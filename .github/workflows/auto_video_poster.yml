@@ -82,9 +82,12 @@ jobs:
 
       - name: 🚀 Run Autonomous Video Pipeline
         env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN || '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' }}
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN || '8886670511:AAFeNxbL5TxpTiWqF_fukB-MeaS4s9OlMqU' }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID || '6402294953' }}
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          FACEBOOK_PAGES_JSON: ${{ secrets.FACEBOOK_PAGES_JSON }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: |
           python cloud_generator/github_runner.py \
             --script "${{ inputs.script_text }}" \

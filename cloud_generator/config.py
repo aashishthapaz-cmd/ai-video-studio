@@ -49,16 +49,35 @@ DEFAULT_SETTINGS = {
 }
 
 def load_settings():
-    if not SETTINGS_FILE.exists():
-        save_settings(DEFAULT_SETTINGS)
-        return DEFAULT_SETTINGS.copy()
-    try:
-        data = json.loads(SETTINGS_FILE.read_text(encoding="utf-8"))
-        merged = DEFAULT_SETTINGS.copy()
-        merged.update(data)
-        return merged
-    except Exception:
-        return DEFAULT_SETTINGS.copy()
+    merged = DEFAULT_SETTINGS.copy()
+    if SETTINGS_FILE.exists():
+        try:
+            data = json.loads(SETTINGS_FILE.read_text(encoding="utf-8"))
+            merged.update(data)
+        except Exception:
+            pass
+
+    # Secure GitHub Secrets & Environment Variable Overrides
+    if os.getenv("TELEGRAM_BOT_TOKEN"):
+        merged["telegram_bot_token"] = os.getenv("TELEGRAM_BOT_TOKEN")
+        merged["enable_telegram"] = True
+    if os.getenv("TELEGRAM_CHAT_ID"):
+        merged["telegram_chat_id"] = os.getenv("TELEGRAM_CHAT_ID")
+    if os.getenv("HF_TOKEN"):
+        merged["huggingface_token"] = os.getenv("HF_TOKEN")
+    if os.getenv("CLOUDFLARE_ACCOUNT_ID"):
+        merged["cloudflare_account_id"] = os.getenv("CLOUDFLARE_ACCOUNT_ID")
+    if os.getenv("CLOUDFLARE_API_TOKEN"):
+        merged["cloudflare_api_token"] = os.getenv("CLOUDFLARE_API_TOKEN")
+    if os.getenv("FACEBOOK_PAGES_JSON"):
+        try:
+            pages = json.loads(os.getenv("FACEBOOK_PAGES_JSON"))
+            if isinstance(pages, list):
+                merged["facebook_pages"] = pages
+        except Exception:
+            pass
+
+    return merged
 
 def save_settings(data):
     SETTINGS_FILE.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")

@@ -2,8 +2,8 @@ import base64, requests, json, os, sys
 from pathlib import Path
 from huggingface_hub import HfApi, login
 
-u = "usha.thapaz488@gmail.com"
-p = "9#w^^95!x48C8jM"
+u = os.getenv("HF_USERNAME", "")
+p = os.getenv("HF_PASSWORD", "")
 
 s = requests.Session()
 headers = {
