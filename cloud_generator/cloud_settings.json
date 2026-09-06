@@ -5,7 +5,7 @@
     "huggingface"
   ],
   "pollinations_model": "flux",
-  "voice_engine": "voxcpm_reference",
+  "voice_engine": "huggingface_whisper_clone",
   "reference_voice_path": "assets/reference_voice/whishper.wav",
   "english_voice": "en-US-ChristopherNeural",
   "nepali_voice": "ne-NP-SagarNeural",

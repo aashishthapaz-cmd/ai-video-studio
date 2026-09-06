@@ -16,6 +16,9 @@ temp_test_assets/
 # Local Output video cache (optional, keep light in git)
 Output/*.mp4
 Output/*.wav
+temp_test/
+logs/
+assets/models/
 
 # System & OS
 .DS_Store

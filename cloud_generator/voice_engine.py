@@ -51,9 +51,9 @@ def get_audio_duration(file_path: Path) -> float:
 
 def synthesize_huggingface_space_clone(scenes: list, audio_dir: Path, reference_audio: Path = None, hf_token: str = None) -> list:
     """
-    Synthesizes voice cloning in the cloud via Hugging Face Spaces (tonyassi/voice-clone, Nymbo)
+    Synthesizes voice cloning in the cloud via Hugging Face Spaces (Nymbo XTTS-v2, tonyassi)
     with the exact reference audio (whishper.wav).
-    Zero local GPU or local PC requirement.
+    Zero local GPU requirement.
     """
     ref_path = Path(reference_audio) if reference_audio else DEFAULT_REFERENCE_VOICE
     if not ref_path.exists():
@@ -61,13 +61,18 @@ def synthesize_huggingface_space_clone(scenes: list, audio_dir: Path, reference_
 
     from gradio_client import Client, handle_file
     
-    headers = {"Authorization": f"Bearer {hf_token}"} if hf_token else {}
+    tok = hf_token or os.environ.get("HF_TOKEN") or None
     
     client = None
-    endpoint_name = "/clone"
-    for sp, ep in [("tonyassi/voice-clone", "/clone"), ("Nymbo/Voice-Clone-Multilingual", "/predict")]:
+    endpoint_name = "/predict"
+    spaces_to_try = [
+        ("Nymbo/Voice-Clone-Multilingual", "/predict"),
+        ("tonyassi/voice-clone", "/clone")
+    ]
+    
+    for sp, ep in spaces_to_try:
         try:
-            client = Client(sp, headers=headers)
+            client = Client(sp, token=tok)
             endpoint_name = ep
             print(f"[Voice] Connected to Hugging Face Voice Clone Space: {sp} (endpoint: {ep})")
             break
@@ -88,28 +93,54 @@ def synthesize_huggingface_space_clone(scenes: list, audio_dir: Path, reference_
             continue
             
         print(f"[Voice HF] Synthesizing scene {i+1}/{len(scenes)}: '{text[:50]}...'")
-        if endpoint_name == "/clone":
-            res = client.predict(
-                text=text,
-                audio=ref_file_handle,
-                api_name="/clone"
-            )
-        else:
-            res = client.predict(
-                text=text,
-                speaker_wav=ref_file_handle,
-                language="en",
-                api_name="/predict"
-            )
-            
-        audio_src = res.get("path") if isinstance(res, dict) else res
-        shutil.copyfile(audio_src, str(out_file))
-        
-        dur = get_audio_duration(out_file)
-        s["audio_path"] = str(out_file)
-        s["duration"] = round(dur, 2)
-        s["voice"] = "Hugging Face Reference Whisper Clone"
-        s["word_durations"] = extract_acoustic_word_durations(out_file, text, language="en")
+        try:
+            if endpoint_name == "/predict":
+                res = client.predict(
+                    text=text,
+                    speaker_wav=ref_file_handle,
+                    language="en",
+                    api_name="/predict"
+                )
+            else:
+                res = client.predict(
+                    text=text,
+                    audio=ref_file_handle,
+                    api_name="/clone"
+                )
+                
+            if isinstance(res, dict):
+                audio_src = res.get("path") or res.get("url") or res.get("name")
+            elif isinstance(res, (list, tuple)):
+                audio_src = res[0]
+            else:
+                audio_src = res
+                
+            shutil.copyfile(audio_src, str(out_file))
+            dur = get_audio_duration(out_file)
+            s["audio_path"] = str(out_file)
+            s["duration"] = round(dur, 2)
+            s["voice"] = "Hugging Face Reference Whisper Clone"
+            s["word_durations"] = extract_acoustic_word_durations(out_file, text, language="en")
+        except Exception as e:
+            print(f"[Voice HF] Scene {i+1} failed on HF ({e}), synthesizing via Kokoro Neural Whisper...")
+            kokoro = get_kokoro_model()
+            if kokoro:
+                import soundfile as sf
+                try:
+                    s_adam = kokoro.get_voice_style("am_adam")
+                    s_mich = kokoro.get_voice_style("am_michael")
+                    blended = 0.6 * s_adam + 0.4 * s_mich
+                except Exception:
+                    blended = "am_adam"
+                samples, sample_rate = kokoro.create(text, voice=blended, speed=0.82, lang="en-us")
+                sf.write(str(out_file), samples, sample_rate)
+                dur = get_audio_duration(out_file)
+                s["audio_path"] = str(out_file)
+                s["duration"] = round(dur, 2)
+                s["voice"] = "Kokoro Neural Whisper"
+                s["word_durations"] = extract_acoustic_word_durations(out_file, text, language="en")
+            else:
+                raise e
         
     return scenes
 
