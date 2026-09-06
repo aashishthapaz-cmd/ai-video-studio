@@ -157,29 +157,29 @@ db = ArtisticDatabase()
 ARTISTIC_VIBES = {
     "typewriters_voice_nostalgia": {
         "name": "Typewriters Voice Nostalgic Poetry",
-        "medium_suffix": "poetic fine-art photography, Typewriters Voice aesthetic, nostalgic 35mm analog film aesthetic, Kodak Portra 400 warm tone, gentle natural film grain, soft warm golden hour light leak, vertical 9:16 portrait composition, fill frame, no text, no letters, no watermark, no border",
+        "medium_suffix": "authentic macro still-life photography, Typewriters Voice aesthetic, vintage manual typewriter keys and carriage, aged parchment paper, warm golden hour window light, steaming ceramic coffee cup, dried pressed botanicals, 35mm film photography, Kodak Portra 400 tones, shallow depth of field, f/1.8 bokeh, vertical 9:16 portrait composition, fill entire frame, no watermark, no text, no letters, no words",
         "palettes": [
             "warm vintage sepia, aged parchment cream, dark antique walnut, soft golden amber glow, muted espresso",
             "nostalgic coffee stain beige, warm terracotta, deep rain-slicked slate, candle amber, antique brass",
-            "soft dusk lavender, warm honey lamplight, muted rosewood, vintage linen white, shadow navy"
+            "soft dusk lavender, warm honey lamplight, muted rosewood, vintage linen white, shadow navy",
+            "rich dark oak, aged ivory paper, roasted coffee brown, glowing beeswax gold, soft copper"
         ],
         "lighting": [
-            "warm soft tungsten lamplight and flickering candle glow illuminating a rustic wooden writing desk with rain on window",
-            "hazy golden hour sunset with gentle 35mm warm lens flare grazing across nostalgic autumn landscape",
-            "moody atmospheric dusk streetlamp glow reflecting across wet cobblestones with soft misty bokeh"
+            "warm flickering candlelight and soft tungsten lamplight illuminating a rustic wooden writing desk with rain on window",
+            "hazy golden hour sunset streaming across dark oak desk casting soft long diagonal shadows on parchment paper",
+            "moody atmospheric evening interior with warm amber streetlamp bokeh reflecting through rain-streaked window",
+            "soft morning dawn light filtering through sheer linen curtains onto vintage typewriter keys and coffee steam"
         ],
-        "particles": ["subtle authentic 35mm film grain and soft golden dust motes", "gentle rain streaks running down window glass with soft bokeh", "delicate warm steam rising into quiet evening air"],
+        "particles": ["subtle authentic 35mm film grain and soft golden dust motes", "delicate warm steam gently rising from ceramic coffee mug", "rain streaks running down dark window glass with creamy warm bokeh"],
         "environments": [
-            "an antique vintage typewriter resting on a rustic wooden desk beside an open rain-streaked window and a warm flickering candle at dusk",
-            "a solitary silhouette holding an umbrella on a quiet cobblestone alleyway in evening rain with warm glowing streetlamps",
-            "a cozy vintage coffee shop corner table with an open journal, ceramic coffee mug, and rain tapping on large plate-glass window",
-            "two solitary silhouettes sitting close on a scenic grassy hill under a vast starry twilight purple sky at dusk",
-            "a peaceful autumn pathway lined with golden ginkgo and maple trees with gentle sunbeams piercing morning mist",
-            "a quiet bookstore reading nook with floor-to-ceiling dark mahogany shelves and warm amber brass lamp light",
-            "a vintage wooden windowsill with delicate sheer curtains billowing in late afternoon golden hour breeze",
-            "a lonely acoustic guitar and vintage record player resting on a warm wooden floor beside sunlit open French doors",
-            "a serene coastal cliff at sunset with wildflowers and a lone wooden bench overlooking the calm golden ocean horizon",
-            "a quiet attic writing desk with scattered antique books, brass magnifying glass, and warm candle glow at midnight"
+            "an antique Olympia manual typewriter resting on a rustic dark walnut desk with aged parchment paper inserted in the roller, a steaming ceramic mug of dark coffee, and a flickering amber candle with rain on the window",
+            "a top-down flat lay view of vintage typewriter mechanical round keys, textured deckle-edge kraft paper, a vintage brass fountain pen, and a small vase of dried lavender sprigs on dark wood",
+            "a close-up macro view of vintage typewriter keycaps in foreground with soft focus, a glowing beeswax candle, and an open antique hardcover book with reading glasses at dusk",
+            "an antique black typewriter carriage loaded with ivory linen paper, a warm cup of chamomile tea, and scattered vintage polaroid prints under warm afternoon sunbeams",
+            "a cozy writing desk corner beside a rain-streaked window with a vintage Remington typewriter, a steaming espresso cup, and pressed autumn maple leaves",
+            "a vintage manual typewriter resting on weathered oak planks beside a glowing brass desk lamp, glass inkwell, and dried eucalyptus sprigs",
+            "an intimate over-the-roller perspective of textured cotton parchment paper loaded in vintage typewriter carriage with warm candle flame and coffee cup",
+            "a nostalgic attic writing desk with an antique Hermes typewriter, dried baby's breath flowers in a ceramic jar, and soft golden sunset light through dormer window"
         ]
     },
     "ghibli_lush_countryside": {
@@ -802,6 +802,61 @@ def _procedural_scene_prompt(line: str, scene_idx: int, total_scenes: int, vibe:
     Generates a unique, high-entropy 70-110 word fine-art visual prompt
     derived directly from the semantic metaphors and imagery of the poem line.
     """
+    vibe_id = vibe.get("id", "") or ""
+    vibe_name = vibe.get("name", "") or ""
+    
+    # Specialized generator for Typewriters Voice authentic photo aesthetic
+    if "typewriter" in vibe_id.lower() or "typewriter" in vibe_name.lower():
+        typewriter_models = [
+            "an antique Olympia SM manual typewriter with round metallic keys",
+            "a vintage Remington Quiet-Riter typewriter with dark enamel frame",
+            "a classic Royal portable typewriter with chrome carriage lever",
+            "an antique Hermes 3000 manual typewriter with circular keycaps",
+            "a vintage Underwood typewriter with authentic mechanical typebars and ribbon spools"
+        ]
+        papers = [
+            "clean blank aged ivory cotton parchment paper rolled into the carriage platen",
+            "textured deckle-edge kraft paper resting flat beside the mechanical keyboard",
+            "aged linen stationery paper with delicate tactile texture loaded in the typewriter",
+            "clean cream-colored parchment sheet inserted into the vintage roller ready to type"
+        ]
+        props = [
+            "a steaming ceramic mug of dark roast coffee with delicate steam, a glowing amber beeswax candle, and a small glass vase of dried lavender",
+            "a vintage brass fountain pen, an open antique hardcover journal with reading glasses, and pressed autumn maple leaves",
+            "a warm flickering candle in a glass jar, a ceramic cup of chamomile tea, and scattered vintage polaroid photos",
+            "a small bouquet of dried baby's breath flowers, a brass desk clock, and a glass inkwell resting on the dark wooden desk",
+            "a steaming espresso cup with rich crema, dried eucalyptus sprigs, and a lit pillar candle casting warm highlights"
+        ]
+        backdrops = [
+            "a dark rain-streaked windowpane in background with soft warm city streetlamp bokeh",
+            "warm golden hour sunlight streaming across the rustic dark oak desk casting soft long diagonal shadows",
+            "a cozy moody evening interior with warm tungsten Edison lamplight glowing on polished walnut wood",
+            "soft gentle morning daylight filtering through sheer linen curtains onto the desk surface"
+        ]
+        camera_angles = [
+            "Macro close-up photography focusing on typewriter keycaps and paper roller, shallow depth of field, f/1.8 bokeh",
+            "Top-down flat lay still-life composition of typewriter, paper, coffee cup, and dried botanicals",
+            "Cinematic 45-degree angle capturing the mechanical carriage, glowing candle flame, and rain-slicked window background",
+            "Intimate over-the-roller perspective highlighting textured paper and warm desk atmosphere",
+            "Close-up detail shot with crisp focal point on parchment paper and soft dreamy background blur"
+        ]
+        
+        tw_model = typewriter_models[scene_idx % len(typewriter_models)]
+        paper = papers[(scene_idx + 1) % len(papers)]
+        prop = props[(scene_idx + 2) % len(props)]
+        backdrop = backdrops[(scene_idx + 3) % len(backdrops)]
+        angle = camera_angles[scene_idx % len(camera_angles)]
+        
+        prompt = (
+            f"Authentic fine-art still-life photography, Typewriters Voice aesthetic. "
+            f"Featuring {tw_model} on a rustic dark wooden desk, with {paper}. "
+            f"Accompanied by {prop}. In the background, {backdrop}. "
+            f"{angle}. 35mm analog film aesthetic, Kodak Portra 400 warm color palette, subtle natural film grain. "
+            f"Vertical 9:16 portrait framing, fill entire frame. | "
+            f"authentic macro still-life photography, Typewriters Voice aesthetic, vintage manual typewriter keys and carriage, aged parchment paper, warm golden hour window light, steaming ceramic coffee cup, dried pressed botanicals, 35mm film photography, Kodak Portra 400 tones, shallow depth of field, f/1.8 bokeh, vertical 9:16 portrait composition, fill entire frame, no watermark, no text, no letters, no words"
+        )
+        return _normalize_prompt(prompt, vibe.get("medium_suffix", ""))
+
     motifs = _extract_poetic_motifs(line)
     
     # Pick novel environment base from vibe's palette / database
@@ -1120,14 +1175,16 @@ STRICT RULES:
 
 
 def _candidate_models(settings: dict) -> list[str]:
+    configured = str(settings.get("artwork_prompt_model", "auto")).strip()
+    if configured.lower() in ("none", "disabled", "procedural", "false"):
+        return []
     try:
-        request = Request(settings["ollama_url"].rstrip("/") + "/api/tags")
-        with urlopen(request, timeout=5) as response:
+        request = Request(settings.get("ollama_url", "http://127.0.0.1:11434").rstrip("/") + "/api/tags")
+        with urlopen(request, timeout=1.5) as response:
             installed = [str(x.get("name", "")).strip() for x in json.loads(response.read().decode("utf-8", "replace")).get("models", [])]
     except Exception:
         return []
     installed = [x for x in installed if x and "embed" not in x.lower()]
-    configured = str(settings.get("artwork_prompt_model", "auto")).strip()
     order = [x.strip() for x in str(settings.get("artwork_prompt_model_order", ",".join(DEFAULT_ORDER))).split(",") if x.strip()]
     result: list[str] = []
     if configured and configured.lower() != "auto":

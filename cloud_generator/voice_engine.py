@@ -49,44 +49,69 @@ def get_audio_duration(file_path: Path) -> float:
     except Exception:
         return 5.0
 
-def synthesize_huggingface_xtts(text: str, output_path: Path, hf_token: str, reference_audio: Path = None) -> dict:
+def synthesize_huggingface_space_clone(scenes: list, audio_dir: Path, reference_audio: Path = None, hf_token: str = None) -> list:
     """
-    Synthesizes voice cloning in the cloud using Hugging Face Serverless XTTS-v2.
+    Synthesizes voice cloning in the cloud via Hugging Face Spaces (tonyassi/voice-clone, Nymbo)
+    with the exact reference audio (whishper.wav).
     Zero local GPU or local PC requirement.
     """
     ref_path = Path(reference_audio) if reference_audio else DEFAULT_REFERENCE_VOICE
     if not ref_path.exists():
-        raise FileNotFoundError(f"Reference voice not found: {ref_path}")
+        raise FileNotFoundError(f"Reference voice audio not found at: {ref_path}")
+
+    from gradio_client import Client, handle_file
+    
+    headers = {"Authorization": f"Bearer {hf_token}"} if hf_token else {}
+    
+    client = None
+    endpoint_name = "/clone"
+    for sp, ep in [("tonyassi/voice-clone", "/clone"), ("Nymbo/Voice-Clone-Multilingual", "/predict")]:
+        try:
+            client = Client(sp, headers=headers)
+            endpoint_name = ep
+            print(f"[Voice] Connected to Hugging Face Voice Clone Space: {sp} (endpoint: {ep})")
+            break
+        except Exception as e:
+            print(f"[Voice] Could not connect to HF Space {sp}: {e}")
+            continue
+
+    if not client:
+        raise RuntimeError("No reachable Hugging Face Voice Cloning Space available")
+
+    ref_file_handle = handle_file(str(ref_path.resolve()))
+
+    for i, s in enumerate(scenes):
+        scene_id = s.get("id", f"scene_{i+1:03d}")
+        out_file = audio_dir / f"{scene_id}.wav"
+        text = s.get("narration", "").strip()
+        if not text:
+            continue
+            
+        print(f"[Voice HF] Synthesizing scene {i+1}/{len(scenes)}: '{text[:50]}...'")
+        if endpoint_name == "/clone":
+            res = client.predict(
+                text=text,
+                audio=ref_file_handle,
+                api_name="/clone"
+            )
+        else:
+            res = client.predict(
+                text=text,
+                speaker_wav=ref_file_handle,
+                language="en",
+                api_name="/predict"
+            )
+            
+        audio_src = res.get("path") if isinstance(res, dict) else res
+        shutil.copyfile(audio_src, str(out_file))
         
-    url = "https://api-inference.huggingface.co/models/coqui/XTTS-v2"
-    headers = {
-        "Authorization": f"Bearer {hf_token}",
-        "Content-Type": "application/json"
-    }
-    
-    # Read reference audio as base64
-    audio_b64 = base64.b64encode(ref_path.read_bytes()).decode("ascii")
-    payload = {
-        "inputs": text,
-        "parameters": {
-            "speaker_wav": audio_b64,
-            "language": "en"
-        }
-    }
-    
-    req = urllib.request.Request(url, data=json.dumps(payload).encode("utf-8"), headers=headers, method="POST")
-    with urllib.request.urlopen(req, timeout=60) as resp:
-        data = resp.read()
-        if resp.status == 200 and len(data) > 2000:
-            output_path.parent.mkdir(parents=True, exist_ok=True)
-            output_path.write_bytes(data)
-            return {
-                "text": text,
-                "audio_path": str(output_path),
-                "duration": get_audio_duration(output_path),
-                "engine": "Hugging Face Cloud XTTS-v2"
-            }
-        raise RuntimeError(f"HF XTTS returned status {resp.status}")
+        dur = get_audio_duration(out_file)
+        s["audio_path"] = str(out_file)
+        s["duration"] = round(dur, 2)
+        s["voice"] = "Hugging Face Reference Whisper Clone"
+        s["word_durations"] = extract_acoustic_word_durations(out_file, text, language="en")
+        
+    return scenes
 
 def synthesize_fish_audio(text: str, output_path: Path, api_key: str, reference_audio: Path = None) -> dict:
     """Synthesizes human voice cloning via Fish Audio Cloud API."""
@@ -372,7 +397,16 @@ def synthesize_project_audio(scenes: list, audio_dir: Path) -> list:
         except Exception as e:
             print(f"[Voice] Local VoxCPM batch warning ({e}), falling back to cloud neural voice...")
 
-    # 2. Kokoro Neural Whisper (100% Free Cloud VM execution on CPU)
+    # 2. Hugging Face Serverless Voice Cloning (Clones reference whishper.wav via Hugging Face API)
+    hf_tok = os.environ.get("HF_TOKEN") or cfg.get("huggingface_token", "")
+    if overall_lang == "en" and DEFAULT_REFERENCE_VOICE.exists():
+        try:
+            print("[Voice] Synthesizing all scenes via Hugging Face Cloud Voice Cloning with reference audio...")
+            return synthesize_huggingface_space_clone(scenes, audio_dir, reference_audio=DEFAULT_REFERENCE_VOICE, hf_token=hf_tok)
+        except Exception as e:
+            print(f"[Voice] Hugging Face Voice Cloning warning ({e}), falling back to Kokoro Neural Whisper...")
+
+    # 3. Kokoro Neural Whisper (100% Free Cloud VM execution on CPU)
     if overall_lang == "en":
         try:
             print("[Voice] Synthesizing all scenes via Kokoro Neural Whisper CPU Engine...")

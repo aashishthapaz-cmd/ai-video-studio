@@ -70,7 +70,7 @@ def plan_scenes_for_poem(title: str, script_text: str, custom_vibe: str = "") ->
     }
     
     # Generate rich 70-110 word artistic prompts using the aesthetic engine
-    plan = artwork_prompts.generate_plan(project_payload, {"ollama_model": "gemma3:4b"})
+    plan = artwork_prompts.generate_plan(project_payload, {"artwork_prompt_model": "none"})
     res_scenes = plan.get("scenes", scenes)
     for sc in res_scenes:
         p = sc.get("prompt") or sc.get("image_prompt") or sc.get("narration") or "Cinematic atmospheric background"
