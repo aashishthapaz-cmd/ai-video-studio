@@ -39,9 +39,11 @@ try:
     from cloud_generator.self_healing import start_watchdog, get_system_health, run_self_repair
     from cloud_generator.cloud_storage import get_pending_sync_list, get_video_file_for_job, confirm_sync_and_delete, get_storage_stats
     from cloud_generator.notifier import dispatch_alert, send_telegram_message, send_whatsapp_message
+    from cloud_generator.niche_profiles import list_niches, get_niche
 except ImportError:
     from config import load_settings, save_settings, OUTPUT_DIR, TEMP_CLOUD_DIR
     from pipeline import run_cloud_pipeline
+    from niche_profiles import list_niches, get_niche
     from facebook_publisher import (
         test_page_token, 
         publish_to_all_enabled_pages, 
@@ -156,6 +158,13 @@ class CloudStudioHandler(SimpleHTTPRequestHandler):
             self.send_header("Content-Type", "application/json")
             self.end_headers()
             self.wfile.write(json.dumps({"queue": load_queue()}).encode("utf-8"))
+            return
+
+        elif path == "/api/niches":
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.end_headers()
+            self.wfile.write(json.dumps({"niches": list_niches()}).encode("utf-8"))
             return
 
         elif path == "/api/sync/pending":
@@ -280,8 +289,11 @@ class CloudStudioHandler(SimpleHTTPRequestHandler):
             raw_text = payload.get("raw_text", "").strip()
             start_time = payload.get("start_time")
             interval = int(payload.get("interval_minutes", 120))
-            voice = payload.get("voice", "cloud_cloning")
-            theme = payload.get("theme", "auto")
+            voice = payload.get("voice")
+            theme = payload.get("theme")
+            niche = payload.get("niche_id") or payload.get("niche")
+            tz = payload.get("timezone", "America/New_York")
+            auto_dist = bool(payload.get("auto_distribute", False))
             target_pages = payload.get("target_page_ids", [])
             
             if not raw_text:
@@ -297,7 +309,10 @@ class CloudStudioHandler(SimpleHTTPRequestHandler):
                 interval_minutes=interval, 
                 default_voice=voice, 
                 default_theme=theme,
-                default_page_ids=target_pages
+                default_page_ids=target_pages,
+                default_niche=niche,
+                timezone_str=tz,
+                auto_distribute_pages=auto_dist
             )
             enqueued = enqueue_bulk_jobs(jobs)
             

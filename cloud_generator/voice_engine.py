@@ -497,15 +497,16 @@ def synthesize_xtts_v2_batch(scenes: list, audio_dir: Path, reference_audio: Pat
         
     return scenes
 
-def synthesize_project_audio(scenes: list, audio_dir: Path) -> list:
+def synthesize_project_audio(scenes: list, audio_dir: Path, voice_override: str = None, rate_override: str = None, pitch_override: str = None, engine_override: str = None) -> list:
     """
     Unified voice synthesis orchestrator:
     Synthesizes exact per-scene audio chunks with millisecond accuracy across all engines.
     Guarantees 100% frame-accurate caption synchronization and zero timing drift.
+    Supports niche-specific voice models, pacing rates, and pitch overrides.
     """
     audio_dir.mkdir(parents=True, exist_ok=True)
     cfg = load_settings()
-    voice_pref = cfg.get("voice_engine", "f5_tts_reference")
+    voice_pref = engine_override or cfg.get("voice_engine", "f5_tts_reference")
     
     # Check language of the overall script
     all_narrations = [s.get("narration", "").strip() for s in scenes if s.get("narration", "").strip()]
@@ -513,14 +514,17 @@ def synthesize_project_audio(scenes: list, audio_dir: Path) -> list:
     overall_lang = detect_language(full_sample)
 
     ref_exists = DEFAULT_REFERENCE_VOICE.exists() or FULL_REFERENCE_VOICE.exists()
+    custom_ref = Path(voice_override) if (voice_override and Path(voice_override).exists()) else DEFAULT_REFERENCE_VOICE
 
-    # 1. Primary: Option 1 SWivid/F5-TTS Voice Cloning (Exact reference whisper clone)
-    if overall_lang == "en" and ref_exists:
-        try:
-            print("[Voice] Synthesizing all scenes via Option 1: SWivid/F5-TTS Reference Voice Cloner...")
-            return synthesize_f5_tts_batch(scenes, audio_dir, reference_audio=DEFAULT_REFERENCE_VOICE)
-        except Exception as e:
-            print(f"[Voice] F5-TTS notice ({e}), falling back to Option 2: coqui-ai/TTS (XTTS-v2)...")
+    # If niche specifically asks for Edge Neural TTS, skip F5-TTS/XTTS
+    if voice_pref != "edge_tts":
+        # 1. Primary: Option 1 SWivid/F5-TTS Voice Cloning (Exact reference whisper clone)
+        if overall_lang == "en" and ref_exists:
+            try:
+                print(f"[Voice] Synthesizing all scenes via Option 1: SWivid/F5-TTS Reference Voice Cloner ({custom_ref.name})...")
+                return synthesize_f5_tts_batch(scenes, audio_dir, reference_audio=custom_ref)
+            except Exception as e:
+                print(f"[Voice] F5-TTS notice ({e}), falling back to Option 2: coqui-ai/TTS (XTTS-v2)...")
 
     # 2. Secondary Fallback: Option 2 coqui-ai/TTS (XTTS-v2)
     if overall_lang == "en" and ref_exists:
@@ -564,9 +568,12 @@ def synthesize_project_audio(scenes: list, audio_dir: Path) -> list:
 
         # 5. Standard / Fallback: Edge Neural Cloud TTS (per-scene)
         if not scene_success:
-            voice = cfg.get("nepali_voice", "ne-NP-SagarNeural") if scene_lang == "ne" else cfg.get("english_voice", "en-US-ChristopherNeural")
-            rate = cfg.get("voice_rate", "-15%")
-            pitch = cfg.get("voice_pitch", "-3Hz")
+            if scene_lang == "ne":
+                voice = cfg.get("nepali_voice", "ne-NP-SagarNeural")
+            else:
+                voice = voice_override if (voice_override and not voice_override.endswith(".wav")) else cfg.get("english_voice", "en-US-ChristopherNeural")
+            rate = rate_override or cfg.get("voice_rate", "-15%")
+            pitch = pitch_override or cfg.get("voice_pitch", "-3Hz")
             
             info = asyncio.run(_synthesize_edge_line(narration, voice, rate, pitch, out_file))
             scene["audio_path"] = info["audio_path"]

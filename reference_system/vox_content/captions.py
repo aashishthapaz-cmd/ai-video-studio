@@ -21,6 +21,11 @@ Style: ProCaption,Arial,72,&H0000D7FF,&H60FFFFFF,&H00111111,&H90000000,-1,0,0,0,
 Style: PoetrySmall,Cormorant Garamond,46,&H0000D7FF,&H60FFFFFF,&H00111111,&H90000000,0,1,0,0,88,100,0,0,1,1.7,0,5,70,70,0,1
 Style: ReferenceCursive,Segoe Print,78,&H0000D7FF,&H60FFFFFF,&H00111111,&H90000000,0,1,0,0,96,100,0,0,1,2.5,2.0,5,90,90,0,1
 Style: ReferenceMark,Segoe Script,22,&H00FFFFFF,&H60FFFFFF,&HAA000000,&H00000000,0,1,0,0,88,100,0,0,1,0.7,1.0,5,40,40,0,1
+Style: DarkAcademiaSerif,Cormorant Garamond,82,&H00C0C0FF,&H50FFFFFF,&H00080808,&H90000000,0,1,0,0,94,100,0,0,1,2.2,2.2,5,90,90,0,1
+Style: RomanticScript,Segoe Script,74,&H0033CCFF,&H60FFFFFF,&H00181008,&H90000000,0,1,0,0,96,100,0,0,1,2.4,1.8,5,90,90,0,1
+Style: StoicMinimal,Montserrat,70,&H00D0FFD0,&H60FFFFFF,&H00111811,&H90000000,-1,0,0,0,96,100,0,0,1,2.6,2.0,5,90,90,0,1
+Style: CosmicSerif,Cinzel,74,&H00EEEEEE,&H50FFFFFF,&H000B0B14,&H90000000,-1,0,0,0,96,100,0,0,1,2.5,2.5,5,90,90,0,1
+Style: TypewriterMono,Courier New,72,&H0000D7FF,&H60FFFFFF,&H00111111,&H90000000,-1,0,0,0,92,100,0,0,1,2.4,2.0,5,90,90,0,1
 Style: NepaliReference,Noto Sans Devanagari,68,&H0000D7FF,&H60FFFFFF,&H00111111,&H90000000,-1,0,0,0,100,100,0,0,1,2.5,2.0,5,90,90,0,1
 Style: NepaliCaption,Noto Sans Devanagari,58,&H0000D7FF,&H60FFFFFF,&H00111111,&H90000000,-1,0,0,0,100,100,0,0,1,2.0,1.5,5,70,70,0,1
 Style: CreativeScript,Cormorant Garamond,58,&H0000D7FF,&H60FFFFFF,&HD0000000,&H00000000,0,1,0,0,100,100,0,0,1,0.45,2.1,5,60,60,0,1
@@ -103,10 +108,18 @@ def write_timed_ass(
         if caption_style.startswith("creative_"):
             events.extend(_creative_caption_events(caption, caption_style=caption_style, video_format=video_format))
             continue
-        if caption_style == "reference_cursive":
+        NICHE_CAPTION_STYLES = {
+            "reference_cursive": "ReferenceCursive",
+            "dark_academia_serif": "DarkAcademiaSerif",
+            "romantic_script": "RomanticScript",
+            "stoic_minimal": "StoicMinimal",
+            "cosmic_serif": "CosmicSerif",
+            "typewriter_mono": "TypewriterMono"
+        }
+        if caption_style in NICHE_CAPTION_STYLES:
             text = _reference_caption_text(caption)
             is_nepali = _contains_devanagari(caption.text)
-            style = "NepaliReference" if is_nepali else "ReferenceCursive"
+            style = "NepaliReference" if is_nepali else NICHE_CAPTION_STYLES[caption_style]
             override = f"\\pos({center_x},{reference_y})\\fad(180,200)\\blur0.3"
             events.append(
                 f"Dialogue: 1,{_stamp(caption.start)},{_stamp(caption.end)},{style},,0,0,0,,"

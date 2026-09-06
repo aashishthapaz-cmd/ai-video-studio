@@ -51,16 +51,19 @@ def master_audio_file(source_audio: Path, target_audio: Path) -> Path:
     r = run_cmd(cmd)
     return target_audio if r.returncode == 0 and target_audio.exists() else source_audio
 
-def compile_cloud_video(scenes: list, title: str, workspace_dir: Path, captions_file: Path = None) -> dict:
+def compile_cloud_video(scenes: list, title: str, workspace_dir: Path, captions_file: Path = None, caption_style: str = None, custom_music_path: Path = None) -> dict:
     """
     Renders the exact production video matching the reference system:
     1. 2.5D Quintic Smootherstep Parallax Animation
     2. Video Dust & Grain Overlay (default_overlay.mp4 at 0.15 opacity)
     3. Whisper Background Music (at 0.22 volume with 3s fade)
     4. Film Grain, Vignette, and Color Grading
-    5. Cursive Poetic Subtitle Typography
+    5. Niche-tuned Subtitle Typography (Cursive, Serif, Minimalist Bold, etc.)
     """
     workspace_dir.mkdir(parents=True, exist_ok=True)
+    
+    # Resolve caption style from argument or scenes
+    active_caption_style = caption_style or (scenes[0].get("caption_style") if scenes and isinstance(scenes[0], dict) else "reference_cursive") or "reference_cursive"
     
     # 1. Identify Master Audio & Exact Per-Scene Durations
     audio_files = [Path(s["audio_path"]) for s in scenes if "audio_path" in s and Path(s["audio_path"]).exists()]
@@ -122,7 +125,7 @@ def compile_cloud_video(scenes: list, title: str, workspace_dir: Path, captions_
             captions=rows,
             output=captions_file,
             preset="poetry_reference",
-            caption_style="reference_cursive",
+            caption_style=active_caption_style,
             video_format="portrait",
             signature_enabled=False
         )
@@ -140,15 +143,18 @@ def compile_cloud_video(scenes: list, title: str, workspace_dir: Path, captions_
                 overlay_path = files[0]
 
     music_path = None
-    default_music = PROJECT_ROOT / "assets" / "Whispr Bg music" / "audio [music] whisper background music.mp3"
-    if default_music.is_file():
-        music_path = default_music
+    if custom_music_path and Path(custom_music_path).is_file():
+        music_path = Path(custom_music_path)
     else:
-        music_dir = PROJECT_ROOT / "assets" / "Whispr Bg music"
-        if music_dir.exists():
-            files = sorted(p for p in music_dir.glob("*") if p.is_file() and p.suffix.lower() in {".wav", ".mp3", ".m4a", ".flac"})
-            if files:
-                music_path = files[0]
+        default_music = PROJECT_ROOT / "assets" / "Whispr Bg music" / "audio [music] whisper background music.mp3"
+        if default_music.is_file():
+            music_path = default_music
+        else:
+            music_dir = PROJECT_ROOT / "assets" / "Whispr Bg music"
+            if music_dir.exists():
+                files = sorted(p for p in music_dir.glob("*") if p.is_file() and p.suffix.lower() in {".wav", ".mp3", ".m4a", ".flac"})
+                if files:
+                    music_path = files[0]
 
     final_output_name = sanitize_title(title) + ".mp4"
     final_output = OUTPUT_DIR / final_output_name

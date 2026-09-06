@@ -526,9 +526,36 @@ Script:
         
         <div class="grid-3">
           <div class="form-group">
+            <label>Poetry Niche & Aesthetic World</label>
+            <select id="bulkNiche">
+              <option value="auto">🌟 Auto-Detect Niche from Poem Content</option>
+              <option value="typewriters_voice_nostalgia">📜 Typewriters Voice Nostalgia (Editorial Linocut Woodblock)</option>
+              <option value="dark_romantic_academia">🥀 Dark Romantic Academia (Baroque Oil & Melancholy)</option>
+              <option value="romantic_devotion">❤️ Romantic Devotion & Soulmates (Golden Hour Watercolor)</option>
+              <option value="healing_self_worth">🌱 Healing & Stoic Solace (Minimalist Zen Dawn)</option>
+              <option value="cosmic_philosophy">🌌 Cosmic & Philosophical Reflections (Celestial Canvas)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Exact Scheduling Start Time</label>
+            <input type="text" id="bulkStartTime" placeholder="YYYY-MM-DD HH:MM (or leave blank for next slot)">
+          </div>
+          <div class="form-group">
+            <label>USA Posting Timezone</label>
+            <select id="bulkTimezone">
+              <option value="America/New_York" selected>🇺🇸 US Eastern (EST/EDT) - New York</option>
+              <option value="America/Chicago">🇺🇸 US Central (CST/CDT) - Chicago</option>
+              <option value="America/Denver">🇺🇸 US Mountain (MST/MDT) - Denver</option>
+              <option value="America/Los_Angeles">🇺🇸 US Pacific (PST/PDT) - Los Angeles</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid-3" style="margin-top: 10px;">
+          <div class="form-group">
             <label>Scheduling Mode</label>
             <select id="bulkScheduleMode" onchange="toggleBulkScheduleFields()">
-              <option value="page_slots">⏰ Match Selected FB Page Time Slots (e.g. 09:00, 15:00, 21:00)</option>
+              <option value="page_slots">⏰ Match Daily USA Peak Slots (08:30, 13:00, 20:30)</option>
               <option value="interval">⏳ Fixed Interval Spacing</option>
             </select>
           </div>
@@ -546,21 +573,16 @@ Script:
           <div class="form-group">
             <label>Target Facebook Page</label>
             <select id="bulkTargetPage">
-              <option value="all">🌐 All Enabled Pages</option>
+              <option value="all">🌐 All Connected Pages</option>
             </select>
           </div>
-          <div class="form-group">
-            <label>Default Visual Style</label>
-            <select id="bulkTheme">
-              <option value="auto">🌟 Dynamic Non-Repeating World</option>
-              <option value="Ghibli Lush Watercolor">🌿 Ghibli Watercolor</option>
-              <option value="Himalayan Mist Serenity">🏔️ Himalayan Mist</option>
-              <option value="Makoto Shinkai Twilight">🌅 Shinkai Twilight</option>
-            </select>
+          <div class="form-group" style="display: flex; align-items: center; gap: 8px; padding-top: 24px;">
+            <input type="checkbox" id="bulkAutoDistribute" style="width: 18px; height: 18px; cursor: pointer;">
+            <label for="bulkAutoDistribute" style="cursor: pointer; margin-bottom: 0; font-size: 13px;">Auto-Distribute Across Multi-Pages</label>
           </div>
         </div>
 
-        <button class="btn" onclick="submitBulkJobs()">⚡ Ingest Scripts & Build Queue</button>
+        <button class="btn" style="margin-top: 14px;" onclick="submitBulkJobs()">⚡ Ingest Scripts & Schedule Bulk Posts</button>
       </div>
 
       <!-- Live Scheduled Queue -->
@@ -948,8 +970,11 @@ Script:
 
       const payload = {
         raw_text: raw,
+        start_time: document.getElementById('bulkStartTime').value.trim() || null,
         interval_minutes: parseInt(document.getElementById('bulkInterval').value),
-        theme: document.getElementById('bulkTheme').value,
+        niche_id: document.getElementById('bulkNiche').value,
+        timezone: document.getElementById('bulkTimezone').value,
+        auto_distribute: document.getElementById('bulkAutoDistribute').checked,
         target_page_ids: targetPages
       };
 
@@ -961,7 +986,7 @@ Script:
         });
         const res = await r.json();
         if (res.ok) {
-          alert(`✅ Successfully enqueued ${res.added_jobs} job(s) into autonomous posting queue!`);
+          alert(`✅ Successfully enqueued ${res.added_jobs} job(s) with USA-based scheduling & niche profiles!`);
           loadBulkQueue();
         } else {
           alert('Error: ' + res.error);
@@ -988,13 +1013,17 @@ Script:
           if (j.status === 'FAILED') badge = 'badge-failed';
 
           const pagesText = (j.target_page_ids && j.target_page_ids.length > 0) ? j.target_page_ids.join(', ') : 'All Enabled';
+          const schedTime = j.scheduled_time_usa || j.scheduled_time || 'Immediate';
+          const nicheLabel = j.niche_name || j.niche_id || 'Auto Niche';
 
           return `<tr>
             <td>
               <div style="font-weight: 700; color: #fff;">${j.title}</div>
-              <div style="font-size: 11px; color: var(--text-muted);">${j.theme || 'auto'}</div>
+              <div style="font-size: 11px; margin-top: 3px;">
+                <span style="font-size: 10px; padding: 2px 6px; border-radius: 4px; background: rgba(99,102,241,0.18); color: #a5b4fc; border: 1px solid rgba(99,102,241,0.3); font-weight: 600;">${nicheLabel}</span>
+              </div>
             </td>
-            <td style="font-family: 'JetBrains Mono', monospace; color: #38bdf8; font-size: 12px;">${j.scheduled_time || 'Immediate'}</td>
+            <td style="font-family: 'JetBrains Mono', monospace; color: #38bdf8; font-size: 12px;">${schedTime}</td>
             <td><span class="slot-pill">${pagesText}</span></td>
             <td><span class="badge ${badge}">${j.status}</span></td>
             <td>

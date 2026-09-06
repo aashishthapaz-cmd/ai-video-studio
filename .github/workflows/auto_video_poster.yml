@@ -35,6 +35,18 @@ on:
           - 'Vintage 90s Anime Nostalgia'
           - 'Dark Romantic Academia'
         default: 'Typewriters Voice Nostalgia'
+      poetry_niche:
+        description: 'Poetry Niche (Tuned Art, Voice, Font & Tone)'
+        required: false
+        type: choice
+        options:
+          - 'Auto-Detect from Poem'
+          - 'Typewriters Voice Nostalgia'
+          - 'Dark Romantic Academia'
+          - 'Romantic Devotion & Soulmates'
+          - 'Healing, Self-Worth & Stoic Solace'
+          - 'Cosmic & Philosophical Reflections'
+        default: 'Auto-Detect from Poem'
       publish_facebook:
         description: 'Publish automatically to connected Facebook Pages'
         required: false
@@ -111,6 +123,7 @@ jobs:
           SCRIPT_INPUT: ${{ inputs.script_text }}
           TITLE_INPUT: ${{ inputs.title }}
           VIBE_INPUT: ${{ inputs.custom_vibe }}
+          NICHE_INPUT: ${{ inputs.poetry_niche }}
           PUBLISH_FB_INPUT: ${{ inputs.publish_facebook }}
         run: |
           python cloud_generator/github_runner.py

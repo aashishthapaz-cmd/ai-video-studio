@@ -96,6 +96,22 @@ def format_typewriter_facebook_caption(title: str, poem_text: str, custom_hashta
     
     return f"{hook}\n\n{poem_body}\n\n{reflection}\n\n{hashtags}"
 
+def format_niche_facebook_caption(title: str, poem_text: str, niche) -> str:
+    """
+    Formats evocative Facebook post copy tuned to the specific poetry niche:
+    Uses niche-specific hook emojis, emotional call to action, and curated hashtags.
+    """
+    raw_lines = [l.strip() for l in str(poem_text or "").splitlines() if l.strip()]
+    if not raw_lines:
+        return f"{title}\n\n{niche.copy.default_hashtags}"
+
+    hook = f'“{raw_lines[0]}” {niche.copy.hook_emojis}'
+    poem_body = "\n".join(raw_lines)
+    reflection = niche.copy.call_to_action
+    hashtags = niche.copy.default_hashtags
+    
+    return f"{hook}\n\n{poem_body}\n\n{reflection}\n\n{hashtags}"
+
 def publish_video_to_facebook_page(
     video_path: Path,
     title: str,
@@ -251,10 +267,13 @@ def save_or_update_facebook_page(page_dict: dict) -> dict:
         "access_token": access_token,
         "enabled": bool(page_dict.get("enabled", True)),
         "schedule_type": page_dict.get("schedule_type", "time_slots"), # "time_slots" or "interval"
-        "time_slots": page_dict.get("time_slots", ["09:00", "15:00", "21:00"]),
+        "niche_id": page_dict.get("niche_id", "typewriters_voice_nostalgia"),
+        "timezone": page_dict.get("timezone", "America/New_York"),
+        "time_slots": page_dict.get("time_slots", ["08:30", "13:00", "20:30"]),
+        "usa_time_slots": page_dict.get("usa_time_slots", page_dict.get("time_slots", ["08:30", "13:00", "20:30"])),
         "interval_hours": int(page_dict.get("interval_hours", 4)),
-        "target_vibe": page_dict.get("target_vibe", "auto"),
-        "default_hashtags": page_dict.get("default_hashtags", "#poetry #anime #aesthetic #reels"),
+        "target_vibe": page_dict.get("target_vibe", "typewriters_voice_nostalgia"),
+        "default_hashtags": page_dict.get("default_hashtags", "#typewriter #poetry #aesthetic #reels"),
         "status": "CONNECTED" if test_res.get("ok") else "TOKEN_ERROR",
         "category": test_res.get("category", "General"),
         "fan_count": test_res.get("fan_count", 0),
