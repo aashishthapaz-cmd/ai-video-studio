@@ -1,0 +1,280 @@
+[
+  {
+    "start": 0.02,
+    "end": 2.36,
+    "text": "You know the most beautiful thing about us.",
+    "words": [
+      {
+        "start": 0.02,
+        "end": 0.5,
+        "word": " You"
+      },
+      {
+        "start": 0.5,
+        "end": 0.64,
+        "word": " know"
+      },
+      {
+        "start": 0.64,
+        "end": 0.78,
+        "word": " the"
+      },
+      {
+        "start": 0.78,
+        "end": 0.98,
+        "word": " most"
+      },
+      {
+        "start": 0.98,
+        "end": 1.4,
+        "word": " beautiful"
+      },
+      {
+        "start": 1.4,
+        "end": 1.7,
+        "word": " thing"
+      },
+      {
+        "start": 1.7,
+        "end": 1.98,
+        "word": " about"
+      },
+      {
+        "start": 1.98,
+        "end": 2.36,
+        "word": " us."
+      }
+    ]
+  },
+  {
+    "start": 3.14,
+    "end": 5.1,
+    "text": "It happened so unexpectedly.",
+    "words": [
+      {
+        "start": 3.14,
+        "end": 3.68,
+        "word": " It"
+      },
+      {
+        "start": 3.68,
+        "end": 4.02,
+        "word": " happened"
+      },
+      {
+        "start": 4.02,
+        "end": 4.38,
+        "word": " so"
+      },
+      {
+        "start": 4.38,
+        "end": 5.1,
+        "word": " unexpectedly."
+      }
+    ]
+  },
+  {
+    "start": 6.22,
+    "end": 8.42,
+    "text": "We never planned on falling in love,",
+    "words": [
+      {
+        "start": 6.22,
+        "end": 6.76,
+        "word": " We"
+      },
+      {
+        "start": 6.76,
+        "end": 6.98,
+        "word": " never"
+      },
+      {
+        "start": 6.98,
+        "end": 7.4,
+        "word": " planned"
+      },
+      {
+        "start": 7.4,
+        "end": 7.6,
+        "word": " on"
+      },
+      {
+        "start": 7.6,
+        "end": 7.94,
+        "word": " falling"
+      },
+      {
+        "start": 7.94,
+        "end": 8.12,
+        "word": " in"
+      },
+      {
+        "start": 8.12,
+        "end": 8.42,
+        "word": " love,"
+      }
+    ]
+  },
+  {
+    "start": 9.1,
+    "end": 11.42,
+    "text": "and maybe that's why it feels so special.",
+    "words": [
+      {
+        "start": 9.1,
+        "end": 9.5,
+        "word": " and"
+      },
+      {
+        "start": 9.5,
+        "end": 9.74,
+        "word": " maybe"
+      },
+      {
+        "start": 9.74,
+        "end": 10.12,
+        "word": " that's"
+      },
+      {
+        "start": 10.12,
+        "end": 10.3,
+        "word": " why"
+      },
+      {
+        "start": 10.3,
+        "end": 10.46,
+        "word": " it"
+      },
+      {
+        "start": 10.46,
+        "end": 10.76,
+        "word": " feels"
+      },
+      {
+        "start": 10.76,
+        "end": 11.0,
+        "word": " so"
+      },
+      {
+        "start": 11.0,
+        "end": 11.42,
+        "word": " special."
+      }
+    ]
+  },
+  {
+    "start": 12.56,
+    "end": 13.3,
+    "text": "No expectations.",
+    "words": [
+      {
+        "start": 12.56,
+        "end": 12.74,
+        "word": " No"
+      },
+      {
+        "start": 12.74,
+        "end": 13.3,
+        "word": " expectations."
+      }
+    ]
+  },
+  {
+    "start": 14.34,
+    "end": 15.02,
+    "text": "No timeline.",
+    "words": [
+      {
+        "start": 14.34,
+        "end": 14.52,
+        "word": " No"
+      },
+      {
+        "start": 14.52,
+        "end": 15.02,
+        "word": " timeline."
+      }
+    ]
+  },
+  {
+    "start": 15.7,
+    "end": 17.78,
+    "text": "Just two hearts finding their way.",
+    "words": [
+      {
+        "start": 15.7,
+        "end": 16.08,
+        "word": " Just"
+      },
+      {
+        "start": 16.08,
+        "end": 16.4,
+        "word": " two"
+      },
+      {
+        "start": 16.4,
+        "end": 16.84,
+        "word": " hearts"
+      },
+      {
+        "start": 16.84,
+        "end": 17.22,
+        "word": " finding"
+      },
+      {
+        "start": 17.22,
+        "end": 17.5,
+        "word": " their"
+      },
+      {
+        "start": 17.5,
+        "end": 17.78,
+        "word": " way."
+      }
+    ]
+  },
+  {
+    "start": 18.78,
+    "end": 19.9,
+    "text": "It's more than love.",
+    "words": [
+      {
+        "start": 18.78,
+        "end": 19.16,
+        "word": " It's"
+      },
+      {
+        "start": 19.16,
+        "end": 19.4,
+        "word": " more"
+      },
+      {
+        "start": 19.4,
+        "end": 19.6,
+        "word": " than"
+      },
+      {
+        "start": 19.6,
+        "end": 19.9,
+        "word": " love."
+      }
+    ]
+  },
+  {
+    "start": 20.74,
+    "end": 21.34,
+    "text": "It's home.",
+    "words": [
+      {
+        "start": 20.74,
+        "end": 21.12,
+        "word": " It's"
+      },
+      {
+        "start": 21.12,
+        "end": 21.34,
+        "word": " home."
+      }
+    ]
+  }
+]

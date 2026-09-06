@@ -1,0 +1,240 @@
+[
+  {
+    "start": 0.0,
+    "end": 4.3,
+    "text": "You don't love someone for their looks or their clothes or their car.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.1,
+        "word": " You"
+      },
+      {
+        "start": 0.1,
+        "end": 0.34,
+        "word": " don't"
+      },
+      {
+        "start": 0.34,
+        "end": 0.58,
+        "word": " love"
+      },
+      {
+        "start": 0.58,
+        "end": 0.96,
+        "word": " someone"
+      },
+      {
+        "start": 0.96,
+        "end": 1.2,
+        "word": " for"
+      },
+      {
+        "start": 1.2,
+        "end": 1.36,
+        "word": " their"
+      },
+      {
+        "start": 1.36,
+        "end": 1.8,
+        "word": " looks"
+      },
+      {
+        "start": 1.8,
+        "end": 2.54,
+        "word": " or"
+      },
+      {
+        "start": 2.54,
+        "end": 2.7,
+        "word": " their"
+      },
+      {
+        "start": 2.7,
+        "end": 3.18,
+        "word": " clothes"
+      },
+      {
+        "start": 3.18,
+        "end": 3.8,
+        "word": " or"
+      },
+      {
+        "start": 3.8,
+        "end": 3.96,
+        "word": " their"
+      },
+      {
+        "start": 3.96,
+        "end": 4.3,
+        "word": " car."
+      }
+    ]
+  },
+  {
+    "start": 5.32,
+    "end": 8.96,
+    "text": "You love them because they sing a song only you can hear.",
+    "words": [
+      {
+        "start": 5.32,
+        "end": 5.62,
+        "word": " You"
+      },
+      {
+        "start": 5.62,
+        "end": 5.86,
+        "word": " love"
+      },
+      {
+        "start": 5.86,
+        "end": 6.08,
+        "word": " them"
+      },
+      {
+        "start": 6.08,
+        "end": 6.34,
+        "word": " because"
+      },
+      {
+        "start": 6.34,
+        "end": 6.54,
+        "word": " they"
+      },
+      {
+        "start": 6.54,
+        "end": 6.82,
+        "word": " sing"
+      },
+      {
+        "start": 6.82,
+        "end": 6.94,
+        "word": " a"
+      },
+      {
+        "start": 6.94,
+        "end": 7.38,
+        "word": " song"
+      },
+      {
+        "start": 7.38,
+        "end": 8.12,
+        "word": " only"
+      },
+      {
+        "start": 8.12,
+        "end": 8.38,
+        "word": " you"
+      },
+      {
+        "start": 8.38,
+        "end": 8.58,
+        "word": " can"
+      },
+      {
+        "start": 8.58,
+        "end": 8.96,
+        "word": " hear."
+      }
+    ]
+  },
+  {
+    "start": 10.08,
+    "end": 13.6,
+    "text": "Love is something deeper than what the eyes can see.",
+    "words": [
+      {
+        "start": 10.08,
+        "end": 10.58,
+        "word": " Love"
+      },
+      {
+        "start": 10.58,
+        "end": 10.82,
+        "word": " is"
+      },
+      {
+        "start": 10.82,
+        "end": 11.08,
+        "word": " something"
+      },
+      {
+        "start": 11.08,
+        "end": 11.64,
+        "word": " deeper"
+      },
+      {
+        "start": 11.64,
+        "end": 12.28,
+        "word": " than"
+      },
+      {
+        "start": 12.28,
+        "end": 12.44,
+        "word": " what"
+      },
+      {
+        "start": 12.44,
+        "end": 12.6,
+        "word": " the"
+      },
+      {
+        "start": 12.6,
+        "end": 12.94,
+        "word": " eyes"
+      },
+      {
+        "start": 12.94,
+        "end": 13.22,
+        "word": " can"
+      },
+      {
+        "start": 13.22,
+        "end": 13.6,
+        "word": " see."
+      }
+    ]
+  },
+  {
+    "start": 14.86,
+    "end": 17.08,
+    "text": "It's something only the heart can feel.",
+    "words": [
+      {
+        "start": 14.86,
+        "end": 15.3,
+        "word": " It's"
+      },
+      {
+        "start": 15.3,
+        "end": 15.5,
+        "word": " something"
+      },
+      {
+        "start": 15.5,
+        "end": 15.96,
+        "word": " only"
+      },
+      {
+        "start": 15.96,
+        "end": 16.16,
+        "word": " the"
+      },
+      {
+        "start": 16.16,
+        "end": 16.44,
+        "word": " heart"
+      },
+      {
+        "start": 16.44,
+        "end": 16.7,
+        "word": " can"
+      },
+      {
+        "start": 16.7,
+        "end": 17.08,
+        "word": " feel."
+      }
+    ]
+  }
+]

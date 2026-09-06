@@ -1,0 +1,273 @@
+[
+  {
+    "start": 0.0,
+    "end": 6.16,
+    "text": "As you grow older, you begin to understand. Your father was just a man, trying his best",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.34,
+        "word": " As"
+      },
+      {
+        "start": 0.34,
+        "end": 0.46,
+        "word": " you"
+      },
+      {
+        "start": 0.46,
+        "end": 0.64,
+        "word": " grow"
+      },
+      {
+        "start": 0.64,
+        "end": 1.04,
+        "word": " older,"
+      },
+      {
+        "start": 1.28,
+        "end": 1.38,
+        "word": " you"
+      },
+      {
+        "start": 1.38,
+        "end": 1.62,
+        "word": " begin"
+      },
+      {
+        "start": 1.62,
+        "end": 1.8,
+        "word": " to"
+      },
+      {
+        "start": 1.8,
+        "end": 2.3,
+        "word": " understand."
+      },
+      {
+        "start": 3.32,
+        "end": 3.76,
+        "word": " Your"
+      },
+      {
+        "start": 3.76,
+        "end": 4.08,
+        "word": " father"
+      },
+      {
+        "start": 4.08,
+        "end": 4.3,
+        "word": " was"
+      },
+      {
+        "start": 4.3,
+        "end": 4.5,
+        "word": " just"
+      },
+      {
+        "start": 4.5,
+        "end": 4.64,
+        "word": " a"
+      },
+      {
+        "start": 4.64,
+        "end": 4.9,
+        "word": " man,"
+      },
+      {
+        "start": 5.34,
+        "end": 5.64,
+        "word": " trying"
+      },
+      {
+        "start": 5.64,
+        "end": 5.84,
+        "word": " his"
+      },
+      {
+        "start": 5.84,
+        "end": 6.16,
+        "word": " best"
+      }
+    ]
+  },
+  {
+    "start": 6.16,
+    "end": 11.9,
+    "text": "with what he knew. He put your needs before his own. He traded some of his dreams for the",
+    "words": [
+      {
+        "start": 6.16,
+        "end": 6.32,
+        "word": " with"
+      },
+      {
+        "start": 6.32,
+        "end": 6.46,
+        "word": " what"
+      },
+      {
+        "start": 6.46,
+        "end": 6.6,
+        "word": " he"
+      },
+      {
+        "start": 6.6,
+        "end": 6.84,
+        "word": " knew."
+      },
+      {
+        "start": 7.8,
+        "end": 8.0,
+        "word": " He"
+      },
+      {
+        "start": 8.0,
+        "end": 8.18,
+        "word": " put"
+      },
+      {
+        "start": 8.18,
+        "end": 8.36,
+        "word": " your"
+      },
+      {
+        "start": 8.36,
+        "end": 8.68,
+        "word": " needs"
+      },
+      {
+        "start": 8.68,
+        "end": 8.94,
+        "word": " before"
+      },
+      {
+        "start": 8.94,
+        "end": 9.16,
+        "word": " his"
+      },
+      {
+        "start": 9.16,
+        "end": 9.42,
+        "word": " own."
+      },
+      {
+        "start": 10.2,
+        "end": 10.44,
+        "word": " He"
+      },
+      {
+        "start": 10.44,
+        "end": 10.74,
+        "word": " traded"
+      },
+      {
+        "start": 10.74,
+        "end": 10.96,
+        "word": " some"
+      },
+      {
+        "start": 10.96,
+        "end": 11.08,
+        "word": " of"
+      },
+      {
+        "start": 11.08,
+        "end": 11.2,
+        "word": " his"
+      },
+      {
+        "start": 11.2,
+        "end": 11.6,
+        "word": " dreams"
+      },
+      {
+        "start": 11.6,
+        "end": 11.82,
+        "word": " for"
+      },
+      {
+        "start": 11.82,
+        "end": 11.9,
+        "word": " the"
+      }
+    ]
+  },
+  {
+    "start": 11.9,
+    "end": 15.78,
+    "text": "dreams he had for you. He was living life for the first time too.",
+    "words": [
+      {
+        "start": 11.9,
+        "end": 12.16,
+        "word": " dreams"
+      },
+      {
+        "start": 12.16,
+        "end": 12.32,
+        "word": " he"
+      },
+      {
+        "start": 12.32,
+        "end": 12.54,
+        "word": " had"
+      },
+      {
+        "start": 12.54,
+        "end": 12.72,
+        "word": " for"
+      },
+      {
+        "start": 12.72,
+        "end": 12.86,
+        "word": " you."
+      },
+      {
+        "start": 13.7,
+        "end": 13.94,
+        "word": " He"
+      },
+      {
+        "start": 13.94,
+        "end": 14.08,
+        "word": " was"
+      },
+      {
+        "start": 14.08,
+        "end": 14.34,
+        "word": " living"
+      },
+      {
+        "start": 14.34,
+        "end": 14.68,
+        "word": " life"
+      },
+      {
+        "start": 14.68,
+        "end": 14.86,
+        "word": " for"
+      },
+      {
+        "start": 14.86,
+        "end": 14.96,
+        "word": " the"
+      },
+      {
+        "start": 14.96,
+        "end": 15.2,
+        "word": " first"
+      },
+      {
+        "start": 15.2,
+        "end": 15.52,
+        "word": " time"
+      },
+      {
+        "start": 15.52,
+        "end": 15.78,
+        "word": " too."
+      }
+    ]
+  }
+]

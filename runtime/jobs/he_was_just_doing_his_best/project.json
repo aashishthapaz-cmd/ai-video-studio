@@ -1,0 +1,71 @@
+{
+  "title": "He Was Just Doing His Best",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 101,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "As you grow older, you begin to understand.",
+      "prompt": "A warm sunlit studio filled with the soft glow of a large window. An unfinished canvas lies on an easel under the light, its colors blending in harmony. Painterly shadows dance across the walls and floor, creating an intimate atmosphere. The artist's hands are seen holding brushes, their fingers stained with ochre and cobalt | lo-fi retro 90s aesthetic anime illustration, Studio Ghibli and Makoto Shinkai inspired, atmospheric digital painting, rich moody color palette, warm amber and deep midnight navy blue, textured brushwork, cinematic emotional depth, subtle film grain, vertical 9:16 composition, no text, no writing. Atmospheric mood, cinematic color grading, deeply evocative composition with poetic negative space, professional fine-art quality. No text, no writing, no signs, no labels, no logos, no watermark.",
+      "motion": "slow_push_in",
+      "seed": 356178372,
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "Your father was just a man, trying his best with what he knew.",
+      "prompt": "A cozy corner of an old workshop bathed in amber light. A sculptor's hands are seen shaping clay on a small table. The shadows of the work and tools cast long, intricate patterns on the floor. Outside, golden hour sunlight filters through a skylight, highlighting the artist’s dedication | lo-fi retro 90s aesthetic anime illustration, Studio Ghibli and Makoto Shinkai inspired, atmospheric digital painting, rich moody color palette, warm amber and deep midnight navy blue, textured brushwork, cinematic emotional depth, subtle film grain, vertical 9:16 composition, no text, no writing. Atmospheric mood, cinematic color grading, deeply evocative composition with poetic negative space, professional fine-art quality. No text, no writing, no signs, no labels, no logos, no watermark.",
+      "motion": "pan_right",
+      "seed": 241049550,
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "He put your needs before his own.",
+      "prompt": "An open doorway in a twilight-lit gallery. A large picture frame catches the golden light, casting deep shadows inside. Inside, an abstract painting of a father and child is seen, blending colors that represent their shared bond. The door creaks softly as if inviting viewers into this intimate moment | lo-fi retro 90s aesthetic anime illustration, Studio Ghibli and Makoto Shinkai inspired, atmospheric digital painting, rich moody color palette, warm amber and deep midnight navy blue, textured brushwork, cinematic emotional depth, subtle film grain, vertical 9:16 composition, no text, no writing. Atmospheric mood, cinematic color grading, deeply evocative composition with poetic negative space, professional fine-art quality. No text, no writing, no signs, no labels, no logos, no watermark.",
+      "motion": "slow_push_in",
+      "seed": 957662384,
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "He traded some of his dreams for the dreams he had for you.",
+      "prompt": "A soft morning haze fills a sculptor’s workshop. A large, open window lets in golden light that highlights the artist's tools and sculptures. In the background, an unfinished sculpture of a father holding a child is seen, its form incomplete but full of potential. The light creates a sense of hope and sacrifice | lo-fi retro 90s aesthetic anime illustration, Studio Ghibli and Makoto Shinkai inspired, atmospheric digital painting, rich moody color palette, warm amber and deep midnight navy blue, textured brushwork, cinematic emotional depth, subtle film grain, vertical 9:16 composition, no text, no writing. Atmospheric mood, cinematic color grading, deeply evocative composition with poetic negative space, professional fine-art quality. No text, no writing, no signs, no labels, no logos, no watermark.",
+      "motion": "pan_left",
+      "seed": 242204496,
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_005",
+      "duration": 4.0,
+      "narration": "He was living life for the first time too.",
+      "prompt": "A warm sunlit studio with a large window casting golden light. An artist is seen painting, their silhouette outlined by the bright sunlight. The background shows a series of paintings in various stages, each one telling a story of growth and discovery. The artist’s focus on their work symbolizes both struggle and joy | lo-fi retro 90s aesthetic anime illustration, Studio Ghibli and Makoto Shinkai inspired, atmospheric digital painting, rich moody color palette, warm amber and deep midnight navy blue, textured brushwork, cinematic emotional depth, subtle film grain, vertical 9:16 composition, no text, no writing. Atmospheric mood, cinematic color grading, deeply evocative composition with poetic negative space, professional fine-art quality. No text, no writing, no signs, no labels, no logos, no watermark.",
+      "motion": "slow_push_in",
+      "seed": 317456563,
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    }
+  ],
+  "style_bible": {
+    "emotional_arc": "A poignant exploration of understanding and empathy as one matures, reflecting on a father's sacrifices and growth.",
+    "palette": "Warm amber and deep midnight navy blue with rich cobalt and ochre accents",
+    "lighting": "Golden hour sunlight casting long warm shadows and amber rim light",
+    "motif": "Painterly atelier shadows, textured pigment strokes, Studio Ghibli fine-art aesthetic",
+    "continuity": "A cohesive visual narrative through varying settings, subjects, and emotional depths.",
+    "negative_prompt": "text, words, letters, numbers, quotation, caption, typography, logo, watermark, sign, label, poster, menu, readable book cover, readable book spine, license plate, road lettering, writing-like symbols, blank text area, ugly, deformed hands, bad anatomy, extra limbs, blurry, low resolution, stock photo, 3D CGI render, photorealism artifact, gore, blood, clutter",
+    "art_direction": "artistic perception and visual poetry, painterly atelier shadows, warm studio lamplight, textured pigment strokes, rich cobalt and ochre accents, Studio Ghibli fine-art aesthetic"
+  },
+  "model": "qwen2.5:7b",
+  "voice_tone": "warm, deep, emotional spoken-word delivery",
+  "pacing": "deliberate phrasing with a pause after each line",
+  "image_style": "lo-fi retro 90s aesthetic anime illustration, Studio Ghibli and Makoto Shinkai inspired, atmospheric digital painting, rich moody color palette, warm amber and deep midnight navy blue, subtle film grain, vertical 9:16",
+  "animation_style": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing"
+}

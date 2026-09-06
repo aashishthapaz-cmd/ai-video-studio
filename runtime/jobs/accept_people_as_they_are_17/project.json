@@ -1,0 +1,64 @@
+{
+  "title": "Accept People As They Are",
+  "style_bible": {
+    "emotional_arc": "Serene acceptance, self-respect, and understanding.",
+    "palette": "Deep charcoal-teal with amber accents",
+    "lighting": "Moody twilight atmosphere",
+    "motif": "Natural elements like trees, paths, and books",
+    "continuity": "Sparse, poetic visual world suitable for slow Ken Burns motion",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "Accept people as they are. Place them where they belong.",
+      "prompt": "A lone tree standing in twilight, its branches reaching out like open arms, with a path leading to it under a pale cream moonlight — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "You are responsible for your own life.",
+      "prompt": "A person sitting alone by the water, reading a book under a soft amber light, with reflections of trees and sky in the calm — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "Acceptance frees you from trying to change anyone.",
+      "prompt": "A hand gently placing a book on a shelf, with the moonlight casting an amber glow over the pages and the surrounding books, low-angle — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "Boundaries protect your peace.",
+      "prompt": "A path leading through a dense forest, with only a narrow strip of moonlight filtering through the trees, creating an amber glow on — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_005",
+      "duration": 4.0,
+      "narration": "Not everyone earns the same access, the same closeness, or the same seat at your table.",
+      "prompt": "A small boat floating on a calm lake under an amber moon, with trees and mountains in the background, symbolizing different paths and destinations — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_006",
+      "duration": 4.0,
+      "narration": "And that's not cruelty. That's self-respect.",
+      "prompt": "A lone lantern hanging from a tree, casting an amber light on the ground below, with a path leading away into the darkness, quiet — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 93,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

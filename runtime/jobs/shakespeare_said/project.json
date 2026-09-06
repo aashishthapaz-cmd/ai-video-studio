@@ -1,0 +1,28 @@
+{
+  "title": "Shakespeare Said",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 78,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "Shakespeare said, love is heavy and light, bright and dark, hot and cold, sick and healthy.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Shakespeare said, love is heavy and light, bright and dark, hot and cold, sick and healthy."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "Asleep and awake, it is everything except what it is.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Asleep and awake, it is everything except what it is."
+    }
+  ]
+}

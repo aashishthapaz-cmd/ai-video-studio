@@ -1,0 +1,29 @@
+{
+  "title": "Tiny Test",
+  "style_bible": {
+    "emotional_arc": "Simple and profound.",
+    "palette": "Charcoal-teal, navy, amber",
+    "lighting": "Twilight/moody night",
+    "motif": "Natural elements, sparse and poetic",
+    "continuity": "Consistent inked storybook/graphic-novel illustration style",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "One short line.",
+      "prompt": "A solitary tree silhouette against twilight sky, inked contour lines, paper grain visible, sparse and poetic, amber accent, wide lonely establishing view, rain haze — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 1,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

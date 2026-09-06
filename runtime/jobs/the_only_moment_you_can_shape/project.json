@@ -1,0 +1,60 @@
+{
+  "title": "The Only Moment You Can Shape",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 123,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "No amount of regret rewrites yesterday.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "No amount of regret rewrites yesterday."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "No amount of worry controls tomorrow.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "No amount of worry controls tomorrow."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "No guilt can undo what's already happened.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "No guilt can undo what's already happened."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "No overthinking has ever brought peace.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "No overthinking has ever brought peace."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "The only moment you can shape is this one.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "The only moment you can shape is this one."
+    },
+    {
+      "id": "scene_006",
+      "duration": 5,
+      "narration": "Live it with intention. Make it beautiful.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Live it with intention. Make it beautiful."
+    }
+  ]
+}

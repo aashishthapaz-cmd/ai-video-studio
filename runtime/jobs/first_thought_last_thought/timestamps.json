@@ -1,0 +1,334 @@
+[
+  {
+    "start": 0.0,
+    "end": 4.76,
+    "text": "What a beautiful thing it is to be someone's first thought in the morning and their last",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.22,
+        "word": " What"
+      },
+      {
+        "start": 0.22,
+        "end": 0.24,
+        "word": " a"
+      },
+      {
+        "start": 0.24,
+        "end": 0.6,
+        "word": " beautiful"
+      },
+      {
+        "start": 0.6,
+        "end": 0.98,
+        "word": " thing"
+      },
+      {
+        "start": 0.98,
+        "end": 1.12,
+        "word": " it"
+      },
+      {
+        "start": 1.12,
+        "end": 1.42,
+        "word": " is"
+      },
+      {
+        "start": 1.42,
+        "end": 1.6,
+        "word": " to"
+      },
+      {
+        "start": 1.6,
+        "end": 1.76,
+        "word": " be"
+      },
+      {
+        "start": 1.76,
+        "end": 2.3,
+        "word": " someone's"
+      },
+      {
+        "start": 2.3,
+        "end": 2.46,
+        "word": " first"
+      },
+      {
+        "start": 2.46,
+        "end": 2.84,
+        "word": " thought"
+      },
+      {
+        "start": 2.84,
+        "end": 3.06,
+        "word": " in"
+      },
+      {
+        "start": 3.06,
+        "end": 3.14,
+        "word": " the"
+      },
+      {
+        "start": 3.14,
+        "end": 3.46,
+        "word": " morning"
+      },
+      {
+        "start": 3.46,
+        "end": 4.2,
+        "word": " and"
+      },
+      {
+        "start": 4.2,
+        "end": 4.38,
+        "word": " their"
+      },
+      {
+        "start": 4.38,
+        "end": 4.76,
+        "word": " last"
+      }
+    ]
+  },
+  {
+    "start": 4.76,
+    "end": 5.18,
+    "text": "at night.",
+    "words": [
+      {
+        "start": 4.76,
+        "end": 4.94,
+        "word": " at"
+      },
+      {
+        "start": 4.94,
+        "end": 5.18,
+        "word": " night."
+      }
+    ]
+  },
+  {
+    "start": 6.5,
+    "end": 9.48,
+    "text": "It isn't just romance, it's safety.",
+    "words": [
+      {
+        "start": 6.5,
+        "end": 6.8,
+        "word": " It"
+      },
+      {
+        "start": 6.8,
+        "end": 7.1,
+        "word": " isn't"
+      },
+      {
+        "start": 7.1,
+        "end": 7.24,
+        "word": " just"
+      },
+      {
+        "start": 7.24,
+        "end": 7.62,
+        "word": " romance,"
+      },
+      {
+        "start": 8.7,
+        "end": 9.08,
+        "word": " it's"
+      },
+      {
+        "start": 9.08,
+        "end": 9.48,
+        "word": " safety."
+      }
+    ]
+  },
+  {
+    "start": 10.8,
+    "end": 15.36,
+    "text": "In a world full of noise, you live in the quiet corners of their mind.",
+    "words": [
+      {
+        "start": 10.8,
+        "end": 10.96,
+        "word": " In"
+      },
+      {
+        "start": 10.96,
+        "end": 11.06,
+        "word": " a"
+      },
+      {
+        "start": 11.06,
+        "end": 11.32,
+        "word": " world"
+      },
+      {
+        "start": 11.32,
+        "end": 11.54,
+        "word": " full"
+      },
+      {
+        "start": 11.54,
+        "end": 11.7,
+        "word": " of"
+      },
+      {
+        "start": 11.7,
+        "end": 12.02,
+        "word": " noise,"
+      },
+      {
+        "start": 12.96,
+        "end": 13.12,
+        "word": " you"
+      },
+      {
+        "start": 13.12,
+        "end": 13.38,
+        "word": " live"
+      },
+      {
+        "start": 13.38,
+        "end": 13.58,
+        "word": " in"
+      },
+      {
+        "start": 13.58,
+        "end": 13.68,
+        "word": " the"
+      },
+      {
+        "start": 13.68,
+        "end": 14.04,
+        "word": " quiet"
+      },
+      {
+        "start": 14.04,
+        "end": 14.52,
+        "word": " corners"
+      },
+      {
+        "start": 14.52,
+        "end": 14.74,
+        "word": " of"
+      },
+      {
+        "start": 14.74,
+        "end": 14.92,
+        "word": " their"
+      },
+      {
+        "start": 14.92,
+        "end": 15.36,
+        "word": " mind."
+      }
+    ]
+  },
+  {
+    "start": 16.34,
+    "end": 21.12,
+    "text": "You're their anchor before the chaos begins and their calm when it ends.",
+    "words": [
+      {
+        "start": 16.34,
+        "end": 16.6,
+        "word": " You're"
+      },
+      {
+        "start": 16.6,
+        "end": 16.72,
+        "word": " their"
+      },
+      {
+        "start": 16.72,
+        "end": 17.18,
+        "word": " anchor"
+      },
+      {
+        "start": 17.18,
+        "end": 17.66,
+        "word": " before"
+      },
+      {
+        "start": 17.66,
+        "end": 17.86,
+        "word": " the"
+      },
+      {
+        "start": 17.86,
+        "end": 18.24,
+        "word": " chaos"
+      },
+      {
+        "start": 18.24,
+        "end": 18.76,
+        "word": " begins"
+      },
+      {
+        "start": 18.76,
+        "end": 19.78,
+        "word": " and"
+      },
+      {
+        "start": 19.78,
+        "end": 19.96,
+        "word": " their"
+      },
+      {
+        "start": 19.96,
+        "end": 20.42,
+        "word": " calm"
+      },
+      {
+        "start": 20.42,
+        "end": 20.66,
+        "word": " when"
+      },
+      {
+        "start": 20.66,
+        "end": 20.82,
+        "word": " it"
+      },
+      {
+        "start": 20.82,
+        "end": 21.12,
+        "word": " ends."
+      }
+    ]
+  },
+  {
+    "start": 22.62,
+    "end": 25.04,
+    "text": "It's rare and it's sacred.",
+    "words": [
+      {
+        "start": 22.62,
+        "end": 23.06,
+        "word": " It's"
+      },
+      {
+        "start": 23.06,
+        "end": 23.28,
+        "word": " rare"
+      },
+      {
+        "start": 23.28,
+        "end": 24.44,
+        "word": " and"
+      },
+      {
+        "start": 24.44,
+        "end": 24.76,
+        "word": " it's"
+      },
+      {
+        "start": 24.76,
+        "end": 25.04,
+        "word": " sacred."
+      }
+    ]
+  }
+]

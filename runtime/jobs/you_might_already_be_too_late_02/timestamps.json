@@ -1,0 +1,285 @@
+[
+  {
+    "start": 0.0,
+    "end": 3.46,
+    "text": "I was too tired to explain, so I chose silence.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.14,
+        "word": " I"
+      },
+      {
+        "start": 0.14,
+        "end": 0.24,
+        "word": " was"
+      },
+      {
+        "start": 0.24,
+        "end": 0.42,
+        "word": " too"
+      },
+      {
+        "start": 0.42,
+        "end": 0.72,
+        "word": " tired"
+      },
+      {
+        "start": 0.72,
+        "end": 0.9,
+        "word": " to"
+      },
+      {
+        "start": 0.9,
+        "end": 1.32,
+        "word": " explain,"
+      },
+      {
+        "start": 2.28,
+        "end": 2.62,
+        "word": " so"
+      },
+      {
+        "start": 2.62,
+        "end": 2.74,
+        "word": " I"
+      },
+      {
+        "start": 2.74,
+        "end": 3.04,
+        "word": " chose"
+      },
+      {
+        "start": 3.04,
+        "end": 3.46,
+        "word": " silence."
+      }
+    ]
+  },
+  {
+    "start": 4.76,
+    "end": 10.56,
+    "text": "You kept asking what was wrong, I kept saying nothing, you heard my words.",
+    "words": [
+      {
+        "start": 4.76,
+        "end": 5.28,
+        "word": " You"
+      },
+      {
+        "start": 5.28,
+        "end": 5.46,
+        "word": " kept"
+      },
+      {
+        "start": 5.46,
+        "end": 5.88,
+        "word": " asking"
+      },
+      {
+        "start": 5.88,
+        "end": 6.12,
+        "word": " what"
+      },
+      {
+        "start": 6.12,
+        "end": 6.28,
+        "word": " was"
+      },
+      {
+        "start": 6.28,
+        "end": 6.52,
+        "word": " wrong,"
+      },
+      {
+        "start": 7.44,
+        "end": 7.74,
+        "word": " I"
+      },
+      {
+        "start": 7.74,
+        "end": 7.96,
+        "word": " kept"
+      },
+      {
+        "start": 7.96,
+        "end": 8.22,
+        "word": " saying"
+      },
+      {
+        "start": 8.22,
+        "end": 8.52,
+        "word": " nothing,"
+      },
+      {
+        "start": 9.38,
+        "end": 9.74,
+        "word": " you"
+      },
+      {
+        "start": 9.74,
+        "end": 9.96,
+        "word": " heard"
+      },
+      {
+        "start": 9.96,
+        "end": 10.14,
+        "word": " my"
+      },
+      {
+        "start": 10.14,
+        "end": 10.56,
+        "word": " words."
+      }
+    ]
+  },
+  {
+    "start": 11.78,
+    "end": 17.84,
+    "text": "You never heard my silence, you wanted an explanation, I wanted to be understood.",
+    "words": [
+      {
+        "start": 11.78,
+        "end": 12.02,
+        "word": " You"
+      },
+      {
+        "start": 12.02,
+        "end": 12.26,
+        "word": " never"
+      },
+      {
+        "start": 12.26,
+        "end": 12.54,
+        "word": " heard"
+      },
+      {
+        "start": 12.54,
+        "end": 12.72,
+        "word": " my"
+      },
+      {
+        "start": 12.72,
+        "end": 13.12,
+        "word": " silence,"
+      },
+      {
+        "start": 14.28,
+        "end": 14.44,
+        "word": " you"
+      },
+      {
+        "start": 14.44,
+        "end": 14.72,
+        "word": " wanted"
+      },
+      {
+        "start": 14.72,
+        "end": 14.92,
+        "word": " an"
+      },
+      {
+        "start": 14.92,
+        "end": 15.52,
+        "word": " explanation,"
+      },
+      {
+        "start": 16.58,
+        "end": 16.76,
+        "word": " I"
+      },
+      {
+        "start": 16.76,
+        "end": 17.06,
+        "word": " wanted"
+      },
+      {
+        "start": 17.06,
+        "end": 17.3,
+        "word": " to"
+      },
+      {
+        "start": 17.3,
+        "end": 17.42,
+        "word": " be"
+      },
+      {
+        "start": 17.42,
+        "end": 17.84,
+        "word": " understood."
+      }
+    ]
+  },
+  {
+    "start": 18.98,
+    "end": 23.08,
+    "text": "By the time you finally understand me, it might already be too late.",
+    "words": [
+      {
+        "start": 18.98,
+        "end": 19.24,
+        "word": " By"
+      },
+      {
+        "start": 19.24,
+        "end": 19.34,
+        "word": " the"
+      },
+      {
+        "start": 19.34,
+        "end": 19.6,
+        "word": " time"
+      },
+      {
+        "start": 19.6,
+        "end": 19.76,
+        "word": " you"
+      },
+      {
+        "start": 19.76,
+        "end": 20.04,
+        "word": " finally"
+      },
+      {
+        "start": 20.04,
+        "end": 20.56,
+        "word": " understand"
+      },
+      {
+        "start": 20.56,
+        "end": 20.96,
+        "word": " me,"
+      },
+      {
+        "start": 21.64,
+        "end": 21.82,
+        "word": " it"
+      },
+      {
+        "start": 21.82,
+        "end": 22.0,
+        "word": " might"
+      },
+      {
+        "start": 22.0,
+        "end": 22.46,
+        "word": " already"
+      },
+      {
+        "start": 22.46,
+        "end": 22.64,
+        "word": " be"
+      },
+      {
+        "start": 22.64,
+        "end": 22.86,
+        "word": " too"
+      },
+      {
+        "start": 22.86,
+        "end": 23.08,
+        "word": " late."
+      }
+    ]
+  }
+]

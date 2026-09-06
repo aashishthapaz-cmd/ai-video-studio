@@ -1,0 +1,193 @@
+[
+  {
+    "start": 0.0,
+    "end": 5.72,
+    "text": "There is a type of hell where nothing is burning, nothing is screaming.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.14,
+        "word": " There"
+      },
+      {
+        "start": 0.14,
+        "end": 0.28,
+        "word": " is"
+      },
+      {
+        "start": 0.28,
+        "end": 0.42,
+        "word": " a"
+      },
+      {
+        "start": 0.42,
+        "end": 0.66,
+        "word": " type"
+      },
+      {
+        "start": 0.66,
+        "end": 0.88,
+        "word": " of"
+      },
+      {
+        "start": 0.88,
+        "end": 1.24,
+        "word": " hell"
+      },
+      {
+        "start": 1.24,
+        "end": 2.5,
+        "word": " where"
+      },
+      {
+        "start": 2.5,
+        "end": 2.82,
+        "word": " nothing"
+      },
+      {
+        "start": 2.82,
+        "end": 3.1,
+        "word": " is"
+      },
+      {
+        "start": 3.1,
+        "end": 3.44,
+        "word": " burning,"
+      },
+      {
+        "start": 4.36,
+        "end": 5.02,
+        "word": " nothing"
+      },
+      {
+        "start": 5.02,
+        "end": 5.28,
+        "word": " is"
+      },
+      {
+        "start": 5.28,
+        "end": 5.72,
+        "word": " screaming."
+      }
+    ]
+  },
+  {
+    "start": 6.84,
+    "end": 13.8,
+    "text": "Just mornings you wake up inside a life you barely recognize, built slowly from everything",
+    "words": [
+      {
+        "start": 6.84,
+        "end": 7.38,
+        "word": " Just"
+      },
+      {
+        "start": 7.38,
+        "end": 7.8,
+        "word": " mornings"
+      },
+      {
+        "start": 7.8,
+        "end": 8.14,
+        "word": " you"
+      },
+      {
+        "start": 8.14,
+        "end": 8.34,
+        "word": " wake"
+      },
+      {
+        "start": 8.34,
+        "end": 8.6,
+        "word": " up"
+      },
+      {
+        "start": 8.6,
+        "end": 8.94,
+        "word": " inside"
+      },
+      {
+        "start": 8.94,
+        "end": 9.18,
+        "word": " a"
+      },
+      {
+        "start": 9.18,
+        "end": 9.44,
+        "word": " life"
+      },
+      {
+        "start": 9.44,
+        "end": 9.66,
+        "word": " you"
+      },
+      {
+        "start": 9.66,
+        "end": 10.1,
+        "word": " barely"
+      },
+      {
+        "start": 10.1,
+        "end": 10.78,
+        "word": " recognize,"
+      },
+      {
+        "start": 11.34,
+        "end": 11.94,
+        "word": " built"
+      },
+      {
+        "start": 11.94,
+        "end": 12.5,
+        "word": " slowly"
+      },
+      {
+        "start": 12.5,
+        "end": 13.16,
+        "word": " from"
+      },
+      {
+        "start": 13.16,
+        "end": 13.8,
+        "word": " everything"
+      }
+    ]
+  },
+  {
+    "start": 14.23,
+    "end": 15.94,
+    "text": "you were too afraid to change.",
+    "words": [
+      {
+        "start": 14.23,
+        "end": 14.58,
+        "word": " you"
+      },
+      {
+        "start": 14.58,
+        "end": 14.72,
+        "word": " were"
+      },
+      {
+        "start": 14.72,
+        "end": 14.9,
+        "word": " too"
+      },
+      {
+        "start": 14.9,
+        "end": 15.32,
+        "word": " afraid"
+      },
+      {
+        "start": 15.32,
+        "end": 15.58,
+        "word": " to"
+      },
+      {
+        "start": 15.58,
+        "end": 15.94,
+        "word": " change."
+      }
+    ]
+  }
+]

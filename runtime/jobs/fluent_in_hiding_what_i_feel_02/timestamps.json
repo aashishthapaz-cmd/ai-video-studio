@@ -1,0 +1,203 @@
+[
+  {
+    "start": 0.0,
+    "end": 2.84,
+    "text": "Because I carry it well doesn't mean it's not heavy.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.22,
+        "word": " Because"
+      },
+      {
+        "start": 0.22,
+        "end": 0.4,
+        "word": " I"
+      },
+      {
+        "start": 0.4,
+        "end": 0.72,
+        "word": " carry"
+      },
+      {
+        "start": 0.72,
+        "end": 0.86,
+        "word": " it"
+      },
+      {
+        "start": 0.86,
+        "end": 1.12,
+        "word": " well"
+      },
+      {
+        "start": 1.12,
+        "end": 1.96,
+        "word": " doesn't"
+      },
+      {
+        "start": 1.96,
+        "end": 2.1,
+        "word": " mean"
+      },
+      {
+        "start": 2.1,
+        "end": 2.32,
+        "word": " it's"
+      },
+      {
+        "start": 2.32,
+        "end": 2.46,
+        "word": " not"
+      },
+      {
+        "start": 2.46,
+        "end": 2.84,
+        "word": " heavy."
+      }
+    ]
+  },
+  {
+    "start": 3.48,
+    "end": 8.26,
+    "text": "I've simply become fluent in the language of pretending nothing hurts when everything does.",
+    "words": [
+      {
+        "start": 3.48,
+        "end": 3.84,
+        "word": " I've"
+      },
+      {
+        "start": 3.84,
+        "end": 4.12,
+        "word": " simply"
+      },
+      {
+        "start": 4.12,
+        "end": 4.5,
+        "word": " become"
+      },
+      {
+        "start": 4.5,
+        "end": 4.82,
+        "word": " fluent"
+      },
+      {
+        "start": 4.82,
+        "end": 5.12,
+        "word": " in"
+      },
+      {
+        "start": 5.12,
+        "end": 5.22,
+        "word": " the"
+      },
+      {
+        "start": 5.22,
+        "end": 5.54,
+        "word": " language"
+      },
+      {
+        "start": 5.54,
+        "end": 5.74,
+        "word": " of"
+      },
+      {
+        "start": 5.74,
+        "end": 6.08,
+        "word": " pretending"
+      },
+      {
+        "start": 6.08,
+        "end": 6.44,
+        "word": " nothing"
+      },
+      {
+        "start": 6.44,
+        "end": 6.9,
+        "word": " hurts"
+      },
+      {
+        "start": 6.9,
+        "end": 7.54,
+        "word": " when"
+      },
+      {
+        "start": 7.54,
+        "end": 7.88,
+        "word": " everything"
+      },
+      {
+        "start": 7.88,
+        "end": 8.26,
+        "word": " does."
+      }
+    ]
+  },
+  {
+    "start": 9.66,
+    "end": 13.58,
+    "text": "I make it look effortless because falling apart was never an option.",
+    "words": [
+      {
+        "start": 9.66,
+        "end": 9.82,
+        "word": " I"
+      },
+      {
+        "start": 9.82,
+        "end": 10.04,
+        "word": " make"
+      },
+      {
+        "start": 10.04,
+        "end": 10.18,
+        "word": " it"
+      },
+      {
+        "start": 10.18,
+        "end": 10.34,
+        "word": " look"
+      },
+      {
+        "start": 10.34,
+        "end": 10.96,
+        "word": " effortless"
+      },
+      {
+        "start": 10.96,
+        "end": 11.62,
+        "word": " because"
+      },
+      {
+        "start": 11.62,
+        "end": 12.04,
+        "word": " falling"
+      },
+      {
+        "start": 12.04,
+        "end": 12.38,
+        "word": " apart"
+      },
+      {
+        "start": 12.38,
+        "end": 12.78,
+        "word": " was"
+      },
+      {
+        "start": 12.78,
+        "end": 13.1,
+        "word": " never"
+      },
+      {
+        "start": 13.1,
+        "end": 13.3,
+        "word": " an"
+      },
+      {
+        "start": 13.3,
+        "end": 13.58,
+        "word": " option."
+      }
+    ]
+  }
+]

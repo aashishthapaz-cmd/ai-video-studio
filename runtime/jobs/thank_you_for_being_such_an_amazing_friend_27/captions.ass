@@ -1,0 +1,29 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: ProCaption,Arial,72,&H00FFFFFF,&H0000D7FF,&H00111111,&HAA000000,-1,0,0,0,100,100,0,0,3,3,0,2,70,70,210,1
+Style: PoetrySmall,Cormorant Garamond,44,&H0034E7FF,&H000000FF,&HAA070707,&H00000000,0,1,0,0,88,100,0,0,1,1.7,0,5,70,70,0,1
+Style: ReferenceCursive,Segoe Print,78,&H00FFFFFF,&H000000FF,&HC0000000,&H00000000,0,1,0,0,96,100,0,0,1,1.2,1.9,5,90,90,0,1
+Style: ReferenceMark,Segoe Script,22,&H00FFFFFF,&H000000FF,&HAA000000,&H00000000,0,1,0,0,88,100,0,0,1,0.7,1.0,5,40,40,0,1
+Style: NepaliReference,Noto Sans Devanagari,68,&H00FFFFFF,&H000000FF,&HC0000000,&H00000000,-1,0,0,0,100,100,0,0,1,1.3,1.9,5,90,90,0,1
+Style: NepaliCaption,Noto Sans Devanagari,58,&H00FFFFFF,&H000000FF,&HAA070707,&H00000000,-1,0,0,0,100,100,0,0,1,1.7,1.2,5,70,70,0,1
+Style: CreativeScript,Cormorant Garamond,58,&H00FFFFFF,&H000000FF,&HD0000000,&H00000000,0,1,0,0,100,100,0,0,1,0.45,2.1,5,60,60,0,1
+Style: CreativeBold,Arial,42,&H00FFFFFF,&H000000FF,&HE0000000,&H00000000,0,0,0,0,92,100,0,0,1,1.55,3.1,5,60,60,0,1
+Style: CreativeYellow,Arial,78,&H0034E7FF,&H000000FF,&HE0000000,&H00000000,-1,0,0,0,90,100,0,0,1,2.0,4.0,5,60,60,0,1
+Style: CreativeTiny,Arial,32,&H00FFFFFF,&H000000FF,&HE0000000,&H00000000,0,0,0,0,90,100,0,0,1,1.3,2.7,5,60,60,0,1
+Style: TinyCredit,Arial,26,&H99FFFFFF,&H000000FF,&H55000000,&H00000000,0,0,0,0,100,100,0,0,1,1,0,1,40,40,40,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 1,0:00:00.00,0:00:02.16,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k22}Thank {\k18}you {\k17}for {\k18}being\N{\k26}such {\k19}an {\k32}amazing {\k43}friend
+Dialogue: 1,0:00:03.00,0:00:05.13,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k8}the {\k31}kind {\k26}I {\k15}could\N{\k30}never {\k21}have {\k33}asked {\k28}for
+Dialogue: 1,0:00:06.01,0:00:09.92,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k24}Thank {\k29}you {\k18}for {\k31}listening {\k24}to {\k16}my\N{\k50}stories {\k71}and {\k20}my {\k41}random {\k43}rants
+Dialogue: 1,0:00:11.08,0:00:14.40,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k24}Thank {\k17}you {\k16}for {\k27}always {\k30}being {\k32}there {\k19}when\N{\k12}I {\k27}needed {\k37}someone {\k20}to {\k25}talk {\k22}to
+Dialogue: 1,0:00:15.03,0:00:17.66,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k48}I'm {\k24}so {\k31}lucky {\k24}to {\k17}have\N{\k8}a {\k30}friend {\k22}like {\k37}you
+Dialogue: 1,0:00:20.10,0:00:20.78,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k16}Just {\k33}remember
+Dialogue: 1,0:00:20.60,0:00:23.71,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k44}I'm {\k82}always {\k16}here {\k17}if {\k23}you {\k12}ever\N{\k32}need {\k19}a {\k23}shoulder {\k20}to {\k25}lean {\k25}on

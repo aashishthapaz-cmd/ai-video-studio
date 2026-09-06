@@ -1,0 +1,161 @@
+[
+  {
+    "start": 0.0,
+    "end": 7.72,
+    "text": "For every day I miss you, for every hour I need you, for every minute I feel you, for",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.12,
+        "word": " For"
+      },
+      {
+        "start": 0.12,
+        "end": 0.32,
+        "word": " every"
+      },
+      {
+        "start": 0.32,
+        "end": 0.56,
+        "word": " day"
+      },
+      {
+        "start": 0.56,
+        "end": 0.74,
+        "word": " I"
+      },
+      {
+        "start": 0.74,
+        "end": 0.98,
+        "word": " miss"
+      },
+      {
+        "start": 0.98,
+        "end": 1.26,
+        "word": " you,"
+      },
+      {
+        "start": 1.92,
+        "end": 2.52,
+        "word": " for"
+      },
+      {
+        "start": 2.52,
+        "end": 2.72,
+        "word": " every"
+      },
+      {
+        "start": 2.72,
+        "end": 2.98,
+        "word": " hour"
+      },
+      {
+        "start": 2.98,
+        "end": 3.22,
+        "word": " I"
+      },
+      {
+        "start": 3.22,
+        "end": 3.4,
+        "word": " need"
+      },
+      {
+        "start": 3.4,
+        "end": 3.72,
+        "word": " you,"
+      },
+      {
+        "start": 4.1,
+        "end": 5.06,
+        "word": " for"
+      },
+      {
+        "start": 5.06,
+        "end": 5.28,
+        "word": " every"
+      },
+      {
+        "start": 5.28,
+        "end": 5.54,
+        "word": " minute"
+      },
+      {
+        "start": 5.54,
+        "end": 5.8,
+        "word": " I"
+      },
+      {
+        "start": 5.8,
+        "end": 6.08,
+        "word": " feel"
+      },
+      {
+        "start": 6.08,
+        "end": 6.38,
+        "word": " you,"
+      },
+      {
+        "start": 7.12,
+        "end": 7.72,
+        "word": " for"
+      }
+    ]
+  },
+  {
+    "start": 7.72,
+    "end": 12.78,
+    "text": "every second I want you, for ever I love you.",
+    "words": [
+      {
+        "start": 7.72,
+        "end": 7.9,
+        "word": " every"
+      },
+      {
+        "start": 7.9,
+        "end": 8.24,
+        "word": " second"
+      },
+      {
+        "start": 8.24,
+        "end": 8.56,
+        "word": " I"
+      },
+      {
+        "start": 8.56,
+        "end": 8.76,
+        "word": " want"
+      },
+      {
+        "start": 8.76,
+        "end": 9.08,
+        "word": " you,"
+      },
+      {
+        "start": 10.0,
+        "end": 10.88,
+        "word": " for"
+      },
+      {
+        "start": 10.88,
+        "end": 11.14,
+        "word": " ever"
+      },
+      {
+        "start": 11.14,
+        "end": 12.3,
+        "word": " I"
+      },
+      {
+        "start": 12.3,
+        "end": 12.52,
+        "word": " love"
+      },
+      {
+        "start": 12.52,
+        "end": 12.78,
+        "word": " you."
+      }
+    ]
+  }
+]

@@ -1,0 +1,50 @@
+{
+  "title": "The Heart Needs More Time",
+  "style_bible": {
+    "emotional_arc": "Gradual acceptance, moving from hope to understanding.",
+    "palette": "Charcoal-teal with amber accents",
+    "lighting": "Twilight/moonlit night",
+    "motif": "Path through a forest",
+    "continuity": "Sparse and poetic visual world",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "Sometimes the heart needs more time to accept what the mind already knows.",
+      "prompt": "A solitary tree stands on a path, its branches reaching towards an amber moon. The ground is covered in fallen leaves, symbolizing acceptance — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "The mind moves on the day it understands.",
+      "prompt": "A path splits into two directions, one leading to a distant light and the other fading into darkness. The amber light represents understanding while — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "The heart moves on the day it stops hoping.",
+      "prompt": "A lone lantern hangs from a tree, casting an amber glow over a path. The lantern’s light contrasts with the surrounding darkness, representing hope — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "And between those two days, a person lives an entire life, pretending to be fine.",
+      "prompt": "A figure walks along the path, their silhouette barely visible against the amber light. The path is lined with trees and fog, symbolizing — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 100,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

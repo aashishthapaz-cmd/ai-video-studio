@@ -1,0 +1,57 @@
+{
+  "title": "He Was Just Doing His Best",
+  "style_bible": {
+    "emotional_arc": "Nostalgic reflection on a father's sacrifices.",
+    "palette": "charcoal-teal, navy-shadows with amber accents",
+    "lighting": "twilight/moody atmosphere",
+    "motif": "father and son silhouette, bookshelf, old lantern",
+    "continuity": "consistent dark hand-inked storybook/graphic-novel illustration style",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "As you grow older, you begin to understand.",
+      "prompt": "elderly father and son silhouette against twilight sky, bookshelf in background, amber light from old lantern casting shadows on walls, wide lonely establishing view — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "Your father was just a man, trying his best with what he knew.",
+      "prompt": "father sitting by window reading old book, sunlight filtering through foggy glass, amber light highlighting worn leather cover and weathered face, close symbolic detail — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "He put your needs before his own.",
+      "prompt": "father gently placing child on bookshelf, old lantern casting soft amber glow, father's face in shadow with only the child illuminated by light — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "He traded some of his dreams for the dreams he had for you.",
+      "prompt": "father and son standing by riverbank, father holding lantern, amber light reflecting off water, trees silhouetted against twilight sky, still interior frame, lantern geometry — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_005",
+      "duration": 4.0,
+      "narration": "He was living life for the first time too.",
+      "prompt": "father and son walking hand-in-hand through foggy path, old lantern casting amber light on both figures, trees and distant silhouette of house in background — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 101,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

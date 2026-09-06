@@ -1,0 +1,178 @@
+[
+  {
+    "start": 0.0,
+    "end": 4.38,
+    "text": "Your name is my favorite word. Your voice is my favorite sound.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.2,
+        "word": " Your"
+      },
+      {
+        "start": 0.2,
+        "end": 0.54,
+        "word": " name"
+      },
+      {
+        "start": 0.54,
+        "end": 0.78,
+        "word": " is"
+      },
+      {
+        "start": 0.78,
+        "end": 0.94,
+        "word": " my"
+      },
+      {
+        "start": 0.94,
+        "end": 1.36,
+        "word": " favorite"
+      },
+      {
+        "start": 1.36,
+        "end": 1.76,
+        "word": " word."
+      },
+      {
+        "start": 2.54,
+        "end": 2.7,
+        "word": " Your"
+      },
+      {
+        "start": 2.7,
+        "end": 3.16,
+        "word": " voice"
+      },
+      {
+        "start": 3.16,
+        "end": 3.42,
+        "word": " is"
+      },
+      {
+        "start": 3.42,
+        "end": 3.58,
+        "word": " my"
+      },
+      {
+        "start": 3.58,
+        "end": 3.94,
+        "word": " favorite"
+      },
+      {
+        "start": 3.94,
+        "end": 4.38,
+        "word": " sound."
+      }
+    ]
+  },
+  {
+    "start": 5.16,
+    "end": 9.52,
+    "text": "Your eyes are my favorite mirror. Your arms are my favorite place.",
+    "words": [
+      {
+        "start": 5.16,
+        "end": 5.4,
+        "word": " Your"
+      },
+      {
+        "start": 5.4,
+        "end": 5.78,
+        "word": " eyes"
+      },
+      {
+        "start": 5.78,
+        "end": 6.08,
+        "word": " are"
+      },
+      {
+        "start": 6.08,
+        "end": 6.22,
+        "word": " my"
+      },
+      {
+        "start": 6.22,
+        "end": 6.64,
+        "word": " favorite"
+      },
+      {
+        "start": 6.64,
+        "end": 7.02,
+        "word": " mirror."
+      },
+      {
+        "start": 7.62,
+        "end": 7.78,
+        "word": " Your"
+      },
+      {
+        "start": 7.78,
+        "end": 8.22,
+        "word": " arms"
+      },
+      {
+        "start": 8.22,
+        "end": 8.5,
+        "word": " are"
+      },
+      {
+        "start": 8.5,
+        "end": 8.64,
+        "word": " my"
+      },
+      {
+        "start": 8.64,
+        "end": 9.1,
+        "word": " favorite"
+      },
+      {
+        "start": 9.1,
+        "end": 9.52,
+        "word": " place."
+      }
+    ]
+  },
+  {
+    "start": 10.3,
+    "end": 12.4,
+    "text": "And your love is my favorite feeling.",
+    "words": [
+      {
+        "start": 10.3,
+        "end": 10.52,
+        "word": " And"
+      },
+      {
+        "start": 10.52,
+        "end": 10.68,
+        "word": " your"
+      },
+      {
+        "start": 10.68,
+        "end": 11.02,
+        "word": " love"
+      },
+      {
+        "start": 11.02,
+        "end": 11.34,
+        "word": " is"
+      },
+      {
+        "start": 11.34,
+        "end": 11.5,
+        "word": " my"
+      },
+      {
+        "start": 11.5,
+        "end": 12.0,
+        "word": " favorite"
+      },
+      {
+        "start": 12.0,
+        "end": 12.4,
+        "word": " feeling."
+      }
+    ]
+  }
+]

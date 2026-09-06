@@ -1,0 +1,325 @@
+[
+  {
+    "start": 0.14,
+    "end": 7.0,
+    "text": "I forgive people easily. I trust people easily. I forget the bad things they did easily.",
+    "words": [
+      {
+        "start": 0.14,
+        "end": 0.42,
+        "word": " I"
+      },
+      {
+        "start": 0.42,
+        "end": 0.74,
+        "word": " forgive"
+      },
+      {
+        "start": 0.74,
+        "end": 1.22,
+        "word": " people"
+      },
+      {
+        "start": 1.22,
+        "end": 1.64,
+        "word": " easily."
+      },
+      {
+        "start": 2.56,
+        "end": 2.92,
+        "word": " I"
+      },
+      {
+        "start": 2.92,
+        "end": 3.2,
+        "word": " trust"
+      },
+      {
+        "start": 3.2,
+        "end": 3.6,
+        "word": " people"
+      },
+      {
+        "start": 3.6,
+        "end": 4.04,
+        "word": " easily."
+      },
+      {
+        "start": 4.92,
+        "end": 5.12,
+        "word": " I"
+      },
+      {
+        "start": 5.12,
+        "end": 5.4,
+        "word": " forget"
+      },
+      {
+        "start": 5.4,
+        "end": 5.56,
+        "word": " the"
+      },
+      {
+        "start": 5.56,
+        "end": 5.78,
+        "word": " bad"
+      },
+      {
+        "start": 5.78,
+        "end": 6.16,
+        "word": " things"
+      },
+      {
+        "start": 6.16,
+        "end": 6.34,
+        "word": " they"
+      },
+      {
+        "start": 6.34,
+        "end": 6.58,
+        "word": " did"
+      },
+      {
+        "start": 6.58,
+        "end": 7.0,
+        "word": " easily."
+      }
+    ]
+  },
+  {
+    "start": 8.14,
+    "end": 13.66,
+    "text": "I always believe they'll be different this time. I keep giving chances they never deserve,",
+    "words": [
+      {
+        "start": 8.14,
+        "end": 8.7,
+        "word": " I"
+      },
+      {
+        "start": 8.7,
+        "end": 8.96,
+        "word": " always"
+      },
+      {
+        "start": 8.96,
+        "end": 9.32,
+        "word": " believe"
+      },
+      {
+        "start": 9.32,
+        "end": 9.58,
+        "word": " they'll"
+      },
+      {
+        "start": 9.58,
+        "end": 9.72,
+        "word": " be"
+      },
+      {
+        "start": 9.72,
+        "end": 10.08,
+        "word": " different"
+      },
+      {
+        "start": 10.08,
+        "end": 10.38,
+        "word": " this"
+      },
+      {
+        "start": 10.38,
+        "end": 10.68,
+        "word": " time."
+      },
+      {
+        "start": 11.58,
+        "end": 11.74,
+        "word": " I"
+      },
+      {
+        "start": 11.74,
+        "end": 11.96,
+        "word": " keep"
+      },
+      {
+        "start": 11.96,
+        "end": 12.22,
+        "word": " giving"
+      },
+      {
+        "start": 12.22,
+        "end": 12.72,
+        "word": " chances"
+      },
+      {
+        "start": 12.72,
+        "end": 12.98,
+        "word": " they"
+      },
+      {
+        "start": 12.98,
+        "end": 13.22,
+        "word": " never"
+      },
+      {
+        "start": 13.22,
+        "end": 13.66,
+        "word": " deserve,"
+      }
+    ]
+  },
+  {
+    "start": 14.02,
+    "end": 17.46,
+    "text": "and I see the good in people, even when they show me the worst.",
+    "words": [
+      {
+        "start": 14.02,
+        "end": 14.34,
+        "word": " and"
+      },
+      {
+        "start": 14.34,
+        "end": 14.46,
+        "word": " I"
+      },
+      {
+        "start": 14.46,
+        "end": 14.64,
+        "word": " see"
+      },
+      {
+        "start": 14.64,
+        "end": 14.78,
+        "word": " the"
+      },
+      {
+        "start": 14.78,
+        "end": 15.02,
+        "word": " good"
+      },
+      {
+        "start": 15.02,
+        "end": 15.18,
+        "word": " in"
+      },
+      {
+        "start": 15.18,
+        "end": 15.58,
+        "word": " people,"
+      },
+      {
+        "start": 15.8,
+        "end": 16.22,
+        "word": " even"
+      },
+      {
+        "start": 16.22,
+        "end": 16.44,
+        "word": " when"
+      },
+      {
+        "start": 16.44,
+        "end": 16.6,
+        "word": " they"
+      },
+      {
+        "start": 16.6,
+        "end": 16.84,
+        "word": " show"
+      },
+      {
+        "start": 16.84,
+        "end": 17.02,
+        "word": " me"
+      },
+      {
+        "start": 17.02,
+        "end": 17.14,
+        "word": " the"
+      },
+      {
+        "start": 17.14,
+        "end": 17.46,
+        "word": " worst."
+      }
+    ]
+  },
+  {
+    "start": 18.48,
+    "end": 22.98,
+    "text": "And somehow, I end up being the one who gets hurt every single time.",
+    "words": [
+      {
+        "start": 18.48,
+        "end": 18.64,
+        "word": " And"
+      },
+      {
+        "start": 18.64,
+        "end": 19.06,
+        "word": " somehow,"
+      },
+      {
+        "start": 19.42,
+        "end": 19.82,
+        "word": " I"
+      },
+      {
+        "start": 19.82,
+        "end": 19.98,
+        "word": " end"
+      },
+      {
+        "start": 19.98,
+        "end": 20.12,
+        "word": " up"
+      },
+      {
+        "start": 20.12,
+        "end": 20.3,
+        "word": " being"
+      },
+      {
+        "start": 20.3,
+        "end": 20.5,
+        "word": " the"
+      },
+      {
+        "start": 20.5,
+        "end": 20.72,
+        "word": " one"
+      },
+      {
+        "start": 20.72,
+        "end": 20.92,
+        "word": " who"
+      },
+      {
+        "start": 20.92,
+        "end": 21.18,
+        "word": " gets"
+      },
+      {
+        "start": 21.18,
+        "end": 21.56,
+        "word": " hurt"
+      },
+      {
+        "start": 21.56,
+        "end": 22.22,
+        "word": " every"
+      },
+      {
+        "start": 22.22,
+        "end": 22.58,
+        "word": " single"
+      },
+      {
+        "start": 22.58,
+        "end": 22.98,
+        "word": " time."
+      }
+    ]
+  }
+]

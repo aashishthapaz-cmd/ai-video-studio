@@ -1,0 +1,57 @@
+{
+  "title": "Your Best Chapter Is Still Waiting",
+  "style_bible": {
+    "emotional_arc": "Resilience, acceptance, hope",
+    "palette": "charcoal-teal, navy, amber",
+    "lighting": "twilight moody atmosphere",
+    "motif": "natural elements and everyday objects",
+    "continuity": "consistent illustration style with depth",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "If you're strong enough to fall in love and give everything you have,",
+      "prompt": "A woman holding a broken heart, standing by a window at twilight, with raindrops on the glass. Charcoal-teal shadows cast deep, wide lonely establishing — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "you're strong enough to let it all go.",
+      "prompt": "A man releasing a paper airplane into the twilight sky, with trees silhouetted in the background. Amber light accentuates his silhouette, close symbolic detail — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "Strong enough to pick up your pieces and start over.",
+      "prompt": "A woman bending down to gather scattered puzzle pieces, with a path leading into the distance under a twilight sky. Rust-red accent highlights her — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "Because the end of one story is never the end of your story.",
+      "prompt": "A lone lantern floating on a river, casting light through misty twilight. Deep charcoal-teal shadows surround it with pale cream accents, still interior frame — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_005",
+      "duration": 4.0,
+      "narration": "Your best chapter is still waiting to be written.",
+      "prompt": "A young girl holding an open book, standing by a window with a view of the horizon at twilight. Ember-orange accents illuminate her hopeful — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 116,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

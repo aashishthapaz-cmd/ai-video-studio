@@ -1,0 +1,61 @@
+{
+  "title": "Faith",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 18,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "Please don't give up on us.",
+      "prompt": ". dark hand-inked graphic-novel storybook illustration, irregular contour linework, visible paper/woodcut grain, flat painted shapes with cinematic depth, charcoal teal and midnight navy shadows, one deliberate amber/rust-red/ember-orange accent, sparse natural human or environmental subject, portrait 9:16, no text, letters, logo, stamp, watermark, or CGI. No text, no watermark.",
+      "motion": "slow_push_in",
+      "image_query": "Please don't give up on us.",
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "What we have means more to me than words can explain.",
+      "prompt": ". dark hand-inked graphic-novel storybook illustration, irregular contour linework, visible paper/woodcut grain, flat painted shapes with cinematic depth, charcoal teal and midnight navy shadows, one deliberate amber/rust-red/ember-orange accent, sparse natural human or environmental subject, portrait 9:16, no text, letters, logo, stamp, watermark, or CGI. No text, no watermark.",
+      "motion": "slow_push_in",
+      "image_query": "What we have means more to me than words can explain.",
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "I know life isn't always easy, but I'm still trying my best for us.",
+      "prompt": ". dark hand-inked graphic-novel storybook illustration, irregular contour linework, visible paper/woodcut grain, flat painted shapes with cinematic depth, charcoal teal and midnight navy shadows, one deliberate amber/rust-red/ember-orange accent, sparse natural human or environmental subject, portrait 9:16, no text, letters, logo, stamp, watermark, or CGI. No text, no watermark.",
+      "motion": "slow_push_in",
+      "image_query": "I know life isn't always easy, but I'm still trying my best for us.",
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "We might have our issues, but my feelings for you are completely real.",
+      "prompt": ". dark hand-inked graphic-novel storybook illustration, irregular contour linework, visible paper/woodcut grain, flat painted shapes with cinematic depth, charcoal teal and midnight navy shadows, one deliberate amber/rust-red/ember-orange accent, sparse natural human or environmental subject, portrait 9:16, no text, letters, logo, stamp, watermark, or CGI. No text, no watermark.",
+      "motion": "slow_push_in",
+      "image_query": "We might have our issues, but my feelings for you are completely real.",
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "Even when everything else feels uncertain, the one thing I still have absolute faith in is us.",
+      "prompt": ". dark hand-inked graphic-novel storybook illustration, irregular contour linework, visible paper/woodcut grain, flat painted shapes with cinematic depth, charcoal teal and midnight navy shadows, one deliberate amber/rust-red/ember-orange accent, sparse natural human or environmental subject, portrait 9:16, no text, letters, logo, stamp, watermark, or CGI. No text, no watermark.",
+      "motion": "slow_push_in",
+      "image_query": "Even when everything else feels uncertain, the one thing I still have absolute faith in is us.",
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    }
+  ],
+  "voice_tone": "warm, deep, emotional spoken-word delivery",
+  "pacing": "deliberate phrasing with a pause after each line",
+  "image_style": "dark hand-inked graphic-novel storybook illustration, irregular contour linework, visible paper/woodcut grain, flat painted shapes with cinematic depth, charcoal teal and midnight navy shadows, one deliberate amber/rust-red/ember-orange accent, sparse natural human or environmental subject, portrait 9:16, no text, letters, logo, stamp, watermark, or CGI",
+  "animation_style": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing"
+}

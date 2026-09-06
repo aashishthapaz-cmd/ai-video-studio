@@ -1,0 +1,50 @@
+{
+  "title": "You Feel Like A Part Of Me",
+  "style_bible": {
+    "emotional_arc": "Discovering a profound connection, moving from initial surprise to deep fulfillment.",
+    "palette": "Charcoal-teal, navy, amber, rust-red, ember-orange, pale cream",
+    "lighting": "Moody twilight/night atmosphere with deep charcoal-teal/navy shadows and one controlled accent color",
+    "motif": "Natural elements like paths, trees, and water reflecting emotions of discovery and connection",
+    "continuity": "Sparse, poetic visual world suitable for slow Ken Burns motion",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "I wasn't looking for you when I met you.",
+      "prompt": "A lone figure walking on a misty path under an old tree, with the first light of dawn breaking through the fog. Charcoal-teal shadows — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "But now, with you, it feels like a part of me always wanted this.",
+      "prompt": "A couple standing by the edge of a calm river at twilight. The water reflects the soft amber light from a nearby lantern, symbolizing — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "My heart stopped searching for anything else,",
+      "prompt": "A solitary tree standing in a vast, open field under the starry night sky. The tree's irregular contours and visible woodcut grain evoke — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "the moment it found you.",
+      "prompt": "A close-up of a book with an old, worn cover, illuminated by the soft glow of a lantern. The book’s pages are slightly open — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 122,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

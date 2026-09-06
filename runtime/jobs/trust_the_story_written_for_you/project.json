@@ -1,0 +1,62 @@
+{
+  "title": "Trust The Story Written For You",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 90,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "We plan a lot of things, but in the end, life follows its own script.",
+      "prompt": "A vast, abandoned atelier bathed in the golden light of a late morning sun. Dust motes dance within the amber rays illuminating an unfinished canvas depicting swirling landscapes – primarily cobalt and ochre brushstrokes. The room is filled with the ghosts of past projects; brushes lie scattered in a jar of clear water catching the light like tiny jewels. A large, open doorway frames a hazy twilight vista hinting at untold stories beyond. Asymmetrical composition, slow push-in camera movement, cinematic depth emphasizing scale and isolation, volumetric lighting, subtle film grain | lo-fi retro 90s aesthetic anime illustration, Studio Ghibli and Makoto Shinkai inspired, atmospheric digital painting, rich moody color palette, warm amber and deep midnight navy blue, textured brushwork, cinematic emotional depth, subtle film grain, vertical 9:16 composition, no text, no writing. Atmospheric mood, cinematic color grading, deeply evocative composition with poetic negative space, professional fine-art quality. No text, no writing, no signs, no labels, no logos, no watermark.",
+      "motion": "slow_push_in",
+      "seed": 402608306,
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5.0,
+      "narration": "Sometimes the detours break your heart, only to lead you where you were meant to be.",
+      "prompt": "A desolate, rain-slicked train station platform at twilight. Deep navy blue dominates, reflecting in puddles shimmering with amber streetlights. A single, weathered wooden bench sits empty beneath a towering arched canopy dripping with moisture. The foreground is filled with the blurred impression of distant lights and movement – a sense of lost journeys. Silhouetted against the fading light, a lone figure’s hand reaches out towards an unseen destination, emphasizing vulnerability and acceptance within the vastness, cinematic framing, atmospheric perspective | lo-fi retro 90s aesthetic anime illustration, Studio Ghibli and Makoto Shinkai inspired, atmospheric digital painting, rich moody color palette, warm amber and deep midnight navy blue, textured brushwork, cinematic emotional depth, subtle film grain, vertical 9:16 composition, no text, no writing. Atmospheric mood, cinematic color grading, deeply evocative composition with poetic negative space, professional fine-art quality. No text, no writing, no signs, no labels, no logos, no watermark.",
+      "motion": "slow_push_in",
+      "seed": 171204341,
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5.0,
+      "narration": "One day you'll understand why it had to happen.",
+      "prompt": "A dimly lit sculptor’s workshop filled with soft morning haze. Partially completed marble sculptures – swirling forms in shades of ochre and gray – rest on a workbench bathed in the warm glow of an antique oil lamp. The light catches the dust motes suspended in the air, creating an ethereal atmosphere. A single hand gently rests upon a smooth stone surface, contemplating its form - a sense of quiet contemplation and burgeoning understanding, cinematic depth, shallow focus | lo-fi retro 90s aesthetic anime illustration, Studio Ghibli and Makoto Shinkai inspired, atmospheric digital painting, rich moody color palette, warm amber and deep midnight navy blue, textured brushwork, cinematic emotional depth, subtle film grain, vertical 9:16 composition, no text, no writing. Atmospheric mood, cinematic color grading, deeply evocative composition with poetic negative space, professional fine-art quality. No text, no writing, no signs, no labels, no logos, no watermark.",
+      "motion": "slow_push_in",
+      "seed": 244547350,
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5.0,
+      "narration": "Until then, trust the story being written for you.",
+      "prompt": "An empty corner of a grand, echoing art gallery at dusk. Geometric shadows cast by unseen spotlights create intricate patterns on the polished concrete floor. Floating picture frames – each displaying abstract compositions in varying shades of amber and cobalt – hang suspended in mid-air, catching the last vestiges of golden light. Negative space emphasizes solitude and faith in an unknown narrative, slow push-in camera movement, volumetric lighting, subtle film grain, asymmetrical composition | lo-fi retro 90s aesthetic anime illustration, Studio Ghibli and Makoto Shinkai inspired, atmospheric digital painting, rich moody color palette, warm amber and deep midnight navy blue, textured brushwork, cinematic emotional depth, subtle film grain, vertical 9:16 composition, no text, no writing. Atmospheric mood, cinematic color grading, deeply evocative composition with poetic negative space, professional fine-art quality. No text, no writing, no signs, no labels, no logos, no watermark.",
+      "motion": "slow_push_in",
+      "seed": 738632299,
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    }
+  ],
+  "style_bible": {
+    "emotional_arc": "Acceptance, melancholy, hope, resilience – a journey through uncertainty towards a deeper understanding of fate and self.",
+    "palette": "Dominantly warm amber (ochre, gold) transitioning to deep midnight navy blue with accents of rich cobalt and muted ochre. Subtle use of pastel pinks and grays for highlights.",
+    "lighting": "Primarily soft diffused morning light gradually deepening into twilight hues, punctuated by targeted amber lamplight creating pools of warmth and shadow. Emphasis on volumetric lighting and atmospheric haze.",
+    "motif": "The cyclical nature of time, the beauty in unexpected detours, the acceptance of loss as part of a larger narrative.",
+    "continuity": "Consistent Ghibli-inspired aesthetic with detailed brushwork, layered textures, and a focus on emotional atmosphere. Subtle visual echoes across scenes to reinforce thematic connections.",
+    "negative_prompt": "realistic portrait, female portrait, realistic girl, realistic woman, photorealistic human face, face close-up, selfie, glamour photo, model photo, text, words, letters, numbers, quotation, caption, typography, logo, watermark, sign, label, poster, menu, readable book cover, readable book spine, license plate, road lettering, writing-like symbols, blank text area, ugly, deformed hands, bad anatomy, extra limbs, blurry, low resolution, stock photo, 3D CGI render, photorealism artifact, gore, blood, clutter",
+    "art_direction": "artistic perception and visual poetry, painterly atelier shadows, warm studio lamplight, textured pigment strokes, rich cobalt and ochre accents, Studio Ghibli fine-art aesthetic"
+  },
+  "model": "gemma3:4b",
+  "voice_tone": "warm, deep, emotional spoken-word delivery",
+  "pacing": "deliberate phrasing with a pause after each line",
+  "image_style": "lo-fi retro 90s aesthetic anime illustration, Studio Ghibli and Makoto Shinkai inspired, atmospheric digital painting, rich moody color palette, warm amber and deep midnight navy blue, subtle film grain, vertical 9:16",
+  "animation_style": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing"
+}

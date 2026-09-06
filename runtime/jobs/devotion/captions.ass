@@ -1,0 +1,30 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: ProCaption,Arial,72,&H00FFFFFF,&H0000D7FF,&H00111111,&HAA000000,-1,0,0,0,100,100,0,0,3,3,0,2,70,70,210,1
+Style: PoetrySmall,Cormorant Garamond,44,&H0034E7FF,&H000000FF,&HAA070707,&H00000000,0,1,0,0,88,100,0,0,1,1.7,0,5,70,70,0,1
+Style: ReferenceCursive,Segoe Print,78,&H00FFFFFF,&H000000FF,&HC0000000,&H00000000,0,1,0,0,96,100,0,0,1,1.2,1.9,5,90,90,0,1
+Style: ReferenceMark,Segoe Script,22,&H00FFFFFF,&H000000FF,&HAA000000,&H00000000,0,1,0,0,88,100,0,0,1,0.7,1.0,5,40,40,0,1
+Style: NepaliReference,Noto Sans Devanagari,68,&H00FFFFFF,&H000000FF,&HC0000000,&H00000000,-1,0,0,0,100,100,0,0,1,1.3,1.9,5,90,90,0,1
+Style: NepaliCaption,Noto Sans Devanagari,58,&H00FFFFFF,&H000000FF,&HAA070707,&H00000000,-1,0,0,0,100,100,0,0,1,1.7,1.2,5,70,70,0,1
+Style: CreativeScript,Cormorant Garamond,58,&H00FFFFFF,&H000000FF,&HD0000000,&H00000000,0,1,0,0,100,100,0,0,1,0.45,2.1,5,60,60,0,1
+Style: CreativeBold,Arial,42,&H00FFFFFF,&H000000FF,&HE0000000,&H00000000,0,0,0,0,92,100,0,0,1,1.55,3.1,5,60,60,0,1
+Style: CreativeYellow,Arial,78,&H0034E7FF,&H000000FF,&HE0000000,&H00000000,-1,0,0,0,90,100,0,0,1,2.0,4.0,5,60,60,0,1
+Style: CreativeTiny,Arial,32,&H00FFFFFF,&H000000FF,&HE0000000,&H00000000,0,0,0,0,90,100,0,0,1,1.3,2.7,5,60,60,0,1
+Style: TinyCredit,Arial,26,&H99FFFFFF,&H000000FF,&H55000000,&H00000000,0,0,0,0,100,100,0,0,1,1,0,1,40,40,40,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 1,0:00:00.00,0:00:01.70,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k18}If {\k22}someone {\k31}loves {\k18}you {\k16}for {\k11}your {\k34}looks
+Dialogue: 1,0:00:02.35,0:00:03.56,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k54}it's {\k48}obsession
+Dialogue: 1,0:00:04.51,0:00:07.75,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k18}If {\k21}someone {\k25}loves {\k18}you {\k13}for {\k12}your\N{\k47}status {\k86}or {\k13}what {\k16}you {\k32}have
+Dialogue: 1,0:00:08.46,0:00:09.24,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k13}it's {\k46}attraction
+Dialogue: 1,0:00:10.30,0:00:12.08,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k21}If {\k24}someone {\k25}loves {\k17}you {\k16}for {\k12}your {\k41}essence
+Dialogue: 1,0:00:12.90,0:00:13.67,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k13}it's {\k46}affection
+Dialogue: 1,0:00:14.56,0:00:17.41,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k51}But {\k9}if {\k24}someone {\k27}loves {\k18}you\N{\k15}for {\k17}who {\k20}you {\k33}truly {\k47}are
+Dialogue: 1,0:00:18.23,0:00:19.00,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k14}it's {\k44}devotion

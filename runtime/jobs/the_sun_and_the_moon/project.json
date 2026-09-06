@@ -1,0 +1,61 @@
+{
+  "title": "The Sun And The Moon",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 29,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "There is a legend that says the sun and the moon once loved each other.",
+      "prompt": ". dark hand-inked graphic-novel storybook illustration, irregular contour linework, visible paper/woodcut grain, flat painted shapes with cinematic depth, charcoal teal and midnight navy shadows, one deliberate amber/rust-red/ember-orange accent, sparse natural human or environmental subject, portrait 9:16, no text, letters, logo, stamp, watermark, or CGI. No text, no watermark.",
+      "motion": "slow_push_in",
+      "image_query": "There is a legend that says the sun and the moon once loved each other.",
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "But because of time and distance, they were never meant to meet.",
+      "prompt": ". dark hand-inked graphic-novel storybook illustration, irregular contour linework, visible paper/woodcut grain, flat painted shapes with cinematic depth, charcoal teal and midnight navy shadows, one deliberate amber/rust-red/ember-orange accent, sparse natural human or environmental subject, portrait 9:16, no text, letters, logo, stamp, watermark, or CGI. No text, no watermark.",
+      "motion": "slow_push_in",
+      "image_query": "But because of time and distance, they were never meant to meet.",
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "So the universe created the eclipse, so they could meet again, if only for a moment.",
+      "prompt": ". dark hand-inked graphic-novel storybook illustration, irregular contour linework, visible paper/woodcut grain, flat painted shapes with cinematic depth, charcoal teal and midnight navy shadows, one deliberate amber/rust-red/ember-orange accent, sparse natural human or environmental subject, portrait 9:16, no text, letters, logo, stamp, watermark, or CGI. No text, no watermark.",
+      "motion": "slow_push_in",
+      "image_query": "So the universe created the eclipse, so they could meet again, if only for a moment.",
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "To prove there's no such thing as an impossible love.",
+      "prompt": ". dark hand-inked graphic-novel storybook illustration, irregular contour linework, visible paper/woodcut grain, flat painted shapes with cinematic depth, charcoal teal and midnight navy shadows, one deliberate amber/rust-red/ember-orange accent, sparse natural human or environmental subject, portrait 9:16, no text, letters, logo, stamp, watermark, or CGI. No text, no watermark.",
+      "motion": "slow_push_in",
+      "image_query": "To prove there's no such thing as an impossible love.",
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "Because even the most distant hearts meet, if only once.",
+      "prompt": ". dark hand-inked graphic-novel storybook illustration, irregular contour linework, visible paper/woodcut grain, flat painted shapes with cinematic depth, charcoal teal and midnight navy shadows, one deliberate amber/rust-red/ember-orange accent, sparse natural human or environmental subject, portrait 9:16, no text, letters, logo, stamp, watermark, or CGI. No text, no watermark.",
+      "motion": "slow_push_in",
+      "image_query": "Because even the most distant hearts meet, if only once.",
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    }
+  ],
+  "voice_tone": "warm, deep, emotional spoken-word delivery",
+  "pacing": "deliberate phrasing with a pause after each line",
+  "image_style": "dark hand-inked graphic-novel storybook illustration, irregular contour linework, visible paper/woodcut grain, flat painted shapes with cinematic depth, charcoal teal and midnight navy shadows, one deliberate amber/rust-red/ember-orange accent, sparse natural human or environmental subject, portrait 9:16, no text, letters, logo, stamp, watermark, or CGI",
+  "animation_style": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing"
+}

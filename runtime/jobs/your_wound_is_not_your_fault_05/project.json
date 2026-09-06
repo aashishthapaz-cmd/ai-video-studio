@@ -1,0 +1,43 @@
+{
+  "title": "Your Wound Is Not Your Fault",
+  "style_bible": {
+    "emotional_arc": "Empowerment through self-healing, moving from victimhood to agency.",
+    "palette": "Charcoal-teal, navy shadows with amber accents",
+    "lighting": "Moody twilight atmosphere, soft lantern light in the background",
+    "motif": "Natural elements like water and trees symbolizing growth and resilience",
+    "continuity": "Sparse, poetic visual world suitable for slow Ken Burns motion",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "Your wound is not your fault, but your healing is your responsibility.",
+      "prompt": "A lone tree standing by a riverbank at twilight, with water ripples reflecting the setting sun. The tree's branches reach out as if offering — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "No one can rewrite your past, but you can decide how your story continues.",
+      "prompt": "A book lying open on a wooden table under the soft glow of an oil lamp. The pages are filled with handwritten notes — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "Heal, so the pain ends with you, not with the people you love.",
+      "prompt": "A small boat floating on a calm lake at twilight. The boat is illuminated by an amber lantern hanging from its bow, casting — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 115,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

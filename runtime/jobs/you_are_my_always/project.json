@@ -1,0 +1,44 @@
+{
+  "title": "You Are My Always",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 47,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "If I had to meet you all over again, in another time, in another place, with another version of my life, I think my heart would still find you.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "If I had to meet you all over again, in another time, in another place, with another version of my life, I think my heart would still find you."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "Maybe not in the same way, maybe not on the same day, but somehow, I believe I would still know you.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Maybe not in the same way, maybe not on the same day, but somehow, I believe I would still know you."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "Not because love is perfect.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Not because love is perfect."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "But because some people feel too rare to be chosen just once.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "But because some people feel too rare to be chosen just once."
+    }
+  ]
+}

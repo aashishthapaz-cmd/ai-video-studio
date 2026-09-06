@@ -1,0 +1,50 @@
+{
+  "title": "What Is Love",
+  "style_bible": {
+    "emotional_arc": "Inquisitive to profound, simple yet complex.",
+    "palette": "Charcoal-teal with amber accents",
+    "lighting": "Twilight moody atmosphere",
+    "motif": "Natural elements and books",
+    "continuity": "Sparse, poetic, readable world",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "What is love?",
+      "prompt": "A child holding a question mark in hand, under starry night sky, sparse trees around, amber light from lantern behind, wide lonely establishing view — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "After all, it's quite simple.",
+      "prompt": "A book with a simple cover lying open on a wooden table under the moonlight, with a single word 'SIMPLE' in amber glow — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "Love is everything that enhances, widens, and enriches our life.",
+      "prompt": "A river flowing through a lush green valley with trees on either side, sunlight filtering through the leaves creating dappled amber light on water — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "In its heights and in its depths, it makes every moment worth living.",
+      "prompt": "A lone boat floating on a calm lake at twilight, with lanterns hanging from the sides casting amber light onto the water, book pages — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 96,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

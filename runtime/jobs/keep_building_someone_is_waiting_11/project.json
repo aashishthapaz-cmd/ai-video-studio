@@ -1,0 +1,50 @@
+{
+  "title": "Keep Building, Someone Is Waiting",
+  "style_bible": {
+    "emotional_arc": "Isolation to Hope",
+    "palette": "Charcoal-teal, navy, amber, rust-red, ember-orange, pale cream",
+    "lighting": "Moody twilight/night atmosphere with deep charcoal-teal/navy shadows and controlled amber/rust-red/ember-orange/pale cream accents",
+    "motif": "Natural person, window, path, tree, rain, fog, water, lantern, boat, book, meaningful everyday object",
+    "continuity": "Sparse, poetic, readable visual world suitable for slow Ken Burns motion",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "No matter how isolated or lonely you feel,",
+      "prompt": "A lone figure standing in a misty forest path under the moonlight, with faint raindrops on leaves and distant trees silhouetted against the night — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "keep doing your work with honesty and quiet dedication.",
+      "prompt": "A hand holding a book, illuminated by the soft glow of an old lantern in a dimly lit room. The pages are worn but — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "Some battles are meant to be fought alone. Some chapters can only be written alone.",
+      "prompt": "A solitary tree standing tall against a dark, stormy night sky with lightning illuminating its branches. The tree's silhouette is stark and resilient, representing — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "Someone out there is waiting to meet the person you're becoming.",
+      "prompt": "A small boat gently rocking on calm, moonlit water with a faint light from within. The outline of the boat and its occupants are — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 107,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

@@ -1,0 +1,61 @@
+{
+  "title": "First Thought, Last Thought",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 32,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "What a beautiful thing it is to be someone's first thought in the morning, and their last at night.",
+      "prompt": ". dark hand-inked graphic-novel storybook illustration, irregular contour linework, visible paper/woodcut grain, flat painted shapes with cinematic depth, charcoal teal and midnight navy shadows, one deliberate amber/rust-red/ember-orange accent, sparse natural human or environmental subject, portrait 9:16, no text, letters, logo, stamp, watermark, or CGI. No text, no watermark.",
+      "motion": "slow_push_in",
+      "image_query": "What a beautiful thing it is to be someone's first thought in the morning, and their last at night.",
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "It isn't just romance. It's safety.",
+      "prompt": ". dark hand-inked graphic-novel storybook illustration, irregular contour linework, visible paper/woodcut grain, flat painted shapes with cinematic depth, charcoal teal and midnight navy shadows, one deliberate amber/rust-red/ember-orange accent, sparse natural human or environmental subject, portrait 9:16, no text, letters, logo, stamp, watermark, or CGI. No text, no watermark.",
+      "motion": "slow_push_in",
+      "image_query": "It isn't just romance. It's safety.",
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "In a world full of noise, you live in the quiet corners of their mind.",
+      "prompt": ". dark hand-inked graphic-novel storybook illustration, irregular contour linework, visible paper/woodcut grain, flat painted shapes with cinematic depth, charcoal teal and midnight navy shadows, one deliberate amber/rust-red/ember-orange accent, sparse natural human or environmental subject, portrait 9:16, no text, letters, logo, stamp, watermark, or CGI. No text, no watermark.",
+      "motion": "slow_push_in",
+      "image_query": "In a world full of noise, you live in the quiet corners of their mind.",
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "You're their anchor before the chaos begins, and their calm when it ends.",
+      "prompt": ". dark hand-inked graphic-novel storybook illustration, irregular contour linework, visible paper/woodcut grain, flat painted shapes with cinematic depth, charcoal teal and midnight navy shadows, one deliberate amber/rust-red/ember-orange accent, sparse natural human or environmental subject, portrait 9:16, no text, letters, logo, stamp, watermark, or CGI. No text, no watermark.",
+      "motion": "slow_push_in",
+      "image_query": "You're their anchor before the chaos begins, and their calm when it ends.",
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "It's rare, and it's sacred.",
+      "prompt": ". dark hand-inked graphic-novel storybook illustration, irregular contour linework, visible paper/woodcut grain, flat painted shapes with cinematic depth, charcoal teal and midnight navy shadows, one deliberate amber/rust-red/ember-orange accent, sparse natural human or environmental subject, portrait 9:16, no text, letters, logo, stamp, watermark, or CGI. No text, no watermark.",
+      "motion": "slow_push_in",
+      "image_query": "It's rare, and it's sacred.",
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    }
+  ],
+  "voice_tone": "warm, deep, emotional spoken-word delivery",
+  "pacing": "deliberate phrasing with a pause after each line",
+  "image_style": "dark hand-inked graphic-novel storybook illustration, irregular contour linework, visible paper/woodcut grain, flat painted shapes with cinematic depth, charcoal teal and midnight navy shadows, one deliberate amber/rust-red/ember-orange accent, sparse natural human or environmental subject, portrait 9:16, no text, letters, logo, stamp, watermark, or CGI",
+  "animation_style": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing"
+}

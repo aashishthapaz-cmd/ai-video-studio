@@ -1,0 +1,50 @@
+{
+  "title": "The Hardest Lesson I've Learned As An Adult",
+  "style_bible": {
+    "emotional_arc": "Progressive struggle to resilience, from pain to strength.",
+    "palette": "Charcoal-teal with amber accents",
+    "lighting": "Twilight moody atmosphere",
+    "motif": "Path through dense forest",
+    "continuity": "Sparse and poetic visual world",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "The hardest lesson I've learned as an adult is that life doesn't stop, even when you're hurt.",
+      "prompt": "A lone figure walking on a path through dense forest at twilight, with the trees stretching high into the darkening sky. The path is — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "No matter the pain, exhaustion, or loss, you still have to push through.",
+      "prompt": "The figure continues walking on the path, now under a canopy of dense foliage. The path is narrow and winding, with occasional glimpses — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "We grow up expecting happy endings, but find ourselves pretending to be okay instead.",
+      "prompt": "The figure stands at a fork in the path, facing a dense thicket of trees. The light is dimmer here, with only faint amber — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "Yet through it all, we find a strength we never knew we had.",
+      "prompt": "The figure emerges from the thicket into an open clearing bathed in amber light. The path continues straight ahead, now flanked by tall trees — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 95,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

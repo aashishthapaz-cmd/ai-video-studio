@@ -1,0 +1,57 @@
+{
+  "title": "Understanding Is Art",
+  "style_bible": {
+    "emotional_arc": "Reflective and introspective, moving from general to specific insights about understanding as a form of art.",
+    "palette": "Charcoal-teal with amber accents for the first scene, rust-red for the second, ember-orange for the third, and pale cream for the fourth and fifth scenes.",
+    "lighting": "Moody twilight/night atmosphere with deep charcoal-teal/navy shadows",
+    "motif": "Sparse natural elements like trees, paths, and windows to evoke a contemplative mood",
+    "continuity": "Consistent hand-inked storybook/graphic-novel illustration style with visible paper or woodcut grain",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "Understanding is art, and not everyone is an artist.",
+      "prompt": "A lone figure stands under a tree at twilight, holding a sketchbook with blank pages. Sparse branches create abstract patterns against the sky, wide — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "Some paint with their eyes. Some paint with their ego.",
+      "prompt": "A person's eye is partially visible, glowing amber in the dark, surrounded by a halo of misty light. A self-portrait frame looms nearby, casting — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "Only a few paint with their heart.",
+      "prompt": "A hand holding a brush, the fingers barely visible in the dim light. The brush strokes on an unseen canvas are faintly outlined by — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "The greatest works are never hung on walls.",
+      "prompt": "A small, unframed canvas is placed in a quiet corner of an artist's studio. The canvas has subtle brushstrokes visible under the amber light — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_005",
+      "duration": 4.0,
+      "narration": "They live quietly inside people's hearts.",
+      "prompt": "A heart-shaped window in a darkened room, with a faint light glowing from within. The heart is partially obscured by misty night air, hinting — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 112,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

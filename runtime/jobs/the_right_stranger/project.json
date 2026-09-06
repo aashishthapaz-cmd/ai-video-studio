@@ -1,0 +1,52 @@
+{
+  "title": "The Right Stranger",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 44,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "We are taught to build walls to protect who we are.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "We are taught to build walls to protect who we are."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "We learn to hide our flaws so we can be chosen.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "We learn to hide our flaws so we can be chosen."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "We guard our secrets so we can never be ruined.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "We guard our secrets so we can never be ruined."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "We spend our whole lives trying to stay completely whole, all on our own.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "We spend our whole lives trying to stay completely whole, all on our own."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "But then you meet someone, and suddenly, you don't mind becoming a little bit undone.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "But then you meet someone, and suddenly, you don't mind becoming a little bit undone."
+    }
+  ]
+}

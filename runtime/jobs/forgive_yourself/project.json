@@ -1,0 +1,76 @@
+{
+  "title": "Forgive Yourself",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 21,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "The truth is, you need to forgive yourself.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "The truth is, you need to forgive yourself."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "You keep replaying what you did wrong.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "You keep replaying what you did wrong."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "But forget all the things you did right.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "But forget all the things you did right."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "You can't change the past.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "You can't change the past."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "But you can change how you move forward.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "But you can change how you move forward."
+    },
+    {
+      "id": "scene_006",
+      "duration": 5,
+      "narration": "Your mistakes do not define you.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Your mistakes do not define you."
+    },
+    {
+      "id": "scene_007",
+      "duration": 5,
+      "narration": "Forgive yourself.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Forgive yourself."
+    },
+    {
+      "id": "scene_008",
+      "duration": 5,
+      "narration": "Find your peace.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Find your peace."
+    }
+  ]
+}

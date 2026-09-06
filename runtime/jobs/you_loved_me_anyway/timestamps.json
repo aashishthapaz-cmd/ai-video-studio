@@ -1,0 +1,245 @@
+[
+  {
+    "start": 0.0,
+    "end": 3.6,
+    "text": "When I thought I didn't deserve love, you loved me anyway.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.34,
+        "word": " When"
+      },
+      {
+        "start": 0.34,
+        "end": 0.48,
+        "word": " I"
+      },
+      {
+        "start": 0.48,
+        "end": 0.68,
+        "word": " thought"
+      },
+      {
+        "start": 0.68,
+        "end": 0.88,
+        "word": " I"
+      },
+      {
+        "start": 0.88,
+        "end": 1.18,
+        "word": " didn't"
+      },
+      {
+        "start": 1.18,
+        "end": 1.5,
+        "word": " deserve"
+      },
+      {
+        "start": 1.5,
+        "end": 1.88,
+        "word": " love,"
+      },
+      {
+        "start": 2.52,
+        "end": 2.74,
+        "word": " you"
+      },
+      {
+        "start": 2.74,
+        "end": 3.0,
+        "word": " loved"
+      },
+      {
+        "start": 3.0,
+        "end": 3.26,
+        "word": " me"
+      },
+      {
+        "start": 3.26,
+        "end": 3.6,
+        "word": " anyway."
+      }
+    ]
+  },
+  {
+    "start": 4.72,
+    "end": 7.58,
+    "text": "When all I knew was darkness, you brought me light.",
+    "words": [
+      {
+        "start": 4.72,
+        "end": 5.12,
+        "word": " When"
+      },
+      {
+        "start": 5.12,
+        "end": 5.3,
+        "word": " all"
+      },
+      {
+        "start": 5.3,
+        "end": 5.42,
+        "word": " I"
+      },
+      {
+        "start": 5.42,
+        "end": 5.62,
+        "word": " knew"
+      },
+      {
+        "start": 5.62,
+        "end": 5.82,
+        "word": " was"
+      },
+      {
+        "start": 5.82,
+        "end": 6.24,
+        "word": " darkness,"
+      },
+      {
+        "start": 6.68,
+        "end": 6.76,
+        "word": " you"
+      },
+      {
+        "start": 6.76,
+        "end": 7.02,
+        "word": " brought"
+      },
+      {
+        "start": 7.02,
+        "end": 7.28,
+        "word": " me"
+      },
+      {
+        "start": 7.28,
+        "end": 7.58,
+        "word": " light."
+      }
+    ]
+  },
+  {
+    "start": 8.34,
+    "end": 11.8,
+    "text": "When I said I was broken, you healed things you didn't break.",
+    "words": [
+      {
+        "start": 8.34,
+        "end": 8.52,
+        "word": " When"
+      },
+      {
+        "start": 8.52,
+        "end": 8.64,
+        "word": " I"
+      },
+      {
+        "start": 8.64,
+        "end": 8.84,
+        "word": " said"
+      },
+      {
+        "start": 8.84,
+        "end": 8.98,
+        "word": " I"
+      },
+      {
+        "start": 8.98,
+        "end": 9.12,
+        "word": " was"
+      },
+      {
+        "start": 9.12,
+        "end": 9.52,
+        "word": " broken,"
+      },
+      {
+        "start": 10.26,
+        "end": 10.38,
+        "word": " you"
+      },
+      {
+        "start": 10.38,
+        "end": 10.72,
+        "word": " healed"
+      },
+      {
+        "start": 10.72,
+        "end": 11.06,
+        "word": " things"
+      },
+      {
+        "start": 11.06,
+        "end": 11.3,
+        "word": " you"
+      },
+      {
+        "start": 11.3,
+        "end": 11.6,
+        "word": " didn't"
+      },
+      {
+        "start": 11.6,
+        "end": 11.8,
+        "word": " break."
+      }
+    ]
+  },
+  {
+    "start": 12.8,
+    "end": 15.92,
+    "text": "When I struggled to love myself, you loved me quietly.",
+    "words": [
+      {
+        "start": 12.8,
+        "end": 13.12,
+        "word": " When"
+      },
+      {
+        "start": 13.12,
+        "end": 13.24,
+        "word": " I"
+      },
+      {
+        "start": 13.24,
+        "end": 13.58,
+        "word": " struggled"
+      },
+      {
+        "start": 13.58,
+        "end": 13.84,
+        "word": " to"
+      },
+      {
+        "start": 13.84,
+        "end": 14.02,
+        "word": " love"
+      },
+      {
+        "start": 14.02,
+        "end": 14.48,
+        "word": " myself,"
+      },
+      {
+        "start": 14.98,
+        "end": 15.08,
+        "word": " you"
+      },
+      {
+        "start": 15.08,
+        "end": 15.3,
+        "word": " loved"
+      },
+      {
+        "start": 15.3,
+        "end": 15.52,
+        "word": " me"
+      },
+      {
+        "start": 15.52,
+        "end": 15.92,
+        "word": " quietly."
+      }
+    ]
+  }
+]

@@ -1,0 +1,61 @@
+{
+  "title": "You Made My Heart Believe Again",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 85,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "You'll never understand how deeply your existence changed my heart, and made it believe again.",
+      "prompt": ". dark hand-inked graphic-novel storybook illustration, irregular contour linework, visible paper/woodcut grain, flat painted shapes with cinematic depth, charcoal teal and midnight navy shadows, one deliberate amber/rust-red/ember-orange accent, sparse natural human or environmental subject, portrait 9:16, no text, letters, logo, stamp, watermark, or CGI. No text, no watermark.",
+      "motion": "slow_push_in",
+      "image_query": "You'll never understand how deeply your existence changed my heart, and made it believe again.",
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "You'll never truly know the healing you brought to my scattered mind.",
+      "prompt": ". dark hand-inked graphic-novel storybook illustration, irregular contour linework, visible paper/woodcut grain, flat painted shapes with cinematic depth, charcoal teal and midnight navy shadows, one deliberate amber/rust-red/ember-orange accent, sparse natural human or environmental subject, portrait 9:16, no text, letters, logo, stamp, watermark, or CGI. No text, no watermark.",
+      "motion": "slow_push_in",
+      "image_query": "You'll never truly know the healing you brought to my scattered mind.",
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "I'll tell you anyway, over and over, even as my hair begins to grey,",
+      "prompt": ". dark hand-inked graphic-novel storybook illustration, irregular contour linework, visible paper/woodcut grain, flat painted shapes with cinematic depth, charcoal teal and midnight navy shadows, one deliberate amber/rust-red/ember-orange accent, sparse natural human or environmental subject, portrait 9:16, no text, letters, logo, stamp, watermark, or CGI. No text, no watermark.",
+      "motion": "slow_push_in",
+      "image_query": "I'll tell you anyway, over and over, even as my hair begins to grey,",
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "how remarkable your soul is.",
+      "prompt": ". dark hand-inked graphic-novel storybook illustration, irregular contour linework, visible paper/woodcut grain, flat painted shapes with cinematic depth, charcoal teal and midnight navy shadows, one deliberate amber/rust-red/ember-orange accent, sparse natural human or environmental subject, portrait 9:16, no text, letters, logo, stamp, watermark, or CGI. No text, no watermark.",
+      "motion": "slow_push_in",
+      "image_query": "how remarkable your soul is.",
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "Because through the adventure of being loved by you, I finally know how a heart feels when it's home.",
+      "prompt": ". dark hand-inked graphic-novel storybook illustration, irregular contour linework, visible paper/woodcut grain, flat painted shapes with cinematic depth, charcoal teal and midnight navy shadows, one deliberate amber/rust-red/ember-orange accent, sparse natural human or environmental subject, portrait 9:16, no text, letters, logo, stamp, watermark, or CGI. No text, no watermark.",
+      "motion": "slow_push_in",
+      "image_query": "Because through the adventure of being loved by you, I finally know how a heart feels when it's home.",
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    }
+  ],
+  "voice_tone": "warm, deep, emotional spoken-word delivery",
+  "pacing": "deliberate phrasing with a pause after each line",
+  "image_style": "dark hand-inked graphic-novel storybook illustration, irregular contour linework, visible paper/woodcut grain, flat painted shapes with cinematic depth, charcoal teal and midnight navy shadows, one deliberate amber/rust-red/ember-orange accent, sparse natural human or environmental subject, portrait 9:16, no text, letters, logo, stamp, watermark, or CGI",
+  "animation_style": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing"
+}

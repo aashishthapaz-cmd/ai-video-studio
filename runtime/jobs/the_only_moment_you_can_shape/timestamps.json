@@ -1,0 +1,256 @@
+[
+  {
+    "start": 0.0,
+    "end": 2.08,
+    "text": "No amount of regret rewrites yesterday.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.16,
+        "word": " No"
+      },
+      {
+        "start": 0.16,
+        "end": 0.46,
+        "word": " amount"
+      },
+      {
+        "start": 0.46,
+        "end": 0.68,
+        "word": " of"
+      },
+      {
+        "start": 0.68,
+        "end": 1.0,
+        "word": " regret"
+      },
+      {
+        "start": 1.0,
+        "end": 1.6,
+        "word": " rewrites"
+      },
+      {
+        "start": 1.6,
+        "end": 2.08,
+        "word": " yesterday."
+      }
+    ]
+  },
+  {
+    "start": 3.28,
+    "end": 5.24,
+    "text": "No amount of worry controls tomorrow.",
+    "words": [
+      {
+        "start": 3.28,
+        "end": 3.52,
+        "word": " No"
+      },
+      {
+        "start": 3.52,
+        "end": 3.82,
+        "word": " amount"
+      },
+      {
+        "start": 3.82,
+        "end": 4.04,
+        "word": " of"
+      },
+      {
+        "start": 4.04,
+        "end": 4.28,
+        "word": " worry"
+      },
+      {
+        "start": 4.28,
+        "end": 4.76,
+        "word": " controls"
+      },
+      {
+        "start": 4.76,
+        "end": 5.24,
+        "word": " tomorrow."
+      }
+    ]
+  },
+  {
+    "start": 6.54,
+    "end": 8.6,
+    "text": "No guilt can undo what's already happened.",
+    "words": [
+      {
+        "start": 6.54,
+        "end": 6.68,
+        "word": " No"
+      },
+      {
+        "start": 6.68,
+        "end": 6.92,
+        "word": " guilt"
+      },
+      {
+        "start": 6.92,
+        "end": 7.2,
+        "word": " can"
+      },
+      {
+        "start": 7.2,
+        "end": 7.48,
+        "word": " undo"
+      },
+      {
+        "start": 7.48,
+        "end": 7.9,
+        "word": " what's"
+      },
+      {
+        "start": 7.9,
+        "end": 8.18,
+        "word": " already"
+      },
+      {
+        "start": 8.18,
+        "end": 8.6,
+        "word": " happened."
+      }
+    ]
+  },
+  {
+    "start": 9.96,
+    "end": 11.9,
+    "text": "No overthinking has ever brought peace.",
+    "words": [
+      {
+        "start": 9.96,
+        "end": 10.18,
+        "word": " No"
+      },
+      {
+        "start": 10.18,
+        "end": 10.8,
+        "word": " overthinking"
+      },
+      {
+        "start": 10.8,
+        "end": 11.1,
+        "word": " has"
+      },
+      {
+        "start": 11.1,
+        "end": 11.3,
+        "word": " ever"
+      },
+      {
+        "start": 11.3,
+        "end": 11.52,
+        "word": " brought"
+      },
+      {
+        "start": 11.52,
+        "end": 11.9,
+        "word": " peace."
+      }
+    ]
+  },
+  {
+    "start": 13.46,
+    "end": 15.66,
+    "text": "The only moment you can shape is this one.",
+    "words": [
+      {
+        "start": 13.46,
+        "end": 13.7,
+        "word": " The"
+      },
+      {
+        "start": 13.7,
+        "end": 13.9,
+        "word": " only"
+      },
+      {
+        "start": 13.9,
+        "end": 14.22,
+        "word": " moment"
+      },
+      {
+        "start": 14.22,
+        "end": 14.44,
+        "word": " you"
+      },
+      {
+        "start": 14.44,
+        "end": 14.62,
+        "word": " can"
+      },
+      {
+        "start": 14.62,
+        "end": 14.98,
+        "word": " shape"
+      },
+      {
+        "start": 14.98,
+        "end": 15.18,
+        "word": " is"
+      },
+      {
+        "start": 15.18,
+        "end": 15.4,
+        "word": " this"
+      },
+      {
+        "start": 15.4,
+        "end": 15.66,
+        "word": " one."
+      }
+    ]
+  },
+  {
+    "start": 16.72,
+    "end": 17.84,
+    "text": "Live it with intention.",
+    "words": [
+      {
+        "start": 16.72,
+        "end": 17.0,
+        "word": " Live"
+      },
+      {
+        "start": 17.0,
+        "end": 17.2,
+        "word": " it"
+      },
+      {
+        "start": 17.2,
+        "end": 17.4,
+        "word": " with"
+      },
+      {
+        "start": 17.4,
+        "end": 17.84,
+        "word": " intention."
+      }
+    ]
+  },
+  {
+    "start": 19.12,
+    "end": 19.88,
+    "text": "Make it beautiful.",
+    "words": [
+      {
+        "start": 19.12,
+        "end": 19.34,
+        "word": " Make"
+      },
+      {
+        "start": 19.34,
+        "end": 19.48,
+        "word": " it"
+      },
+      {
+        "start": 19.48,
+        "end": 19.88,
+        "word": " beautiful."
+      }
+    ]
+  }
+]

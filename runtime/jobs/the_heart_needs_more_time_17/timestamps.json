@@ -1,0 +1,248 @@
+[
+  {
+    "start": 0.0,
+    "end": 4.16,
+    "text": "Sometimes the heart needs more time to accept what the mind already knows.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.5,
+        "word": " Sometimes"
+      },
+      {
+        "start": 0.5,
+        "end": 0.78,
+        "word": " the"
+      },
+      {
+        "start": 0.78,
+        "end": 1.06,
+        "word": " heart"
+      },
+      {
+        "start": 1.06,
+        "end": 1.36,
+        "word": " needs"
+      },
+      {
+        "start": 1.36,
+        "end": 1.66,
+        "word": " more"
+      },
+      {
+        "start": 1.66,
+        "end": 1.98,
+        "word": " time"
+      },
+      {
+        "start": 1.98,
+        "end": 2.2,
+        "word": " to"
+      },
+      {
+        "start": 2.2,
+        "end": 2.62,
+        "word": " accept"
+      },
+      {
+        "start": 2.62,
+        "end": 2.88,
+        "word": " what"
+      },
+      {
+        "start": 2.88,
+        "end": 3.04,
+        "word": " the"
+      },
+      {
+        "start": 3.04,
+        "end": 3.34,
+        "word": " mind"
+      },
+      {
+        "start": 3.34,
+        "end": 3.74,
+        "word": " already"
+      },
+      {
+        "start": 3.74,
+        "end": 4.16,
+        "word": " knows."
+      }
+    ]
+  },
+  {
+    "start": 5.4,
+    "end": 11.81,
+    "text": "The mind moves on the day it understands, the heart moves on the day it stops hoping.",
+    "words": [
+      {
+        "start": 5.4,
+        "end": 5.8,
+        "word": " The"
+      },
+      {
+        "start": 5.8,
+        "end": 6.08,
+        "word": " mind"
+      },
+      {
+        "start": 6.08,
+        "end": 6.42,
+        "word": " moves"
+      },
+      {
+        "start": 6.42,
+        "end": 6.7,
+        "word": " on"
+      },
+      {
+        "start": 6.7,
+        "end": 6.8,
+        "word": " the"
+      },
+      {
+        "start": 6.8,
+        "end": 7.04,
+        "word": " day"
+      },
+      {
+        "start": 7.04,
+        "end": 7.16,
+        "word": " it"
+      },
+      {
+        "start": 7.16,
+        "end": 7.62,
+        "word": " understands,"
+      },
+      {
+        "start": 9.55,
+        "end": 9.69,
+        "word": " the"
+      },
+      {
+        "start": 9.69,
+        "end": 9.93,
+        "word": " heart"
+      },
+      {
+        "start": 9.93,
+        "end": 10.29,
+        "word": " moves"
+      },
+      {
+        "start": 10.29,
+        "end": 10.55,
+        "word": " on"
+      },
+      {
+        "start": 10.55,
+        "end": 10.65,
+        "word": " the"
+      },
+      {
+        "start": 10.65,
+        "end": 10.89,
+        "word": " day"
+      },
+      {
+        "start": 10.89,
+        "end": 11.03,
+        "word": " it"
+      },
+      {
+        "start": 11.03,
+        "end": 11.31,
+        "word": " stops"
+      },
+      {
+        "start": 11.31,
+        "end": 11.81,
+        "word": " hoping."
+      }
+    ]
+  },
+  {
+    "start": 12.97,
+    "end": 19.71,
+    "text": "And between those two days, a person lives an entire life, pretending to be fine.",
+    "words": [
+      {
+        "start": 12.97,
+        "end": 13.51,
+        "word": " And"
+      },
+      {
+        "start": 13.51,
+        "end": 13.81,
+        "word": " between"
+      },
+      {
+        "start": 13.81,
+        "end": 14.17,
+        "word": " those"
+      },
+      {
+        "start": 14.17,
+        "end": 14.45,
+        "word": " two"
+      },
+      {
+        "start": 14.45,
+        "end": 14.85,
+        "word": " days,"
+      },
+      {
+        "start": 15.59,
+        "end": 15.73,
+        "word": " a"
+      },
+      {
+        "start": 15.73,
+        "end": 16.09,
+        "word": " person"
+      },
+      {
+        "start": 16.09,
+        "end": 16.47,
+        "word": " lives"
+      },
+      {
+        "start": 16.47,
+        "end": 16.69,
+        "word": " an"
+      },
+      {
+        "start": 16.69,
+        "end": 17.13,
+        "word": " entire"
+      },
+      {
+        "start": 17.13,
+        "end": 17.65,
+        "word": " life,"
+      },
+      {
+        "start": 18.31,
+        "end": 18.87,
+        "word": " pretending"
+      },
+      {
+        "start": 18.87,
+        "end": 19.23,
+        "word": " to"
+      },
+      {
+        "start": 19.23,
+        "end": 19.37,
+        "word": " be"
+      },
+      {
+        "start": 19.37,
+        "end": 19.71,
+        "word": " fine."
+      }
+    ]
+  }
+]

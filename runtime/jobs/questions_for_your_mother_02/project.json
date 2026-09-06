@@ -1,0 +1,66 @@
+{
+  "title": "Questions For Your Mother",
+  "style_bible": {
+    "emotional_arc": "Nostalgic, introspective, tender, bittersweet, reflective",
+    "palette": "Charcoal-teal, navy, amber, rust-red, ember-orange, pale cream",
+    "lighting": "Moody twilight/night atmosphere with deep charcoal-teal/navy shadows and one controlled accent color",
+    "motif": "Natural elements like trees, paths, windows, boats, and books",
+    "continuity": "Sparse, poetic, readable visual world suitable for slow Ken Burns motion",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "Five questions to ask your mother while you still can.",
+      "prompt": "A woman standing by a window, looking out at the night sky with five question marks floating around her in soft white ink, amber — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork. dark hand-inked graphic-novel storybook illustration, irregular contour linework, visible paper/woodcut grain, flat painted shapes with cinematic depth, charcoal teal and midnight navy shadows, one deliberate amber/rust-red/ember-orange accent, sparse natural human or environmental subject, portrait 9:16, no text, letters, logo, stamp, watermark, or CGI. No text, no watermark.",
+      "motion": "slow_push_in",
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "What did you want to become before you had me?",
+      "prompt": "A young woman holding a book, sitting by the window with her hand resting on an old typewriter, rust-red accent on the typewritten pages — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork. dark hand-inked graphic-novel storybook illustration, irregular contour linework, visible paper/woodcut grain, flat painted shapes with cinematic depth, charcoal teal and midnight navy shadows, one deliberate amber/rust-red/ember-orange accent, sparse natural human or environmental subject, portrait 9:16, no text, letters, logo, stamp, watermark, or CGI. No text, no watermark.",
+      "motion": "slow_push_in",
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "What's a moment you're quietly proud of me for?",
+      "prompt": "A mother and child walking hand in hand along a path under the moonlight, with the child holding a lantern, amber accent on — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork. dark hand-inked graphic-novel storybook illustration, irregular contour linework, visible paper/woodcut grain, flat painted shapes with cinematic depth, charcoal teal and midnight navy shadows, one deliberate amber/rust-red/ember-orange accent, sparse natural human or environmental subject, portrait 9:16, no text, letters, logo, stamp, watermark, or CGI. No text, no watermark.",
+      "motion": "slow_push_in",
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "What's something you gave up for us that we never noticed?",
+      "prompt": "A mother sitting by a window, holding an old photograph of herself and her younger self with a child, pale cream accent on — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork. dark hand-inked graphic-novel storybook illustration, irregular contour linework, visible paper/woodcut grain, flat painted shapes with cinematic depth, charcoal teal and midnight navy shadows, one deliberate amber/rust-red/ember-orange accent, sparse natural human or environmental subject, portrait 9:16, no text, letters, logo, stamp, watermark, or CGI. No text, no watermark.",
+      "motion": "slow_push_in",
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_005",
+      "duration": 4.0,
+      "narration": "And what's one thing you want me to always remember, after you're gone?",
+      "prompt": "A mother looking at a book with her child, the book titled 'Always Remember', ember-orange accent on the title and the distant trees — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork. dark hand-inked graphic-novel storybook illustration, irregular contour linework, visible paper/woodcut grain, flat painted shapes with cinematic depth, charcoal teal and midnight navy shadows, one deliberate amber/rust-red/ember-orange accent, sparse natural human or environmental subject, portrait 9:16, no text, letters, logo, stamp, watermark, or CGI. No text, no watermark.",
+      "motion": "slow_push_in",
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 99,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry",
+  "voice_tone": "warm, deep, emotional spoken-word delivery",
+  "pacing": "deliberate phrasing with a pause after each line",
+  "image_style": "dark hand-inked graphic-novel storybook illustration, irregular contour linework, visible paper/woodcut grain, flat painted shapes with cinematic depth, charcoal teal and midnight navy shadows, one deliberate amber/rust-red/ember-orange accent, sparse natural human or environmental subject, portrait 9:16, no text, letters, logo, stamp, watermark, or CGI",
+  "animation_style": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing"
+}

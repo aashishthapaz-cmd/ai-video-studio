@@ -1,0 +1,50 @@
+{
+  "title": "The Hardest Lesson I've Learned As An Adult",
+  "style_bible": {
+    "emotional_arc": "Progressive struggle to resilience, from pain to strength.",
+    "palette": "Charcoal-teal, navy with amber accents",
+    "lighting": "Moody twilight with a soft amber glow",
+    "motif": "Natural elements and human figures in sparse settings",
+    "continuity": "Consistent dark hand-inked style, irregular contour lines, visible paper grain",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "The hardest lesson I've learned as an adult is that life doesn't stop, even when you're hurt.",
+      "prompt": "A lone figure walking on a rain-soaked path under a twilight sky with distant mountains, charcoal-teal shadows, wide lonely establishing view, rain haze, amber — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "No matter the pain, exhaustion, or loss, you still have to push through.",
+      "prompt": "A person sitting by a window with a book in hand, amber light filtering through raindrops on glass, charcoal-teal tones, close symbolic detail, heavy — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "We grow up expecting happy endings, but find ourselves pretending to be okay instead.",
+      "prompt": "A child's drawing of a castle with smoke rising from its chimney, set against a twilight sky, amber highlights, low-angle walking silhouette, open negative — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "Yet through it all, we find a strength we never knew we had.",
+      "prompt": "A silhouette of a person holding a lantern in their hand, casting light on the path ahead under an amber glow, charcoal-teal background, still — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 95,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

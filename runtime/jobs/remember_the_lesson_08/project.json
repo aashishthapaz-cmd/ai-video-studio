@@ -1,0 +1,50 @@
+{
+  "title": "Remember The Lesson",
+  "style_bible": {
+    "emotional_arc": "Reflective and instructive, moving from pain to resilience.",
+    "palette": "Charcoal-teal with amber accents",
+    "lighting": "Twilight moody atmosphere",
+    "motif": "Natural elements like paths, trees, and water",
+    "continuity": "Sparse, poetic, readable world for slow Ken Burns motion",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "Forget the past, but remember the lesson.",
+      "prompt": "A solitary path under twilight sky with a lone tree standing firm against fading light. Amber glow from unseen lanterns in the distance, wide — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "Let go of what hurts you, but never forget what it taught you.",
+      "prompt": "A river flowing through a dense forest, with a fallen tree blocking its path. A small boat floating gently around the obstacle, symbolizing resilience — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "Not every loss is a failure. Some are just directions.",
+      "prompt": "A dense fog rolling over a calm lake, with a lone tree silhouette in the mist. The water reflects the night sky, hinting at — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "Learn from it. But don't let it define you.",
+      "prompt": "A lone book floating gently on a stream, with its pages turning slowly as if learning unfolds step by step. The amber light — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 106,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

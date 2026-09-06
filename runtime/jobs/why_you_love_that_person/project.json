@@ -1,0 +1,52 @@
+{
+  "title": "Why You Love That Person",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 63,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "If you love someone because they love you, it's empathy.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "If you love someone because they love you, it's empathy."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "If you love someone for their looks, it's obsession.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "If you love someone for their looks, it's obsession."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "If you love someone for what they have, it's interest.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "If you love someone for what they have, it's interest."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "If you love someone for their kindness, it's admiration.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "If you love someone for their kindness, it's admiration."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "But if you're confused about why you love someone, it's definitely love.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "But if you're confused about why you love someone, it's definitely love."
+    }
+  ]
+}

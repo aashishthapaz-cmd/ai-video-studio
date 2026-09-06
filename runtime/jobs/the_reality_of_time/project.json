@@ -1,0 +1,52 @@
+{
+  "title": "The Reality Of Time",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 17,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "The painful reality of time is that it only moves in one direction.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "The painful reality of time is that it only moves in one direction."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "We spend our youth rushing to grow up, and the rest of our lives wishing we could go back.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "We spend our youth rushing to grow up, and the rest of our lives wishing we could go back."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "We trade our youth for wisdom.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "We trade our youth for wisdom."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "Right as the story comes to an end.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Right as the story comes to an end."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "That's what makes growing older so beautiful, yet so sad.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "That's what makes growing older so beautiful, yet so sad."
+    }
+  ]
+}

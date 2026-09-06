@@ -1,0 +1,275 @@
+[
+  {
+    "start": 0.0,
+    "end": 4.8,
+    "text": "We plan a lot of things, but in the end, life follows its own script.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.1,
+        "word": " We"
+      },
+      {
+        "start": 0.1,
+        "end": 0.42,
+        "word": " plan"
+      },
+      {
+        "start": 0.42,
+        "end": 0.62,
+        "word": " a"
+      },
+      {
+        "start": 0.62,
+        "end": 0.82,
+        "word": " lot"
+      },
+      {
+        "start": 0.82,
+        "end": 0.94,
+        "word": " of"
+      },
+      {
+        "start": 0.94,
+        "end": 1.26,
+        "word": " things,"
+      },
+      {
+        "start": 1.82,
+        "end": 2.08,
+        "word": " but"
+      },
+      {
+        "start": 2.08,
+        "end": 2.2,
+        "word": " in"
+      },
+      {
+        "start": 2.2,
+        "end": 2.32,
+        "word": " the"
+      },
+      {
+        "start": 2.32,
+        "end": 2.66,
+        "word": " end,"
+      },
+      {
+        "start": 3.3,
+        "end": 3.48,
+        "word": " life"
+      },
+      {
+        "start": 3.48,
+        "end": 3.96,
+        "word": " follows"
+      },
+      {
+        "start": 3.96,
+        "end": 4.18,
+        "word": " its"
+      },
+      {
+        "start": 4.18,
+        "end": 4.4,
+        "word": " own"
+      },
+      {
+        "start": 4.4,
+        "end": 4.8,
+        "word": " script."
+      }
+    ]
+  },
+  {
+    "start": 6.180000000000001,
+    "end": 11.0,
+    "text": "Sometimes the detours break your heart, only to lead you where you were meant to be.",
+    "words": [
+      {
+        "start": 6.180000000000001,
+        "end": 6.7,
+        "word": " Sometimes"
+      },
+      {
+        "start": 6.7,
+        "end": 7.04,
+        "word": " the"
+      },
+      {
+        "start": 7.04,
+        "end": 7.52,
+        "word": " detours"
+      },
+      {
+        "start": 7.52,
+        "end": 7.78,
+        "word": " break"
+      },
+      {
+        "start": 7.78,
+        "end": 8.04,
+        "word": " your"
+      },
+      {
+        "start": 8.04,
+        "end": 8.46,
+        "word": " heart,"
+      },
+      {
+        "start": 9.02,
+        "end": 9.32,
+        "word": " only"
+      },
+      {
+        "start": 9.32,
+        "end": 9.52,
+        "word": " to"
+      },
+      {
+        "start": 9.52,
+        "end": 9.74,
+        "word": " lead"
+      },
+      {
+        "start": 9.74,
+        "end": 9.96,
+        "word": " you"
+      },
+      {
+        "start": 9.96,
+        "end": 10.16,
+        "word": " where"
+      },
+      {
+        "start": 10.16,
+        "end": 10.32,
+        "word": " you"
+      },
+      {
+        "start": 10.32,
+        "end": 10.44,
+        "word": " were"
+      },
+      {
+        "start": 10.44,
+        "end": 10.62,
+        "word": " meant"
+      },
+      {
+        "start": 10.62,
+        "end": 10.78,
+        "word": " to"
+      },
+      {
+        "start": 10.78,
+        "end": 11.0,
+        "word": " be."
+      }
+    ]
+  },
+  {
+    "start": 11.96,
+    "end": 14.4,
+    "text": "One day you'll understand why it had to happen.",
+    "words": [
+      {
+        "start": 11.96,
+        "end": 12.14,
+        "word": " One"
+      },
+      {
+        "start": 12.14,
+        "end": 12.4,
+        "word": " day"
+      },
+      {
+        "start": 12.4,
+        "end": 12.64,
+        "word": " you'll"
+      },
+      {
+        "start": 12.64,
+        "end": 13.08,
+        "word": " understand"
+      },
+      {
+        "start": 13.08,
+        "end": 13.54,
+        "word": " why"
+      },
+      {
+        "start": 13.54,
+        "end": 13.74,
+        "word": " it"
+      },
+      {
+        "start": 13.74,
+        "end": 13.9,
+        "word": " had"
+      },
+      {
+        "start": 13.9,
+        "end": 14.1,
+        "word": " to"
+      },
+      {
+        "start": 14.1,
+        "end": 14.4,
+        "word": " happen."
+      }
+    ]
+  },
+  {
+    "start": 15.6,
+    "end": 18.86,
+    "text": "Until then, trust the story being written for you.",
+    "words": [
+      {
+        "start": 15.6,
+        "end": 15.86,
+        "word": " Until"
+      },
+      {
+        "start": 15.86,
+        "end": 16.24,
+        "word": " then,"
+      },
+      {
+        "start": 16.84,
+        "end": 17.08,
+        "word": " trust"
+      },
+      {
+        "start": 17.08,
+        "end": 17.34,
+        "word": " the"
+      },
+      {
+        "start": 17.34,
+        "end": 17.7,
+        "word": " story"
+      },
+      {
+        "start": 17.7,
+        "end": 18.0,
+        "word": " being"
+      },
+      {
+        "start": 18.0,
+        "end": 18.34,
+        "word": " written"
+      },
+      {
+        "start": 18.34,
+        "end": 18.64,
+        "word": " for"
+      },
+      {
+        "start": 18.64,
+        "end": 18.86,
+        "word": " you."
+      }
+    ]
+  }
+]

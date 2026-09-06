@@ -1,0 +1,100 @@
+{
+  "title": "Immune To You",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 39,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "The terrifying part is, I am no longer immune to you.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "The terrifying part is, I am no longer immune to you."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "I used to be fine on my own.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I used to be fine on my own."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "I was good at keeping people at a distance.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I was good at keeping people at a distance."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "But one message from you can change my whole mood.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "But one message from you can change my whole mood."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "Your voice softens my guard.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Your voice softens my guard."
+    },
+    {
+      "id": "scene_006",
+      "duration": 5,
+      "narration": "Your laugh gets through me when nothing else can.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Your laugh gets through me when nothing else can."
+    },
+    {
+      "id": "scene_007",
+      "duration": 5,
+      "narration": "And the way you look at me makes everything else feel far away.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "And the way you look at me makes everything else feel far away."
+    },
+    {
+      "id": "scene_008",
+      "duration": 5,
+      "narration": "I don't want attention.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I don't want attention."
+    },
+    {
+      "id": "scene_009",
+      "duration": 5,
+      "narration": "I want you.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I want you."
+    },
+    {
+      "id": "scene_010",
+      "duration": 5,
+      "narration": "That's what scares me.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "That's what scares me."
+    },
+    {
+      "id": "scene_011",
+      "duration": 5,
+      "narration": "You became the habit my heart doesn't want to break.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "You became the habit my heart doesn't want to break."
+    }
+  ]
+}

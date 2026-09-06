@@ -1,0 +1,44 @@
+{
+  "title": "Lose Yourself, Or Be Found?",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 28,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "Some say to truly love someone is to slowly lose yourself.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Some say to truly love someone is to slowly lose yourself."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "Others say to truly love someone is to finally find who you are.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Others say to truly love someone is to finally find who you are."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "So the question is, when you fall in love, do you want to lose yourself?",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "So the question is, when you fall in love, do you want to lose yourself?"
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "Or do you want to be found?",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Or do you want to be found?"
+    }
+  ]
+}

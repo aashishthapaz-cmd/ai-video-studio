@@ -1,0 +1,19 @@
+ComfyUI generated scene_001
+ComfyUI generated scene_002
+ComfyUI generated scene_003
+ComfyUI generated scene_004
+ComfyUI generated scene_005
+{"output": "D:\\Auto video Generator\\Output\\Questions For Your Father.mp4", "project_output": "D:\\Auto video Generator\\runtime\\questions_for_your_father\\final_voxcpm_match.mp4", "scenes": 5, "caption_visible": true, "renderer": "Nepali TTS reference system"}
+ComfyUI generated scene_001
+ComfyUI generated scene_002
+ComfyUI generated scene_003
+ComfyUI generated scene_004
+ComfyUI generated scene_005
+{"output": "D:\\Auto video Generator\\Output\\Questions For Your Father.mp4", "project_output": "D:\\Auto video Generator\\runtime\\jobs\\questions_for_your_father\\final_voxcpm_match.mp4", "scenes": 5, "caption_visible": true, "renderer": "Nepali TTS reference system"}
+ERROR: Voice generation failed: Loaded VoxCPM2Model
+ComfyUI generated scene_001
+ComfyUI generated scene_002
+ComfyUI generated scene_003
+ComfyUI generated scene_004
+ComfyUI generated scene_005
+{"output": "D:\\Auto video Generator\\Output\\Questions For Your Father.mp4", "project_output": "D:\\Auto video Generator\\runtime\\jobs\\questions_for_your_father\\final_voxcpm_match.mp4", "scenes": 5, "caption_visible": true, "renderer": "Nepali TTS reference system"}

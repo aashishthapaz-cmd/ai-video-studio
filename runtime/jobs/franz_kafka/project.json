@@ -1,0 +1,44 @@
+{
+  "title": "Franz Kafka",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 98,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "Franz Kafka said, I was ashamed of myself when I realized life was a costume party,",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Franz Kafka said, I was ashamed of myself when I realized life was a costume party,"
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "and I attended with my real face.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "and I attended with my real face."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "Most people spend their whole lives performing for a crowd that is even watching.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Most people spend their whole lives performing for a crowd that is even watching."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "The moment you stop pretending is the moment you start living.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "The moment you stop pretending is the moment you start living."
+    }
+  ]
+}

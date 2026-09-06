@@ -1,0 +1,20 @@
+ComfyUI generated scene_001
+ComfyUI generated scene_002
+ComfyUI generated scene_003
+ComfyUI generated scene_004
+{"output": "D:\\Auto video Generator\\Output\\Leave What You Love Just To Live.mp4", "project_output": "D:\\Auto video Generator\\runtime\\leave_what_you_love_just_to_live\\final_voxcpm_match.mp4", "scenes": 4, "caption_visible": true, "renderer": "Nepali TTS reference system"}
+ComfyUI generated scene_001
+ComfyUI generated scene_002
+ComfyUI generated scene_003
+ComfyUI generated scene_004
+{"output": "D:\\Auto video Generator\\Output\\Leave What You Love Just To Live.mp4", "project_output": "D:\\Auto video Generator\\runtime\\jobs\\leave_what_you_love_just_to_live\\final_voxcpm_match.mp4", "scenes": 4, "caption_visible": true, "renderer": "Nepali TTS reference system"}
+ERROR: Voice generation failed: VOXCPM synthesis failed: CUDA error: unknown error
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+ComfyUI generated scene_001
+ComfyUI generated scene_002
+ComfyUI generated scene_003
+ComfyUI generated scene_004
+{"output": "D:\\Auto video Generator\\Output\\Leave What You Love Just To Live.mp4", "project_output": "D:\\Auto video Generator\\runtime\\jobs\\leave_what_you_love_just_to_live\\final_voxcpm_match.mp4", "scenes": 4, "caption_visible": true, "renderer": "Nepali TTS reference system"}

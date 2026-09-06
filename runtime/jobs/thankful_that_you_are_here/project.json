@@ -1,0 +1,68 @@
+{
+  "title": "Thankful That You Are Here",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 23,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "Dear love, you matter to me more than you know.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Dear love, you matter to me more than you know."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "Maybe I don't say it often.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Maybe I don't say it often."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "Maybe I hide it behind jokes.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Maybe I hide it behind jokes."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "But I appreciate you.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "But I appreciate you."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "I remember you.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I remember you."
+    },
+    {
+      "id": "scene_006",
+      "duration": 5,
+      "narration": "I carry little pieces of our conversations throughout my day.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I carry little pieces of our conversations throughout my day."
+    },
+    {
+      "id": "scene_007",
+      "duration": 5,
+      "narration": "I am so thankful that you are here.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I am so thankful that you are here."
+    }
+  ]
+}

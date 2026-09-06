@@ -1,0 +1,92 @@
+{
+  "title": "It Will Always Be You",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 31,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "It is you.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "It is you."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "It has always been you.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "It has always been you."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "It will always be you.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "It will always be you."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "Without conditions.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Without conditions."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "Without hesitation.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Without hesitation."
+    },
+    {
+      "id": "scene_006",
+      "duration": 5,
+      "narration": "Without questions.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Without questions."
+    },
+    {
+      "id": "scene_007",
+      "duration": 5,
+      "narration": "I will love you through the quiet days.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I will love you through the quiet days."
+    },
+    {
+      "id": "scene_008",
+      "duration": 5,
+      "narration": "Through the loud nights.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Through the loud nights."
+    },
+    {
+      "id": "scene_009",
+      "duration": 5,
+      "narration": "Through every season we have yet to face.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Through every season we have yet to face."
+    },
+    {
+      "id": "scene_010",
+      "duration": 5,
+      "narration": "And no matter what changes, my answer is always you.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "And no matter what changes, my answer is always you."
+    }
+  ]
+}

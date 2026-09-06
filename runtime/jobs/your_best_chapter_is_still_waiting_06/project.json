@@ -1,0 +1,57 @@
+{
+  "title": "Your Best Chapter Is Still Waiting",
+  "style_bible": {
+    "emotional_arc": "Resilience, acceptance, hope",
+    "palette": "Charcoal-teal, navy, amber, rust-red, ember-orange, pale cream",
+    "lighting": "Moody twilight/night atmosphere with deep charcoal-teal/navy shadows and one controlled accent color",
+    "motif": "Natural elements like trees, paths, and water",
+    "continuity": "Sparse, poetic visual world suitable for slow Ken Burns motion",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "If you're strong enough to fall in love and give everything you have,",
+      "prompt": "A lone figure standing by a path under a twilight sky, with trees silhouetted against the horizon. The path is winding, leading into darkness — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "you're strong enough to let it all go.",
+      "prompt": "A figure holding a lantern, casting light on the ground as they walk away from a dark forest path into the night, close symbolic — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "Strong enough to pick up your pieces and start over.",
+      "prompt": "A figure bending down by a riverbank, gathering scattered leaves into their hands. The river flows gently in the background, low-angle walking silhouette, open — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "Because the end of one story is never the end of your story.",
+      "prompt": "A figure sitting by a window, looking out at rain-drenched trees. The room inside is dimly lit with a single candle flickering in — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_005",
+      "duration": 4.0,
+      "narration": "Your best chapter is still waiting to be written.",
+      "prompt": "A figure holding an open book by a window, the first page blank and inviting. Outside, raindrops fall on the glass, creating patterns — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 116,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

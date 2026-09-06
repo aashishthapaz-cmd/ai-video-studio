@@ -1,0 +1,57 @@
+{
+  "title": "As Adults We Understand Villains",
+  "style_bible": {
+    "emotional_arc": "Childhood innocence to adult complexity, understanding nuanced human nature.",
+    "palette": "charcoal-teal, navy-shadows, amber-accents",
+    "lighting": "moody twilight/night atmosphere with deep shadows and subtle light sources",
+    "motif": "natural elements like trees, paths, and windows symbolizing growth and reflection",
+    "continuity": "consistent visual style of hand-inked illustrations with expressive contour lines and flat painted shapes",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "As kids, we love the heroes.",
+      "prompt": "child playing with toy hero figures under a tree, sunlight filtering through leaves, amber accent on toy, wide lonely establishing view, rain haze, amber — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "But as adults, we understand the villains.",
+      "prompt": "adult standing by a window at twilight, looking out at rain-soaked path, amber accent on wet pavement, close symbolic detail, heavy shadow, rust-red emotional — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "Life teaches us that people aren't simply good or bad.",
+      "prompt": "bookshelf with open book, pages revealing complex characters, amber light from nearby lamp, navy shadows, low-angle walking silhouette, open negative space, pale cream breath-light — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "Sometimes the villain is just someone who got tired of being hurt,",
+      "prompt": "figure sitting on a bench by a river at dusk, face in hands, amber light reflecting off water, navy shadows, still interior frame, lantern — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_005",
+      "duration": 4.0,
+      "narration": "someone who stopped explaining themselves, someone who finally chose themselves after being forgotten.",
+      "prompt": "figure walking away from a closed door at night, amber light from the door creating an outline, navy shadows, distant horizon composition, layered fog — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 102,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

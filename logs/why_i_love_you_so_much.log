@@ -1,0 +1,6 @@
+ComfyUI generated scene_001
+ComfyUI generated scene_002
+ComfyUI generated scene_003
+ComfyUI generated scene_004
+ComfyUI generated scene_005
+{"output": "D:\\Auto video Generator\\Output\\Why I Love You So Much.mp4", "project_output": "D:\\Auto video Generator\\runtime\\jobs\\why_i_love_you_so_much\\final_voxcpm_match.mp4", "scenes": 5, "caption_visible": true, "renderer": "Nepali TTS reference system"}

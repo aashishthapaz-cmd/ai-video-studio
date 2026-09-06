@@ -1,0 +1,38 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: ProCaption,Arial,72,&H00FFFFFF,&H0000D7FF,&H00111111,&HAA000000,-1,0,0,0,100,100,0,0,3,3,0,2,70,70,210,1
+Style: PoetrySmall,Cormorant Garamond,44,&H0034E7FF,&H000000FF,&HAA070707,&H00000000,0,1,0,0,88,100,0,0,1,1.7,0,5,70,70,0,1
+Style: ReferenceCursive,Segoe Print,78,&H00FFFFFF,&H000000FF,&HC0000000,&H00000000,0,1,0,0,96,100,0,0,1,1.2,1.9,5,90,90,0,1
+Style: ReferenceMark,Segoe Script,22,&H00FFFFFF,&H000000FF,&HAA000000,&H00000000,0,1,0,0,88,100,0,0,1,0.7,1.0,5,40,40,0,1
+Style: NepaliReference,Noto Sans Devanagari,68,&H00FFFFFF,&H000000FF,&HC0000000,&H00000000,-1,0,0,0,100,100,0,0,1,1.3,1.9,5,90,90,0,1
+Style: NepaliCaption,Noto Sans Devanagari,58,&H00FFFFFF,&H000000FF,&HAA070707,&H00000000,-1,0,0,0,100,100,0,0,1,1.7,1.2,5,70,70,0,1
+Style: CreativeScript,Cormorant Garamond,58,&H00FFFFFF,&H000000FF,&HD0000000,&H00000000,0,1,0,0,100,100,0,0,1,0.45,2.1,5,60,60,0,1
+Style: CreativeBold,Arial,42,&H00FFFFFF,&H000000FF,&HE0000000,&H00000000,0,0,0,0,92,100,0,0,1,1.55,3.1,5,60,60,0,1
+Style: CreativeYellow,Arial,78,&H0034E7FF,&H000000FF,&HE0000000,&H00000000,-1,0,0,0,90,100,0,0,1,2.0,4.0,5,60,60,0,1
+Style: CreativeTiny,Arial,32,&H00FFFFFF,&H000000FF,&HE0000000,&H00000000,0,0,0,0,90,100,0,0,1,1.3,2.7,5,60,60,0,1
+Style: TinyCredit,Arial,26,&H99FFFFFF,&H000000FF,&H55000000,&H00000000,0,0,0,0,100,100,0,0,1,1,0,1,40,40,40,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 1,0:00:00.00,0:00:02.04,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k26}Real {\k30}love {\k41}happens {\k28}in {\k19}two {\k40}moments
+Dialogue: 1,0:00:03.00,0:00:03.78,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k60}First
+Dialogue: 1,0:00:04.44,0:00:06.35,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k21}you {\k28}fall {\k21}for {\k20}who\N{\k15}they {\k32}appear {\k14}to {\k19}be
+Dialogue: 1,0:00:07.05,0:00:07.83,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k20}the {\k40}charm
+Dialogue: 1,0:00:08.41,0:00:09.08,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k9}the {\k38}smile
+Dialogue: 1,0:00:09.61,0:00:10.19,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k8}the {\k33}feeling
+Dialogue: 1,0:00:11.06,0:00:12.71,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k29}Then {\k14}the {\k30}truth {\k73}unfolds
+Dialogue: 1,0:00:13.22,0:00:14.37,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k16}You {\k21}see {\k22}their {\k37}flaws
+Dialogue: 1,0:00:15.09,0:00:15.85,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k14}their {\k43}past
+Dialogue: 1,0:00:16.26,0:00:17.01,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k19}their {\k37}struggles
+Dialogue: 1,0:00:17.73,0:00:19.01,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k18}If {\k11}you {\k26}choose {\k23}to {\k30}stay
+Dialogue: 1,0:00:19.46,0:00:20.21,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k11}to {\k46}understand
+Dialogue: 1,0:00:20.80,0:00:22.28,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k12}to {\k23}love {\k23}them {\k28}as {\k17}they {\k24}are
+Dialogue: 1,0:00:22.69,0:00:24.35,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k19}that's {\k17}not {\k68}attraction {\k41}anymore
+Dialogue: 1,0:00:24.89,0:00:26.10,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k40}That's {\k8}a {\k24}deeper {\k30}love
+Dialogue: 1,0:00:26.55,0:00:27.78,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k12}the {\k32}kind {\k28}that {\k32}lasts

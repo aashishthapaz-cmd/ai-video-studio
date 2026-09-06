@@ -1,0 +1,44 @@
+{
+  "title": "The Heart Needs More Time",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 100,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "Sometimes the heart needs more time to accept what the mind already knows.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Sometimes the heart needs more time to accept what the mind already knows."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "The mind moves on the day it understands.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "The mind moves on the day it understands."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "The heart moves on the day it stops hoping.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "The heart moves on the day it stops hoping."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "And between those two days, a person lives an entire life, pretending to be fine.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "And between those two days, a person lives an entire life, pretending to be fine."
+    }
+  ]
+}

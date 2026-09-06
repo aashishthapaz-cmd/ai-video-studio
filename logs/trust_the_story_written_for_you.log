@@ -1,0 +1,10 @@
+ERROR: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>
+ComfyUI generated scene_001
+ComfyUI generated scene_002
+ComfyUI generated scene_003
+ComfyUI generated scene_004
+{"output": "D:\\Auto video Generator\\Output\\Trust The Story Written For You.mp4", "project_output": "D:\\Auto video Generator\\runtime\\jobs\\trust_the_story_written_for_you\\final_voxcpm_match.mp4", "scenes": 4, "caption_visible": true, "renderer": "Nepali TTS reference system"}
+ERROR: Voice generation failed: weight_norm.py:143: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+Loading AudioVAE from pytorch: D:\VoxCPM Content Factory\models\VoxCPM2\audiovae.pth
+Running on device: cpu, dtype: bfloat16

@@ -1,0 +1,33 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: ProCaption,Arial,72,&H00FFFFFF,&H0000D7FF,&H00111111,&HAA000000,-1,0,0,0,100,100,0,0,3,3,0,2,70,70,210,1
+Style: PoetrySmall,Cormorant Garamond,44,&H0034E7FF,&H000000FF,&HAA070707,&H00000000,0,1,0,0,88,100,0,0,1,1.7,0,5,70,70,0,1
+Style: ReferenceCursive,Segoe Print,78,&H00FFFFFF,&H000000FF,&HC0000000,&H00000000,0,1,0,0,96,100,0,0,1,1.2,1.9,5,90,90,0,1
+Style: ReferenceMark,Segoe Script,22,&H00FFFFFF,&H000000FF,&HAA000000,&H00000000,0,1,0,0,88,100,0,0,1,0.7,1.0,5,40,40,0,1
+Style: NepaliReference,Noto Sans Devanagari,68,&H00FFFFFF,&H000000FF,&HC0000000,&H00000000,-1,0,0,0,100,100,0,0,1,1.3,1.9,5,90,90,0,1
+Style: NepaliCaption,Noto Sans Devanagari,58,&H00FFFFFF,&H000000FF,&HAA070707,&H00000000,-1,0,0,0,100,100,0,0,1,1.7,1.2,5,70,70,0,1
+Style: CreativeScript,Cormorant Garamond,58,&H00FFFFFF,&H000000FF,&HD0000000,&H00000000,0,1,0,0,100,100,0,0,1,0.45,2.1,5,60,60,0,1
+Style: CreativeBold,Arial,42,&H00FFFFFF,&H000000FF,&HE0000000,&H00000000,0,0,0,0,92,100,0,0,1,1.55,3.1,5,60,60,0,1
+Style: CreativeYellow,Arial,78,&H0034E7FF,&H000000FF,&HE0000000,&H00000000,-1,0,0,0,90,100,0,0,1,2.0,4.0,5,60,60,0,1
+Style: CreativeTiny,Arial,32,&H00FFFFFF,&H000000FF,&HE0000000,&H00000000,0,0,0,0,90,100,0,0,1,1.3,2.7,5,60,60,0,1
+Style: TinyCredit,Arial,26,&H99FFFFFF,&H000000FF,&H55000000,&H00000000,0,0,0,0,100,100,0,0,1,1,0,1,40,40,40,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 1,0:00:00.14,0:00:02.08,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k27}I {\k20}hope {\k18}you {\k21}know\N{\k19}you {\k17}make {\k18}me {\k31}happy
+Dialogue: 1,0:00:02.79,0:00:04.23,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k22}I {\k14}know {\k13}it {\k24}sounds {\k51}simple
+Dialogue: 1,0:00:04.24,0:00:06.23,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k59}but {\k12}I {\k20}mean {\k21}it {\k20}from {\k16}the {\k31}heart
+Dialogue: 1,0:00:07.09,0:00:10.87,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k18}A {\k31}regular {\k34}day {\k41}becomes {\k56}beautiful {\k69}when\N{\k12}I {\k24}spend {\k27}it {\k20}with {\k23}you
+Dialogue: 1,0:00:11.72,0:00:13.50,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k16}You {\k19}make {\k16}me {\k35}believe {\k22}in {\k19}love {\k30}again
+Dialogue: 1,0:00:14.50,0:00:15.29,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k16}We {\k45}fight
+Dialogue: 1,0:00:15.59,0:00:16.51,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k24}we {\k21}make {\k28}up
+Dialogue: 1,0:00:16.78,0:00:17.48,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k17}we {\k33}talk
+Dialogue: 1,0:00:17.98,0:00:19.23,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k12}we {\k35}comfort {\k33}each {\k25}other
+Dialogue: 1,0:00:20.05,0:00:21.64,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k16}and {\k14}in {\k14}all {\k17}these {\k30}little {\k48}things
+Dialogue: 1,0:00:22.14,0:00:24.07,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k17}I {\k32}feel {\k19}how {\k23}much {\k26}love {\k26}there {\k29}is

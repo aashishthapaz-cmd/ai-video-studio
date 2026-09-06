@@ -1,0 +1,50 @@
+{
+  "title": "A Soul Your Own Has Always Known",
+  "style_bible": {
+    "emotional_arc": "nostalgic, serene, homely, profound",
+    "palette": "charcoal-teal, navy, amber, rust-red, ember-orange, pale cream",
+    "lighting": "twilight, moody atmosphere with deep shadows and a soft glow from an internal light source",
+    "motif": "path leading to a home or destination, windows, books, natural elements like trees and rain",
+    "continuity": "consistent visual style of hand-inked storybook/graphic-novel illustration, expressive contour lines, flat painted shapes with cinematic depth",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "There is a legend that says when you meet your soulmate,",
+      "prompt": "a winding path under moonlight leading to an old wooden door with a faint light inside, charcoal-teal shadows, wide lonely establishing view, rain haze — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "you'll feel a sudden sense of calm and peace,",
+      "prompt": "a window pane reflecting the night sky with stars peeking through, amber light streaming in, rust-red accents, close symbolic detail, heavy shadow, rust-red emotional — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "as if you've finally come home after a very long journey.",
+      "prompt": "a tree with branches reaching towards the night sky, raindrops glistening on leaves, pale cream highlights, low-angle walking silhouette, open negative space, pale cream — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "And in their eyes, you'll recognize a soul your own has always known.",
+      "prompt": "a pair of old leather-bound books resting on a wooden table with a soft amber glow from an oil lamp, navy shadows, still interior — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 120,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

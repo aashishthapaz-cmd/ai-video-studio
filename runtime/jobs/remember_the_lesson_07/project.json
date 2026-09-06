@@ -1,0 +1,50 @@
+{
+  "title": "Remember The Lesson",
+  "style_bible": {
+    "emotional_arc": "Reflective and insightful, moving from letting go to finding strength in past experiences.",
+    "palette": "Charcoal-teal with amber accents for scenes 1-2; deep navy with rust-red for scene 3; pale cream with ember-orange for scene 4",
+    "lighting": "Moody twilight/night atmosphere with soft, diffused light",
+    "motif": "Sparse natural elements like trees and paths, symbolic objects such as lanterns or books",
+    "continuity": "Consistent dark hand-inked storybook/graphic-novel illustration style, expressive irregular contour lines, visible paper grain",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "Forget the past, but remember the lesson.",
+      "prompt": "A lone tree stands against a twilight sky, its branches reaching towards an amber lantern hanging from a nearby window. The path leading — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "Let go of what hurts you, but never forget what it taught you.",
+      "prompt": "A hand gently cradles a weathered book, its pages yellowed and worn. The light from an amber lantern casts long shadows on the ground — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "Not every loss is a failure. Some are just directions.",
+      "prompt": "A path forks into two, each leading to different trees in the twilight. The path chosen by a solitary figure is marked with rust-red — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "Learn from it. But don't let it define you.",
+      "prompt": "A book lies open on a wooden table, its pages illuminated by the soft light of an ember-orange lantern. The figure stands in — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 106,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

@@ -1,0 +1,57 @@
+{
+  "title": "Thank You For Being Such An Amazing Friend",
+  "style_bible": {
+    "emotional_arc": "Gratitude, warmth, and deep friendship.",
+    "palette": "charcoal-teal, navy-shadows, amber-accents",
+    "lighting": "twilight/moody-night",
+    "motif": "path, lantern, book, window",
+    "continuity": "Sparse, poetic, readable, Ken Burns motion",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "Thank you for being such an amazing friend, the kind I could never have asked for.",
+      "prompt": "path winding through a forest at twilight, amber light filtering through trees, book resting on the path, charcoal-teal shadows, wide lonely establishing view, rain — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "Thank you for listening to my stories and my random rants.",
+      "prompt": "window pane reflecting a night sky, raindrops on the glass, book open with pages turned back, amber light inside casting shadows, charcoal-teal background, close — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "Thank you for always being there when I needed someone to talk to.",
+      "prompt": "path leading to a small wooden bridge over a stream, lantern hanging from a tree branch, book pages fluttering in the breeze, amber glow — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "I'm so lucky to have a friend like you.",
+      "prompt": "path leading up to a cozy cabin, lantern light spilling out the window, book on a small table inside, amber glow from within, charcoal-teal — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_005",
+      "duration": 4.0,
+      "narration": "Just remember, I'm always here if you ever need a shoulder to lean on.",
+      "prompt": "path leading back towards the cabin, lantern hanging from a tree, book pages open and slightly worn, amber light casting soft shadows, charcoal-teal background — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 97,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

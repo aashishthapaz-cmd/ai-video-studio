@@ -1,0 +1,43 @@
+{
+  "title": "Some People Were Only Sent To Teach You",
+  "style_bible": {
+    "emotional_arc": "Gradual acceptance and growth through pain, leading to self-discovery.",
+    "palette": "Charcoal-teal with amber accents",
+    "lighting": "Moody twilight with a soft glow from within",
+    "motif": "Natural elements like trees, paths, and books",
+    "continuity": "Sparse, poetic, and readable visual world",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "When someone isn't right for you, life will keep using them to hurt you, until you're strong enough to let go.",
+      "prompt": "A lone figure walking a winding path under a twilight sky, with trees casting long shadows. A book half-open on the ground, an amber — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "And one day you'll realize,",
+      "prompt": "A window frame at twilight, with a soft amber light filtering through the glass. Inside, a book is open to a page — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "they were only sent to teach you that losing someone is how you find yourself.",
+      "prompt": "A boat floating on a calm, twilight lake with a single lantern hanging from its bow. The water reflects the amber light, symbolizing both — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 94,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

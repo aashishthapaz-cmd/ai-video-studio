@@ -1,0 +1,232 @@
+[
+  {
+    "start": 0.0,
+    "end": 3.52,
+    "text": "Understanding is art, and not everyone is an artist.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.54,
+        "word": " Understanding"
+      },
+      {
+        "start": 0.54,
+        "end": 0.82,
+        "word": " is"
+      },
+      {
+        "start": 0.82,
+        "end": 1.2,
+        "word": " art,"
+      },
+      {
+        "start": 1.76,
+        "end": 1.94,
+        "word": " and"
+      },
+      {
+        "start": 1.94,
+        "end": 2.08,
+        "word": " not"
+      },
+      {
+        "start": 2.08,
+        "end": 2.48,
+        "word": " everyone"
+      },
+      {
+        "start": 2.48,
+        "end": 2.94,
+        "word": " is"
+      },
+      {
+        "start": 2.94,
+        "end": 3.08,
+        "word": " an"
+      },
+      {
+        "start": 3.08,
+        "end": 3.52,
+        "word": " artist."
+      }
+    ]
+  },
+  {
+    "start": 4.5,
+    "end": 7.96,
+    "text": "Some paint with their eyes, some paint with their ego.",
+    "words": [
+      {
+        "start": 4.5,
+        "end": 4.7,
+        "word": " Some"
+      },
+      {
+        "start": 4.7,
+        "end": 5.04,
+        "word": " paint"
+      },
+      {
+        "start": 5.04,
+        "end": 5.28,
+        "word": " with"
+      },
+      {
+        "start": 5.28,
+        "end": 5.48,
+        "word": " their"
+      },
+      {
+        "start": 5.48,
+        "end": 5.82,
+        "word": " eyes,"
+      },
+      {
+        "start": 6.56,
+        "end": 6.82,
+        "word": " some"
+      },
+      {
+        "start": 6.82,
+        "end": 7.12,
+        "word": " paint"
+      },
+      {
+        "start": 7.12,
+        "end": 7.36,
+        "word": " with"
+      },
+      {
+        "start": 7.36,
+        "end": 7.58,
+        "word": " their"
+      },
+      {
+        "start": 7.58,
+        "end": 7.96,
+        "word": " ego."
+      }
+    ]
+  },
+  {
+    "start": 8.84,
+    "end": 12.82,
+    "text": "Only a few paint with their, the greatest works",
+    "words": [
+      {
+        "start": 8.84,
+        "end": 9.16,
+        "word": " Only"
+      },
+      {
+        "start": 9.16,
+        "end": 9.34,
+        "word": " a"
+      },
+      {
+        "start": 9.34,
+        "end": 9.54,
+        "word": " few"
+      },
+      {
+        "start": 9.54,
+        "end": 9.96,
+        "word": " paint"
+      },
+      {
+        "start": 9.96,
+        "end": 10.3,
+        "word": " with"
+      },
+      {
+        "start": 10.3,
+        "end": 10.46,
+        "word": " their,"
+      },
+      {
+        "start": 11.88,
+        "end": 12.04,
+        "word": " the"
+      },
+      {
+        "start": 12.04,
+        "end": 12.36,
+        "word": " greatest"
+      },
+      {
+        "start": 12.36,
+        "end": 12.82,
+        "word": " works"
+      }
+    ]
+  },
+  {
+    "start": 12.82,
+    "end": 14.1,
+    "text": "are never hung on walls.",
+    "words": [
+      {
+        "start": 12.82,
+        "end": 13.08,
+        "word": " are"
+      },
+      {
+        "start": 13.08,
+        "end": 13.3,
+        "word": " never"
+      },
+      {
+        "start": 13.3,
+        "end": 13.56,
+        "word": " hung"
+      },
+      {
+        "start": 13.56,
+        "end": 13.7,
+        "word": " on"
+      },
+      {
+        "start": 13.7,
+        "end": 14.1,
+        "word": " walls."
+      }
+    ]
+  },
+  {
+    "start": 14.92,
+    "end": 17.18,
+    "text": "They live quietly inside people's hearts.",
+    "words": [
+      {
+        "start": 14.92,
+        "end": 15.14,
+        "word": " They"
+      },
+      {
+        "start": 15.14,
+        "end": 15.32,
+        "word": " live"
+      },
+      {
+        "start": 15.32,
+        "end": 15.86,
+        "word": " quietly"
+      },
+      {
+        "start": 15.86,
+        "end": 16.28,
+        "word": " inside"
+      },
+      {
+        "start": 16.28,
+        "end": 16.96,
+        "word": " people's"
+      },
+      {
+        "start": 16.96,
+        "end": 17.18,
+        "word": " hearts."
+      }
+    ]
+  }
+]

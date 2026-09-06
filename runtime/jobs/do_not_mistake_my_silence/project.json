@@ -1,0 +1,68 @@
+{
+  "title": "Do Not Mistake My Silence",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 42,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "Do not mistake my silence for weakness.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Do not mistake my silence for weakness."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "I have nothing left to prove.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I have nothing left to prove."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "I am no longer convincing anyone of my value.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I am no longer convincing anyone of my value."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "And I am done fighting to be understood by people who are committed to misunderstanding me.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "And I am done fighting to be understood by people who are committed to misunderstanding me."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "Whatever you do from here is on you.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Whatever you do from here is on you."
+    },
+    {
+      "id": "scene_006",
+      "duration": 5,
+      "narration": "Just understand.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Just understand."
+    },
+    {
+      "id": "scene_007",
+      "duration": 5,
+      "narration": "Once I turn down the volume of my presence, you lose the right to hear from me again.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Once I turn down the volume of my presence, you lose the right to hear from me again."
+    }
+  ]
+}

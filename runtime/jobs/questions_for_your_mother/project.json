@@ -1,0 +1,52 @@
+{
+  "title": "Questions For Your Mother",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 99,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "Five questions to ask your mother while you still can.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Five questions to ask your mother while you still can."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "What did you want to become before you had me?",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "What did you want to become before you had me?"
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "What's a moment you're quietly proud of me for?",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "What's a moment you're quietly proud of me for?"
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "What's something you gave up for us that we never noticed?",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "What's something you gave up for us that we never noticed?"
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "And what's one thing you want me to always remember, after you're gone?",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "And what's one thing you want me to always remember, after you're gone?"
+    }
+  ]
+}

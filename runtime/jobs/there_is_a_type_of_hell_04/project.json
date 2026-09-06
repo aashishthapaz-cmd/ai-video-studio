@@ -1,0 +1,43 @@
+{
+  "title": "There Is A Type Of Hell",
+  "style_bible": {
+    "emotional_arc": "A slow, introspective descent into a quiet, suffocating despair.",
+    "palette": "Charcoal-teal and navy with subtle amber accents",
+    "lighting": "Moody twilight with soft, diffused light",
+    "motif": "Sparse natural elements like trees and paths",
+    "continuity": "Consistent dark hand-inked storybook/graphic-novel illustration style",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "There is a type of hell where nothing is burning, nothing is screaming.",
+      "prompt": "Empty path under twilight sky with distant trees, amber light filtering through branches, wide lonely establishing view, rain haze, amber window glow — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "Just mornings you wake up inside a life you barely recognize,",
+      "prompt": "Dawn breaking over misty path with faint outline of old wooden door in background, amber light on dewy grass, close symbolic detail, heavy shadow — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "built slowly, from everything you were too afraid to change.",
+      "prompt": "Close-up of weathered book with faded pages in dim light, amber glow on cracked leather cover, low-angle walking silhouette, open negative space, pale cream — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 124,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

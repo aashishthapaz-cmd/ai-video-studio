@@ -1,0 +1,151 @@
+[
+  {
+    "start": 0.0,
+    "end": 6.26,
+    "text": "I want to be your person, the one who is always with you, the one who always supports",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.12,
+        "word": " I"
+      },
+      {
+        "start": 0.12,
+        "end": 0.24,
+        "word": " want"
+      },
+      {
+        "start": 0.24,
+        "end": 0.4,
+        "word": " to"
+      },
+      {
+        "start": 0.4,
+        "end": 0.52,
+        "word": " be"
+      },
+      {
+        "start": 0.52,
+        "end": 0.66,
+        "word": " your"
+      },
+      {
+        "start": 0.66,
+        "end": 1.14,
+        "word": " person,"
+      },
+      {
+        "start": 1.92,
+        "end": 2.42,
+        "word": " the"
+      },
+      {
+        "start": 2.42,
+        "end": 2.6,
+        "word": " one"
+      },
+      {
+        "start": 2.6,
+        "end": 2.8,
+        "word": " who"
+      },
+      {
+        "start": 2.8,
+        "end": 2.92,
+        "word": " is"
+      },
+      {
+        "start": 2.92,
+        "end": 3.22,
+        "word": " always"
+      },
+      {
+        "start": 3.22,
+        "end": 3.54,
+        "word": " with"
+      },
+      {
+        "start": 3.54,
+        "end": 3.8,
+        "word": " you,"
+      },
+      {
+        "start": 4.72,
+        "end": 5.2,
+        "word": " the"
+      },
+      {
+        "start": 5.2,
+        "end": 5.38,
+        "word": " one"
+      },
+      {
+        "start": 5.38,
+        "end": 5.56,
+        "word": " who"
+      },
+      {
+        "start": 5.56,
+        "end": 5.86,
+        "word": " always"
+      },
+      {
+        "start": 5.86,
+        "end": 6.26,
+        "word": " supports"
+      }
+    ]
+  },
+  {
+    "start": 6.26,
+    "end": 10.06,
+    "text": "you, and the one who becomes your last love.",
+    "words": [
+      {
+        "start": 6.26,
+        "end": 6.68,
+        "word": " you,"
+      },
+      {
+        "start": 7.68,
+        "end": 8.22,
+        "word": " and"
+      },
+      {
+        "start": 8.22,
+        "end": 8.36,
+        "word": " the"
+      },
+      {
+        "start": 8.36,
+        "end": 8.54,
+        "word": " one"
+      },
+      {
+        "start": 8.54,
+        "end": 8.7,
+        "word": " who"
+      },
+      {
+        "start": 8.7,
+        "end": 9.1,
+        "word": " becomes"
+      },
+      {
+        "start": 9.1,
+        "end": 9.38,
+        "word": " your"
+      },
+      {
+        "start": 9.38,
+        "end": 9.76,
+        "word": " last"
+      },
+      {
+        "start": 9.76,
+        "end": 10.06,
+        "word": " love."
+      }
+    ]
+  }
+]

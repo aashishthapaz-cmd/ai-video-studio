@@ -1,0 +1,166 @@
+[
+  {
+    "start": 0.0,
+    "end": 6.98,
+    "text": "undress my soul, open every folded petal, dig into the bark of my strength,",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.46,
+        "word": " undress"
+      },
+      {
+        "start": 0.46,
+        "end": 0.66,
+        "word": " my"
+      },
+      {
+        "start": 0.66,
+        "end": 1.08,
+        "word": " soul,"
+      },
+      {
+        "start": 1.8,
+        "end": 2.38,
+        "word": " open"
+      },
+      {
+        "start": 2.38,
+        "end": 3.18,
+        "word": " every"
+      },
+      {
+        "start": 3.18,
+        "end": 3.68,
+        "word": " folded"
+      },
+      {
+        "start": 3.68,
+        "end": 4.22,
+        "word": " petal,"
+      },
+      {
+        "start": 5.08,
+        "end": 5.26,
+        "word": " dig"
+      },
+      {
+        "start": 5.26,
+        "end": 5.6,
+        "word": " into"
+      },
+      {
+        "start": 5.6,
+        "end": 5.78,
+        "word": " the"
+      },
+      {
+        "start": 5.78,
+        "end": 6.08,
+        "word": " bark"
+      },
+      {
+        "start": 6.08,
+        "end": 6.26,
+        "word": " of"
+      },
+      {
+        "start": 6.26,
+        "end": 6.44,
+        "word": " my"
+      },
+      {
+        "start": 6.44,
+        "end": 6.98,
+        "word": " strength,"
+      }
+    ]
+  },
+  {
+    "start": 7.94,
+    "end": 15.0,
+    "text": "search the artefacts of my heart, before soaking my body in your eyes and your touch.",
+    "words": [
+      {
+        "start": 7.94,
+        "end": 8.42,
+        "word": " search"
+      },
+      {
+        "start": 8.42,
+        "end": 8.68,
+        "word": " the"
+      },
+      {
+        "start": 8.68,
+        "end": 9.36,
+        "word": " artefacts"
+      },
+      {
+        "start": 9.36,
+        "end": 9.52,
+        "word": " of"
+      },
+      {
+        "start": 9.52,
+        "end": 9.72,
+        "word": " my"
+      },
+      {
+        "start": 9.72,
+        "end": 10.12,
+        "word": " heart,"
+      },
+      {
+        "start": 11.08,
+        "end": 11.64,
+        "word": " before"
+      },
+      {
+        "start": 11.64,
+        "end": 12.06,
+        "word": " soaking"
+      },
+      {
+        "start": 12.06,
+        "end": 12.38,
+        "word": " my"
+      },
+      {
+        "start": 12.38,
+        "end": 12.7,
+        "word": " body"
+      },
+      {
+        "start": 12.7,
+        "end": 12.96,
+        "word": " in"
+      },
+      {
+        "start": 12.96,
+        "end": 13.12,
+        "word": " your"
+      },
+      {
+        "start": 13.12,
+        "end": 13.66,
+        "word": " eyes"
+      },
+      {
+        "start": 13.66,
+        "end": 14.48,
+        "word": " and"
+      },
+      {
+        "start": 14.48,
+        "end": 14.66,
+        "word": " your"
+      },
+      {
+        "start": 14.66,
+        "end": 15.0,
+        "word": " touch."
+      }
+    ]
+  }
+]

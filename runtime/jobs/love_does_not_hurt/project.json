@@ -1,0 +1,68 @@
+{
+  "title": "Love Does Not Hurt",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 79,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "Everyone says love hurts, but that is not true.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Everyone says love hurts, but that is not true."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "Loneliness hurts, rejection hurts, losing someone hurts, envy hurts.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Loneliness hurts, rejection hurts, losing someone hurts, envy hurts."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "Everyone gets these things confused with love.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Everyone gets these things confused with love."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "But in reality,",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "But in reality,"
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "love is the only thing in this world that covers up all pain and makes someone feel",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "love is the only thing in this world that covers up all pain and makes someone feel"
+    },
+    {
+      "id": "scene_006",
+      "duration": 5,
+      "narration": "wonderful again.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "wonderful again."
+    },
+    {
+      "id": "scene_007",
+      "duration": 5,
+      "narration": "Love is the only thing in this world that does not hurt.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Love is the only thing in this world that does not hurt."
+    }
+  ]
+}

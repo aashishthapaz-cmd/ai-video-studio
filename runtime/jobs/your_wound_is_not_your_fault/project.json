@@ -1,0 +1,36 @@
+{
+  "title": "Your Wound Is Not Your Fault",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 115,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "Your wound is not your fault, but your healing is your responsibility.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Your wound is not your fault, but your healing is your responsibility."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "No one can rewrite your past, but you can decide how your story continues.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "No one can rewrite your past, but you can decide how your story continues."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "Heal, so the pain ends with you, not with the people you love.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Heal, so the pain ends with you, not with the people you love."
+    }
+  ]
+}

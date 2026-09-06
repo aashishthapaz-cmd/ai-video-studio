@@ -1,0 +1,252 @@
+[
+  {
+    "start": 0.0,
+    "end": 3.52,
+    "text": "When you give people your time, they think you're always free,",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.12,
+        "word": " When"
+      },
+      {
+        "start": 0.12,
+        "end": 0.22,
+        "word": " you"
+      },
+      {
+        "start": 0.22,
+        "end": 0.4,
+        "word": " give"
+      },
+      {
+        "start": 0.4,
+        "end": 0.72,
+        "word": " people"
+      },
+      {
+        "start": 0.72,
+        "end": 0.92,
+        "word": " your"
+      },
+      {
+        "start": 0.92,
+        "end": 1.32,
+        "word": " time,"
+      },
+      {
+        "start": 1.92,
+        "end": 2.12,
+        "word": " they"
+      },
+      {
+        "start": 2.12,
+        "end": 2.36,
+        "word": " think"
+      },
+      {
+        "start": 2.36,
+        "end": 2.64,
+        "word": " you're"
+      },
+      {
+        "start": 2.64,
+        "end": 3.02,
+        "word": " always"
+      },
+      {
+        "start": 3.02,
+        "end": 3.52,
+        "word": " free,"
+      }
+    ]
+  },
+  {
+    "start": 4.2,
+    "end": 7.1,
+    "text": "but they rarely see how often you show up for them.",
+    "words": [
+      {
+        "start": 4.2,
+        "end": 4.74,
+        "word": " but"
+      },
+      {
+        "start": 4.74,
+        "end": 4.86,
+        "word": " they"
+      },
+      {
+        "start": 4.86,
+        "end": 5.16,
+        "word": " rarely"
+      },
+      {
+        "start": 5.16,
+        "end": 5.54,
+        "word": " see"
+      },
+      {
+        "start": 5.54,
+        "end": 5.76,
+        "word": " how"
+      },
+      {
+        "start": 5.76,
+        "end": 6.1,
+        "word": " often"
+      },
+      {
+        "start": 6.1,
+        "end": 6.32,
+        "word": " you"
+      },
+      {
+        "start": 6.32,
+        "end": 6.54,
+        "word": " show"
+      },
+      {
+        "start": 6.54,
+        "end": 6.76,
+        "word": " up"
+      },
+      {
+        "start": 6.76,
+        "end": 6.9,
+        "word": " for"
+      },
+      {
+        "start": 6.9,
+        "end": 7.1,
+        "word": " them."
+      }
+    ]
+  },
+  {
+    "start": 7.9,
+    "end": 10.78,
+    "text": "Do it enough, and it starts to feel normal,",
+    "words": [
+      {
+        "start": 7.9,
+        "end": 8.08,
+        "word": " Do"
+      },
+      {
+        "start": 8.08,
+        "end": 8.2,
+        "word": " it"
+      },
+      {
+        "start": 8.2,
+        "end": 8.5,
+        "word": " enough,"
+      },
+      {
+        "start": 9.22,
+        "end": 9.5,
+        "word": " and"
+      },
+      {
+        "start": 9.5,
+        "end": 9.62,
+        "word": " it"
+      },
+      {
+        "start": 9.62,
+        "end": 9.86,
+        "word": " starts"
+      },
+      {
+        "start": 9.86,
+        "end": 10.12,
+        "word": " to"
+      },
+      {
+        "start": 10.12,
+        "end": 10.32,
+        "word": " feel"
+      },
+      {
+        "start": 10.32,
+        "end": 10.78,
+        "word": " normal,"
+      }
+    ]
+  },
+  {
+    "start": 11.58,
+    "end": 13.64,
+    "text": "and your value quietly fades away.",
+    "words": [
+      {
+        "start": 11.58,
+        "end": 11.76,
+        "word": " and"
+      },
+      {
+        "start": 11.76,
+        "end": 11.94,
+        "word": " your"
+      },
+      {
+        "start": 11.94,
+        "end": 12.38,
+        "word": " value"
+      },
+      {
+        "start": 12.38,
+        "end": 12.84,
+        "word": " quietly"
+      },
+      {
+        "start": 12.84,
+        "end": 13.28,
+        "word": " fades"
+      },
+      {
+        "start": 13.28,
+        "end": 13.64,
+        "word": " away."
+      }
+    ]
+  },
+  {
+    "start": 14.22,
+    "end": 16.02,
+    "text": "That's the harsh reality of life.",
+    "words": [
+      {
+        "start": 14.22,
+        "end": 14.64,
+        "word": " That's"
+      },
+      {
+        "start": 14.64,
+        "end": 14.78,
+        "word": " the"
+      },
+      {
+        "start": 14.78,
+        "end": 15.02,
+        "word": " harsh"
+      },
+      {
+        "start": 15.02,
+        "end": 15.52,
+        "word": " reality"
+      },
+      {
+        "start": 15.52,
+        "end": 15.78,
+        "word": " of"
+      },
+      {
+        "start": 15.78,
+        "end": 16.02,
+        "word": " life."
+      }
+    ]
+  }
+]

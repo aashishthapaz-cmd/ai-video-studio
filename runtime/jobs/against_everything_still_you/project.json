@@ -1,0 +1,36 @@
+{
+  "title": "Against Everything, Still You",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 81,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "I love you against reason, against promise, against peace, against hope, against happiness,",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I love you against reason, against promise, against peace, against hope, against happiness,"
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "against all discouragement that could be, and still, if I had to choose again,",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "against all discouragement that could be, and still, if I had to choose again,"
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "I choose you every time.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I choose you every time."
+    }
+  ]
+}

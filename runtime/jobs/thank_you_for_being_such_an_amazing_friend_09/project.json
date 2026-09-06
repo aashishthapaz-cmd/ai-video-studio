@@ -1,0 +1,57 @@
+{
+  "title": "Thank You For Being Such An Amazing Friend",
+  "style_bible": {
+    "emotional_arc": "Gratitude, appreciation, warmth, support, and companionship.",
+    "palette": "charcoal-teal, navy-shadows, amber-accents",
+    "lighting": "moody twilight/night atmosphere with soft lantern light",
+    "motif": "path through a forest, old book, windowpane, raindrops, tree branches",
+    "continuity": "Sparse, poetic, readable visual world suitable for slow Ken Burns motion.",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "Thank you for being such an amazing friend, the kind I could never have asked for.",
+      "prompt": "path through a dense forest under moonlight with faint amber light filtering through trees, soft focus on a lone traveler walking steadily forward, charcoal-teal — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "Thank you for listening to my stories and my random rants.",
+      "prompt": "old leather-bound book resting on a wooden table with raindrops gently falling, amber light illuminating the pages, charcoal-teal shadows, close symbolic detail, heavy shadow — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "Thank you for always being there when I needed someone to talk to.",
+      "prompt": "windowpane with raindrops creating patterns on the glass, a figure inside sitting by a lamp, amber light casting warm shadows, charcoal-teal background, low-angle walking — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "I'm so lucky to have a friend like you.",
+      "prompt": "a small wooden boat floating on calm water under a starry sky, amber light from the lantern inside casting a warm glow, charcoal-teal shadows — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_005",
+      "duration": 4.0,
+      "narration": "Just remember, I'm always here if you ever need a shoulder to lean on.",
+      "prompt": "a weathered wooden bench under an old tree with raindrops hanging from its branches, amber light from the setting sun casting long shadows, charcoal-teal — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 97,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

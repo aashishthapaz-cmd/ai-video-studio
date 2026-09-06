@@ -1,0 +1,52 @@
+{
+  "title": "Japanese Legend",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 90,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "There's a Japanese legend that says,",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "There's a Japanese legend that says,"
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "crying is how your eyes speak when your heart is too broken for words.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "crying is how your eyes speak when your heart is too broken for words."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "And every tear you hide becomes a story your soul still carries.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "And every tear you hide becomes a story your soul still carries."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "So let them fall, let them speak.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "So let them fall, let them speak."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "They're just waiting for someone, gentle enough to understand.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "They're just waiting for someone, gentle enough to understand."
+    }
+  ]
+}

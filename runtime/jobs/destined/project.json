@@ -1,0 +1,52 @@
+{
+  "title": "Destined",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 34,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "There is a Japanese legend that says two souls are tied together.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "There is a Japanese legend that says two souls are tied together."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "Not by luck, not by timing, not by coincidence, but by an invisible red thread that fate refuses to break.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Not by luck, not by timing, not by coincidence, but by an invisible red thread that fate refuses to break."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "They'll be tested by distance, by silence, by time.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "They'll be tested by distance, by silence, by time."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "But when fate finally pulls them close, they won't feel like strangers.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "But when fate finally pulls them close, they won't feel like strangers."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "They'll arrive like peace, like a heartbeat their souls already knew.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "They'll arrive like peace, like a heartbeat their souls already knew."
+    }
+  ]
+}

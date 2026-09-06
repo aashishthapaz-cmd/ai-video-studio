@@ -1,0 +1,48 @@
+{
+  "title": "Some People Were Only Sent To Teach You",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 94,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4,
+      "narration": "When someone isn't right for you, life will keep using them to hurt you, until you're strong enough to let go.",
+      "prompt": "heartbreak and release, open door in rain, wide cinematic establishing frame with tiny silhouette at lower right, high rooftop view, subject in lower corner, diagonal beam of ochre light, vibrant indigo and ember orange, heartbreak and departure topic, wet asphalt reflections, cold cyan shadows, pearl gray rain, rust-red wound of light, layered foreground middle-ground background, asymmetrical frame, new location, new subject, new viewpoint, new light source, new narrative moment, not a portrait | dark hand-inked vintage graphic-novel illustration, irregular black contours, dense directional hatching, scratchy weather lines, rough paper grain, distressed print texture, cool charcoal and blue-green shadows, disciplined amber, ochre, rust, or muted-red accent light, strong lighting contrast, cinematic vertical 9:16, same artistic language as reference only, not the same objects or composition, no text, no writing. New location, new subject, new layout, new camera angle, new light source, new foreground middle-ground background, not a portrait, not a copied reference layout. No text, no writing, no signs, no labels, no logos, no watermark.",
+      "motion": "slow_push_in",
+      "seed": 147304223,
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_002",
+      "duration": 4,
+      "narration": "And one day you'll realize,",
+      "prompt": "poetic reflective mood, two cups left apart, macro symbolic close-up with no face, object filling left foreground, low ground-level view, foreground object huge, distant silhouette small, electric teal and gold, heartbreak and departure topic, wet asphalt reflections, cold cyan shadows, pearl gray rain, rust-red wound of light, layered foreground middle-ground background, asymmetrical frame, new location, new subject, new viewpoint, new light source, new narrative moment, not a portrait, not a copied reference | dark hand-inked vintage graphic-novel illustration, irregular black contours, dense directional hatching, scratchy weather lines, rough paper grain, distressed print texture, cool charcoal and blue-green shadows, disciplined amber, ochre, rust, or muted-red accent light, strong lighting contrast, cinematic vertical 9:16, same artistic language as reference only, not the same objects or composition, no text, no writing. New location, new subject, new layout, new camera angle, new light source, new foreground middle-ground background, not a portrait, not a copied reference layout. No text, no writing, no signs, no labels, no logos, no watermark.",
+      "motion": "pan_right",
+      "seed": 538505731,
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_003",
+      "duration": 4,
+      "narration": "they were only sent to teach you that losing someone is how you find yourself.",
+      "prompt": "poetic reflective mood, suitcase by threshold, low-angle dramatic silhouette beside a new landmark, overhead still-life arrangement, circular shadows, off-center focal point, coral, saffron, and midnight blue, heartbreak and departure topic, wet asphalt reflections, cold cyan shadows, pearl gray rain, rust-red wound of light, layered foreground middle-ground background, asymmetrical frame, new location, new subject, new viewpoint, new light source, new narrative moment, not a portrait, not a copied reference layout, vibrant cinematic color | dark hand-inked vintage graphic-novel illustration, irregular black contours, dense directional hatching, scratchy weather lines, rough paper grain, distressed print texture, cool charcoal and blue-green shadows, disciplined amber, ochre, rust, or muted-red accent light, strong lighting contrast, cinematic vertical 9:16, same artistic language as reference only, not the same objects or composition, no text, no writing. New location, new subject, new layout, new camera angle, new light source, new foreground middle-ground background, not a portrait, not a copied reference layout. No text, no writing, no signs, no labels, no logos, no watermark.",
+      "motion": "slow_push_in",
+      "seed": 60232465,
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    }
+  ],
+  "style_bible": {
+    "art_direction": "heartbreak and departure topic, wet asphalt reflections, cold cyan shadows, pearl gray rain, rust-red wound of light",
+    "negative_prompt": "text, words, letters, numbers, quotation, caption, typography, logo, watermark, sign, label, poster, menu, readable book cover, readable book spine, license plate, road lettering, writing-like symbols, blank text area, girl portrait, female portrait, close-up face, repeated face, same lonely person, same storefront layout, same balcony, copied reference composition, copied architecture, stock photo, photorealism, CGI, 3D render, robot, gore, clutter"
+  },
+  "model": "offline-fallback",
+  "voice_tone": "warm, deep, emotional spoken-word delivery",
+  "pacing": "deliberate phrasing with a pause after each line",
+  "image_style": "dark hand-inked vintage graphic-novel illustration, irregular black contours, dense hatching, rough paper grain, distressed print texture, cool charcoal and blue-green shadows, disciplined amber or rust accent light, fresh original composition",
+  "animation_style": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing"
+}

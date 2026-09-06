@@ -1,0 +1,32 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: ProCaption,Arial,72,&H00FFFFFF,&H0000D7FF,&H00111111,&HAA000000,-1,0,0,0,100,100,0,0,3,3,0,2,70,70,210,1
+Style: PoetrySmall,Cormorant Garamond,44,&H0034E7FF,&H000000FF,&HAA070707,&H00000000,0,1,0,0,88,100,0,0,1,1.7,0,5,70,70,0,1
+Style: ReferenceCursive,Segoe Print,78,&H00FFFFFF,&H000000FF,&HC0000000,&H00000000,0,1,0,0,96,100,0,0,1,1.2,1.9,5,90,90,0,1
+Style: ReferenceMark,Segoe Script,22,&H00FFFFFF,&H000000FF,&HAA000000,&H00000000,0,1,0,0,88,100,0,0,1,0.7,1.0,5,40,40,0,1
+Style: NepaliReference,Noto Sans Devanagari,68,&H00FFFFFF,&H000000FF,&HC0000000,&H00000000,-1,0,0,0,100,100,0,0,1,1.3,1.9,5,90,90,0,1
+Style: NepaliCaption,Noto Sans Devanagari,58,&H00FFFFFF,&H000000FF,&HAA070707,&H00000000,-1,0,0,0,100,100,0,0,1,1.7,1.2,5,70,70,0,1
+Style: CreativeScript,Cormorant Garamond,58,&H00FFFFFF,&H000000FF,&HD0000000,&H00000000,0,1,0,0,100,100,0,0,1,0.45,2.1,5,60,60,0,1
+Style: CreativeBold,Arial,42,&H00FFFFFF,&H000000FF,&HE0000000,&H00000000,0,0,0,0,92,100,0,0,1,1.55,3.1,5,60,60,0,1
+Style: CreativeYellow,Arial,78,&H0034E7FF,&H000000FF,&HE0000000,&H00000000,-1,0,0,0,90,100,0,0,1,2.0,4.0,5,60,60,0,1
+Style: CreativeTiny,Arial,32,&H00FFFFFF,&H000000FF,&HE0000000,&H00000000,0,0,0,0,90,100,0,0,1,1.3,2.7,5,60,60,0,1
+Style: TinyCredit,Arial,26,&H99FFFFFF,&H000000FF,&H55000000,&H00000000,0,0,0,0,100,100,0,0,1,1,0,1,40,40,40,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 1,0:00:00.00,0:00:02.48,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k38}When {\k12}the {\k21}right {\k43}person {\k40}enters {\k30}your {\k43}life
+Dialogue: 1,0:00:02.85,0:00:03.98,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k20}it's {\k14}not {\k21}just {\k37}love
+Dialogue: 1,0:00:04.29,0:00:05.19,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k18}it's {\k53}transformation
+Dialogue: 1,0:00:05.92,0:00:08.08,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k24}They {\k29}don't {\k12}bring {\k66}confusion {\k31}or {\k34}chaos
+Dialogue: 1,0:00:08.51,0:00:09.64,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k14}They {\k32}bring {\k48}calm
+Dialogue: 1,0:00:10.03,0:00:11.67,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k14}They {\k25}don't {\k30}focus {\k25}on {\k11}your {\k38}past
+Dialogue: 1,0:00:11.88,0:00:13.87,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k23}They {\k28}see {\k17}the {\k33}strength {\k24}in {\k16}your {\k37}scars
+Dialogue: 1,0:00:14.17,0:00:16.60,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k14}They {\k41}inspire {\k32}you {\k13}to\N{\k33}heal {\k46}and {\k14}to {\k28}grow
+Dialogue: 1,0:00:16.83,0:00:18.44,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k28}It's {\k14}not {\k23}just {\k16}a {\k60}relationship
+Dialogue: 1,0:00:18.73,0:00:21.64,ReferenceCursive,,0,0,0,,{\pos(540,950)\fad(110,120)\blur0.2}{\k26}It's {\k8}a {\k56}partnership {\k33}in\N{\k41}becoming {\k28}your {\k35}best {\k44}self

@@ -1,0 +1,15 @@
+{
+  "ollama_url": "http://127.0.0.1:11434",
+  "ollama_model": "gemma3:4b",
+  "ollama_vision_model": "gemma3:4b",
+  "comfyui_url": "http://127.0.0.1:8188",
+  "tts": "windows",
+  "whisper_model": "small",
+  "image_workflow": "workflows/txt2img_api.json",
+  "comfyui_launch_path": "D:\\ComfyUI_windows_portable_nvidia\\ComfyUI_windows_portable\\run_nvidia_gpu.bat",
+  "comfyui_launch_args": "",
+  "comfyui_workdir": "D:\\ComfyUI_windows_portable_nvidia\\ComfyUI_windows_portable",
+  "comfyui_python": "",
+  "artwork_prompt_model": "qwen2.5:7b",
+  "artwork_prompt_model_order": "qwen2.5:7b,scriptflow-qwen:latest,gemma3:4b,stickman-qwen:latest"
+}

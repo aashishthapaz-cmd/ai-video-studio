@@ -1,0 +1,15 @@
+ERROR: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>
+ComfyUI generated scene_001
+ComfyUI generated scene_002
+ComfyUI generated scene_003
+{"output": "D:\\Auto video Generator\\Output\\Never Get Too Attached.mp4", "project_output": "D:\\Auto video Generator\\runtime\\jobs\\never_get_too_attached\\final_voxcpm_match.mp4", "scenes": 3, "caption_visible": true, "renderer": "Nepali TTS reference system"}
+ComfyUI generated scene_001
+ComfyUI generated scene_002
+ComfyUI generated scene_003
+ComfyUI generated scene_004
+{"output": "D:\\Auto video Generator\\Output\\Never Get Too Attached.mp4", "project_output": "D:\\Auto video Generator\\runtime\\jobs\\never_get_too_attached\\final_voxcpm_match.mp4", "scenes": 4, "caption_visible": true, "renderer": "Nepali TTS reference system"}
+ComfyUI generated scene_001
+ComfyUI generated scene_002
+ComfyUI generated scene_003
+ComfyUI generated scene_004
+{"output": "D:\\Auto video Generator\\Output\\Never Get Too Attached.mp4", "project_output": "D:\\Auto video Generator\\runtime\\jobs\\never_get_too_attached\\final_voxcpm_match.mp4", "scenes": 4, "caption_visible": true, "renderer": "Nepali TTS reference system"}

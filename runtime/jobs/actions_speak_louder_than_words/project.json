@@ -1,0 +1,60 @@
+{
+  "title": "Actions Speak Louder Than Words",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 18,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "Talk is cheap, and empty promises are hard to keep.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Talk is cheap, and empty promises are hard to keep."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "But a genuine effort will always be a genuine effort.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "But a genuine effort will always be a genuine effort."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "Words are just a disguise.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Words are just a disguise."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "Actions are where the truth lies.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Actions are where the truth lies."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "Because it's easy to talk the talk.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Because it's easy to talk the talk."
+    },
+    {
+      "id": "scene_006",
+      "duration": 5,
+      "narration": "But it takes effort to walk the walk.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "But it takes effort to walk the walk."
+    }
+  ]
+}

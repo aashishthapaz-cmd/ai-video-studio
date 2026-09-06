@@ -1,0 +1,52 @@
+{
+  "title": "You Are My Everything",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 26,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "You are my everything, my best friend, my safe space, my favorite person.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "You are my everything, my best friend, my safe space, my favorite person."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "I love how you understand me, my quietest thoughts, my loudest dreams, my silliest fears.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I love how you understand me, my quietest thoughts, my loudest dreams, my silliest fears."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "Even when I make absolutely no sense, even when I can't find the right words.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Even when I make absolutely no sense, even when I can't find the right words."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "You always know exactly what my heart needs.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "You always know exactly what my heart needs."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "That is why I will love you, and you will always be my everything.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "That is why I will love you, and you will always be my everything."
+    }
+  ]
+}

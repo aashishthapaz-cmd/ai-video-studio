@@ -1,0 +1,208 @@
+[
+  {
+    "start": 0.0,
+    "end": 4.58,
+    "text": "In the wrong place, even your very best will never feel like enough.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.16,
+        "word": " In"
+      },
+      {
+        "start": 0.16,
+        "end": 0.24,
+        "word": " the"
+      },
+      {
+        "start": 0.24,
+        "end": 0.46,
+        "word": " wrong"
+      },
+      {
+        "start": 0.46,
+        "end": 0.94,
+        "word": " place,"
+      },
+      {
+        "start": 1.8,
+        "end": 2.38,
+        "word": " even"
+      },
+      {
+        "start": 2.38,
+        "end": 2.58,
+        "word": " your"
+      },
+      {
+        "start": 2.58,
+        "end": 2.86,
+        "word": " very"
+      },
+      {
+        "start": 2.86,
+        "end": 3.28,
+        "word": " best"
+      },
+      {
+        "start": 3.28,
+        "end": 3.48,
+        "word": " will"
+      },
+      {
+        "start": 3.48,
+        "end": 3.72,
+        "word": " never"
+      },
+      {
+        "start": 3.72,
+        "end": 4.02,
+        "word": " feel"
+      },
+      {
+        "start": 4.02,
+        "end": 4.24,
+        "word": " like"
+      },
+      {
+        "start": 4.24,
+        "end": 4.58,
+        "word": " enough."
+      }
+    ]
+  },
+  {
+    "start": 5.56,
+    "end": 9.7,
+    "text": "But in the right place, your mere presence will be celebrated.",
+    "words": [
+      {
+        "start": 5.56,
+        "end": 6.12,
+        "word": " But"
+      },
+      {
+        "start": 6.12,
+        "end": 6.24,
+        "word": " in"
+      },
+      {
+        "start": 6.24,
+        "end": 6.34,
+        "word": " the"
+      },
+      {
+        "start": 6.34,
+        "end": 6.54,
+        "word": " right"
+      },
+      {
+        "start": 6.54,
+        "end": 7.02,
+        "word": " place,"
+      },
+      {
+        "start": 7.9,
+        "end": 8.06,
+        "word": " your"
+      },
+      {
+        "start": 8.06,
+        "end": 8.26,
+        "word": " mere"
+      },
+      {
+        "start": 8.26,
+        "end": 8.66,
+        "word": " presence"
+      },
+      {
+        "start": 8.66,
+        "end": 8.98,
+        "word": " will"
+      },
+      {
+        "start": 8.98,
+        "end": 9.12,
+        "word": " be"
+      },
+      {
+        "start": 9.12,
+        "end": 9.7,
+        "word": " celebrated."
+      }
+    ]
+  },
+  {
+    "start": 10.98,
+    "end": 16.14,
+    "text": "The same person can feel ordinary in one place and extraordinary in another.",
+    "words": [
+      {
+        "start": 10.98,
+        "end": 11.1,
+        "word": " The"
+      },
+      {
+        "start": 11.1,
+        "end": 11.36,
+        "word": " same"
+      },
+      {
+        "start": 11.36,
+        "end": 11.82,
+        "word": " person"
+      },
+      {
+        "start": 11.82,
+        "end": 12.06,
+        "word": " can"
+      },
+      {
+        "start": 12.06,
+        "end": 12.3,
+        "word": " feel"
+      },
+      {
+        "start": 12.3,
+        "end": 12.82,
+        "word": " ordinary"
+      },
+      {
+        "start": 12.82,
+        "end": 13.1,
+        "word": " in"
+      },
+      {
+        "start": 13.1,
+        "end": 13.26,
+        "word": " one"
+      },
+      {
+        "start": 13.26,
+        "end": 13.72,
+        "word": " place"
+      },
+      {
+        "start": 13.72,
+        "end": 14.86,
+        "word": " and"
+      },
+      {
+        "start": 14.86,
+        "end": 15.38,
+        "word": " extraordinary"
+      },
+      {
+        "start": 15.38,
+        "end": 15.86,
+        "word": " in"
+      },
+      {
+        "start": 15.86,
+        "end": 16.14,
+        "word": " another."
+      }
+    ]
+  }
+]

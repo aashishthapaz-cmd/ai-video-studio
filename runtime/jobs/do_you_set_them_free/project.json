@@ -1,0 +1,60 @@
+{
+  "title": "Do You Set Them Free",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 67,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "Can you remember who you were before the world told you who you should be?",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Can you remember who you were before the world told you who you should be?"
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "Before fear had a voice, before doubt took control,",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Before fear had a voice, before doubt took control,"
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "before you learned to shrink just to fit a role.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "before you learned to shrink just to fit a role."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "Do you still hear that version of you?",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Do you still hear that version of you?"
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "Or have you already buried them?",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Or have you already buried them?"
+    },
+    {
+      "id": "scene_006",
+      "duration": 5,
+      "narration": "And if they're still there, will you go back and set them free?",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "And if they're still there, will you go back and set them free?"
+    }
+  ]
+}

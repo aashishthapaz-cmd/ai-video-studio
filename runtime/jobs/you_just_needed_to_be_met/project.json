@@ -1,0 +1,68 @@
+{
+  "title": "You Just Needed To Be Met",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 41,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "You spend years believing you are too difficult to hold.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "You spend years believing you are too difficult to hold."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "So you hide your chaos.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "So you hide your chaos."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "You learn to carry your storms alone.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "You learn to carry your storms alone."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "Until the day a gentle soul sees the parts of you, you were afraid would make them leave.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Until the day a gentle soul sees the parts of you, you were afraid would make them leave."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "And instead of stepping back, they move closer.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "And instead of stepping back, they move closer."
+    },
+    {
+      "id": "scene_006",
+      "duration": 5,
+      "narration": "And suddenly you realize you never needed to be fixed.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "And suddenly you realize you never needed to be fixed."
+    },
+    {
+      "id": "scene_007",
+      "duration": 5,
+      "narration": "You just needed to be met.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "You just needed to be met."
+    }
+  ]
+}

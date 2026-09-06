@@ -1,0 +1,57 @@
+{
+  "title": "I'm Not Born To Impress Others",
+  "style_bible": {
+    "emotional_arc": "Resilient self-acceptance, defiance against societal expectations.",
+    "palette": "Deep charcoal-teal/navy with amber and rust-red accents",
+    "lighting": "Moody twilight/night atmosphere with soft ambient light",
+    "motif": "Natural elements like trees, paths, and water reflecting the inner journey of self-acceptance",
+    "continuity": "Sparse, poetic, readable visual world suitable for slow Ken Burns motion",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "I don't care what others think about me.",
+      "prompt": "A lone figure standing by a path under the twilight sky, with trees silhouetted in the background, amber light filtering through the branches, wide — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "I'm not born to impress others.",
+      "prompt": "A reflection of a person in calm water, with trees and distant mountains visible on the opposite shore, rust-red accents highlighting the ripples, close — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "Every mask eventually wears you down.",
+      "prompt": "A close-up of a partially peeled-off mask, with the remaining fabric hanging loosely on a tree branch, amber light casting shadows over it, low-angle — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "Every honest soul faces criticism.",
+      "prompt": "A figure walking along a path under the twilight sky, with a faint lantern light visible ahead, amber and rust-red accents highlighting — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_005",
+      "duration": 4.0,
+      "narration": "I'd rather be misunderstood for being real, than admired for being someone I'm not.",
+      "prompt": "A figure sitting by a calm river at twilight, holding an open book with the moonlight casting pale cream light on their face — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 110,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

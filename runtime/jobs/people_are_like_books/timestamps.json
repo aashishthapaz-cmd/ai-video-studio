@@ -1,0 +1,198 @@
+[
+  {
+    "start": 0.0,
+    "end": 6.1,
+    "text": "People are like books. Some deceive you with their cover. Others surprise you with their content.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.22,
+        "word": " People"
+      },
+      {
+        "start": 0.22,
+        "end": 0.42,
+        "word": " are"
+      },
+      {
+        "start": 0.42,
+        "end": 0.56,
+        "word": " like"
+      },
+      {
+        "start": 0.56,
+        "end": 0.96,
+        "word": " books."
+      },
+      {
+        "start": 1.9,
+        "end": 2.1,
+        "word": " Some"
+      },
+      {
+        "start": 2.1,
+        "end": 2.54,
+        "word": " deceive"
+      },
+      {
+        "start": 2.54,
+        "end": 2.76,
+        "word": " you"
+      },
+      {
+        "start": 2.76,
+        "end": 2.9,
+        "word": " with"
+      },
+      {
+        "start": 2.9,
+        "end": 3.06,
+        "word": " their"
+      },
+      {
+        "start": 3.06,
+        "end": 3.36,
+        "word": " cover."
+      },
+      {
+        "start": 4.28,
+        "end": 4.5,
+        "word": " Others"
+      },
+      {
+        "start": 4.5,
+        "end": 4.96,
+        "word": " surprise"
+      },
+      {
+        "start": 4.96,
+        "end": 5.3,
+        "word": " you"
+      },
+      {
+        "start": 5.3,
+        "end": 5.5,
+        "word": " with"
+      },
+      {
+        "start": 5.5,
+        "end": 5.62,
+        "word": " their"
+      },
+      {
+        "start": 5.62,
+        "end": 6.1,
+        "word": " content."
+      }
+    ]
+  },
+  {
+    "start": 7.3,
+    "end": 12.96,
+    "text": "So don't chase appearances. Time always reveals what words cannot.",
+    "words": [
+      {
+        "start": 7.3,
+        "end": 7.68,
+        "word": " So"
+      },
+      {
+        "start": 7.68,
+        "end": 8.02,
+        "word": " don't"
+      },
+      {
+        "start": 8.02,
+        "end": 8.26,
+        "word": " chase"
+      },
+      {
+        "start": 8.26,
+        "end": 8.82,
+        "word": " appearances."
+      },
+      {
+        "start": 10.34,
+        "end": 10.86,
+        "word": " Time"
+      },
+      {
+        "start": 10.86,
+        "end": 11.26,
+        "word": " always"
+      },
+      {
+        "start": 11.26,
+        "end": 11.84,
+        "word": " reveals"
+      },
+      {
+        "start": 11.84,
+        "end": 12.16,
+        "word": " what"
+      },
+      {
+        "start": 12.16,
+        "end": 12.62,
+        "word": " words"
+      },
+      {
+        "start": 12.62,
+        "end": 12.96,
+        "word": " cannot."
+      }
+    ]
+  },
+  {
+    "start": 14.68,
+    "end": 17.64,
+    "text": "And the right people will prove themselves without effort.",
+    "words": [
+      {
+        "start": 14.68,
+        "end": 14.92,
+        "word": " And"
+      },
+      {
+        "start": 14.92,
+        "end": 15.02,
+        "word": " the"
+      },
+      {
+        "start": 15.02,
+        "end": 15.22,
+        "word": " right"
+      },
+      {
+        "start": 15.22,
+        "end": 15.64,
+        "word": " people"
+      },
+      {
+        "start": 15.64,
+        "end": 15.96,
+        "word": " will"
+      },
+      {
+        "start": 15.96,
+        "end": 16.26,
+        "word": " prove"
+      },
+      {
+        "start": 16.26,
+        "end": 16.78,
+        "word": " themselves"
+      },
+      {
+        "start": 16.78,
+        "end": 17.22,
+        "word": " without"
+      },
+      {
+        "start": 17.22,
+        "end": 17.64,
+        "word": " effort."
+      }
+    ]
+  }
+]

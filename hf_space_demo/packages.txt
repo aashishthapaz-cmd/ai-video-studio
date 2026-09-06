@@ -1,0 +1,5 @@
+ffmpeg
+fonts-noto-core
+fonts-noto-cjk
+fonts-noto-extra
+fonts-dejavu-core

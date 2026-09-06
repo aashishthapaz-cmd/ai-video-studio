@@ -1,0 +1,44 @@
+{
+  "title": "When Autumn Comes",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 93,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "When people fall in love with someone's flowers, but not their roots,",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "When people fall in love with someone's flowers, but not their roots,"
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "they don't know what to do when autumn comes.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "they don't know what to do when autumn comes."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "Loving someone when they're blooming is easy, but staying when they're breaking.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Loving someone when they're blooming is easy, but staying when they're breaking."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "That's love.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "That's love."
+    }
+  ]
+}

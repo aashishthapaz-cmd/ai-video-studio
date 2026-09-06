@@ -1,0 +1,253 @@
+[
+  {
+    "start": 0.0,
+    "end": 6.78,
+    "text": "Maybe it's okay that I lost you in this life, but I still keep hoping that somewhere in another",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.24,
+        "word": " Maybe"
+      },
+      {
+        "start": 0.24,
+        "end": 0.5,
+        "word": " it's"
+      },
+      {
+        "start": 0.5,
+        "end": 0.78,
+        "word": " okay"
+      },
+      {
+        "start": 0.78,
+        "end": 1.24,
+        "word": " that"
+      },
+      {
+        "start": 1.24,
+        "end": 1.36,
+        "word": " I"
+      },
+      {
+        "start": 1.36,
+        "end": 1.58,
+        "word": " lost"
+      },
+      {
+        "start": 1.58,
+        "end": 1.8,
+        "word": " you"
+      },
+      {
+        "start": 1.8,
+        "end": 1.92,
+        "word": " in"
+      },
+      {
+        "start": 1.92,
+        "end": 2.1,
+        "word": " this"
+      },
+      {
+        "start": 2.1,
+        "end": 2.5,
+        "word": " life,"
+      },
+      {
+        "start": 3.36,
+        "end": 3.9,
+        "word": " but"
+      },
+      {
+        "start": 3.9,
+        "end": 4.02,
+        "word": " I"
+      },
+      {
+        "start": 4.02,
+        "end": 4.3,
+        "word": " still"
+      },
+      {
+        "start": 4.3,
+        "end": 4.58,
+        "word": " keep"
+      },
+      {
+        "start": 4.58,
+        "end": 5.02,
+        "word": " hoping"
+      },
+      {
+        "start": 5.02,
+        "end": 5.72,
+        "word": " that"
+      },
+      {
+        "start": 5.72,
+        "end": 6.14,
+        "word": " somewhere"
+      },
+      {
+        "start": 6.14,
+        "end": 6.52,
+        "word": " in"
+      },
+      {
+        "start": 6.52,
+        "end": 6.78,
+        "word": " another"
+      }
+    ]
+  },
+  {
+    "start": 6.78,
+    "end": 12.92,
+    "text": "lifetime I'll find you again, and in that lifetime I'll never let you go.",
+    "words": [
+      {
+        "start": 6.78,
+        "end": 7.38,
+        "word": " lifetime"
+      },
+      {
+        "start": 7.38,
+        "end": 8.1,
+        "word": " I'll"
+      },
+      {
+        "start": 8.1,
+        "end": 8.36,
+        "word": " find"
+      },
+      {
+        "start": 8.36,
+        "end": 8.62,
+        "word": " you"
+      },
+      {
+        "start": 8.62,
+        "end": 9.04,
+        "word": " again,"
+      },
+      {
+        "start": 10.0,
+        "end": 10.32,
+        "word": " and"
+      },
+      {
+        "start": 10.32,
+        "end": 10.48,
+        "word": " in"
+      },
+      {
+        "start": 10.48,
+        "end": 10.66,
+        "word": " that"
+      },
+      {
+        "start": 10.66,
+        "end": 11.24,
+        "word": " lifetime"
+      },
+      {
+        "start": 11.24,
+        "end": 11.92,
+        "word": " I'll"
+      },
+      {
+        "start": 11.92,
+        "end": 12.14,
+        "word": " never"
+      },
+      {
+        "start": 12.14,
+        "end": 12.38,
+        "word": " let"
+      },
+      {
+        "start": 12.38,
+        "end": 12.56,
+        "word": " you"
+      },
+      {
+        "start": 12.56,
+        "end": 12.92,
+        "word": " go."
+      }
+    ]
+  },
+  {
+    "start": 14.04,
+    "end": 18.86,
+    "text": "We'll hold hands and walk together in peace, never to be parted again.",
+    "words": [
+      {
+        "start": 14.04,
+        "end": 14.34,
+        "word": " We'll"
+      },
+      {
+        "start": 14.34,
+        "end": 14.56,
+        "word": " hold"
+      },
+      {
+        "start": 14.56,
+        "end": 15.0,
+        "word": " hands"
+      },
+      {
+        "start": 15.0,
+        "end": 15.22,
+        "word": " and"
+      },
+      {
+        "start": 15.22,
+        "end": 15.44,
+        "word": " walk"
+      },
+      {
+        "start": 15.44,
+        "end": 15.86,
+        "word": " together"
+      },
+      {
+        "start": 15.86,
+        "end": 16.1,
+        "word": " in"
+      },
+      {
+        "start": 16.1,
+        "end": 16.54,
+        "word": " peace,"
+      },
+      {
+        "start": 17.36,
+        "end": 17.64,
+        "word": " never"
+      },
+      {
+        "start": 17.64,
+        "end": 17.98,
+        "word": " to"
+      },
+      {
+        "start": 17.98,
+        "end": 18.12,
+        "word": " be"
+      },
+      {
+        "start": 18.12,
+        "end": 18.6,
+        "word": " parted"
+      },
+      {
+        "start": 18.6,
+        "end": 18.86,
+        "word": " again."
+      }
+    ]
+  }
+]

@@ -1,0 +1,274 @@
+[
+  {
+    "start": 0.0,
+    "end": 3.2,
+    "text": "We suffer more in imagination than in reality.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.16,
+        "word": " We"
+      },
+      {
+        "start": 0.16,
+        "end": 0.52,
+        "word": " suffer"
+      },
+      {
+        "start": 0.52,
+        "end": 0.94,
+        "word": " more"
+      },
+      {
+        "start": 0.94,
+        "end": 1.2,
+        "word": " in"
+      },
+      {
+        "start": 1.2,
+        "end": 1.72,
+        "word": " imagination"
+      },
+      {
+        "start": 1.72,
+        "end": 2.56,
+        "word": " than"
+      },
+      {
+        "start": 2.56,
+        "end": 2.7,
+        "word": " in"
+      },
+      {
+        "start": 2.7,
+        "end": 3.2,
+        "word": " reality."
+      }
+    ]
+  },
+  {
+    "start": 4.44,
+    "end": 6.76,
+    "text": "We live inside our heads all the time.",
+    "words": [
+      {
+        "start": 4.44,
+        "end": 4.68,
+        "word": " We"
+      },
+      {
+        "start": 4.68,
+        "end": 4.92,
+        "word": " live"
+      },
+      {
+        "start": 4.92,
+        "end": 5.38,
+        "word": " inside"
+      },
+      {
+        "start": 5.38,
+        "end": 5.62,
+        "word": " our"
+      },
+      {
+        "start": 5.62,
+        "end": 5.96,
+        "word": " heads"
+      },
+      {
+        "start": 5.96,
+        "end": 6.3,
+        "word": " all"
+      },
+      {
+        "start": 6.3,
+        "end": 6.44,
+        "word": " the"
+      },
+      {
+        "start": 6.44,
+        "end": 6.76,
+        "word": " time."
+      }
+    ]
+  },
+  {
+    "start": 7.92,
+    "end": 10.46,
+    "text": "It doesn't matter what the reality actually is.",
+    "words": [
+      {
+        "start": 7.92,
+        "end": 8.08,
+        "word": " It"
+      },
+      {
+        "start": 8.08,
+        "end": 8.32,
+        "word": " doesn't"
+      },
+      {
+        "start": 8.32,
+        "end": 8.62,
+        "word": " matter"
+      },
+      {
+        "start": 8.62,
+        "end": 8.96,
+        "word": " what"
+      },
+      {
+        "start": 8.96,
+        "end": 9.12,
+        "word": " the"
+      },
+      {
+        "start": 9.12,
+        "end": 9.54,
+        "word": " reality"
+      },
+      {
+        "start": 9.54,
+        "end": 10.06,
+        "word": " actually"
+      },
+      {
+        "start": 10.06,
+        "end": 10.46,
+        "word": " is."
+      }
+    ]
+  },
+  {
+    "start": 11.82,
+    "end": 14.02,
+    "text": "The problem is, we overthink everything.",
+    "words": [
+      {
+        "start": 11.82,
+        "end": 11.98,
+        "word": " The"
+      },
+      {
+        "start": 11.98,
+        "end": 12.26,
+        "word": " problem"
+      },
+      {
+        "start": 12.26,
+        "end": 12.64,
+        "word": " is,"
+      },
+      {
+        "start": 12.84,
+        "end": 13.0,
+        "word": " we"
+      },
+      {
+        "start": 13.0,
+        "end": 13.5,
+        "word": " overthink"
+      },
+      {
+        "start": 13.5,
+        "end": 14.02,
+        "word": " everything."
+      }
+    ]
+  },
+  {
+    "start": 15.74,
+    "end": 17.96,
+    "text": "Most of our pain doesn't come from what happens,",
+    "words": [
+      {
+        "start": 15.74,
+        "end": 16.0,
+        "word": " Most"
+      },
+      {
+        "start": 16.0,
+        "end": 16.16,
+        "word": " of"
+      },
+      {
+        "start": 16.16,
+        "end": 16.28,
+        "word": " our"
+      },
+      {
+        "start": 16.28,
+        "end": 16.54,
+        "word": " pain"
+      },
+      {
+        "start": 16.54,
+        "end": 16.94,
+        "word": " doesn't"
+      },
+      {
+        "start": 16.94,
+        "end": 17.16,
+        "word": " come"
+      },
+      {
+        "start": 17.16,
+        "end": 17.38,
+        "word": " from"
+      },
+      {
+        "start": 17.38,
+        "end": 17.56,
+        "word": " what"
+      },
+      {
+        "start": 17.56,
+        "end": 17.96,
+        "word": " happens,"
+      }
+    ]
+  },
+  {
+    "start": 18.92,
+    "end": 20.92,
+    "text": "but from what we imagine might happen.",
+    "words": [
+      {
+        "start": 18.92,
+        "end": 19.26,
+        "word": " but"
+      },
+      {
+        "start": 19.26,
+        "end": 19.46,
+        "word": " from"
+      },
+      {
+        "start": 19.46,
+        "end": 19.62,
+        "word": " what"
+      },
+      {
+        "start": 19.62,
+        "end": 19.8,
+        "word": " we"
+      },
+      {
+        "start": 19.8,
+        "end": 20.2,
+        "word": " imagine"
+      },
+      {
+        "start": 20.2,
+        "end": 20.56,
+        "word": " might"
+      },
+      {
+        "start": 20.56,
+        "end": 20.92,
+        "word": " happen."
+      }
+    ]
+  }
+]

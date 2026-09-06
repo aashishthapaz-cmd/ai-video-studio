@@ -1,0 +1,4 @@
+file 'D:/Auto video Generator/runtime/jobs/life_has_taught_me/frames/001.mp4'
+file 'D:/Auto video Generator/runtime/jobs/life_has_taught_me/frames/002.mp4'
+file 'D:/Auto video Generator/runtime/jobs/life_has_taught_me/frames/003.mp4'
+file 'D:/Auto video Generator/runtime/jobs/life_has_taught_me/frames/004.mp4'

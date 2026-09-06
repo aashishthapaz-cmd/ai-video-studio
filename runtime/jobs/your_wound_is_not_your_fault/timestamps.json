@@ -1,0 +1,218 @@
+[
+  {
+    "start": 0.0,
+    "end": 5.06,
+    "text": "Your wound is not your fault, but your healing is your responsibility.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.14,
+        "word": " Your"
+      },
+      {
+        "start": 0.14,
+        "end": 0.54,
+        "word": " wound"
+      },
+      {
+        "start": 0.54,
+        "end": 0.78,
+        "word": " is"
+      },
+      {
+        "start": 0.78,
+        "end": 0.96,
+        "word": " not"
+      },
+      {
+        "start": 0.96,
+        "end": 1.16,
+        "word": " your"
+      },
+      {
+        "start": 1.16,
+        "end": 1.56,
+        "word": " fault,"
+      },
+      {
+        "start": 2.18,
+        "end": 2.68,
+        "word": " but"
+      },
+      {
+        "start": 2.68,
+        "end": 2.82,
+        "word": " your"
+      },
+      {
+        "start": 2.82,
+        "end": 3.22,
+        "word": " healing"
+      },
+      {
+        "start": 3.22,
+        "end": 4.06,
+        "word": " is"
+      },
+      {
+        "start": 4.06,
+        "end": 4.22,
+        "word": " your"
+      },
+      {
+        "start": 4.22,
+        "end": 5.06,
+        "word": " responsibility."
+      }
+    ]
+  },
+  {
+    "start": 6.44,
+    "end": 11.96,
+    "text": "No one can rewrite your past, but you can decide how your story continues.",
+    "words": [
+      {
+        "start": 6.44,
+        "end": 6.7,
+        "word": " No"
+      },
+      {
+        "start": 6.7,
+        "end": 6.9,
+        "word": " one"
+      },
+      {
+        "start": 6.9,
+        "end": 7.08,
+        "word": " can"
+      },
+      {
+        "start": 7.08,
+        "end": 7.36,
+        "word": " rewrite"
+      },
+      {
+        "start": 7.36,
+        "end": 7.64,
+        "word": " your"
+      },
+      {
+        "start": 7.64,
+        "end": 8.14,
+        "word": " past,"
+      },
+      {
+        "start": 8.7,
+        "end": 9.06,
+        "word": " but"
+      },
+      {
+        "start": 9.06,
+        "end": 9.22,
+        "word": " you"
+      },
+      {
+        "start": 9.22,
+        "end": 9.42,
+        "word": " can"
+      },
+      {
+        "start": 9.42,
+        "end": 9.88,
+        "word": " decide"
+      },
+      {
+        "start": 9.88,
+        "end": 10.62,
+        "word": " how"
+      },
+      {
+        "start": 10.62,
+        "end": 10.82,
+        "word": " your"
+      },
+      {
+        "start": 10.82,
+        "end": 11.26,
+        "word": " story"
+      },
+      {
+        "start": 11.26,
+        "end": 11.96,
+        "word": " continues."
+      }
+    ]
+  },
+  {
+    "start": 13.16,
+    "end": 18.58,
+    "text": "Heal, so the pain ends with you, not with the people you love.",
+    "words": [
+      {
+        "start": 13.16,
+        "end": 13.78,
+        "word": " Heal,"
+      },
+      {
+        "start": 14.48,
+        "end": 14.8,
+        "word": " so"
+      },
+      {
+        "start": 14.8,
+        "end": 14.94,
+        "word": " the"
+      },
+      {
+        "start": 14.94,
+        "end": 15.26,
+        "word": " pain"
+      },
+      {
+        "start": 15.26,
+        "end": 15.66,
+        "word": " ends"
+      },
+      {
+        "start": 15.66,
+        "end": 15.92,
+        "word": " with"
+      },
+      {
+        "start": 15.92,
+        "end": 16.2,
+        "word": " you,"
+      },
+      {
+        "start": 17.0,
+        "end": 17.26,
+        "word": " not"
+      },
+      {
+        "start": 17.26,
+        "end": 17.5,
+        "word": " with"
+      },
+      {
+        "start": 17.5,
+        "end": 17.64,
+        "word": " the"
+      },
+      {
+        "start": 17.64,
+        "end": 18.0,
+        "word": " people"
+      },
+      {
+        "start": 18.0,
+        "end": 18.28,
+        "word": " you"
+      },
+      {
+        "start": 18.28,
+        "end": 18.58,
+        "word": " love."
+      }
+    ]
+  }
+]

@@ -1,0 +1,209 @@
+[
+  {
+    "start": 0.0,
+    "end": 2.04,
+    "text": "Sometimes being intelligent is a curse.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.46,
+        "word": " Sometimes"
+      },
+      {
+        "start": 0.46,
+        "end": 0.76,
+        "word": " being"
+      },
+      {
+        "start": 0.76,
+        "end": 1.36,
+        "word": " intelligent"
+      },
+      {
+        "start": 1.36,
+        "end": 1.64,
+        "word": " is"
+      },
+      {
+        "start": 1.64,
+        "end": 1.78,
+        "word": " a"
+      },
+      {
+        "start": 1.78,
+        "end": 2.04,
+        "word": " curse."
+      }
+    ]
+  },
+  {
+    "start": 3.04,
+    "end": 4.18,
+    "text": "You understand the game.",
+    "words": [
+      {
+        "start": 3.04,
+        "end": 3.16,
+        "word": " You"
+      },
+      {
+        "start": 3.16,
+        "end": 3.58,
+        "word": " understand"
+      },
+      {
+        "start": 3.58,
+        "end": 3.9,
+        "word": " the"
+      },
+      {
+        "start": 3.9,
+        "end": 4.18,
+        "word": " game."
+      }
+    ]
+  },
+  {
+    "start": 5.04,
+    "end": 5.84,
+    "text": "You see the lies.",
+    "words": [
+      {
+        "start": 5.04,
+        "end": 5.2,
+        "word": " You"
+      },
+      {
+        "start": 5.2,
+        "end": 5.38,
+        "word": " see"
+      },
+      {
+        "start": 5.38,
+        "end": 5.52,
+        "word": " the"
+      },
+      {
+        "start": 5.52,
+        "end": 5.84,
+        "word": " lies."
+      }
+    ]
+  },
+  {
+    "start": 6.76,
+    "end": 8.04,
+    "text": "You recognize the patterns.",
+    "words": [
+      {
+        "start": 6.76,
+        "end": 6.9,
+        "word": " You"
+      },
+      {
+        "start": 6.9,
+        "end": 7.32,
+        "word": " recognize"
+      },
+      {
+        "start": 7.32,
+        "end": 7.66,
+        "word": " the"
+      },
+      {
+        "start": 7.66,
+        "end": 8.04,
+        "word": " patterns."
+      }
+    ]
+  },
+  {
+    "start": 9.12,
+    "end": 10.8,
+    "text": "But despite knowing all of this,",
+    "words": [
+      {
+        "start": 9.12,
+        "end": 9.22,
+        "word": " But"
+      },
+      {
+        "start": 9.22,
+        "end": 9.54,
+        "word": " despite"
+      },
+      {
+        "start": 9.54,
+        "end": 9.96,
+        "word": " knowing"
+      },
+      {
+        "start": 9.96,
+        "end": 10.36,
+        "word": " all"
+      },
+      {
+        "start": 10.36,
+        "end": 10.5,
+        "word": " of"
+      },
+      {
+        "start": 10.5,
+        "end": 10.8,
+        "word": " this,"
+      }
+    ]
+  },
+  {
+    "start": 11.96,
+    "end": 15.76,
+    "text": "sometimes to survive, you still have to play along.",
+    "words": [
+      {
+        "start": 11.96,
+        "end": 12.58,
+        "word": " sometimes"
+      },
+      {
+        "start": 12.58,
+        "end": 13.2,
+        "word": " to"
+      },
+      {
+        "start": 13.2,
+        "end": 13.64,
+        "word": " survive,"
+      },
+      {
+        "start": 14.56,
+        "end": 14.66,
+        "word": " you"
+      },
+      {
+        "start": 14.66,
+        "end": 14.9,
+        "word": " still"
+      },
+      {
+        "start": 14.9,
+        "end": 15.14,
+        "word": " have"
+      },
+      {
+        "start": 15.14,
+        "end": 15.26,
+        "word": " to"
+      },
+      {
+        "start": 15.26,
+        "end": 15.48,
+        "word": " play"
+      },
+      {
+        "start": 15.48,
+        "end": 15.76,
+        "word": " along."
+      }
+    ]
+  }
+]

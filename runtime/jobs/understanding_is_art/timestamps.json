@@ -1,0 +1,223 @@
+[
+  {
+    "start": 0.0,
+    "end": 6.26,
+    "text": "Understanding is art and not everyone is an artist. Some paint with their eyes.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.56,
+        "word": " Understanding"
+      },
+      {
+        "start": 0.56,
+        "end": 0.94,
+        "word": " is"
+      },
+      {
+        "start": 0.94,
+        "end": 1.4,
+        "word": " art"
+      },
+      {
+        "start": 1.4,
+        "end": 2.14,
+        "word": " and"
+      },
+      {
+        "start": 2.14,
+        "end": 2.32,
+        "word": " not"
+      },
+      {
+        "start": 2.32,
+        "end": 2.68,
+        "word": " everyone"
+      },
+      {
+        "start": 2.68,
+        "end": 2.96,
+        "word": " is"
+      },
+      {
+        "start": 2.96,
+        "end": 3.1,
+        "word": " an"
+      },
+      {
+        "start": 3.1,
+        "end": 3.5,
+        "word": " artist."
+      },
+      {
+        "start": 4.8,
+        "end": 5.14,
+        "word": " Some"
+      },
+      {
+        "start": 5.14,
+        "end": 5.44,
+        "word": " paint"
+      },
+      {
+        "start": 5.44,
+        "end": 5.72,
+        "word": " with"
+      },
+      {
+        "start": 5.72,
+        "end": 5.92,
+        "word": " their"
+      },
+      {
+        "start": 5.92,
+        "end": 6.26,
+        "word": " eyes."
+      }
+    ]
+  },
+  {
+    "start": 7.3,
+    "end": 11.76,
+    "text": "Some paint with their ego. Only a few paint with their heart.",
+    "words": [
+      {
+        "start": 7.3,
+        "end": 7.52,
+        "word": " Some"
+      },
+      {
+        "start": 7.52,
+        "end": 7.8,
+        "word": " paint"
+      },
+      {
+        "start": 7.8,
+        "end": 8.04,
+        "word": " with"
+      },
+      {
+        "start": 8.04,
+        "end": 8.24,
+        "word": " their"
+      },
+      {
+        "start": 8.24,
+        "end": 8.6,
+        "word": " ego."
+      },
+      {
+        "start": 9.64,
+        "end": 10.12,
+        "word": " Only"
+      },
+      {
+        "start": 10.12,
+        "end": 10.28,
+        "word": " a"
+      },
+      {
+        "start": 10.28,
+        "end": 10.5,
+        "word": " few"
+      },
+      {
+        "start": 10.5,
+        "end": 10.88,
+        "word": " paint"
+      },
+      {
+        "start": 10.88,
+        "end": 11.2,
+        "word": " with"
+      },
+      {
+        "start": 11.2,
+        "end": 11.4,
+        "word": " their"
+      },
+      {
+        "start": 11.4,
+        "end": 11.76,
+        "word": " heart."
+      }
+    ]
+  },
+  {
+    "start": 12.8,
+    "end": 19.0,
+    "text": "The greatest works are never hung on walls. They live quietly inside people's hearts.",
+    "words": [
+      {
+        "start": 12.8,
+        "end": 13.1,
+        "word": " The"
+      },
+      {
+        "start": 13.1,
+        "end": 13.48,
+        "word": " greatest"
+      },
+      {
+        "start": 13.48,
+        "end": 14.02,
+        "word": " works"
+      },
+      {
+        "start": 14.02,
+        "end": 14.44,
+        "word": " are"
+      },
+      {
+        "start": 14.44,
+        "end": 14.7,
+        "word": " never"
+      },
+      {
+        "start": 14.7,
+        "end": 15.02,
+        "word": " hung"
+      },
+      {
+        "start": 15.02,
+        "end": 15.18,
+        "word": " on"
+      },
+      {
+        "start": 15.18,
+        "end": 15.58,
+        "word": " walls."
+      },
+      {
+        "start": 16.72,
+        "end": 16.9,
+        "word": " They"
+      },
+      {
+        "start": 16.9,
+        "end": 17.08,
+        "word": " live"
+      },
+      {
+        "start": 17.08,
+        "end": 17.58,
+        "word": " quietly"
+      },
+      {
+        "start": 17.58,
+        "end": 18.04,
+        "word": " inside"
+      },
+      {
+        "start": 18.04,
+        "end": 18.78,
+        "word": " people's"
+      },
+      {
+        "start": 18.78,
+        "end": 19.0,
+        "word": " hearts."
+      }
+    ]
+  }
+]

@@ -1,0 +1,50 @@
+{
+  "title": "The Hardest Lesson I've Learned As An Adult",
+  "style_bible": {
+    "emotional_arc": "Progressive resilience amidst adversity, leading to inner strength.",
+    "palette": "Charcoal-teal and navy with amber accents",
+    "lighting": "Twilight/moody night atmosphere",
+    "motif": "Natural elements like paths, trees, and water reflecting the journey of life",
+    "continuity": "Sparse, poetic visual world suitable for slow Ken Burns motion",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "The hardest lesson I've learned as an adult is that life doesn't stop, even when you're hurt.",
+      "prompt": "A lone figure walking on a winding path under starlit sky, with distant mountains in the background. Trees line the path, their branches — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "No matter the pain, exhaustion, or loss, you still have to push through.",
+      "prompt": "A person sitting by a riverbank at twilight, with water gently flowing in the background. The figure is partially obscured by shadows, suggesting resilience — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "We grow up expecting happy endings, but find ourselves pretending to be okay instead.",
+      "prompt": "A young girl standing in a field of tall grass under a moonlit sky. The girl's face is partially hidden by the grass, symbolizing — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "Yet through it all, we find a strength we never knew we had.",
+      "prompt": "A figure standing at the edge of a cliff overlooking the sea. The sky is dark with stars, and the ocean waves crash — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 95,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

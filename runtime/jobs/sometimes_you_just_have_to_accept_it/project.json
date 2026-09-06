@@ -1,0 +1,60 @@
+{
+  "title": "Sometimes You Just Have To Accept It",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 119,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "Sometimes you just have to accept the situation.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Sometimes you just have to accept the situation."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "Understand that it's okay. It happens. It's life.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Understand that it's okay. It happens. It's life."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "Not every ending needs an explanation.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Not every ending needs an explanation."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "Not every loss deserves another chance.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Not every loss deserves another chance."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "Some chapters are only meant to teach, not to stay.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Some chapters are only meant to teach, not to stay."
+    },
+    {
+      "id": "scene_006",
+      "duration": 5,
+      "narration": "And one day, you'll thank life for what it didn't let you keep.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "And one day, you'll thank life for what it didn't let you keep."
+    }
+  ]
+}

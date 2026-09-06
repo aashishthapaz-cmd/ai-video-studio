@@ -1,0 +1,238 @@
+[
+  {
+    "start": 0.0,
+    "end": 4.08,
+    "text": "I read somewhere that we're all a little weird, and life is a little weird too.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.12,
+        "word": " I"
+      },
+      {
+        "start": 0.12,
+        "end": 0.32,
+        "word": " read"
+      },
+      {
+        "start": 0.32,
+        "end": 0.64,
+        "word": " somewhere"
+      },
+      {
+        "start": 0.64,
+        "end": 0.88,
+        "word": " that"
+      },
+      {
+        "start": 0.88,
+        "end": 1.08,
+        "word": " we're"
+      },
+      {
+        "start": 1.08,
+        "end": 1.22,
+        "word": " all"
+      },
+      {
+        "start": 1.22,
+        "end": 1.32,
+        "word": " a"
+      },
+      {
+        "start": 1.32,
+        "end": 1.52,
+        "word": " little"
+      },
+      {
+        "start": 1.52,
+        "end": 1.9,
+        "word": " weird,"
+      },
+      {
+        "start": 2.32,
+        "end": 2.64,
+        "word": " and"
+      },
+      {
+        "start": 2.64,
+        "end": 2.9,
+        "word": " life"
+      },
+      {
+        "start": 2.9,
+        "end": 3.14,
+        "word": " is"
+      },
+      {
+        "start": 3.14,
+        "end": 3.22,
+        "word": " a"
+      },
+      {
+        "start": 3.22,
+        "end": 3.44,
+        "word": " little"
+      },
+      {
+        "start": 3.44,
+        "end": 3.76,
+        "word": " weird"
+      },
+      {
+        "start": 3.76,
+        "end": 4.08,
+        "word": " too."
+      }
+    ]
+  },
+  {
+    "start": 5.1,
+    "end": 10.14,
+    "text": "And when we find someone whose weirdness is compatible with ours, we join up with them",
+    "words": [
+      {
+        "start": 5.1,
+        "end": 5.62,
+        "word": " And"
+      },
+      {
+        "start": 5.62,
+        "end": 5.76,
+        "word": " when"
+      },
+      {
+        "start": 5.76,
+        "end": 5.92,
+        "word": " we"
+      },
+      {
+        "start": 5.92,
+        "end": 6.16,
+        "word": " find"
+      },
+      {
+        "start": 6.16,
+        "end": 6.54,
+        "word": " someone"
+      },
+      {
+        "start": 6.54,
+        "end": 6.76,
+        "word": " whose"
+      },
+      {
+        "start": 6.76,
+        "end": 7.3,
+        "word": " weirdness"
+      },
+      {
+        "start": 7.3,
+        "end": 7.44,
+        "word": " is"
+      },
+      {
+        "start": 7.44,
+        "end": 7.88,
+        "word": " compatible"
+      },
+      {
+        "start": 7.88,
+        "end": 8.2,
+        "word": " with"
+      },
+      {
+        "start": 8.2,
+        "end": 8.52,
+        "word": " ours,"
+      },
+      {
+        "start": 9.14,
+        "end": 9.24,
+        "word": " we"
+      },
+      {
+        "start": 9.24,
+        "end": 9.5,
+        "word": " join"
+      },
+      {
+        "start": 9.5,
+        "end": 9.72,
+        "word": " up"
+      },
+      {
+        "start": 9.72,
+        "end": 9.92,
+        "word": " with"
+      },
+      {
+        "start": 9.92,
+        "end": 10.14,
+        "word": " them"
+      }
+    ]
+  },
+  {
+    "start": 10.68,
+    "end": 15.28,
+    "text": "and fall into mutually satisfying weirdness, and we call it love.",
+    "words": [
+      {
+        "start": 10.68,
+        "end": 10.94,
+        "word": " and"
+      },
+      {
+        "start": 10.94,
+        "end": 11.24,
+        "word": " fall"
+      },
+      {
+        "start": 11.24,
+        "end": 11.5,
+        "word": " into"
+      },
+      {
+        "start": 11.5,
+        "end": 11.98,
+        "word": " mutually"
+      },
+      {
+        "start": 11.98,
+        "end": 12.56,
+        "word": " satisfying"
+      },
+      {
+        "start": 12.56,
+        "end": 13.36,
+        "word": " weirdness,"
+      },
+      {
+        "start": 14.06,
+        "end": 14.42,
+        "word": " and"
+      },
+      {
+        "start": 14.42,
+        "end": 14.56,
+        "word": " we"
+      },
+      {
+        "start": 14.56,
+        "end": 14.82,
+        "word": " call"
+      },
+      {
+        "start": 14.82,
+        "end": 15.0,
+        "word": " it"
+      },
+      {
+        "start": 15.0,
+        "end": 15.28,
+        "word": " love."
+      }
+    ]
+  }
+]

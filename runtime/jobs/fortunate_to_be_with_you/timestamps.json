@@ -1,0 +1,257 @@
+[
+  {
+    "start": 0.0,
+    "end": 2.78,
+    "text": "You are the most beautiful person I've ever seen.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.18,
+        "word": " You"
+      },
+      {
+        "start": 0.18,
+        "end": 0.3,
+        "word": " are"
+      },
+      {
+        "start": 0.3,
+        "end": 0.38,
+        "word": " the"
+      },
+      {
+        "start": 0.38,
+        "end": 0.64,
+        "word": " most"
+      },
+      {
+        "start": 0.64,
+        "end": 1.08,
+        "word": " beautiful"
+      },
+      {
+        "start": 1.08,
+        "end": 1.68,
+        "word": " person"
+      },
+      {
+        "start": 1.68,
+        "end": 2.08,
+        "word": " I've"
+      },
+      {
+        "start": 2.08,
+        "end": 2.38,
+        "word": " ever"
+      },
+      {
+        "start": 2.38,
+        "end": 2.78,
+        "word": " seen."
+      }
+    ]
+  },
+  {
+    "start": 3.62,
+    "end": 5.66,
+    "text": "You are the strongest person I know.",
+    "words": [
+      {
+        "start": 3.62,
+        "end": 3.9,
+        "word": " You"
+      },
+      {
+        "start": 3.9,
+        "end": 4.02,
+        "word": " are"
+      },
+      {
+        "start": 4.02,
+        "end": 4.1,
+        "word": " the"
+      },
+      {
+        "start": 4.1,
+        "end": 4.46,
+        "word": " strongest"
+      },
+      {
+        "start": 4.46,
+        "end": 5.06,
+        "word": " person"
+      },
+      {
+        "start": 5.06,
+        "end": 5.38,
+        "word": " I"
+      },
+      {
+        "start": 5.38,
+        "end": 5.66,
+        "word": " know."
+      }
+    ]
+  },
+  {
+    "start": 6.56,
+    "end": 9.12,
+    "text": "You are the kindest person I've ever met.",
+    "words": [
+      {
+        "start": 6.56,
+        "end": 6.94,
+        "word": " You"
+      },
+      {
+        "start": 6.94,
+        "end": 7.04,
+        "word": " are"
+      },
+      {
+        "start": 7.04,
+        "end": 7.12,
+        "word": " the"
+      },
+      {
+        "start": 7.12,
+        "end": 7.62,
+        "word": " kindest"
+      },
+      {
+        "start": 7.62,
+        "end": 8.02,
+        "word": " person"
+      },
+      {
+        "start": 8.02,
+        "end": 8.48,
+        "word": " I've"
+      },
+      {
+        "start": 8.48,
+        "end": 8.8,
+        "word": " ever"
+      },
+      {
+        "start": 8.8,
+        "end": 9.12,
+        "word": " met."
+      }
+    ]
+  },
+  {
+    "start": 10.0,
+    "end": 12.72,
+    "text": "You are the brightest light I've ever found.",
+    "words": [
+      {
+        "start": 10.0,
+        "end": 10.36,
+        "word": " You"
+      },
+      {
+        "start": 10.36,
+        "end": 10.48,
+        "word": " are"
+      },
+      {
+        "start": 10.48,
+        "end": 10.56,
+        "word": " the"
+      },
+      {
+        "start": 10.56,
+        "end": 10.98,
+        "word": " brightest"
+      },
+      {
+        "start": 10.98,
+        "end": 11.46,
+        "word": " light"
+      },
+      {
+        "start": 11.46,
+        "end": 12.02,
+        "word": " I've"
+      },
+      {
+        "start": 12.02,
+        "end": 12.32,
+        "word": " ever"
+      },
+      {
+        "start": 12.32,
+        "end": 12.72,
+        "word": " found."
+      }
+    ]
+  },
+  {
+    "start": 13.84,
+    "end": 16.84,
+    "text": "I feel so fortunate to have the chance to be with you.",
+    "words": [
+      {
+        "start": 13.84,
+        "end": 14.2,
+        "word": " I"
+      },
+      {
+        "start": 14.2,
+        "end": 14.42,
+        "word": " feel"
+      },
+      {
+        "start": 14.42,
+        "end": 14.66,
+        "word": " so"
+      },
+      {
+        "start": 14.66,
+        "end": 15.24,
+        "word": " fortunate"
+      },
+      {
+        "start": 15.24,
+        "end": 15.52,
+        "word": " to"
+      },
+      {
+        "start": 15.52,
+        "end": 15.66,
+        "word": " have"
+      },
+      {
+        "start": 15.66,
+        "end": 15.78,
+        "word": " the"
+      },
+      {
+        "start": 15.78,
+        "end": 16.08,
+        "word": " chance"
+      },
+      {
+        "start": 16.08,
+        "end": 16.28,
+        "word": " to"
+      },
+      {
+        "start": 16.28,
+        "end": 16.44,
+        "word": " be"
+      },
+      {
+        "start": 16.44,
+        "end": 16.66,
+        "word": " with"
+      },
+      {
+        "start": 16.66,
+        "end": 16.84,
+        "word": " you."
+      }
+    ]
+  }
+]

@@ -1,0 +1,50 @@
+{
+  "title": "The Heart Needs More Time",
+  "style_bible": {
+    "emotional_arc": "Gradual acceptance, moving from hope to understanding.",
+    "palette": "Charcoal-teal, navy shadows with amber accents",
+    "lighting": "Moody twilight/night atmosphere",
+    "motif": "Natural elements and everyday objects",
+    "continuity": "Sparse, poetic, readable visual world",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "Sometimes the heart needs more time to accept what the mind already knows.",
+      "prompt": "A lone hand holding a book under a dimly lit street lamp, pages fluttering slightly in an unseen breeze. The hand is partially obscured — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "The mind moves on the day it understands.",
+      "prompt": "A path leading to a distant, barely visible light at the end of a misty night. The path is lined with trees, their silhouettes — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "The heart moves on the day it stops hoping.",
+      "prompt": "A window frame with a single pane of glass, partially obscured by raindrops. Inside, a solitary candle flickers weakly against the night. The flame — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "And between those two days, a person lives an entire life, pretending to be fine.",
+      "prompt": "A boat floating on a calm lake at twilight. The boat is old and weathered, with visible woodcut grain. A lantern hangs — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 100,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

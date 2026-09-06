@@ -1,0 +1,84 @@
+{
+  "title": "For The Love We Lost, But Will Forever Carry",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 19,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "I miss you.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I miss you."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "I miss your smile.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I miss your smile."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "I miss your touch.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I miss your touch."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "I miss everything about you.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I miss everything about you."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "I was hoping to spend my forever with you.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I was hoping to spend my forever with you."
+    },
+    {
+      "id": "scene_006",
+      "duration": 5,
+      "narration": "But God had different plans.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "But God had different plans."
+    },
+    {
+      "id": "scene_007",
+      "duration": 5,
+      "narration": "I thank Him for taking all your pain.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I thank Him for taking all your pain."
+    },
+    {
+      "id": "scene_008",
+      "duration": 5,
+      "narration": "And I hope one day, when my journey is done, our souls will meet again.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "And I hope one day, when my journey is done, our souls will meet again."
+    },
+    {
+      "id": "scene_009",
+      "duration": 5,
+      "narration": "My only one.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "My only one."
+    }
+  ]
+}

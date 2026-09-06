@@ -1,0 +1,228 @@
+[
+  {
+    "start": 0.0,
+    "end": 6.86,
+    "text": "After you walked away from me, I didn't break, I learned to forget you, I learned how to",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.24,
+        "word": " After"
+      },
+      {
+        "start": 0.24,
+        "end": 0.42,
+        "word": " you"
+      },
+      {
+        "start": 0.42,
+        "end": 0.66,
+        "word": " walked"
+      },
+      {
+        "start": 0.66,
+        "end": 0.94,
+        "word": " away"
+      },
+      {
+        "start": 0.94,
+        "end": 1.18,
+        "word": " from"
+      },
+      {
+        "start": 1.18,
+        "end": 1.42,
+        "word": " me,"
+      },
+      {
+        "start": 2.14,
+        "end": 2.28,
+        "word": " I"
+      },
+      {
+        "start": 2.28,
+        "end": 2.58,
+        "word": " didn't"
+      },
+      {
+        "start": 2.58,
+        "end": 2.76,
+        "word": " break,"
+      },
+      {
+        "start": 3.54,
+        "end": 4.04,
+        "word": " I"
+      },
+      {
+        "start": 4.04,
+        "end": 4.28,
+        "word": " learned"
+      },
+      {
+        "start": 4.28,
+        "end": 4.46,
+        "word": " to"
+      },
+      {
+        "start": 4.46,
+        "end": 4.74,
+        "word": " forget"
+      },
+      {
+        "start": 4.74,
+        "end": 5.04,
+        "word": " you,"
+      },
+      {
+        "start": 6.02,
+        "end": 6.28,
+        "word": " I"
+      },
+      {
+        "start": 6.28,
+        "end": 6.52,
+        "word": " learned"
+      },
+      {
+        "start": 6.52,
+        "end": 6.74,
+        "word": " how"
+      },
+      {
+        "start": 6.74,
+        "end": 6.86,
+        "word": " to"
+      }
+    ]
+  },
+  {
+    "start": 6.86,
+    "end": 10.16,
+    "text": "live without you, and I began to love myself.",
+    "words": [
+      {
+        "start": 6.86,
+        "end": 7.1,
+        "word": " live"
+      },
+      {
+        "start": 7.1,
+        "end": 7.44,
+        "word": " without"
+      },
+      {
+        "start": 7.44,
+        "end": 7.78,
+        "word": " you,"
+      },
+      {
+        "start": 8.78,
+        "end": 8.9,
+        "word": " and"
+      },
+      {
+        "start": 8.9,
+        "end": 9.0,
+        "word": " I"
+      },
+      {
+        "start": 9.0,
+        "end": 9.26,
+        "word": " began"
+      },
+      {
+        "start": 9.26,
+        "end": 9.48,
+        "word": " to"
+      },
+      {
+        "start": 9.48,
+        "end": 9.68,
+        "word": " love"
+      },
+      {
+        "start": 9.68,
+        "end": 10.16,
+        "word": " myself."
+      }
+    ]
+  },
+  {
+    "start": 11.32,
+    "end": 15.48,
+    "text": "In the end, I was able to start over and begin a new life.",
+    "words": [
+      {
+        "start": 11.32,
+        "end": 11.58,
+        "word": " In"
+      },
+      {
+        "start": 11.58,
+        "end": 11.7,
+        "word": " the"
+      },
+      {
+        "start": 11.7,
+        "end": 12.04,
+        "word": " end,"
+      },
+      {
+        "start": 12.48,
+        "end": 12.72,
+        "word": " I"
+      },
+      {
+        "start": 12.72,
+        "end": 12.86,
+        "word": " was"
+      },
+      {
+        "start": 12.86,
+        "end": 13.04,
+        "word": " able"
+      },
+      {
+        "start": 13.04,
+        "end": 13.22,
+        "word": " to"
+      },
+      {
+        "start": 13.22,
+        "end": 13.46,
+        "word": " start"
+      },
+      {
+        "start": 13.46,
+        "end": 13.84,
+        "word": " over"
+      },
+      {
+        "start": 13.84,
+        "end": 14.62,
+        "word": " and"
+      },
+      {
+        "start": 14.62,
+        "end": 14.88,
+        "word": " begin"
+      },
+      {
+        "start": 14.88,
+        "end": 15.04,
+        "word": " a"
+      },
+      {
+        "start": 15.04,
+        "end": 15.2,
+        "word": " new"
+      },
+      {
+        "start": 15.2,
+        "end": 15.48,
+        "word": " life."
+      }
+    ]
+  }
+]

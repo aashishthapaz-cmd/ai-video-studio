@@ -1,0 +1,57 @@
+{
+  "title": "True People Won't Need Convincing",
+  "style_bible": {
+    "emotional_arc": "Pain, resilience, liberation, inner peace, validation",
+    "palette": "charcoal-teal, navy, amber, rust-red, ember-orange, pale cream",
+    "lighting": "twilight/night atmosphere with deep shadows and a soft glow from an amber lantern or ember-orange light source",
+    "motif": "natural elements like trees, paths, water, and books",
+    "continuity": "consistent dark hand-inked storybook/graphic-novel illustration style with visible paper grain",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "It hurts when your biggest effort is ignored, and your smallest mistake is judged.",
+      "prompt": "A lone figure standing by a path under twilight skies, with a small ember-orange flame flickering in the distance, emphasizing solitude and pain, wide — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "People often remember one mistake, and forget a hundred sacrifices.",
+      "prompt": "A figure walking along a path under twilight skies, with a book in hand symbolizing knowledge and sacrifice, amber light casting shadows on — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "Don't waste your life trying to prove yourself to everyone.",
+      "prompt": "A figure sitting by a river under twilight skies, with the water reflecting the amber light, symbolizing reflection and inner peace, low-angle walking silhouette — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "Peace begins the moment you stop seeking everyone's approval.",
+      "prompt": "A figure standing by a calm river under twilight skies, with an amber lantern casting soft light on the water and trees, symbolizing inner — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_005",
+      "duration": 4.0,
+      "narration": "The people who truly matter never needed convincing.",
+      "prompt": "A figure walking along a path under twilight skies, with an ember-orange light source in the distance symbolizing trust and validation from true friends — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 118,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

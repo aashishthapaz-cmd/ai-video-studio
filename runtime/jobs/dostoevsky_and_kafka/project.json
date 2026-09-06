@@ -1,0 +1,60 @@
+{
+  "title": "Dostoevsky And Kafka",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 99,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "Dostoevsky said,",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Dostoevsky said,"
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "perhaps it is better to suffer and know the truth than to be happy in a delusion.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "perhaps it is better to suffer and know the truth than to be happy in a delusion."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "But Franz Kafka said,",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "But Franz Kafka said,"
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "I would rather keep my illusions for they are often kinder than the truth.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I would rather keep my illusions for they are often kinder than the truth."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "So the question is, do you want the truth?",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "So the question is, do you want the truth?"
+    },
+    {
+      "id": "scene_006",
+      "duration": 5,
+      "narration": "Or do you want the illusion?",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Or do you want the illusion?"
+    }
+  ]
+}

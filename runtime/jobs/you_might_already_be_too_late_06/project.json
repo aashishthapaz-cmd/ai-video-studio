@@ -1,0 +1,52 @@
+{
+  "title": "You Might Already Be Too Late",
+  "style_bible": {
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16",
+    "negative_prompt": "text, logo, watermark, photorealism, 3D CGI, robots, gore"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4,
+      "narration": "I was too tired to explain, so I chose silence.",
+      "prompt": "symbolic scene expressing I was too tired to explain, so, one clear focal subject, wide lonely establishing view, rain haze, amber window glow — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4,
+      "narration": "You kept asking what was wrong. I kept saying nothing.",
+      "prompt": "symbolic scene expressing You kept asking what was wrong. I, one clear focal subject, close symbolic detail, heavy shadow, rust-red emotional accent — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "pan_right"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4,
+      "narration": "You heard my words. You never heard my silence.",
+      "prompt": "symbolic scene expressing You heard my words. You never heard, one clear focal subject, low-angle walking silhouette, open negative space, pale cream breath-light — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4,
+      "narration": "You wanted an explanation. I wanted to be understood.",
+      "prompt": "symbolic scene expressing You wanted an explanation. I wanted to, one clear focal subject, still interior frame, lantern geometry, muted ember-orange pool — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "pan_right"
+    },
+    {
+      "id": "scene_005",
+      "duration": 4,
+      "narration": "By the time you finally understand me, it might already be too late.",
+      "prompt": "symbolic scene expressing By the time you finally understand me,, one clear focal subject, distant horizon composition, layered fog, restrained crimson trace — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "offline-fallback",
+  "source_number": 109,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

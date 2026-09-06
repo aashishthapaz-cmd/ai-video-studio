@@ -1,0 +1,52 @@
+{
+  "title": "Why That Happens Every Time",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 114,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "I forgive people easily. I trust people easily.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I forgive people easily. I trust people easily."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "I forget the bad things they did easily.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I forget the bad things they did easily."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "I always believe they'll be different this time.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I always believe they'll be different this time."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "I keep giving chances they never deserve, and I see the good in people, even when they show me the worst.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I keep giving chances they never deserve, and I see the good in people, even when they show me the worst."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "And somehow, I end up being the one who gets hurt, every single time.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "And somehow, I end up being the one who gets hurt, every single time."
+    }
+  ]
+}

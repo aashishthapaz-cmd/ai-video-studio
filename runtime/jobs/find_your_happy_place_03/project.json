@@ -1,0 +1,43 @@
+{
+  "title": "Find Your Happy Place",
+  "style_bible": {
+    "emotional_arc": "Disappointment to Hope, Contrast of Belonging vs. Alienation",
+    "palette": "Charcoal-teal, Navy, Amber, Rust-red, Ember-orange, Pale cream",
+    "lighting": "Moody twilight/night atmosphere with deep shadows and a subtle accent light",
+    "motif": "Natural elements like paths, trees, windows, and books",
+    "continuity": "Sparse, poetic visual world suitable for slow Ken Burns motion",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "In the wrong place, even your very best will never feel like enough.",
+      "prompt": "A lone figure standing on a desolate path under an overcast sky with distant trees and a faint outline of a book in hand — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "But in the right place, your mere presence will be celebrated.",
+      "prompt": "A warm glow from a small lantern illuminates a cozy window with people gathered inside, their faces lit up by joy and celebration — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "The same person can feel ordinary in one place, and extraordinary in another.",
+      "prompt": "A figure standing by a riverbank at twilight, looking into the water where their reflection appears both mundane and mysterious. The scene is framed — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 103,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

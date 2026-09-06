@@ -1,0 +1,44 @@
+{
+  "title": "Change What Surrounds You",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 108,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "I read once that you can't always change the people around you,",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I read once that you can't always change the people around you,"
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "but you can change who you choose to be around.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "but you can change who you choose to be around."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "And when I finally understood that,",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "And when I finally understood that,"
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "everything made sense.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "everything made sense."
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "The Hardest Lesson I've Learned As An Adult",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 95,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "The hardest lesson I've learned as an adult is that life doesn't stop, even when you're hurt.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "The hardest lesson I've learned as an adult is that life doesn't stop, even when you're hurt."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "No matter the pain, exhaustion, or loss, you still have to push through.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "No matter the pain, exhaustion, or loss, you still have to push through."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "We grow up expecting happy endings, but find ourselves pretending to be okay instead.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "We grow up expecting happy endings, but find ourselves pretending to be okay instead."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "Yet through it all, we find a strength we never knew we had.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Yet through it all, we find a strength we never knew we had."
+    }
+  ]
+}

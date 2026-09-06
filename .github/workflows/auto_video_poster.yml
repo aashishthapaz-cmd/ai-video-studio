@@ -1,0 +1,115 @@
+name: 🎬 Autonomous AI Video Studio & Auto-Poster
+
+on:
+  # 1. Scheduled Posting via Cron (Runs every 4 hours automatically)
+  schedule:
+    - cron: '0 3,7,11,15,19 * * *'
+
+  # 2. Manual / Mobile Trigger via GitHub Web UI or GitHub App
+  workflow_dispatch:
+    inputs:
+      script_text:
+        description: 'Poem or Script text (Leave empty to process next queued post)'
+        required: false
+        type: string
+        default: ''
+      title:
+        description: 'Video Title'
+        required: false
+        type: string
+        default: ''
+      custom_vibe:
+        description: 'Visual Style & World'
+        required: false
+        type: choice
+        options:
+          - 'Auto-Detect (Adaptive Multi-World)'
+          - 'Makoto Shinkai Twilight'
+          - 'Himalayan Mist Serenity'
+          - 'Studio Ghibli Meadow'
+          - 'Cyberpunk Rain Reflections'
+          - 'Claude Monet Impressionism'
+          - 'Van Gogh Starry Canvas'
+          - 'Ink Wash Zen Landscape'
+          - 'Vintage 90s Anime Nostalgia'
+          - 'Dark Romantic Academia'
+        default: 'Auto-Detect (Adaptive Multi-World)'
+      publish_facebook:
+        description: 'Publish automatically to connected Facebook Pages'
+        required: false
+        type: boolean
+        default: true
+
+  # 3. Webhook / Repository Dispatch Trigger (e.g. from Telegram Bot / External API)
+  repository_dispatch:
+    types: [generate_video, process_queue]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: video-render-pipeline
+  cancel-in-progress: false
+
+jobs:
+  render-and-publish:
+    name: 🎥 Render 1080x1920 Video & Publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🐍 Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: 🎬 Install FFmpeg & Multi-Lingual Fonts
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends             ffmpeg             fonts-dejavu-core             fonts-noto-core             fonts-noto-cjk             fonts-noto-extra             git             curl
+
+      - name: 📦 Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r cloud_generator/requirements.txt
+
+      - name: 🚀 Run Autonomous Video Pipeline
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN || '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' }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN || '8886670511:AAFeNxbL5TxpTiWqF_fukB-MeaS4s9OlMqU' }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID || '6402294953' }}
+        run: |
+          python cloud_generator/github_runner.py \
+            --script "${{ inputs.script_text }}" \
+            --title "${{ inputs.title }}" \
+            --vibe "${{ inputs.custom_vibe }}" \
+            --publish-fb "${{ inputs.publish_facebook || 'true' }}"
+
+      - name: 💾 Commit & Push Updated Job Queue & History
+        if: always()
+        run: |
+          git config --global user.name "Autonomous Studio Bot"
+          git config --global user.email "bot@autovideostudio.internal"
+          git add cloud_generator/jobs_queue.json cloud_generator/facebook_history.json || true
+          if git diff --staged --quiet; then
+            echo "No queue changes to commit."
+          else
+            git commit -m "🤖 Auto-update job queue & publication history [skip ci]"
+            git push origin HEAD:${{ github.ref_name }} || true
+          fi
+
+      - name: 📤 Upload Rendered Videos as Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rendered-videos-${{ github.run_number }}
+          path: Output/*.mp4
+          retention-days: 14
+          if-no-files-found: ignore

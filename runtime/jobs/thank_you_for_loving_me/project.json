@@ -1,0 +1,60 @@
+{
+  "title": "Thank You For Loving Me",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 38,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "Thank you for loving me when I didn't know how to be loved.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Thank you for loving me when I didn't know how to be loved."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "For loving the deep scars I spent years trying to bury.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "For loving the deep scars I spent years trying to bury."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "For choosing patience when all I gave you was silence.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "For choosing patience when all I gave you was silence."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "You didn't erase my pain.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "You didn't erase my pain."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "You made it feel safe to carry.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "You made it feel safe to carry."
+    },
+    {
+      "id": "scene_006",
+      "duration": 5,
+      "narration": "And if life rewrote itself a million times, I would choose you every single time.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "And if life rewrote itself a million times, I would choose you every single time."
+    }
+  ]
+}

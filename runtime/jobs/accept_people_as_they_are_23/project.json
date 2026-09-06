@@ -1,0 +1,64 @@
+{
+  "title": "Accept People As They Are",
+  "style_bible": {
+    "emotional_arc": "Serene acceptance, personal responsibility, freedom from struggle, protective boundaries, understanding of differences.",
+    "palette": "Deep charcoal-teal, navy shadows with amber accents",
+    "lighting": "Moody twilight/night atmosphere",
+    "motif": "Natural elements and everyday objects",
+    "continuity": "Sparse, poetic visual world suitable for slow Ken Burns motion",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "Accept people as they are. Place them where they belong.",
+      "prompt": "A hand gently places a book on a shelf among others, symbolizing acceptance and belonging in twilight light, wide lonely establishing view, rain haze — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "You are responsible for your own life.",
+      "prompt": "A solitary figure stands by a window, looking out into the twilight, emphasizing personal responsibility with amber lighting, close symbolic detail, heavy shadow, rust-red — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "Acceptance frees you from trying to change anyone.",
+      "prompt": "A lantern casts a soft glow on a path leading into the distance, symbolizing freedom and acceptance in twilight light with amber accents, low-angle — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "Boundaries protect your peace.",
+      "prompt": "A tree stands tall, its branches forming a protective canopy in the twilight, symbolizing boundaries and peace with amber lighting, still interior frame, lantern — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_005",
+      "duration": 4.0,
+      "narration": "Not everyone earns the same access, the same closeness, or the same seat at your table.",
+      "prompt": "A path splits into two, one leading to a boat and another to a treehouse, symbolizing different paths in twilight with amber accents — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_006",
+      "duration": 4.0,
+      "narration": "And that's not cruelty. That's self-respect.",
+      "prompt": "A book lies open on a wooden table, its pages glowing softly in the twilight with amber lighting, symbolizing self-respect and understanding, quiet homecoming — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 93,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

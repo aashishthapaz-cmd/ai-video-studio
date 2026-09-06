@@ -1,0 +1,292 @@
+[
+  {
+    "start": 0.0,
+    "end": 3.0,
+    "text": "What's the difference between I like you and I love you?",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.22,
+        "word": " What's"
+      },
+      {
+        "start": 0.22,
+        "end": 0.34,
+        "word": " the"
+      },
+      {
+        "start": 0.34,
+        "end": 0.62,
+        "word": " difference"
+      },
+      {
+        "start": 0.62,
+        "end": 0.98,
+        "word": " between"
+      },
+      {
+        "start": 0.98,
+        "end": 1.32,
+        "word": " I"
+      },
+      {
+        "start": 1.32,
+        "end": 1.6,
+        "word": " like"
+      },
+      {
+        "start": 1.6,
+        "end": 1.94,
+        "word": " you"
+      },
+      {
+        "start": 1.94,
+        "end": 2.26,
+        "word": " and"
+      },
+      {
+        "start": 2.26,
+        "end": 2.44,
+        "word": " I"
+      },
+      {
+        "start": 2.44,
+        "end": 2.72,
+        "word": " love"
+      },
+      {
+        "start": 2.72,
+        "end": 3.0,
+        "word": " you?"
+      }
+    ]
+  },
+  {
+    "start": 4.02,
+    "end": 6.2,
+    "text": "If you like a flower, you pick it.",
+    "words": [
+      {
+        "start": 4.02,
+        "end": 4.2,
+        "word": " If"
+      },
+      {
+        "start": 4.2,
+        "end": 4.3,
+        "word": " you"
+      },
+      {
+        "start": 4.3,
+        "end": 4.48,
+        "word": " like"
+      },
+      {
+        "start": 4.48,
+        "end": 4.6,
+        "word": " a"
+      },
+      {
+        "start": 4.6,
+        "end": 4.94,
+        "word": " flower,"
+      },
+      {
+        "start": 5.58,
+        "end": 5.7,
+        "word": " you"
+      },
+      {
+        "start": 5.7,
+        "end": 5.94,
+        "word": " pick"
+      },
+      {
+        "start": 5.94,
+        "end": 6.2,
+        "word": " it."
+      }
+    ]
+  },
+  {
+    "start": 6.8,
+    "end": 11.36,
+    "text": "If you love a flower, you care for it, water it daily and protect it.",
+    "words": [
+      {
+        "start": 6.8,
+        "end": 6.96,
+        "word": " If"
+      },
+      {
+        "start": 6.96,
+        "end": 7.1,
+        "word": " you"
+      },
+      {
+        "start": 7.1,
+        "end": 7.26,
+        "word": " love"
+      },
+      {
+        "start": 7.26,
+        "end": 7.36,
+        "word": " a"
+      },
+      {
+        "start": 7.36,
+        "end": 7.72,
+        "word": " flower,"
+      },
+      {
+        "start": 7.88,
+        "end": 7.94,
+        "word": " you"
+      },
+      {
+        "start": 7.94,
+        "end": 8.22,
+        "word": " care"
+      },
+      {
+        "start": 8.22,
+        "end": 8.46,
+        "word": " for"
+      },
+      {
+        "start": 8.46,
+        "end": 8.7,
+        "word": " it,"
+      },
+      {
+        "start": 9.2,
+        "end": 9.54,
+        "word": " water"
+      },
+      {
+        "start": 9.54,
+        "end": 9.76,
+        "word": " it"
+      },
+      {
+        "start": 9.76,
+        "end": 10.1,
+        "word": " daily"
+      },
+      {
+        "start": 10.1,
+        "end": 10.62,
+        "word": " and"
+      },
+      {
+        "start": 10.62,
+        "end": 10.96,
+        "word": " protect"
+      },
+      {
+        "start": 10.96,
+        "end": 11.36,
+        "word": " it."
+      }
+    ]
+  },
+  {
+    "start": 12.42,
+    "end": 14.96,
+    "text": "That's the difference between liking and loving.",
+    "words": [
+      {
+        "start": 12.42,
+        "end": 12.78,
+        "word": " That's"
+      },
+      {
+        "start": 12.78,
+        "end": 12.9,
+        "word": " the"
+      },
+      {
+        "start": 12.9,
+        "end": 13.18,
+        "word": " difference"
+      },
+      {
+        "start": 13.18,
+        "end": 13.5,
+        "word": " between"
+      },
+      {
+        "start": 13.5,
+        "end": 13.92,
+        "word": " liking"
+      },
+      {
+        "start": 13.92,
+        "end": 14.62,
+        "word": " and"
+      },
+      {
+        "start": 14.62,
+        "end": 14.96,
+        "word": " loving."
+      }
+    ]
+  },
+  {
+    "start": 16.06,
+    "end": 20.2,
+    "text": "And when you truly understand that difference, you understand life.",
+    "words": [
+      {
+        "start": 16.06,
+        "end": 16.52,
+        "word": " And"
+      },
+      {
+        "start": 16.52,
+        "end": 16.66,
+        "word": " when"
+      },
+      {
+        "start": 16.66,
+        "end": 16.82,
+        "word": " you"
+      },
+      {
+        "start": 16.82,
+        "end": 17.14,
+        "word": " truly"
+      },
+      {
+        "start": 17.14,
+        "end": 17.78,
+        "word": " understand"
+      },
+      {
+        "start": 17.78,
+        "end": 18.02,
+        "word": " that"
+      },
+      {
+        "start": 18.02,
+        "end": 18.44,
+        "word": " difference,"
+      },
+      {
+        "start": 19.14,
+        "end": 19.28,
+        "word": " you"
+      },
+      {
+        "start": 19.28,
+        "end": 19.8,
+        "word": " understand"
+      },
+      {
+        "start": 19.8,
+        "end": 20.2,
+        "word": " life."
+      }
+    ]
+  }
+]

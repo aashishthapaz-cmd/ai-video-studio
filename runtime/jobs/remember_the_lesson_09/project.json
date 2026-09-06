@@ -1,0 +1,50 @@
+{
+  "title": "Remember The Lesson",
+  "style_bible": {
+    "emotional_arc": "Reflective and insightful, moving from letting go to finding meaning in loss.",
+    "palette": "Charcoal-teal with amber accents",
+    "lighting": "Moody twilight with soft ambient light",
+    "motif": "Natural elements like paths, trees, and water reflecting the journey of life",
+    "continuity": "Consistent dark hand-inked style with expressive lines and visible paper grain",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "Forget the past, but remember the lesson.",
+      "prompt": "A path winding through a dense forest at twilight, with an old book lying on the ground. The path is illuminated by soft amber — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "Let go of what hurts you, but never forget what it taught you.",
+      "prompt": "A solitary tree standing by a calm river at dusk. The tree's branches are bare, symbolizing letting go, while the river reflects the lessons — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "Not every loss is a failure. Some are just directions.",
+      "prompt": "A small boat floating on a misty lake at night, with the moon casting an amber glow over the water and guiding the path — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "Learn from it. But don't let it define you.",
+      "prompt": "A lone lantern hanging in a tree, casting a warm amber light on the ground below as a figure walks away into the night — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 106,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

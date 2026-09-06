@@ -1,0 +1,36 @@
+{
+  "title": "Franz Kafka Said",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 96,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "Franz Kafka said, destroy yourself to know yourself.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Franz Kafka said, destroy yourself to know yourself."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "Build yourself to surprise yourself.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Build yourself to surprise yourself."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "The important thing is not to be, but to become.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "The important thing is not to be, but to become."
+    }
+  ]
+}

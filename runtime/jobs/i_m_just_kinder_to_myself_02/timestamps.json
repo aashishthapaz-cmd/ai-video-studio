@@ -1,0 +1,290 @@
+[
+  {
+    "start": 0.0,
+    "end": 1.28,
+    "text": "I don't chase people anymore.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.12,
+        "word": " I"
+      },
+      {
+        "start": 0.12,
+        "end": 0.34,
+        "word": " don't"
+      },
+      {
+        "start": 0.34,
+        "end": 0.5,
+        "word": " chase"
+      },
+      {
+        "start": 0.5,
+        "end": 0.88,
+        "word": " people"
+      },
+      {
+        "start": 0.88,
+        "end": 1.28,
+        "word": " anymore."
+      }
+    ]
+  },
+  {
+    "start": 2.22,
+    "end": 2.94,
+    "text": "I chase peace.",
+    "words": [
+      {
+        "start": 2.22,
+        "end": 2.32,
+        "word": " I"
+      },
+      {
+        "start": 2.32,
+        "end": 2.56,
+        "word": " chase"
+      },
+      {
+        "start": 2.56,
+        "end": 2.94,
+        "word": " peace."
+      }
+    ]
+  },
+  {
+    "start": 3.88,
+    "end": 5.78,
+    "text": "If you stay, I'm grateful.",
+    "words": [
+      {
+        "start": 3.88,
+        "end": 4.06,
+        "word": " If"
+      },
+      {
+        "start": 4.06,
+        "end": 4.2,
+        "word": " you"
+      },
+      {
+        "start": 4.2,
+        "end": 4.48,
+        "word": " stay,"
+      },
+      {
+        "start": 5.3,
+        "end": 5.52,
+        "word": " I'm"
+      },
+      {
+        "start": 5.52,
+        "end": 5.78,
+        "word": " grateful."
+      }
+    ]
+  },
+  {
+    "start": 6.76,
+    "end": 9.36,
+    "text": "If you leave, I'm still peaceful.",
+    "words": [
+      {
+        "start": 6.76,
+        "end": 7.02,
+        "word": " If"
+      },
+      {
+        "start": 7.02,
+        "end": 7.18,
+        "word": " you"
+      },
+      {
+        "start": 7.18,
+        "end": 7.46,
+        "word": " leave,"
+      },
+      {
+        "start": 8.38,
+        "end": 8.68,
+        "word": " I'm"
+      },
+      {
+        "start": 8.68,
+        "end": 8.92,
+        "word": " still"
+      },
+      {
+        "start": 8.92,
+        "end": 9.36,
+        "word": " peaceful."
+      }
+    ]
+  },
+  {
+    "start": 10.46,
+    "end": 12.08,
+    "text": "Because I finally learned",
+    "words": [
+      {
+        "start": 10.46,
+        "end": 11.02,
+        "word": " Because"
+      },
+      {
+        "start": 11.02,
+        "end": 11.2,
+        "word": " I"
+      },
+      {
+        "start": 11.2,
+        "end": 11.6,
+        "word": " finally"
+      },
+      {
+        "start": 11.6,
+        "end": 12.08,
+        "word": " learned"
+      }
+    ]
+  },
+  {
+    "start": 12.76,
+    "end": 14.98,
+    "text": "my worth isn't proven by how hard",
+    "words": [
+      {
+        "start": 12.76,
+        "end": 13.08,
+        "word": " my"
+      },
+      {
+        "start": 13.08,
+        "end": 13.42,
+        "word": " worth"
+      },
+      {
+        "start": 13.42,
+        "end": 13.78,
+        "word": " isn't"
+      },
+      {
+        "start": 13.78,
+        "end": 14.1,
+        "word": " proven"
+      },
+      {
+        "start": 14.1,
+        "end": 14.36,
+        "word": " by"
+      },
+      {
+        "start": 14.36,
+        "end": 14.6,
+        "word": " how"
+      },
+      {
+        "start": 14.6,
+        "end": 14.98,
+        "word": " hard"
+      }
+    ]
+  },
+  {
+    "start": 14.98,
+    "end": 16.96,
+    "text": "I'm willing to suffer to be loved.",
+    "words": [
+      {
+        "start": 14.98,
+        "end": 15.62,
+        "word": " I'm"
+      },
+      {
+        "start": 15.62,
+        "end": 15.78,
+        "word": " willing"
+      },
+      {
+        "start": 15.78,
+        "end": 16.0,
+        "word": " to"
+      },
+      {
+        "start": 16.0,
+        "end": 16.3,
+        "word": " suffer"
+      },
+      {
+        "start": 16.3,
+        "end": 16.5,
+        "word": " to"
+      },
+      {
+        "start": 16.5,
+        "end": 16.64,
+        "word": " be"
+      },
+      {
+        "start": 16.64,
+        "end": 16.96,
+        "word": " loved."
+      }
+    ]
+  },
+  {
+    "start": 17.82,
+    "end": 18.94,
+    "text": "I'm not cold.",
+    "words": [
+      {
+        "start": 17.82,
+        "end": 18.38,
+        "word": " I'm"
+      },
+      {
+        "start": 18.38,
+        "end": 18.54,
+        "word": " not"
+      },
+      {
+        "start": 18.54,
+        "end": 18.94,
+        "word": " cold."
+      }
+    ]
+  },
+  {
+    "start": 19.94,
+    "end": 21.56,
+    "text": "I'm just kinder to myself.",
+    "words": [
+      {
+        "start": 19.94,
+        "end": 20.3,
+        "word": " I'm"
+      },
+      {
+        "start": 20.3,
+        "end": 20.48,
+        "word": " just"
+      },
+      {
+        "start": 20.48,
+        "end": 21.0,
+        "word": " kinder"
+      },
+      {
+        "start": 21.0,
+        "end": 21.12,
+        "word": " to"
+      },
+      {
+        "start": 21.12,
+        "end": 21.56,
+        "word": " myself."
+      }
+    ]
+  }
+]

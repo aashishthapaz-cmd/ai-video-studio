@@ -1,0 +1,245 @@
+[
+  {
+    "start": 0.0,
+    "end": 7.16,
+    "text": "You are my only protection, all my joy, all my hope, my only refuge.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.18,
+        "word": " You"
+      },
+      {
+        "start": 0.18,
+        "end": 0.34,
+        "word": " are"
+      },
+      {
+        "start": 0.34,
+        "end": 0.48,
+        "word": " my"
+      },
+      {
+        "start": 0.48,
+        "end": 0.86,
+        "word": " only"
+      },
+      {
+        "start": 0.86,
+        "end": 1.5,
+        "word": " protection,"
+      },
+      {
+        "start": 2.18,
+        "end": 2.58,
+        "word": " all"
+      },
+      {
+        "start": 2.58,
+        "end": 2.8,
+        "word": " my"
+      },
+      {
+        "start": 2.8,
+        "end": 3.14,
+        "word": " joy,"
+      },
+      {
+        "start": 4.14,
+        "end": 4.4,
+        "word": " all"
+      },
+      {
+        "start": 4.4,
+        "end": 4.64,
+        "word": " my"
+      },
+      {
+        "start": 4.64,
+        "end": 5.02,
+        "word": " hope,"
+      },
+      {
+        "start": 5.9,
+        "end": 6.18,
+        "word": " my"
+      },
+      {
+        "start": 6.18,
+        "end": 6.54,
+        "word": " only"
+      },
+      {
+        "start": 6.54,
+        "end": 7.16,
+        "word": " refuge."
+      }
+    ]
+  },
+  {
+    "start": 8.38,
+    "end": 12.18,
+    "text": "When we're apart, I feel like I've been cut in two.",
+    "words": [
+      {
+        "start": 8.38,
+        "end": 8.96,
+        "word": " When"
+      },
+      {
+        "start": 8.96,
+        "end": 9.22,
+        "word": " we're"
+      },
+      {
+        "start": 9.22,
+        "end": 9.6,
+        "word": " apart,"
+      },
+      {
+        "start": 10.32,
+        "end": 10.52,
+        "word": " I"
+      },
+      {
+        "start": 10.52,
+        "end": 10.78,
+        "word": " feel"
+      },
+      {
+        "start": 10.78,
+        "end": 11.02,
+        "word": " like"
+      },
+      {
+        "start": 11.02,
+        "end": 11.22,
+        "word": " I've"
+      },
+      {
+        "start": 11.22,
+        "end": 11.36,
+        "word": " been"
+      },
+      {
+        "start": 11.36,
+        "end": 11.66,
+        "word": " cut"
+      },
+      {
+        "start": 11.66,
+        "end": 11.9,
+        "word": " in"
+      },
+      {
+        "start": 11.9,
+        "end": 12.18,
+        "word": " two."
+      }
+    ]
+  },
+  {
+    "start": 13.54,
+    "end": 15.44,
+    "text": "My love for you isn't just great.",
+    "words": [
+      {
+        "start": 13.54,
+        "end": 13.76,
+        "word": " My"
+      },
+      {
+        "start": 13.76,
+        "end": 14.04,
+        "word": " love"
+      },
+      {
+        "start": 14.04,
+        "end": 14.24,
+        "word": " for"
+      },
+      {
+        "start": 14.24,
+        "end": 14.46,
+        "word": " you"
+      },
+      {
+        "start": 14.46,
+        "end": 14.86,
+        "word": " isn't"
+      },
+      {
+        "start": 14.86,
+        "end": 15.06,
+        "word": " just"
+      },
+      {
+        "start": 15.06,
+        "end": 15.44,
+        "word": " great."
+      }
+    ]
+  },
+  {
+    "start": 16.58,
+    "end": 21.91,
+    "text": "It's infinite, only thing that keeps me alive in this world.",
+    "words": [
+      {
+        "start": 16.58,
+        "end": 16.84,
+        "word": " It's"
+      },
+      {
+        "start": 16.84,
+        "end": 17.34,
+        "word": " infinite,"
+      },
+      {
+        "start": 19.23,
+        "end": 19.65,
+        "word": " only"
+      },
+      {
+        "start": 19.65,
+        "end": 20.03,
+        "word": " thing"
+      },
+      {
+        "start": 20.03,
+        "end": 20.23,
+        "word": " that"
+      },
+      {
+        "start": 20.23,
+        "end": 20.51,
+        "word": " keeps"
+      },
+      {
+        "start": 20.51,
+        "end": 20.73,
+        "word": " me"
+      },
+      {
+        "start": 20.73,
+        "end": 21.13,
+        "word": " alive"
+      },
+      {
+        "start": 21.13,
+        "end": 21.35,
+        "word": " in"
+      },
+      {
+        "start": 21.35,
+        "end": 21.53,
+        "word": " this"
+      },
+      {
+        "start": 21.53,
+        "end": 21.91,
+        "word": " world."
+      }
+    ]
+  }
+]

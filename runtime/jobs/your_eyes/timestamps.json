@@ -1,0 +1,240 @@
+[
+  {
+    "start": 0.0,
+    "end": 3.66,
+    "text": "Your eyes are the color of the ocean, laced with sunlight.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.16,
+        "word": " Your"
+      },
+      {
+        "start": 0.16,
+        "end": 0.56,
+        "word": " eyes"
+      },
+      {
+        "start": 0.56,
+        "end": 0.8,
+        "word": " are"
+      },
+      {
+        "start": 0.8,
+        "end": 0.88,
+        "word": " the"
+      },
+      {
+        "start": 0.88,
+        "end": 1.18,
+        "word": " color"
+      },
+      {
+        "start": 1.18,
+        "end": 1.38,
+        "word": " of"
+      },
+      {
+        "start": 1.38,
+        "end": 1.5,
+        "word": " the"
+      },
+      {
+        "start": 1.5,
+        "end": 1.86,
+        "word": " ocean,"
+      },
+      {
+        "start": 2.54,
+        "end": 3.0,
+        "word": " laced"
+      },
+      {
+        "start": 3.0,
+        "end": 3.18,
+        "word": " with"
+      },
+      {
+        "start": 3.18,
+        "end": 3.66,
+        "word": " sunlight."
+      }
+    ]
+  },
+  {
+    "start": 4.7,
+    "end": 7.62,
+    "text": "They shine with every beautiful shade of your being.",
+    "words": [
+      {
+        "start": 4.7,
+        "end": 4.84,
+        "word": " They"
+      },
+      {
+        "start": 4.84,
+        "end": 5.26,
+        "word": " shine"
+      },
+      {
+        "start": 5.26,
+        "end": 5.54,
+        "word": " with"
+      },
+      {
+        "start": 5.54,
+        "end": 5.92,
+        "word": " every"
+      },
+      {
+        "start": 5.92,
+        "end": 6.4,
+        "word": " beautiful"
+      },
+      {
+        "start": 6.4,
+        "end": 6.9,
+        "word": " shade"
+      },
+      {
+        "start": 6.9,
+        "end": 7.12,
+        "word": " of"
+      },
+      {
+        "start": 7.12,
+        "end": 7.28,
+        "word": " your"
+      },
+      {
+        "start": 7.28,
+        "end": 7.62,
+        "word": " being."
+      }
+    ]
+  },
+  {
+    "start": 8.5,
+    "end": 11.06,
+    "text": "I love the person I am when you look at me,",
+    "words": [
+      {
+        "start": 8.5,
+        "end": 8.74,
+        "word": " I"
+      },
+      {
+        "start": 8.74,
+        "end": 9.08,
+        "word": " love"
+      },
+      {
+        "start": 9.08,
+        "end": 9.3,
+        "word": " the"
+      },
+      {
+        "start": 9.3,
+        "end": 9.72,
+        "word": " person"
+      },
+      {
+        "start": 9.72,
+        "end": 9.96,
+        "word": " I"
+      },
+      {
+        "start": 9.96,
+        "end": 10.22,
+        "word": " am"
+      },
+      {
+        "start": 10.22,
+        "end": 10.42,
+        "word": " when"
+      },
+      {
+        "start": 10.42,
+        "end": 10.56,
+        "word": " you"
+      },
+      {
+        "start": 10.56,
+        "end": 10.74,
+        "word": " look"
+      },
+      {
+        "start": 10.74,
+        "end": 10.9,
+        "word": " at"
+      },
+      {
+        "start": 10.9,
+        "end": 11.06,
+        "word": " me,"
+      }
+    ]
+  },
+  {
+    "start": 11.76,
+    "end": 14.26,
+    "text": "and I'll never find the words to thank you for that.",
+    "words": [
+      {
+        "start": 11.76,
+        "end": 11.92,
+        "word": " and"
+      },
+      {
+        "start": 11.92,
+        "end": 12.08,
+        "word": " I'll"
+      },
+      {
+        "start": 12.08,
+        "end": 12.34,
+        "word": " never"
+      },
+      {
+        "start": 12.34,
+        "end": 12.68,
+        "word": " find"
+      },
+      {
+        "start": 12.68,
+        "end": 12.9,
+        "word": " the"
+      },
+      {
+        "start": 12.9,
+        "end": 13.24,
+        "word": " words"
+      },
+      {
+        "start": 13.24,
+        "end": 13.46,
+        "word": " to"
+      },
+      {
+        "start": 13.46,
+        "end": 13.72,
+        "word": " thank"
+      },
+      {
+        "start": 13.72,
+        "end": 13.9,
+        "word": " you"
+      },
+      {
+        "start": 13.9,
+        "end": 14.06,
+        "word": " for"
+      },
+      {
+        "start": 14.06,
+        "end": 14.26,
+        "word": " that."
+      }
+    ]
+  }
+]

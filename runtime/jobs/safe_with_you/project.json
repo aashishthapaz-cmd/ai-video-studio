@@ -1,0 +1,92 @@
+{
+  "title": "Safe With You",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 45,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "I know I am not always easy to love.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I know I am not always easy to love."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "My mind gets loud.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "My mind gets loud."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "My walls go up.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "My walls go up."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "Some days, I carry a silence I do not know how to explain.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Some days, I carry a silence I do not know how to explain."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "But you never ask me to become easier.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "But you never ask me to become easier."
+    },
+    {
+      "id": "scene_006",
+      "duration": 5,
+      "narration": "You just stay gentle.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "You just stay gentle."
+    },
+    {
+      "id": "scene_007",
+      "duration": 5,
+      "narration": "You hold my hand when it shakes.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "You hold my hand when it shakes."
+    },
+    {
+      "id": "scene_008",
+      "duration": 5,
+      "narration": "You love me, even on the days I forget how to love myself.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "You love me, even on the days I forget how to love myself."
+    },
+    {
+      "id": "scene_009",
+      "duration": 5,
+      "narration": "And that is how I know you are not just someone I love.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "And that is how I know you are not just someone I love."
+    },
+    {
+      "id": "scene_010",
+      "duration": 5,
+      "narration": "You are the place my heart feels safe.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "You are the place my heart feels safe."
+    }
+  ]
+}

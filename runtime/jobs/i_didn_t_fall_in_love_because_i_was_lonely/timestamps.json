@@ -1,0 +1,250 @@
+[
+  {
+    "start": 0.0,
+    "end": 4.1,
+    "text": "I didn't fall in love with you because I was lonely or lost.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.1,
+        "word": " I"
+      },
+      {
+        "start": 0.1,
+        "end": 0.38,
+        "word": " didn't"
+      },
+      {
+        "start": 0.38,
+        "end": 0.54,
+        "word": " fall"
+      },
+      {
+        "start": 0.54,
+        "end": 0.7,
+        "word": " in"
+      },
+      {
+        "start": 0.7,
+        "end": 0.9,
+        "word": " love"
+      },
+      {
+        "start": 0.9,
+        "end": 1.1,
+        "word": " with"
+      },
+      {
+        "start": 1.1,
+        "end": 1.3,
+        "word": " you"
+      },
+      {
+        "start": 1.3,
+        "end": 2.3,
+        "word": " because"
+      },
+      {
+        "start": 2.3,
+        "end": 2.5,
+        "word": " I"
+      },
+      {
+        "start": 2.5,
+        "end": 2.66,
+        "word": " was"
+      },
+      {
+        "start": 2.66,
+        "end": 3.04,
+        "word": " lonely"
+      },
+      {
+        "start": 3.04,
+        "end": 3.66,
+        "word": " or"
+      },
+      {
+        "start": 3.66,
+        "end": 4.1,
+        "word": " lost."
+      }
+    ]
+  },
+  {
+    "start": 5.22,
+    "end": 7.44,
+    "text": "I fell in love with you after getting to know you.",
+    "words": [
+      {
+        "start": 5.22,
+        "end": 5.32,
+        "word": " I"
+      },
+      {
+        "start": 5.32,
+        "end": 5.52,
+        "word": " fell"
+      },
+      {
+        "start": 5.52,
+        "end": 5.68,
+        "word": " in"
+      },
+      {
+        "start": 5.68,
+        "end": 5.88,
+        "word": " love"
+      },
+      {
+        "start": 5.88,
+        "end": 6.04,
+        "word": " with"
+      },
+      {
+        "start": 6.04,
+        "end": 6.2,
+        "word": " you"
+      },
+      {
+        "start": 6.2,
+        "end": 6.4,
+        "word": " after"
+      },
+      {
+        "start": 6.4,
+        "end": 6.7,
+        "word": " getting"
+      },
+      {
+        "start": 6.7,
+        "end": 6.94,
+        "word": " to"
+      },
+      {
+        "start": 6.94,
+        "end": 7.16,
+        "word": " know"
+      },
+      {
+        "start": 7.16,
+        "end": 7.44,
+        "word": " you."
+      }
+    ]
+  },
+  {
+    "start": 8.58,
+    "end": 14.68,
+    "text": "After I truly understood who you are, I realized I wanted to make you a permanent part of my",
+    "words": [
+      {
+        "start": 8.58,
+        "end": 8.86,
+        "word": " After"
+      },
+      {
+        "start": 8.86,
+        "end": 9.02,
+        "word": " I"
+      },
+      {
+        "start": 9.02,
+        "end": 9.3,
+        "word": " truly"
+      },
+      {
+        "start": 9.3,
+        "end": 9.86,
+        "word": " understood"
+      },
+      {
+        "start": 9.86,
+        "end": 10.26,
+        "word": " who"
+      },
+      {
+        "start": 10.26,
+        "end": 10.44,
+        "word": " you"
+      },
+      {
+        "start": 10.44,
+        "end": 10.74,
+        "word": " are,"
+      },
+      {
+        "start": 11.8,
+        "end": 12.06,
+        "word": " I"
+      },
+      {
+        "start": 12.06,
+        "end": 12.36,
+        "word": " realized"
+      },
+      {
+        "start": 12.36,
+        "end": 12.68,
+        "word": " I"
+      },
+      {
+        "start": 12.68,
+        "end": 12.92,
+        "word": " wanted"
+      },
+      {
+        "start": 12.92,
+        "end": 13.1,
+        "word": " to"
+      },
+      {
+        "start": 13.1,
+        "end": 13.28,
+        "word": " make"
+      },
+      {
+        "start": 13.28,
+        "end": 13.48,
+        "word": " you"
+      },
+      {
+        "start": 13.48,
+        "end": 13.56,
+        "word": " a"
+      },
+      {
+        "start": 13.56,
+        "end": 13.94,
+        "word": " permanent"
+      },
+      {
+        "start": 13.94,
+        "end": 14.32,
+        "word": " part"
+      },
+      {
+        "start": 14.32,
+        "end": 14.52,
+        "word": " of"
+      },
+      {
+        "start": 14.52,
+        "end": 14.68,
+        "word": " my"
+      }
+    ]
+  },
+  {
+    "start": 14.68,
+    "end": 15.04,
+    "text": "world.",
+    "words": [
+      {
+        "start": 14.68,
+        "end": 15.04,
+        "word": " world."
+      }
+    ]
+  }
+]

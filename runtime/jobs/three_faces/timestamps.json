@@ -1,0 +1,297 @@
+[
+  {
+    "start": 0.0,
+    "end": 3.5,
+    "text": "There is a legend that says we all have three faces.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.14,
+        "word": " There"
+      },
+      {
+        "start": 0.14,
+        "end": 0.28,
+        "word": " is"
+      },
+      {
+        "start": 0.28,
+        "end": 0.42,
+        "word": " a"
+      },
+      {
+        "start": 0.42,
+        "end": 0.78,
+        "word": " legend"
+      },
+      {
+        "start": 0.78,
+        "end": 1.5,
+        "word": " that"
+      },
+      {
+        "start": 1.5,
+        "end": 1.8,
+        "word": " says"
+      },
+      {
+        "start": 1.8,
+        "end": 2.06,
+        "word": " we"
+      },
+      {
+        "start": 2.06,
+        "end": 2.34,
+        "word": " all"
+      },
+      {
+        "start": 2.34,
+        "end": 2.6,
+        "word": " have"
+      },
+      {
+        "start": 2.6,
+        "end": 2.94,
+        "word": " three"
+      },
+      {
+        "start": 2.94,
+        "end": 3.5,
+        "word": " faces."
+      }
+    ]
+  },
+  {
+    "start": 4.26,
+    "end": 6.46,
+    "text": "The first, we show to the world.",
+    "words": [
+      {
+        "start": 4.26,
+        "end": 4.32,
+        "word": " The"
+      },
+      {
+        "start": 4.32,
+        "end": 4.88,
+        "word": " first,"
+      },
+      {
+        "start": 5.28,
+        "end": 5.5,
+        "word": " we"
+      },
+      {
+        "start": 5.5,
+        "end": 5.8,
+        "word": " show"
+      },
+      {
+        "start": 5.8,
+        "end": 5.96,
+        "word": " to"
+      },
+      {
+        "start": 5.96,
+        "end": 6.1,
+        "word": " the"
+      },
+      {
+        "start": 6.1,
+        "end": 6.46,
+        "word": " world."
+      }
+    ]
+  },
+  {
+    "start": 7.18,
+    "end": 12.54,
+    "text": "The second, we reveal only to the people we trust most and to our family.",
+    "words": [
+      {
+        "start": 7.18,
+        "end": 7.36,
+        "word": " The"
+      },
+      {
+        "start": 7.36,
+        "end": 7.84,
+        "word": " second,"
+      },
+      {
+        "start": 8.44,
+        "end": 8.56,
+        "word": " we"
+      },
+      {
+        "start": 8.56,
+        "end": 8.96,
+        "word": " reveal"
+      },
+      {
+        "start": 8.96,
+        "end": 9.46,
+        "word": " only"
+      },
+      {
+        "start": 9.46,
+        "end": 9.72,
+        "word": " to"
+      },
+      {
+        "start": 9.72,
+        "end": 9.82,
+        "word": " the"
+      },
+      {
+        "start": 9.82,
+        "end": 10.14,
+        "word": " people"
+      },
+      {
+        "start": 10.14,
+        "end": 10.38,
+        "word": " we"
+      },
+      {
+        "start": 10.38,
+        "end": 10.64,
+        "word": " trust"
+      },
+      {
+        "start": 10.64,
+        "end": 11.16,
+        "word": " most"
+      },
+      {
+        "start": 11.16,
+        "end": 11.74,
+        "word": " and"
+      },
+      {
+        "start": 11.74,
+        "end": 11.96,
+        "word": " to"
+      },
+      {
+        "start": 11.96,
+        "end": 12.12,
+        "word": " our"
+      },
+      {
+        "start": 12.12,
+        "end": 12.54,
+        "word": " family."
+      }
+    ]
+  },
+  {
+    "start": 13.52,
+    "end": 16.48,
+    "text": "And the final one is the one we keep hidden.",
+    "words": [
+      {
+        "start": 13.52,
+        "end": 13.86,
+        "word": " And"
+      },
+      {
+        "start": 13.86,
+        "end": 13.98,
+        "word": " the"
+      },
+      {
+        "start": 13.98,
+        "end": 14.3,
+        "word": " final"
+      },
+      {
+        "start": 14.3,
+        "end": 14.64,
+        "word": " one"
+      },
+      {
+        "start": 14.64,
+        "end": 15.24,
+        "word": " is"
+      },
+      {
+        "start": 15.24,
+        "end": 15.4,
+        "word": " the"
+      },
+      {
+        "start": 15.4,
+        "end": 15.64,
+        "word": " one"
+      },
+      {
+        "start": 15.64,
+        "end": 15.86,
+        "word": " we"
+      },
+      {
+        "start": 15.86,
+        "end": 16.08,
+        "word": " keep"
+      },
+      {
+        "start": 16.08,
+        "end": 16.48,
+        "word": " hidden."
+      }
+    ]
+  },
+  {
+    "start": 17.36,
+    "end": 21.24,
+    "text": "It's our truest self, the person we really are.",
+    "words": [
+      {
+        "start": 17.36,
+        "end": 17.66,
+        "word": " It's"
+      },
+      {
+        "start": 17.66,
+        "end": 17.78,
+        "word": " our"
+      },
+      {
+        "start": 17.78,
+        "end": 18.34,
+        "word": " truest"
+      },
+      {
+        "start": 18.34,
+        "end": 18.8,
+        "word": " self,"
+      },
+      {
+        "start": 19.62,
+        "end": 19.86,
+        "word": " the"
+      },
+      {
+        "start": 19.86,
+        "end": 20.26,
+        "word": " person"
+      },
+      {
+        "start": 20.26,
+        "end": 20.54,
+        "word": " we"
+      },
+      {
+        "start": 20.54,
+        "end": 20.88,
+        "word": " really"
+      },
+      {
+        "start": 20.88,
+        "end": 21.24,
+        "word": " are."
+      }
+    ]
+  }
+]

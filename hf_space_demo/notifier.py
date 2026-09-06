@@ -1,0 +1,125 @@
+import os
+import time
+import json
+import requests
+from pathlib import Path
+import sys
+
+CURR_DIR = Path(__file__).resolve().parent
+if str(CURR_DIR) not in sys.path:
+    sys.path.insert(0, str(CURR_DIR))
+
+from config import load_settings
+
+def send_telegram_message(message: str, bot_token: str = None, chat_id: str = None) -> dict:
+    cfg = load_settings()
+    token = (bot_token or cfg.get('telegram_bot_token', '')).strip()
+    chat = (chat_id or cfg.get('telegram_chat_id', '')).strip()
+    if not token or not chat:
+        return {'ok': False, 'error': 'Telegram bot token or chat ID is missing'}
+    url = f'https://api.telegram.org/bot{token}/sendMessage'
+    payload = {'chat_id': chat, 'text': message, 'parse_mode': 'Markdown', 'disable_web_page_preview': False}
+    try:
+        r = requests.post(url, json=payload, timeout=4)
+        data = r.json()
+        if data.get('ok'):
+            return {'ok': True, 'result': data}
+        return {'ok': False, 'error': data.get('description', r.text)}
+    except Exception as e:
+        return {'ok': False, 'error': str(e)}
+
+def send_whatsapp_message(message: str, phone: str = None, apikey: str = None) -> dict:
+    cfg = load_settings()
+    phone_num = (phone or cfg.get('whatsapp_phone', '')).strip()
+    key = (apikey or cfg.get('whatsapp_apikey', '')).strip()
+    if not phone_num or not key:
+        return {'ok': False, 'error': 'WhatsApp phone number or API key missing'}
+    url = 'https://api.callmebot.com/whatsapp.php'
+    params = {'phone': phone_num, 'text': message, 'apikey': key}
+    try:
+        r = requests.get(url, params=params, timeout=4)
+        if r.status_code == 200:
+            return {'ok': True}
+        return {'ok': False, 'error': f'HTTP {r.status_code}: {r.text}'}
+    except Exception as e:
+        return {'ok': False, 'error': str(e)}
+
+def dispatch_alert(message: str) -> dict:
+    cfg = load_settings()
+    results = {}
+    if cfg.get('enable_telegram', False) and cfg.get('telegram_bot_token'):
+        results['telegram'] = send_telegram_message(message)
+    if cfg.get('enable_whatsapp', False) and cfg.get('whatsapp_apikey'):
+        results['whatsapp'] = send_whatsapp_message(message)
+    if not results:
+        results['status'] = 'Notifications not enabled or credentials not configured'
+    return results
+
+def notify_job_start(job: dict):
+    title = job.get('title', 'Untitled Video')
+    sched_time = job.get('scheduled_time', 'Immediate')
+    msg = (
+        f"[Video Production Started]\n\n"
+        f"Title: {title}\n"
+        f"Scheduled Time: {sched_time}\n"
+        f"Voice: {job.get('voice', 'Default')}\n"
+        f"Visual World: {job.get('theme', 'Auto Dynamic')}\n"
+        f"Status: Generating audio, 2.5D visual scenes and parallax motion..."
+    )
+    return dispatch_alert(msg)
+
+def notify_job_success(job: dict, fb_results: list, render_time: float, video_path: str = None):
+    title = job.get('title', 'Untitled Video')
+    lines = [
+        f"[Video Published Successfully]\n",
+        f"Title: {title}\n",
+        f"Total Render Time: {render_time:.1f}s\n",
+        f"Facebook Publishing Results:\n"
+    ]
+    if not fb_results:
+        lines.append("No Facebook pages were enabled for auto-posting.\n")
+    else:
+        for res in fb_results:
+            page_name = res.get('page_name', 'Facebook Page')
+            if res.get('success'):
+                post_id = res.get('post_id', 'N/A')
+                reel_id = res.get('reel_video_id', '')
+                url = f'https://facebook.com/{post_id}' if post_id != 'N/A' else 'Published'
+                lines.append(f"  - {page_name}: Posted Successfully!\n")
+                if reel_id:
+                    lines.append(f"    Reel ID: {reel_id}\n")
+                lines.append(f"    Link: {url}\n")
+            else:
+                err = res.get('error', 'Unknown error')
+                lines.append(f"  - {page_name}: FAILED\n")
+                lines.append(f"    Error: {err}\n")
+                lines.append(f"    Suggestion: Check Page Token permissions at Facebook Developer console.\n")
+    lines.append("\nVideo stored temporarily in cloud queue. Will auto-sync to local PC on next boot.")
+    return dispatch_alert(''.join(lines))
+
+def notify_job_failure(job: dict, error_msg: str, stage: str = 'Video Generation'):
+    title = job.get('title', 'Untitled Video')
+    msg = (
+        f"[Video Production Failed]\n\n"
+        f"Title: {title}\n"
+        f"Failed Stage: {stage}\n"
+        f"Error Details: {error_msg}\n\n"
+        f"Troubleshooting Tips:\n"
+        f"  1. Check your API tokens and internet connection.\n"
+        f"  2. You can click 'Run Now' on the dashboard to retry this job immediately."
+    )
+    return dispatch_alert(msg)
+
+def notify_local_sync(pulled_files: list):
+    count = len(pulled_files)
+    if count == 0:
+        return {}
+    file_list = '\n'.join([f"  - {Path(f).name}" for f in pulled_files[:10]])
+    msg = (
+        f"[Local PC Auto-Sync Completed]\n\n"
+        f"Local PC turned ON and connected!\n"
+        f"Successfully transferred: {count} video(s) to D:\\Auto video Generator\\Output\\\n\n"
+        f"{file_list}\n\n"
+        f"Cloud storage cleaned up: 0 MB remaining on cloud."
+    )
+    return dispatch_alert(msg)

@@ -1,0 +1,52 @@
+{
+  "title": "Thank You For Being Such An Amazing Friend",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 97,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "Thank you for being such an amazing friend, the kind I could never have asked for.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Thank you for being such an amazing friend, the kind I could never have asked for."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "Thank you for listening to my stories and my random rants.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Thank you for listening to my stories and my random rants."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "Thank you for always being there when I needed someone to talk to.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Thank you for always being there when I needed someone to talk to."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "I'm so lucky to have a friend like you.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I'm so lucky to have a friend like you."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "Just remember, I'm always here if you ever need a shoulder to lean on.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Just remember, I'm always here if you ever need a shoulder to lean on."
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "title": "Find Your Happy Place",
+  "style_bible": {
+    "emotional_arc": "Disconnection to Connection, Ordinary to Extraordinary",
+    "palette": "Charcoal-teal, navy shadows with amber accents",
+    "lighting": "Moody twilight/night atmosphere",
+    "motif": "Natural person and path in a forest setting",
+    "continuity": "Sparse, poetic, readable visual world suitable for slow Ken Burns motion",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "In the wrong place, even your very best will never feel like enough.",
+      "prompt": "A lone figure stands on a path under a dense forest canopy, with only their silhouette visible against the twilight sky. The ground is — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "But in the right place, your mere presence will be celebrated.",
+      "prompt": "The same figure now stands at a clearing where sunlight filters through the trees. A small group of people are gathered around them, their — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "The same person can feel ordinary in one place, and extraordinary in another.",
+      "prompt": "A figure walks along a path that leads from the clearing back into the dense forest. The trees are taller here, and the atmosphere — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 103,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

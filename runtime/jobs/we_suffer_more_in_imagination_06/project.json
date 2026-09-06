@@ -1,0 +1,57 @@
+{
+  "title": "We Suffer More In Imagination",
+  "style_bible": {
+    "emotional_arc": "A contemplative journey through the inner turmoil of overthinking, from isolation to understanding.",
+    "palette": "Charcoal-teal with amber accents",
+    "lighting": "Twilight moody atmosphere",
+    "motif": "Sparse natural elements and symbolic objects",
+    "continuity": "Consistent dark hand-inked style with expressive contour lines and visible paper grain",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "We suffer more in imagination than in reality.",
+      "prompt": "A solitary figure sitting by a window, looking out into the twilight with a contemplative expression. The room is dimly lit, and a single — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "We live inside our heads all the time.",
+      "prompt": "A close-up of a person's head, with irregular contour lines emphasizing the complexity and depth of their thoughts. The background is a blurred silhouette — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "It doesn't matter what the reality actually is.",
+      "prompt": "A path leading into a dense fog, with only a faint outline of trees visible. The lighting is dim and moody, emphasizing the uncertainty — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "The problem is we overthink everything.",
+      "prompt": "A person holding a book with an expressive face, as if deep in thought. The background shows a library filled with books and shadows — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_005",
+      "duration": 4.0,
+      "narration": "Most of our pain doesn't come from what happens, but from what we imagine might happen.",
+      "prompt": "A person sitting by a riverbank, looking at the water with a contemplative expression. The river flows gently in the background, symbolizing the flow — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 113,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

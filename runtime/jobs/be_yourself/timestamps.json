@@ -1,0 +1,239 @@
+[
+  {
+    "start": 0.0,
+    "end": 2.2,
+    "text": "The moon doesn't compare itself to the stars.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.12,
+        "word": " The"
+      },
+      {
+        "start": 0.12,
+        "end": 0.36,
+        "word": " moon"
+      },
+      {
+        "start": 0.36,
+        "end": 0.74,
+        "word": " doesn't"
+      },
+      {
+        "start": 0.74,
+        "end": 1.08,
+        "word": " compare"
+      },
+      {
+        "start": 1.08,
+        "end": 1.44,
+        "word": " itself"
+      },
+      {
+        "start": 1.44,
+        "end": 1.7,
+        "word": " to"
+      },
+      {
+        "start": 1.7,
+        "end": 1.82,
+        "word": " the"
+      },
+      {
+        "start": 1.82,
+        "end": 2.2,
+        "word": " stars."
+      }
+    ]
+  },
+  {
+    "start": 3.34,
+    "end": 5.6,
+    "text": "The flowers don't compare themselves to other flowers.",
+    "words": [
+      {
+        "start": 3.34,
+        "end": 3.4,
+        "word": " The"
+      },
+      {
+        "start": 3.4,
+        "end": 3.72,
+        "word": " flowers"
+      },
+      {
+        "start": 3.72,
+        "end": 4.02,
+        "word": " don't"
+      },
+      {
+        "start": 4.02,
+        "end": 4.32,
+        "word": " compare"
+      },
+      {
+        "start": 4.32,
+        "end": 4.66,
+        "word": " themselves"
+      },
+      {
+        "start": 4.66,
+        "end": 4.96,
+        "word": " to"
+      },
+      {
+        "start": 4.96,
+        "end": 5.18,
+        "word": " other"
+      },
+      {
+        "start": 5.18,
+        "end": 5.6,
+        "word": " flowers."
+      }
+    ]
+  },
+  {
+    "start": 6.74,
+    "end": 9.26,
+    "text": "We shouldn't compare ourselves to anyone else either.",
+    "words": [
+      {
+        "start": 6.74,
+        "end": 7.02,
+        "word": " We"
+      },
+      {
+        "start": 7.02,
+        "end": 7.36,
+        "word": " shouldn't"
+      },
+      {
+        "start": 7.36,
+        "end": 7.68,
+        "word": " compare"
+      },
+      {
+        "start": 7.68,
+        "end": 8.12,
+        "word": " ourselves"
+      },
+      {
+        "start": 8.12,
+        "end": 8.36,
+        "word": " to"
+      },
+      {
+        "start": 8.36,
+        "end": 8.7,
+        "word": " anyone"
+      },
+      {
+        "start": 8.7,
+        "end": 8.96,
+        "word": " else"
+      },
+      {
+        "start": 8.96,
+        "end": 9.26,
+        "word": " either."
+      }
+    ]
+  },
+  {
+    "start": 10.1,
+    "end": 11.66,
+    "text": "So just be yourself.",
+    "words": [
+      {
+        "start": 10.1,
+        "end": 10.62,
+        "word": " So"
+      },
+      {
+        "start": 10.62,
+        "end": 10.9,
+        "word": " just"
+      },
+      {
+        "start": 10.9,
+        "end": 11.14,
+        "word": " be"
+      },
+      {
+        "start": 11.14,
+        "end": 11.66,
+        "word": " yourself."
+      }
+    ]
+  },
+  {
+    "start": 13.08,
+    "end": 14.64,
+    "text": "Walk your own path quietly,",
+    "words": [
+      {
+        "start": 13.08,
+        "end": 13.42,
+        "word": " Walk"
+      },
+      {
+        "start": 13.42,
+        "end": 13.6,
+        "word": " your"
+      },
+      {
+        "start": 13.6,
+        "end": 13.76,
+        "word": " own"
+      },
+      {
+        "start": 13.76,
+        "end": 14.04,
+        "word": " path"
+      },
+      {
+        "start": 14.04,
+        "end": 14.64,
+        "word": " quietly,"
+      }
+    ]
+  },
+  {
+    "start": 15.36,
+    "end": 17.42,
+    "text": "and life becomes so much easier.",
+    "words": [
+      {
+        "start": 15.36,
+        "end": 15.76,
+        "word": " and"
+      },
+      {
+        "start": 15.76,
+        "end": 16.04,
+        "word": " life"
+      },
+      {
+        "start": 16.04,
+        "end": 16.48,
+        "word": " becomes"
+      },
+      {
+        "start": 16.48,
+        "end": 16.82,
+        "word": " so"
+      },
+      {
+        "start": 16.82,
+        "end": 17.06,
+        "word": " much"
+      },
+      {
+        "start": 17.06,
+        "end": 17.42,
+        "word": " easier."
+      }
+    ]
+  }
+]

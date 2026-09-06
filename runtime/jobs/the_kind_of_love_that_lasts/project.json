@@ -1,0 +1,60 @@
+{
+  "title": "The Kind Of Love That Lasts",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 46,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "The kind of love that lasts is not built on perfect moments.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "The kind of love that lasts is not built on perfect moments."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "It is built on patience, on forgiveness, on choosing gentleness when being right would be easier.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "It is built on patience, on forgiveness, on choosing gentleness when being right would be easier."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "On holding hands through ordinary days and heavy seasons.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "On holding hands through ordinary days and heavy seasons."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "Because forever is never made from one beautiful promise.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Because forever is never made from one beautiful promise."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "It is made from two people choosing each other in the quietest ways.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "It is made from two people choosing each other in the quietest ways."
+    },
+    {
+      "id": "scene_006",
+      "duration": 5,
+      "narration": "Again and again.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Again and again."
+    }
+  ]
+}

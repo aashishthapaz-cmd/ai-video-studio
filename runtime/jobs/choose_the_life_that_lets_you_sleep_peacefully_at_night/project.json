@@ -1,0 +1,44 @@
+{
+  "title": "Choose The Life That Lets You Sleep Peacefully At Night",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 61,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "A satisfied life is more beautiful than a successful one.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "A satisfied life is more beautiful than a successful one."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "Success is seen by the world, but Satisfaction is felt by your soul.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Success is seen by the world, but Satisfaction is felt by your soul."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "Because at the end of the day, when the noise fades away, it's not the praise that stays.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Because at the end of the day, when the noise fades away, it's not the praise that stays."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "It's the peace.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "It's the peace."
+    }
+  ]
+}

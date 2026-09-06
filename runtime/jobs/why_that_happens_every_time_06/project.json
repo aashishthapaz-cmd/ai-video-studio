@@ -1,0 +1,57 @@
+{
+  "title": "Why That Happens Every Time",
+  "style_bible": {
+    "emotional_arc": "Optimistic yet melancholic, showing repeated hope followed by inevitable disappointment.",
+    "palette": "Charcoal-teal with amber accents for warmth and contrast against the overall cool tones.",
+    "lighting": "Moody twilight with a soft glow from an unseen lantern or distant light source creating depth and mystery.",
+    "motif": "A solitary figure in nature, often by water, symbolizing both isolation and reflection.",
+    "continuity": "Consistent sparse, poetic visual world suitable for slow Ken Burns motion.",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "I forgive people easily. I trust people easily.",
+      "prompt": "A woman standing by a calm riverbank, looking at the water with hopeful eyes under twilight skies, amber light filtering through trees, charcoal-teal background — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "I forget the bad things they did easily.",
+      "prompt": "A woman walking along a misty path, her silhouette barely visible against the night sky, with faint outlines of trees and distant lantern light — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "I always believe they'll be different this time.",
+      "prompt": "A woman sitting by a small wooden boat on the water, gazing at the horizon with hopeful eyes under twilight skies, amber light reflecting — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "I keep giving chances they never deserve, and I see the good in people, even when they show me the worst.",
+      "prompt": "A woman holding an open book by a window with raindrops falling outside, her face illuminated by the soft light from inside, amber glow — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_005",
+      "duration": 4.0,
+      "narration": "And somehow, I end up being the one who gets hurt, every single time.",
+      "prompt": "A woman standing alone in a rain-soaked forest clearing, her figure barely visible under the dense canopy of trees, amber light filtering — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 114,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

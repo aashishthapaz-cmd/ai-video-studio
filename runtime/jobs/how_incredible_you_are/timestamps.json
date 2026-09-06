@@ -1,0 +1,245 @@
+[
+  {
+    "start": 0.0,
+    "end": 3.04,
+    "text": "I want to make you so happy you can't stop smiling.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.14,
+        "word": " I"
+      },
+      {
+        "start": 0.14,
+        "end": 0.26,
+        "word": " want"
+      },
+      {
+        "start": 0.26,
+        "end": 0.4,
+        "word": " to"
+      },
+      {
+        "start": 0.4,
+        "end": 0.56,
+        "word": " make"
+      },
+      {
+        "start": 0.56,
+        "end": 0.78,
+        "word": " you"
+      },
+      {
+        "start": 0.78,
+        "end": 1.02,
+        "word": " so"
+      },
+      {
+        "start": 1.02,
+        "end": 1.42,
+        "word": " happy"
+      },
+      {
+        "start": 1.42,
+        "end": 1.96,
+        "word": " you"
+      },
+      {
+        "start": 1.96,
+        "end": 2.3,
+        "word": " can't"
+      },
+      {
+        "start": 2.3,
+        "end": 2.48,
+        "word": " stop"
+      },
+      {
+        "start": 2.48,
+        "end": 3.04,
+        "word": " smiling."
+      }
+    ]
+  },
+  {
+    "start": 4.06,
+    "end": 7.88,
+    "text": "I want you to feel so loved you never have to doubt anything.",
+    "words": [
+      {
+        "start": 4.06,
+        "end": 4.56,
+        "word": " I"
+      },
+      {
+        "start": 4.56,
+        "end": 4.74,
+        "word": " want"
+      },
+      {
+        "start": 4.74,
+        "end": 4.88,
+        "word": " you"
+      },
+      {
+        "start": 4.88,
+        "end": 4.98,
+        "word": " to"
+      },
+      {
+        "start": 4.98,
+        "end": 5.18,
+        "word": " feel"
+      },
+      {
+        "start": 5.18,
+        "end": 5.42,
+        "word": " so"
+      },
+      {
+        "start": 5.42,
+        "end": 5.82,
+        "word": " loved"
+      },
+      {
+        "start": 5.82,
+        "end": 6.4,
+        "word": " you"
+      },
+      {
+        "start": 6.4,
+        "end": 6.7,
+        "word": " never"
+      },
+      {
+        "start": 6.7,
+        "end": 6.96,
+        "word": " have"
+      },
+      {
+        "start": 6.96,
+        "end": 7.14,
+        "word": " to"
+      },
+      {
+        "start": 7.14,
+        "end": 7.38,
+        "word": " doubt"
+      },
+      {
+        "start": 7.38,
+        "end": 7.88,
+        "word": " anything."
+      }
+    ]
+  },
+  {
+    "start": 9.44,
+    "end": 14.82,
+    "text": "As I keep learning new things about you I want to prove just how incredible I think",
+    "words": [
+      {
+        "start": 9.44,
+        "end": 9.64,
+        "word": " As"
+      },
+      {
+        "start": 9.64,
+        "end": 9.78,
+        "word": " I"
+      },
+      {
+        "start": 9.78,
+        "end": 9.94,
+        "word": " keep"
+      },
+      {
+        "start": 9.94,
+        "end": 10.32,
+        "word": " learning"
+      },
+      {
+        "start": 10.32,
+        "end": 10.6,
+        "word": " new"
+      },
+      {
+        "start": 10.6,
+        "end": 10.86,
+        "word": " things"
+      },
+      {
+        "start": 10.86,
+        "end": 11.18,
+        "word": " about"
+      },
+      {
+        "start": 11.18,
+        "end": 11.52,
+        "word": " you"
+      },
+      {
+        "start": 11.52,
+        "end": 12.1,
+        "word": " I"
+      },
+      {
+        "start": 12.1,
+        "end": 12.24,
+        "word": " want"
+      },
+      {
+        "start": 12.24,
+        "end": 12.38,
+        "word": " to"
+      },
+      {
+        "start": 12.38,
+        "end": 12.74,
+        "word": " prove"
+      },
+      {
+        "start": 12.74,
+        "end": 13.16,
+        "word": " just"
+      },
+      {
+        "start": 13.16,
+        "end": 13.46,
+        "word": " how"
+      },
+      {
+        "start": 13.46,
+        "end": 13.98,
+        "word": " incredible"
+      },
+      {
+        "start": 13.98,
+        "end": 14.56,
+        "word": " I"
+      },
+      {
+        "start": 14.56,
+        "end": 14.82,
+        "word": " think"
+      }
+    ]
+  },
+  {
+    "start": 14.82,
+    "end": 15.3,
+    "text": "you are.",
+    "words": [
+      {
+        "start": 14.82,
+        "end": 15.08,
+        "word": " you"
+      },
+      {
+        "start": 15.08,
+        "end": 15.3,
+        "word": " are."
+      }
+    ]
+  }
+]

@@ -1,0 +1,255 @@
+[
+  {
+    "start": 0.0,
+    "end": 3.82,
+    "text": "I hope you know distance never separates two hearts that really care.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.26,
+        "word": " I"
+      },
+      {
+        "start": 0.26,
+        "end": 0.44,
+        "word": " hope"
+      },
+      {
+        "start": 0.44,
+        "end": 0.58,
+        "word": " you"
+      },
+      {
+        "start": 0.58,
+        "end": 0.78,
+        "word": " know"
+      },
+      {
+        "start": 0.78,
+        "end": 1.4,
+        "word": " distance"
+      },
+      {
+        "start": 1.4,
+        "end": 1.78,
+        "word": " never"
+      },
+      {
+        "start": 1.78,
+        "end": 2.38,
+        "word": " separates"
+      },
+      {
+        "start": 2.38,
+        "end": 2.6,
+        "word": " two"
+      },
+      {
+        "start": 2.6,
+        "end": 2.94,
+        "word": " hearts"
+      },
+      {
+        "start": 2.94,
+        "end": 3.16,
+        "word": " that"
+      },
+      {
+        "start": 3.16,
+        "end": 3.42,
+        "word": " really"
+      },
+      {
+        "start": 3.42,
+        "end": 3.82,
+        "word": " care."
+      }
+    ]
+  },
+  {
+    "start": 4.98,
+    "end": 8.44,
+    "text": "Our memories span the miles and in seconds we're there.",
+    "words": [
+      {
+        "start": 4.98,
+        "end": 5.32,
+        "word": " Our"
+      },
+      {
+        "start": 5.32,
+        "end": 5.7,
+        "word": " memories"
+      },
+      {
+        "start": 5.7,
+        "end": 6.08,
+        "word": " span"
+      },
+      {
+        "start": 6.08,
+        "end": 6.24,
+        "word": " the"
+      },
+      {
+        "start": 6.24,
+        "end": 6.66,
+        "word": " miles"
+      },
+      {
+        "start": 6.66,
+        "end": 7.36,
+        "word": " and"
+      },
+      {
+        "start": 7.36,
+        "end": 7.5,
+        "word": " in"
+      },
+      {
+        "start": 7.5,
+        "end": 7.82,
+        "word": " seconds"
+      },
+      {
+        "start": 7.82,
+        "end": 8.26,
+        "word": " we're"
+      },
+      {
+        "start": 8.26,
+        "end": 8.44,
+        "word": " there."
+      }
+    ]
+  },
+  {
+    "start": 10.06,
+    "end": 15.64,
+    "text": "Whenever I start feeling sad because I miss you, I remind myself how lucky I am",
+    "words": [
+      {
+        "start": 10.06,
+        "end": 10.38,
+        "word": " Whenever"
+      },
+      {
+        "start": 10.38,
+        "end": 10.64,
+        "word": " I"
+      },
+      {
+        "start": 10.64,
+        "end": 10.88,
+        "word": " start"
+      },
+      {
+        "start": 10.88,
+        "end": 11.22,
+        "word": " feeling"
+      },
+      {
+        "start": 11.22,
+        "end": 11.66,
+        "word": " sad"
+      },
+      {
+        "start": 11.66,
+        "end": 12.36,
+        "word": " because"
+      },
+      {
+        "start": 12.36,
+        "end": 12.56,
+        "word": " I"
+      },
+      {
+        "start": 12.56,
+        "end": 12.82,
+        "word": " miss"
+      },
+      {
+        "start": 12.82,
+        "end": 13.12,
+        "word": " you,"
+      },
+      {
+        "start": 13.6,
+        "end": 13.8,
+        "word": " I"
+      },
+      {
+        "start": 13.8,
+        "end": 14.04,
+        "word": " remind"
+      },
+      {
+        "start": 14.04,
+        "end": 14.62,
+        "word": " myself"
+      },
+      {
+        "start": 14.62,
+        "end": 14.86,
+        "word": " how"
+      },
+      {
+        "start": 14.86,
+        "end": 15.14,
+        "word": " lucky"
+      },
+      {
+        "start": 15.14,
+        "end": 15.4,
+        "word": " I"
+      },
+      {
+        "start": 15.4,
+        "end": 15.64,
+        "word": " am"
+      }
+    ]
+  },
+  {
+    "start": 15.64,
+    "end": 18.04,
+    "text": "to have someone so special to miss.",
+    "words": [
+      {
+        "start": 15.64,
+        "end": 16.22,
+        "word": " to"
+      },
+      {
+        "start": 16.22,
+        "end": 16.42,
+        "word": " have"
+      },
+      {
+        "start": 16.42,
+        "end": 16.78,
+        "word": " someone"
+      },
+      {
+        "start": 16.78,
+        "end": 17.08,
+        "word": " so"
+      },
+      {
+        "start": 17.08,
+        "end": 17.54,
+        "word": " special"
+      },
+      {
+        "start": 17.54,
+        "end": 17.78,
+        "word": " to"
+      },
+      {
+        "start": 17.78,
+        "end": 18.04,
+        "word": " miss."
+      }
+    ]
+  }
+]

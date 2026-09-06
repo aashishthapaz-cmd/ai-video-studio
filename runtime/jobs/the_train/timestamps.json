@@ -1,0 +1,260 @@
+[
+  {
+    "start": 0.0,
+    "end": 4.34,
+    "text": "Life is just a journey on a train with a pair of travellers at every window.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.2,
+        "word": " Life"
+      },
+      {
+        "start": 0.2,
+        "end": 0.44,
+        "word": " is"
+      },
+      {
+        "start": 0.44,
+        "end": 0.62,
+        "word": " just"
+      },
+      {
+        "start": 0.62,
+        "end": 0.78,
+        "word": " a"
+      },
+      {
+        "start": 0.78,
+        "end": 1.12,
+        "word": " journey"
+      },
+      {
+        "start": 1.12,
+        "end": 1.34,
+        "word": " on"
+      },
+      {
+        "start": 1.34,
+        "end": 1.44,
+        "word": " a"
+      },
+      {
+        "start": 1.44,
+        "end": 1.88,
+        "word": " train"
+      },
+      {
+        "start": 1.88,
+        "end": 2.5,
+        "word": " with"
+      },
+      {
+        "start": 2.5,
+        "end": 2.64,
+        "word": " a"
+      },
+      {
+        "start": 2.64,
+        "end": 2.82,
+        "word": " pair"
+      },
+      {
+        "start": 2.82,
+        "end": 2.94,
+        "word": " of"
+      },
+      {
+        "start": 2.94,
+        "end": 3.44,
+        "word": " travellers"
+      },
+      {
+        "start": 3.44,
+        "end": 3.62,
+        "word": " at"
+      },
+      {
+        "start": 3.62,
+        "end": 3.92,
+        "word": " every"
+      },
+      {
+        "start": 3.92,
+        "end": 4.34,
+        "word": " window."
+      }
+    ]
+  },
+  {
+    "start": 5.6,
+    "end": 8.62,
+    "text": "Sometimes someone stays right beside you for the whole ride.",
+    "words": [
+      {
+        "start": 5.6,
+        "end": 6.16,
+        "word": " Sometimes"
+      },
+      {
+        "start": 6.16,
+        "end": 6.56,
+        "word": " someone"
+      },
+      {
+        "start": 6.56,
+        "end": 6.88,
+        "word": " stays"
+      },
+      {
+        "start": 6.88,
+        "end": 7.16,
+        "word": " right"
+      },
+      {
+        "start": 7.16,
+        "end": 7.5,
+        "word": " beside"
+      },
+      {
+        "start": 7.5,
+        "end": 7.78,
+        "word": " you"
+      },
+      {
+        "start": 7.78,
+        "end": 7.92,
+        "word": " for"
+      },
+      {
+        "start": 7.92,
+        "end": 8.04,
+        "word": " the"
+      },
+      {
+        "start": 8.04,
+        "end": 8.22,
+        "word": " whole"
+      },
+      {
+        "start": 8.22,
+        "end": 8.62,
+        "word": " ride."
+      }
+    ]
+  },
+  {
+    "start": 9.62,
+    "end": 11.7,
+    "text": "Sometimes they step off along the way.",
+    "words": [
+      {
+        "start": 9.62,
+        "end": 10.18,
+        "word": " Sometimes"
+      },
+      {
+        "start": 10.18,
+        "end": 10.52,
+        "word": " they"
+      },
+      {
+        "start": 10.52,
+        "end": 10.78,
+        "word": " step"
+      },
+      {
+        "start": 10.78,
+        "end": 11.02,
+        "word": " off"
+      },
+      {
+        "start": 11.02,
+        "end": 11.24,
+        "word": " along"
+      },
+      {
+        "start": 11.24,
+        "end": 11.44,
+        "word": " the"
+      },
+      {
+        "start": 11.44,
+        "end": 11.7,
+        "word": " way."
+      }
+    ]
+  },
+  {
+    "start": 12.84,
+    "end": 17.16,
+    "text": "But if destiny ever seats me next to you, let's be pleasant travellers.",
+    "words": [
+      {
+        "start": 12.84,
+        "end": 13.2,
+        "word": " But"
+      },
+      {
+        "start": 13.2,
+        "end": 13.32,
+        "word": " if"
+      },
+      {
+        "start": 13.32,
+        "end": 13.74,
+        "word": " destiny"
+      },
+      {
+        "start": 13.74,
+        "end": 14.0,
+        "word": " ever"
+      },
+      {
+        "start": 14.0,
+        "end": 14.28,
+        "word": " seats"
+      },
+      {
+        "start": 14.28,
+        "end": 14.52,
+        "word": " me"
+      },
+      {
+        "start": 14.52,
+        "end": 14.8,
+        "word": " next"
+      },
+      {
+        "start": 14.8,
+        "end": 15.0,
+        "word": " to"
+      },
+      {
+        "start": 15.0,
+        "end": 15.2,
+        "word": " you,"
+      },
+      {
+        "start": 15.96,
+        "end": 16.2,
+        "word": " let's"
+      },
+      {
+        "start": 16.2,
+        "end": 16.3,
+        "word": " be"
+      },
+      {
+        "start": 16.3,
+        "end": 16.66,
+        "word": " pleasant"
+      },
+      {
+        "start": 16.66,
+        "end": 17.16,
+        "word": " travellers."
+      }
+    ]
+  }
+]

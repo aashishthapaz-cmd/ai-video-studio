@@ -1,0 +1,57 @@
+{
+  "title": "I'm Just Kinder To Myself",
+  "style_bible": {
+    "emotional_arc": "Transition from isolation to inner peace, acceptance of solitude.",
+    "palette": "Charcoal-teal, navy shadows with amber accents",
+    "lighting": "Moody twilight atmosphere, soft ambient light",
+    "motif": "Natural elements and solitary figures",
+    "continuity": "Sparse, poetic visual world suitable for slow Ken Burns motion",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "I don't chase people anymore. I chase peace.",
+      "prompt": "solitary figure walking away from a bustling cityscape towards calm waters, amber light filtering through trees, wide lonely establishing view, rain haze, amber window — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "If you stay, I'm grateful. If you leave, I'm still peaceful.",
+      "prompt": "window frame showing a person's silhouette in twilight, with raindrops gently falling on the glass, amber light inside, close symbolic detail, heavy shadow, rust-red — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "Because I finally learned, my worth isn't proven by how hard I'm willing to suffer to be loved.",
+      "prompt": "tree silhouette against a twilight sky with faint moonlight, book lying open on its trunk, amber light casting shadows, low-angle walking silhouette, open negative — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "I'm not cold.",
+      "prompt": "path leading to a solitary lantern in the misty night, amber light glowing softly from within, rust-red accents, still interior frame, lantern geometry, muted — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_005",
+      "duration": 4.0,
+      "narration": "I'm just kinder to myself.",
+      "prompt": "person sitting by a calm lake at twilight, holding a book with soft amber light reflecting off the water, pale cream accents, distant horizon — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 104,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

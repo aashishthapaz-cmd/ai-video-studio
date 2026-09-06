@@ -1,0 +1,50 @@
+{
+  "title": "Fluent In Hiding What I Feel",
+  "style_bible": {
+    "emotional_arc": "Heavy burden, emotional suppression, resilience, unspoken pain",
+    "palette": "Charcoal-teal, navy shadows, amber accents",
+    "lighting": "Moody twilight/night atmosphere with subtle moonlight",
+    "motif": "Natural elements and sparse everyday objects",
+    "continuity": "Consistent dark hand-inked storybook/graphic-novel illustration style",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "Because I carry it well, doesn't mean it's not heavy.",
+      "prompt": "A woman carries a heavy wooden crate on her back under the moonlight, symbolic of an emotional burden. Sparse trees in the background add — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "I've simply become fluent in the language of pretending nothing hurts, when everything does.",
+      "prompt": "A person standing by a window with their back to us, hands clasped tightly as if holding back tears. The window frames the night — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "I make it look effortless,",
+      "prompt": "A person sitting on a bench under the moonlight, reading an old book with a calm expression. The atmosphere is serene yet melancholic — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "because falling apart was never an option.",
+      "prompt": "A person standing alone on a path under moonlight, with distant trees and fog in the background. The path symbolizes the journey of resilience — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 105,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

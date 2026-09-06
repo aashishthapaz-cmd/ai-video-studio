@@ -1,0 +1,2 @@
+file 'D:/Auto video Generator/output/test_cloud_workspace/audio/s1.mp3'
+file 'D:/Auto video Generator/output/test_cloud_workspace/audio/s2.mp3'

@@ -1,0 +1,57 @@
+{
+  "title": "He Was Just Doing His Best",
+  "style_bible": {
+    "emotional_arc": "A journey of understanding and appreciation as one matures, recognizing the sacrifices made by a parent.",
+    "palette": "Charcoal-teal with amber accents",
+    "lighting": "Moody twilight atmosphere",
+    "motif": "Natural elements representing growth and reflection",
+    "continuity": "Sparse, poetic visual world suitable for slow Ken Burns motion",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "As you grow older, you begin to understand.",
+      "prompt": "A young tree sprouting from a crack in the earth, symbolizing growth and resilience. Sparse branches reach towards the twilight sky, wide lonely establishing — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "Your father was just a man, trying his best with what he knew.",
+      "prompt": "A weathered hand holding a worn book under the twilight sky. The book's pages are yellowed and creased, hinting at years of use, close — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "He put your needs before his own.",
+      "prompt": "A small lantern casting a warm glow on a path leading to a cozy cabin. The path is lined with fallen leaves, symbolizing — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "He traded some of his dreams for the dreams he had for you.",
+      "prompt": "A boat floating on a calm, twilight river. The boat's outline is faintly visible against the dark water, representing the unseen sacrifices made by — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_005",
+      "duration": 4.0,
+      "narration": "He was living life for the first time too.",
+      "prompt": "A lone figure standing at a window, looking out into the twilight. The figure's silhouette is slightly blurred, symbolizing the father’s new perspective on — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 101,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

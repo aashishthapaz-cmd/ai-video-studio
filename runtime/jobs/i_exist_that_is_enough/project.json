@@ -1,0 +1,60 @@
+{
+  "title": "I Exist. That Is Enough",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 85,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "I exist as I am, and that is enough.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I exist as I am, and that is enough."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "Even if no one sees me, I'm still enough.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Even if no one sees me, I'm still enough."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "Even if everyone sees me, I'm still enough.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Even if everyone sees me, I'm still enough."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "Because the only person who truly needs to know me, is me.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Because the only person who truly needs to know me, is me."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "And whether I become who I meant to be today or years from now, I will get there.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "And whether I become who I meant to be today or years from now, I will get there."
+    },
+    {
+      "id": "scene_006",
+      "duration": 5,
+      "narration": "And until then, I will learn to be at peace with who I am.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "And until then, I will learn to be at peace with who I am."
+    }
+  ]
+}

@@ -1,0 +1,268 @@
+[
+  {
+    "start": 0.0,
+    "end": 8.04,
+    "text": "Isn't it strange? You are not the same person you once were. Too much has changed. Too much had to.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.32,
+        "word": " Isn't"
+      },
+      {
+        "start": 0.32,
+        "end": 0.4,
+        "word": " it"
+      },
+      {
+        "start": 0.4,
+        "end": 0.78,
+        "word": " strange?"
+      },
+      {
+        "start": 1.88,
+        "end": 2.0,
+        "word": " You"
+      },
+      {
+        "start": 2.0,
+        "end": 2.1,
+        "word": " are"
+      },
+      {
+        "start": 2.1,
+        "end": 2.3,
+        "word": " not"
+      },
+      {
+        "start": 2.3,
+        "end": 2.52,
+        "word": " the"
+      },
+      {
+        "start": 2.52,
+        "end": 2.76,
+        "word": " same"
+      },
+      {
+        "start": 2.76,
+        "end": 3.18,
+        "word": " person"
+      },
+      {
+        "start": 3.18,
+        "end": 3.4,
+        "word": " you"
+      },
+      {
+        "start": 3.4,
+        "end": 3.66,
+        "word": " once"
+      },
+      {
+        "start": 3.66,
+        "end": 3.98,
+        "word": " were."
+      },
+      {
+        "start": 5.02,
+        "end": 5.16,
+        "word": " Too"
+      },
+      {
+        "start": 5.16,
+        "end": 5.4,
+        "word": " much"
+      },
+      {
+        "start": 5.4,
+        "end": 5.56,
+        "word": " has"
+      },
+      {
+        "start": 5.56,
+        "end": 5.98,
+        "word": " changed."
+      },
+      {
+        "start": 7.06,
+        "end": 7.32,
+        "word": " Too"
+      },
+      {
+        "start": 7.32,
+        "end": 7.58,
+        "word": " much"
+      },
+      {
+        "start": 7.58,
+        "end": 7.8,
+        "word": " had"
+      },
+      {
+        "start": 7.8,
+        "end": 8.04,
+        "word": " to."
+      }
+    ]
+  },
+  {
+    "start": 8.94,
+    "end": 14.78,
+    "text": "So don't expect from yourself what you once embodied, that version of you no longer exists.",
+    "words": [
+      {
+        "start": 8.94,
+        "end": 9.22,
+        "word": " So"
+      },
+      {
+        "start": 9.22,
+        "end": 9.5,
+        "word": " don't"
+      },
+      {
+        "start": 9.5,
+        "end": 9.88,
+        "word": " expect"
+      },
+      {
+        "start": 9.88,
+        "end": 10.06,
+        "word": " from"
+      },
+      {
+        "start": 10.06,
+        "end": 10.54,
+        "word": " yourself"
+      },
+      {
+        "start": 10.54,
+        "end": 11.14,
+        "word": " what"
+      },
+      {
+        "start": 11.14,
+        "end": 11.36,
+        "word": " you"
+      },
+      {
+        "start": 11.36,
+        "end": 11.66,
+        "word": " once"
+      },
+      {
+        "start": 11.66,
+        "end": 12.18,
+        "word": " embodied,"
+      },
+      {
+        "start": 12.68,
+        "end": 12.86,
+        "word": " that"
+      },
+      {
+        "start": 12.86,
+        "end": 13.2,
+        "word": " version"
+      },
+      {
+        "start": 13.2,
+        "end": 13.4,
+        "word": " of"
+      },
+      {
+        "start": 13.4,
+        "end": 13.64,
+        "word": " you"
+      },
+      {
+        "start": 13.64,
+        "end": 13.9,
+        "word": " no"
+      },
+      {
+        "start": 13.9,
+        "end": 14.24,
+        "word": " longer"
+      },
+      {
+        "start": 14.24,
+        "end": 14.78,
+        "word": " exists."
+      }
+    ]
+  },
+  {
+    "start": 15.84,
+    "end": 20.22,
+    "text": "Maybe what you lost shaped you. And what you buried set you free.",
+    "words": [
+      {
+        "start": 15.84,
+        "end": 16.36,
+        "word": " Maybe"
+      },
+      {
+        "start": 16.36,
+        "end": 16.62,
+        "word": " what"
+      },
+      {
+        "start": 16.62,
+        "end": 16.78,
+        "word": " you"
+      },
+      {
+        "start": 16.78,
+        "end": 17.14,
+        "word": " lost"
+      },
+      {
+        "start": 17.14,
+        "end": 17.54,
+        "word": " shaped"
+      },
+      {
+        "start": 17.54,
+        "end": 17.84,
+        "word": " you."
+      },
+      {
+        "start": 18.58,
+        "end": 18.84,
+        "word": " And"
+      },
+      {
+        "start": 18.84,
+        "end": 18.96,
+        "word": " what"
+      },
+      {
+        "start": 18.96,
+        "end": 19.1,
+        "word": " you"
+      },
+      {
+        "start": 19.1,
+        "end": 19.48,
+        "word": " buried"
+      },
+      {
+        "start": 19.48,
+        "end": 19.8,
+        "word": " set"
+      },
+      {
+        "start": 19.8,
+        "end": 19.98,
+        "word": " you"
+      },
+      {
+        "start": 19.98,
+        "end": 20.22,
+        "word": " free."
+      }
+    ]
+  }
+]

@@ -1,0 +1,52 @@
+{
+  "title": "You Are My Peace",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 48,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "I cannot promise that every day will be perfect.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I cannot promise that every day will be perfect."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "But I can promise you will not be loved halfway.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "But I can promise you will not be loved halfway."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "I will choose you in the quiet mornings, in the tired evenings, and in the ordinary moments no one else sees.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I will choose you in the quiet mornings, in the tired evenings, and in the ordinary moments no one else sees."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "Because love is not only something I feel.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Because love is not only something I feel."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "It is something I keep choosing.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "It is something I keep choosing."
+    }
+  ]
+}

@@ -1,0 +1,198 @@
+[
+  {
+    "start": 0.0,
+    "end": 6.2,
+    "text": "I wasn't looking for you when I met you, but now, with you, it feels like a part of me",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.14,
+        "word": " I"
+      },
+      {
+        "start": 0.14,
+        "end": 0.4,
+        "word": " wasn't"
+      },
+      {
+        "start": 0.4,
+        "end": 0.6,
+        "word": " looking"
+      },
+      {
+        "start": 0.6,
+        "end": 0.88,
+        "word": " for"
+      },
+      {
+        "start": 0.88,
+        "end": 1.02,
+        "word": " you"
+      },
+      {
+        "start": 1.02,
+        "end": 1.16,
+        "word": " when"
+      },
+      {
+        "start": 1.16,
+        "end": 1.28,
+        "word": " I"
+      },
+      {
+        "start": 1.28,
+        "end": 1.46,
+        "word": " met"
+      },
+      {
+        "start": 1.46,
+        "end": 1.74,
+        "word": " you,"
+      },
+      {
+        "start": 2.42,
+        "end": 2.78,
+        "word": " but"
+      },
+      {
+        "start": 2.78,
+        "end": 3.08,
+        "word": " now,"
+      },
+      {
+        "start": 3.62,
+        "end": 3.82,
+        "word": " with"
+      },
+      {
+        "start": 3.82,
+        "end": 4.14,
+        "word": " you,"
+      },
+      {
+        "start": 4.92,
+        "end": 5.06,
+        "word": " it"
+      },
+      {
+        "start": 5.06,
+        "end": 5.32,
+        "word": " feels"
+      },
+      {
+        "start": 5.32,
+        "end": 5.56,
+        "word": " like"
+      },
+      {
+        "start": 5.56,
+        "end": 5.66,
+        "word": " a"
+      },
+      {
+        "start": 5.66,
+        "end": 5.9,
+        "word": " part"
+      },
+      {
+        "start": 5.9,
+        "end": 6.04,
+        "word": " of"
+      },
+      {
+        "start": 6.04,
+        "end": 6.2,
+        "word": " me"
+      }
+    ]
+  },
+  {
+    "start": 6.2,
+    "end": 7.24,
+    "text": "always wanted this.",
+    "words": [
+      {
+        "start": 6.2,
+        "end": 6.48,
+        "word": " always"
+      },
+      {
+        "start": 6.48,
+        "end": 6.84,
+        "word": " wanted"
+      },
+      {
+        "start": 6.84,
+        "end": 7.24,
+        "word": " this."
+      }
+    ]
+  },
+  {
+    "start": 8.82,
+    "end": 13.2,
+    "text": "My heart stopped searching for anything else, the moment it found you.",
+    "words": [
+      {
+        "start": 8.82,
+        "end": 9.1,
+        "word": " My"
+      },
+      {
+        "start": 9.1,
+        "end": 9.36,
+        "word": " heart"
+      },
+      {
+        "start": 9.36,
+        "end": 9.64,
+        "word": " stopped"
+      },
+      {
+        "start": 9.64,
+        "end": 10.08,
+        "word": " searching"
+      },
+      {
+        "start": 10.08,
+        "end": 10.36,
+        "word": " for"
+      },
+      {
+        "start": 10.36,
+        "end": 10.64,
+        "word": " anything"
+      },
+      {
+        "start": 10.64,
+        "end": 11.06,
+        "word": " else,"
+      },
+      {
+        "start": 12.06,
+        "end": 12.18,
+        "word": " the"
+      },
+      {
+        "start": 12.18,
+        "end": 12.48,
+        "word": " moment"
+      },
+      {
+        "start": 12.48,
+        "end": 12.68,
+        "word": " it"
+      },
+      {
+        "start": 12.68,
+        "end": 12.92,
+        "word": " found"
+      },
+      {
+        "start": 12.92,
+        "end": 13.2,
+        "word": " you."
+      }
+    ]
+  }
+]

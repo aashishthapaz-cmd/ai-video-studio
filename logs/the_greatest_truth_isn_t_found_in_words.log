@@ -1,0 +1,7 @@
+ERROR: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>
+ComfyUI generated scene_001
+ComfyUI generated scene_002
+ComfyUI generated scene_003
+ComfyUI generated scene_004
+ComfyUI generated scene_005
+{"output": "D:\\Auto video Generator\\Output\\The Greatest Truth Isn't Found In Words.mp4", "project_output": "D:\\Auto video Generator\\runtime\\jobs\\the_greatest_truth_isn_t_found_in_words\\final_voxcpm_match.mp4", "scenes": 5, "caption_visible": true, "renderer": "Nepali TTS reference system"}

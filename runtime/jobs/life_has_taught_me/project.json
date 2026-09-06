@@ -1,0 +1,44 @@
+{
+  "title": "Life Has Taught Me",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 117,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "Life has taught me, you can't decide how loyal someone will be.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Life has taught me, you can't decide how loyal someone will be."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "Treating people with love and respect doesn't guarantee they'll return it.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Treating people with love and respect doesn't guarantee they'll return it."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "Caring deeply for someone doesn't mean they'll care for you the same way.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Caring deeply for someone doesn't mean they'll care for you the same way."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "The saddest truth is, the people closest to you can become the ones you feel safest keeping your distance from.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "The saddest truth is, the people closest to you can become the ones you feel safest keeping your distance from."
+    }
+  ]
+}

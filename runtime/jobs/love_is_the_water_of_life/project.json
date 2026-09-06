@@ -1,0 +1,44 @@
+{
+  "title": "Love Is The Water Of Life",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 70,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "Love has no labels, no definitions.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Love has no labels, no definitions."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "It is what it is, pure and simple.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "It is what it is, pure and simple."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "Love is the water of life, and the lover is a soul of fire.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Love is the water of life, and the lover is a soul of fire."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "The universe turns differently when fire loves water.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "The universe turns differently when fire loves water."
+    }
+  ]
+}

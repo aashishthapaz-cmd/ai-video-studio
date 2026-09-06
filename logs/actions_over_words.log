@@ -1,0 +1,4 @@
+ComfyUI generated scene_001
+ComfyUI generated scene_002
+ComfyUI generated scene_003
+{"output": "D:\\Auto video Generator\\Output\\Actions Over Words.mp4", "project_output": "D:\\Auto video Generator\\runtime\\jobs\\actions_over_words\\final_voxcpm_match.mp4", "scenes": 3, "caption_visible": true, "renderer": "Nepali TTS reference system"}

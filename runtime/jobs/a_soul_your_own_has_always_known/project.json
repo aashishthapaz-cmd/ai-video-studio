@@ -1,0 +1,44 @@
+{
+  "title": "A Soul Your Own Has Always Known",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 120,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "There is a legend that says when you meet your soulmate,",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "There is a legend that says when you meet your soulmate,"
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "you'll feel a sudden sense of calm and peace,",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "you'll feel a sudden sense of calm and peace,"
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "as if you've finally come home after a very long journey.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "as if you've finally come home after a very long journey."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "And in their eyes, you'll recognize a soul your own has always known.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "And in their eyes, you'll recognize a soul your own has always known."
+    }
+  ]
+}

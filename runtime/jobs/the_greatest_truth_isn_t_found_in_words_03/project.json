@@ -1,0 +1,57 @@
+{
+  "title": "The Greatest Truth Isn't Found In Words",
+  "style_bible": {
+    "emotional_arc": "Mysterious, introspective, revealing hidden truths through subtle actions.",
+    "palette": "Charcoal-teal, navy shadows with amber accents",
+    "lighting": "Moody twilight atmosphere, soft ambient light filtering through trees",
+    "motif": "Sparse natural elements and symbolic objects",
+    "continuity": "Consistent dark hand-inked storybook/graphic-novel illustration style",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "The greatest truth isn't found in people's words. It's found in their actions.",
+      "prompt": "A lone figure standing by a tree at twilight, with the moon partially obscured behind dense foliage. The ground is covered in fallen leaves — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "Sometimes people don't tell you the truth.",
+      "prompt": "A person sitting alone on a bench under an old, gnarled tree, with their back to the viewer. The bench is partially hidden by — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "Maybe they're protecting you. Maybe they're protecting themselves.",
+      "prompt": "A protective barrier of branches and leaves forms a natural arch, shielding something hidden from view. A small path leads into the darkness beyond — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "Maybe they're hiding something you'll never know.",
+      "prompt": "A figure huddled under a large, protective umbrella in a rain-soaked scene. The umbrella's shadow creates a cocoon of privacy and concealment, still interior — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_005",
+      "duration": 4.0,
+      "narration": "But no matter how carefully the truth is hidden, their actions always reveal what their words conceal.",
+      "prompt": "A lantern hanging from a tree branch casts an amber glow on the ground below. The light reveals a path leading to a mysterious — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 111,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

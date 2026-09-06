@@ -1,0 +1,252 @@
+[
+  {
+    "start": 0.0,
+    "end": 6.02,
+    "text": "No matter how isolated or lonely you feel, keep doing your work with honesty and quiet",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.14,
+        "word": " No"
+      },
+      {
+        "start": 0.14,
+        "end": 0.34,
+        "word": " matter"
+      },
+      {
+        "start": 0.34,
+        "end": 0.56,
+        "word": " how"
+      },
+      {
+        "start": 0.56,
+        "end": 1.16,
+        "word": " isolated"
+      },
+      {
+        "start": 1.16,
+        "end": 1.44,
+        "word": " or"
+      },
+      {
+        "start": 1.44,
+        "end": 1.74,
+        "word": " lonely"
+      },
+      {
+        "start": 1.74,
+        "end": 1.96,
+        "word": " you"
+      },
+      {
+        "start": 1.96,
+        "end": 2.32,
+        "word": " feel,"
+      },
+      {
+        "start": 3.18,
+        "end": 3.6,
+        "word": " keep"
+      },
+      {
+        "start": 3.6,
+        "end": 3.9,
+        "word": " doing"
+      },
+      {
+        "start": 3.9,
+        "end": 4.12,
+        "word": " your"
+      },
+      {
+        "start": 4.12,
+        "end": 4.44,
+        "word": " work"
+      },
+      {
+        "start": 4.44,
+        "end": 4.58,
+        "word": " with"
+      },
+      {
+        "start": 4.58,
+        "end": 5.02,
+        "word": " honesty"
+      },
+      {
+        "start": 5.02,
+        "end": 5.64,
+        "word": " and"
+      },
+      {
+        "start": 5.64,
+        "end": 6.02,
+        "word": " quiet"
+      }
+    ]
+  },
+  {
+    "start": 6.02,
+    "end": 6.7,
+    "text": "dedication.",
+    "words": [
+      {
+        "start": 6.02,
+        "end": 6.7,
+        "word": " dedication."
+      }
+    ]
+  },
+  {
+    "start": 7.82,
+    "end": 9.98,
+    "text": "Some battles are meant to be fought alone.",
+    "words": [
+      {
+        "start": 7.82,
+        "end": 8.32,
+        "word": " Some"
+      },
+      {
+        "start": 8.32,
+        "end": 8.7,
+        "word": " battles"
+      },
+      {
+        "start": 8.7,
+        "end": 8.94,
+        "word": " are"
+      },
+      {
+        "start": 8.94,
+        "end": 9.04,
+        "word": " meant"
+      },
+      {
+        "start": 9.04,
+        "end": 9.22,
+        "word": " to"
+      },
+      {
+        "start": 9.22,
+        "end": 9.34,
+        "word": " be"
+      },
+      {
+        "start": 9.34,
+        "end": 9.64,
+        "word": " fought"
+      },
+      {
+        "start": 9.64,
+        "end": 9.98,
+        "word": " alone."
+      }
+    ]
+  },
+  {
+    "start": 11.32,
+    "end": 13.34,
+    "text": "Some chapters can only be written alone.",
+    "words": [
+      {
+        "start": 11.32,
+        "end": 11.64,
+        "word": " Some"
+      },
+      {
+        "start": 11.64,
+        "end": 12.04,
+        "word": " chapters"
+      },
+      {
+        "start": 12.04,
+        "end": 12.3,
+        "word": " can"
+      },
+      {
+        "start": 12.3,
+        "end": 12.54,
+        "word": " only"
+      },
+      {
+        "start": 12.54,
+        "end": 12.7,
+        "word": " be"
+      },
+      {
+        "start": 12.7,
+        "end": 12.98,
+        "word": " written"
+      },
+      {
+        "start": 12.98,
+        "end": 13.34,
+        "word": " alone."
+      }
+    ]
+  },
+  {
+    "start": 14.36,
+    "end": 17.7,
+    "text": "Someone out there is waiting to meet the person you're becoming.",
+    "words": [
+      {
+        "start": 14.36,
+        "end": 14.8,
+        "word": " Someone"
+      },
+      {
+        "start": 14.8,
+        "end": 15.02,
+        "word": " out"
+      },
+      {
+        "start": 15.02,
+        "end": 15.34,
+        "word": " there"
+      },
+      {
+        "start": 15.34,
+        "end": 15.88,
+        "word": " is"
+      },
+      {
+        "start": 15.88,
+        "end": 16.16,
+        "word": " waiting"
+      },
+      {
+        "start": 16.16,
+        "end": 16.42,
+        "word": " to"
+      },
+      {
+        "start": 16.42,
+        "end": 16.6,
+        "word": " meet"
+      },
+      {
+        "start": 16.6,
+        "end": 16.78,
+        "word": " the"
+      },
+      {
+        "start": 16.78,
+        "end": 17.14,
+        "word": " person"
+      },
+      {
+        "start": 17.14,
+        "end": 17.38,
+        "word": " you're"
+      },
+      {
+        "start": 17.38,
+        "end": 17.7,
+        "word": " becoming."
+      }
+    ]
+  }
+]

@@ -1,0 +1,76 @@
+{
+  "title": "My Favorite Story",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 25,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "My life had so many blank pages, so many empty chapters waiting to be written.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "My life had so many blank pages, so many empty chapters waiting to be written."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "And then you became my favorite story.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "And then you became my favorite story."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "To be the one who shares your morning coffee.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "To be the one who shares your morning coffee."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "The one who laughs at your silly jokes.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "The one who laughs at your silly jokes."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "And the one who gets to grow old with you.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "And the one who gets to grow old with you."
+    },
+    {
+      "id": "scene_006",
+      "duration": 5,
+      "narration": "I am so deeply thankful for this life.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I am so deeply thankful for this life."
+    },
+    {
+      "id": "scene_007",
+      "duration": 5,
+      "narration": "For every chapter we have written.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "For every chapter we have written."
+    },
+    {
+      "id": "scene_008",
+      "duration": 5,
+      "narration": "And every page we still get to write together.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "And every page we still get to write together."
+    }
+  ]
+}

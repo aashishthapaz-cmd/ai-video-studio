@@ -1,0 +1,245 @@
+[
+  {
+    "start": 0.0,
+    "end": 4.74,
+    "text": "I'm still waiting for you, because my heart feels like there's something special between",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.2,
+        "word": " I'm"
+      },
+      {
+        "start": 0.2,
+        "end": 0.4,
+        "word": " still"
+      },
+      {
+        "start": 0.4,
+        "end": 0.68,
+        "word": " waiting"
+      },
+      {
+        "start": 0.68,
+        "end": 0.96,
+        "word": " for"
+      },
+      {
+        "start": 0.96,
+        "end": 1.18,
+        "word": " you,"
+      },
+      {
+        "start": 1.92,
+        "end": 2.54,
+        "word": " because"
+      },
+      {
+        "start": 2.54,
+        "end": 2.74,
+        "word": " my"
+      },
+      {
+        "start": 2.74,
+        "end": 3.04,
+        "word": " heart"
+      },
+      {
+        "start": 3.04,
+        "end": 3.3,
+        "word": " feels"
+      },
+      {
+        "start": 3.3,
+        "end": 3.52,
+        "word": " like"
+      },
+      {
+        "start": 3.52,
+        "end": 3.76,
+        "word": " there's"
+      },
+      {
+        "start": 3.76,
+        "end": 3.96,
+        "word": " something"
+      },
+      {
+        "start": 3.96,
+        "end": 4.4,
+        "word": " special"
+      },
+      {
+        "start": 4.4,
+        "end": 4.74,
+        "word": " between"
+      }
+    ]
+  },
+  {
+    "start": 4.74,
+    "end": 5.08,
+    "text": "us.",
+    "words": [
+      {
+        "start": 4.74,
+        "end": 5.08,
+        "word": " us."
+      }
+    ]
+  },
+  {
+    "start": 5.96,
+    "end": 12.08,
+    "text": "Maybe not today, maybe not tomorrow, but I feel like it's worth waiting for.",
+    "words": [
+      {
+        "start": 5.96,
+        "end": 6.36,
+        "word": " Maybe"
+      },
+      {
+        "start": 6.36,
+        "end": 6.58,
+        "word": " not"
+      },
+      {
+        "start": 6.58,
+        "end": 6.92,
+        "word": " today,"
+      },
+      {
+        "start": 7.92,
+        "end": 8.18,
+        "word": " maybe"
+      },
+      {
+        "start": 8.18,
+        "end": 8.42,
+        "word": " not"
+      },
+      {
+        "start": 8.42,
+        "end": 8.86,
+        "word": " tomorrow,"
+      },
+      {
+        "start": 9.96,
+        "end": 10.36,
+        "word": " but"
+      },
+      {
+        "start": 10.36,
+        "end": 10.46,
+        "word": " I"
+      },
+      {
+        "start": 10.46,
+        "end": 10.7,
+        "word": " feel"
+      },
+      {
+        "start": 10.7,
+        "end": 10.92,
+        "word": " like"
+      },
+      {
+        "start": 10.92,
+        "end": 11.1,
+        "word": " it's"
+      },
+      {
+        "start": 11.1,
+        "end": 11.3,
+        "word": " worth"
+      },
+      {
+        "start": 11.3,
+        "end": 11.74,
+        "word": " waiting"
+      },
+      {
+        "start": 11.74,
+        "end": 12.08,
+        "word": " for."
+      }
+    ]
+  },
+  {
+    "start": 13.1,
+    "end": 18.0,
+    "text": "Deep down, I believe one day, we'll find our way back to each other.",
+    "words": [
+      {
+        "start": 13.1,
+        "end": 13.38,
+        "word": " Deep"
+      },
+      {
+        "start": 13.38,
+        "end": 13.74,
+        "word": " down,"
+      },
+      {
+        "start": 14.6,
+        "end": 14.78,
+        "word": " I"
+      },
+      {
+        "start": 14.78,
+        "end": 15.04,
+        "word": " believe"
+      },
+      {
+        "start": 15.04,
+        "end": 15.32,
+        "word": " one"
+      },
+      {
+        "start": 15.32,
+        "end": 15.6,
+        "word": " day,"
+      },
+      {
+        "start": 16.24,
+        "end": 16.6,
+        "word": " we'll"
+      },
+      {
+        "start": 16.6,
+        "end": 16.82,
+        "word": " find"
+      },
+      {
+        "start": 16.82,
+        "end": 17.02,
+        "word": " our"
+      },
+      {
+        "start": 17.02,
+        "end": 17.2,
+        "word": " way"
+      },
+      {
+        "start": 17.2,
+        "end": 17.42,
+        "word": " back"
+      },
+      {
+        "start": 17.42,
+        "end": 17.6,
+        "word": " to"
+      },
+      {
+        "start": 17.6,
+        "end": 17.78,
+        "word": " each"
+      },
+      {
+        "start": 17.78,
+        "end": 18.0,
+        "word": " other."
+      }
+    ]
+  }
+]

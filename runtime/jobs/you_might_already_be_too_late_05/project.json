@@ -1,0 +1,57 @@
+{
+  "title": "You Might Already Be Too Late",
+  "style_bible": {
+    "emotional_arc": "A poignant narrative of unspoken understanding and missed opportunities, transitioning from a sense of weariness to a bittersweet realization.",
+    "palette": "Charcoal-teal with subtle amber highlights, evoking a somber yet hopeful tone.",
+    "lighting": "Moody twilight atmosphere with soft, diffused light filtering through the scene, creating deep shadows and gentle illumination.",
+    "motif": "Sparse natural elements like trees, paths, or windows to symbolize barriers between understanding and communication.",
+    "continuity": "Consistent use of hand-inked illustrations with irregular contour lines and visible paper grain for a cohesive visual style.",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "I was too tired to explain, so I chose silence.",
+      "prompt": "A lone figure sitting by a window at dusk, hands resting on knees, looking out into the fading light. Irregular contour lines, visible paper — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "You kept asking what was wrong. I kept saying nothing.",
+      "prompt": "A path winding through a dense forest, leading to a dimly lit cabin with the figure standing at its entrance, arms crossed and looking — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "You heard my words. You never heard my silence.",
+      "prompt": "A tree standing alone in a field, its branches reaching towards the sky under a twilight sky, with the figure standing beneath it, hands — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "You wanted an explanation. I wanted to be understood.",
+      "prompt": "A book lying open on a wooden table, with the figure standing beside it, looking down at the pages in thought. Irregular contour lines — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_005",
+      "duration": 4.0,
+      "narration": "By the time you finally understand me, it might already be too late.",
+      "prompt": "A boat floating on a calm lake under a twilight sky, with the figure standing at its edge, looking out towards the water. Irregular — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 109,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

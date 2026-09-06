@@ -1,0 +1,250 @@
+[
+  {
+    "start": 0.0,
+    "end": 2.62,
+    "text": "There is a legend that says when you meet your soulmate,",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.18,
+        "word": " There"
+      },
+      {
+        "start": 0.18,
+        "end": 0.3,
+        "word": " is"
+      },
+      {
+        "start": 0.3,
+        "end": 0.42,
+        "word": " a"
+      },
+      {
+        "start": 0.42,
+        "end": 0.7,
+        "word": " legend"
+      },
+      {
+        "start": 0.7,
+        "end": 0.96,
+        "word": " that"
+      },
+      {
+        "start": 0.96,
+        "end": 1.24,
+        "word": " says"
+      },
+      {
+        "start": 1.24,
+        "end": 1.56,
+        "word": " when"
+      },
+      {
+        "start": 1.56,
+        "end": 1.7,
+        "word": " you"
+      },
+      {
+        "start": 1.7,
+        "end": 1.9,
+        "word": " meet"
+      },
+      {
+        "start": 1.9,
+        "end": 2.06,
+        "word": " your"
+      },
+      {
+        "start": 2.06,
+        "end": 2.62,
+        "word": " soulmate,"
+      }
+    ]
+  },
+  {
+    "start": 3.4,
+    "end": 6.06,
+    "text": "you'll feel a sudden sense of calm and peace",
+    "words": [
+      {
+        "start": 3.4,
+        "end": 3.76,
+        "word": " you'll"
+      },
+      {
+        "start": 3.76,
+        "end": 3.96,
+        "word": " feel"
+      },
+      {
+        "start": 3.96,
+        "end": 4.14,
+        "word": " a"
+      },
+      {
+        "start": 4.14,
+        "end": 4.4,
+        "word": " sudden"
+      },
+      {
+        "start": 4.4,
+        "end": 4.8,
+        "word": " sense"
+      },
+      {
+        "start": 4.8,
+        "end": 5.02,
+        "word": " of"
+      },
+      {
+        "start": 5.02,
+        "end": 5.42,
+        "word": " calm"
+      },
+      {
+        "start": 5.42,
+        "end": 5.58,
+        "word": " and"
+      },
+      {
+        "start": 5.58,
+        "end": 6.06,
+        "word": " peace"
+      }
+    ]
+  },
+  {
+    "start": 6.63,
+    "end": 9.6,
+    "text": "as if you've finally come home after a very long journey.",
+    "words": [
+      {
+        "start": 6.63,
+        "end": 6.9,
+        "word": " as"
+      },
+      {
+        "start": 6.9,
+        "end": 7.04,
+        "word": " if"
+      },
+      {
+        "start": 7.04,
+        "end": 7.3,
+        "word": " you've"
+      },
+      {
+        "start": 7.3,
+        "end": 7.58,
+        "word": " finally"
+      },
+      {
+        "start": 7.58,
+        "end": 7.88,
+        "word": " come"
+      },
+      {
+        "start": 7.88,
+        "end": 8.2,
+        "word": " home"
+      },
+      {
+        "start": 8.2,
+        "end": 8.5,
+        "word": " after"
+      },
+      {
+        "start": 8.5,
+        "end": 8.66,
+        "word": " a"
+      },
+      {
+        "start": 8.66,
+        "end": 8.86,
+        "word": " very"
+      },
+      {
+        "start": 8.86,
+        "end": 9.14,
+        "word": " long"
+      },
+      {
+        "start": 9.14,
+        "end": 9.6,
+        "word": " journey."
+      }
+    ]
+  },
+  {
+    "start": 10.66,
+    "end": 14.8,
+    "text": "And in their eyes, you'll recognize a soul your own has always known.",
+    "words": [
+      {
+        "start": 10.66,
+        "end": 10.98,
+        "word": " And"
+      },
+      {
+        "start": 10.98,
+        "end": 11.1,
+        "word": " in"
+      },
+      {
+        "start": 11.1,
+        "end": 11.26,
+        "word": " their"
+      },
+      {
+        "start": 11.26,
+        "end": 11.72,
+        "word": " eyes,"
+      },
+      {
+        "start": 12.4,
+        "end": 12.58,
+        "word": " you'll"
+      },
+      {
+        "start": 12.58,
+        "end": 13.0,
+        "word": " recognize"
+      },
+      {
+        "start": 13.0,
+        "end": 13.26,
+        "word": " a"
+      },
+      {
+        "start": 13.26,
+        "end": 13.52,
+        "word": " soul"
+      },
+      {
+        "start": 13.52,
+        "end": 13.72,
+        "word": " your"
+      },
+      {
+        "start": 13.72,
+        "end": 14.0,
+        "word": " own"
+      },
+      {
+        "start": 14.0,
+        "end": 14.2,
+        "word": " has"
+      },
+      {
+        "start": 14.2,
+        "end": 14.48,
+        "word": " always"
+      },
+      {
+        "start": 14.48,
+        "end": 14.8,
+        "word": " known."
+      }
+    ]
+  }
+]

@@ -1,0 +1,243 @@
+[
+  {
+    "start": 0.0,
+    "end": 6.1,
+    "text": "Love isn't just about what's comfortable for you. It's about learning the language of the person",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.28,
+        "word": " Love"
+      },
+      {
+        "start": 0.28,
+        "end": 0.78,
+        "word": " isn't"
+      },
+      {
+        "start": 0.78,
+        "end": 0.96,
+        "word": " just"
+      },
+      {
+        "start": 0.96,
+        "end": 1.26,
+        "word": " about"
+      },
+      {
+        "start": 1.26,
+        "end": 1.6,
+        "word": " what's"
+      },
+      {
+        "start": 1.6,
+        "end": 2.02,
+        "word": " comfortable"
+      },
+      {
+        "start": 2.02,
+        "end": 2.36,
+        "word": " for"
+      },
+      {
+        "start": 2.36,
+        "end": 2.6,
+        "word": " you."
+      },
+      {
+        "start": 3.62,
+        "end": 4.06,
+        "word": " It's"
+      },
+      {
+        "start": 4.06,
+        "end": 4.28,
+        "word": " about"
+      },
+      {
+        "start": 4.28,
+        "end": 4.66,
+        "word": " learning"
+      },
+      {
+        "start": 4.66,
+        "end": 4.88,
+        "word": " the"
+      },
+      {
+        "start": 4.88,
+        "end": 5.28,
+        "word": " language"
+      },
+      {
+        "start": 5.28,
+        "end": 5.62,
+        "word": " of"
+      },
+      {
+        "start": 5.62,
+        "end": 5.74,
+        "word": " the"
+      },
+      {
+        "start": 5.74,
+        "end": 6.1,
+        "word": " person"
+      }
+    ]
+  },
+  {
+    "start": 6.1,
+    "end": 15.2,
+    "text": "you choose. It takes effort, patience, and emotional maturity. It won't always be easy.",
+    "words": [
+      {
+        "start": 6.1,
+        "end": 6.34,
+        "word": " you"
+      },
+      {
+        "start": 6.34,
+        "end": 6.78,
+        "word": " choose."
+      },
+      {
+        "start": 8.2,
+        "end": 8.34,
+        "word": " It"
+      },
+      {
+        "start": 8.34,
+        "end": 8.64,
+        "word": " takes"
+      },
+      {
+        "start": 8.64,
+        "end": 9.04,
+        "word": " effort,"
+      },
+      {
+        "start": 9.72,
+        "end": 10.4,
+        "word": " patience,"
+      },
+      {
+        "start": 11.18,
+        "end": 11.44,
+        "word": " and"
+      },
+      {
+        "start": 11.44,
+        "end": 11.88,
+        "word": " emotional"
+      },
+      {
+        "start": 11.88,
+        "end": 12.54,
+        "word": " maturity."
+      },
+      {
+        "start": 13.82,
+        "end": 14.0,
+        "word": " It"
+      },
+      {
+        "start": 14.0,
+        "end": 14.28,
+        "word": " won't"
+      },
+      {
+        "start": 14.28,
+        "end": 14.6,
+        "word": " always"
+      },
+      {
+        "start": 14.6,
+        "end": 14.82,
+        "word": " be"
+      },
+      {
+        "start": 14.82,
+        "end": 15.2,
+        "word": " easy."
+      }
+    ]
+  },
+  {
+    "start": 16.36,
+    "end": 21.48,
+    "text": "Real love blooms when both people learn to love each other, not just themselves.",
+    "words": [
+      {
+        "start": 16.36,
+        "end": 16.72,
+        "word": " Real"
+      },
+      {
+        "start": 16.72,
+        "end": 17.12,
+        "word": " love"
+      },
+      {
+        "start": 17.12,
+        "end": 17.76,
+        "word": " blooms"
+      },
+      {
+        "start": 17.76,
+        "end": 17.94,
+        "word": " when"
+      },
+      {
+        "start": 17.94,
+        "end": 18.22,
+        "word": " both"
+      },
+      {
+        "start": 18.22,
+        "end": 18.62,
+        "word": " people"
+      },
+      {
+        "start": 18.62,
+        "end": 18.96,
+        "word": " learn"
+      },
+      {
+        "start": 18.96,
+        "end": 19.18,
+        "word": " to"
+      },
+      {
+        "start": 19.18,
+        "end": 19.38,
+        "word": " love"
+      },
+      {
+        "start": 19.38,
+        "end": 19.6,
+        "word": " each"
+      },
+      {
+        "start": 19.6,
+        "end": 19.94,
+        "word": " other,"
+      },
+      {
+        "start": 20.36,
+        "end": 20.68,
+        "word": " not"
+      },
+      {
+        "start": 20.68,
+        "end": 20.92,
+        "word": " just"
+      },
+      {
+        "start": 20.92,
+        "end": 21.48,
+        "word": " themselves."
+      }
+    ]
+  }
+]

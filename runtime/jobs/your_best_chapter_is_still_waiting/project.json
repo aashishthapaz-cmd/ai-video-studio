@@ -1,0 +1,52 @@
+{
+  "title": "Your Best Chapter Is Still Waiting",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 116,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "If you're strong enough to fall in love and give everything you have,",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "If you're strong enough to fall in love and give everything you have,"
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "you're strong enough to let it all go.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "you're strong enough to let it all go."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "Strong enough to pick up your pieces and start over.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Strong enough to pick up your pieces and start over."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "Because the end of one story is never the end of your story.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Because the end of one story is never the end of your story."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "Your best chapter is still waiting to be written.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Your best chapter is still waiting to be written."
+    }
+  ]
+}

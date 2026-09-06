@@ -1,0 +1,60 @@
+{
+  "title": "Dostoevsky Said",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 95,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "Dostoevsky said, isolate yourself as much as you need to become stronger.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Dostoevsky said, isolate yourself as much as you need to become stronger."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "Even if you see that loneliness is an unbearable hell,",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Even if you see that loneliness is an unbearable hell,"
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "it is much better than the multiple masks of humans.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "it is much better than the multiple masks of humans."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "Because in solitude, at least the pain is honest.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Because in solitude, at least the pain is honest."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "There are no false smiles, no hidden intentions.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "There are no false smiles, no hidden intentions."
+    },
+    {
+      "id": "scene_006",
+      "duration": 5,
+      "narration": "Just you and the truth you cannot escape.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Just you and the truth you cannot escape."
+    }
+  ]
+}

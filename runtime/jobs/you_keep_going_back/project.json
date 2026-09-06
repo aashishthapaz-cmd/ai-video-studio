@@ -1,0 +1,84 @@
+{
+  "title": "You Keep Going Back",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 71,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "You keep going back.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "You keep going back."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "I know.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I know."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "It feels familiar there, even when it hurts.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "It feels familiar there, even when it hurts."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "But you cannot find happiness in the same place you lost it.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "But you cannot find happiness in the same place you lost it."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "You cannot find light in the hands that dimmed it.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "You cannot find light in the hands that dimmed it."
+    },
+    {
+      "id": "scene_006",
+      "duration": 5,
+      "narration": "Let it go.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Let it go."
+    },
+    {
+      "id": "scene_007",
+      "duration": 5,
+      "narration": "Not because it didn't matter.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Not because it didn't matter."
+    },
+    {
+      "id": "scene_008",
+      "duration": 5,
+      "narration": "But because you do, your happiness is not behind you.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "But because you do, your happiness is not behind you."
+    },
+    {
+      "id": "scene_009",
+      "duration": 5,
+      "narration": "It never was.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "It never was."
+    }
+  ]
+}

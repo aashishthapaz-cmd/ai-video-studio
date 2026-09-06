@@ -1,0 +1,52 @@
+{
+  "title": "I Love You Forever",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 32,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "I love you as you are, as you were, and as you will be.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I love you as you are, as you were, and as you will be."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "Even on our hardest days.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Even on our hardest days."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "Even when everything feels too heavy.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Even when everything feels too heavy."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "Even when the years start to catch up with us, and the quiet days blur together.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Even when the years start to catch up with us, and the quiet days blur together."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "Through every chapter, I will love you as long as I breathe.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Through every chapter, I will love you as long as I breathe."
+    }
+  ]
+}

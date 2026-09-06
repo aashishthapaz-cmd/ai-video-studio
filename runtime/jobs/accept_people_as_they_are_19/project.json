@@ -1,0 +1,64 @@
+{
+  "title": "Accept People As They Are",
+  "style_bible": {
+    "emotional_arc": "Serene acceptance, self-respect, and inner peace.",
+    "palette": "Deep charcoal-teal with amber accents",
+    "lighting": "Twilight moody atmosphere",
+    "motif": "Natural elements like trees, paths, and water",
+    "continuity": "Sparse, poetic, readable visual world suitable for slow Ken Burns motion",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "Accept people as they are. Place them where they belong.",
+      "prompt": "A lone tree standing in twilight with its branches reaching out, symbolizing acceptance and belonging, amber light filtering through the leaves, slow push-in — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "You are responsible for your own life.",
+      "prompt": "A person walking alone on a misty path, amber light casting long shadows, emphasizing the solitude and self-reliance of individual responsibility, slow pull-back — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_pull_back"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "Acceptance frees you from trying to change anyone.",
+      "prompt": "A lantern hanging over a quiet river, amber light reflecting off the water, symbolizing inner peace and acceptance, slow pan right to show — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "Boundaries protect your peace.",
+      "prompt": "A small wooden fence by a calm lake, amber light highlighting the simplicity and strength of boundaries, slow push-in to focus on the texture — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_005",
+      "duration": 4.0,
+      "narration": "Not everyone earns the same access, the same closeness, or the same seat at your table.",
+      "prompt": "A path leading to a small wooden bridge over a stream, amber light illuminating the steps and highlighting the uneven terrain, slow zoom in — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_006",
+      "duration": 4.0,
+      "narration": "And that's not cruelty. That's self-respect.",
+      "prompt": "A solitary boat floating on a calm lake at twilight, amber light reflecting off the water and casting gentle shadows, slow pan left — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 93,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

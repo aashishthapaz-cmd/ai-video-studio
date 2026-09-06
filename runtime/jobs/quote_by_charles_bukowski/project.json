@@ -1,0 +1,44 @@
+{
+  "title": "Quote By Charles Bukowski",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 86,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "I read a quote that said, when it is truly time, and if you have been chosen,",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I read a quote that said, when it is truly time, and if you have been chosen,"
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "it will do it by itself.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "it will do it by itself."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "And it will keep on doing it, until you die, or it dies in you.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "And it will keep on doing it, until you die, or it dies in you."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "There is no other way, and there never was.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "There is no other way, and there never was."
+    }
+  ]
+}

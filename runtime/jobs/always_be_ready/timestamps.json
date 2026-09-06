@@ -1,0 +1,198 @@
+[
+  {
+    "start": 0.0,
+    "end": 8.06,
+    "text": "Always be ready to survive alone. Some people suddenly change. Today you're important to them.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.42,
+        "word": " Always"
+      },
+      {
+        "start": 0.42,
+        "end": 0.74,
+        "word": " be"
+      },
+      {
+        "start": 0.74,
+        "end": 1.02,
+        "word": " ready"
+      },
+      {
+        "start": 1.02,
+        "end": 1.24,
+        "word": " to"
+      },
+      {
+        "start": 1.24,
+        "end": 1.58,
+        "word": " survive"
+      },
+      {
+        "start": 1.58,
+        "end": 2.02,
+        "word": " alone."
+      },
+      {
+        "start": 3.26,
+        "end": 3.6,
+        "word": " Some"
+      },
+      {
+        "start": 3.6,
+        "end": 3.96,
+        "word": " people"
+      },
+      {
+        "start": 3.96,
+        "end": 4.48,
+        "word": " suddenly"
+      },
+      {
+        "start": 4.48,
+        "end": 5.0,
+        "word": " change."
+      },
+      {
+        "start": 6.44,
+        "end": 6.8,
+        "word": " Today"
+      },
+      {
+        "start": 6.8,
+        "end": 7.28,
+        "word": " you're"
+      },
+      {
+        "start": 7.28,
+        "end": 7.66,
+        "word": " important"
+      },
+      {
+        "start": 7.66,
+        "end": 7.9,
+        "word": " to"
+      },
+      {
+        "start": 7.9,
+        "end": 8.06,
+        "word": " them."
+      }
+    ]
+  },
+  {
+    "start": 9.1,
+    "end": 15.7,
+    "text": "Tomorrow you might be nothing. Sometimes they only held you for their own benefit.",
+    "words": [
+      {
+        "start": 9.1,
+        "end": 9.6,
+        "word": " Tomorrow"
+      },
+      {
+        "start": 9.6,
+        "end": 10.3,
+        "word": " you"
+      },
+      {
+        "start": 10.3,
+        "end": 10.48,
+        "word": " might"
+      },
+      {
+        "start": 10.48,
+        "end": 10.68,
+        "word": " be"
+      },
+      {
+        "start": 10.68,
+        "end": 10.96,
+        "word": " nothing."
+      },
+      {
+        "start": 12.32,
+        "end": 12.9,
+        "word": " Sometimes"
+      },
+      {
+        "start": 12.9,
+        "end": 13.72,
+        "word": " they"
+      },
+      {
+        "start": 13.72,
+        "end": 14.08,
+        "word": " only"
+      },
+      {
+        "start": 14.08,
+        "end": 14.4,
+        "word": " held"
+      },
+      {
+        "start": 14.4,
+        "end": 14.64,
+        "word": " you"
+      },
+      {
+        "start": 14.64,
+        "end": 14.82,
+        "word": " for"
+      },
+      {
+        "start": 14.82,
+        "end": 15.02,
+        "word": " their"
+      },
+      {
+        "start": 15.02,
+        "end": 15.2,
+        "word": " own"
+      },
+      {
+        "start": 15.2,
+        "end": 15.7,
+        "word": " benefit."
+      }
+    ]
+  },
+  {
+    "start": 16.74,
+    "end": 18.74,
+    "text": "That's the ultimate truth of life.",
+    "words": [
+      {
+        "start": 16.74,
+        "end": 17.3,
+        "word": " That's"
+      },
+      {
+        "start": 17.3,
+        "end": 17.42,
+        "word": " the"
+      },
+      {
+        "start": 17.42,
+        "end": 17.88,
+        "word": " ultimate"
+      },
+      {
+        "start": 17.88,
+        "end": 18.26,
+        "word": " truth"
+      },
+      {
+        "start": 18.26,
+        "end": 18.48,
+        "word": " of"
+      },
+      {
+        "start": 18.48,
+        "end": 18.74,
+        "word": " life."
+      }
+    ]
+  }
+]

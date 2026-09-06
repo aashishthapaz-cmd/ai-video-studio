@@ -1,0 +1,60 @@
+{
+  "title": "Quiet Beginnings",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 22,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "The love you lose teaches worth.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "The love you lose teaches worth."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "The lie you hear teaches truth.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "The lie you hear teaches truth."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "The noise you ignore teaches peace.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "The noise you ignore teaches peace."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "The mistake you make teaches growth.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "The mistake you make teaches growth."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "The pain you feel teaches strength.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "The pain you feel teaches strength."
+    },
+    {
+      "id": "scene_006",
+      "duration": 5,
+      "narration": "What feels like an ending is just a quiet beginning.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "What feels like an ending is just a quiet beginning."
+    }
+  ]
+}

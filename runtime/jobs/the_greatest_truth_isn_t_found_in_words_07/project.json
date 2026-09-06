@@ -1,0 +1,57 @@
+{
+  "title": "The Greatest Truth Isn't Found In Words",
+  "style_bible": {
+    "emotional_arc": "Mysterious, introspective, revealing hidden truths through subtle actions.",
+    "palette": "charcoal-teal, navy-shadows, amber-accents",
+    "lighting": "twilight/moody-night",
+    "motif": "natural objects and everyday items",
+    "continuity": "consistent illustration style with varying compositions",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "The greatest truth isn't found in people's words. It's found in their actions.",
+      "prompt": "A lone tree standing against a twilight sky, its branches reaching out as if searching for something unseen. The trunk is silhouetted by — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "Sometimes people don't tell you the truth.",
+      "prompt": "A person's back is seen against a night sky, their hands clasped tightly as if holding secrets. The path leading to them is dimly — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "Maybe they're protecting you. Maybe they're protecting themselves.",
+      "prompt": "A book with a worn cover, its pages yellowed and filled with secrets, is placed on a wooden table under the soft light — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "Maybe they're hiding something you'll never know.",
+      "prompt": "A closed windowpane with raindrops glistening on it, the reflection of a distant streetlight casting an amber glow inside. The window is slightly fogged — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_005",
+      "duration": 4.0,
+      "narration": "But no matter how carefully the truth is hidden, their actions always reveal what their words conceal.",
+      "prompt": "A boat gently rocking on a calm lake at twilight, its silhouette against the night sky. The water reflects an amber glow — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 111,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

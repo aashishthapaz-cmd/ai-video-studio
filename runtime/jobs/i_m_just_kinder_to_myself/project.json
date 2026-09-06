@@ -1,0 +1,71 @@
+{
+  "title": "I'm Just Kinder To Myself",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 104,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "I don't chase people anymore. I chase peace.",
+      "prompt": "A lone woman standing at a rain-soaked window, looking out into the night city. The window is fogged with her breath, and she holds an empty tea cup in her hands. Soft amber light from inside the room contrasts with the cold, wet asphalt outside, reflecting off the glass. She stands alone, lost in thought, with deep blue twilight casting long shadows behind her | lo-fi retro 90s aesthetic anime illustration, Studio Ghibli and Makoto Shinkai inspired, atmospheric digital painting, rich moody color palette, warm amber and deep midnight navy blue, textured brushwork, cinematic emotional depth, subtle film grain, vertical 9:16 composition, no text, no writing. Atmospheric mood, cinematic color grading, deeply evocative composition with poetic negative space, professional fine-art quality. No text, no writing, no signs, no labels, no logos, no watermark.",
+      "motion": "slow_push_in",
+      "seed": 172439012,
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "If you stay, I'm grateful. If you leave, I'm still peaceful.",
+      "prompt": "An empty train station platform under a soft amber streetlight. The platform is quiet and desolate, with only the light from the lamppost breaking through the darkness. A single raindrop falls onto an old wooden bench, creating a gentle sound that echoes in the silence. In the background, distant buildings are silhouetted against the twilight sky | lo-fi retro 90s aesthetic anime illustration, Studio Ghibli and Makoto Shinkai inspired, atmospheric digital painting, rich moody color palette, warm amber and deep midnight navy blue, textured brushwork, cinematic emotional depth, subtle film grain, vertical 9:16 composition, no text, no writing. Atmospheric mood, cinematic color grading, deeply evocative composition with poetic negative space, professional fine-art quality. No text, no writing, no signs, no labels, no logos, no watermark.",
+      "motion": "pan_left",
+      "seed": 506712609,
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "Because I finally learned, my worth isn't proven by how hard I'm willing to suffer to be loved.",
+      "prompt": "A single glowing streetlamp in the twilight rain. The light is warm and inviting, casting a soft amber glow over the wet cobblestone alleyway. A few autumn leaves drift across the path, reflecting the light as they spin gently towards the ground. In the background, the cityscape fades into darkness, emphasizing the small but comforting presence of this lone lamp | lo-fi retro 90s aesthetic anime illustration, Studio Ghibli and Makoto Shinkai inspired, atmospheric digital painting, rich moody color palette, warm amber and deep midnight navy blue, textured brushwork, cinematic emotional depth, subtle film grain, vertical 9:16 composition, no text, no writing. Atmospheric mood, cinematic color grading, deeply evocative composition with poetic negative space, professional fine-art quality. No text, no writing, no signs, no labels, no logos, no watermark.",
+      "motion": "slow_push_in",
+      "seed": 211272344,
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "I'm not cold.",
+      "prompt": "A woman walking away down a quiet cobblestone alley in gentle rain. Her silhouette is clear against the soft amber light from an old streetlamp, casting long shadows on the wet ground. The rain sheen on her clothes and hair adds to the sense of solitude and reflection. She walks with a determined yet graceful step, leaving behind her own small footprints | lo-fi retro 90s aesthetic anime illustration, Studio Ghibli and Makoto Shinkai inspired, atmospheric digital painting, rich moody color palette, warm amber and deep midnight navy blue, textured brushwork, cinematic emotional depth, subtle film grain, vertical 9:16 composition, no text, no writing. Atmospheric mood, cinematic color grading, deeply evocative composition with poetic negative space, professional fine-art quality. No text, no writing, no signs, no labels, no logos, no watermark.",
+      "motion": "slow_push_in",
+      "seed": 842214877,
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_005",
+      "duration": 4.0,
+      "narration": "I'm just kinder to myself.",
+      "prompt": "A lone woman sitting by a window, her reflection in the wet glass blending with the night city outside. She holds two empty tea cups on the wooden table beside her, as if they represent the past and present of her journey. The amber light from inside the room creates soft, warm shadows around her, emphasizing her serene presence amidst the solitude | lo-fi retro 90s aesthetic anime illustration, Studio Ghibli and Makoto Shinkai inspired, atmospheric digital painting, rich moody color palette, warm amber and deep midnight navy blue, textured brushwork, cinematic emotional depth, subtle film grain, vertical 9:16 composition, no text, no writing. Atmospheric mood, cinematic color grading, deeply evocative composition with poetic negative space, professional fine-art quality. No text, no writing, no signs, no labels, no logos, no watermark.",
+      "motion": "slow_push_in",
+      "seed": 963104043,
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    }
+  ],
+  "style_bible": {
+    "emotional_arc": "A journey of self-discovery and acceptance after heartbreak.",
+    "palette": "Warm amber and deep midnight navy blue, with subtle film grain and textured brushwork.",
+    "lighting": "Soft, warm amber light breaking through the solitude, casting gentle shadows.",
+    "motif": "Isolation and reflection in a lo-fi night city aesthetic.",
+    "continuity": "Consistent emotional depth and narrative flow from line to line.",
+    "negative_prompt": "text, words, letters, numbers, quotation, caption, typography, logo, watermark, sign, label, poster, menu, readable book cover, readable book spine, license plate, road lettering, writing-like symbols, blank text area, ugly, deformed hands, bad anatomy, extra limbs, blurry, low resolution, stock photo, 3D CGI render, photorealism artifact, gore, blood, clutter",
+    "art_direction": "heartbreak, longing, and release, wet asphalt reflections, deep midnight navy shadows, soft rain sheen, warm amber light breaking through solitude, Makoto Shinkai style"
+  },
+  "model": "qwen2.5:7b",
+  "voice_tone": "warm, deep, emotional spoken-word delivery",
+  "pacing": "deliberate phrasing with a pause after each line",
+  "image_style": "lo-fi retro 90s aesthetic anime illustration, Studio Ghibli and Makoto Shinkai inspired, atmospheric digital painting, rich moody color palette, warm amber and deep midnight navy blue, subtle film grain, vertical 9:16",
+  "animation_style": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing"
+}

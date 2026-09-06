@@ -1,0 +1,57 @@
+{
+  "title": "We Suffer More In Imagination",
+  "style_bible": {
+    "emotional_arc": "A journey from introspection to realization, highlighting the internal struggle of overthinking and its impact on emotional well-being.",
+    "palette": "Charcoal-teal with amber accents",
+    "lighting": "Moody twilight atmosphere with a soft glow in the background",
+    "motif": "Sparse natural elements like trees, paths, and books",
+    "continuity": "Consistent dark hand-inked storybook/graphic-novel illustration style",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "We suffer more in imagination than in reality.",
+      "prompt": "A lone tree standing against a twilight sky with faint stars, emphasizing the isolation of internal suffering. Amber light from unseen lanterns casts soft — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "We live inside our heads all the time.",
+      "prompt": "A winding path leading into a dense forest, with the path itself representing the constant journey of thoughts. A single lantern hanging — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "It doesn't matter what the reality actually is.",
+      "prompt": "A book lying open on a weathered wooden table, with pages filled with scribbles and thoughts. The table is in a dimly lit room — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "The problem is we overthink everything.",
+      "prompt": "A close-up of a person's face, eyes closed in thought, with the background showing a path winding through a forest. The path represents — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_005",
+      "duration": 4.0,
+      "narration": "Most of our pain doesn't come from what happens, but from what we imagine might happen.",
+      "prompt": "A boat floating on a calm lake at twilight, with the water reflecting the amber glow of distant lanterns. The boat represents the journey — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 113,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

@@ -1,0 +1,52 @@
+{
+  "title": "Imperfectly Perfect",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 24,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "I love you unconditionally.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I love you unconditionally."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "Your clumsiness, your silliness, your messiness, and all your imperfections.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Your clumsiness, your silliness, your messiness, and all your imperfections."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "I want the real you.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I want the real you."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "No pretending, no hiding who you really are, just the real you.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "No pretending, no hiding who you really are, just the real you."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "Because for me, you are imperfectly perfect.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Because for me, you are imperfectly perfect."
+    }
+  ]
+}

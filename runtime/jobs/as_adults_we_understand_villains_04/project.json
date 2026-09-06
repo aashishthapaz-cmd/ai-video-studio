@@ -1,0 +1,57 @@
+{
+  "title": "As Adults We Understand Villains",
+  "style_bible": {
+    "emotional_arc": "Childhood innocence to adult understanding, with a focus on empathy and complexity.",
+    "palette": "Charcoal-teal, navy, amber, rust-red, ember-orange, pale cream",
+    "lighting": "Moody twilight/night atmosphere with deep charcoal-teal/navy shadows",
+    "motif": "Sparse, poetic, readable visual world with expressive irregular contour lines and visible paper or woodcut grain",
+    "continuity": "Consistent art style across all scenes but varied compositions and focal objects",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "As kids, we love the heroes.",
+      "prompt": "Childhood innocence with a hero standing tall in a simple village scene, soft sunlight filtering through trees. (Amber accent), wide lonely establishing view, rain — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "But as adults, we understand the villains.",
+      "prompt": "Adult understanding with a shadowy figure in a dimly lit alleyway, hands clasped behind back. (Rust-red accent), close symbolic detail, heavy shadow, rust-red emotional — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "Life teaches us that people aren't simply good or bad.",
+      "prompt": "Complexity with a figure standing on the edge of a cliff, looking out at a vast landscape. (Ember-orange accent), low-angle walking silhouette, open negative — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "Sometimes the villain is just someone who got tired of being hurt,",
+      "prompt": "Empathy with a figure sitting on a bench under a weeping willow tree, head in hands. (Pale cream accent), still interior frame, lantern geometry — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_005",
+      "duration": 4.0,
+      "narration": "someone who stopped explaining themselves, someone who finally chose themselves after being forgotten.",
+      "prompt": "Self-discovery with a figure standing by the edge of a calm river at dusk, holding a lantern. (Amber accent), distant horizon composition, layered fog — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 102,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

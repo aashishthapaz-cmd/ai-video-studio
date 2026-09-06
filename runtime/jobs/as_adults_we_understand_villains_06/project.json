@@ -1,0 +1,57 @@
+{
+  "title": "As Adults We Understand Villains",
+  "style_bible": {
+    "emotional_arc": "Childhood innocence to adult complexity, understanding nuance.",
+    "palette": "Charcoal-teal, navy shadows with amber accents",
+    "lighting": "Moody twilight/night atmosphere",
+    "motif": "Sparse, poetic, readable illustrations with expressive irregular contour lines and visible paper grain",
+    "continuity": "Consistent visual style across all scenes for a cohesive narrative flow",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "As kids, we love the heroes.",
+      "prompt": "Child with a colorful hero mask, joyful smile, bright sunlight contrasted by dark shadows in background, amber accent on mask, wide lonely establishing view — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "But as adults, we understand the villains.",
+      "prompt": "Adult standing alone under a moonlit sky with distant silhouette of an old castle in the background, amber accent on face, close symbolic detail — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "Life teaches us that people aren't simply good or bad.",
+      "prompt": "Close-up of a hand holding an old book with weathered pages, amber light filtering through the cracks in the window frame, amber accent on — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "Sometimes the villain is just someone who got tired of being hurt,",
+      "prompt": "Person sitting alone by a small lake at dusk with ripples on the water's surface, amber accent on their face, still interior frame, lantern — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_005",
+      "duration": 4.0,
+      "narration": "someone who stopped explaining themselves, someone who finally chose themselves after being forgotten.",
+      "prompt": "Figure standing in a dimly lit room with a single lantern casting light on their face, amber accent on the lantern's flame, distant horizon — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 102,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

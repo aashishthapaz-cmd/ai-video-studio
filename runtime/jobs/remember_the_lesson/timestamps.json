@@ -1,0 +1,218 @@
+[
+  {
+    "start": 0.0,
+    "end": 7.5,
+    "text": "Forget the past, but remember the lesson. Let go of what hurts you, but never forget",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.28,
+        "word": " Forget"
+      },
+      {
+        "start": 0.28,
+        "end": 0.46,
+        "word": " the"
+      },
+      {
+        "start": 0.46,
+        "end": 1.0,
+        "word": " past,"
+      },
+      {
+        "start": 1.66,
+        "end": 2.22,
+        "word": " but"
+      },
+      {
+        "start": 2.22,
+        "end": 2.5,
+        "word": " remember"
+      },
+      {
+        "start": 2.5,
+        "end": 2.74,
+        "word": " the"
+      },
+      {
+        "start": 2.74,
+        "end": 3.12,
+        "word": " lesson."
+      },
+      {
+        "start": 4.12,
+        "end": 4.24,
+        "word": " Let"
+      },
+      {
+        "start": 4.24,
+        "end": 4.5,
+        "word": " go"
+      },
+      {
+        "start": 4.5,
+        "end": 4.66,
+        "word": " of"
+      },
+      {
+        "start": 4.66,
+        "end": 4.84,
+        "word": " what"
+      },
+      {
+        "start": 4.84,
+        "end": 5.16,
+        "word": " hurts"
+      },
+      {
+        "start": 5.16,
+        "end": 5.44,
+        "word": " you,"
+      },
+      {
+        "start": 6.52,
+        "end": 6.76,
+        "word": " but"
+      },
+      {
+        "start": 6.76,
+        "end": 6.98,
+        "word": " never"
+      },
+      {
+        "start": 6.98,
+        "end": 7.5,
+        "word": " forget"
+      }
+    ]
+  },
+  {
+    "start": 7.5,
+    "end": 17.4,
+    "text": "what it taught you. Not every loss is a failure. Some are just directions. Learn from it, but don't",
+    "words": [
+      {
+        "start": 7.5,
+        "end": 8.04,
+        "word": " what"
+      },
+      {
+        "start": 8.04,
+        "end": 8.18,
+        "word": " it"
+      },
+      {
+        "start": 8.18,
+        "end": 8.44,
+        "word": " taught"
+      },
+      {
+        "start": 8.44,
+        "end": 8.74,
+        "word": " you."
+      },
+      {
+        "start": 10.08,
+        "end": 10.32,
+        "word": " Not"
+      },
+      {
+        "start": 10.32,
+        "end": 10.56,
+        "word": " every"
+      },
+      {
+        "start": 10.56,
+        "end": 10.94,
+        "word": " loss"
+      },
+      {
+        "start": 10.94,
+        "end": 11.16,
+        "word": " is"
+      },
+      {
+        "start": 11.16,
+        "end": 11.28,
+        "word": " a"
+      },
+      {
+        "start": 11.28,
+        "end": 11.62,
+        "word": " failure."
+      },
+      {
+        "start": 12.84,
+        "end": 13.16,
+        "word": " Some"
+      },
+      {
+        "start": 13.16,
+        "end": 13.28,
+        "word": " are"
+      },
+      {
+        "start": 13.28,
+        "end": 13.44,
+        "word": " just"
+      },
+      {
+        "start": 13.44,
+        "end": 14.02,
+        "word": " directions."
+      },
+      {
+        "start": 15.28,
+        "end": 15.52,
+        "word": " Learn"
+      },
+      {
+        "start": 15.52,
+        "end": 15.8,
+        "word": " from"
+      },
+      {
+        "start": 15.8,
+        "end": 16.06,
+        "word": " it,"
+      },
+      {
+        "start": 16.86,
+        "end": 17.12,
+        "word": " but"
+      },
+      {
+        "start": 17.12,
+        "end": 17.4,
+        "word": " don't"
+      }
+    ]
+  },
+  {
+    "start": 17.4,
+    "end": 18.3,
+    "text": "let it define you.",
+    "words": [
+      {
+        "start": 17.4,
+        "end": 17.52,
+        "word": " let"
+      },
+      {
+        "start": 17.52,
+        "end": 17.64,
+        "word": " it"
+      },
+      {
+        "start": 17.64,
+        "end": 18.0,
+        "word": " define"
+      },
+      {
+        "start": 18.0,
+        "end": 18.3,
+        "word": " you."
+      }
+    ]
+  }
+]

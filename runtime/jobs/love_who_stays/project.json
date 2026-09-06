@@ -1,0 +1,60 @@
+{
+  "title": "Love Who Stays",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 36,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "There is a Japanese legend that says the moon pulls the ocean, and the waves always return.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "There is a Japanese legend that says the moon pulls the ocean, and the waves always return."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "I kept calling your return love.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I kept calling your return love."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "Because admitting you never stayed hurt more.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Because admitting you never stayed hurt more."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "But some waves come back only to leave the shore again.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "But some waves come back only to leave the shore again."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "And I finally learned love is not who returns.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "And I finally learned love is not who returns."
+    },
+    {
+      "id": "scene_006",
+      "duration": 5,
+      "narration": "Love is who stays.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Love is who stays."
+    }
+  ]
+}

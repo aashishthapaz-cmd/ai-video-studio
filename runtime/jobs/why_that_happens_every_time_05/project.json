@@ -1,0 +1,57 @@
+{
+  "title": "Why That Happens Every Time",
+  "style_bible": {
+    "emotional_arc": "Optimistic yet heartbroken, with a sense of repeated loss and resilience.",
+    "palette": "Charcoal-teal, navy, amber, rust-red, ember-orange, pale cream",
+    "lighting": "Moody twilight/night atmosphere, deep charcoal-teal/navy shadows",
+    "motif": "Natural elements like rain, fog, water, and trees to symbolize the passage of time and emotional turmoil.",
+    "continuity": "Sparse, poetic visual world with a consistent hand-inked storybook/graphic-novel illustration style.",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "I forgive people easily. I trust people easily.",
+      "prompt": "A hand gently cradling a fragile flower under the soft glow of twilight, symbolizing easy forgiveness and trust, wide lonely establishing view, rain haze — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "I forget the bad things they did easily.",
+      "prompt": "A rain-drenched path leading to a distant, hazy light, representing easy forgetting and washed-away memories, close symbolic detail, heavy shadow, rust-red emotional accent — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "I always believe they'll be different this time.",
+      "prompt": "A tree with bare branches reaching towards a faint, amber glow in the distance, symbolizing hope and belief, low-angle walking silhouette, open negative space — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "I keep giving chances they never deserve, and I see the good in people, even when they show me the worst.",
+      "prompt": "A lantern hanging from a tree branch, casting an ember-orange light on a rain-soaked path, symbolizing persistent optimism despite adversity, still interior frame, lantern — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_005",
+      "duration": 4.0,
+      "narration": "And somehow, I end up being the one who gets hurt, every single time.",
+      "prompt": "A solitary boat floating in a misty lake at twilight, with a pale cream light from inside illuminating its cabin, symbolizing repeated emotional pain — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 114,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

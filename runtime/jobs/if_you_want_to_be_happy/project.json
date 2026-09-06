@@ -1,0 +1,44 @@
+{
+  "title": "If You Want To Be Happy",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 88,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "If you want to be happy for the rest of your life, learn to love yourself,",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "If you want to be happy for the rest of your life, learn to love yourself,"
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "learn to prioritize you, learn to say no without feeling guilty,",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "learn to prioritize you, learn to say no without feeling guilty,"
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "learn to mind your own business, learn not to care too much about everything,",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "learn to mind your own business, learn not to care too much about everything,"
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "and most importantly, understand that you don't need everybody to like you.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "and most importantly, understand that you don't need everybody to like you."
+    }
+  ]
+}

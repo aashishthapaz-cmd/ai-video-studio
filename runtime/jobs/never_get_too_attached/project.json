@@ -1,0 +1,44 @@
+{
+  "title": "Never Get Too Attached",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 121,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "Never get too attached to anyone who doesn't feel the same about you.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Never get too attached to anyone who doesn't feel the same about you."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "Because one-sided expectations can quietly destroy you.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Because one-sided expectations can quietly destroy you."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "Some people become your whole world, while you remain just a chapter in theirs.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Some people become your whole world, while you remain just a chapter in theirs."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "So choose wisely. Choose yourself.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "So choose wisely. Choose yourself."
+    }
+  ]
+}

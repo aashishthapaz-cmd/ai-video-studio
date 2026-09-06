@@ -1,0 +1,64 @@
+{
+  "title": "Sometimes You Just Have To Accept It",
+  "style_bible": {
+    "emotional_arc": "Acceptance, understanding, release, gratitude",
+    "palette": "charcoal-teal, navy, amber, rust-red, ember-orange, pale cream",
+    "lighting": "moody twilight/night atmosphere with deep shadows and a soft glow from an accent light source",
+    "motif": "natural elements like trees, paths, windows, and books",
+    "continuity": "Sparse, poetic, readable visual world suitable for slow Ken Burns motion",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "Sometimes you just have to accept the situation.",
+      "prompt": "A lone tree standing in twilight, its branches reaching towards an unseen sky, with a soft amber light filtering through the leaves. The trunk — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "Understand that it's okay. It happens. It's life.",
+      "prompt": "A window frame at dusk, with a faint rust-red glow inside hinting at comfort and understanding, while the outside world is shrouded in deep — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "Not every ending needs an explanation.",
+      "prompt": "A path winding through a forest, leading to a clearing where the light is softer and more forgiving, symbolizing acceptance of endings without needing — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "Not every loss deserves another chance.",
+      "prompt": "A book lying open on a wooden table, with the pages slightly turned as if someone had paused in reading. The light — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_005",
+      "duration": 4.0,
+      "narration": "Some chapters are only meant to teach, not to stay.",
+      "prompt": "A boat gently rocking on a calm lake at twilight, with the water reflecting the pale cream clouds in the sky. The boat symbolizes — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_006",
+      "duration": 4.0,
+      "narration": "And one day, you'll thank life for what it didn't let you keep.",
+      "prompt": "A path leading to a small wooden door in the twilight, with a soft amber light spilling out. The door symbolizes new beginnings — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 119,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

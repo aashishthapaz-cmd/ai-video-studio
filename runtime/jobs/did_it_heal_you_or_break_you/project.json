@@ -1,0 +1,76 @@
+{
+  "title": "Did It Heal You… Or Break You",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 84,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "I read a quote that said, The right person will feel wrong sometimes.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I read a quote that said, The right person will feel wrong sometimes."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "And that confused me.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "And that confused me."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "Until I realized, Real Love isn't always calm.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Until I realized, Real Love isn't always calm."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "It questions you.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "It questions you."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "It triggers you.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "It triggers you."
+    },
+    {
+      "id": "scene_006",
+      "duration": 5,
+      "narration": "It forces you to grow.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "It forces you to grow."
+    },
+    {
+      "id": "scene_007",
+      "duration": 5,
+      "narration": "Because the right person doesn't come to complete you.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Because the right person doesn't come to complete you."
+    },
+    {
+      "id": "scene_008",
+      "duration": 5,
+      "narration": "They come to change you.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "They come to change you."
+    }
+  ]
+}

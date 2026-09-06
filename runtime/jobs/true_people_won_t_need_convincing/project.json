@@ -1,0 +1,52 @@
+{
+  "title": "True People Won't Need Convincing",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 118,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "It hurts when your biggest effort is ignored, and your smallest mistake is judged.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "It hurts when your biggest effort is ignored, and your smallest mistake is judged."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "People often remember one mistake, and forget a hundred sacrifices.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "People often remember one mistake, and forget a hundred sacrifices."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "Don't waste your life trying to prove yourself to everyone.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Don't waste your life trying to prove yourself to everyone."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "Peace begins the moment you stop seeking everyone's approval.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Peace begins the moment you stop seeking everyone's approval."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "The people who truly matter never needed convincing.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "The people who truly matter never needed convincing."
+    }
+  ]
+}

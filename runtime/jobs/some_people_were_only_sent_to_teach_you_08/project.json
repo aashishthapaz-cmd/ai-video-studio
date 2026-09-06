@@ -1,0 +1,43 @@
+{
+  "title": "Some People Were Only Sent To Teach You",
+  "style_bible": {
+    "emotional_arc": "Gradual acceptance of pain leading to self-discovery.",
+    "palette": "Charcoal-teal, navy, amber, rust-red, ember-orange, pale cream",
+    "lighting": "Moody twilight/night atmosphere with deep charcoal-teal/navy shadows and controlled amber, rust-red, or ember-orange accents",
+    "motif": "Natural elements like rain, fog, water, and trees to symbolize emotional growth.",
+    "continuity": "Sparse, poetic visual world suitable for slow Ken Burns motion, maintaining a consistent storybook/graphic-novel illustration style.",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "When someone isn't right for you, life will keep using them to hurt you, until you're strong enough to let go.",
+      "prompt": "A lone figure standing in a rain-soaked forest path under an amber-lit lantern, with the silhouette of trees and distant fog creating depth — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "And one day you'll realize,",
+      "prompt": "A close-up of a book with weathered pages and an ember-orange glow from the lantern reflecting on its cover, symbolizing the lessons learned — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "they were only sent to teach you that losing someone is how you find yourself.",
+      "prompt": "A boat floating on a calm, misty river at twilight with the moon casting pale cream light over the water, symbolizing the journey — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 94,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

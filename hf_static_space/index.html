@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Video Studio & Autonomous Auto-Publisher</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0e14;
+      --card-bg: rgba(22, 27, 34, 0.85);
+      --border: rgba(255, 255, 255, 0.08);
+      --primary: #6366f1;
+      --primary-hover: #4f46e5;
+      --accent: #10b981;
+      --accent-hover: #059669;
+      --danger: #ef4444;
+      --text: #cbd5e1;
+      --text-bright: #f8fafc;
+      --text-dim: #94a3b8;
+      --fb-blue: #1877f2;
+      --radius: 12px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.06) 0%, transparent 40%);
+      color: var(--text);
+      padding: 24px;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 18px;
+    }
+    .logo-box { display: flex; align-items: center; gap: 12px; }
+    .logo-icon {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, var(--primary), #a855f7);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 0 16px rgba(99, 102, 241, 0.4);
+    }
+    .logo-text h1 { font-family: 'Cinzel', serif; font-size: 20px; color: var(--text-bright); letter-spacing: 0.04em; }
+    .logo-text p { font-size: 12px; color: var(--text-dim); }
+
+    .nav-tabs {
+      display: flex;
+      gap: 8px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+      overflow-x: auto;
+    }
+    .tab-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-dim);
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .tab-btn:hover { background: rgba(255, 255, 255, 0.04); color: var(--text-bright); }
+    .tab-btn.active {
+      background: rgba(99, 102, 241, 0.15);
+      border-color: rgba(99, 102, 241, 0.35);
+      color: #818cf8;
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+      margin-bottom: 20px;
+    }
+    .card h2 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-bright);
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .form-group { margin-bottom: 16px; }
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+      color: var(--text-dim);
+    }
+    input, textarea, select {
+      width: 100%;
+      background: #080b11;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-bright);
+      padding: 11px 14px;
+      font-family: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: border 0.2s;
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 10px rgba(99, 102, 241, 0.25);
+    }
+    textarea { resize: vertical; min-height: 120px; line-height: 1.5; }
+    .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+    .btn {
+      background: linear-gradient(135deg, var(--primary), #a855f7);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 22px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.15s, opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.95; transform: translateY(-1px); }
+    .btn-secondary { background: rgba(255, 255, 255, 0.08); color: var(--text-bright); border: 1px solid var(--border); }
+    .btn-secondary:hover { background: rgba(255, 255, 255, 0.12); }
+    .btn-danger { background: var(--danger); }
+    .btn-success { background: var(--accent); }
+
+    .badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 999px;
+      display: inline-block;
+    }
+    .badge-pending { background: rgba(234, 179, 8, 0.15); color: #facc15; border: 1px solid rgba(234, 179, 8, 0.3); }
+    .badge-rendering { background: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3); }
+    .badge-published { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .badge-failed { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+
+    table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+    th { text-align: left; padding: 10px 12px; color: var(--text-dim); border-bottom: 1px solid var(--border); text-transform: uppercase; font-size: 11px; }
+    td { padding: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.04); vertical-align: middle; }
+    tr:hover td { background: rgba(255, 255, 255, 0.02); }
+
+    .code-box {
+      background: #04060a;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-family: monospace;
+      font-size: 12px;
+      color: #38bdf8;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo-box">
+        <div class="logo-icon">🎬</div>
+        <div class="logo-text">
+          <h1>AI CINEMATIC STUDIO</h1>
+          <p>Zero-Cost Cloud Generation, Bulk Auto-Scheduler & FB Publisher</p>
+        </div>
+      </div>
+      <div>
+        <span class="badge badge-published">● Cloud Studio LIVE</span>
+      </div>
+    </header>
+
+    <div class="nav-tabs">
+      <button class="tab-btn active" onclick="switchTab('single')">🎥 Single Generator</button>
+      <button class="tab-btn" onclick="switchTab('bulk')">📅 Bulk Scheduler & Queue</button>
+      <button class="tab-btn" onclick="switchTab('facebook')">📱 Facebook Pages</button>
+      <button class="tab-btn" onclick="switchTab('notifications')">🔔 Telegram / WhatsApp Alerts</button>
+      <button class="tab-btn" onclick="switchTab('sync')">📥 Local PC Sync</button>
+      <button class="tab-btn" onclick="switchTab('settings')">⚙️ Settings</button>
+    </div>
+
+    <!-- TAB 1: SINGLE GENERATOR -->
+    <div id="tab-single" class="tab-content active">
+      <div class="card">
+        <h2>🎥 Create Single Cinematic Video</h2>
+        <div class="form-group">
+          <label>Video Title</label>
+          <input type="text" id="singleTitle" value="The Path to Inner Peace">
+        </div>
+        <div class="form-group">
+          <label>Poem / Script</label>
+          <textarea id="singleScript">Sometimes the best way to heal is to stop giving your energy to what hurt you.
+Walk away. Breathe. Let peace return to your heart.
+Eventually, you will realize their actions no longer have the power to disturb your soul.
+You do not need revenge when you have found peace.</textarea>
+        </div>
+        <div class="row-2">
+          <div class="form-group">
+            <label>Voice Clone / Style</label>
+            <select id="singleVoice">
+              <option value="cloud_cloning">🎙️ Whisper Reference (Human Clone)</option>
+              <option value="en-US-ChristopherNeural">🗣️ English Christopher (Deep Poetic)</option>
+              <option value="en-US-GuyNeural">🗣️ English Guy (Warm)</option>
+              <option value="ne-NP-SagarNeural">🇳🇵 Sagar (Nepali Male)</option>
+              <option value="ne-NP-HemkalaNeural">🇳🇵 Hemkala (Nepali Female)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Visual Style</label>
+            <select id="singleTheme">
+              <option value="auto">🌟 Dynamic AI Selection (25+ Fine-Art Worlds)</option>
+              <option value="Ghibli Lush Watercolor">🌿 Ghibli Lush Watercolor</option>
+              <option value="Makoto Shinkai Twilight">🌅 Makoto Shinkai Twilight</option>
+              <option value="Ukiyo-e Woodblock">🌊 Ukiyo-e Woodblock Indigo</option>
+              <option value="Bioluminescent Deep Forest">✨ Bioluminescent Forest</option>
+            </select>
+          </div>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+          <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; text-transform: none;">
+            <input type="checkbox" id="singleAutoFb" style="width: auto;"> Auto-publish to connected Facebook Pages upon completion
+          </label>
+          <button class="btn" id="singleGenBtn" onclick="generateSingle()">🚀 Render Full Video</button>
+        </div>
+      </div>
+      <div class="card" id="singleProgressCard" style="display: none;">
+        <h2>📊 Production Status</h2>
+        <p id="singleStatusText" style="color: var(--primary); font-weight: 600; margin-bottom: 8px;">Starting...</p>
+        <div class="code-box" id="singleLogBox" style="max-height: 160px;"></div>
+      </div>
+    </div>
+
+    <!-- TAB 2: BULK SCHEDULER -->
+    <div id="tab-bulk" class="tab-content">
+      <div class="card">
+        <h2>📅 Bulk Script Pasting & Autonomous Scheduling</h2>
+        <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 14px;">
+          Paste multiple poems separated by <code>---</code>. The scheduler automatically spaces them out and posts to Facebook at exact timestamps!
+        </p>
+        <div class="form-group">
+          <label>Bulk Script Text</label>
+          <textarea id="bulkText" style="min-height: 180px;">Title: Whispers of the Valley
+Script:
+In the gentle embrace of the mountains,
+peace settles softly like evening snow.
+Breathe in the calm silence.
+
+---
+Title: Radiance in the Rain
+Script:
+Every drop carries a memory of clouds,
+falling down to awaken the slumbering earth.
+Life blooms in the quiet storm.
+
+---
+Title: Constellations of Hope
+Script:
+When the night grows darkest,
+look up into the endless void.
+Every star has traveled across time to find you tonight.</textarea>
+        </div>
+        <div class="row-3">
+          <div class="form-group">
+            <label>Interval Between Posts</label>
+            <select id="bulkInterval">
+              <option value="60">Every 1 Hour</option>
+              <option value="120" selected>Every 2 Hours</option>
+              <option value="180">Every 3 Hours</option>
+              <option value="360">Every 6 Hours</option>
+              <option value="720">Every 12 Hours (Twice Daily)</option>
+              <option value="1440">Every 24 Hours (Daily)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Default Voice</label>
+            <select id="bulkVoice">
+              <option value="cloud_cloning">🎙️ Whisper Reference (Human Clone)</option>
+              <option value="en-US-ChristopherNeural">🗣️ Christopher (Deep Poetic)</option>
+              <option value="ne-NP-SagarNeural">🇳🇵 Nepali Male</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Default Theme</label>
+            <select id="bulkTheme">
+              <option value="auto">🌟 Dynamic Non-Repeating</option>
+              <option value="Ghibli Lush Watercolor">🌿 Ghibli Watercolor</option>
+              <option value="Makoto Shinkai Twilight">🌅 Shinkai Twilight</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn" onclick="submitBulkJobs()">⚡ Ingest & Queue All Scripts</button>
+      </div>
+
+      <div class="card">
+        <h2>
+          <span>📋 Live Scheduled Queue</span>
+          <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;" onclick="loadBulkQueue()">🔄 Refresh</button>
+        </h2>
+        <div style="overflow-x: auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Scheduled Time</th>
+                <th>Voice / Theme</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="queueTableBody">
+              <tr><td colspan="5" style="text-align: center; color: var(--text-dim);">No scheduled jobs in queue.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: FACEBOOK PAGES -->
+    <div id="tab-facebook" class="tab-content">
+      <div class="card">
+        <h2>📱 Connect Facebook Pages</h2>
+        <div class="row-2">
+          <div class="form-group">
+            <label>Page Name</label>
+            <input type="text" id="fbName" placeholder="e.g. Poetic Horizons">
+          </div>
+          <div class="form-group">
+            <label>Page ID</label>
+            <input type="text" id="fbId" placeholder="e.g. 1092837465">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Page Access Token (EAA...)</label>
+          <input type="password" id="fbToken" placeholder="Paste Page Access Token here">
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <button class="btn btn-secondary" onclick="testFbToken()">🔍 Test Token</button>
+          <button class="btn" onclick="saveFbPage()">💾 Save Page</button>
+        </div>
+        <p id="fbTestResult" style="margin-top: 12px; font-size: 13px;"></p>
+      </div>
+    </div>
+
+    <!-- TAB 4: NOTIFICATIONS -->
+    <div id="tab-notifications" class="tab-content">
+      <div class="card">
+        <h2>🔔 Multi-Channel Notification Alerts</h2>
+        <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 16px;">
+          Receive real-time notifications on your phone for successful posts (with links), failure reasons, and local PC sync updates!
+        </p>
+        <div class="form-group">
+          <label style="display: flex; align-items: center; gap: 8px;">
+            <input type="checkbox" id="enableTelegram" style="width: auto;"> Enable Telegram Instant Notifications (100% Free)
+          </label>
+        </div>
+        <div class="row-2">
+          <div class="form-group">
+            <label>Telegram Bot Token</label>
+            <input type="password" id="tgToken" placeholder="e.g. 7123456789:AAFx...">
+          </div>
+          <div class="form-group">
+            <label>Telegram Chat ID</label>
+            <input type="text" id="tgChat" placeholder="e.g. 123456789">
+          </div>
+        </div>
+        <div class="form-group" style="margin-top: 10px;">
+          <label style="display: flex; align-items: center; gap: 8px;">
+            <input type="checkbox" id="enableWhatsapp" style="width: auto;"> Enable WhatsApp Instant Notifications (CallMeBot)
+          </label>
+        </div>
+        <div class="row-2">
+          <div class="form-group">
+            <label>WhatsApp Phone (with Country Code)</label>
+            <input type="text" id="waPhone" placeholder="e.g. +9779812345678">
+          </div>
+          <div class="form-group">
+            <label>CallMeBot API Key</label>
+            <input type="password" id="waKey" placeholder="e.g. 123456">
+          </div>
+        </div>
+        <div style="display: flex; gap: 10px; margin-top: 10px;">
+          <button class="btn btn-secondary" onclick="sendTestAlert()">🔔 Send Test Alert</button>
+          <button class="btn" onclick="saveNotificationSettings()">💾 Save Notification Settings</button>
+        </div>
+        <p id="notifyResult" style="margin-top: 12px; font-size: 13px;"></p>
+      </div>
+    </div>
+
+    <!-- TAB 5: LOCAL PC SYNC -->
+    <div id="tab-sync" class="tab-content">
+      <div class="card">
+        <h2>📥 Local PC Auto-Pull & Cloud Cleanup</h2>
+        <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 14px;">
+          Videos produced in the cloud queue are stored temporarily. Whenever your local PC boots up, <code>local_sync_daemon.py</code> downloads them to <code>D:\Auto video Generator\Output\</code> and clears the cloud buffer to maintain 0 MB waste.
+        </p>
+        <div class="code-box" style="margin-bottom: 16px;">
+          # Run one-time sync:<br>
+          python local_sync_daemon.py --once<br><br>
+          # Run background daemon (checks every 60s):<br>
+          python local_sync_daemon.py
+        </div>
+        <div style="display: flex; gap: 20px; align-items: center;">
+          <button class="btn btn-secondary" onclick="loadSyncStats()">🔄 Refresh Cloud Buffer Status</button>
+          <span id="syncStatsText" style="font-size: 13px; color: var(--text-bright);">Loading buffer status...</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 6: SETTINGS -->
+    <div id="tab-settings" class="tab-content">
+      <div class="card">
+        <h2>⚙️ Cloud API Keys & Engine Priorities</h2>
+        <div class="form-group">
+          <label>Hugging Face Write Token (hf_...)</label>
+          <input type="password" id="hfToken" placeholder="hf_...">
+        </div>
+        <div class="row-2">
+          <div class="form-group">
+            <label>Cloudflare Account ID</label>
+            <input type="text" id="cfAccountId" placeholder="Cloudflare Account ID">
+          </div>
+          <div class="form-group">
+            <label>Cloudflare API Token</label>
+            <input type="password" id="cfApiToken" placeholder="Cloudflare API Token">
+          </div>
+        </div>
+        <button class="btn" onclick="saveGeneralSettings()">💾 Save Settings</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function switchTab(name) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById('tab-' + name).classList.add('active');
+      if (name === 'bulk') loadBulkQueue();
+      if (name === 'sync') loadSyncStats();
+    }
+
+    async function loadSettings() {
+      try {
+        const r = await fetch('/api/settings');
+        const s = await r.json();
+        if (s.telegram_bot_token) document.getElementById('tgToken').value = s.telegram_bot_token;
+        if (s.telegram_chat_id) document.getElementById('tgChat').value = s.telegram_chat_id;
+        document.getElementById('enableTelegram').checked = !!s.enable_telegram;
+        if (s.whatsapp_phone) document.getElementById('waPhone').value = s.whatsapp_phone;
+        if (s.whatsapp_apikey) document.getElementById('waKey').value = s.whatsapp_apikey;
+        document.getElementById('enableWhatsapp').checked = !!s.enable_whatsapp;
+        if (s.huggingface_token) document.getElementById('hfToken').value = s.huggingface_token;
+        if (s.cloudflare_account_id) document.getElementById('cfAccountId').value = s.cloudflare_account_id;
+        if (s.cloudflare_api_token) document.getElementById('cfApiToken').value = s.cloudflare_api_token;
+      } catch (e) { console.error(e); }
+    }
+
+    async function generateSingle() {
+      const btn = document.getElementById('singleGenBtn');
+      btn.disabled = true;
+      btn.innerHTML = '⏳ Generating...';
+      document.getElementById('singleProgressCard').style.display = 'block';
+
+      const payload = {
+        title: document.getElementById('singleTitle').value,
+        script: document.getElementById('singleScript').value,
+        auto_publish_fb: document.getElementById('singleAutoFb').checked
+      };
+
+      try {
+        const r = await fetch('/api/generate', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload) });
+        pollSingleStatus();
+      } catch (e) {
+        alert('Error: ' + e);
+        btn.disabled = false;
+        btn.innerHTML = '🚀 Render Full Video';
+      }
+    }
+
+    function pollSingleStatus() {
+      const interval = setInterval(async () => {
+        try {
+          const r = await fetch('/api/status');
+          const data = await r.json();
+          document.getElementById('singleStatusText').innerText = data.status + ' (' + data.progress + '%)';
+          document.getElementById('singleLogBox').innerHTML = data.logs.join('<br>');
+          if (!data.running) {
+            clearInterval(interval);
+            document.getElementById('singleGenBtn').disabled = false;
+            document.getElementById('singleGenBtn').innerHTML = '🚀 Render Full Video';
+            if (data.progress === 100) {
+              alert('✅ Video Generated & Published Successfully!');
+            }
+          }
+        } catch (e) {}
+      }, 1500);
+    }
+
+    async function submitBulkJobs() {
+      const raw = document.getElementById('bulkText').value.trim();
+      if (!raw) return alert('Please enter bulk script text.');
+      const payload = {
+        raw_text: raw,
+        interval_minutes: parseInt(document.getElementById('bulkInterval').value),
+        voice: document.getElementById('bulkVoice').value,
+        theme: document.getElementById('bulkTheme').value
+      };
+      try {
+        const r = await fetch('/api/bulk/create', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload) });
+        const res = await r.json();
+        if (res.ok) {
+          alert('✅ Successfully enqueued ' + res.added_jobs + ' scheduled job(s)!');
+          loadBulkQueue();
+        } else {
+          alert('Error: ' + res.error);
+        }
+      } catch (e) { alert('Failed to create bulk jobs: ' + e); }
+    }
+
+    async function loadBulkQueue() {
+      try {
+        const r = await fetch('/api/bulk/queue');
+        const data = await r.json();
+        const tbody = document.getElementById('queueTableBody');
+        if (!data.queue || data.queue.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--text-dim);">No scheduled jobs in queue.</td></tr>';
+          return;
+        }
+        tbody.innerHTML = data.queue.map(j => {
+          let badge = 'badge-pending';
+          if (j.status === 'RENDERING') badge = 'badge-rendering';
+          if (j.status === 'PUBLISHED') badge = 'badge-published';
+          if (j.status === 'FAILED') badge = 'badge-failed';
+          return `<tr>
+            <td style="font-weight: 600; color: #fff;">${j.title}</td>
+            <td style="color: #38bdf8; font-family: monospace;">${j.scheduled_time || 'N/A'}</td>
+            <td><span style="font-size: 11px; color: var(--text-dim);">${j.voice} • ${j.theme}</span></td>
+            <td><span class="badge ${badge}">${j.status}</span></td>
+            <td>
+              <button class="btn btn-secondary" style="padding: 4px 8px; font-size: 11px;" onclick="runJobNow('${j.id}')">▶️ Run Now</button>
+              <button class="btn btn-danger" style="padding: 4px 8px; font-size: 11px;" onclick="deleteJob('${j.id}')">🗑️</button>
+            </td>
+          </tr>`;
+        }).join('');
+      } catch (e) { console.error(e); }
+    }
+
+    async function runJobNow(jobId) {
+      if (!confirm('Run this scheduled job immediately?')) return;
+      await fetch('/api/bulk/run_now', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({job_id: jobId}) });
+      alert('🚀 Job execution triggered!');
+      loadBulkQueue();
+    }
+
+    async function deleteJob(jobId) {
+      if (!confirm('Delete this scheduled job?')) return;
+      await fetch('/api/bulk/delete', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({job_id: jobId}) });
+      loadBulkQueue();
+    }
+
+    async function saveNotificationSettings() {
+      const payload = {
+        enable_telegram: document.getElementById('enableTelegram').checked,
+        telegram_bot_token: document.getElementById('tgToken').value.trim(),
+        telegram_chat_id: document.getElementById('tgChat').value.trim(),
+        enable_whatsapp: document.getElementById('enableWhatsapp').checked,
+        whatsapp_phone: document.getElementById('waPhone').value.trim(),
+        whatsapp_apikey: document.getElementById('waKey').value.trim()
+      };
+      const r = await fetch('/api/settings', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload) });
+      const data = await r.json();
+      document.getElementById('notifyResult').innerText = '✅ Notification settings saved successfully!';
+    }
+
+    async function sendTestAlert() {
+      const r = await fetch('/api/notify/test', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({message: '🔔 Test Notification: AI Video Studio connected successfully!'}) });
+      const data = await r.json();
+      alert('Test alert dispatched! Result: ' + JSON.stringify(data.results));
+    }
+
+    async function loadSyncStats() {
+      try {
+        const r = await fetch('/api/sync/pending');
+        const data = await r.json();
+        document.getElementById('syncStatsText').innerHTML = `📦 <strong>${data.stats.total_files}</strong> video(s) in cloud buffer (${data.stats.total_size_mb} MB).`;
+      } catch (e) { console.error(e); }
+    }
+
+    window.onload = () => {
+      loadSettings();
+      loadBulkQueue();
+    };
+  </script>
+</body>
+</html>

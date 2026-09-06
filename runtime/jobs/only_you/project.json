@@ -1,0 +1,44 @@
+{
+  "title": "Only You",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 73,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "Nobody has ever touched my soul the way you have,",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Nobody has ever touched my soul the way you have,"
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "and it's impossible for me to seek someone new.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "and it's impossible for me to seek someone new."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "Because you awakened a part of my heart, that only now beats for you.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Because you awakened a part of my heart, that only now beats for you."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "And no matter where life takes me, it keeps finding its way back to you.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "And no matter where life takes me, it keeps finding its way back to you."
+    }
+  ]
+}

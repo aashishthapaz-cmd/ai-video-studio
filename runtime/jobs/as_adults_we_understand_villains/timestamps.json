@@ -1,0 +1,270 @@
+[
+  {
+    "start": 0.0,
+    "end": 6.62,
+    "text": "As kids, we love the heroes, but as adults, we understand the villains.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.26,
+        "word": " As"
+      },
+      {
+        "start": 0.26,
+        "end": 0.5,
+        "word": " kids,"
+      },
+      {
+        "start": 1.16,
+        "end": 1.52,
+        "word": " we"
+      },
+      {
+        "start": 1.52,
+        "end": 1.8,
+        "word": " love"
+      },
+      {
+        "start": 1.8,
+        "end": 2.04,
+        "word": " the"
+      },
+      {
+        "start": 2.04,
+        "end": 2.46,
+        "word": " heroes,"
+      },
+      {
+        "start": 3.04,
+        "end": 3.82,
+        "word": " but"
+      },
+      {
+        "start": 3.82,
+        "end": 3.96,
+        "word": " as"
+      },
+      {
+        "start": 3.96,
+        "end": 4.38,
+        "word": " adults,"
+      },
+      {
+        "start": 4.82,
+        "end": 5.46,
+        "word": " we"
+      },
+      {
+        "start": 5.46,
+        "end": 6.0,
+        "word": " understand"
+      },
+      {
+        "start": 6.0,
+        "end": 6.24,
+        "word": " the"
+      },
+      {
+        "start": 6.24,
+        "end": 6.62,
+        "word": " villains."
+      }
+    ]
+  },
+  {
+    "start": 8.26,
+    "end": 11.38,
+    "text": "Life teaches us that people aren't simply good or bad.",
+    "words": [
+      {
+        "start": 8.26,
+        "end": 8.58,
+        "word": " Life"
+      },
+      {
+        "start": 8.58,
+        "end": 8.9,
+        "word": " teaches"
+      },
+      {
+        "start": 8.9,
+        "end": 9.28,
+        "word": " us"
+      },
+      {
+        "start": 9.28,
+        "end": 9.5,
+        "word": " that"
+      },
+      {
+        "start": 9.5,
+        "end": 9.84,
+        "word": " people"
+      },
+      {
+        "start": 9.84,
+        "end": 10.3,
+        "word": " aren't"
+      },
+      {
+        "start": 10.3,
+        "end": 10.56,
+        "word": " simply"
+      },
+      {
+        "start": 10.56,
+        "end": 10.9,
+        "word": " good"
+      },
+      {
+        "start": 10.9,
+        "end": 11.06,
+        "word": " or"
+      },
+      {
+        "start": 11.06,
+        "end": 11.38,
+        "word": " bad."
+      }
+    ]
+  },
+  {
+    "start": 12.5,
+    "end": 17.12,
+    "text": "Sometimes the villain is just someone who got tired of being hurt, someone who stopped",
+    "words": [
+      {
+        "start": 12.5,
+        "end": 12.96,
+        "word": " Sometimes"
+      },
+      {
+        "start": 12.96,
+        "end": 13.24,
+        "word": " the"
+      },
+      {
+        "start": 13.24,
+        "end": 13.5,
+        "word": " villain"
+      },
+      {
+        "start": 13.5,
+        "end": 13.68,
+        "word": " is"
+      },
+      {
+        "start": 13.68,
+        "end": 13.88,
+        "word": " just"
+      },
+      {
+        "start": 13.88,
+        "end": 14.16,
+        "word": " someone"
+      },
+      {
+        "start": 14.16,
+        "end": 14.38,
+        "word": " who"
+      },
+      {
+        "start": 14.38,
+        "end": 14.54,
+        "word": " got"
+      },
+      {
+        "start": 14.54,
+        "end": 14.92,
+        "word": " tired"
+      },
+      {
+        "start": 14.92,
+        "end": 15.1,
+        "word": " of"
+      },
+      {
+        "start": 15.1,
+        "end": 15.3,
+        "word": " being"
+      },
+      {
+        "start": 15.3,
+        "end": 15.7,
+        "word": " hurt,"
+      },
+      {
+        "start": 16.36,
+        "end": 16.66,
+        "word": " someone"
+      },
+      {
+        "start": 16.66,
+        "end": 16.88,
+        "word": " who"
+      },
+      {
+        "start": 16.88,
+        "end": 17.12,
+        "word": " stopped"
+      }
+    ]
+  },
+  {
+    "start": 17.12,
+    "end": 22.02,
+    "text": "explaining themselves, someone who finally chose themselves after being forgotten.",
+    "words": [
+      {
+        "start": 17.12,
+        "end": 17.66,
+        "word": " explaining"
+      },
+      {
+        "start": 17.66,
+        "end": 18.18,
+        "word": " themselves,"
+      },
+      {
+        "start": 19.1,
+        "end": 19.38,
+        "word": " someone"
+      },
+      {
+        "start": 19.38,
+        "end": 19.62,
+        "word": " who"
+      },
+      {
+        "start": 19.62,
+        "end": 19.98,
+        "word": " finally"
+      },
+      {
+        "start": 19.98,
+        "end": 20.4,
+        "word": " chose"
+      },
+      {
+        "start": 20.4,
+        "end": 20.96,
+        "word": " themselves"
+      },
+      {
+        "start": 20.96,
+        "end": 21.4,
+        "word": " after"
+      },
+      {
+        "start": 21.4,
+        "end": 21.62,
+        "word": " being"
+      },
+      {
+        "start": 21.62,
+        "end": 22.02,
+        "word": " forgotten."
+      }
+    ]
+  }
+]

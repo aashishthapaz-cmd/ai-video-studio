@@ -1,0 +1,275 @@
+[
+  {
+    "start": 0.0,
+    "end": 5.28,
+    "text": "If no one wakes up thinking of you, if no one waits to hear from you,",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.36,
+        "word": " If"
+      },
+      {
+        "start": 0.36,
+        "end": 0.54,
+        "word": " no"
+      },
+      {
+        "start": 0.54,
+        "end": 0.72,
+        "word": " one"
+      },
+      {
+        "start": 0.72,
+        "end": 0.94,
+        "word": " wakes"
+      },
+      {
+        "start": 0.94,
+        "end": 1.24,
+        "word": " up"
+      },
+      {
+        "start": 1.24,
+        "end": 1.64,
+        "word": " thinking"
+      },
+      {
+        "start": 1.64,
+        "end": 1.92,
+        "word": " of"
+      },
+      {
+        "start": 1.92,
+        "end": 2.14,
+        "word": " you,"
+      },
+      {
+        "start": 2.88,
+        "end": 3.4,
+        "word": " if"
+      },
+      {
+        "start": 3.4,
+        "end": 3.64,
+        "word": " no"
+      },
+      {
+        "start": 3.64,
+        "end": 3.86,
+        "word": " one"
+      },
+      {
+        "start": 3.86,
+        "end": 4.14,
+        "word": " waits"
+      },
+      {
+        "start": 4.14,
+        "end": 4.46,
+        "word": " to"
+      },
+      {
+        "start": 4.46,
+        "end": 4.72,
+        "word": " hear"
+      },
+      {
+        "start": 4.72,
+        "end": 4.96,
+        "word": " from"
+      },
+      {
+        "start": 4.96,
+        "end": 5.28,
+        "word": " you,"
+      }
+    ]
+  },
+  {
+    "start": 5.94,
+    "end": 10.06,
+    "text": "if no one wonders where you are or how your day is going,",
+    "words": [
+      {
+        "start": 5.94,
+        "end": 6.5,
+        "word": " if"
+      },
+      {
+        "start": 6.5,
+        "end": 6.7,
+        "word": " no"
+      },
+      {
+        "start": 6.7,
+        "end": 6.9,
+        "word": " one"
+      },
+      {
+        "start": 6.9,
+        "end": 7.24,
+        "word": " wonders"
+      },
+      {
+        "start": 7.24,
+        "end": 7.56,
+        "word": " where"
+      },
+      {
+        "start": 7.56,
+        "end": 7.8,
+        "word": " you"
+      },
+      {
+        "start": 7.8,
+        "end": 8.12,
+        "word": " are"
+      },
+      {
+        "start": 8.12,
+        "end": 8.8,
+        "word": " or"
+      },
+      {
+        "start": 8.8,
+        "end": 9.06,
+        "word": " how"
+      },
+      {
+        "start": 9.06,
+        "end": 9.28,
+        "word": " your"
+      },
+      {
+        "start": 9.28,
+        "end": 9.58,
+        "word": " day"
+      },
+      {
+        "start": 9.58,
+        "end": 9.74,
+        "word": " is"
+      },
+      {
+        "start": 9.74,
+        "end": 10.06,
+        "word": " going,"
+      }
+    ]
+  },
+  {
+    "start": 11.08,
+    "end": 15.08,
+    "text": "and you're free to do whatever you want, what do you call that?",
+    "words": [
+      {
+        "start": 11.08,
+        "end": 11.26,
+        "word": " and"
+      },
+      {
+        "start": 11.26,
+        "end": 11.44,
+        "word": " you're"
+      },
+      {
+        "start": 11.44,
+        "end": 11.7,
+        "word": " free"
+      },
+      {
+        "start": 11.7,
+        "end": 11.94,
+        "word": " to"
+      },
+      {
+        "start": 11.94,
+        "end": 12.12,
+        "word": " do"
+      },
+      {
+        "start": 12.12,
+        "end": 12.4,
+        "word": " whatever"
+      },
+      {
+        "start": 12.4,
+        "end": 12.74,
+        "word": " you"
+      },
+      {
+        "start": 12.74,
+        "end": 13.1,
+        "word": " want,"
+      },
+      {
+        "start": 14.08,
+        "end": 14.26,
+        "word": " what"
+      },
+      {
+        "start": 14.26,
+        "end": 14.42,
+        "word": " do"
+      },
+      {
+        "start": 14.42,
+        "end": 14.54,
+        "word": " you"
+      },
+      {
+        "start": 14.54,
+        "end": 14.8,
+        "word": " call"
+      },
+      {
+        "start": 14.8,
+        "end": 15.08,
+        "word": " that?"
+      }
+    ]
+  },
+  {
+    "start": 16.26,
+    "end": 18.9,
+    "text": "Is that freedom or is it loneliness?",
+    "words": [
+      {
+        "start": 16.26,
+        "end": 16.4,
+        "word": " Is"
+      },
+      {
+        "start": 16.4,
+        "end": 16.62,
+        "word": " that"
+      },
+      {
+        "start": 16.62,
+        "end": 17.02,
+        "word": " freedom"
+      },
+      {
+        "start": 17.02,
+        "end": 18.26,
+        "word": " or"
+      },
+      {
+        "start": 18.26,
+        "end": 18.4,
+        "word": " is"
+      },
+      {
+        "start": 18.4,
+        "end": 18.52,
+        "word": " it"
+      },
+      {
+        "start": 18.52,
+        "end": 18.9,
+        "word": " loneliness?"
+      }
+    ]
+  }
+]

@@ -1,0 +1,249 @@
+[
+  {
+    "start": 0.0,
+    "end": 1.5,
+    "text": "When someone isn't right for you,",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.12,
+        "word": " When"
+      },
+      {
+        "start": 0.12,
+        "end": 0.42,
+        "word": " someone"
+      },
+      {
+        "start": 0.42,
+        "end": 0.82,
+        "word": " isn't"
+      },
+      {
+        "start": 0.82,
+        "end": 1.0,
+        "word": " right"
+      },
+      {
+        "start": 1.0,
+        "end": 1.26,
+        "word": " for"
+      },
+      {
+        "start": 1.26,
+        "end": 1.5,
+        "word": " you,"
+      }
+    ]
+  },
+  {
+    "start": 2.02,
+    "end": 4.12,
+    "text": "life will keep using them to hurt you",
+    "words": [
+      {
+        "start": 2.02,
+        "end": 2.34,
+        "word": " life"
+      },
+      {
+        "start": 2.34,
+        "end": 2.54,
+        "word": " will"
+      },
+      {
+        "start": 2.54,
+        "end": 2.72,
+        "word": " keep"
+      },
+      {
+        "start": 2.72,
+        "end": 3.12,
+        "word": " using"
+      },
+      {
+        "start": 3.12,
+        "end": 3.4,
+        "word": " them"
+      },
+      {
+        "start": 3.4,
+        "end": 3.58,
+        "word": " to"
+      },
+      {
+        "start": 3.58,
+        "end": 3.84,
+        "word": " hurt"
+      },
+      {
+        "start": 3.84,
+        "end": 4.12,
+        "word": " you"
+      }
+    ]
+  },
+  {
+    "start": 4.12,
+    "end": 6.4,
+    "text": "until you're strong enough to let go.",
+    "words": [
+      {
+        "start": 4.12,
+        "end": 4.72,
+        "word": " until"
+      },
+      {
+        "start": 4.72,
+        "end": 5.08,
+        "word": " you're"
+      },
+      {
+        "start": 5.08,
+        "end": 5.36,
+        "word": " strong"
+      },
+      {
+        "start": 5.36,
+        "end": 5.64,
+        "word": " enough"
+      },
+      {
+        "start": 5.64,
+        "end": 5.88,
+        "word": " to"
+      },
+      {
+        "start": 5.88,
+        "end": 6.06,
+        "word": " let"
+      },
+      {
+        "start": 6.06,
+        "end": 6.4,
+        "word": " go."
+      }
+    ]
+  },
+  {
+    "start": 7.08,
+    "end": 8.64,
+    "text": "And one day you'll realize",
+    "words": [
+      {
+        "start": 7.08,
+        "end": 7.58,
+        "word": " And"
+      },
+      {
+        "start": 7.58,
+        "end": 7.78,
+        "word": " one"
+      },
+      {
+        "start": 7.78,
+        "end": 7.98,
+        "word": " day"
+      },
+      {
+        "start": 7.98,
+        "end": 8.2,
+        "word": " you'll"
+      },
+      {
+        "start": 8.2,
+        "end": 8.64,
+        "word": " realize"
+      }
+    ]
+  },
+  {
+    "start": 9.32,
+    "end": 11.0,
+    "text": "they were only sent to teach you",
+    "words": [
+      {
+        "start": 9.14,
+        "end": 9.42,
+        "word": " they"
+      },
+      {
+        "start": 9.42,
+        "end": 9.58,
+        "word": " were"
+      },
+      {
+        "start": 9.58,
+        "end": 9.88,
+        "word": " only"
+      },
+      {
+        "start": 9.88,
+        "end": 10.18,
+        "word": " sent"
+      },
+      {
+        "start": 10.18,
+        "end": 10.4,
+        "word": " to"
+      },
+      {
+        "start": 10.4,
+        "end": 10.64,
+        "word": " teach"
+      },
+      {
+        "start": 10.64,
+        "end": 11.0,
+        "word": " you"
+      }
+    ]
+  },
+  {
+    "start": 11.0,
+    "end": 14.08,
+    "text": "that losing someone is how you find yourself.",
+    "words": [
+      {
+        "start": 11.0,
+        "end": 11.54,
+        "word": " that"
+      },
+      {
+        "start": 11.54,
+        "end": 11.82,
+        "word": " losing"
+      },
+      {
+        "start": 11.82,
+        "end": 12.36,
+        "word": " someone"
+      },
+      {
+        "start": 12.36,
+        "end": 13.1,
+        "word": " is"
+      },
+      {
+        "start": 13.1,
+        "end": 13.28,
+        "word": " how"
+      },
+      {
+        "start": 13.28,
+        "end": 13.42,
+        "word": " you"
+      },
+      {
+        "start": 13.42,
+        "end": 13.68,
+        "word": " find"
+      },
+      {
+        "start": 13.68,
+        "end": 14.08,
+        "word": " yourself."
+      }
+    ]
+  }
+]

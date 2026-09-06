@@ -1,0 +1,15 @@
+1
+00:00:00,000 --> 00:00:05,400
+There is a legend that says, if you get on the wrong train, get off at the nearest station.
+
+2
+00:00:06,200 --> 00:00:10,780
+The longer it takes you to leave, the more expensive the return trip becomes.
+
+3
+00:00:11,620 --> 00:00:16,000
+Every stop you stay past your peace is a cost you'll have to pay back.
+
+4
+00:00:16,920 --> 00:00:19,060
+So is this really only about trains?

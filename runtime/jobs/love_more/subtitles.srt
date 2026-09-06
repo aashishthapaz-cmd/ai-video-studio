@@ -1,0 +1,15 @@
+1
+00:00:00,000 --> 00:00:02,620
+If you love and get hurt, love more.
+
+2
+00:00:03,780 --> 00:00:07,400
+If you love more and hurt more, love even more.
+
+3
+00:00:08,440 --> 00:00:12,580
+If you love even more and hurt even more, love some more.
+
+4
+00:00:13,360 --> 00:00:15,080
+Until it hurts no more.

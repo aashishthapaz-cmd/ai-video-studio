@@ -1,0 +1,52 @@
+{
+  "title": "The Greatest Truth Isn't Found In Words",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 111,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "The greatest truth isn't found in people's words. It's found in their actions.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "The greatest truth isn't found in people's words. It's found in their actions."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "Sometimes people don't tell you the truth.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Sometimes people don't tell you the truth."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "Maybe they're protecting you. Maybe they're protecting themselves.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Maybe they're protecting you. Maybe they're protecting themselves."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "Maybe they're hiding something you'll never know.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Maybe they're hiding something you'll never know."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "But no matter how carefully the truth is hidden, their actions always reveal what their words conceal.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "But no matter how carefully the truth is hidden, their actions always reveal what their words conceal."
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "Keep Building, Someone Is Waiting",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 107,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "No matter how isolated or lonely you feel,",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "No matter how isolated or lonely you feel,"
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "keep doing your work with honesty and quiet dedication.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "keep doing your work with honesty and quiet dedication."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "Some battles are meant to be fought alone. Some chapters can only be written alone.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Some battles are meant to be fought alone. Some chapters can only be written alone."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "Someone out there is waiting to meet the person you're becoming.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Someone out there is waiting to meet the person you're becoming."
+    }
+  ]
+}

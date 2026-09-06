@@ -1,0 +1,220 @@
+[
+  {
+    "start": 0.0,
+    "end": 2.1,
+    "text": "Be with someone who takes care of you.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.14,
+        "word": " Be"
+      },
+      {
+        "start": 0.14,
+        "end": 0.34,
+        "word": " with"
+      },
+      {
+        "start": 0.34,
+        "end": 0.66,
+        "word": " someone"
+      },
+      {
+        "start": 0.66,
+        "end": 1.18,
+        "word": " who"
+      },
+      {
+        "start": 1.18,
+        "end": 1.42,
+        "word": " takes"
+      },
+      {
+        "start": 1.42,
+        "end": 1.76,
+        "word": " care"
+      },
+      {
+        "start": 1.76,
+        "end": 1.92,
+        "word": " of"
+      },
+      {
+        "start": 1.92,
+        "end": 2.1,
+        "word": " you."
+      }
+    ]
+  },
+  {
+    "start": 3.06,
+    "end": 8.84,
+    "text": "Not just materially, but your soul, your well-being, your heart.",
+    "words": [
+      {
+        "start": 3.06,
+        "end": 3.6,
+        "word": " Not"
+      },
+      {
+        "start": 3.6,
+        "end": 3.8,
+        "word": " just"
+      },
+      {
+        "start": 3.8,
+        "end": 4.48,
+        "word": " materially,"
+      },
+      {
+        "start": 5.18,
+        "end": 5.5,
+        "word": " but"
+      },
+      {
+        "start": 5.5,
+        "end": 5.66,
+        "word": " your"
+      },
+      {
+        "start": 5.66,
+        "end": 6.04,
+        "word": " soul,"
+      },
+      {
+        "start": 6.88,
+        "end": 6.98,
+        "word": " your"
+      },
+      {
+        "start": 6.98,
+        "end": 7.18,
+        "word": " well"
+      },
+      {
+        "start": 7.18,
+        "end": 7.48,
+        "word": "-being,"
+      },
+      {
+        "start": 8.4,
+        "end": 8.5,
+        "word": " your"
+      },
+      {
+        "start": 8.5,
+        "end": 8.84,
+        "word": " heart."
+      }
+    ]
+  },
+  {
+    "start": 9.82,
+    "end": 13.36,
+    "text": "Someone who sees all of you and still chooses to stay.",
+    "words": [
+      {
+        "start": 9.82,
+        "end": 10.26,
+        "word": " Someone"
+      },
+      {
+        "start": 10.26,
+        "end": 10.48,
+        "word": " who"
+      },
+      {
+        "start": 10.48,
+        "end": 10.74,
+        "word": " sees"
+      },
+      {
+        "start": 10.74,
+        "end": 11.1,
+        "word": " all"
+      },
+      {
+        "start": 11.1,
+        "end": 11.24,
+        "word": " of"
+      },
+      {
+        "start": 11.24,
+        "end": 11.48,
+        "word": " you"
+      },
+      {
+        "start": 11.48,
+        "end": 12.18,
+        "word": " and"
+      },
+      {
+        "start": 12.18,
+        "end": 12.42,
+        "word": " still"
+      },
+      {
+        "start": 12.42,
+        "end": 12.8,
+        "word": " chooses"
+      },
+      {
+        "start": 12.8,
+        "end": 13.08,
+        "word": " to"
+      },
+      {
+        "start": 13.08,
+        "end": 13.36,
+        "word": " stay."
+      }
+    ]
+  },
+  {
+    "start": 14.34,
+    "end": 16.34,
+    "text": "That's the kind of care worth waiting for.",
+    "words": [
+      {
+        "start": 14.34,
+        "end": 14.74,
+        "word": " That's"
+      },
+      {
+        "start": 14.74,
+        "end": 14.84,
+        "word": " the"
+      },
+      {
+        "start": 14.84,
+        "end": 15.04,
+        "word": " kind"
+      },
+      {
+        "start": 15.04,
+        "end": 15.16,
+        "word": " of"
+      },
+      {
+        "start": 15.16,
+        "end": 15.42,
+        "word": " care"
+      },
+      {
+        "start": 15.42,
+        "end": 15.7,
+        "word": " worth"
+      },
+      {
+        "start": 15.7,
+        "end": 16.02,
+        "word": " waiting"
+      },
+      {
+        "start": 16.02,
+        "end": 16.34,
+        "word": " for."
+      }
+    ]
+  }
+]

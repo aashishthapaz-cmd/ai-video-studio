@@ -1,0 +1,60 @@
+{
+  "title": "The Hand That Never Lets Go",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 33,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "Dear love, I know you're used to people who walk away when things get hard.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Dear love, I know you're used to people who walk away when things get hard."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "But I will be the one who stays.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "But I will be the one who stays."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "I'll become the quiet reminder that you are deeply wanted, exactly as you are today.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I'll become the quiet reminder that you are deeply wanted, exactly as you are today."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "I'll become the hand that never lets go of yours.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I'll become the hand that never lets go of yours."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "Not just for a season, but for a lifetime.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Not just for a season, but for a lifetime."
+    },
+    {
+      "id": "scene_006",
+      "duration": 5,
+      "narration": "And this is my promise to you.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "And this is my promise to you."
+    }
+  ]
+}

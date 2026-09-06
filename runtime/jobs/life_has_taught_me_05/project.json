@@ -1,0 +1,50 @@
+{
+  "title": "Life Has Taught Me",
+  "style_bible": {
+    "emotional_arc": "A somber reflection on the unpredictability of human relationships, leading to a sense of resignation and acceptance.",
+    "palette": "Deep charcoal-teal/navy with subtle amber highlights",
+    "lighting": "Moody twilight/night atmosphere with soft, diffused light",
+    "motif": "Sparse natural elements like trees, paths, and windows",
+    "continuity": "Consistent dark hand-inked storybook/graphic-novel illustration style",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "Life has taught me, you can't decide how loyal someone will be.",
+      "prompt": "A lone tree standing in twilight with a path leading to it, emphasizing the unpredictability of loyalty. Soft amber light filters through the branches — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "Treating people with love and respect doesn't guarantee they'll return it.",
+      "prompt": "A windowpane reflecting a dark night, with faint silhouettes of hands holding each other outside the glass. Amber light inside contrasts with the cold — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "Caring deeply for someone doesn't mean they'll care for you the same way.",
+      "prompt": "A book lying open on a wooden table, with pages illuminated by an amber glow. The rest of the scene is in deep shadow — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "The saddest truth is, the people closest to you can become the ones you feel safest keeping your distance from.",
+      "prompt": "A boat floating on a calm lake at twilight, with only its silhouette visible. The water reflects an amber glow, symbolizing emotional isolation — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 117,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

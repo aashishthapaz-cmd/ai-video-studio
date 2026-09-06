@@ -1,0 +1,295 @@
+[
+  {
+    "start": 0.0,
+    "end": 5.86,
+    "text": "Dear love, I may not be your first love, but I promise to be your last.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.24,
+        "word": " Dear"
+      },
+      {
+        "start": 0.24,
+        "end": 0.6,
+        "word": " love,"
+      },
+      {
+        "start": 1.54,
+        "end": 1.74,
+        "word": " I"
+      },
+      {
+        "start": 1.74,
+        "end": 1.88,
+        "word": " may"
+      },
+      {
+        "start": 1.88,
+        "end": 2.08,
+        "word": " not"
+      },
+      {
+        "start": 2.08,
+        "end": 2.32,
+        "word": " be"
+      },
+      {
+        "start": 2.32,
+        "end": 2.5,
+        "word": " your"
+      },
+      {
+        "start": 2.5,
+        "end": 2.76,
+        "word": " first"
+      },
+      {
+        "start": 2.76,
+        "end": 3.18,
+        "word": " love,"
+      },
+      {
+        "start": 3.88,
+        "end": 4.36,
+        "word": " but"
+      },
+      {
+        "start": 4.36,
+        "end": 4.46,
+        "word": " I"
+      },
+      {
+        "start": 4.46,
+        "end": 4.76,
+        "word": " promise"
+      },
+      {
+        "start": 4.76,
+        "end": 5.1,
+        "word": " to"
+      },
+      {
+        "start": 5.1,
+        "end": 5.26,
+        "word": " be"
+      },
+      {
+        "start": 5.26,
+        "end": 5.42,
+        "word": " your"
+      },
+      {
+        "start": 5.42,
+        "end": 5.86,
+        "word": " last."
+      }
+    ]
+  },
+  {
+    "start": 7.16,
+    "end": 10.94,
+    "text": "I promise to bring back the smile that faded from your face long ago.",
+    "words": [
+      {
+        "start": 7.16,
+        "end": 7.4,
+        "word": " I"
+      },
+      {
+        "start": 7.4,
+        "end": 7.74,
+        "word": " promise"
+      },
+      {
+        "start": 7.74,
+        "end": 8.04,
+        "word": " to"
+      },
+      {
+        "start": 8.04,
+        "end": 8.22,
+        "word": " bring"
+      },
+      {
+        "start": 8.22,
+        "end": 8.46,
+        "word": " back"
+      },
+      {
+        "start": 8.46,
+        "end": 8.66,
+        "word": " the"
+      },
+      {
+        "start": 8.66,
+        "end": 9.02,
+        "word": " smile"
+      },
+      {
+        "start": 9.02,
+        "end": 9.24,
+        "word": " that"
+      },
+      {
+        "start": 9.24,
+        "end": 9.6,
+        "word": " faded"
+      },
+      {
+        "start": 9.6,
+        "end": 9.86,
+        "word": " from"
+      },
+      {
+        "start": 9.86,
+        "end": 10.04,
+        "word": " your"
+      },
+      {
+        "start": 10.04,
+        "end": 10.38,
+        "word": " face"
+      },
+      {
+        "start": 10.38,
+        "end": 10.62,
+        "word": " long"
+      },
+      {
+        "start": 10.62,
+        "end": 10.94,
+        "word": " ago."
+      }
+    ]
+  },
+  {
+    "start": 12.16,
+    "end": 15.04,
+    "text": "I promise to fill your world with happiness once again.",
+    "words": [
+      {
+        "start": 12.16,
+        "end": 12.4,
+        "word": " I"
+      },
+      {
+        "start": 12.4,
+        "end": 12.76,
+        "word": " promise"
+      },
+      {
+        "start": 12.76,
+        "end": 13.02,
+        "word": " to"
+      },
+      {
+        "start": 13.02,
+        "end": 13.16,
+        "word": " fill"
+      },
+      {
+        "start": 13.16,
+        "end": 13.42,
+        "word": " your"
+      },
+      {
+        "start": 13.42,
+        "end": 13.76,
+        "word": " world"
+      },
+      {
+        "start": 13.76,
+        "end": 13.94,
+        "word": " with"
+      },
+      {
+        "start": 13.94,
+        "end": 14.34,
+        "word": " happiness"
+      },
+      {
+        "start": 14.34,
+        "end": 14.64,
+        "word": " once"
+      },
+      {
+        "start": 14.64,
+        "end": 15.04,
+        "word": " again."
+      }
+    ]
+  },
+  {
+    "start": 16.34,
+    "end": 20.46,
+    "text": "No matter what storms come our way, I will be with you forever.",
+    "words": [
+      {
+        "start": 16.34,
+        "end": 16.56,
+        "word": " No"
+      },
+      {
+        "start": 16.56,
+        "end": 16.8,
+        "word": " matter"
+      },
+      {
+        "start": 16.8,
+        "end": 17.04,
+        "word": " what"
+      },
+      {
+        "start": 17.04,
+        "end": 17.5,
+        "word": " storms"
+      },
+      {
+        "start": 17.5,
+        "end": 17.78,
+        "word": " come"
+      },
+      {
+        "start": 17.78,
+        "end": 17.94,
+        "word": " our"
+      },
+      {
+        "start": 17.94,
+        "end": 18.24,
+        "word": " way,"
+      },
+      {
+        "start": 19.02,
+        "end": 19.4,
+        "word": " I"
+      },
+      {
+        "start": 19.4,
+        "end": 19.56,
+        "word": " will"
+      },
+      {
+        "start": 19.56,
+        "end": 19.72,
+        "word": " be"
+      },
+      {
+        "start": 19.72,
+        "end": 19.96,
+        "word": " with"
+      },
+      {
+        "start": 19.96,
+        "end": 20.14,
+        "word": " you"
+      },
+      {
+        "start": 20.14,
+        "end": 20.46,
+        "word": " forever."
+      }
+    ]
+  }
+]

@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autonomous AI Video Studio & Multi-Page Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #07090e;
+      --card-bg: rgba(18, 22, 34, 0.75);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-hover: rgba(255, 255, 255, 0.12);
+      --primary: #6366f1;
+      --primary-glow: rgba(99, 102, 241, 0.4);
+      --accent-cyan: #06b6d4;
+      --accent-green: #10b981;
+      --accent-emerald: #059669;
+      --accent-gold: #f59e0b;
+      --danger: #ef4444;
+      --fb-blue: #1877f2;
+      --text-main: #f1f5f9;
+      --text-dim: #94a3b8;
+      --text-muted: #64748b;
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 5% 15%, rgba(99, 102, 241, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 95% 85%, rgba(6, 182, 212, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.04) 0%, transparent 60%);
+      background-attachment: fixed;
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 24px;
+      display: flex;
+      justify-content: center;
+    }
+    .wrapper {
+      width: 100%;
+      max-width: 1240px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+    
+    /* Header & Telemetry */
+    header {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 10px 35px rgba(0,0,0,0.5);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .brand { display: flex; align-items: center; gap: 14px; }
+    .brand-icon {
+      width: 48px; height: 48px;
+      background: linear-gradient(135deg, #6366f1, #a855f7, #06b6d4);
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 0 20px var(--primary-glow);
+    }
+    .brand-text h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      background: linear-gradient(135deg, #ffffff, #c7d2fe);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .brand-text p { font-size: 12px; color: var(--text-dim); }
+
+    .telemetry-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .stat-pill {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--card-border);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-dim);
+    }
+    .stat-pill strong { color: var(--text-main); font-weight: 700; }
+    .status-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent-green);
+      box-shadow: 0 0 8px var(--accent-green);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    /* Navigation Tabs */
+    .nav-bar {
+      display: flex;
+      gap: 8px;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 8px;
+      overflow-x: auto;
+    }
+    .tab-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-dim);
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      white-space: nowrap;
+    }
+    .tab-btn:hover { background: rgba(255, 255, 255, 0.05); color: var(--text-main); }
+    .tab-btn.active {
+      background: rgba(99, 102, 241, 0.16);
+      border-color: rgba(99, 102, 241, 0.4);
+      color: #a5b4fc;
+      box-shadow: 0 0 16px rgba(99, 102, 241, 0.2);
+    }
+
+    /* Cards & Layout */
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 24px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      margin-bottom: 22px;
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .card-subtitle { font-size: 13px; color: var(--text-dim); margin-bottom: 16px; line-height: 1.5; }
+
+    /* Forms */
+    .form-group { margin-bottom: 16px; }
+    label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 7px;
+      color: var(--text-muted);
+    }
+    input, textarea, select {
+      width: 100%;
+      background: rgba(5, 7, 12, 0.8);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      color: var(--text-main);
+      padding: 12px 16px;
+      font-family: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.2s;
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 15px rgba(99, 102, 241, 0.25);
+      background: rgba(8, 11, 20, 0.95);
+    }
+    textarea { resize: vertical; min-height: 130px; line-height: 1.6; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+    @media (max-width: 768px) {
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    }
+
+    /* Buttons */
+    .btn {
+      background: linear-gradient(135deg, var(--primary), #8b5cf6);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 11px 20px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
+    }
+    .btn:hover { opacity: 0.92; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(99, 102, 241, 0.45); }
+    .btn:active { transform: translateY(1px); }
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-main);
+      border: 1px solid var(--card-border);
+      box-shadow: none;
+    }
+    .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.2); }
+    .btn-emerald { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3); }
+    .btn-danger { background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 4px 14px rgba(239, 68, 68, 0.3); }
+    .btn-sm { padding: 6px 12px; font-size: 11px; border-radius: 8px; }
+
+    /* Badges */
+    .badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .badge-pending { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .badge-rendering { background: rgba(99, 102, 241, 0.18); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.4); animation: pulse 1.5s infinite; }
+    .badge-published { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .badge-failed { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+    .badge-connected { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .badge-tokenerr { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+
+    /* Tables */
+    .table-responsive { overflow-x: auto; border-radius: 10px; border: 1px solid var(--card-border); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; text-align: left; }
+    th {
+      background: rgba(0, 0, 0, 0.3);
+      color: var(--text-muted);
+      padding: 12px 14px;
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--card-border);
+    }
+    td { padding: 14px; border-bottom: 1px solid rgba(255, 255, 255, 0.04); vertical-align: middle; }
+    tr:hover td { background: rgba(255, 255, 255, 0.02); }
+
+    /* Facebook Page Grid Cards */
+    .fb-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 18px;
+    }
+    .fb-page-card {
+      background: rgba(8, 12, 22, 0.8);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: all 0.2s;
+    }
+    .fb-page-card:hover { border-color: rgba(99, 102, 241, 0.3); transform: translateY(-2px); }
+    .fb-card-top { display: flex; justify-content: space-between; align-items: flex-start; }
+    .fb-page-name { font-weight: 700; font-size: 15px; color: var(--text-main); }
+    .fb-page-meta { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
+    .fb-time-slots {
+      display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px;
+    }
+    .slot-pill {
+      background: rgba(99, 102, 241, 0.12);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      color: #c7d2fe;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+    }
+
+    /* Video Gallery Cards */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 18px;
+    }
+    .video-card {
+      background: rgba(8, 12, 22, 0.85);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .video-preview-holder {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 9/16;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .video-preview-holder video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .video-card-body {
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* Console logs */
+    .console-box {
+      background: #04060a;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: #38bdf8;
+      max-height: 220px;
+      overflow-y: auto;
+      line-height: 1.6;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal-dialog {
+      background: #0e131f;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius);
+      width: 100%;
+      max-width: 580px;
+      padding: 24px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+      animation: modalPop 0.25s ease;
+    }
+    @keyframes modalPop { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- TOP HEADER & LIVE TELEMETRY -->
+    <header>
+      <div class="brand">
+        <div class="brand-icon">🎬</div>
+        <div class="brand-text">
+          <h1>AI AUTONOMOUS VIDEO FACTORY</h1>
+          <p>Zero-Cost Generation • Self-Healing Watchdog • Multi-Page Facebook Hub</p>
+        </div>
+      </div>
+      <div class="telemetry-bar">
+        <div class="stat-pill" id="healthPill">
+          <span class="status-dot"></span> Watchdog: <strong id="healthStatusText">ACTIVE</strong>
+        </div>
+        <div class="stat-pill">
+          📦 Cloud Buffer: <strong id="telemetryBuffer">0 MB</strong>
+        </div>
+        <div class="stat-pill">
+          📱 Active Pages: <strong id="telemetryPages">0</strong>
+        </div>
+        <button class="btn btn-sm btn-secondary" onclick="triggerSelfRepair()" title="Instant self-recovery, clean old workspaces, unstick jobs">
+          🛡️ Self-Repair
+        </button>
+      </div>
+    </header>
+
+    <!-- NAVIGATION BAR -->
+    <div class="nav-bar">
+      <button class="tab-btn active" onclick="showTab('tab-single')">🎥 Single Studio</button>
+      <button class="tab-btn" onclick="showTab('tab-bulk')">📅 Bulk Scheduler & Queue</button>
+      <button class="tab-btn" onclick="showTab('tab-facebook')">📱 Facebook Pages Hub</button>
+      <button class="tab-btn" onclick="showTab('tab-gallery')">🎬 Video Gallery</button>
+      <button class="tab-btn" onclick="showTab('tab-notifications')">🔔 Telegram & WhatsApp</button>
+      <button class="tab-btn" onclick="showTab('tab-sync')">📥 Local PC Sync</button>
+      <button class="tab-btn" onclick="showTab('tab-settings')">⚙️ Settings</button>
+    </div>
+
+    <!-- TAB 1: SINGLE STUDIO -->
+    <div id="tab-single" class="tab-pane active">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">✨ Create Single Masterpiece Video</div>
+          <span class="badge badge-published">Edge Neural TTS + 2.5D Parallax</span>
+        </div>
+        <p class="card-subtitle">
+          Generate an aesthetic 9:16 portrait video with zero-cost AI cloud image generation, syllable-synchronized karaoke subtitles, and camera panning.
+        </p>
+        <div class="form-group">
+          <label>Poem / Video Title</label>
+          <input type="text" id="singleTitle" value="The Whisper of Silent Rain">
+        </div>
+        <div class="form-group">
+          <label>Poem / Script Text (Devanagari or English)</label>
+          <textarea id="singleScript">मनका सबै कुरा शब्दमा पोख्न कहाँ सकिन्छ र?
+केही पीडा केवल आँखाको मौनताले बुझाउँछ।
+जब समयले साथ छोड्छ, आफ्नै छायाँ पनि टाढा हुन्छ,
+तर धर्य राख, हरेक कालो रातपछि सुनौलो बिहानी अवश्य आउँछ।</textarea>
+        </div>
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Artistic World Aesthetic</label>
+            <select id="singleTheme">
+              <option value="auto">🌟 Dynamic AI Selection (Poem Breakdown)</option>
+              <option value="Ghibli Lush Watercolor">🌿 Ghibli Lush Watercolor & Meadow</option>
+              <option value="Makoto Shinkai Twilight">🌅 Makoto Shinkai Twilight Glow</option>
+              <option value="Ukiyo-e Woodblock Indigo">🌊 Ukiyo-e Woodblock Japanese Indigo</option>
+              <option value="Himalayan Mist Serenity">🏔️ Himalayan Mist & Buddhist Serenity</option>
+              <option value="Bioluminescent Deep Forest">✨ Bioluminescent Night Forest</option>
+              <option value="Cyberpunk Neon Rain">🌃 Cyberpunk Rainy Alleyway</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Voice Synthesizer</label>
+            <select id="singleVoice">
+              <option value="cloud_cloning">🎙️ Whisper Reference (Zero VRAM Clone)</option>
+              <option value="ne-NP-SagarNeural">🇳🇵 Nepali Sagar (Male Deep)</option>
+              <option value="ne-NP-HemkalaNeural">🇳🇵 Nepali Hemkala (Female Warm)</option>
+              <option value="en-US-ChristopherNeural">🗣️ English Christopher (Poetic)</option>
+            </select>
+          </div>
+        </div>
+        
+        <!-- Target FB Pages for Single Job -->
+        <div class="form-group">
+          <label>Target Facebook Pages for Instant Auto-Publish</label>
+          <div id="singleFbPagesList" style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px;">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px;">
+          <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; text-transform: none; margin: 0;">
+            <input type="checkbox" id="singleAutoFb" checked style="width: auto;"> Auto-publish to selected Facebook Pages upon completion
+          </label>
+          <button class="btn" id="singleGenBtn" onclick="generateSingle()">🚀 Render Full Video</button>
+        </div>
+      </div>
+
+      <!-- Live Render Progress Card -->
+      <div class="card" id="singleProgressCard" style="display: none;">
+        <div class="card-header">
+          <div class="card-title">⚙️ Generation Mission Control</div>
+          <span class="badge badge-rendering" id="singleProgressPct">0%</span>
+        </div>
+        <p id="singleStatusText" style="color: var(--primary); font-weight: 700; margin-bottom: 10px;">Initializing cloud pipeline...</p>
+        <div class="console-box" id="singleLogBox"></div>
+        <div id="singleOutputPreview" style="margin-top: 18px; display: none;">
+          <video id="singleResultVideo" controls style="width: 100%; max-width: 320px; border-radius: 10px; border: 1px solid var(--card-border);"></video>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: BULK SCHEDULER -->
+    <div id="tab-bulk" class="tab-pane">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">📅 Ingest Bulk Scripts & Auto-Schedule</div>
+          <span class="badge badge-published">Autonomous Round-Robin</span>
+        </div>
+        <p class="card-subtitle">
+          Paste multiple poems/scripts separated by <code>---</code>. The factory parses individual titles, custom time overrides, and page targets, or automatically calculates schedule slots according to your configured Facebook Page time tables!
+        </p>
+        <div class="form-group">
+          <label>Bulk Script Ingestion (Markdown/Delimited)</label>
+          <textarea id="bulkText" style="min-height: 200px;">Title: पहाडको मौनता
+Script:
+हिउँले ढाकिएका ती शान्त डाँडाहरू,
+जहाँ समय पनि एकछिन रोकिन्छ।
+आफ्नो मनको आवाज सुन्न,
+कहिलेकाहीँ एकान्त नै काफी हुन्छ।
+
+---
+Title: आँसुको मूल्य
+Script:
+हरेक झरेको आँसु कमजोरी होइन,
+कहिलेकाहीँ सहनशीलताको प्रमाण हो।
+मुस्कानको पछाडि लुकेको पीडा,
+केवल बुझ्नेले मात्र देख्न सक्छ।
+
+---
+Title: नयाँ बिहानीको आशा
+Script:
+रात जतिसुकै लामो र कालो भए पनि,
+उज्यालोलाई कसैले रोक्न सक्दैन।
+तिमी आफ्नो कर्ममा विश्वास राख,
+सफलताले एकदिन तिम्रो ढोका ढकढकाउनेछ।</textarea>
+        </div>
+        
+        <div class="grid-3">
+          <div class="form-group">
+            <label>Scheduling Mode</label>
+            <select id="bulkScheduleMode" onchange="toggleBulkScheduleFields()">
+              <option value="page_slots">⏰ Match Selected FB Page Time Slots (e.g. 09:00, 15:00, 21:00)</option>
+              <option value="interval">⏳ Fixed Interval Spacing</option>
+            </select>
+          </div>
+          <div class="form-group" id="bulkIntervalGroup" style="display: none;">
+            <label>Interval Between Posts</label>
+            <select id="bulkInterval">
+              <option value="60">Every 1 Hour</option>
+              <option value="120" selected>Every 2 Hours</option>
+              <option value="240">Every 4 Hours</option>
+              <option value="360">Every 6 Hours</option>
+              <option value="720">Every 12 Hours</option>
+              <option value="1440">Every 24 Hours (Daily)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Target Facebook Page</label>
+            <select id="bulkTargetPage">
+              <option value="all">🌐 All Enabled Pages</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Default Visual Style</label>
+            <select id="bulkTheme">
+              <option value="auto">🌟 Dynamic Non-Repeating World</option>
+              <option value="Ghibli Lush Watercolor">🌿 Ghibli Watercolor</option>
+              <option value="Himalayan Mist Serenity">🏔️ Himalayan Mist</option>
+              <option value="Makoto Shinkai Twilight">🌅 Shinkai Twilight</option>
+            </select>
+          </div>
+        </div>
+
+        <button class="btn" onclick="submitBulkJobs()">⚡ Ingest Scripts & Build Queue</button>
+      </div>
+
+      <!-- Live Scheduled Queue -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">📋 Live Production & Posting Queue</div>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn btn-sm btn-secondary" onclick="clearCompletedJobs()">🧹 Clear Completed</button>
+            <button class="btn btn-sm btn-secondary" onclick="loadBulkQueue()">🔄 Refresh Queue</button>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Job Title</th>
+                <th>Target Time</th>
+                <th>Target Pages</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="queueTableBody">
+              <tr><td colspan="5" style="text-align: center; color: var(--text-dim); padding: 20px;">Loading queue...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: FACEBOOK PAGES HUB -->
+    <div id="tab-facebook" class="tab-pane">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">📱 Multi-Page Facebook Management Hub</div>
+          <button class="btn btn-sm" onclick="openAddFbModal()">➕ Add New Facebook Page</button>
+        </div>
+        <p class="card-subtitle">
+          Manage multiple Facebook Pages with independent access tokens, isolated error boundaries, and custom daily posting time schedules (e.g. 09:00, 15:00, 21:00).
+        </p>
+        <div class="fb-grid" id="fbPagesGrid">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <!-- Publication History -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">📜 Publication History & Live FB Post Links</div>
+          <button class="btn btn-sm btn-secondary" onclick="loadFbHistory()">🔄 Refresh History</button>
+        </div>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Video Title</th>
+                <th>Facebook Page</th>
+                <th>Time</th>
+                <th>Status</th>
+                <th>Post Link</th>
+              </tr>
+            </thead>
+            <tbody id="fbHistoryTableBody">
+              <tr><td colspan="5" style="text-align: center; color: var(--text-dim); padding: 20px;">Loading history...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: VIDEO GALLERY -->
+    <div id="tab-gallery" class="tab-pane">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">🎬 Produced Videos Studio Player</div>
+          <button class="btn btn-sm btn-secondary" onclick="loadVideoGallery()">🔄 Refresh Gallery</button>
+        </div>
+        <div class="gallery-grid" id="videoGalleryGrid">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 5: NOTIFICATIONS -->
+    <div id="tab-notifications" class="tab-pane">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">🔔 Real-Time Mobile Alerts (Telegram & WhatsApp)</div>
+          <button class="btn btn-sm btn-secondary" onclick="sendTestAlert()">🔔 Send Test Alert</button>
+        </div>
+        <p class="card-subtitle">
+          Receive automated Telegram & WhatsApp updates whenever videos render, publish to Facebook (with direct links), or if any token requires attention.
+        </p>
+
+        <!-- Telegram Config -->
+        <div class="card" style="background: rgba(0,0,0,0.25); border: 1px solid var(--card-border);">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; text-transform: none; margin: 0; font-size: 14px; font-weight: 700; color: #fff;">
+              <input type="checkbox" id="enableTelegram" style="width: auto;"> ✈️ Enable Telegram Bot Alerts (@AVideoPoster_bot)
+            </label>
+            <span class="badge badge-published">100% Free & Fast</span>
+          </div>
+          <div class="grid-2">
+            <div class="form-group">
+              <label>Telegram Bot Token</label>
+              <input type="password" id="tgToken" placeholder="8886670511:AAFeNxbL5TxpTiWqF_fukB-MeaS4s9OlMqU">
+            </div>
+            <div class="form-group">
+              <label>Telegram Chat ID</label>
+              <input type="text" id="tgChat" placeholder="6402294953">
+            </div>
+          </div>
+        </div>
+
+        <!-- WhatsApp Config -->
+        <div class="card" style="background: rgba(0,0,0,0.25); border: 1px solid var(--card-border); margin-top: 14px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; text-transform: none; margin: 0; font-size: 14px; font-weight: 700; color: #fff;">
+              <input type="checkbox" id="enableWhatsapp" style="width: auto;"> 💬 Enable WhatsApp Alerts (CallMeBot)
+            </label>
+          </div>
+          <div class="grid-2">
+            <div class="form-group">
+              <label>Phone Number (with Country Code)</label>
+              <input type="text" id="waPhone" placeholder="+9779812345678">
+            </div>
+            <div class="form-group">
+              <label>CallMeBot API Key</label>
+              <input type="password" id="waKey" placeholder="API Key">
+            </div>
+          </div>
+        </div>
+
+        <button class="btn btn-emerald" style="margin-top: 10px;" onclick="saveNotificationSettings()">💾 Save Notification Settings</button>
+      </div>
+    </div>
+
+    <!-- TAB 6: LOCAL PC SYNC -->
+    <div id="tab-sync" class="tab-pane">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">📥 Local PC Auto-Pull & Zero-Disk Cloud Cleaner</div>
+          <button class="btn btn-sm btn-secondary" onclick="loadSyncStats()">🔄 Refresh Buffer</button>
+        </div>
+        <p class="card-subtitle">
+          Videos generated in the cloud are temporarily held in the buffer. Whenever your local PC boots up, <code>local_sync_daemon.py</code> pulls the full 1080x1920 MP4 files directly into <code>D:\Auto video Generator\Output\</code> and purges cloud files to maintain 0 MB disk footprint.
+        </p>
+        <div class="console-box" style="margin-bottom: 16px;">
+          # Run one-time sync from your local PC:<br>
+          python local_sync_daemon.py --once<br><br>
+          # Run background daemon (checks every 60 seconds):<br>
+          python local_sync_daemon.py
+        </div>
+        <div class="stat-pill" style="display: inline-flex; font-size: 14px; padding: 10px 18px;">
+          📦 Buffer Status: <strong id="syncBufferDetails" style="margin-left: 6px;">0 videos pending sync</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 7: SETTINGS -->
+    <div id="tab-settings" class="tab-pane">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">⚙️ Cloud Engine Credentials & Watchdog Tuning</div>
+        </div>
+        <div class="form-group">
+          <label>Hugging Face Write Token (hf_...)</label>
+          <input type="password" id="hfToken" placeholder="hf_...">
+        </div>
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Cloudflare Account ID (Optional)</label>
+            <input type="text" id="cfAccountId" placeholder="Cloudflare Account ID">
+          </div>
+          <div class="form-group">
+            <label>Cloudflare API Token (Optional)</label>
+            <input type="password" id="cfApiToken" placeholder="Cloudflare API Token">
+          </div>
+        </div>
+        <button class="btn btn-emerald" onclick="saveGeneralSettings()">💾 Save Engine Settings</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ADD / EDIT FACEBOOK PAGE MODAL -->
+  <div class="modal-overlay" id="fbModal">
+    <div class="modal-dialog">
+      <div class="card-header">
+        <div class="card-title" id="fbModalTitle">📱 Configure Facebook Page</div>
+        <button class="btn btn-sm btn-secondary" onclick="closeAddFbModal()">✕</button>
+      </div>
+      <div class="form-group">
+        <label>Page Name</label>
+        <input type="text" id="modalFbName" placeholder="e.g. Nepali Poetic Soul">
+      </div>
+      <div class="form-group">
+        <label>Facebook Page ID</label>
+        <input type="text" id="modalFbId" placeholder="e.g. 10928374659283">
+      </div>
+      <div class="form-group">
+        <label>Page Access Token (EAA...)</label>
+        <input type="password" id="modalFbToken" placeholder="Paste Page Access Token">
+      </div>
+      <div class="form-group">
+        <label>Daily Posting Time Slots (Comma-separated 24h format)</label>
+        <input type="text" id="modalFbSlots" value="09:00, 15:00, 21:00" placeholder="09:00, 15:00, 21:00">
+      </div>
+      <div class="form-group">
+        <label>Default Hashtags</label>
+        <input type="text" id="modalFbHashtags" value="#poetry #nepali #reels #anime #art #ghibli">
+      </div>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 18px;">
+        <button class="btn btn-secondary" onclick="testModalFbToken()">🔍 Test Token Health</button>
+        <button class="btn btn-emerald" onclick="saveModalFbPage()">💾 Save Page</button>
+      </div>
+      <p id="modalFbTestMsg" style="font-size: 12px; margin-top: 12px;"></p>
+    </div>
+  </div>
+
+  <script>
+    let CURRENT_SETTINGS = {};
+
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+      event.target.classList.add('active');
+      const target = document.getElementById(tabId);
+      if (target) target.classList.add('active');
+      if (tabId === 'tab-bulk') loadBulkQueue();
+      if (tabId === 'tab-facebook') { loadFbPagesList(); loadFbHistory(); }
+      if (tabId === 'tab-gallery') loadVideoGallery();
+      if (tabId === 'tab-sync') loadSyncStats();
+    }
+
+    async function loadHealthAndTelemetry() {
+      try {
+        const r = await fetch('/api/system/health');
+        const h = await r.json();
+        document.getElementById('healthStatusText').innerText = h.watchdog_running ? 'ACTIVE' : 'STANDBY';
+        document.getElementById('telemetryBuffer').innerText = (h.cloud_buffer ? h.cloud_buffer.total_size_mb : 0) + ' MB';
+        document.getElementById('telemetryPages').innerText = (h.facebook_pages ? h.facebook_pages.total : 0);
+      } catch (e) { console.error(e); }
+    }
+
+    async function triggerSelfRepair() {
+      const btn = event.target;
+      btn.innerText = '⏳ Repairing...';
+      try {
+        const r = await fetch('/api/system/repair', { method: 'POST' });
+        const res = await r.json();
+        alert('🛡️ Self-Repair Complete!\n' + JSON.stringify(res.repair_report, null, 2));
+        loadHealthAndTelemetry();
+        loadBulkQueue();
+      } catch (e) {
+        alert('Self-repair error: ' + e);
+      } finally {
+        btn.innerText = '🛡️ Self-Repair';
+      }
+    }
+
+    async function loadAllSettings() {
+      try {
+        const r = await fetch('/api/settings');
+        CURRENT_SETTINGS = await r.json();
+        
+        // Notifications
+        document.getElementById('enableTelegram').checked = !!CURRENT_SETTINGS.enable_telegram;
+        if (CURRENT_SETTINGS.telegram_bot_token) document.getElementById('tgToken').value = CURRENT_SETTINGS.telegram_bot_token;
+        if (CURRENT_SETTINGS.telegram_chat_id) document.getElementById('tgChat').value = CURRENT_SETTINGS.telegram_chat_id;
+        document.getElementById('enableWhatsapp').checked = !!CURRENT_SETTINGS.enable_whatsapp;
+        if (CURRENT_SETTINGS.whatsapp_phone) document.getElementById('waPhone').value = CURRENT_SETTINGS.whatsapp_phone;
+        if (CURRENT_SETTINGS.whatsapp_apikey) document.getElementById('waKey').value = CURRENT_SETTINGS.whatsapp_apikey;
+        
+        // Engine
+        if (CURRENT_SETTINGS.huggingface_token) document.getElementById('hfToken').value = CURRENT_SETTINGS.huggingface_token;
+        if (CURRENT_SETTINGS.cloudflare_account_id) document.getElementById('cfAccountId').value = CURRENT_SETTINGS.cloudflare_account_id;
+        if (CURRENT_SETTINGS.cloudflare_api_token) document.getElementById('cfApiToken').value = CURRENT_SETTINGS.cloudflare_api_token;
+
+        renderFbPagesDropdown();
+        loadFbPagesList();
+      } catch (e) { console.error(e); }
+    }
+
+    function renderFbPagesDropdown() {
+      const pages = CURRENT_SETTINGS.facebook_pages || [];
+      const singleList = document.getElementById('singleFbPagesList');
+      const bulkSelect = document.getElementById('bulkTargetPage');
+      
+      singleList.innerHTML = '';
+      bulkSelect.innerHTML = '<option value="all">🌐 All Enabled Pages</option>';
+
+      if (pages.length === 0) {
+        singleList.innerHTML = '<span style="font-size: 12px; color: var(--text-dim);">No pages connected yet. Add one in the Facebook Hub!</span>';
+        return;
+      }
+
+      pages.forEach(p => {
+        const pid = p.id || p.page_id;
+        const pname = p.name || p.page_name || pid;
+        const checked = p.enabled !== false ? 'checked' : '';
+        
+        // Single Checkbox
+        const label = document.createElement('label');
+        label.style = 'display: inline-flex; align-items: center; gap: 6px; background: rgba(0,0,0,0.3); border: 1px solid var(--card-border); padding: 4px 10px; border-radius: 6px; font-size: 12px; color: #fff; cursor: pointer;';
+        label.innerHTML = `<input type="checkbox" class="single-target-fb" value="${pid}" ${checked} style="width: auto;"> ${pname}`;
+        singleList.appendChild(label);
+
+        // Bulk Option
+        const opt = document.createElement('option');
+        opt.value = pid;
+        opt.innerText = `📱 ${pname}`;
+        bulkSelect.appendChild(opt);
+      });
+    }
+
+    function toggleBulkScheduleFields() {
+      const mode = document.getElementById('bulkScheduleMode').value;
+      document.getElementById('bulkIntervalGroup').style.display = mode === 'interval' ? 'block' : 'none';
+    }
+
+    async function generateSingle() {
+      const btn = document.getElementById('singleGenBtn');
+      btn.disabled = true;
+      btn.innerText = '⏳ Rendering...';
+      document.getElementById('singleProgressCard').style.display = 'block';
+      document.getElementById('singleOutputPreview').style.display = 'none';
+
+      const targetPages = [];
+      document.querySelectorAll('.single-target-fb:checked').forEach(cb => targetPages.push(cb.value));
+
+      const payload = {
+        title: document.getElementById('singleTitle').value.trim(),
+        script: document.getElementById('singleScript').value.trim(),
+        theme: document.getElementById('singleTheme').value,
+        voice: document.getElementById('singleVoice').value,
+        auto_publish_fb: document.getElementById('singleAutoFb').checked,
+        target_page_ids: targetPages
+      };
+
+      try {
+        const r = await fetch('/api/generate', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(payload)
+        });
+        pollSingleStatus();
+      } catch (e) {
+        alert('Failed to start generation: ' + e);
+        btn.disabled = false;
+        btn.innerText = '🚀 Render Full Video';
+      }
+    }
+
+    function pollSingleStatus() {
+      const timer = setInterval(async () => {
+        try {
+          const r = await fetch('/api/status');
+          const data = await r.json();
+          document.getElementById('singleProgressPct').innerText = data.progress + '%';
+          document.getElementById('singleStatusText').innerText = data.status;
+          document.getElementById('singleLogBox').innerHTML = data.logs.join('<br>');
+          
+          if (!data.running) {
+            clearInterval(timer);
+            document.getElementById('singleGenBtn').disabled = false;
+            document.getElementById('singleGenBtn').innerText = '🚀 Render Full Video';
+            if (data.output_file) {
+              const fname = data.output_file.split(/[\\/]/).pop();
+              const vtag = document.getElementById('singleResultVideo');
+              vtag.src = '/outputs/' + encodeURIComponent(fname);
+              document.getElementById('singleOutputPreview').style.display = 'block';
+            }
+          }
+        } catch (e) {}
+      }, 1500);
+    }
+
+    async function submitBulkJobs() {
+      const raw = document.getElementById('bulkText').value.trim();
+      if (!raw) return alert('Please enter bulk script text.');
+      
+      const targetPageVal = document.getElementById('bulkTargetPage').value;
+      const targetPages = targetPageVal === 'all' ? [] : [targetPageVal];
+
+      const payload = {
+        raw_text: raw,
+        interval_minutes: parseInt(document.getElementById('bulkInterval').value),
+        theme: document.getElementById('bulkTheme').value,
+        target_page_ids: targetPages
+      };
+
+      try {
+        const r = await fetch('/api/bulk/create', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(payload)
+        });
+        const res = await r.json();
+        if (res.ok) {
+          alert(`✅ Successfully enqueued ${res.added_jobs} job(s) into autonomous posting queue!`);
+          loadBulkQueue();
+        } else {
+          alert('Error: ' + res.error);
+        }
+      } catch (e) { alert('Failed: ' + e); }
+    }
+
+    async function loadBulkQueue() {
+      try {
+        const r = await fetch('/api/bulk/queue');
+        const data = await r.json();
+        const tbody = document.getElementById('queueTableBody');
+        const queue = data.queue || [];
+        
+        if (queue.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--text-dim); padding: 20px;">Queue is empty. Ingest scripts above to begin!</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = queue.map((j, idx) => {
+          let badge = 'badge-pending';
+          if (j.status === 'RENDERING') badge = 'badge-rendering';
+          if (j.status === 'PUBLISHED') badge = 'badge-published';
+          if (j.status === 'FAILED') badge = 'badge-failed';
+
+          const pagesText = (j.target_page_ids && j.target_page_ids.length > 0) ? j.target_page_ids.join(', ') : 'All Enabled';
+
+          return `<tr>
+            <td>
+              <div style="font-weight: 700; color: #fff;">${j.title}</div>
+              <div style="font-size: 11px; color: var(--text-muted);">${j.theme || 'auto'}</div>
+            </td>
+            <td style="font-family: 'JetBrains Mono', monospace; color: #38bdf8; font-size: 12px;">${j.scheduled_time || 'Immediate'}</td>
+            <td><span class="slot-pill">${pagesText}</span></td>
+            <td><span class="badge ${badge}">${j.status}</span></td>
+            <td>
+              <div style="display: flex; gap: 6px;">
+                <button class="btn btn-sm btn-secondary" onclick="runJobNow('${j.id}')" title="Run Now">▶️</button>
+                <button class="btn btn-sm btn-secondary" onclick="retryJob('${j.id}')" title="Retry Job">🔄</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteJob('${j.id}')" title="Delete">🗑️</button>
+              </div>
+            </td>
+          </tr>`;
+        }).join('');
+      } catch (e) { console.error(e); }
+    }
+
+    async function runJobNow(jobId) {
+      await fetch('/api/bulk/run_now', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({job_id: jobId}) });
+      alert('🚀 Job execution triggered!');
+      loadBulkQueue();
+    }
+
+    async function retryJob(jobId) {
+      await fetch('/api/bulk/retry', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({job_id: jobId}) });
+      loadBulkQueue();
+    }
+
+    async function deleteJob(jobId) {
+      if (!confirm('Delete this scheduled job?')) return;
+      await fetch('/api/bulk/delete', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({job_id: jobId}) });
+      loadBulkQueue();
+    }
+
+    async function clearCompletedJobs() {
+      await fetch('/api/bulk/clear_completed', { method: 'POST' });
+      loadBulkQueue();
+    }
+
+    /* Facebook Page Hub */
+    async function loadFbPagesList() {
+      const grid = document.getElementById('fbPagesGrid');
+      const pages = CURRENT_SETTINGS.facebook_pages || [];
+      if (pages.length === 0) {
+        grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: var(--text-dim); padding: 30px;">No Facebook Pages configured yet. Click "Add New Facebook Page" to connect!</div>';
+        return;
+      }
+      grid.innerHTML = pages.map(p => {
+        const isOk = p.status === 'CONNECTED';
+        const badge = isOk ? '<span class="badge badge-connected">🟢 CONNECTED</span>' : '<span class="badge badge-tokenerr">🔴 TOKEN ISSUE</span>';
+        const slots = (p.time_slots || []).map(s => `<span class="slot-pill">${s}</span>`).join(' ');
+        
+        return `<div class="fb-page-card">
+          <div class="fb-card-top">
+            <div>
+              <div class="fb-page-name">${p.name || p.page_id}</div>
+              <div class="fb-page-meta">ID: <code>${p.page_id || p.id}</code></div>
+            </div>
+            ${badge}
+          </div>
+          <div>
+            <label>Posting Schedule</label>
+            <div class="fb-time-slots">${slots || '<span class="slot-pill">Interval</span>'}</div>
+          </div>
+          <div>
+            <label>Default Hashtags</label>
+            <div style="font-size: 11px; color: var(--text-dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${p.default_hashtags || '#poetry'}</div>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
+            <button class="btn btn-sm btn-secondary" onclick="editFbPage('${p.page_id || p.id}')">✏️ Edit</button>
+            <button class="btn btn-sm btn-danger" onclick="deleteFbPage('${p.page_id || p.id}')">🗑️ Remove</button>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    function openAddFbModal() {
+      document.getElementById('fbModalTitle').innerText = '➕ Connect New Facebook Page';
+      document.getElementById('modalFbName').value = '';
+      document.getElementById('modalFbId').value = '';
+      document.getElementById('modalFbToken').value = '';
+      document.getElementById('modalFbSlots').value = '09:00, 15:00, 21:00';
+      document.getElementById('modalFbTestMsg').innerText = '';
+      document.getElementById('fbModal').classList.add('active');
+    }
+
+    function closeAddFbModal() {
+      document.getElementById('fbModal').classList.remove('active');
+    }
+
+    function editFbPage(pid) {
+      const page = (CURRENT_SETTINGS.facebook_pages || []).find(p => (p.id || p.page_id) === pid);
+      if (!page) return;
+      document.getElementById('fbModalTitle').innerText = '✏️ Edit ' + (page.name || pid);
+      document.getElementById('modalFbName').value = page.name || '';
+      document.getElementById('modalFbId').value = page.id || page.page_id || '';
+      document.getElementById('modalFbToken').value = page.access_token || '';
+      document.getElementById('modalFbSlots').value = (page.time_slots || []).join(', ');
+      document.getElementById('modalFbHashtags').value = page.default_hashtags || '';
+      document.getElementById('modalFbTestMsg').innerText = '';
+      document.getElementById('fbModal').classList.add('active');
+    }
+
+    async function testModalFbToken() {
+      const pid = document.getElementById('modalFbId').value.trim();
+      const token = document.getElementById('modalFbToken').value.trim();
+      const msg = document.getElementById('modalFbTestMsg');
+      msg.innerText = '🔍 Validating token with Graph API...';
+      try {
+        const r = await fetch('/api/facebook/test', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({page_id: pid, access_token: token})
+        });
+        const res = await r.json();
+        if (res.ok) {
+          msg.innerHTML = `<span style="color: #34d399;">✅ Connected! Page: <strong>${res.page_name}</strong> (Category: ${res.category})</span>`;
+          if (!document.getElementById('modalFbName').value) {
+            document.getElementById('modalFbName').value = res.page_name;
+          }
+        } else {
+          msg.innerHTML = `<span style="color: #f87171;">❌ ${res.error}</span>`;
+        }
+      } catch (e) { msg.innerText = 'Error: ' + e; }
+    }
+
+    async function saveModalFbPage() {
+      const pid = document.getElementById('modalFbId').value.trim();
+      const token = document.getElementById('modalFbToken').value.trim();
+      const name = document.getElementById('modalFbName').value.trim();
+      const slotsRaw = document.getElementById('modalFbSlots').value.trim();
+      const slots = slotsRaw.split(',').map(s => s.trim()).filter(s => s);
+      const hashtags = document.getElementById('modalFbHashtags').value.trim();
+
+      if (!pid || !token) return alert('Page ID and Access Token are required!');
+
+      const payload = {
+        page_id: pid,
+        name: name,
+        access_token: token,
+        time_slots: slots,
+        default_hashtags: hashtags,
+        schedule_type: 'time_slots'
+      };
+
+      try {
+        const r = await fetch('/api/facebook/page/save', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(payload)
+        });
+        const res = await r.json();
+        if (res.ok) {
+          closeAddFbModal();
+          await loadAllSettings();
+          alert('✅ Facebook Page saved successfully!');
+        } else {
+          alert('Error: ' + res.error);
+        }
+      } catch (e) { alert('Save error: ' + e); }
+    }
+
+    async function deleteFbPage(pid) {
+      if (!confirm('Are you sure you want to remove this Facebook Page?')) return;
+      await fetch('/api/facebook/page/delete', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({page_id: pid})
+      });
+      await loadAllSettings();
+    }
+
+    async function loadFbHistory() {
+      try {
+        const r = await fetch('/api/facebook/history');
+        const hist = await r.json();
+        const tbody = document.getElementById('fbHistoryTableBody');
+        if (!hist || hist.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--text-dim); padding: 20px;">No posts published yet.</td></tr>';
+          return;
+        }
+        tbody.innerHTML = hist.map(h => {
+          const badge = h.success ? '<span class="badge badge-published">SUCCESS</span>' : '<span class="badge badge-failed">FAILED</span>';
+          const link = h.post_url ? `<a href="${h.post_url}" target="_blank" style="color: #38bdf8; text-decoration: none;">🔗 View Post</a>` : 'N/A';
+          return `<tr>
+            <td style="font-weight: 600; color: #fff;">${h.title}</td>
+            <td>${h.page_name || h.page_id}</td>
+            <td style="font-family: 'JetBrains Mono', monospace; font-size: 11px;">${h.timestamp}</td>
+            <td>${badge}</td>
+            <td>${link}</td>
+          </tr>`;
+        }).join('');
+      } catch (e) { console.error(e); }
+    }
+
+    /* Video Gallery */
+    async function loadVideoGallery() {
+      try {
+        const r = await fetch('/api/outputs');
+        const files = await r.json();
+        const grid = document.getElementById('videoGalleryGrid');
+        if (!files || files.length === 0) {
+          grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: var(--text-dim); padding: 30px;">No generated videos found. Render your first video!</div>';
+          return;
+        }
+        grid.innerHTML = files.map(f => {
+          return `<div class="video-card">
+            <div class="video-preview-holder">
+              <video src="${f.url}" preload="metadata" controls></video>
+            </div>
+            <div class="video-card-body">
+              <div style="font-weight: 700; font-size: 13px; color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${f.name}</div>
+              <div style="font-size: 11px; color: var(--text-dim); display: flex; justify-content: space-between;">
+                <span>${f.size_mb} MB</span>
+                <span>${f.modified}</span>
+              </div>
+              <a href="${f.url}" download class="btn btn-sm btn-secondary" style="justify-content: center; text-decoration: none; margin-top: 4px;">⬇️ Download MP4</a>
+            </div>
+          </div>`;
+        }).join('');
+      } catch (e) { console.error(e); }
+    }
+
+    /* Notifications */
+    async function saveNotificationSettings() {
+      const payload = {
+        enable_telegram: document.getElementById('enableTelegram').checked,
+        telegram_bot_token: document.getElementById('tgToken').value.trim(),
+        telegram_chat_id: document.getElementById('tgChat').value.trim(),
+        enable_whatsapp: document.getElementById('enableWhatsapp').checked,
+        whatsapp_phone: document.getElementById('waPhone').value.trim(),
+        whatsapp_apikey: document.getElementById('waKey').value.trim()
+      };
+      await fetch('/api/settings', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(payload)
+      });
+      alert('✅ Notification settings updated successfully!');
+    }
+
+    async function sendTestAlert() {
+      const r = await fetch('/api/notify/test', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({message: '🔔 Test Notification from AI Video Factory Mission Control!'})
+      });
+      const res = await r.json();
+      alert('Dispatched test alert:\n' + JSON.stringify(res.results, null, 2));
+    }
+
+    async function loadSyncStats() {
+      try {
+        const r = await fetch('/api/sync/pending');
+        const data = await r.json();
+        document.getElementById('syncBufferDetails').innerText = `${data.stats.total_files} videos pending sync (${data.stats.total_size_mb} MB)`;
+      } catch (e) {}
+    }
+
+    async function saveGeneralSettings() {
+      const payload = {
+        huggingface_token: document.getElementById('hfToken').value.trim(),
+        cloudflare_account_id: document.getElementById('cfAccountId').value.trim(),
+        cloudflare_api_token: document.getElementById('cfApiToken').value.trim()
+      };
+      await fetch('/api/settings', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(payload)
+      });
+      alert('✅ Engine settings saved successfully!');
+    }
+
+    window.onload = () => {
+      loadHealthAndTelemetry();
+      loadAllSettings();
+      loadBulkQueue();
+      setInterval(loadHealthAndTelemetry, 10000);
+    };
+  </script>
+</body>
+</html>

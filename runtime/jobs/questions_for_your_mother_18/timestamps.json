@@ -1,0 +1,309 @@
+[
+  {
+    "start": 0.0,
+    "end": 2.72,
+    "text": "Five questions to ask your mother while you still can.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.22,
+        "word": " Five"
+      },
+      {
+        "start": 0.22,
+        "end": 0.68,
+        "word": " questions"
+      },
+      {
+        "start": 0.68,
+        "end": 0.94,
+        "word": " to"
+      },
+      {
+        "start": 0.94,
+        "end": 1.18,
+        "word": " ask"
+      },
+      {
+        "start": 1.18,
+        "end": 1.34,
+        "word": " your"
+      },
+      {
+        "start": 1.34,
+        "end": 1.6,
+        "word": " mother"
+      },
+      {
+        "start": 1.6,
+        "end": 2.04,
+        "word": " while"
+      },
+      {
+        "start": 2.04,
+        "end": 2.2,
+        "word": " you"
+      },
+      {
+        "start": 2.2,
+        "end": 2.42,
+        "word": " still"
+      },
+      {
+        "start": 2.42,
+        "end": 2.72,
+        "word": " can."
+      }
+    ]
+  },
+  {
+    "start": 3.8,
+    "end": 6.3,
+    "text": "What did you want to become before you had me?",
+    "words": [
+      {
+        "start": 3.8,
+        "end": 4.22,
+        "word": " What"
+      },
+      {
+        "start": 4.22,
+        "end": 4.4,
+        "word": " did"
+      },
+      {
+        "start": 4.4,
+        "end": 4.54,
+        "word": " you"
+      },
+      {
+        "start": 4.54,
+        "end": 4.7,
+        "word": " want"
+      },
+      {
+        "start": 4.7,
+        "end": 4.84,
+        "word": " to"
+      },
+      {
+        "start": 4.84,
+        "end": 5.16,
+        "word": " become"
+      },
+      {
+        "start": 5.16,
+        "end": 5.62,
+        "word": " before"
+      },
+      {
+        "start": 5.62,
+        "end": 5.86,
+        "word": " you"
+      },
+      {
+        "start": 5.86,
+        "end": 6.08,
+        "word": " had"
+      },
+      {
+        "start": 6.08,
+        "end": 6.3,
+        "word": " me?"
+      }
+    ]
+  },
+  {
+    "start": 7.7,
+    "end": 10.04,
+    "text": "What's a moment you're quietly proud of me for?",
+    "words": [
+      {
+        "start": 7.7,
+        "end": 8.14,
+        "word": " What's"
+      },
+      {
+        "start": 8.14,
+        "end": 8.22,
+        "word": " a"
+      },
+      {
+        "start": 8.22,
+        "end": 8.48,
+        "word": " moment"
+      },
+      {
+        "start": 8.48,
+        "end": 8.82,
+        "word": " you're"
+      },
+      {
+        "start": 8.82,
+        "end": 9.2,
+        "word": " quietly"
+      },
+      {
+        "start": 9.2,
+        "end": 9.5,
+        "word": " proud"
+      },
+      {
+        "start": 9.5,
+        "end": 9.66,
+        "word": " of"
+      },
+      {
+        "start": 9.66,
+        "end": 9.8,
+        "word": " me"
+      },
+      {
+        "start": 9.8,
+        "end": 10.04,
+        "word": " for?"
+      }
+    ]
+  },
+  {
+    "start": 11.22,
+    "end": 14.24,
+    "text": "What's something you gave up for us that we never noticed?",
+    "words": [
+      {
+        "start": 11.22,
+        "end": 11.7,
+        "word": " What's"
+      },
+      {
+        "start": 11.7,
+        "end": 11.94,
+        "word": " something"
+      },
+      {
+        "start": 11.94,
+        "end": 12.2,
+        "word": " you"
+      },
+      {
+        "start": 12.2,
+        "end": 12.38,
+        "word": " gave"
+      },
+      {
+        "start": 12.38,
+        "end": 12.58,
+        "word": " up"
+      },
+      {
+        "start": 12.58,
+        "end": 12.8,
+        "word": " for"
+      },
+      {
+        "start": 12.8,
+        "end": 13.08,
+        "word": " us"
+      },
+      {
+        "start": 13.08,
+        "end": 13.48,
+        "word": " that"
+      },
+      {
+        "start": 13.48,
+        "end": 13.6,
+        "word": " we"
+      },
+      {
+        "start": 13.6,
+        "end": 13.8,
+        "word": " never"
+      },
+      {
+        "start": 13.8,
+        "end": 14.24,
+        "word": " noticed?"
+      }
+    ]
+  },
+  {
+    "start": 15.72,
+    "end": 18.12,
+    "text": "And what's one thing you want me to always remember",
+    "words": [
+      {
+        "start": 15.72,
+        "end": 15.86,
+        "word": " And"
+      },
+      {
+        "start": 15.86,
+        "end": 16.08,
+        "word": " what's"
+      },
+      {
+        "start": 16.08,
+        "end": 16.26,
+        "word": " one"
+      },
+      {
+        "start": 16.26,
+        "end": 16.54,
+        "word": " thing"
+      },
+      {
+        "start": 16.54,
+        "end": 16.8,
+        "word": " you"
+      },
+      {
+        "start": 16.8,
+        "end": 16.96,
+        "word": " want"
+      },
+      {
+        "start": 16.96,
+        "end": 17.12,
+        "word": " me"
+      },
+      {
+        "start": 17.12,
+        "end": 17.26,
+        "word": " to"
+      },
+      {
+        "start": 17.26,
+        "end": 17.56,
+        "word": " always"
+      },
+      {
+        "start": 17.56,
+        "end": 18.12,
+        "word": " remember"
+      }
+    ]
+  },
+  {
+    "start": 18.64,
+    "end": 19.34,
+    "text": "after you're gone?",
+    "words": [
+      {
+        "start": 18.64,
+        "end": 18.9,
+        "word": " after"
+      },
+      {
+        "start": 18.9,
+        "end": 19.16,
+        "word": " you're"
+      },
+      {
+        "start": 19.16,
+        "end": 19.34,
+        "word": " gone?"
+      }
+    ]
+  }
+]

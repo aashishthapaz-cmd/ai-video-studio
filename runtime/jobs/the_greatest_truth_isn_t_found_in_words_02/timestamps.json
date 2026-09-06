@@ -1,0 +1,294 @@
+[
+  {
+    "start": 0.0,
+    "end": 4.96,
+    "text": "The greatest truth isn't found in people's words, it's found in their actions.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.14,
+        "word": " The"
+      },
+      {
+        "start": 0.14,
+        "end": 0.54,
+        "word": " greatest"
+      },
+      {
+        "start": 0.54,
+        "end": 1.0,
+        "word": " truth"
+      },
+      {
+        "start": 1.0,
+        "end": 1.48,
+        "word": " isn't"
+      },
+      {
+        "start": 1.48,
+        "end": 1.78,
+        "word": " found"
+      },
+      {
+        "start": 1.78,
+        "end": 2.02,
+        "word": " in"
+      },
+      {
+        "start": 2.02,
+        "end": 2.46,
+        "word": " people's"
+      },
+      {
+        "start": 2.46,
+        "end": 2.8,
+        "word": " words,"
+      },
+      {
+        "start": 3.54,
+        "end": 3.96,
+        "word": " it's"
+      },
+      {
+        "start": 3.96,
+        "end": 4.22,
+        "word": " found"
+      },
+      {
+        "start": 4.22,
+        "end": 4.42,
+        "word": " in"
+      },
+      {
+        "start": 4.42,
+        "end": 4.58,
+        "word": " their"
+      },
+      {
+        "start": 4.58,
+        "end": 4.96,
+        "word": " actions."
+      }
+    ]
+  },
+  {
+    "start": 6.4,
+    "end": 9.42,
+    "text": "Sometimes, people don't tell you the truth.",
+    "words": [
+      {
+        "start": 6.4,
+        "end": 7.08,
+        "word": " Sometimes,"
+      },
+      {
+        "start": 7.92,
+        "end": 8.28,
+        "word": " people"
+      },
+      {
+        "start": 8.28,
+        "end": 8.62,
+        "word": " don't"
+      },
+      {
+        "start": 8.62,
+        "end": 8.82,
+        "word": " tell"
+      },
+      {
+        "start": 8.82,
+        "end": 9.0,
+        "word": " you"
+      },
+      {
+        "start": 9.0,
+        "end": 9.12,
+        "word": " the"
+      },
+      {
+        "start": 9.12,
+        "end": 9.42,
+        "word": " truth."
+      }
+    ]
+  },
+  {
+    "start": 10.58,
+    "end": 14.82,
+    "text": "Maybe they're protecting you, looking themselves.",
+    "words": [
+      {
+        "start": 10.58,
+        "end": 10.9,
+        "word": " Maybe"
+      },
+      {
+        "start": 10.9,
+        "end": 11.2,
+        "word": " they're"
+      },
+      {
+        "start": 11.2,
+        "end": 11.58,
+        "word": " protecting"
+      },
+      {
+        "start": 11.58,
+        "end": 11.94,
+        "word": " you,"
+      },
+      {
+        "start": 14.16,
+        "end": 14.38,
+        "word": " looking"
+      },
+      {
+        "start": 14.38,
+        "end": 14.82,
+        "word": " themselves."
+      }
+    ]
+  },
+  {
+    "start": 16.06,
+    "end": 18.54,
+    "text": "Maybe they're hiding something you'll never know.",
+    "words": [
+      {
+        "start": 16.06,
+        "end": 16.6,
+        "word": " Maybe"
+      },
+      {
+        "start": 16.6,
+        "end": 16.9,
+        "word": " they're"
+      },
+      {
+        "start": 16.9,
+        "end": 17.2,
+        "word": " hiding"
+      },
+      {
+        "start": 17.2,
+        "end": 17.62,
+        "word": " something"
+      },
+      {
+        "start": 17.62,
+        "end": 17.96,
+        "word": " you'll"
+      },
+      {
+        "start": 17.96,
+        "end": 18.18,
+        "word": " never"
+      },
+      {
+        "start": 18.18,
+        "end": 18.54,
+        "word": " know."
+      }
+    ]
+  },
+  {
+    "start": 19.88,
+    "end": 22.26,
+    "text": "But no matter how carefully the truth is hidden,",
+    "words": [
+      {
+        "start": 19.88,
+        "end": 20.06,
+        "word": " But"
+      },
+      {
+        "start": 20.06,
+        "end": 20.24,
+        "word": " no"
+      },
+      {
+        "start": 20.24,
+        "end": 20.52,
+        "word": " matter"
+      },
+      {
+        "start": 20.52,
+        "end": 20.82,
+        "word": " how"
+      },
+      {
+        "start": 20.82,
+        "end": 21.28,
+        "word": " carefully"
+      },
+      {
+        "start": 21.28,
+        "end": 21.52,
+        "word": " the"
+      },
+      {
+        "start": 21.52,
+        "end": 21.78,
+        "word": " truth"
+      },
+      {
+        "start": 21.78,
+        "end": 21.96,
+        "word": " is"
+      },
+      {
+        "start": 21.96,
+        "end": 22.26,
+        "word": " hidden,"
+      }
+    ]
+  },
+  {
+    "start": 23.1,
+    "end": 25.98,
+    "text": "their actions always reveal what their words conceal.",
+    "words": [
+      {
+        "start": 23.1,
+        "end": 23.24,
+        "word": " their"
+      },
+      {
+        "start": 23.24,
+        "end": 23.68,
+        "word": " actions"
+      },
+      {
+        "start": 23.68,
+        "end": 24.2,
+        "word": " always"
+      },
+      {
+        "start": 24.2,
+        "end": 24.74,
+        "word": " reveal"
+      },
+      {
+        "start": 24.74,
+        "end": 24.98,
+        "word": " what"
+      },
+      {
+        "start": 24.98,
+        "end": 25.18,
+        "word": " their"
+      },
+      {
+        "start": 25.18,
+        "end": 25.5,
+        "word": " words"
+      },
+      {
+        "start": 25.5,
+        "end": 25.98,
+        "word": " conceal."
+      }
+    ]
+  }
+]

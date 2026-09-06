@@ -1,0 +1,230 @@
+[
+  {
+    "start": 0.0,
+    "end": 5.84,
+    "text": "They say soulmates recognize each other instantly, and I think that's why I felt so comfortable",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.12,
+        "word": " They"
+      },
+      {
+        "start": 0.12,
+        "end": 0.36,
+        "word": " say"
+      },
+      {
+        "start": 0.36,
+        "end": 1.0,
+        "word": " soulmates"
+      },
+      {
+        "start": 1.0,
+        "end": 1.46,
+        "word": " recognize"
+      },
+      {
+        "start": 1.46,
+        "end": 1.86,
+        "word": " each"
+      },
+      {
+        "start": 1.86,
+        "end": 2.1,
+        "word": " other"
+      },
+      {
+        "start": 2.1,
+        "end": 2.66,
+        "word": " instantly,"
+      },
+      {
+        "start": 3.54,
+        "end": 4.06,
+        "word": " and"
+      },
+      {
+        "start": 4.06,
+        "end": 4.18,
+        "word": " I"
+      },
+      {
+        "start": 4.18,
+        "end": 4.32,
+        "word": " think"
+      },
+      {
+        "start": 4.32,
+        "end": 4.6,
+        "word": " that's"
+      },
+      {
+        "start": 4.6,
+        "end": 4.78,
+        "word": " why"
+      },
+      {
+        "start": 4.78,
+        "end": 4.96,
+        "word": " I"
+      },
+      {
+        "start": 4.96,
+        "end": 5.18,
+        "word": " felt"
+      },
+      {
+        "start": 5.18,
+        "end": 5.4,
+        "word": " so"
+      },
+      {
+        "start": 5.4,
+        "end": 5.84,
+        "word": " comfortable"
+      }
+    ]
+  },
+  {
+    "start": 5.84,
+    "end": 6.66,
+    "text": "from the start.",
+    "words": [
+      {
+        "start": 5.84,
+        "end": 6.18,
+        "word": " from"
+      },
+      {
+        "start": 6.18,
+        "end": 6.3,
+        "word": " the"
+      },
+      {
+        "start": 6.3,
+        "end": 6.66,
+        "word": " start."
+      }
+    ]
+  },
+  {
+    "start": 7.68,
+    "end": 13.4,
+    "text": "I didn't need time to understand how much you meant to me, because my heart already knew,",
+    "words": [
+      {
+        "start": 7.68,
+        "end": 8.2,
+        "word": " I"
+      },
+      {
+        "start": 8.2,
+        "end": 8.46,
+        "word": " didn't"
+      },
+      {
+        "start": 8.46,
+        "end": 8.62,
+        "word": " need"
+      },
+      {
+        "start": 8.62,
+        "end": 9.0,
+        "word": " time"
+      },
+      {
+        "start": 9.0,
+        "end": 9.2,
+        "word": " to"
+      },
+      {
+        "start": 9.2,
+        "end": 9.64,
+        "word": " understand"
+      },
+      {
+        "start": 9.64,
+        "end": 9.92,
+        "word": " how"
+      },
+      {
+        "start": 9.92,
+        "end": 10.18,
+        "word": " much"
+      },
+      {
+        "start": 10.18,
+        "end": 10.3,
+        "word": " you"
+      },
+      {
+        "start": 10.3,
+        "end": 10.48,
+        "word": " meant"
+      },
+      {
+        "start": 10.48,
+        "end": 10.66,
+        "word": " to"
+      },
+      {
+        "start": 10.66,
+        "end": 10.88,
+        "word": " me,"
+      },
+      {
+        "start": 11.5,
+        "end": 12.1,
+        "word": " because"
+      },
+      {
+        "start": 12.1,
+        "end": 12.32,
+        "word": " my"
+      },
+      {
+        "start": 12.32,
+        "end": 12.64,
+        "word": " heart"
+      },
+      {
+        "start": 12.64,
+        "end": 13.06,
+        "word": " already"
+      },
+      {
+        "start": 13.06,
+        "end": 13.4,
+        "word": " knew,"
+      }
+    ]
+  },
+  {
+    "start": 14.36,
+    "end": 15.4,
+    "text": "and it always did.",
+    "words": [
+      {
+        "start": 14.36,
+        "end": 14.64,
+        "word": " and"
+      },
+      {
+        "start": 14.64,
+        "end": 14.76,
+        "word": " it"
+      },
+      {
+        "start": 14.76,
+        "end": 15.06,
+        "word": " always"
+      },
+      {
+        "start": 15.06,
+        "end": 15.4,
+        "word": " did."
+      }
+    ]
+  }
+]

@@ -1,0 +1,68 @@
+{
+  "title": "Why Can't You Overthink The Best?",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 66,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "If you can overthink the worst, why can't you overthink the best?",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "If you can overthink the worst, why can't you overthink the best?"
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "What if it all works out?",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "What if it all works out?"
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "What if you finally rest?",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "What if you finally rest?"
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "What if your mind chose hope?",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "What if your mind chose hope?"
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "Just as much as the stress?",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Just as much as the stress?"
+    },
+    {
+      "id": "scene_006",
+      "duration": 5,
+      "narration": "Maybe it's all going to be okay.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Maybe it's all going to be okay."
+    },
+    {
+      "id": "scene_007",
+      "duration": 5,
+      "narration": "Maybe you'll see it one day.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Maybe you'll see it one day."
+    }
+  ]
+}

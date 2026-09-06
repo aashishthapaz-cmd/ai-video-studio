@@ -1,0 +1,44 @@
+{
+  "title": "Some Wounds Don’t Need Fixing",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 94,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "We don't heal first and love later.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "We don't heal first and love later."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "We heal in love, through love, around love.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "We heal in love, through love, around love."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "In the presence of people who are safe enough, stable enough,",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "In the presence of people who are safe enough, stable enough,"
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "and willing enough to walk with us through the hard stuff.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "and willing enough to walk with us through the hard stuff."
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+ERROR: voxcpm_model_path: D:\VoxCPM Content Factory\models\VoxCPM2, zipenhancer_model_path: None, enable_denoiser: False
+D:\VoxCPM Content Factory\.venv\lib\site-packages\torch\nn\utils\weight_norm.py:144: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+Loading AudioVAE from pytorch: D:\VoxCPM Content Factory\models\VoxCPM2\audiovae.pth
+Running on device: cpu, dtype: bfloat16
+

@@ -1,0 +1,60 @@
+{
+  "title": "Quiet Devotion",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 43,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "Do you know why true devotion is quiet?",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Do you know why true devotion is quiet?"
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "Because it is heavy.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Because it is heavy."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "It is forged by silent rooms, by unspoken fears, by the coldness of the world.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "It is forged by silent rooms, by unspoken fears, by the coldness of the world."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "It forces you to face the dark, without ever letting go of the light.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "It forces you to face the dark, without ever letting go of the light."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "But if two hearts still choose the anchor over the drift, that is not just a feeling.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "But if two hearts still choose the anchor over the drift, that is not just a feeling."
+    },
+    {
+      "id": "scene_006",
+      "duration": 5,
+      "narration": "That is a sanctuary.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "That is a sanctuary."
+    }
+  ]
+}

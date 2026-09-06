@@ -1,0 +1,245 @@
+[
+  {
+    "start": 0.24,
+    "end": 4.16,
+    "text": "I hope you know there isn't anyone who gets my attention the way you do.",
+    "words": [
+      {
+        "start": 0.24,
+        "end": 0.42,
+        "word": " I"
+      },
+      {
+        "start": 0.42,
+        "end": 0.62,
+        "word": " hope"
+      },
+      {
+        "start": 0.62,
+        "end": 0.78,
+        "word": " you"
+      },
+      {
+        "start": 0.78,
+        "end": 0.96,
+        "word": " know"
+      },
+      {
+        "start": 0.96,
+        "end": 1.18,
+        "word": " there"
+      },
+      {
+        "start": 1.18,
+        "end": 1.48,
+        "word": " isn't"
+      },
+      {
+        "start": 1.48,
+        "end": 1.82,
+        "word": " anyone"
+      },
+      {
+        "start": 1.82,
+        "end": 2.02,
+        "word": " who"
+      },
+      {
+        "start": 2.02,
+        "end": 2.24,
+        "word": " gets"
+      },
+      {
+        "start": 2.24,
+        "end": 2.44,
+        "word": " my"
+      },
+      {
+        "start": 2.44,
+        "end": 2.88,
+        "word": " attention"
+      },
+      {
+        "start": 2.88,
+        "end": 3.46,
+        "word": " the"
+      },
+      {
+        "start": 3.46,
+        "end": 3.66,
+        "word": " way"
+      },
+      {
+        "start": 3.66,
+        "end": 3.86,
+        "word": " you"
+      },
+      {
+        "start": 3.86,
+        "end": 4.16,
+        "word": " do."
+      }
+    ]
+  },
+  {
+    "start": 5.04,
+    "end": 6.12,
+    "text": "I'm all in for you.",
+    "words": [
+      {
+        "start": 5.04,
+        "end": 5.4,
+        "word": " I'm"
+      },
+      {
+        "start": 5.4,
+        "end": 5.54,
+        "word": " all"
+      },
+      {
+        "start": 5.54,
+        "end": 5.7,
+        "word": " in"
+      },
+      {
+        "start": 5.7,
+        "end": 5.92,
+        "word": " for"
+      },
+      {
+        "start": 5.92,
+        "end": 6.12,
+        "word": " you."
+      }
+    ]
+  },
+  {
+    "start": 6.86,
+    "end": 11.64,
+    "text": "There isn't anyone who can keep me up all night, thinking about them the entire day,",
+    "words": [
+      {
+        "start": 6.86,
+        "end": 7.14,
+        "word": " There"
+      },
+      {
+        "start": 7.14,
+        "end": 7.46,
+        "word": " isn't"
+      },
+      {
+        "start": 7.46,
+        "end": 7.8,
+        "word": " anyone"
+      },
+      {
+        "start": 7.8,
+        "end": 8.04,
+        "word": " who"
+      },
+      {
+        "start": 8.04,
+        "end": 8.2,
+        "word": " can"
+      },
+      {
+        "start": 8.2,
+        "end": 8.36,
+        "word": " keep"
+      },
+      {
+        "start": 8.36,
+        "end": 8.54,
+        "word": " me"
+      },
+      {
+        "start": 8.54,
+        "end": 8.76,
+        "word": " up"
+      },
+      {
+        "start": 8.76,
+        "end": 8.92,
+        "word": " all"
+      },
+      {
+        "start": 8.92,
+        "end": 9.24,
+        "word": " night,"
+      },
+      {
+        "start": 9.7,
+        "end": 10.24,
+        "word": " thinking"
+      },
+      {
+        "start": 10.24,
+        "end": 10.52,
+        "word": " about"
+      },
+      {
+        "start": 10.52,
+        "end": 10.76,
+        "word": " them"
+      },
+      {
+        "start": 10.76,
+        "end": 10.9,
+        "word": " the"
+      },
+      {
+        "start": 10.9,
+        "end": 11.3,
+        "word": " entire"
+      },
+      {
+        "start": 11.3,
+        "end": 11.64,
+        "word": " day,"
+      }
+    ]
+  },
+  {
+    "start": 12.26,
+    "end": 13.46,
+    "text": "the way that I do for you.",
+    "words": [
+      {
+        "start": 12.26,
+        "end": 12.38,
+        "word": " the"
+      },
+      {
+        "start": 12.38,
+        "end": 12.56,
+        "word": " way"
+      },
+      {
+        "start": 12.56,
+        "end": 12.74,
+        "word": " that"
+      },
+      {
+        "start": 12.74,
+        "end": 12.86,
+        "word": " I"
+      },
+      {
+        "start": 12.86,
+        "end": 13.06,
+        "word": " do"
+      },
+      {
+        "start": 13.06,
+        "end": 13.28,
+        "word": " for"
+      },
+      {
+        "start": 13.28,
+        "end": 13.46,
+        "word": " you."
+      }
+    ]
+  }
+]

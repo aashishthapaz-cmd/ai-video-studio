@@ -1,0 +1,57 @@
+{
+  "title": "You Might Already Be Too Late",
+  "style_bible": {
+    "emotional_arc": "A narrative of unspoken understanding, growing frustration, and eventual realization.",
+    "palette": "Charcoal-teal with amber accents for the first scene; rust-red for the second; ember-orange for the third; pale cream for the fourth; charcoal-teal again for the fifth.",
+    "lighting": "Moody twilight/night atmosphere with deep shadows in the background, fading to softer lighting as understanding grows.",
+    "motif": "A lone figure standing by a window, looking out into the night or rain, with books and papers scattered around them.",
+    "continuity": "The same figure appears throughout, but their expression changes subtly from scene to scene.",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "I was too tired to explain, so I chose silence.",
+      "prompt": "A lone figure by a window, hands resting on the sill, looking out into the rain. The room is dimly lit with papers — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "You kept asking what was wrong. I kept saying nothing.",
+      "prompt": "The figure turns slightly, facing a bookshelf filled with books and papers. Their expression is one of frustration as they hold their hands up — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "You heard my words. You never heard my silence.",
+      "prompt": "The figure stands by a window, looking out into the rain, now with a more contemplative expression. The room is slightly brighter — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "You wanted an explanation. I wanted to be understood.",
+      "prompt": "The figure sits at a desk, surrounded by papers and books, their face in profile as they look down thoughtfully. The lighting is softer — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_005",
+      "duration": 4.0,
+      "narration": "By the time you finally understand me, it might already be too late.",
+      "prompt": "The figure stands by a window again, now with a distant look in their eyes. The room is darkening as night falls — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 109,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

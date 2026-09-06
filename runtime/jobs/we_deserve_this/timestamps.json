@@ -1,0 +1,344 @@
+[
+  {
+    "start": 0.0,
+    "end": 3.56,
+    "text": "This chapter of our story is called We Deserve This.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.18,
+        "word": " This"
+      },
+      {
+        "start": 0.18,
+        "end": 0.56,
+        "word": " chapter"
+      },
+      {
+        "start": 0.56,
+        "end": 0.8,
+        "word": " of"
+      },
+      {
+        "start": 0.8,
+        "end": 0.94,
+        "word": " our"
+      },
+      {
+        "start": 0.94,
+        "end": 1.34,
+        "word": " story"
+      },
+      {
+        "start": 1.34,
+        "end": 1.58,
+        "word": " is"
+      },
+      {
+        "start": 1.58,
+        "end": 1.96,
+        "word": " called"
+      },
+      {
+        "start": 1.96,
+        "end": 2.82,
+        "word": " We"
+      },
+      {
+        "start": 2.82,
+        "end": 3.28,
+        "word": " Deserve"
+      },
+      {
+        "start": 3.28,
+        "end": 3.56,
+        "word": " This."
+      }
+    ]
+  },
+  {
+    "start": 4.8,
+    "end": 10.9,
+    "text": "Life hasn't been gentle to either of us, and we've both carried scars from choices we once made.",
+    "words": [
+      {
+        "start": 4.8,
+        "end": 5.36,
+        "word": " Life"
+      },
+      {
+        "start": 5.36,
+        "end": 5.74,
+        "word": " hasn't"
+      },
+      {
+        "start": 5.74,
+        "end": 5.88,
+        "word": " been"
+      },
+      {
+        "start": 5.88,
+        "end": 6.28,
+        "word": " gentle"
+      },
+      {
+        "start": 6.28,
+        "end": 6.5,
+        "word": " to"
+      },
+      {
+        "start": 6.5,
+        "end": 6.8,
+        "word": " either"
+      },
+      {
+        "start": 6.8,
+        "end": 7.04,
+        "word": " of"
+      },
+      {
+        "start": 7.04,
+        "end": 7.3,
+        "word": " us,"
+      },
+      {
+        "start": 7.66,
+        "end": 7.86,
+        "word": " and"
+      },
+      {
+        "start": 7.86,
+        "end": 8.06,
+        "word": " we've"
+      },
+      {
+        "start": 8.06,
+        "end": 8.3,
+        "word": " both"
+      },
+      {
+        "start": 8.3,
+        "end": 8.7,
+        "word": " carried"
+      },
+      {
+        "start": 8.7,
+        "end": 9.1,
+        "word": " scars"
+      },
+      {
+        "start": 9.1,
+        "end": 9.48,
+        "word": " from"
+      },
+      {
+        "start": 9.48,
+        "end": 9.9,
+        "word": " choices"
+      },
+      {
+        "start": 9.9,
+        "end": 10.18,
+        "word": " we"
+      },
+      {
+        "start": 10.18,
+        "end": 10.44,
+        "word": " once"
+      },
+      {
+        "start": 10.44,
+        "end": 10.9,
+        "word": " made."
+      }
+    ]
+  },
+  {
+    "start": 12.34,
+    "end": 15.72,
+    "text": "But somehow, life still brought us to each other for a reason.",
+    "words": [
+      {
+        "start": 12.34,
+        "end": 12.5,
+        "word": " But"
+      },
+      {
+        "start": 12.5,
+        "end": 12.92,
+        "word": " somehow,"
+      },
+      {
+        "start": 13.44,
+        "end": 13.7,
+        "word": " life"
+      },
+      {
+        "start": 13.7,
+        "end": 14.02,
+        "word": " still"
+      },
+      {
+        "start": 14.02,
+        "end": 14.32,
+        "word": " brought"
+      },
+      {
+        "start": 14.32,
+        "end": 14.54,
+        "word": " us"
+      },
+      {
+        "start": 14.54,
+        "end": 14.7,
+        "word": " to"
+      },
+      {
+        "start": 14.7,
+        "end": 14.9,
+        "word": " each"
+      },
+      {
+        "start": 14.9,
+        "end": 15.12,
+        "word": " other"
+      },
+      {
+        "start": 15.12,
+        "end": 15.28,
+        "word": " for"
+      },
+      {
+        "start": 15.28,
+        "end": 15.42,
+        "word": " a"
+      },
+      {
+        "start": 15.42,
+        "end": 15.72,
+        "word": " reason."
+      }
+    ]
+  },
+  {
+    "start": 16.82,
+    "end": 19.0,
+    "text": "Now we're learning what real love feels like.",
+    "words": [
+      {
+        "start": 16.82,
+        "end": 17.04,
+        "word": " Now"
+      },
+      {
+        "start": 17.04,
+        "end": 17.24,
+        "word": " we're"
+      },
+      {
+        "start": 17.24,
+        "end": 17.52,
+        "word": " learning"
+      },
+      {
+        "start": 17.52,
+        "end": 17.74,
+        "word": " what"
+      },
+      {
+        "start": 17.74,
+        "end": 18.04,
+        "word": " real"
+      },
+      {
+        "start": 18.04,
+        "end": 18.3,
+        "word": " love"
+      },
+      {
+        "start": 18.3,
+        "end": 18.58,
+        "word": " feels"
+      },
+      {
+        "start": 18.58,
+        "end": 19.0,
+        "word": " like."
+      }
+    ]
+  },
+  {
+    "start": 20.06,
+    "end": 22.72,
+    "text": "So when you see us smiling, let us smile.",
+    "words": [
+      {
+        "start": 20.06,
+        "end": 20.26,
+        "word": " So"
+      },
+      {
+        "start": 20.26,
+        "end": 20.4,
+        "word": " when"
+      },
+      {
+        "start": 20.4,
+        "end": 20.52,
+        "word": " you"
+      },
+      {
+        "start": 20.52,
+        "end": 20.74,
+        "word": " see"
+      },
+      {
+        "start": 20.74,
+        "end": 20.88,
+        "word": " us"
+      },
+      {
+        "start": 20.88,
+        "end": 21.34,
+        "word": " smiling,"
+      },
+      {
+        "start": 21.92,
+        "end": 22.16,
+        "word": " let"
+      },
+      {
+        "start": 22.16,
+        "end": 22.32,
+        "word": " us"
+      },
+      {
+        "start": 22.32,
+        "end": 22.72,
+        "word": " smile."
+      }
+    ]
+  },
+  {
+    "start": 23.84,
+    "end": 24.74,
+    "text": "We deserve this.",
+    "words": [
+      {
+        "start": 23.84,
+        "end": 24.04,
+        "word": " We"
+      },
+      {
+        "start": 24.04,
+        "end": 24.36,
+        "word": " deserve"
+      },
+      {
+        "start": 24.36,
+        "end": 24.74,
+        "word": " this."
+      }
+    ]
+  }
+]

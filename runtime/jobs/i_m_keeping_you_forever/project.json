@@ -1,0 +1,84 @@
+{
+  "title": "I'm Keeping You Forever",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 29,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "I love the way you love.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I love the way you love."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "I love your gentle soul.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I love your gentle soul."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "I love the way you make the hardest days feel absolutely effortless.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I love the way you make the hardest days feel absolutely effortless."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "Even when we are exhausted.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Even when we are exhausted."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "Even when we are overwhelmed.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Even when we are overwhelmed."
+    },
+    {
+      "id": "scene_006",
+      "duration": 5,
+      "narration": "Even when we are just sitting in complete silence.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Even when we are just sitting in complete silence."
+    },
+    {
+      "id": "scene_007",
+      "duration": 5,
+      "narration": "I look at you, and I know.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I look at you, and I know."
+    },
+    {
+      "id": "scene_008",
+      "duration": 5,
+      "narration": "I found exactly what my heart was looking for.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I found exactly what my heart was looking for."
+    },
+    {
+      "id": "scene_009",
+      "duration": 5,
+      "narration": "I'm keeping you forever.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I'm keeping you forever."
+    }
+  ]
+}

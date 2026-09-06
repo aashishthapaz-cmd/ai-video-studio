@@ -1,0 +1,36 @@
+{
+  "title": "Khalil Gibran Said",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 87,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "Khalil Gibran said, I have learned silence from the talkative,",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Khalil Gibran said, I have learned silence from the talkative,"
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "tolerance from the intolerant, and kindness from the unkind.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "tolerance from the intolerant, and kindness from the unkind."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "Yet strangely, I am ungrateful to these teachers.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Yet strangely, I am ungrateful to these teachers."
+    }
+  ]
+}

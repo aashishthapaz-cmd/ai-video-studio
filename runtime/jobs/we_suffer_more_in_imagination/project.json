@@ -1,0 +1,52 @@
+{
+  "title": "We Suffer More In Imagination",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 113,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "We suffer more in imagination than in reality.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "We suffer more in imagination than in reality."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "We live inside our heads all the time.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "We live inside our heads all the time."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "It doesn't matter what the reality actually is.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "It doesn't matter what the reality actually is."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "The problem is we overthink everything.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "The problem is we overthink everything."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "Most of our pain doesn't come from what happens, but from what we imagine might happen.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Most of our pain doesn't come from what happens, but from what we imagine might happen."
+    }
+  ]
+}

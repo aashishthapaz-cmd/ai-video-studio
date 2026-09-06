@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+
+# Video Render Workspaces & Temp Caches
+cloud_generator/workspaces/
+cloud_generator/temp_cloud_store/
+cloud_generator/staging_hf/
+temp_test_assets/
+*.tmp
+
+# Local Output video cache (optional, keep light in git)
+Output/*.mp4
+Output/*.wav
+
+# System & OS
+.DS_Store
+Thumbs.db

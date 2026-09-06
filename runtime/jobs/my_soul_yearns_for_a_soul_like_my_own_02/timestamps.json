@@ -1,0 +1,255 @@
+[
+  {
+    "start": 0.0,
+    "end": 2.68,
+    "text": "My soul yearns for a soul like my own.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.14,
+        "word": " My"
+      },
+      {
+        "start": 0.14,
+        "end": 0.52,
+        "word": " soul"
+      },
+      {
+        "start": 0.52,
+        "end": 1.22,
+        "word": " yearns"
+      },
+      {
+        "start": 1.22,
+        "end": 1.42,
+        "word": " for"
+      },
+      {
+        "start": 1.42,
+        "end": 1.56,
+        "word": " a"
+      },
+      {
+        "start": 1.56,
+        "end": 1.86,
+        "word": " soul"
+      },
+      {
+        "start": 1.86,
+        "end": 2.12,
+        "word": " like"
+      },
+      {
+        "start": 2.12,
+        "end": 2.36,
+        "word": " my"
+      },
+      {
+        "start": 2.36,
+        "end": 2.68,
+        "word": " own."
+      }
+    ]
+  },
+  {
+    "start": 3.88,
+    "end": 7.6,
+    "text": "In this crowded world, that might be the hardest thing to find.",
+    "words": [
+      {
+        "start": 3.88,
+        "end": 4.04,
+        "word": " In"
+      },
+      {
+        "start": 4.04,
+        "end": 4.2,
+        "word": " this"
+      },
+      {
+        "start": 4.2,
+        "end": 4.58,
+        "word": " crowded"
+      },
+      {
+        "start": 4.58,
+        "end": 5.1,
+        "word": " world,"
+      },
+      {
+        "start": 5.68,
+        "end": 5.94,
+        "word": " that"
+      },
+      {
+        "start": 5.94,
+        "end": 6.1,
+        "word": " might"
+      },
+      {
+        "start": 6.1,
+        "end": 6.28,
+        "word": " be"
+      },
+      {
+        "start": 6.28,
+        "end": 6.4,
+        "word": " the"
+      },
+      {
+        "start": 6.4,
+        "end": 6.74,
+        "word": " hardest"
+      },
+      {
+        "start": 6.74,
+        "end": 7.04,
+        "word": " thing"
+      },
+      {
+        "start": 7.04,
+        "end": 7.2,
+        "word": " to"
+      },
+      {
+        "start": 7.2,
+        "end": 7.6,
+        "word": " find."
+      }
+    ]
+  },
+  {
+    "start": 8.58,
+    "end": 14.18,
+    "text": "Someone who carries a heart full of understanding and still knows what it means to feel alone.",
+    "words": [
+      {
+        "start": 8.58,
+        "end": 9.02,
+        "word": " Someone"
+      },
+      {
+        "start": 9.02,
+        "end": 9.24,
+        "word": " who"
+      },
+      {
+        "start": 9.24,
+        "end": 9.58,
+        "word": " carries"
+      },
+      {
+        "start": 9.58,
+        "end": 9.72,
+        "word": " a"
+      },
+      {
+        "start": 9.72,
+        "end": 10.02,
+        "word": " heart"
+      },
+      {
+        "start": 10.02,
+        "end": 10.26,
+        "word": " full"
+      },
+      {
+        "start": 10.26,
+        "end": 10.4,
+        "word": " of"
+      },
+      {
+        "start": 10.4,
+        "end": 11.0,
+        "word": " understanding"
+      },
+      {
+        "start": 11.0,
+        "end": 12.0,
+        "word": " and"
+      },
+      {
+        "start": 12.0,
+        "end": 12.32,
+        "word": " still"
+      },
+      {
+        "start": 12.32,
+        "end": 12.66,
+        "word": " knows"
+      },
+      {
+        "start": 12.66,
+        "end": 12.92,
+        "word": " what"
+      },
+      {
+        "start": 12.92,
+        "end": 13.04,
+        "word": " it"
+      },
+      {
+        "start": 13.04,
+        "end": 13.36,
+        "word": " means"
+      },
+      {
+        "start": 13.36,
+        "end": 13.56,
+        "word": " to"
+      },
+      {
+        "start": 13.56,
+        "end": 13.8,
+        "word": " feel"
+      },
+      {
+        "start": 13.8,
+        "end": 14.18,
+        "word": " alone."
+      }
+    ]
+  },
+  {
+    "start": 15.0,
+    "end": 17.3,
+    "text": "Someone who understands the way I love.",
+    "words": [
+      {
+        "start": 15.0,
+        "end": 15.58,
+        "word": " Someone"
+      },
+      {
+        "start": 15.58,
+        "end": 15.82,
+        "word": " who"
+      },
+      {
+        "start": 15.82,
+        "end": 16.26,
+        "word": " understands"
+      },
+      {
+        "start": 16.26,
+        "end": 16.68,
+        "word": " the"
+      },
+      {
+        "start": 16.68,
+        "end": 16.84,
+        "word": " way"
+      },
+      {
+        "start": 16.84,
+        "end": 17.02,
+        "word": " I"
+      },
+      {
+        "start": 17.02,
+        "end": 17.3,
+        "word": " love."
+      }
+    ]
+  }
+]

@@ -1,0 +1,92 @@
+{
+  "title": "Let Them Be Wrong",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 35,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "Let them make you the villain.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Let them make you the villain."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "Let them tell it their way.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Let them tell it their way."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "Let them turn your boundary into betrayal.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Let them turn your boundary into betrayal."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "You know what happened.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "You know what happened."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "You know what you carried.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "You know what you carried."
+    },
+    {
+      "id": "scene_006",
+      "duration": 5,
+      "narration": "The people who truly wanted the truth would have asked, not accused.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "The people who truly wanted the truth would have asked, not accused."
+    },
+    {
+      "id": "scene_007",
+      "duration": 5,
+      "narration": "So stop chasing a fair version of the story.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "So stop chasing a fair version of the story."
+    },
+    {
+      "id": "scene_008",
+      "duration": 5,
+      "narration": "Keep your peace.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Keep your peace."
+    },
+    {
+      "id": "scene_009",
+      "duration": 5,
+      "narration": "Live your truth.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Live your truth."
+    },
+    {
+      "id": "scene_010",
+      "duration": 5,
+      "narration": "Let them be wrong.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Let them be wrong."
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "title": "How To Win Without Arguing",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 92,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "When they insult, stay silent but smile.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "When they insult, stay silent but smile."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "When they lie, let truth unfold on its own.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "When they lie, let truth unfold on its own."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "When they shout, lower your tone.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "When they shout, lower your tone."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "When they blame, don't defend, just observe.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "When they blame, don't defend, just observe."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "Power isn't in proving.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Power isn't in proving."
+    },
+    {
+      "id": "scene_006",
+      "duration": 5,
+      "narration": "It's in knowing you don't need to.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "It's in knowing you don't need to."
+    }
+  ]
+}

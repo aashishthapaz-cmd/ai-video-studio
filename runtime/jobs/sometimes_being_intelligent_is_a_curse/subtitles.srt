@@ -1,0 +1,23 @@
+1
+00:00:00,000 --> 00:00:02,040
+Sometimes being intelligent is a curse.
+
+2
+00:00:03,040 --> 00:00:04,180
+You understand the game.
+
+3
+00:00:05,040 --> 00:00:05,840
+You see the lies.
+
+4
+00:00:06,760 --> 00:00:08,040
+You recognize the patterns.
+
+5
+00:00:09,120 --> 00:00:10,800
+But despite knowing all of this,
+
+6
+00:00:11,960 --> 00:00:15,760
+sometimes to survive, you still have to play along.

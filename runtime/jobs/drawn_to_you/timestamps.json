@@ -1,0 +1,277 @@
+[
+  {
+    "start": 0.0,
+    "end": 5.4,
+    "text": "I got addicted to you so quietly, drawn to you in ways I still can't explain.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.12,
+        "word": " I"
+      },
+      {
+        "start": 0.12,
+        "end": 0.22,
+        "word": " got"
+      },
+      {
+        "start": 0.22,
+        "end": 0.62,
+        "word": " addicted"
+      },
+      {
+        "start": 0.62,
+        "end": 0.92,
+        "word": " to"
+      },
+      {
+        "start": 0.92,
+        "end": 1.1,
+        "word": " you"
+      },
+      {
+        "start": 1.1,
+        "end": 1.38,
+        "word": " so"
+      },
+      {
+        "start": 1.38,
+        "end": 1.98,
+        "word": " quietly,"
+      },
+      {
+        "start": 2.82,
+        "end": 3.2,
+        "word": " drawn"
+      },
+      {
+        "start": 3.2,
+        "end": 3.46,
+        "word": " to"
+      },
+      {
+        "start": 3.46,
+        "end": 3.68,
+        "word": " you"
+      },
+      {
+        "start": 3.68,
+        "end": 3.78,
+        "word": " in"
+      },
+      {
+        "start": 3.78,
+        "end": 4.0,
+        "word": " ways"
+      },
+      {
+        "start": 4.0,
+        "end": 4.24,
+        "word": " I"
+      },
+      {
+        "start": 4.24,
+        "end": 4.5,
+        "word": " still"
+      },
+      {
+        "start": 4.5,
+        "end": 4.96,
+        "word": " can't"
+      },
+      {
+        "start": 4.96,
+        "end": 5.4,
+        "word": " explain."
+      }
+    ]
+  },
+  {
+    "start": 6.42,
+    "end": 9.08,
+    "text": "Every single day, you're in my mind.",
+    "words": [
+      {
+        "start": 6.42,
+        "end": 6.72,
+        "word": " Every"
+      },
+      {
+        "start": 6.72,
+        "end": 7.04,
+        "word": " single"
+      },
+      {
+        "start": 7.04,
+        "end": 7.44,
+        "word": " day,"
+      },
+      {
+        "start": 8.06,
+        "end": 8.4,
+        "word": " you're"
+      },
+      {
+        "start": 8.4,
+        "end": 8.5,
+        "word": " in"
+      },
+      {
+        "start": 8.5,
+        "end": 8.68,
+        "word": " my"
+      },
+      {
+        "start": 8.68,
+        "end": 9.08,
+        "word": " mind."
+      }
+    ]
+  },
+  {
+    "start": 9.94,
+    "end": 13.9,
+    "text": "When night falls and the world turns quiet, my mind doesn't.",
+    "words": [
+      {
+        "start": 9.94,
+        "end": 10.1,
+        "word": " When"
+      },
+      {
+        "start": 10.1,
+        "end": 10.38,
+        "word": " night"
+      },
+      {
+        "start": 10.38,
+        "end": 10.74,
+        "word": " falls"
+      },
+      {
+        "start": 10.74,
+        "end": 11.14,
+        "word": " and"
+      },
+      {
+        "start": 11.14,
+        "end": 11.24,
+        "word": " the"
+      },
+      {
+        "start": 11.24,
+        "end": 11.46,
+        "word": " world"
+      },
+      {
+        "start": 11.46,
+        "end": 11.76,
+        "word": " turns"
+      },
+      {
+        "start": 11.76,
+        "end": 12.2,
+        "word": " quiet,"
+      },
+      {
+        "start": 12.94,
+        "end": 13.08,
+        "word": " my"
+      },
+      {
+        "start": 13.08,
+        "end": 13.4,
+        "word": " mind"
+      },
+      {
+        "start": 13.4,
+        "end": 13.9,
+        "word": " doesn't."
+      }
+    ]
+  },
+  {
+    "start": 14.92,
+    "end": 16.44,
+    "text": "It fills with thoughts of you.",
+    "words": [
+      {
+        "start": 14.92,
+        "end": 15.2,
+        "word": " It"
+      },
+      {
+        "start": 15.2,
+        "end": 15.44,
+        "word": " fills"
+      },
+      {
+        "start": 15.44,
+        "end": 15.68,
+        "word": " with"
+      },
+      {
+        "start": 15.68,
+        "end": 15.96,
+        "word": " thoughts"
+      },
+      {
+        "start": 15.96,
+        "end": 16.22,
+        "word": " of"
+      },
+      {
+        "start": 16.22,
+        "end": 16.44,
+        "word": " you."
+      }
+    ]
+  },
+  {
+    "start": 17.48,
+    "end": 20.66,
+    "text": "You're the last wish hidden inside my heart.",
+    "words": [
+      {
+        "start": 17.48,
+        "end": 17.78,
+        "word": " You're"
+      },
+      {
+        "start": 17.78,
+        "end": 17.86,
+        "word": " the"
+      },
+      {
+        "start": 17.86,
+        "end": 18.26,
+        "word": " last"
+      },
+      {
+        "start": 18.26,
+        "end": 18.66,
+        "word": " wish"
+      },
+      {
+        "start": 18.66,
+        "end": 19.48,
+        "word": " hidden"
+      },
+      {
+        "start": 19.48,
+        "end": 20.06,
+        "word": " inside"
+      },
+      {
+        "start": 20.06,
+        "end": 20.34,
+        "word": " my"
+      },
+      {
+        "start": 20.34,
+        "end": 20.66,
+        "word": " heart."
+      }
+    ]
+  }
+]

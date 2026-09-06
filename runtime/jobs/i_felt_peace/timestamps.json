@@ -1,0 +1,295 @@
+[
+  {
+    "start": 0.0,
+    "end": 3.46,
+    "text": "I didn't fall for you because I wanted a relationship.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.14,
+        "word": " I"
+      },
+      {
+        "start": 0.14,
+        "end": 0.44,
+        "word": " didn't"
+      },
+      {
+        "start": 0.44,
+        "end": 0.66,
+        "word": " fall"
+      },
+      {
+        "start": 0.66,
+        "end": 0.92,
+        "word": " for"
+      },
+      {
+        "start": 0.92,
+        "end": 1.16,
+        "word": " you"
+      },
+      {
+        "start": 1.16,
+        "end": 2.2,
+        "word": " because"
+      },
+      {
+        "start": 2.2,
+        "end": 2.36,
+        "word": " I"
+      },
+      {
+        "start": 2.36,
+        "end": 2.66,
+        "word": " wanted"
+      },
+      {
+        "start": 2.66,
+        "end": 2.84,
+        "word": " a"
+      },
+      {
+        "start": 2.84,
+        "end": 3.46,
+        "word": " relationship."
+      }
+    ]
+  },
+  {
+    "start": 4.68,
+    "end": 11.86,
+    "text": "I fell for you because for the first time in forever I felt peace, like I was finally home.",
+    "words": [
+      {
+        "start": 4.68,
+        "end": 5.16,
+        "word": " I"
+      },
+      {
+        "start": 5.16,
+        "end": 5.4,
+        "word": " fell"
+      },
+      {
+        "start": 5.4,
+        "end": 5.66,
+        "word": " for"
+      },
+      {
+        "start": 5.66,
+        "end": 5.8,
+        "word": " you"
+      },
+      {
+        "start": 5.8,
+        "end": 6.04,
+        "word": " because"
+      },
+      {
+        "start": 6.04,
+        "end": 6.74,
+        "word": " for"
+      },
+      {
+        "start": 6.74,
+        "end": 6.82,
+        "word": " the"
+      },
+      {
+        "start": 6.82,
+        "end": 7.12,
+        "word": " first"
+      },
+      {
+        "start": 7.12,
+        "end": 7.4,
+        "word": " time"
+      },
+      {
+        "start": 7.4,
+        "end": 7.54,
+        "word": " in"
+      },
+      {
+        "start": 7.54,
+        "end": 7.88,
+        "word": " forever"
+      },
+      {
+        "start": 7.88,
+        "end": 8.68,
+        "word": " I"
+      },
+      {
+        "start": 8.68,
+        "end": 8.88,
+        "word": " felt"
+      },
+      {
+        "start": 8.88,
+        "end": 9.38,
+        "word": " peace,"
+      },
+      {
+        "start": 10.2,
+        "end": 10.78,
+        "word": " like"
+      },
+      {
+        "start": 10.78,
+        "end": 10.9,
+        "word": " I"
+      },
+      {
+        "start": 10.9,
+        "end": 11.04,
+        "word": " was"
+      },
+      {
+        "start": 11.04,
+        "end": 11.44,
+        "word": " finally"
+      },
+      {
+        "start": 11.44,
+        "end": 11.86,
+        "word": " home."
+      }
+    ]
+  },
+  {
+    "start": 13.22,
+    "end": 19.02,
+    "text": "I fell for your smile, the way you made my heart laugh, and the way you never let",
+    "words": [
+      {
+        "start": 13.22,
+        "end": 13.48,
+        "word": " I"
+      },
+      {
+        "start": 13.48,
+        "end": 13.7,
+        "word": " fell"
+      },
+      {
+        "start": 13.7,
+        "end": 13.94,
+        "word": " for"
+      },
+      {
+        "start": 13.94,
+        "end": 14.06,
+        "word": " your"
+      },
+      {
+        "start": 14.06,
+        "end": 14.54,
+        "word": " smile,"
+      },
+      {
+        "start": 15.42,
+        "end": 15.54,
+        "word": " the"
+      },
+      {
+        "start": 15.54,
+        "end": 15.68,
+        "word": " way"
+      },
+      {
+        "start": 15.68,
+        "end": 15.86,
+        "word": " you"
+      },
+      {
+        "start": 15.86,
+        "end": 16.06,
+        "word": " made"
+      },
+      {
+        "start": 16.06,
+        "end": 16.26,
+        "word": " my"
+      },
+      {
+        "start": 16.26,
+        "end": 16.56,
+        "word": " heart"
+      },
+      {
+        "start": 16.56,
+        "end": 16.98,
+        "word": " laugh,"
+      },
+      {
+        "start": 17.68,
+        "end": 18.08,
+        "word": " and"
+      },
+      {
+        "start": 18.08,
+        "end": 18.2,
+        "word": " the"
+      },
+      {
+        "start": 18.2,
+        "end": 18.32,
+        "word": " way"
+      },
+      {
+        "start": 18.32,
+        "end": 18.5,
+        "word": " you"
+      },
+      {
+        "start": 18.5,
+        "end": 18.8,
+        "word": " never"
+      },
+      {
+        "start": 18.8,
+        "end": 19.02,
+        "word": " let"
+      }
+    ]
+  },
+  {
+    "start": 19.02,
+    "end": 20.86,
+    "text": "me wonder if I was wanted.",
+    "words": [
+      {
+        "start": 19.02,
+        "end": 19.2,
+        "word": " me"
+      },
+      {
+        "start": 19.2,
+        "end": 19.58,
+        "word": " wonder"
+      },
+      {
+        "start": 19.58,
+        "end": 20.18,
+        "word": " if"
+      },
+      {
+        "start": 20.18,
+        "end": 20.34,
+        "word": " I"
+      },
+      {
+        "start": 20.34,
+        "end": 20.5,
+        "word": " was"
+      },
+      {
+        "start": 20.5,
+        "end": 20.86,
+        "word": " wanted."
+      }
+    ]
+  }
+]

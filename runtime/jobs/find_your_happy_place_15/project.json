@@ -1,0 +1,43 @@
+{
+  "title": "Find Your Happy Place",
+  "style_bible": {
+    "emotional_arc": "Sadness to Joy, Contrast in Perception",
+    "palette": "Charcoal-teal, Navy, Amber, Rust-red, Ember-orange, Pale cream",
+    "lighting": "Moody twilight/night atmosphere with deep shadows and subtle highlights",
+    "motif": "Natural elements like paths, trees, and water reflecting emotions",
+    "continuity": "Sparse, poetic, readable visual world suitable for slow Ken Burns motion",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "In the wrong place, even your very best will never feel like enough.",
+      "prompt": "A lone figure standing on a desolate path under a twilight sky, with trees casting long shadows. The ground is dry and cracked, symbolizing — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "But in the right place, your mere presence will be celebrated.",
+      "prompt": "A small cottage by a serene lake at dawn, with warm light filtering through trees. A figure stands on the dock, surrounded by blooming — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "The same person can feel ordinary in one place, and extraordinary in another.",
+      "prompt": "A figure walking through a dense forest at dusk, with the light filtering through leaves creating a magical atmosphere. The path is winding, leading — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 103,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

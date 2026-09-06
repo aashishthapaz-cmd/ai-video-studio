@@ -1,0 +1,305 @@
+[
+  {
+    "start": 0.0,
+    "end": 5.4,
+    "text": "There is a legend that says, if you get on the wrong train, get off at the nearest station.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.12,
+        "word": " There"
+      },
+      {
+        "start": 0.12,
+        "end": 0.24,
+        "word": " is"
+      },
+      {
+        "start": 0.24,
+        "end": 0.34,
+        "word": " a"
+      },
+      {
+        "start": 0.34,
+        "end": 0.6,
+        "word": " legend"
+      },
+      {
+        "start": 0.6,
+        "end": 0.84,
+        "word": " that"
+      },
+      {
+        "start": 0.84,
+        "end": 1.14,
+        "word": " says,"
+      },
+      {
+        "start": 1.7,
+        "end": 2.0,
+        "word": " if"
+      },
+      {
+        "start": 2.0,
+        "end": 2.14,
+        "word": " you"
+      },
+      {
+        "start": 2.14,
+        "end": 2.28,
+        "word": " get"
+      },
+      {
+        "start": 2.28,
+        "end": 2.44,
+        "word": " on"
+      },
+      {
+        "start": 2.44,
+        "end": 2.56,
+        "word": " the"
+      },
+      {
+        "start": 2.56,
+        "end": 2.76,
+        "word": " wrong"
+      },
+      {
+        "start": 2.76,
+        "end": 3.14,
+        "word": " train,"
+      },
+      {
+        "start": 3.76,
+        "end": 4.04,
+        "word": " get"
+      },
+      {
+        "start": 4.04,
+        "end": 4.32,
+        "word": " off"
+      },
+      {
+        "start": 4.32,
+        "end": 4.54,
+        "word": " at"
+      },
+      {
+        "start": 4.54,
+        "end": 4.64,
+        "word": " the"
+      },
+      {
+        "start": 4.64,
+        "end": 4.86,
+        "word": " nearest"
+      },
+      {
+        "start": 4.86,
+        "end": 5.4,
+        "word": " station."
+      }
+    ]
+  },
+  {
+    "start": 6.2,
+    "end": 10.78,
+    "text": "The longer it takes you to leave, the more expensive the return trip becomes.",
+    "words": [
+      {
+        "start": 6.2,
+        "end": 6.68,
+        "word": " The"
+      },
+      {
+        "start": 6.68,
+        "end": 6.92,
+        "word": " longer"
+      },
+      {
+        "start": 6.92,
+        "end": 7.1,
+        "word": " it"
+      },
+      {
+        "start": 7.1,
+        "end": 7.32,
+        "word": " takes"
+      },
+      {
+        "start": 7.32,
+        "end": 7.5,
+        "word": " you"
+      },
+      {
+        "start": 7.5,
+        "end": 7.62,
+        "word": " to"
+      },
+      {
+        "start": 7.62,
+        "end": 7.92,
+        "word": " leave,"
+      },
+      {
+        "start": 8.56,
+        "end": 8.72,
+        "word": " the"
+      },
+      {
+        "start": 8.72,
+        "end": 8.88,
+        "word": " more"
+      },
+      {
+        "start": 8.88,
+        "end": 9.4,
+        "word": " expensive"
+      },
+      {
+        "start": 9.4,
+        "end": 9.64,
+        "word": " the"
+      },
+      {
+        "start": 9.64,
+        "end": 10.0,
+        "word": " return"
+      },
+      {
+        "start": 10.0,
+        "end": 10.22,
+        "word": " trip"
+      },
+      {
+        "start": 10.22,
+        "end": 10.78,
+        "word": " becomes."
+      }
+    ]
+  },
+  {
+    "start": 11.62,
+    "end": 16.0,
+    "text": "Every stop you stay past your peace is a cost you'll have to pay back.",
+    "words": [
+      {
+        "start": 11.62,
+        "end": 12.14,
+        "word": " Every"
+      },
+      {
+        "start": 12.14,
+        "end": 12.46,
+        "word": " stop"
+      },
+      {
+        "start": 12.46,
+        "end": 12.68,
+        "word": " you"
+      },
+      {
+        "start": 12.68,
+        "end": 12.88,
+        "word": " stay"
+      },
+      {
+        "start": 12.88,
+        "end": 13.32,
+        "word": " past"
+      },
+      {
+        "start": 13.32,
+        "end": 13.5,
+        "word": " your"
+      },
+      {
+        "start": 13.5,
+        "end": 13.92,
+        "word": " peace"
+      },
+      {
+        "start": 13.92,
+        "end": 14.54,
+        "word": " is"
+      },
+      {
+        "start": 14.54,
+        "end": 14.66,
+        "word": " a"
+      },
+      {
+        "start": 14.66,
+        "end": 14.98,
+        "word": " cost"
+      },
+      {
+        "start": 14.98,
+        "end": 15.24,
+        "word": " you'll"
+      },
+      {
+        "start": 15.24,
+        "end": 15.36,
+        "word": " have"
+      },
+      {
+        "start": 15.36,
+        "end": 15.52,
+        "word": " to"
+      },
+      {
+        "start": 15.52,
+        "end": 15.7,
+        "word": " pay"
+      },
+      {
+        "start": 15.7,
+        "end": 16.0,
+        "word": " back."
+      }
+    ]
+  },
+  {
+    "start": 16.92,
+    "end": 19.06,
+    "text": "So is this really only about trains?",
+    "words": [
+      {
+        "start": 16.92,
+        "end": 17.44,
+        "word": " So"
+      },
+      {
+        "start": 17.44,
+        "end": 17.6,
+        "word": " is"
+      },
+      {
+        "start": 17.6,
+        "end": 17.78,
+        "word": " this"
+      },
+      {
+        "start": 17.78,
+        "end": 18.04,
+        "word": " really"
+      },
+      {
+        "start": 18.04,
+        "end": 18.36,
+        "word": " only"
+      },
+      {
+        "start": 18.36,
+        "end": 18.66,
+        "word": " about"
+      },
+      {
+        "start": 18.66,
+        "end": 19.06,
+        "word": " trains?"
+      }
+    ]
+  }
+]

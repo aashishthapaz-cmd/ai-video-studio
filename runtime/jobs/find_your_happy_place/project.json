@@ -1,0 +1,53 @@
+{
+  "title": "Find Your Happy Place",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 103,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "In the wrong place, even your very best will never feel like enough.",
+      "prompt": "A misty tranquil shoreline at dawn with calm reflections. The camera slowly pushes in from a wide-angle overhead view to reveal a lone figure standing on the shore, backlit by soft amber light filtering through morning fog. The subject is cloaked in a warm, textured fabric, their silhouette barely visible against the dramatic contrast of sky and sea. The water mirrors the hazy landscape, creating an ethereal sense of disconnection between self and surroundings | lo-fi retro 90s aesthetic anime illustration, Studio Ghibli and Makoto Shinkai inspired, atmospheric digital painting, rich moody color palette, warm amber and deep midnight navy blue, textured brushwork, cinematic emotional depth, subtle film grain, vertical 9:16 composition, no text, no writing. Atmospheric mood, cinematic color grading, deeply evocative composition with poetic negative space, professional fine-art quality. No text, no writing, no signs, no labels, no logos, no watermark.",
+      "motion": "slow_push_in",
+      "seed": 736927266,
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "But in the right place, your mere presence will be celebrated.",
+      "prompt": "A cozy room interior with warm lamplight and a rainy window. The camera is positioned low to capture the subject's perspective from within the window frame, emphasizing their intimate connection with the outside world. Raindrops create golden bokeh patterns on the glass, symbolizing the joy of unexpected connections. A lone figure sits by an old wooden desk, surrounded by books and papers, their presence bringing a sense of warmth and comfort to the space | lo-fi retro 90s aesthetic anime illustration, Studio Ghibli and Makoto Shinkai inspired, atmospheric digital painting, rich moody color palette, warm amber and deep midnight navy blue, textured brushwork, cinematic emotional depth, subtle film grain, vertical 9:16 composition, no text, no writing. Atmospheric mood, cinematic color grading, deeply evocative composition with poetic negative space, professional fine-art quality. No text, no writing, no signs, no labels, no logos, no watermark.",
+      "motion": "slow_push_in",
+      "seed": 917823511,
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "The same person can feel ordinary in one place, and extraordinary in another.",
+      "prompt": "A quiet park bench under falling autumn leaves with golden bokeh. The camera is positioned from a bird's-eye view to emphasize the vastness of the scene while focusing on the subject sitting alone on the bench. Autumn leaves fall around them, creating a carpet of gold that contrasts sharply against the deep navy blue sky. A soft amber light filters through the trees, casting long shadows and highlighting the subject’s solitude in a moment of quiet reflection | lo-fi retro 90s aesthetic anime illustration, Studio Ghibli and Makoto Shinkai inspired, atmospheric digital painting, rich moody color palette, warm amber and deep midnight navy blue, textured brushwork, cinematic emotional depth, subtle film grain, vertical 9:16 composition, no text, no writing. Atmospheric mood, cinematic color grading, deeply evocative composition with poetic negative space, professional fine-art quality. No text, no writing, no signs, no labels, no logos, no watermark.",
+      "motion": "slow_push_in",
+      "seed": 464960152,
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    }
+  ],
+  "style_bible": {
+    "emotional_arc": "A journey of self-discovery and transformation from feeling inadequate to finding fulfillment.",
+    "palette": "Warm amber and deep midnight navy blue, with subtle film grain for a lo-fi retro 90s aesthetic.",
+    "lighting": "Cinematic moody chiaroscuro lighting with dramatic shadow contrast",
+    "motif": "Symbolic elements of nature and solitude to evoke emotional depth and atmosphere.",
+    "continuity": "A cohesive visual narrative through varying settings, subjects, and emotions.",
+    "negative_prompt": "realistic portrait, female portrait, realistic girl, realistic woman, photorealistic human face, face close-up, selfie, glamour photo, model photo, text, words, letters, numbers, quotation, caption, typography, logo, watermark, sign, label, poster, menu, readable book cover, readable book spine, license plate, road lettering, writing-like symbols, blank text area, ugly, deformed hands, bad anatomy, extra limbs, blurry, low resolution, stock photo, 3D CGI render, photorealism artifact, gore, blood, clutter",
+    "art_direction": "soulful atmospheric digital painting, lo-fi retro 90s aesthetic anime illustration, rich moody color palette, warm amber and deep midnight navy blue, textured brushwork, cinematic emotional depth"
+  },
+  "model": "qwen2.5:7b",
+  "voice_tone": "warm, deep, emotional spoken-word delivery",
+  "pacing": "deliberate phrasing with a pause after each line",
+  "image_style": "lo-fi retro 90s aesthetic anime illustration, Studio Ghibli and Makoto Shinkai inspired, atmospheric digital painting, rich moody color palette, warm amber and deep midnight navy blue, subtle film grain, vertical 9:16",
+  "animation_style": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing"
+}

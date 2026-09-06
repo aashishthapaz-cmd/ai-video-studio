@@ -1,0 +1,50 @@
+{
+  "title": "Keep Building, Someone Is Waiting",
+  "style_bible": {
+    "emotional_arc": "Solitude and perseverance lead to a hopeful reunion.",
+    "palette": "Charcoal-teal with amber accents",
+    "lighting": "Twilight moody atmosphere with soft lantern light",
+    "motif": "Isolated figures, books, and paths in nature",
+    "continuity": "Sparse, poetic, readable world suitable for Ken Burns motion",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "No matter how isolated or lonely you feel,",
+      "prompt": "A lone figure walking a winding path under twilight sky with faint stars, charcoal-teal background, amber light from distant lantern, wide lonely establishing view — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "keep doing your work with honesty and quiet dedication.",
+      "prompt": "A hand holding a book, fingers tracing the pages, charcoal-teal background, amber light from nearby lantern casting shadows on open page, close symbolic detail — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "Some battles are meant to be fought alone. Some chapters can only be written alone.",
+      "prompt": "A solitary figure sitting by a small wooden desk with an open book, charcoal-teal background, amber light from the window illuminating the page, low-angle — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "Someone out there is waiting to meet the person you're becoming.",
+      "prompt": "A silhouette of a figure standing by a window, looking into the distance with hope and anticipation, charcoal-teal background, amber light from outside casting — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 107,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

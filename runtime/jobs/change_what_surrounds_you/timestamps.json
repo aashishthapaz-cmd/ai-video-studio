@@ -1,0 +1,178 @@
+[
+  {
+    "start": 0.0,
+    "end": 5.66,
+    "text": "I read once that you can't always change the people around you, but you can change who you",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.16,
+        "word": " I"
+      },
+      {
+        "start": 0.16,
+        "end": 0.36,
+        "word": " read"
+      },
+      {
+        "start": 0.36,
+        "end": 0.7,
+        "word": " once"
+      },
+      {
+        "start": 0.7,
+        "end": 1.2,
+        "word": " that"
+      },
+      {
+        "start": 1.2,
+        "end": 1.36,
+        "word": " you"
+      },
+      {
+        "start": 1.36,
+        "end": 1.74,
+        "word": " can't"
+      },
+      {
+        "start": 1.74,
+        "end": 2.06,
+        "word": " always"
+      },
+      {
+        "start": 2.06,
+        "end": 2.44,
+        "word": " change"
+      },
+      {
+        "start": 2.44,
+        "end": 2.66,
+        "word": " the"
+      },
+      {
+        "start": 2.66,
+        "end": 2.96,
+        "word": " people"
+      },
+      {
+        "start": 2.96,
+        "end": 3.3,
+        "word": " around"
+      },
+      {
+        "start": 3.3,
+        "end": 3.62,
+        "word": " you,"
+      },
+      {
+        "start": 3.8,
+        "end": 4.48,
+        "word": " but"
+      },
+      {
+        "start": 4.48,
+        "end": 4.62,
+        "word": " you"
+      },
+      {
+        "start": 4.62,
+        "end": 4.8,
+        "word": " can"
+      },
+      {
+        "start": 4.8,
+        "end": 5.18,
+        "word": " change"
+      },
+      {
+        "start": 5.18,
+        "end": 5.5,
+        "word": " who"
+      },
+      {
+        "start": 5.5,
+        "end": 5.66,
+        "word": " you"
+      }
+    ]
+  },
+  {
+    "start": 5.66,
+    "end": 6.72,
+    "text": "choose to be around.",
+    "words": [
+      {
+        "start": 5.66,
+        "end": 5.96,
+        "word": " choose"
+      },
+      {
+        "start": 5.96,
+        "end": 6.18,
+        "word": " to"
+      },
+      {
+        "start": 6.18,
+        "end": 6.36,
+        "word": " be"
+      },
+      {
+        "start": 6.36,
+        "end": 6.72,
+        "word": " around."
+      }
+    ]
+  },
+  {
+    "start": 7.58,
+    "end": 11.76,
+    "text": "And when I finally understood that, everything made sense.",
+    "words": [
+      {
+        "start": 7.58,
+        "end": 8.0,
+        "word": " And"
+      },
+      {
+        "start": 8.0,
+        "end": 8.12,
+        "word": " when"
+      },
+      {
+        "start": 8.12,
+        "end": 8.28,
+        "word": " I"
+      },
+      {
+        "start": 8.28,
+        "end": 8.66,
+        "word": " finally"
+      },
+      {
+        "start": 8.66,
+        "end": 9.2,
+        "word": " understood"
+      },
+      {
+        "start": 9.2,
+        "end": 9.56,
+        "word": " that,"
+      },
+      {
+        "start": 10.34,
+        "end": 11.02,
+        "word": " everything"
+      },
+      {
+        "start": 11.02,
+        "end": 11.44,
+        "word": " made"
+      },
+      {
+        "start": 11.44,
+        "end": 11.76,
+        "word": " sense."
+      }
+    ]
+  }
+]

@@ -1,0 +1,84 @@
+{
+  "title": "I Am So Proud Of You",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 30,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "I believe in you.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I believe in you."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "I believe in your dreams.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I believe in your dreams."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "I believe in the incredible things you are going to achieve.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I believe in the incredible things you are going to achieve."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "When you doubt yourself, I will remind you of your worth.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "When you doubt yourself, I will remind you of your worth."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "When you stumble, I will be the one to catch you.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "When you stumble, I will be the one to catch you."
+    },
+    {
+      "id": "scene_006",
+      "duration": 5,
+      "narration": "And when you succeed, I will be the one cheering the loudest.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "And when you succeed, I will be the one cheering the loudest."
+    },
+    {
+      "id": "scene_007",
+      "duration": 5,
+      "narration": "Don't ever let the world make you feel small.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Don't ever let the world make you feel small."
+    },
+    {
+      "id": "scene_008",
+      "duration": 5,
+      "narration": "Because I have seen what you are capable of.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Because I have seen what you are capable of."
+    },
+    {
+      "id": "scene_009",
+      "duration": 5,
+      "narration": "And I am so proud of you.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "And I am so proud of you."
+    }
+  ]
+}

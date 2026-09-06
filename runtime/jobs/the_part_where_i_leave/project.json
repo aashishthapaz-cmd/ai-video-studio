@@ -1,0 +1,60 @@
+{
+  "title": "The Part Where I Leave",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 40,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "I am no longer writing explanations on pages you choose to skip.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I am no longer writing explanations on pages you choose to skip."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "I am not highlighting my heart just to make it visible to you.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I am not highlighting my heart just to make it visible to you."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "You are free to misread my chapters until whatever version of my story makes you feel at home.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "You are free to misread my chapters until whatever version of my story makes you feel at home."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "I am not rewriting my truth just to fit your narrow margins.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I am not rewriting my truth just to fit your narrow margins."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "My silence is not an invitation to fix it.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "My silence is not an invitation to fix it."
+    },
+    {
+      "id": "scene_006",
+      "duration": 5,
+      "narration": "It is the part where I leave.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "It is the part where I leave."
+    }
+  ]
+}

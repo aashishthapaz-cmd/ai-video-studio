@@ -1,0 +1,84 @@
+{
+  "title": "Men And Women",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 62,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "Men fall for what their eyes admire.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Men fall for what their eyes admire."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "Women fall for what their hearts feel.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Women fall for what their hearts feel."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "A man's heart opens with respect.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "A man's heart opens with respect."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "A woman's heart opens when she feels understood.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "A woman's heart opens when she feels understood."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "Men show love through actions.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Men show love through actions."
+    },
+    {
+      "id": "scene_006",
+      "duration": 5,
+      "narration": "Women feel love through consistency.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Women feel love through consistency."
+    },
+    {
+      "id": "scene_007",
+      "duration": 5,
+      "narration": "Men stay where they are appreciated.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Men stay where they are appreciated."
+    },
+    {
+      "id": "scene_008",
+      "duration": 5,
+      "narration": "Women stay where they are reassured.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Women stay where they are reassured."
+    },
+    {
+      "id": "scene_009",
+      "duration": 5,
+      "narration": "Maybe that's why we love differently, but still need each other.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Maybe that's why we love differently, but still need each other."
+    }
+  ]
+}

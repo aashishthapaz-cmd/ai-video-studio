@@ -1,0 +1,44 @@
+{
+  "title": "If You Don’t Let The Past Die",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 68,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "If you don't let the past die, it won't let you live.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "If you don't let the past die, it won't let you live."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "It stays in your decisions, in what you avoid, in what you accept without asking why.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "It stays in your decisions, in what you avoid, in what you accept without asking why."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "The past has already taken enough.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "The past has already taken enough."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "Don't let it take your present.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Don't let it take your present."
+    }
+  ]
+}

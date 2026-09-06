@@ -1,0 +1,75 @@
+{
+  "title": "Accept People As They Are",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 93,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4,
+      "narration": "Accept people as they are. Place them where they belong.",
+      "prompt": "poetic reflective mood, mended ceramic bowl, wide cinematic establishing frame with tiny silhouette at lower right, high rooftop view, subject in lower corner, diagonal beam of ochre light, vibrant indigo and ember orange, healing and peace topic, botanical textures, sunrise haze, jade green, warm cream, quiet peach light, clear water reflections, layered foreground middle-ground background, asymmetrical frame, new location, new subject, new viewpoint, new light source, new narrative moment, not a portrait | dark hand-inked vintage graphic-novel illustration, irregular black contours, dense directional hatching, scratchy weather lines, rough paper grain, distressed print texture, cool charcoal and blue-green shadows, disciplined amber, ochre, rust, or muted-red accent light, strong lighting contrast, cinematic vertical 9:16, same artistic language as reference only, not the same objects or composition, no text, no writing. New location, new subject, new layout, new camera angle, new light source, new foreground middle-ground background, not a portrait, not a copied reference layout. No text, no writing, no signs, no labels, no logos, no watermark.",
+      "motion": "slow_push_in",
+      "seed": 528204827,
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_002",
+      "duration": 4,
+      "narration": "You are responsible for your own life.",
+      "prompt": "poetic reflective mood, new leaves through stone, macro symbolic close-up with no face, object filling left foreground, low ground-level view, foreground object huge, distant silhouette small, electric teal and gold, healing and peace topic, botanical textures, sunrise haze, jade green, warm cream, quiet peach light, clear water reflections, layered foreground middle-ground background, asymmetrical frame, new location, new subject, new viewpoint, new light source, new narrative moment, not a portrait, not a copied | dark hand-inked vintage graphic-novel illustration, irregular black contours, dense directional hatching, scratchy weather lines, rough paper grain, distressed print texture, cool charcoal and blue-green shadows, disciplined amber, ochre, rust, or muted-red accent light, strong lighting contrast, cinematic vertical 9:16, same artistic language as reference only, not the same objects or composition, no text, no writing. New location, new subject, new layout, new camera angle, new light source, new foreground middle-ground background, not a portrait, not a copied reference layout. No text, no writing, no signs, no labels, no logos, no watermark.",
+      "motion": "pan_right",
+      "seed": 964818519,
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_003",
+      "duration": 4,
+      "narration": "Acceptance frees you from trying to change anyone.",
+      "prompt": "poetic reflective mood, quiet river bend, low-angle dramatic silhouette beside a new landmark, overhead still-life arrangement, circular shadows, off-center focal point, coral, saffron, and midnight blue, healing and peace topic, botanical textures, sunrise haze, jade green, warm cream, quiet peach light, clear water reflections, layered foreground middle-ground background, asymmetrical frame, new location, new subject, new viewpoint, new light source, new narrative moment, not a portrait, not a copied reference layout, vibrant cinematic | dark hand-inked vintage graphic-novel illustration, irregular black contours, dense directional hatching, scratchy weather lines, rough paper grain, distressed print texture, cool charcoal and blue-green shadows, disciplined amber, ochre, rust, or muted-red accent light, strong lighting contrast, cinematic vertical 9:16, same artistic language as reference only, not the same objects or composition, no text, no writing. New location, new subject, new layout, new camera angle, new light source, new foreground middle-ground background, not a portrait, not a copied reference layout. No text, no writing, no signs, no labels, no logos, no watermark.",
+      "motion": "slow_push_in",
+      "seed": 848700990,
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_004",
+      "duration": 4,
+      "narration": "Boundaries protect your peace.",
+      "prompt": "gentle restoration, sunlit bed sheet, overhead contemplative view of meaningful objects, wide shoreline view, hard side light, layered foreground posts and far hills, emerald, copper, and violet, healing and peace topic, botanical textures, sunrise haze, jade green, warm cream, quiet peach light, clear water reflections, layered foreground middle-ground background, asymmetrical frame, new location, new subject, new viewpoint, new light source, new narrative moment, not a portrait, not a copied reference layout, vibrant | dark hand-inked vintage graphic-novel illustration, irregular black contours, dense directional hatching, scratchy weather lines, rough paper grain, distressed print texture, cool charcoal and blue-green shadows, disciplined amber, ochre, rust, or muted-red accent light, strong lighting contrast, cinematic vertical 9:16, same artistic language as reference only, not the same objects or composition, no text, no writing. New location, new subject, new layout, new camera angle, new light source, new foreground middle-ground background, not a portrait, not a copied reference layout. No text, no writing, no signs, no labels, no logos, no watermark.",
+      "motion": "pan_right",
+      "seed": 893539738,
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_005",
+      "duration": 4,
+      "narration": "Not everyone earns the same access, the same closeness, or the same seat at your table.",
+      "prompt": "poetic reflective mood, hands releasing string, environmental composition with deep negative space and off-center subject, narrow alley perspective, rain scratches, glowing doorway far off-center, cobalt, crimson, and warm cream, healing and peace topic, botanical textures, sunrise haze, jade green, warm cream, quiet peach light, clear water reflections, layered foreground middle-ground background, asymmetrical frame, new location, new subject, new viewpoint, new light source, new narrative moment, not a portrait, not a copied reference | dark hand-inked vintage graphic-novel illustration, irregular black contours, dense directional hatching, scratchy weather lines, rough paper grain, distressed print texture, cool charcoal and blue-green shadows, disciplined amber, ochre, rust, or muted-red accent light, strong lighting contrast, cinematic vertical 9:16, same artistic language as reference only, not the same objects or composition, no text, no writing. New location, new subject, new layout, new camera angle, new light source, new foreground middle-ground background, not a portrait, not a copied reference layout. No text, no writing, no signs, no labels, no logos, no watermark.",
+      "motion": "slow_push_in",
+      "seed": 845423851,
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    },
+    {
+      "id": "scene_006",
+      "duration": 4,
+      "narration": "And that's not cruelty. That's self-respect.",
+      "prompt": "poetic reflective mood, garden after rain, layered interior scene with glowing foreground and distant background, interior room cutaway, lamp glow from below, deep background window, magenta, jade, and lantern amber, healing and peace topic, botanical textures, sunrise haze, jade green, warm cream, quiet peach light, clear water reflections, layered foreground middle-ground background, asymmetrical frame, new location, new subject, new viewpoint, new light source, new narrative moment, not a portrait, not a copied | dark hand-inked vintage graphic-novel illustration, irregular black contours, dense directional hatching, scratchy weather lines, rough paper grain, distressed print texture, cool charcoal and blue-green shadows, disciplined amber, ochre, rust, or muted-red accent light, strong lighting contrast, cinematic vertical 9:16, same artistic language as reference only, not the same objects or composition, no text, no writing. New location, new subject, new layout, new camera angle, new light source, new foreground middle-ground background, not a portrait, not a copied reference layout. No text, no writing, no signs, no labels, no logos, no watermark.",
+      "motion": "pan_right",
+      "seed": 688180881,
+      "animation_prompt": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing. Preserve the composition and mood; no flicker, no black frames."
+    }
+  ],
+  "style_bible": {
+    "art_direction": "healing and peace topic, botanical textures, sunrise haze, jade green, warm cream, quiet peach light, clear water reflections",
+    "negative_prompt": "text, words, letters, numbers, quotation, caption, typography, logo, watermark, sign, label, poster, menu, readable book cover, readable book spine, license plate, road lettering, writing-like symbols, blank text area, girl portrait, female portrait, close-up face, repeated face, same lonely person, same storefront layout, same balcony, copied reference composition, copied architecture, stock photo, photorealism, CGI, 3D render, robot, gore, clutter"
+  },
+  "model": "offline-fallback",
+  "voice_tone": "warm, deep, emotional spoken-word delivery",
+  "pacing": "deliberate phrasing with a pause after each line",
+  "image_style": "dark hand-inked vintage graphic-novel illustration, irregular black contours, dense hatching, rough paper grain, distressed print texture, cool charcoal and blue-green shadows, disciplined amber or rust accent light, fresh original composition",
+  "animation_style": "smooth meditative 3-5 second Ken Burns motion, slow push-in or lateral drift, subtle grain and gentle cross-fade, no jitter or morphing"
+}

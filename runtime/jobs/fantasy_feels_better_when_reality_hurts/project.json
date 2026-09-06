@@ -1,0 +1,100 @@
+{
+  "title": "Fantasy Feels Better When Reality Hurts",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 83,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "Fantasy feels better when reality hurts.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Fantasy feels better when reality hurts."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "So we live in the in between.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "So we live in the in between."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "Half here, half somewhere beautiful.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Half here, half somewhere beautiful."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "We rewrite the conversations that broke us.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "We rewrite the conversations that broke us."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "We keep the people who chose to leave.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "We keep the people who chose to leave."
+    },
+    {
+      "id": "scene_006",
+      "duration": 5,
+      "narration": "Because in our heads, nobody dies.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Because in our heads, nobody dies."
+    },
+    {
+      "id": "scene_007",
+      "duration": 5,
+      "narration": "Nobody lies.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Nobody lies."
+    },
+    {
+      "id": "scene_008",
+      "duration": 5,
+      "narration": "Nobody says goodbye for good.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Nobody says goodbye for good."
+    },
+    {
+      "id": "scene_009",
+      "duration": 5,
+      "narration": "And maybe that's why we stay there.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "And maybe that's why we stay there."
+    },
+    {
+      "id": "scene_010",
+      "duration": 5,
+      "narration": "A little longer than we should.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "A little longer than we should."
+    },
+    {
+      "id": "scene_011",
+      "duration": 5,
+      "narration": "Because it's the only place we can finally breathe.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Because it's the only place we can finally breathe."
+    }
+  ]
+}

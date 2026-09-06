@@ -1,0 +1,60 @@
+{
+  "title": "Words Left Unspoken",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 20,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "One of the burdens we carry are the words left unspoken.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "One of the burdens we carry are the words left unspoken."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "We stay quiet to keep the peace.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "We stay quiet to keep the peace."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "And end up drowning in our own thoughts.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "And end up drowning in our own thoughts."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "We swallow our feelings.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "We swallow our feelings."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "And just quietly fall apart.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "And just quietly fall apart."
+    },
+    {
+      "id": "scene_006",
+      "duration": 5,
+      "narration": "That's what makes silence so incredibly loud.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "That's what makes silence so incredibly loud."
+    }
+  ]
+}

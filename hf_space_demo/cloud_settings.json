@@ -1,0 +1,31 @@
+{
+  "image_engine_priority": [
+    "pollinations",
+    "cloudflare",
+    "huggingface"
+  ],
+  "pollinations_model": "flux",
+  "voice_engine": "voxcpm_reference",
+  "reference_voice_path": "assets/reference_voice/whishper.wav",
+  "english_voice": "en-US-ChristopherNeural",
+  "nepali_voice": "ne-NP-SagarNeural",
+  "voice_rate": "-4%",
+  "voice_pitch": "+0Hz",
+  "output_width": 1080,
+  "output_height": 1920,
+  "video_transition": "dip_to_black",
+  "transition_duration": 0.5,
+  "motion_style": "parallax_2_5d",
+  "overlay_opacity": 0.15,
+  "music_volume": 0.22,
+  "huggingface_token": "",
+  "cloudflare_account_id": "",
+  "cloudflare_api_token": "",
+  "pollinations_api_key": "",
+  "auto_publish_facebook": false,
+  "default_hashtags": "#poetry #anime #ghibli #reels #art #aesthetic #nepalipoetry",
+  "facebook_pages": [],
+  "enable_telegram": true,
+  "telegram_bot_token": "8886670511:AAFeNxbL5TxpTiWqF_fukB-MeaS4s9OlMqU",
+  "telegram_chat_id": "6402294953"
+}

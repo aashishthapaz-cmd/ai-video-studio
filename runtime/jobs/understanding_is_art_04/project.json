@@ -1,0 +1,57 @@
+{
+  "title": "Understanding Is Art",
+  "style_bible": {
+    "emotional_arc": "Reflective and introspective, moving from general to specific insights about understanding as a form of art.",
+    "palette": "Charcoal-teal with amber accents",
+    "lighting": "Moody twilight with subtle shadows",
+    "motif": "Natural elements like trees, paths, and books",
+    "continuity": "Sparse, poetic scenes with deep cinematic depth",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "Understanding is art, and not everyone is an artist.",
+      "prompt": "A lone figure stands under a tree, holding a blank canvas, twilight casting long shadows on the path behind them. The canvas represents potential — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "Some paint with their eyes. Some paint with their ego.",
+      "prompt": "A person sitting by a window, looking out at the night sky through fogged glass, holding a small sketchbook with an eye symbol drawn — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "Only a few paint with their heart.",
+      "prompt": "A close-up of a hand holding a brush, the fingers stained with dark charcoal-teal ink. The background is a blurred path leading — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "The greatest works are never hung on walls.",
+      "prompt": "A small, unframed painting lying flat on a wooden table in the twilight. The painting is simple and abstract, with soft charcoal-teal tones — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_005",
+      "duration": 4.0,
+      "narration": "They live quietly inside people's hearts.",
+      "prompt": "A close-up of a person’s hand gently holding a book, with the pages open to reveal a simple drawing. The book is old — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 112,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

@@ -1,0 +1,60 @@
+{
+  "title": "The Villain In The Story",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 69,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "The villain will always be the villain, if the hero tells the story.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "The villain will always be the villain, if the hero tells the story."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "Every scar has two sides of pain.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Every scar has two sides of pain."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "One gets sympathy, one gets blame.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "One gets sympathy, one gets blame."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "The world believes the loudest voice, not the soul left without a choice.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "The world believes the loudest voice, not the soul left without a choice."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "Truth often hides behind the glory,",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Truth often hides behind the glory,"
+    },
+    {
+      "id": "scene_006",
+      "duration": 5,
+      "narration": "because history is written by the one who tells the story.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "because history is written by the one who tells the story."
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "title": "Given Unsought Is Better",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 37,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "Shakespeare said, love sought is good, but given unsought is better.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Shakespeare said, love sought is good, but given unsought is better."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "I never understood what that meant until you.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I never understood what that meant until you."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "I spent my whole life chasing people, begging to be chosen, exhausting myself just to prove I was worth keeping around.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I spent my whole life chasing people, begging to be chosen, exhausting myself just to prove I was worth keeping around."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "But you didn't wait for me to ask.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "But you didn't wait for me to ask."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "You didn't make me earn my place.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "You didn't make me earn my place."
+    },
+    {
+      "id": "scene_006",
+      "duration": 5,
+      "narration": "You just showed up.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "You just showed up."
+    },
+    {
+      "id": "scene_007",
+      "duration": 5,
+      "narration": "And handed me the kind of love I never thought I'd experience.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "And handed me the kind of love I never thought I'd experience."
+    }
+  ]
+}

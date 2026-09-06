@@ -1,0 +1,44 @@
+{
+  "title": "Build You Or Break You",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 91,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "Dostoevsky said, pain changes you, but it teaches that is its mercy.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Dostoevsky said, pain changes you, but it teaches that is its mercy."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "But Franz Kafka said, pain changes nothing.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "But Franz Kafka said, pain changes nothing."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "It just repeats itself until you forget who you were before it started.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "It just repeats itself until you forget who you were before it started."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "So the question is, did pain build you or break you?",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "So the question is, did pain build you or break you?"
+    }
+  ]
+}

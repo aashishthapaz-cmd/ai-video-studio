@@ -1,0 +1,52 @@
+{
+  "title": "Understanding Is Art",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 112,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "Understanding is art, and not everyone is an artist.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Understanding is art, and not everyone is an artist."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "Some paint with their eyes. Some paint with their ego.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Some paint with their eyes. Some paint with their ego."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "Only a few paint with their heart.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Only a few paint with their heart."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "The greatest works are never hung on walls.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "The greatest works are never hung on walls."
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "They live quietly inside people's hearts.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "They live quietly inside people's hearts."
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+ComfyUI generated scene_001
+ComfyUI generated scene_002
+ComfyUI generated scene_003
+ComfyUI generated scene_004
+{"output": "D:\\Auto video Generator\\Output\\You Loved Me Anyway.mp4", "project_output": "D:\\Auto video Generator\\runtime\\jobs\\you_loved_me_anyway\\final_voxcpm_match.mp4", "scenes": 4, "caption_visible": true, "renderer": "Nepali TTS reference system"}

@@ -1,0 +1,11 @@
+1
+00:00:00,000 --> 00:00:04,380
+Your name is my favorite word. Your voice is my favorite sound.
+
+2
+00:00:05,160 --> 00:00:09,520
+Your eyes are my favorite mirror. Your arms are my favorite place.
+
+3
+00:00:10,300 --> 00:00:12,400
+And your love is my favorite feeling.

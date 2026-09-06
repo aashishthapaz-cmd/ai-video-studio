@@ -1,0 +1,364 @@
+[
+  {
+    "start": 0.0,
+    "end": 4.68,
+    "text": "The scary thing about distance is you don't know whether they'll miss you or forget you.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.12,
+        "word": " The"
+      },
+      {
+        "start": 0.12,
+        "end": 0.4,
+        "word": " scary"
+      },
+      {
+        "start": 0.4,
+        "end": 0.64,
+        "word": " thing"
+      },
+      {
+        "start": 0.64,
+        "end": 0.88,
+        "word": " about"
+      },
+      {
+        "start": 0.88,
+        "end": 1.28,
+        "word": " distance"
+      },
+      {
+        "start": 1.28,
+        "end": 2.16,
+        "word": " is"
+      },
+      {
+        "start": 2.16,
+        "end": 2.3,
+        "word": " you"
+      },
+      {
+        "start": 2.3,
+        "end": 2.56,
+        "word": " don't"
+      },
+      {
+        "start": 2.56,
+        "end": 2.78,
+        "word": " know"
+      },
+      {
+        "start": 2.78,
+        "end": 3.04,
+        "word": " whether"
+      },
+      {
+        "start": 3.04,
+        "end": 3.32,
+        "word": " they'll"
+      },
+      {
+        "start": 3.32,
+        "end": 3.6,
+        "word": " miss"
+      },
+      {
+        "start": 3.6,
+        "end": 3.88,
+        "word": " you"
+      },
+      {
+        "start": 3.88,
+        "end": 4.1,
+        "word": " or"
+      },
+      {
+        "start": 4.1,
+        "end": 4.42,
+        "word": " forget"
+      },
+      {
+        "start": 4.42,
+        "end": 4.68,
+        "word": " you."
+      }
+    ]
+  },
+  {
+    "start": 5.62,
+    "end": 10.76,
+    "text": "Maybe your name still crosses their mind before they fall asleep, or maybe they've already",
+    "words": [
+      {
+        "start": 5.62,
+        "end": 5.84,
+        "word": " Maybe"
+      },
+      {
+        "start": 5.84,
+        "end": 6.06,
+        "word": " your"
+      },
+      {
+        "start": 6.06,
+        "end": 6.4,
+        "word": " name"
+      },
+      {
+        "start": 6.4,
+        "end": 6.68,
+        "word": " still"
+      },
+      {
+        "start": 6.68,
+        "end": 7.08,
+        "word": " crosses"
+      },
+      {
+        "start": 7.08,
+        "end": 7.34,
+        "word": " their"
+      },
+      {
+        "start": 7.34,
+        "end": 7.72,
+        "word": " mind"
+      },
+      {
+        "start": 7.72,
+        "end": 8.02,
+        "word": " before"
+      },
+      {
+        "start": 8.02,
+        "end": 8.2,
+        "word": " they"
+      },
+      {
+        "start": 8.2,
+        "end": 8.42,
+        "word": " fall"
+      },
+      {
+        "start": 8.42,
+        "end": 8.8,
+        "word": " asleep,"
+      },
+      {
+        "start": 9.6,
+        "end": 9.94,
+        "word": " or"
+      },
+      {
+        "start": 9.94,
+        "end": 10.2,
+        "word": " maybe"
+      },
+      {
+        "start": 10.2,
+        "end": 10.5,
+        "word": " they've"
+      },
+      {
+        "start": 10.5,
+        "end": 10.76,
+        "word": " already"
+      }
+    ]
+  },
+  {
+    "start": 10.76,
+    "end": 12.32,
+    "text": "learned how to live without you.",
+    "words": [
+      {
+        "start": 10.76,
+        "end": 11.16,
+        "word": " learned"
+      },
+      {
+        "start": 11.16,
+        "end": 11.36,
+        "word": " how"
+      },
+      {
+        "start": 11.36,
+        "end": 11.5,
+        "word": " to"
+      },
+      {
+        "start": 11.5,
+        "end": 11.7,
+        "word": " live"
+      },
+      {
+        "start": 11.7,
+        "end": 12.02,
+        "word": " without"
+      },
+      {
+        "start": 12.02,
+        "end": 12.32,
+        "word": " you."
+      }
+    ]
+  },
+  {
+    "start": 13.42,
+    "end": 15.24,
+    "text": "That's what makes distance so painful.",
+    "words": [
+      {
+        "start": 13.42,
+        "end": 13.8,
+        "word": " That's"
+      },
+      {
+        "start": 13.8,
+        "end": 13.9,
+        "word": " what"
+      },
+      {
+        "start": 13.9,
+        "end": 14.16,
+        "word": " makes"
+      },
+      {
+        "start": 14.16,
+        "end": 14.54,
+        "word": " distance"
+      },
+      {
+        "start": 14.54,
+        "end": 14.84,
+        "word": " so"
+      },
+      {
+        "start": 14.84,
+        "end": 15.24,
+        "word": " painful."
+      }
+    ]
+  },
+  {
+    "start": 16.26,
+    "end": 21.96,
+    "text": "Not the miles but the silence, the uncertainty, and slowly becoming a memory to someone",
+    "words": [
+      {
+        "start": 16.26,
+        "end": 16.46,
+        "word": " Not"
+      },
+      {
+        "start": 16.46,
+        "end": 16.62,
+        "word": " the"
+      },
+      {
+        "start": 16.62,
+        "end": 17.02,
+        "word": " miles"
+      },
+      {
+        "start": 17.02,
+        "end": 17.28,
+        "word": " but"
+      },
+      {
+        "start": 17.28,
+        "end": 17.42,
+        "word": " the"
+      },
+      {
+        "start": 17.42,
+        "end": 17.88,
+        "word": " silence,"
+      },
+      {
+        "start": 18.52,
+        "end": 18.56,
+        "word": " the"
+      },
+      {
+        "start": 18.56,
+        "end": 19.2,
+        "word": " uncertainty,"
+      },
+      {
+        "start": 20.16,
+        "end": 20.22,
+        "word": " and"
+      },
+      {
+        "start": 20.22,
+        "end": 20.56,
+        "word": " slowly"
+      },
+      {
+        "start": 20.56,
+        "end": 20.96,
+        "word": " becoming"
+      },
+      {
+        "start": 20.96,
+        "end": 21.14,
+        "word": " a"
+      },
+      {
+        "start": 21.14,
+        "end": 21.46,
+        "word": " memory"
+      },
+      {
+        "start": 21.46,
+        "end": 21.68,
+        "word": " to"
+      },
+      {
+        "start": 21.68,
+        "end": 21.96,
+        "word": " someone"
+      }
+    ]
+  },
+  {
+    "start": 21.96,
+    "end": 23.62,
+    "text": "you still think about every day.",
+    "words": [
+      {
+        "start": 21.96,
+        "end": 22.14,
+        "word": " you"
+      },
+      {
+        "start": 22.14,
+        "end": 22.38,
+        "word": " still"
+      },
+      {
+        "start": 22.38,
+        "end": 22.62,
+        "word": " think"
+      },
+      {
+        "start": 22.62,
+        "end": 22.9,
+        "word": " about"
+      },
+      {
+        "start": 22.9,
+        "end": 23.3,
+        "word": " every"
+      },
+      {
+        "start": 23.3,
+        "end": 23.62,
+        "word": " day."
+      }
+    ]
+  }
+]

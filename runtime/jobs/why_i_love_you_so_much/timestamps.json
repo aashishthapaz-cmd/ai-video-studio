@@ -1,0 +1,278 @@
+[
+  {
+    "start": 0.0,
+    "end": 9.12,
+    "text": "Sometimes my heart asks why I love you so much, why I miss you so hard, why I still choose you even when it's not easy.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.68,
+        "word": " Sometimes"
+      },
+      {
+        "start": 0.68,
+        "end": 0.98,
+        "word": " my"
+      },
+      {
+        "start": 0.98,
+        "end": 1.28,
+        "word": " heart"
+      },
+      {
+        "start": 1.28,
+        "end": 1.74,
+        "word": " asks"
+      },
+      {
+        "start": 1.74,
+        "end": 2.02,
+        "word": " why"
+      },
+      {
+        "start": 2.02,
+        "end": 2.18,
+        "word": " I"
+      },
+      {
+        "start": 2.18,
+        "end": 2.4,
+        "word": " love"
+      },
+      {
+        "start": 2.4,
+        "end": 2.56,
+        "word": " you"
+      },
+      {
+        "start": 2.56,
+        "end": 2.74,
+        "word": " so"
+      },
+      {
+        "start": 2.74,
+        "end": 3.18,
+        "word": " much,"
+      },
+      {
+        "start": 3.54,
+        "end": 4.12,
+        "word": " why"
+      },
+      {
+        "start": 4.12,
+        "end": 4.24,
+        "word": " I"
+      },
+      {
+        "start": 4.24,
+        "end": 4.46,
+        "word": " miss"
+      },
+      {
+        "start": 4.46,
+        "end": 4.7,
+        "word": " you"
+      },
+      {
+        "start": 4.7,
+        "end": 4.9,
+        "word": " so"
+      },
+      {
+        "start": 4.9,
+        "end": 5.34,
+        "word": " hard,"
+      },
+      {
+        "start": 6.16,
+        "end": 6.46,
+        "word": " why"
+      },
+      {
+        "start": 6.46,
+        "end": 6.6,
+        "word": " I"
+      },
+      {
+        "start": 6.6,
+        "end": 6.84,
+        "word": " still"
+      },
+      {
+        "start": 6.84,
+        "end": 7.26,
+        "word": " choose"
+      },
+      {
+        "start": 7.26,
+        "end": 7.56,
+        "word": " you"
+      },
+      {
+        "start": 7.56,
+        "end": 8.14,
+        "word": " even"
+      },
+      {
+        "start": 8.14,
+        "end": 8.38,
+        "word": " when"
+      },
+      {
+        "start": 8.38,
+        "end": 8.56,
+        "word": " it's"
+      },
+      {
+        "start": 8.56,
+        "end": 8.7,
+        "word": " not"
+      },
+      {
+        "start": 8.7,
+        "end": 9.12,
+        "word": " easy."
+      }
+    ]
+  },
+  {
+    "start": 10.08,
+    "end": 15.46,
+    "text": "And my mind always answers the same way. You're the one who feels like home.",
+    "words": [
+      {
+        "start": 10.08,
+        "end": 10.54,
+        "word": " And"
+      },
+      {
+        "start": 10.54,
+        "end": 10.72,
+        "word": " my"
+      },
+      {
+        "start": 10.72,
+        "end": 11.06,
+        "word": " mind"
+      },
+      {
+        "start": 11.06,
+        "end": 11.44,
+        "word": " always"
+      },
+      {
+        "start": 11.44,
+        "end": 11.98,
+        "word": " answers"
+      },
+      {
+        "start": 11.98,
+        "end": 12.2,
+        "word": " the"
+      },
+      {
+        "start": 12.2,
+        "end": 12.48,
+        "word": " same"
+      },
+      {
+        "start": 12.48,
+        "end": 12.78,
+        "word": " way."
+      },
+      {
+        "start": 13.62,
+        "end": 14.08,
+        "word": " You're"
+      },
+      {
+        "start": 14.08,
+        "end": 14.16,
+        "word": " the"
+      },
+      {
+        "start": 14.16,
+        "end": 14.36,
+        "word": " one"
+      },
+      {
+        "start": 14.36,
+        "end": 14.54,
+        "word": " who"
+      },
+      {
+        "start": 14.54,
+        "end": 14.86,
+        "word": " feels"
+      },
+      {
+        "start": 14.86,
+        "end": 15.14,
+        "word": " like"
+      },
+      {
+        "start": 15.14,
+        "end": 15.46,
+        "word": " home."
+      }
+    ]
+  },
+  {
+    "start": 16.24,
+    "end": 20.0,
+    "text": "You're the only one my heart chooses again and again.",
+    "words": [
+      {
+        "start": 16.24,
+        "end": 16.66,
+        "word": " You're"
+      },
+      {
+        "start": 16.66,
+        "end": 16.74,
+        "word": " the"
+      },
+      {
+        "start": 16.74,
+        "end": 17.04,
+        "word": " only"
+      },
+      {
+        "start": 17.04,
+        "end": 17.32,
+        "word": " one"
+      },
+      {
+        "start": 17.32,
+        "end": 17.5,
+        "word": " my"
+      },
+      {
+        "start": 17.5,
+        "end": 17.78,
+        "word": " heart"
+      },
+      {
+        "start": 17.78,
+        "end": 18.32,
+        "word": " chooses"
+      },
+      {
+        "start": 18.32,
+        "end": 19.06,
+        "word": " again"
+      },
+      {
+        "start": 19.06,
+        "end": 19.62,
+        "word": " and"
+      },
+      {
+        "start": 19.62,
+        "end": 20.0,
+        "word": " again."
+      }
+    ]
+  }
+]

@@ -1,0 +1,44 @@
+{
+  "title": "Fluent In Hiding What I Feel",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 105,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "Because I carry it well, doesn't mean it's not heavy.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "Because I carry it well, doesn't mean it's not heavy."
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "I've simply become fluent in the language of pretending nothing hurts, when everything does.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I've simply become fluent in the language of pretending nothing hurts, when everything does."
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "I make it look effortless,",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "I make it look effortless,"
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "because falling apart was never an option.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "because falling apart was never an option."
+    }
+  ]
+}

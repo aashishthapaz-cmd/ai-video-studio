@@ -1,0 +1,43 @@
+{
+  "title": "Your Wound Is Not Your Fault",
+  "style_bible": {
+    "emotional_arc": "Empowerment through self-healing, moving from victimhood to agency.",
+    "palette": "Charcoal-teal with amber accents for healing and hope; navy shadows for introspection and depth.",
+    "lighting": "Moody twilight atmosphere with soft, diffused light creating a sense of comfort within the darkness.",
+    "motif": "Natural elements like water, books, or paths symbolizing journeys and transformation.",
+    "continuity": "Consistent hand-inked style with irregular contour lines and visible paper grain for a graphic-novel feel.",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "Your wound is not your fault, but your healing is your responsibility.",
+      "prompt": "A lone book lying open on a wooden table under soft twilight light, with irregular contour lines and visible paper grain. The page shows — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "No one can rewrite your past, but you can decide how your story continues.",
+      "prompt": "A path winding through a forest at twilight, with irregular contour lines and visible woodcut grain. The path is illuminated by an amber lantern — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "Heal, so the pain ends with you, not with the people you love.",
+      "prompt": "A calm river flowing under a bridge at twilight, with irregular contour lines and visible water grain. The river is highlighted in amber, symbolizing — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 115,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

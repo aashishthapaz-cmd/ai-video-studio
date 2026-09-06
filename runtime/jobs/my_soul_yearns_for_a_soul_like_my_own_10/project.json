@@ -1,0 +1,57 @@
+{
+  "title": "My Soul Yearns For A Soul Like My Own",
+  "style_bible": {
+    "emotional_arc": "Longing, isolation, understanding, connection",
+    "palette": "Charcoal-teal, navy, amber, rust-red, ember-orange, pale cream",
+    "lighting": "Moody twilight/night atmosphere with deep charcoal-teal/navy shadows and one controlled accent color",
+    "motif": "Sparse, poetic, readable, suitable for slow Ken Burns motion",
+    "continuity": "Vertical 9:16 dark hand-inked storybook/graphic-novel illustration, expressive irregular contour lines, visible paper or woodcut grain, flat painted shapes with cinematic depth",
+    "negative_prompt": "text, letters, logo, watermark, UI, collage, photorealism, 3D CGI, robots, cyberpunk, unusual animals, gore, clutter, oversaturation, jitter, morphing",
+    "art_direction": "cohesive dark hand-inked graphic-novel storybook world, tactile paper/woodcut grain, near-black charcoal, deep teal, midnight navy and muted olive shadows, one deliberate warm accent per scene, strong silhouette, sparse cinematic composition, natural human or environmental subjects only, portrait 9:16"
+  },
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 4.0,
+      "narration": "My soul yearns for a soul like my own.",
+      "prompt": "A lone figure standing in twilight under an open sky, with the moon casting silvery light on their silhouette. The figure's face is turned — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_002",
+      "duration": 4.0,
+      "narration": "In this crowded world, that might be the hardest thing to find.",
+      "prompt": "A bustling city street at dusk with people walking hurriedly past each other. A lone figure stands on a small balcony overlooking the scene — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_003",
+      "duration": 4.0,
+      "narration": "Someone who carries a heart full of understanding,",
+      "prompt": "A person sitting by the light of a lantern in an old wooden cabin. Their face is partially illuminated, showing deep lines and thoughtful — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_004",
+      "duration": 4.0,
+      "narration": "and still knows what it means to feel alone.",
+      "prompt": "A solitary figure walking along a foggy path under an old tree. The path is barely visible, and the tree's branches stretch out like — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    },
+    {
+      "id": "scene_005",
+      "duration": 4.0,
+      "narration": "Someone who understands the way I love.",
+      "prompt": "A book lying open on a wooden table, its pages glowing softly in the dim light. The cover is worn and familiar, suggesting it — dark graphic-novel storybook illustration, hand-inked contour linework, visible paper and woodcut texture, deep charcoal teal and midnight navy shadows, selective amber, rust-red, or ember-orange focal light, cinematic vertical 9:16 composition, text-free artwork",
+      "motion": "slow_push_in"
+    }
+  ],
+  "model": "qwen2.5:7b",
+  "source_number": 98,
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "language": "en",
+  "content_type": "poetry"
+}

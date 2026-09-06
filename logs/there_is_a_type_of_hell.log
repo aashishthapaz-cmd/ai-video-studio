@@ -1,0 +1,5 @@
+ERROR: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>
+ComfyUI generated scene_001
+ComfyUI generated scene_002
+ComfyUI generated scene_003
+{"output": "D:\\Auto video Generator\\Output\\There Is A Type Of Hell.mp4", "project_output": "D:\\Auto video Generator\\runtime\\jobs\\there_is_a_type_of_hell\\final_voxcpm_match.mp4", "scenes": 3, "caption_visible": true, "renderer": "Nepali TTS reference system"}

@@ -1,0 +1,52 @@
+{
+  "title": "You Deserve To Be Loved",
+  "language": "en",
+  "content_type": "poetry",
+  "caption_style": "english_exact_source",
+  "use_i2v": false,
+  "bypass_i2v": true,
+  "reference_25d_parallax": true,
+  "source_number": 72,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "duration": 5,
+      "narration": "And when you teach yourself that you deserve to be loved,",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "And when you teach yourself that you deserve to be loved,"
+    },
+    {
+      "id": "scene_002",
+      "duration": 5,
+      "narration": "without having to beg for that love, without having to chase that love,",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "without having to beg for that love, without having to chase that love,"
+    },
+    {
+      "id": "scene_003",
+      "duration": 5,
+      "narration": "you open yourself to the kind of beauty that chooses you just as freely as you choose it.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "you open yourself to the kind of beauty that chooses you just as freely as you choose it."
+    },
+    {
+      "id": "scene_004",
+      "duration": 5,
+      "narration": "You open yourself to the kind of people who see you and immediately know that you are a rare",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "You open yourself to the kind of people who see you and immediately know that you are a rare"
+    },
+    {
+      "id": "scene_005",
+      "duration": 5,
+      "narration": "and beautiful thing.",
+      "prompt": "",
+      "motion": "slow_push_in",
+      "image_query": "and beautiful thing."
+    }
+  ]
+}

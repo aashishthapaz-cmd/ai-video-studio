@@ -1,0 +1,312 @@
+[
+  {
+    "start": 0.0,
+    "end": 4.08,
+    "text": "If someone asked me what love feels like, I'd simply point to us.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.4,
+        "word": " If"
+      },
+      {
+        "start": 0.4,
+        "end": 0.66,
+        "word": " someone"
+      },
+      {
+        "start": 0.66,
+        "end": 0.94,
+        "word": " asked"
+      },
+      {
+        "start": 0.94,
+        "end": 1.1,
+        "word": " me"
+      },
+      {
+        "start": 1.1,
+        "end": 1.28,
+        "word": " what"
+      },
+      {
+        "start": 1.28,
+        "end": 1.48,
+        "word": " love"
+      },
+      {
+        "start": 1.48,
+        "end": 1.8,
+        "word": " feels"
+      },
+      {
+        "start": 1.8,
+        "end": 2.24,
+        "word": " like,"
+      },
+      {
+        "start": 2.78,
+        "end": 3.02,
+        "word": " I'd"
+      },
+      {
+        "start": 3.02,
+        "end": 3.28,
+        "word": " simply"
+      },
+      {
+        "start": 3.28,
+        "end": 3.58,
+        "word": " point"
+      },
+      {
+        "start": 3.58,
+        "end": 3.82,
+        "word": " to"
+      },
+      {
+        "start": 3.82,
+        "end": 4.08,
+        "word": " us."
+      }
+    ]
+  },
+  {
+    "start": 5.26,
+    "end": 7.72,
+    "text": "With you, love isn't just a feeling.",
+    "words": [
+      {
+        "start": 5.26,
+        "end": 5.56,
+        "word": " With"
+      },
+      {
+        "start": 5.56,
+        "end": 5.88,
+        "word": " you,"
+      },
+      {
+        "start": 6.4,
+        "end": 6.7,
+        "word": " love"
+      },
+      {
+        "start": 6.7,
+        "end": 7.1,
+        "word": " isn't"
+      },
+      {
+        "start": 7.1,
+        "end": 7.24,
+        "word": " just"
+      },
+      {
+        "start": 7.24,
+        "end": 7.42,
+        "word": " a"
+      },
+      {
+        "start": 7.42,
+        "end": 7.72,
+        "word": " feeling."
+      }
+    ]
+  },
+  {
+    "start": 8.68,
+    "end": 11.26,
+    "text": "It's the way time forgets to move when we're together.",
+    "words": [
+      {
+        "start": 8.68,
+        "end": 8.92,
+        "word": " It's"
+      },
+      {
+        "start": 8.92,
+        "end": 9.02,
+        "word": " the"
+      },
+      {
+        "start": 9.02,
+        "end": 9.2,
+        "word": " way"
+      },
+      {
+        "start": 9.2,
+        "end": 9.6,
+        "word": " time"
+      },
+      {
+        "start": 9.6,
+        "end": 10.1,
+        "word": " forgets"
+      },
+      {
+        "start": 10.1,
+        "end": 10.22,
+        "word": " to"
+      },
+      {
+        "start": 10.22,
+        "end": 10.5,
+        "word": " move"
+      },
+      {
+        "start": 10.5,
+        "end": 10.76,
+        "word": " when"
+      },
+      {
+        "start": 10.76,
+        "end": 10.98,
+        "word": " we're"
+      },
+      {
+        "start": 10.98,
+        "end": 11.26,
+        "word": " together."
+      }
+    ]
+  },
+  {
+    "start": 12.3,
+    "end": 15.08,
+    "text": "It's the way my heart finds its way home in your presence.",
+    "words": [
+      {
+        "start": 12.3,
+        "end": 12.5,
+        "word": " It's"
+      },
+      {
+        "start": 12.5,
+        "end": 12.62,
+        "word": " the"
+      },
+      {
+        "start": 12.62,
+        "end": 12.82,
+        "word": " way"
+      },
+      {
+        "start": 12.82,
+        "end": 13.0,
+        "word": " my"
+      },
+      {
+        "start": 13.0,
+        "end": 13.34,
+        "word": " heart"
+      },
+      {
+        "start": 13.34,
+        "end": 13.68,
+        "word": " finds"
+      },
+      {
+        "start": 13.68,
+        "end": 13.88,
+        "word": " its"
+      },
+      {
+        "start": 13.88,
+        "end": 14.1,
+        "word": " way"
+      },
+      {
+        "start": 14.1,
+        "end": 14.42,
+        "word": " home"
+      },
+      {
+        "start": 14.42,
+        "end": 14.6,
+        "word": " in"
+      },
+      {
+        "start": 14.6,
+        "end": 14.74,
+        "word": " your"
+      },
+      {
+        "start": 14.74,
+        "end": 15.08,
+        "word": " presence."
+      }
+    ]
+  },
+  {
+    "start": 16.08,
+    "end": 20.28,
+    "text": "And the way every dream I've quietly held somehow made room for you.",
+    "words": [
+      {
+        "start": 16.08,
+        "end": 16.26,
+        "word": " And"
+      },
+      {
+        "start": 16.26,
+        "end": 16.4,
+        "word": " the"
+      },
+      {
+        "start": 16.4,
+        "end": 16.58,
+        "word": " way"
+      },
+      {
+        "start": 16.58,
+        "end": 16.94,
+        "word": " every"
+      },
+      {
+        "start": 16.94,
+        "end": 17.38,
+        "word": " dream"
+      },
+      {
+        "start": 17.38,
+        "end": 17.6,
+        "word": " I've"
+      },
+      {
+        "start": 17.6,
+        "end": 18.0,
+        "word": " quietly"
+      },
+      {
+        "start": 18.0,
+        "end": 18.5,
+        "word": " held"
+      },
+      {
+        "start": 18.5,
+        "end": 19.18,
+        "word": " somehow"
+      },
+      {
+        "start": 19.18,
+        "end": 19.58,
+        "word": " made"
+      },
+      {
+        "start": 19.58,
+        "end": 19.84,
+        "word": " room"
+      },
+      {
+        "start": 19.84,
+        "end": 20.06,
+        "word": " for"
+      },
+      {
+        "start": 20.06,
+        "end": 20.28,
+        "word": " you."
+      }
+    ]
+  }
+]

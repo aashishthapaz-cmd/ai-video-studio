@@ -1,0 +1,152 @@
+[
+  {
+    "start": 0.0,
+    "end": 1.18,
+    "text": "Half of life is lost.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.18,
+        "word": " Half"
+      },
+      {
+        "start": 0.18,
+        "end": 0.34,
+        "word": " of"
+      },
+      {
+        "start": 0.34,
+        "end": 0.6,
+        "word": " life"
+      },
+      {
+        "start": 0.6,
+        "end": 0.8,
+        "word": " is"
+      },
+      {
+        "start": 0.8,
+        "end": 1.18,
+        "word": " lost."
+      }
+    ]
+  },
+  {
+    "start": 1.78,
+    "end": 2.58,
+    "text": "Charming others.",
+    "words": [
+      {
+        "start": 1.78,
+        "end": 2.32,
+        "word": " Charming"
+      },
+      {
+        "start": 2.32,
+        "end": 2.58,
+        "word": " others."
+      }
+    ]
+  },
+  {
+    "start": 3.56,
+    "end": 6.54,
+    "text": "The other half is lost in the anxieties they cause.",
+    "words": [
+      {
+        "start": 3.56,
+        "end": 3.66,
+        "word": " The"
+      },
+      {
+        "start": 3.66,
+        "end": 3.82,
+        "word": " other"
+      },
+      {
+        "start": 3.82,
+        "end": 4.1,
+        "word": " half"
+      },
+      {
+        "start": 4.1,
+        "end": 4.26,
+        "word": " is"
+      },
+      {
+        "start": 4.26,
+        "end": 4.68,
+        "word": " lost"
+      },
+      {
+        "start": 4.68,
+        "end": 5.3,
+        "word": " in"
+      },
+      {
+        "start": 5.3,
+        "end": 5.4,
+        "word": " the"
+      },
+      {
+        "start": 5.4,
+        "end": 6.0,
+        "word": " anxieties"
+      },
+      {
+        "start": 6.0,
+        "end": 6.2,
+        "word": " they"
+      },
+      {
+        "start": 6.2,
+        "end": 6.54,
+        "word": " cause."
+      }
+    ]
+  },
+  {
+    "start": 7.4,
+    "end": 8.22,
+    "text": "Leave this play.",
+    "words": [
+      {
+        "start": 7.4,
+        "end": 7.62,
+        "word": " Leave"
+      },
+      {
+        "start": 7.62,
+        "end": 7.88,
+        "word": " this"
+      },
+      {
+        "start": 7.88,
+        "end": 8.22,
+        "word": " play."
+      }
+    ]
+  },
+  {
+    "start": 9.46,
+    "end": 10.44,
+    "text": "You've played enough.",
+    "words": [
+      {
+        "start": 9.46,
+        "end": 9.86,
+        "word": " You've"
+      },
+      {
+        "start": 9.86,
+        "end": 10.1,
+        "word": " played"
+      },
+      {
+        "start": 10.1,
+        "end": 10.44,
+        "word": " enough."
+      }
+    ]
+  }
+]

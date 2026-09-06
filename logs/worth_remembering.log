@@ -1,0 +1,13 @@
+ERROR: Voice generation failed: 8%|8         | 29/346 [00:08<01:42,  3.10it/s]
+  9%|8         | 30/346 [00:08<01:35,  3.30it/s]
+  9%|8         | 31/346 [00:08<01:25,  3.69it/s]
+  9%|9         | 32/346 [00:08<01:19,  3.96it/s]
+ 10%|9         | 33/346 [00:09<01:14,  4.22it/s]
+ 10%|9         | 34/346 [00:09<01:10,  4.44it/s]
+ComfyUI generated scene_001
+ComfyUI generated scene_002
+ComfyUI generated scene_003
+ComfyUI generated scene_004
+ComfyUI generated scene_005
+ComfyUI generated scene_006
+{"output": "D:\\Auto video Generator\\Output\\Worth Remembering.mp4", "project_output": "D:\\Auto video Generator\\runtime\\jobs\\worth_remembering\\final_voxcpm_match.mp4", "scenes": 6, "caption_visible": true, "renderer": "Nepali TTS reference system"}

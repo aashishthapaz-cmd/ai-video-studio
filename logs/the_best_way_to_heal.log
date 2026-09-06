@@ -1,0 +1,30 @@
+ComfyUI generated scene_001
+ComfyUI generated scene_002
+ComfyUI generated scene_003
+ComfyUI generated scene_004
+ComfyUI generated scene_005
+ComfyUI generated scene_006
+{"output": "D:\\Auto video Generator\\Output\\The Best Way To Heal.mp4", "project_output": "D:\\Auto video Generator\\projects\\the_best_way_to_heal\\final_voxcpm_match.mp4", "scenes": 6, "caption_visible": true, "renderer": "Nepali TTS reference system"}
+ComfyUI generated scene_001
+ComfyUI generated scene_002
+ComfyUI generated scene_003
+ComfyUI generated scene_004
+ComfyUI generated scene_005
+ComfyUI generated scene_006
+{"output": "D:\\Auto video Generator\\Output\\The Best Way To Heal.mp4", "project_output": "D:\\Auto video Generator\\runtime\\the_best_way_to_heal\\final_voxcpm_match.mp4", "scenes": 6, "caption_visible": true, "renderer": "Nepali TTS reference system"}
+ComfyUI generated scene_001
+ComfyUI generated scene_002
+ComfyUI generated scene_003
+ComfyUI generated scene_004
+ComfyUI generated scene_005
+ComfyUI generated scene_006
+{"output": "D:\\Auto video Generator\\Output\\The Best Way To Heal.mp4", "project_output": "D:\\Auto video Generator\\runtime\\jobs\\the_best_way_to_heal\\final_voxcpm_match.mp4", "scenes": 6, "caption_visible": true, "renderer": "Nepali TTS reference system"}
+ERROR: Voice generation failed: Loading model from safetensors: D:\VoxCPM Content Factory\models\VoxCPM2\model.safetensors
+ERROR: Voice generation failed: Loading model from safetensors: D:\VoxCPM Content Factory\models\VoxCPM2\model.safetensors
+ComfyUI generated scene_001
+ComfyUI generated scene_002
+ComfyUI generated scene_003
+ComfyUI generated scene_004
+ComfyUI generated scene_005
+ComfyUI generated scene_006
+{"output": "D:\\Auto video Generator\\Output\\The Best Way To Heal.mp4", "project_output": "D:\\Auto video Generator\\runtime\\jobs\\the_best_way_to_heal\\final_voxcpm_match.mp4", "scenes": 6, "caption_visible": true, "renderer": "Nepali TTS reference system"}

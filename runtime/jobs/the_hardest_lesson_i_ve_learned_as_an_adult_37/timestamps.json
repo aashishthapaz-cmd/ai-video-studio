@@ -1,0 +1,315 @@
+[
+  {
+    "start": 0.0,
+    "end": 5.7,
+    "text": "The hardest lesson I've learned as an adult is that life doesn't stop even when you're hurt.",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.14,
+        "word": " The"
+      },
+      {
+        "start": 0.14,
+        "end": 0.4,
+        "word": " hardest"
+      },
+      {
+        "start": 0.4,
+        "end": 0.86,
+        "word": " lesson"
+      },
+      {
+        "start": 0.86,
+        "end": 1.1,
+        "word": " I've"
+      },
+      {
+        "start": 1.1,
+        "end": 1.36,
+        "word": " learned"
+      },
+      {
+        "start": 1.36,
+        "end": 1.54,
+        "word": " as"
+      },
+      {
+        "start": 1.54,
+        "end": 1.68,
+        "word": " an"
+      },
+      {
+        "start": 1.68,
+        "end": 1.98,
+        "word": " adult"
+      },
+      {
+        "start": 1.98,
+        "end": 2.76,
+        "word": " is"
+      },
+      {
+        "start": 2.76,
+        "end": 2.94,
+        "word": " that"
+      },
+      {
+        "start": 2.94,
+        "end": 3.2,
+        "word": " life"
+      },
+      {
+        "start": 3.2,
+        "end": 3.6,
+        "word": " doesn't"
+      },
+      {
+        "start": 3.6,
+        "end": 3.98,
+        "word": " stop"
+      },
+      {
+        "start": 3.98,
+        "end": 4.96,
+        "word": " even"
+      },
+      {
+        "start": 4.96,
+        "end": 5.18,
+        "word": " when"
+      },
+      {
+        "start": 5.18,
+        "end": 5.4,
+        "word": " you're"
+      },
+      {
+        "start": 5.4,
+        "end": 5.7,
+        "word": " hurt."
+      }
+    ]
+  },
+  {
+    "start": 7.08,
+    "end": 11.68,
+    "text": "No matter the pain, exhaustion or loss, you still have to push through.",
+    "words": [
+      {
+        "start": 7.08,
+        "end": 7.32,
+        "word": " No"
+      },
+      {
+        "start": 7.32,
+        "end": 7.52,
+        "word": " matter"
+      },
+      {
+        "start": 7.52,
+        "end": 7.68,
+        "word": " the"
+      },
+      {
+        "start": 7.68,
+        "end": 8.06,
+        "word": " pain,"
+      },
+      {
+        "start": 8.62,
+        "end": 9.02,
+        "word": " exhaustion"
+      },
+      {
+        "start": 9.02,
+        "end": 9.5,
+        "word": " or"
+      },
+      {
+        "start": 9.5,
+        "end": 9.92,
+        "word": " loss,"
+      },
+      {
+        "start": 10.42,
+        "end": 10.6,
+        "word": " you"
+      },
+      {
+        "start": 10.6,
+        "end": 10.86,
+        "word": " still"
+      },
+      {
+        "start": 10.86,
+        "end": 11.04,
+        "word": " have"
+      },
+      {
+        "start": 11.04,
+        "end": 11.16,
+        "word": " to"
+      },
+      {
+        "start": 11.16,
+        "end": 11.42,
+        "word": " push"
+      },
+      {
+        "start": 11.42,
+        "end": 11.68,
+        "word": " through."
+      }
+    ]
+  },
+  {
+    "start": 12.78,
+    "end": 18.22,
+    "text": "We grow up expecting happy endings, but find ourselves pretending to be okay instead.",
+    "words": [
+      {
+        "start": 12.78,
+        "end": 13.04,
+        "word": " We"
+      },
+      {
+        "start": 13.04,
+        "end": 13.26,
+        "word": " grow"
+      },
+      {
+        "start": 13.26,
+        "end": 13.54,
+        "word": " up"
+      },
+      {
+        "start": 13.54,
+        "end": 14.0,
+        "word": " expecting"
+      },
+      {
+        "start": 14.0,
+        "end": 14.46,
+        "word": " happy"
+      },
+      {
+        "start": 14.46,
+        "end": 14.92,
+        "word": " endings,"
+      },
+      {
+        "start": 15.68,
+        "end": 15.92,
+        "word": " but"
+      },
+      {
+        "start": 15.92,
+        "end": 16.16,
+        "word": " find"
+      },
+      {
+        "start": 16.16,
+        "end": 16.6,
+        "word": " ourselves"
+      },
+      {
+        "start": 16.6,
+        "end": 17.12,
+        "word": " pretending"
+      },
+      {
+        "start": 17.12,
+        "end": 17.4,
+        "word": " to"
+      },
+      {
+        "start": 17.4,
+        "end": 17.56,
+        "word": " be"
+      },
+      {
+        "start": 17.56,
+        "end": 17.82,
+        "word": " okay"
+      },
+      {
+        "start": 17.82,
+        "end": 18.22,
+        "word": " instead."
+      }
+    ]
+  },
+  {
+    "start": 19.38,
+    "end": 23.5,
+    "text": "Yet through it all, we find a strength we never knew we had.",
+    "words": [
+      {
+        "start": 19.38,
+        "end": 19.82,
+        "word": " Yet"
+      },
+      {
+        "start": 19.82,
+        "end": 20.08,
+        "word": " through"
+      },
+      {
+        "start": 20.08,
+        "end": 20.24,
+        "word": " it"
+      },
+      {
+        "start": 20.24,
+        "end": 20.48,
+        "word": " all,"
+      },
+      {
+        "start": 21.22,
+        "end": 21.4,
+        "word": " we"
+      },
+      {
+        "start": 21.4,
+        "end": 21.68,
+        "word": " find"
+      },
+      {
+        "start": 21.68,
+        "end": 21.8,
+        "word": " a"
+      },
+      {
+        "start": 21.8,
+        "end": 22.16,
+        "word": " strength"
+      },
+      {
+        "start": 22.16,
+        "end": 22.4,
+        "word": " we"
+      },
+      {
+        "start": 22.4,
+        "end": 22.74,
+        "word": " never"
+      },
+      {
+        "start": 22.74,
+        "end": 23.04,
+        "word": " knew"
+      },
+      {
+        "start": 23.04,
+        "end": 23.22,
+        "word": " we"
+      },
+      {
+        "start": 23.22,
+        "end": 23.5,
+        "word": " had."
+      }
+    ]
+  }
+]

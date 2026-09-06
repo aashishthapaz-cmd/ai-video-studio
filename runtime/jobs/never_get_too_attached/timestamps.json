@@ -1,0 +1,244 @@
+[
+  {
+    "start": 0.0,
+    "end": 3.52,
+    "text": "Never get too attached to anyone who doesn't feel the same about you,",
+    "words": [
+      {
+        "start": 0.0,
+        "end": 0.22,
+        "word": " Never"
+      },
+      {
+        "start": 0.22,
+        "end": 0.5,
+        "word": " get"
+      },
+      {
+        "start": 0.5,
+        "end": 0.72,
+        "word": " too"
+      },
+      {
+        "start": 0.72,
+        "end": 1.06,
+        "word": " attached"
+      },
+      {
+        "start": 1.06,
+        "end": 1.42,
+        "word": " to"
+      },
+      {
+        "start": 1.42,
+        "end": 1.78,
+        "word": " anyone"
+      },
+      {
+        "start": 1.78,
+        "end": 2.0,
+        "word": " who"
+      },
+      {
+        "start": 2.0,
+        "end": 2.32,
+        "word": " doesn't"
+      },
+      {
+        "start": 2.32,
+        "end": 2.5,
+        "word": " feel"
+      },
+      {
+        "start": 2.5,
+        "end": 2.68,
+        "word": " the"
+      },
+      {
+        "start": 2.68,
+        "end": 2.94,
+        "word": " same"
+      },
+      {
+        "start": 2.94,
+        "end": 3.16,
+        "word": " about"
+      },
+      {
+        "start": 3.16,
+        "end": 3.52,
+        "word": " you,"
+      }
+    ]
+  },
+  {
+    "start": 4.520000000000002,
+    "end": 8.16,
+    "text": "because one-sided expectations can quietly destroy you.",
+    "words": [
+      {
+        "start": 4.520000000000002,
+        "end": 5.12,
+        "word": " because"
+      },
+      {
+        "start": 5.12,
+        "end": 5.38,
+        "word": " one"
+      },
+      {
+        "start": 5.38,
+        "end": 5.72,
+        "word": "-sided"
+      },
+      {
+        "start": 5.72,
+        "end": 6.46,
+        "word": " expectations"
+      },
+      {
+        "start": 6.46,
+        "end": 6.88,
+        "word": " can"
+      },
+      {
+        "start": 6.88,
+        "end": 7.32,
+        "word": " quietly"
+      },
+      {
+        "start": 7.32,
+        "end": 7.84,
+        "word": " destroy"
+      },
+      {
+        "start": 7.84,
+        "end": 8.16,
+        "word": " you."
+      }
+    ]
+  },
+  {
+    "start": 9.3,
+    "end": 11.02,
+    "text": "Some people become your whole world,",
+    "words": [
+      {
+        "start": 9.3,
+        "end": 9.54,
+        "word": " Some"
+      },
+      {
+        "start": 9.54,
+        "end": 9.8,
+        "word": " people"
+      },
+      {
+        "start": 9.8,
+        "end": 10.12,
+        "word": " become"
+      },
+      {
+        "start": 10.12,
+        "end": 10.32,
+        "word": " your"
+      },
+      {
+        "start": 10.32,
+        "end": 10.56,
+        "word": " whole"
+      },
+      {
+        "start": 10.56,
+        "end": 11.02,
+        "word": " world,"
+      }
+    ]
+  },
+  {
+    "start": 11.14,
+    "end": 13.44,
+    "text": "while you remain just a chapter in theirs.",
+    "words": [
+      {
+        "start": 11.14,
+        "end": 11.78,
+        "word": " while"
+      },
+      {
+        "start": 11.78,
+        "end": 11.92,
+        "word": " you"
+      },
+      {
+        "start": 11.92,
+        "end": 12.22,
+        "word": " remain"
+      },
+      {
+        "start": 12.22,
+        "end": 12.48,
+        "word": " just"
+      },
+      {
+        "start": 12.48,
+        "end": 12.66,
+        "word": " a"
+      },
+      {
+        "start": 12.66,
+        "end": 12.96,
+        "word": " chapter"
+      },
+      {
+        "start": 12.96,
+        "end": 13.18,
+        "word": " in"
+      },
+      {
+        "start": 13.18,
+        "end": 13.44,
+        "word": " theirs."
+      }
+    ]
+  },
+  {
+    "start": 14.56,
+    "end": 15.54,
+    "text": "So choose wisely.",
+    "words": [
+      {
+        "start": 14.56,
+        "end": 14.82,
+        "word": " So"
+      },
+      {
+        "start": 14.82,
+        "end": 15.1,
+        "word": " choose"
+      },
+      {
+        "start": 15.1,
+        "end": 15.54,
+        "word": " wisely."
+      }
+    ]
+  },
+  {
+    "start": 16.74,
+    "end": 17.28,
+    "text": "Choose yourself.",
+    "words": [
+      {
+        "start": 16.74,
+        "end": 16.84,
+        "word": " Choose"
+      },
+      {
+        "start": 16.84,
+        "end": 17.28,
+        "word": " yourself."
+      }
+    ]
+  }
+]
