@@ -13,17 +13,14 @@
       --bg: #07090e;
       --card-bg: rgba(18, 22, 34, 0.75);
       --card-border: rgba(255, 255, 255, 0.08);
-      --card-hover: rgba(255, 255, 255, 0.14);
       --primary: #6366f1;
       --primary-glow: rgba(99, 102, 241, 0.4);
       --accent-cyan: #06b6d4;
       --accent-green: #10b981;
-      --accent-emerald: #059669;
       --accent-gold: #f59e0b;
       --danger: #ef4444;
       --fb-blue: #1877f2;
       --tg-blue: #229ed9;
-      --wa-green: #25d366;
       --text: #f1f5f9;
       --text-dim: #94a3b8;
       --text-muted: #64748b;
@@ -41,7 +38,7 @@
     }
     header {
       padding: 1.1rem 2rem;
-      background: rgba(11, 15, 25, 0.88);
+      background: rgba(11, 15, 25, 0.9);
       backdrop-filter: blur(18px);
       border-bottom: 1px solid var(--card-border);
       display: flex;
@@ -275,19 +272,6 @@
     .item-info h4 { font-size: 0.95rem; margin-bottom: 0.25rem; font-weight: 700; color: #fff; }
     .item-info p { font-size: 0.8rem; color: var(--text-dim); }
 
-    .console-box {
-      background: #04060a;
-      border: 1px solid var(--card-border);
-      border-radius: 10px;
-      padding: 1rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.82rem;
-      color: #38bdf8;
-      max-height: 240px;
-      overflow-y: auto;
-      line-height: 1.6;
-    }
-
     .toast {
       position: fixed;
       bottom: 2rem;
@@ -311,7 +295,7 @@
     <div class="logo">
       <div class="logo-icon">🎬</div>
       <div>
-        <span>AUTONOMOUS VIDEO STUDIO <small style="font-size: 0.65rem; background: rgba(99,102,241,0.25); color: #c7d2fe; padding: 2px 7px; border-radius: 6px; border: 1px solid rgba(99,102,241,0.4);">v2.5 Full Hub</small></span>
+        <span>AUTONOMOUS VIDEO STUDIO <small style="font-size: 0.65rem; background: rgba(99,102,241,0.25); color: #c7d2fe; padding: 2px 7px; border-radius: 6px; border: 1px solid rgba(99,102,241,0.4);">v2.5 Live</small></span>
         <div style="font-size: 0.72rem; color: var(--text-muted); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; letter-spacing: normal;">24/7 Cloud Factory • Bots Hub • Auto-Poster</div>
       </div>
     </div>
@@ -328,12 +312,12 @@
 
   <!-- NAVIGATION TABS -->
   <nav class="nav-tabs">
-    <button class="tab-btn active" onclick="switchTab('single')">🎥 Single Studio</button>
-    <button class="tab-btn" onclick="switchTab('bulk')">📝 Bulk Scheduler & Queue</button>
-    <button class="tab-btn" onclick="switchTab('fb')">📱 Facebook Pages Hub</button>
-    <button class="tab-btn" onclick="switchTab('bots')">🔔 Telegram & WhatsApp (Bots)</button>
-    <button class="tab-btn" onclick="switchTab('gallery')">🎬 Cloud Gallery & Runs</button>
-    <button class="tab-btn" onclick="switchTab('settings')">⚙️ GitHub Actions & Secrets</button>
+    <button class="tab-btn active" id="btn-single" onclick="switchTab('single', this)">🎥 Single Studio</button>
+    <button class="tab-btn" id="btn-bulk" onclick="switchTab('bulk', this)">📝 Bulk Scheduler & Queue</button>
+    <button class="tab-btn" id="btn-fb" onclick="switchTab('fb', this)">📱 Facebook Pages Hub</button>
+    <button class="tab-btn" id="btn-bots" onclick="switchTab('bots', this)">🔔 Telegram & WhatsApp (Bots)</button>
+    <button class="tab-btn" id="btn-gallery" onclick="switchTab('gallery', this)">🎬 Cloud Gallery & Runs</button>
+    <button class="tab-btn" id="btn-settings" onclick="switchTab('settings', this)">⚙️ GitHub Actions & Secrets</button>
   </nav>
 
   <main>
@@ -402,11 +386,7 @@ And I'll always admire you for that.</textarea>
           <span class="badge badge-completed">Smart Numbered Parser Active</span>
         </div>
         <p class="card-desc">
-          Paste multiple poems in your numbered format (e.g. <code>1. Title 
- Lines ... 
-
- 2. Title 
- Lines ...</code>) or separated by <code>---</code>. Titles and verses are automatically parsed and scheduled into separate slots!
+          Paste multiple poems in your numbered format (e.g. <code>1. Title \n Lines ... \n\n 2. Title \n Lines ...</code>) or separated by <code>---</code>. Titles and verses are automatically parsed and scheduled into separate slots!
         </p>
 
         <div class="form-group">
@@ -583,7 +563,7 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
           <span class="badge badge-completed">Private & Encrypted in Browser</span>
         </div>
         <p class="card-desc">
-          Your GitHub PAT allows this web hub to dispatch workflow runs, monitor video generations, and sync your bulk queue 24/7 without exposing secrets publicly.
+          Your GitHub Classic Token allows this web hub to dispatch workflow runs, monitor video generations, and sync your bulk queue 24/7 without exposing secrets publicly.
         </p>
 
         <div class="grid-2">
@@ -593,10 +573,7 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
           </div>
           <div class="form-group">
             <label>GitHub Personal Access Token (PAT)</label>
-            <input type="password" id="ghToken" placeholder="ghp_... (Classic Token Recommended)">
-            <div style="margin-top: 6px; font-size: 0.75rem; color: var(--accent-cyan);">
-              👉 <strong>Recommended (30 seconds):</strong> <a href="https://github.com/settings/tokens/new?scopes=repo,workflow&description=AI_Video_Studio_Automation" target="_blank" style="color: #38bdf8; text-decoration: underline; font-weight: 700;">Click here to generate a 1-Click Classic Token (repo & workflow pre-selected)</a>
-            </div>
+            <input type="password" id="ghToken" placeholder="ghp_... (Classic Token Active)">
           </div>
         </div>
 
@@ -606,15 +583,11 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
         </div>
 
         <div style="margin-top: 1.5rem; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 10px; border: 1px solid var(--card-border);">
-          <div style="font-weight: 700; font-size: 0.85rem; color: #c7d2fe; margin-bottom: 0.5rem;">🔒 Required GitHub Repository Secrets:</div>
-          <p style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.5;">
-            Make sure the following secrets are added in your GitHub repository (<a href="https://github.com/aashishthapaz-cmd/ai-video-studio/settings/secrets/actions" target="_blank" style="color: var(--primary);">Settings -> Secrets and variables -> Actions</a>):
-          </p>
+          <div style="font-weight: 700; font-size: 0.85rem; color: #c7d2fe; margin-bottom: 0.5rem;">🔒 Encrypted Repository Secrets Configured:</div>
           <ul style="margin-left: 1.25rem; font-size: 0.8rem; color: var(--text-dim); margin-top: 0.4rem; line-height: 1.6;">
-            <li><code>TELEGRAM_BOT_TOKEN</code>: <code>8886670511:AAFeNxbL5TxpTiWqF_fukB-MeaS4s9OlMqU</code></li>
-            <li><code>TELEGRAM_CHAT_ID</code>: <code>6402294953</code></li>
-            <li><code>FACEBOOK_PAGES_JSON</code>: JSON array of your configured Facebook Pages and tokens</li>
-            <li><code>HF_TOKEN</code>: Hugging Face API token (Optional for cloud Flux generation)</li>
+            <li>✅ <code>TELEGRAM_BOT_TOKEN</code>: Encrypted & Active in GitHub Secrets</li>
+            <li>✅ <code>TELEGRAM_CHAT_ID</code>: Encrypted & Active in GitHub Secrets</li>
+            <li>✅ <code>FACEBOOK_PAGES_JSON</code>: Configured for 24/7 Publishing</li>
           </ul>
         </div>
       </div>
@@ -625,11 +598,19 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
 
   <script>
     const DEFAULT_REPO = 'aashishthapaz-cmd/ai-video-studio';
-    let QUEUE = JSON.parse(localStorage.getItem('video_queue') || '[]');
-    let FB_PAGES = JSON.parse(localStorage.getItem('fb_pages') || '[]');
+    let QUEUE = [];
+    let FB_PAGES = [];
 
-    // Initialize saved settings on page load
-    window.addEventListener('DOMContentLoaded', () => {
+    try {
+      QUEUE = JSON.parse(localStorage.getItem('video_queue') || '[]');
+    } catch(e) { QUEUE = []; }
+
+    try {
+      FB_PAGES = JSON.parse(localStorage.getItem('fb_pages') || '[]');
+    } catch(e) { FB_PAGES = []; }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', function() {
       const savedPat = localStorage.getItem('gh_pat') || '';
       const savedRepo = localStorage.getItem('gh_repo') || DEFAULT_REPO;
       const savedTgToken = localStorage.getItem('tg_token') || '8886670511:AAFeNxbL5TxpTiWqF_fukB-MeaS4s9OlMqU';
@@ -649,12 +630,24 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       renderFbPages();
     });
 
-    function switchTab(tabId) {
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    function switchTab(tabId, btnElement) {
+      const allButtons = document.querySelectorAll('.tab-btn');
+      const allPanels = document.querySelectorAll('.panel');
+
+      allButtons.forEach(function(b) { b.classList.remove('active'); });
+      allPanels.forEach(function(p) { p.classList.remove('active'); });
+
       const targetPanel = document.getElementById('tab-' + tabId);
-      if (targetPanel) targetPanel.classList.add('active');
-      if (event && event.target) event.target.closest('.tab-btn').classList.add('active');
+      if (targetPanel) {
+        targetPanel.classList.add('active');
+      }
+
+      if (btnElement) {
+        btnElement.classList.add('active');
+      } else {
+        const matchingBtn = document.getElementById('btn-' + tabId);
+        if (matchingBtn) matchingBtn.classList.add('active');
+      }
 
       if (tabId === 'bulk') renderQueue();
       if (tabId === 'fb') renderFbPages();
@@ -663,9 +656,10 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
 
     function showToast(msg) {
       const t = document.getElementById('toast');
+      if (!t) return;
       t.innerText = msg;
       t.style.display = 'block';
-      setTimeout(() => { t.style.display = 'none'; }, 4500);
+      setTimeout(function() { t.style.display = 'none'; }, 4500);
     }
 
     // Single Cloud Render Dispatch
@@ -675,7 +669,10 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       const vibe = document.getElementById('singleVibe').value;
       const autoPub = document.getElementById('singleAutoPublish').value === 'true';
 
-      if (!script) return alert('Please enter poem or script text.');
+      if (!script) {
+        alert('Please enter poem or script text.');
+        return;
+      }
 
       showToast('🚀 Dispatching single render job to GitHub Actions...');
 
@@ -688,44 +685,48 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
 
       if (success) {
         showToast('✅ Job launched on GitHub Actions! Check "Cloud Gallery" in ~2 mins.');
-        setTimeout(() => switchTab('gallery'), 1500);
+        setTimeout(function() { switchTab('gallery'); }, 1500);
       }
     }
 
-    // Parse Numbered Bulk Poems
+    // Safe Parse Numbered Bulk Poems
     function scheduleBulkPosts() {
       const raw = document.getElementById('bulkText').value.trim();
-      if (!raw) return alert('Please paste at least one poem or script.');
+      if (!raw) {
+        alert('Please paste at least one poem or script.');
+        return;
+      }
 
       const interval = parseInt(document.getElementById('bulkInterval').value, 10);
       const defaultVibe = document.getElementById('defaultVibe').value;
       
       let chunks = [];
-      if (/(?:^|
-)\s*\d+[\.\)]\s+/i.test(raw)) {
-        chunks = raw.split(/(?=(?:^|
-)\s*\d+[\.\)]\s+)/gi);
-      } else if (/\n\s*(?:---+|===+|###+)\s*\n/.test(raw)) {
-        chunks = raw.split(/\n\s*(?:---+|===+|###+)\s*\n/gi);
+      const numPattern = new RegExp('(?:^|\\n)\\s*\\d+[\\.\\)]\\s+', 'i');
+      const sepPattern = new RegExp('\\n\\s*(?:---+|===+|###+)\\s*\\n');
+
+      if (numPattern.test(raw)) {
+        chunks = raw.split(new RegExp('(?=(?:^|\\n)\\s*\\d+[\\.\\)]\\s+)', 'gi'));
+      } else if (sepPattern.test(raw)) {
+        chunks = raw.split(new RegExp('\\n\\s*(?:---+|===+|###+)\\s*\\n', 'gi'));
       } else {
-        chunks = raw.split(/\n\s*\n+/g);
+        chunks = raw.split(new RegExp('\\n\\s*\\n+', 'g'));
       }
 
       let currTime = new Date();
       currTime.setMinutes(currTime.getMinutes() + 10);
 
       let count = 0;
-      chunks.forEach(chunk => {
+      chunks.forEach(function(chunk) {
         const text = chunk.trim();
         if (!text) return;
 
         let title = '';
         let vibe = defaultVibe;
-        let lines = text.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+        let lines = text.split('\n').map(function(l) { return l.trim(); }).filter(function(l) { return l.length > 0; });
         if (!lines.length) return;
 
         let firstLine = lines[0];
-        let match = firstLine.match(/^(?:#?\d+[\.\)\-:]\s*|title:\s*)(.*)$/i);
+        let match = firstLine.match(new RegExp('^(?:#?\\d+[\\.\\)\\-:]\\s*|title:\\s*)(.*)$', 'i'));
         let bodyLines = [];
 
         if (match && lines.length > 1) {
@@ -736,10 +737,11 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
         }
 
         let scriptLines = [];
-        bodyLines.forEach(line => {
-          if (line.toLowerCase().startsWith('title:')) {
+        bodyLines.forEach(function(line) {
+          const lower = line.toLowerCase();
+          if (lower.startsWith('title:')) {
             title = line.substring(6).trim();
-          } else if (line.toLowerCase().startsWith('vibe:') || line.toLowerCase().startsWith('theme:')) {
+          } else if (lower.startsWith('vibe:') || lower.startsWith('theme:')) {
             vibe = line.substring(5).trim();
           } else {
             scriptLines.push(line);
@@ -768,34 +770,37 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
 
       localStorage.setItem('video_queue', JSON.stringify(QUEUE));
       renderQueue();
-      showToast(`✨ Successfully parsed & added ${count} poems to the schedule!`);
+      showToast('✨ Successfully parsed & added ' + count + ' poems to the schedule!');
     }
 
     function renderQueue() {
       const container = document.getElementById('queueList');
       const countEl = document.getElementById('queueCount');
       if (countEl) countEl.innerText = QUEUE.length;
+      if (!container) return;
 
       if (!QUEUE.length) {
         container.innerHTML = '<p style="color: var(--text-muted); font-size: 0.9rem;">No scheduled posts yet. Paste scripts above to populate.</p>';
         return;
       }
 
-      container.innerHTML = QUEUE.map((item, index) => `
-        <div class="item-card">
-          <div class="item-info" style="max-width: 70%;">
-            <h4>${index + 1}. ${escapeHtml(item.title)}</h4>
-            <p><strong>Scheduled:</strong> ${item.scheduled_time} | <strong>Vibe:</strong> ${escapeHtml(item.vibe)}</p>
-            <p style="margin-top: 4px; color: var(--text-muted); font-size: 0.75rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-              ${escapeHtml(item.script_text.replace(/\n/g, ' • '))}
-            </p>
+      container.innerHTML = QUEUE.map(function(item, index) {
+        return `
+          <div class="item-card">
+            <div class="item-info" style="max-width: 70%;">
+              <h4>${index + 1}. ${escapeHtml(item.title)}</h4>
+              <p><strong>Scheduled:</strong> ${item.scheduled_time} | <strong>Vibe:</strong> ${escapeHtml(item.vibe)}</p>
+              <p style="margin-top: 4px; color: var(--text-muted); font-size: 0.75rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                ${escapeHtml(item.script_text.replace(/\n/g, ' • '))}
+              </p>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="badge ${item.status === 'COMPLETED' ? 'badge-completed' : 'badge-pending'}">${item.status}</span>
+              <button class="btn btn-sm btn-secondary" onclick="removeQueueItem(${index})">❌</button>
+            </div>
           </div>
-          <div style="display: flex; align-items: center; gap: 8px;">
-            <span class="badge ${item.status === 'COMPLETED' ? 'badge-completed' : 'badge-pending'}">${item.status}</span>
-            <button class="btn btn-sm btn-secondary" onclick="removeQueueItem(${index})">❌</button>
-          </div>
-        </div>
-      `).join('');
+        `;
+      }).join('');
     }
 
     function removeQueueItem(index) {
@@ -817,20 +822,20 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       const token = document.getElementById('tgToken').value.trim();
       const chatId = document.getElementById('tgChat').value.trim();
 
-      if (!token || !chatId) return alert('Please provide Telegram Bot Token and Chat ID.');
+      if (!token || !chatId) {
+        alert('Please provide Telegram Bot Token and Chat ID.');
+        return;
+      }
 
       showToast('✈️ Sending test message to Telegram...');
 
       try {
-        const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        const res = await fetch('https://api.telegram.org/bot' + token + '/sendMessage', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             chat_id: chatId,
-            text: '🎬 *AI Autonomous Video Studio: Mobile Alert Test*
-
-✅ Bot connection verified!
-Your scheduled videos and Facebook publication updates will arrive here 🚀',
+            text: '🎬 *AI Autonomous Video Studio: Mobile Alert Test*\n\n✅ Bot connection verified!\nYour scheduled videos and Facebook publication updates will arrive here 🚀',
             parse_mode: 'Markdown'
           })
         });
@@ -851,9 +856,12 @@ Your scheduled videos and Facebook publication updates will arrive here 🚀',
       const id = document.getElementById('fbPageId').value.trim();
       const token = document.getElementById('fbPageToken').value.trim();
 
-      if (!name || !id || !token) return alert('Please fill in Page Name, Page ID, and Token.');
+      if (!name || !id || !token) {
+        alert('Please fill in Page Name, Page ID, and Token.');
+        return;
+      }
 
-      FB_PAGES.push({ name, id, token, created_at: new Date().toISOString() });
+      FB_PAGES.push({ name: name, id: id, token: token, created_at: new Date().toISOString() });
       localStorage.setItem('fb_pages', JSON.stringify(FB_PAGES));
       renderFbPages();
 
@@ -861,21 +869,24 @@ Your scheduled videos and Facebook publication updates will arrive here 🚀',
       document.getElementById('fbPageId').value = '';
       document.getElementById('fbPageToken').value = '';
 
-      showToast(`📱 Added Facebook Page: ${name}`);
+      showToast('📱 Added Facebook Page: ' + name);
     }
 
     async function testFbToken() {
       const token = document.getElementById('fbPageToken').value.trim();
-      if (!token) return alert('Please enter a Facebook Page Access Token to test.');
+      if (!token) {
+        alert('Please enter a Facebook Page Access Token to test.');
+        return;
+      }
 
       showToast('🔍 Validating token with Graph API...');
       try {
-        const res = await fetch(`https://graph.facebook.com/v19.0/me?access_token=${token}`);
+        const res = await fetch('https://graph.facebook.com/v19.0/me?access_token=' + token);
         const data = await res.json();
         if (data.id) {
-          alert(`✅ Valid Token for Page: ${data.name} (ID: ${data.id})`);
+          alert('✅ Valid Token for Page: ' + data.name + ' (ID: ' + data.id + ')');
         } else {
-          alert(`❌ Token Error: ${data.error ? data.error.message : 'Invalid Token'}`);
+          alert('❌ Token Error: ' + (data.error ? data.error.message : 'Invalid Token'));
         }
       } catch (err) {
         alert('Graph API request error: ' + err.message);
@@ -891,15 +902,17 @@ Your scheduled videos and Facebook publication updates will arrive here 🚀',
         return;
       }
 
-      container.innerHTML = FB_PAGES.map((p, idx) => `
-        <div class="item-card">
-          <div class="item-info">
-            <h4>📘 ${escapeHtml(p.name)}</h4>
-            <p><strong>Page ID:</strong> ${escapeHtml(p.id)} | <strong>Token:</strong> ${escapeHtml(p.token.substring(0, 10))}••••••••</p>
+      container.innerHTML = FB_PAGES.map(function(p, idx) {
+        return `
+          <div class="item-card">
+            <div class="item-info">
+              <h4>📘 ${escapeHtml(p.name)}</h4>
+              <p><strong>Page ID:</strong> ${escapeHtml(p.id)} | <strong>Token:</strong> ${escapeHtml(p.token.substring(0, 10))}••••••••</p>
+            </div>
+            <button class="btn btn-sm btn-secondary" onclick="removeFbPage(${idx})">❌ Remove</button>
           </div>
-          <button class="btn btn-sm btn-secondary" onclick="removeFbPage(${idx})">❌ Remove</button>
-        </div>
-      `).join('');
+        `;
+      }).join('');
     }
 
     function removeFbPage(idx) {
@@ -928,20 +941,23 @@ Your scheduled videos and Facebook publication updates will arrive here 🚀',
       const pat = localStorage.getItem('gh_pat');
       const repo = localStorage.getItem('gh_repo') || DEFAULT_REPO;
 
-      if (!pat) return alert('Please enter your GitHub PAT.');
+      if (!pat) {
+        alert('Please enter your GitHub PAT.');
+        return;
+      }
 
       showToast('🔍 Verifying GitHub PAT permissions...');
       try {
-        const res = await fetch(`https://api.github.com/repos/${repo}`, {
+        const res = await fetch('https://api.github.com/repos/' + repo, {
           headers: {
-            'Authorization': `Bearer ${pat}`,
+            'Authorization': 'Bearer ' + pat,
             'Accept': 'application/vnd.github+json'
           }
         });
         const data = await res.json();
         if (data.full_name) {
-          document.getElementById('connStatusText').innerText = `Connected: ${data.full_name}`;
-          showToast(`✅ Successfully authenticated to ${data.full_name}!`);
+          document.getElementById('connStatusText').innerText = 'Connected: ' + data.full_name;
+          showToast('✅ Successfully authenticated to ' + data.full_name + '!');
         } else {
           alert('GitHub PAT Error: ' + (data.message || 'Access denied'));
         }
@@ -955,44 +971,39 @@ Your scheduled videos and Facebook publication updates will arrive here 🚀',
       const success = await dispatchWorkflowAPI({});
       if (success) {
         showToast('🚀 Workflow run started! Inspecting in Cloud Gallery...');
-        setTimeout(() => switchTab('gallery'), 1500);
+        setTimeout(function() { switchTab('gallery'); }, 1500);
       }
     }
 
-    async function dispatchWorkflowAPI(inputs = {}) {
+    async function dispatchWorkflowAPI(inputs) {
       const pat = localStorage.getItem('gh_pat');
       const repo = localStorage.getItem('gh_repo') || DEFAULT_REPO;
 
       if (!pat) {
-        alert('Please enter and save your GitHub Personal Access Token (PAT) in the Settings tab.');
+        alert('Please enter your GitHub Token in the Settings tab.');
         switchTab('settings');
         return false;
       }
 
       try {
-        const res = await fetch(`https://api.github.com/repos/${repo}/actions/workflows/auto_video_poster.yml/dispatches`, {
+        const res = await fetch('https://api.github.com/repos/' + repo + '/actions/workflows/auto_video_poster.yml/dispatches', {
           method: 'POST',
           headers: {
-            'Authorization': `Bearer ${pat}`,
+            'Authorization': 'Bearer ' + pat,
             'Accept': 'application/vnd.github+json',
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
             ref: 'main',
-            inputs: inputs
+            inputs: inputs || {}
           })
         });
 
         if (res.status === 204) {
           return true;
         } else {
-          const err = await res.json().catch(() => ({ message: res.statusText }));
-          const msg = err.message || res.statusText;
-          if (res.status === 403 && msg.includes('Resource not accessible')) {
-            alert('⚠️ GitHub Token Permission Error:\n\nYour Fine-Grained Token does not have write permissions for GitHub Actions workflows.\n\nFIX (Takes 30 seconds):\n1. Generate a Classic Token at:\nhttps://github.com/settings/tokens/new?scopes=repo,workflow&description=AI_Video_Studio_Automation\n2. Paste the new ghp_... token into the Settings tab and click Save.');
-          } else {
-            alert('Workflow Dispatch Error (' + res.status + '): ' + msg);
-          }
+          const err = await res.json().catch(function() { return { message: res.statusText }; });
+          alert('Workflow Dispatch Error (' + res.status + '): ' + (err.message || res.statusText));
           return false;
         }
       } catch (err) {
@@ -1005,31 +1016,34 @@ Your scheduled videos and Facebook publication updates will arrive here 🚀',
       const pat = localStorage.getItem('gh_pat');
       const repo = localStorage.getItem('gh_repo') || DEFAULT_REPO;
       const list = document.getElementById('runsList');
+      if (!list) return;
 
       list.innerHTML = '<p style="color: var(--text-dim); font-size: 0.85rem;">⏳ Fetching recent workflow runs from GitHub API...</p>';
 
       try {
         const headers = { 'Accept': 'application/vnd.github+json' };
-        if (pat) headers['Authorization'] = `Bearer ${pat}`;
+        if (pat) headers['Authorization'] = 'Bearer ' + pat;
 
-        const res = await fetch(`https://api.github.com/repos/${repo}/actions/runs?per_page=6`, { headers });
+        const res = await fetch('https://api.github.com/repos/' + repo + '/actions/runs?per_page=6', { headers: headers });
         const data = await res.json();
 
         if (data.workflow_runs && data.workflow_runs.length) {
-          list.innerHTML = data.workflow_runs.map(run => `
-            <div class="item-card">
-              <div class="item-info">
-                <h4>#${run.run_number}: ${escapeHtml(run.name)}</h4>
-                <p><strong>Trigger:</strong> ${run.event} | <strong>Status:</strong> ${run.status} (${run.conclusion || 'running'}) | <strong>Time:</strong> ${new Date(run.created_at).toLocaleString()}</p>
+          list.innerHTML = data.workflow_runs.map(function(run) {
+            return `
+              <div class="item-card">
+                <div class="item-info">
+                  <h4>#${run.run_number}: ${escapeHtml(run.name)}</h4>
+                  <p><strong>Trigger:</strong> ${run.event} | <strong>Status:</strong> ${run.status} (${run.conclusion || 'running'}) | <strong>Time:</strong> ${new Date(run.created_at).toLocaleString()}</p>
+                </div>
+                <a href="${run.html_url}" target="_blank" class="btn btn-sm btn-secondary">🔗 View Logs & Artifacts</a>
               </div>
-              <a href="${run.html_url}" target="_blank" class="btn btn-sm btn-secondary">🔗 View Logs & Artifacts</a>
-            </div>
-          `).join('');
+            `;
+          }).join('');
         } else {
           list.innerHTML = '<p style="color: var(--text-muted); font-size: 0.85rem;">No recent workflow runs found.</p>';
         }
       } catch (err) {
-        list.innerHTML = `<p style="color: var(--danger); font-size: 0.85rem;">Error fetching runs: ${err.message}</p>`;
+        list.innerHTML = '<p style="color: var(--danger); font-size: 0.85rem;">Error fetching runs: ' + err.message + '</p>';
       }
     }
 
