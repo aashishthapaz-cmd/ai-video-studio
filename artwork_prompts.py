@@ -848,14 +848,13 @@ def _procedural_scene_prompt(line: str, scene_idx: int, total_scenes: int, vibe:
         angle = camera_angles[scene_idx % len(camera_angles)]
         
         prompt = (
-            f"Authentic fine-art still-life photography, Typewriters Voice aesthetic. "
+            f"Authentic 35mm analog film still-life photography, Typewriters Voice aesthetic. "
             f"Featuring {tw_model} on a rustic dark wooden desk, with {paper}. "
-            f"Accompanied by {prop}. In the background, {backdrop}. "
-            f"{angle}. 35mm analog film aesthetic, Kodak Portra 400 warm color palette, subtle natural film grain. "
-            f"Vertical 9:16 portrait framing, fill entire frame. | "
-            f"authentic macro still-life photography, Typewriters Voice aesthetic, vintage manual typewriter keys and carriage, aged parchment paper, warm golden hour window light, steaming ceramic coffee cup, dried pressed botanicals, 35mm film photography, Kodak Portra 400 tones, shallow depth of field, f/1.8 bokeh, vertical 9:16 portrait composition, fill entire frame, no watermark, no text, no letters, no words"
+            f"Accompanied by {prop}, {backdrop}. {angle}. "
+            f"Kodak Portra 400 warm color palette, subtle natural film grain, shallow depth of field, f/1.8 bokeh, "
+            f"vertical 9:16 portrait composition, photorealistic, no text, no letters, no watermark, no writing"
         )
-        return _normalize_prompt(prompt, vibe.get("medium_suffix", ""))
+        return prompt
 
     motifs = _extract_poetic_motifs(line)
     

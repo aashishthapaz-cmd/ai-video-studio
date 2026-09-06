@@ -18,14 +18,43 @@ except ImportError:
 VOX_ROOT = Path(r'D:\VoxCPM Content Factory')
 VOX_PY = VOX_ROOT / '.venv' / 'Scripts' / 'python.exe'
 VOX_BRIDGE = PROJECT_ROOT / 'voxcpm_bridge.py'
-DEFAULT_REFERENCE_VOICE = PROJECT_ROOT / 'assets' / 'reference_voice' / 'whishper.wav'
+DEFAULT_REFERENCE_VOICE = PROJECT_ROOT / 'assets' / 'reference_voice' / 'whishper_prompt.wav'
+FULL_REFERENCE_VOICE = PROJECT_ROOT / 'assets' / 'reference_voice' / 'whishper.wav'
 
-WHISPER_REFERENCE_TRANSCRIPT = (
-    "I don't know what you did to me, but I swear my heart reacts to you like a habit. "
-    "Your voice feels like music. Your smile hits me harder than any high. "
-    "I don't crave attention. I crave you. The way you talk, the way you look at me, "
-    "the way you exist, it's dangerous because now my favorite addiction is simply being yours."
-)
+WHISPER_REFERENCE_TRANSCRIPT = "I don't know what you did to me, but I swear my heart reacts to you like a habit."
+
+def get_effective_reference_voice(reference_audio: Path = None, work_dir: Path = None) -> tuple[Path, str]:
+    """
+    Returns a clean 3-6s reference voice clip and its matching transcript.
+    If the source audio is >8.0s, automatically slices a clean 5.2s WAV clip
+    so F5-TTS and XTTS-v2 cross-attention windows never overflow or distort.
+    """
+    p = Path(reference_audio) if reference_audio else DEFAULT_REFERENCE_VOICE
+    if not p.exists() and FULL_REFERENCE_VOICE.exists():
+        p = FULL_REFERENCE_VOICE
+
+    if not p.exists():
+        raise FileNotFoundError(f"Reference voice audio not found at: {p}")
+
+    dur = get_audio_duration(p)
+    if dur <= 8.0:
+        return p, WHISPER_REFERENCE_TRANSCRIPT
+
+    # Auto-slice long reference audio to 5.2s
+    target_dir = work_dir or p.parent
+    sliced_path = target_dir / "whishper_prompt_auto.wav"
+    if sliced_path.exists() and sliced_path.stat().st_size > 1000:
+        return sliced_path, WHISPER_REFERENCE_TRANSCRIPT
+
+    try:
+        import soundfile as sf
+        data, sr = sf.read(str(p))
+        samples = int(5.2 * sr)
+        sliced_data = data[:samples]
+        sf.write(str(sliced_path), sliced_data, sr)
+        return sliced_path, WHISPER_REFERENCE_TRANSCRIPT
+    except Exception:
+        return p, WHISPER_REFERENCE_TRANSCRIPT
 
 def detect_language(text: str) -> str:
     """Detect if text is Nepali (Devanagari) or English/Latin."""
@@ -51,11 +80,11 @@ def get_audio_duration(file_path: Path) -> float:
 
 def synthesize_huggingface_space_clone(scenes: list, audio_dir: Path, reference_audio: Path = None, hf_token: str = None) -> list:
     """
-    Synthesizes voice cloning in the cloud via Hugging Face Spaces (mrfakename/E2-F5-TTS, Nymbo XTTS-v2, tonyassi)
-    with the exact reference audio (whishper.wav).
+    Synthesizes voice cloning in the cloud via Hugging Face Spaces (Nymbo XTTS-v2, tonyassi, E2-F5-TTS)
+    with the exact clean reference audio clip (whishper_prompt.wav).
     Zero local GPU requirement.
     """
-    ref_path = Path(reference_audio) if reference_audio else DEFAULT_REFERENCE_VOICE
+    ref_path, ref_text = get_effective_reference_voice(reference_audio, work_dir=audio_dir)
     if not ref_path.exists():
         raise FileNotFoundError(f"Reference voice audio not found at: {ref_path}")
 
@@ -68,8 +97,8 @@ def synthesize_huggingface_space_clone(scenes: list, audio_dir: Path, reference_
     chosen_space = None
     spaces_to_try = [
         ("Nymbo/Voice-Clone-Multilingual", "/predict"),
-        ("mrfakename/E2-F5-TTS", "/predict"),
-        ("tonyassi/voice-clone", "/clone")
+        ("tonyassi/voice-clone", "/clone"),
+        ("mrfakename/E2-F5-TTS", "/predict")
     ]
     
     for sp, ep in spaces_to_try:
@@ -102,7 +131,7 @@ def synthesize_huggingface_space_clone(scenes: list, audio_dir: Path, reference_
             if chosen_space == "mrfakename/E2-F5-TTS":
                 return client.predict(
                     ref_audio=ref_file_handle,
-                    ref_text=WHISPER_REFERENCE_TRANSCRIPT,
+                    ref_text=ref_text,
                     gen_text=text,
                     remove_silence=False,
                     api_name="/predict"
@@ -124,7 +153,7 @@ def synthesize_huggingface_space_clone(scenes: list, audio_dir: Path, reference_
         try:
             with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
                 future = executor.submit(_predict_hf)
-                res = future.result(timeout=45)
+                res = future.result(timeout=60)
                 
             if isinstance(res, dict):
                 audio_src = res.get("path") or res.get("url") or res.get("name")
@@ -376,9 +405,9 @@ def get_f5_engine(device="cpu"):
 def synthesize_f5_tts_batch(scenes: list, audio_dir: Path, reference_audio: Path = None) -> list:
     """
     Synthesizes exact voice cloning using SWivid/F5-TTS (Option 1 Primary).
-    Clones reference audio whishper.wav with emotional nuances and whisper breathing.
+    Clones reference audio whishper_prompt.wav with emotional nuances and whisper breathing.
     """
-    ref_path = Path(reference_audio) if reference_audio else DEFAULT_REFERENCE_VOICE
+    ref_path, ref_text = get_effective_reference_voice(reference_audio, work_dir=audio_dir)
     if not ref_path.exists():
         raise FileNotFoundError(f"Reference voice audio not found at: {ref_path}")
         
@@ -395,7 +424,7 @@ def synthesize_f5_tts_batch(scenes: list, audio_dir: Path, reference_audio: Path
         try:
             f5.infer(
                 ref_file=str(ref_path.resolve()),
-                ref_text=WHISPER_REFERENCE_TRANSCRIPT,
+                ref_text=ref_text,
                 gen_text=text,
                 file_wave=str(out_file),
                 speed=0.9,
@@ -404,7 +433,7 @@ def synthesize_f5_tts_batch(scenes: list, audio_dir: Path, reference_audio: Path
         except TypeError:
             f5.infer(
                 ref_file=str(ref_path.resolve()),
-                ref_text=WHISPER_REFERENCE_TRANSCRIPT,
+                ref_text=ref_text,
                 gen_text=text,
                 file_wave=str(out_file)
             )
@@ -428,9 +457,9 @@ def get_xtts_engine(device="cpu"):
 def synthesize_xtts_v2_batch(scenes: list, audio_dir: Path, reference_audio: Path = None) -> list:
     """
     Synthesizes exact voice cloning using coqui-ai/TTS XTTS-v2 (Option 2 Secondary Fallback).
-    Clones reference audio whishper.wav directly into the speech conditioning embedding.
+    Clones reference audio whishper_prompt.wav directly into the speech conditioning embedding.
     """
-    ref_path = Path(reference_audio) if reference_audio else DEFAULT_REFERENCE_VOICE
+    ref_path, _ref_text = get_effective_reference_voice(reference_audio, work_dir=audio_dir)
     if not ref_path.exists():
         raise FileNotFoundError(f"Reference voice audio not found at: {ref_path}")
         
@@ -474,8 +503,10 @@ def synthesize_project_audio(scenes: list, audio_dir: Path) -> list:
     full_sample = " ".join(all_narrations)
     overall_lang = detect_language(full_sample)
 
+    ref_exists = DEFAULT_REFERENCE_VOICE.exists() or FULL_REFERENCE_VOICE.exists()
+
     # 1. Primary: Option 1 SWivid/F5-TTS Voice Cloning (Exact reference whisper clone)
-    if overall_lang == "en" and DEFAULT_REFERENCE_VOICE.exists():
+    if overall_lang == "en" and ref_exists:
         try:
             print("[Voice] Synthesizing all scenes via Option 1: SWivid/F5-TTS Reference Voice Cloner...")
             return synthesize_f5_tts_batch(scenes, audio_dir, reference_audio=DEFAULT_REFERENCE_VOICE)
@@ -483,7 +514,7 @@ def synthesize_project_audio(scenes: list, audio_dir: Path) -> list:
             print(f"[Voice] F5-TTS notice ({e}), falling back to Option 2: coqui-ai/TTS (XTTS-v2)...")
 
     # 2. Secondary Fallback: Option 2 coqui-ai/TTS (XTTS-v2)
-    if overall_lang == "en" and DEFAULT_REFERENCE_VOICE.exists():
+    if overall_lang == "en" and ref_exists:
         try:
             print("[Voice] Synthesizing all scenes via Option 2: coqui-ai/TTS XTTS-v2...")
             return synthesize_xtts_v2_batch(scenes, audio_dir, reference_audio=DEFAULT_REFERENCE_VOICE)
@@ -492,7 +523,7 @@ def synthesize_project_audio(scenes: list, audio_dir: Path) -> list:
 
     # 3. Tertiary Fallback: Hugging Face Serverless Voice Cloning
     hf_tok = os.environ.get("HF_TOKEN") or cfg.get("huggingface_token", "")
-    if overall_lang == "en" and DEFAULT_REFERENCE_VOICE.exists():
+    if overall_lang == "en" and ref_exists:
         try:
             print("[Voice] Synthesizing all scenes via Hugging Face Cloud Voice Cloning with reference audio...")
             return synthesize_huggingface_space_clone(scenes, audio_dir, reference_audio=DEFAULT_REFERENCE_VOICE, hf_token=hf_tok)
