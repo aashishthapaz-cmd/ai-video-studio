@@ -343,6 +343,93 @@ def extract_acoustic_word_durations(audio_path: Path, script_text: str, language
     w_sum = sum(weights) or 1.0
     return [max(0.08, round((w / w_sum) * spoken_dur, 3)) for w in weights]
 
+_CACHED_F5 = None
+
+def get_f5_engine(device="cpu"):
+    global _CACHED_F5
+    if _CACHED_F5 is None:
+        from f5_tts.api import F5TTS
+        _CACHED_F5 = F5TTS(model_type="F5-TTS_Base", device=device)
+    return _CACHED_F5
+
+def synthesize_f5_tts_batch(scenes: list, audio_dir: Path, reference_audio: Path = None) -> list:
+    """
+    Synthesizes exact voice cloning using SWivid/F5-TTS (Option 1 Primary).
+    Clones reference audio whishper.wav with emotional nuances and whisper breathing.
+    """
+    ref_path = Path(reference_audio) if reference_audio else DEFAULT_REFERENCE_VOICE
+    if not ref_path.exists():
+        raise FileNotFoundError(f"Reference voice audio not found at: {ref_path}")
+        
+    f5 = get_f5_engine(device="cpu")
+    
+    for i, s in enumerate(scenes):
+        scene_id = s.get("id", f"scene_{i+1:03d}")
+        out_file = audio_dir / f"{scene_id}.wav"
+        text = s.get("narration", "").strip()
+        if not text:
+            continue
+            
+        print(f"[Voice F5-TTS] Synthesizing scene {i+1}/{len(scenes)}: '{text[:50]}...'")
+        f5.infer(
+            ref_file=str(ref_path.resolve()),
+            ref_text=WHISPER_REFERENCE_TRANSCRIPT,
+            gen_text=text,
+            file_wave=str(out_file),
+            speed=0.9,
+            nfe_step=16
+        )
+        dur = get_audio_duration(out_file)
+        s["audio_path"] = str(out_file)
+        s["duration"] = round(dur, 2)
+        s["voice"] = "F5-TTS Reference Whisper Clone"
+        s["word_durations"] = extract_acoustic_word_durations(out_file, text, language="en")
+        
+    return scenes
+
+_CACHED_XTTS = None
+
+def get_xtts_engine(device="cpu"):
+    global _CACHED_XTTS
+    if _CACHED_XTTS is None:
+        from TTS.api import TTS
+        _CACHED_XTTS = TTS("tts_models/multilingual/multi-dataset/xtts_v2").to(device)
+    return _CACHED_XTTS
+
+def synthesize_xtts_v2_batch(scenes: list, audio_dir: Path, reference_audio: Path = None) -> list:
+    """
+    Synthesizes exact voice cloning using coqui-ai/TTS XTTS-v2 (Option 2 Secondary Fallback).
+    Clones reference audio whishper.wav directly into the speech conditioning embedding.
+    """
+    ref_path = Path(reference_audio) if reference_audio else DEFAULT_REFERENCE_VOICE
+    if not ref_path.exists():
+        raise FileNotFoundError(f"Reference voice audio not found at: {ref_path}")
+        
+    xtts = get_xtts_engine(device="cpu")
+    
+    for i, s in enumerate(scenes):
+        scene_id = s.get("id", f"scene_{i+1:03d}")
+        out_file = audio_dir / f"{scene_id}.wav"
+        text = s.get("narration", "").strip()
+        if not text:
+            continue
+            
+        print(f"[Voice XTTS-v2] Synthesizing scene {i+1}/{len(scenes)}: '{text[:50]}...'")
+        xtts.tts_to_file(
+            text=text,
+            speaker_wav=str(ref_path.resolve()),
+            language="en",
+            file_path=str(out_file),
+            speed=0.9
+        )
+        dur = get_audio_duration(out_file)
+        s["audio_path"] = str(out_file)
+        s["duration"] = round(dur, 2)
+        s["voice"] = "XTTS-v2 Reference Whisper Clone"
+        s["word_durations"] = extract_acoustic_word_durations(out_file, text, language="en")
+        
+    return scenes
+
 def synthesize_project_audio(scenes: list, audio_dir: Path) -> list:
     """
     Unified voice synthesis orchestrator:
@@ -351,25 +438,30 @@ def synthesize_project_audio(scenes: list, audio_dir: Path) -> list:
     """
     audio_dir.mkdir(parents=True, exist_ok=True)
     cfg = load_settings()
-    voice_pref = cfg.get("voice_engine", "huggingface_whisper_clone")
+    voice_pref = cfg.get("voice_engine", "f5_tts_reference")
     
     # Check language of the overall script
     all_narrations = [s.get("narration", "").strip() for s in scenes if s.get("narration", "").strip()]
     full_sample = " ".join(all_narrations)
     overall_lang = detect_language(full_sample)
 
-    # 1. Fast Batch VoxCPM (Local GPU / exact reference audio clone)
-    if (voice_pref in ("voxcpm_reference", "voxcpm")) and overall_lang == "en" and VOX_PY.exists() and DEFAULT_REFERENCE_VOICE.exists():
+    # 1. Primary: Option 1 SWivid/F5-TTS Voice Cloning (Exact reference whisper clone)
+    if overall_lang == "en" and DEFAULT_REFERENCE_VOICE.exists():
         try:
-            print("[Voice] Synthesizing all scenes via Fast Batch VoxCPM2...")
-            res_scenes = synthesize_voxcpm_batch(scenes, audio_dir)
-            for sc in res_scenes:
-                sc["word_durations"] = extract_acoustic_word_durations(Path(sc["audio_path"]), sc.get("narration", ""), language="en")
-            return res_scenes
+            print("[Voice] Synthesizing all scenes via Option 1: SWivid/F5-TTS Reference Voice Cloner...")
+            return synthesize_f5_tts_batch(scenes, audio_dir, reference_audio=DEFAULT_REFERENCE_VOICE)
         except Exception as e:
-            print(f"[Voice] Local VoxCPM batch warning ({e}), falling back to cloud voice cloner...")
+            print(f"[Voice] F5-TTS notice ({e}), falling back to Option 2: coqui-ai/TTS (XTTS-v2)...")
 
-    # 2. Hugging Face Serverless Voice Cloning (Clones reference whishper.wav via Hugging Face API)
+    # 2. Secondary Fallback: Option 2 coqui-ai/TTS (XTTS-v2)
+    if overall_lang == "en" and DEFAULT_REFERENCE_VOICE.exists():
+        try:
+            print("[Voice] Synthesizing all scenes via Option 2: coqui-ai/TTS XTTS-v2...")
+            return synthesize_xtts_v2_batch(scenes, audio_dir, reference_audio=DEFAULT_REFERENCE_VOICE)
+        except Exception as e:
+            print(f"[Voice] XTTS-v2 notice ({e}), falling back to Hugging Face Cloud Voice Cloner...")
+
+    # 3. Tertiary Fallback: Hugging Face Serverless Voice Cloning
     hf_tok = os.environ.get("HF_TOKEN") or cfg.get("huggingface_token", "")
     if overall_lang == "en" and DEFAULT_REFERENCE_VOICE.exists():
         try:
@@ -390,7 +482,7 @@ def synthesize_project_audio(scenes: list, audio_dir: Path) -> list:
         out_file = audio_dir / f"{scene_id}.mp3"
         scene_success = False
 
-        # 3. ElevenLabs Cloud API (per-scene)
+        # 4. ElevenLabs Cloud API (per-scene)
         if not scene_success and cfg.get("elevenlabs_api_key") and (voice_pref in ("elevenlabs", "cloud_cloning")):
             try:
                 res = synthesize_elevenlabs(narration, out_file, cfg["elevenlabs_api_key"])
@@ -401,7 +493,7 @@ def synthesize_project_audio(scenes: list, audio_dir: Path) -> list:
             except Exception as e:
                 print(f"[Voice] ElevenLabs warning for {scene_id}: {e}")
 
-        # 4. Standard / Fallback: Edge Neural Cloud TTS (per-scene)
+        # 5. Standard / Fallback: Edge Neural Cloud TTS (per-scene)
         if not scene_success:
             voice = cfg.get("nepali_voice", "ne-NP-SagarNeural") if scene_lang == "ne" else cfg.get("english_voice", "en-US-ChristopherNeural")
             rate = cfg.get("voice_rate", "-8%")

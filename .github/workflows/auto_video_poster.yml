@@ -84,14 +84,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
 
-      - name: 🧠 Cache Alignment Models
+      - name: 🧠 Cache Voice Cloning & Alignment Models (F5-TTS, XTTS, Whisper)
         uses: actions/cache@v4
         with:
           path: |
             ~/.cache/huggingface
-          key: ${{ runner.os }}-models-v1
+            ~/.cache/cached_path
+            ~/.local/share/tts
+          key: ${{ runner.os }}-voice-models-v1
           restore-keys: |
-            ${{ runner.os }}-models-
+            ${{ runner.os }}-voice-models-
 
       - name: 📦 Install Python Dependencies
         run: |
