@@ -807,67 +807,49 @@ def _procedural_scene_prompt(line: str, scene_idx: int, total_scenes: int, vibe:
     vibe_id = vibe.get("id", "") or ""
     vibe_name = vibe.get("name", "") or ""
     
-    # Specialized generator for Typewriters Voice authentic European storybook illustration aesthetic
+    # Specialized generator for Typewriters Voice authentic editorial linocut woodblock aesthetic
     if "typewriter" in vibe_id.lower() or "typewriter" in vibe_name.lower():
         environments_pool = [
-            # Bookstores, Kiosks & Libraries
-            "an illuminated arched wooden bookstore facade with warm amber bookshelves and illustrated art prints on a dark cobblestone lane",
-            "a quaint Parisian bookstall kiosk along the stone riverwall illuminated by a glowing hanging lantern at dusk",
-            "a cozy second-hand bookstore storefront on an old stone street with stacks of vintage books lit by glowing streetlamp",
-            "an intimate corner bookshop with warm yellow light spilling from large multi-pane display windows onto wet cobblestones",
-            "a cozy antiquarian library alcove with oak bookshelves, glowing banker's lamp, and rain against tall arched window",
+            # Surreal Natural & Elemental Motifs (Direct User Reference Match)
+            "a dramatically curved windswept dark bonsai tree on a quiet snowy hill with fine vertical line hatching against a deep dark navy sky",
+            "a surreal gnarled bonsai tree growing from a wooden boat on calm water split between deep crimson red and glowing golden yellow woodcut ripples",
+            "a historic European canal with terracotta buildings and a giant surreal dark blue stone monolith rising into the dark hatched sky",
+            "a dark city street corner with a glowing red-wood bakery window and a giant surreal glowing monolith rising between old townhouses into the dark sky",
+            "a quiet European canal quay with horizontal linocut wave ripples on deep blue water and warm golden streetlamp glow on stone pavement",
             
-            # Cottages, Cabins & Shelters
+            # Cozy Bookstores, Kiosks & Printmakers (Direct User Reference Match)
+            "an illuminated arched red-wood bookstore facade with warm amber bookshelves and illustrated art prints on a dark cobblestone lane",
+            "a quaint nocturnal bakery storefront radiating intense warm amber and cadmium-yellow light through glass displays onto dark cobblestones",
+            "an intimate European corner bookshop with warm yellow light spilling from large multi-pane windows onto wet stone pavement",
+            "a cozy second-hand bookstore storefront on an old stone street with stacks of vintage books lit by glowing streetlamp",
+            "a quaint Parisian bookstall kiosk along the stone riverwall illuminated by a glowing hanging lantern at dusk",
+            
+            # Cottages, Cabins & Nocturnal Waypoints
             "a solitary cozy red brick cottage with glowing warm amber windows and smoking stone chimney under a starlit midnight sky",
             "a rustic wooden A-frame cabin nestled in quiet evergreen pine woods with warm golden light glowing through glass facade",
-            "a solitary stone cottage on a quiet grassy hillside with warm amber light shining from the window beneath crescent moon",
-            "a charming English countryside cottage with blooming window boxes lit by warm lantern light on a winding stone path",
-            "a cozy seaside dune cottage with warm yellow light glowing against the dark ocean horizon and soft starry mist",
-            
-            # Bridges, Canals & Rivers
             "an ancient stone arch bridge over a quiet canal with glowing gas lanterns casting long golden amber reflections on dark water",
+            "a solitary weathered stone lighthouse atop a dramatic coastal cliff beaming a bright warm golden light ray across dark rolling ocean waves",
             "a solitary wooden boat dock with a single glowing lantern extending into a calm misty midnight lake beneath crescent moon",
-            "a cobblestone riverside embankment flanked by weeping willow trees and illuminated streetlamps reflecting on rippling river",
-            "a romantic European canal alley at night with warm lamp glow reflecting off historic stone walls into quiet dark water",
-            "a historic pedestrian bridge over a misty river overlooking distant glowing silhouettes of old town spires",
-            
-            # Lighthouses, Coastal Cliffs & Harbors
-            "a solitary weathered stone lighthouse atop a dramatic coastal cliff beaming a bright warm golden light ray across dark ocean waves",
-            "a quiet harbor pier at midnight with small wooden fishing dories moored under warm glowing harbor lanterns",
-            "a solitary wooden bench on an ocean overlook cliff bathed in the sweeping warm beam of a distant lighthouse under starry sky",
-            
-            # Cafes, Bistros & Late-Night Sanctuaries
-            "a cozy European corner bistro with warm amber light glowing from the dining terrace and a solitary coffee cup on round table",
-            "a quaint nocturnal street bakery with warm cadmium-yellow light showing fresh bread and pastries through steam-fogged glass",
-            "a quiet cobblestone street cafe beneath a striped canvas awning in evening drizzle with glowing Edison lanterns",
-            
-            # Journeys, Trains & Waypoints
-            "a vintage illuminated railway carriage window with warm amber glow looking out into dark passing countryside hills",
             "a quiet European railway station platform at midnight with an antique station clock and glowing iron lantern in mist",
-            "a solitary traveler with a small suitcase waiting beside a warm illuminated countryside bus shelter under stars",
-            
-            # Ancient Trees, Meadows & Nocturnal Nature
-            "a solitary giant ancient oak tree with glowing amber autumn foliage on a quiet grassy knoll beneath starry midnight cosmos",
-            "a wooden park bench beneath a glowing streetlamp beside a peaceful dark pond with floating golden leaves",
-            "a solitary hilltop stone overlook gazing at distant glowing city skyline beneath shooting stars"
+            "a solitary giant ancient oak tree with glowing amber autumn foliage on a quiet grassy knoll beneath starry midnight cosmos"
         ]
         
         wanderer_figures = [
-            "a solitary figure in an ochre yellow coat browsing the warm shop display from behind",
-            "a solitary wanderer in a yellow raincoat walking peacefully along the stone path toward the warm light",
+            "a tiny solitary figure holding a bright lime-yellow umbrella walking peacefully beneath the tree",
+            "a solitary figure in a bright yellow trenchcoat browsing the warm glowing shop display from behind",
+            "a solitary fisherman in a red sweater standing on the golden cobblestone quay with a fishing rod",
+            "a tiny stylized figure with a red umbrella standing in a yellow canoe on the glowing water",
+            "a solitary wanderer in a yellow coat standing on the stone canal bridge looking at the water reflections",
             "a solitary traveler holding a red umbrella gazing out over the calm midnight water",
-            "a solitary person in a warm yellow trenchcoat standing quietly beneath the glowing streetlamp",
-            "a solitary figure seated on the wooden bench contemplating the starry night sky",
-            "a solitary traveler walking along the rain-slicked cobblestones under the warm lantern glow",
-            "a solitary wanderer in a yellow coat standing on the stone bridge looking at the water reflections"
+            "a solitary person in a warm yellow coat standing quietly beneath the glowing streetlamp"
         ]
         
         atmospheres = [
-            "moody deep midnight indigo and slate navy night sky with fine white diagonal rain hatch lines",
-            "deep dark starlit night sky with a luminous yellow crescent moon and delicate twinkling stars",
-            "peaceful nocturnal atmosphere with soft evening mist and gentle golden lantern glow",
-            "atmospheric twilight gradient from deep Prussian blue to dark indigo with distant shooting star",
-            "quiet rainy night with fine textural cross-hatching and warm amber light pooling across wet cobblestones"
+            "moody deep midnight navy and slate blue night sky with fine vertical rain hatch lines and woodcut texture",
+            "deep dark starlit night sky with fine horizontal line hatch texture and delicate stars",
+            "peaceful nocturnal atmosphere with soft evening mist and glowing warm amber lantern light",
+            "high contrast chiaroscuro with intense warm golden light pooling against deep charcoal and navy shadows",
+            "quiet rainy night with fine textural cross-hatching and warm amber light glowing on dark surfaces"
         ]
         
         env = environments_pool[scene_idx % len(environments_pool)]
@@ -875,10 +857,10 @@ def _procedural_scene_prompt(line: str, scene_idx: int, total_scenes: int, vibe:
         atm = atmospheres[(scene_idx * 2) % len(atmospheres)]
         
         prompt = (
-            f"Ligne claire storybook illustration, Typewriters Voice aesthetic, fine ink cross-hatching and textured gouache. "
+            f"Editorial linocut woodblock illustration, Typewriters Voice art style, scratchboard engraving texture with fine ink cross-hatching. "
             f"Featuring {env}, {fig}. {atm}. "
-            f"High contrast warm amber and cadmium orange light pooling against deep indigo and slate blue night, "
-            f"cozy nocturnal sanctuary, vertical 9:16 portrait composition, photorealistic storybook art, no text, no letters, no words"
+            f"High contrast radiant amber and cadmium yellow light against deep midnight navy and slate blue, "
+            f"matte gouache print, vertical 9:16 portrait composition, masterpiece editorial illustration, no text, no letters, no words"
         )
         return prompt
 

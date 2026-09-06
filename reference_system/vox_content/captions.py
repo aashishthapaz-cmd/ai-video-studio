@@ -626,10 +626,25 @@ def _poetry_caption_text(caption: TimedCaption) -> str:
     words, durations = _caption_words_and_durations(caption)
     if not words:
         return ""
-    if len(words) <= 7:
+    if len(words) <= 6:
         return _karaoke_line(words, durations)
+        
     midpoint = max(1, min(len(words) - 1, round(len(words) * 0.52)))
-    return _karaoke_line(words[:midpoint], durations[:midpoint]) + r"\N" + _karaoke_line(words[midpoint:], durations[midpoint:])
+    l1_words, l1_durs = words[:midpoint], durations[:midpoint]
+    l2_words, l2_durs = words[midpoint:], durations[midpoint:]
+
+    # Line 1 renders from t=0 of the event
+    line1_text = _karaoke_line(l1_words, l1_durs)
+    
+    # Line 2 MUST wait until Line 1 finishes to eliminate double-speed premature highlighting
+    line1_total_centis = sum(max(8, int(round(d * 100))) for d in l1_durs)
+    line2_parts = [f"{{\\k{line1_total_centis}}}"]
+    for idx, w in enumerate(l2_words):
+        centis = max(8, int(round(l2_durs[idx] * 100)))
+        line2_parts.append(f"{{\\kf{centis}}}{_escape_ass(_display_word(w))}")
+    line2_text = " ".join(line2_parts)
+    
+    return line1_text + r"\N" + line2_text
 
 
 def _reference_caption_text(caption: TimedCaption) -> str:

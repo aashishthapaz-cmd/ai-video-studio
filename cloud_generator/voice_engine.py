@@ -171,8 +171,8 @@ def synthesize_huggingface_space_clone(scenes: list, audio_dir: Path, reference_
         except Exception as e:
             print(f"[Voice HF] Scene {i+1} notice ({type(e).__name__}: {e}), generating via Edge Neural TTS...")
             voice = "en-US-ChristopherNeural"
-            rate = "-8%"
-            pitch = "-2Hz"
+            rate = "-15%"
+            pitch = "-3Hz"
             info = asyncio.run(_synthesize_edge_line(text, voice, rate, pitch, out_file))
             dur = get_audio_duration(out_file)
             s["audio_path"] = str(out_file)
@@ -436,8 +436,8 @@ def synthesize_f5_tts_batch(scenes: list, audio_dir: Path, reference_audio: Path
                 ref_text=ref_text,
                 gen_text=text,
                 file_wave=str(out_file),
-                speed=0.9,
-                nfe_step=16
+                speed=0.82,
+                nfe_step=32
             )
         except TypeError:
             f5.infer(
@@ -487,7 +487,7 @@ def synthesize_xtts_v2_batch(scenes: list, audio_dir: Path, reference_audio: Pat
             speaker_wav=str(ref_path.resolve()),
             language="en",
             file_path=str(out_file),
-            speed=0.9
+            speed=0.82
         )
         dur = get_audio_duration(out_file)
         s["audio_path"] = str(out_file)
@@ -565,8 +565,8 @@ def synthesize_project_audio(scenes: list, audio_dir: Path) -> list:
         # 5. Standard / Fallback: Edge Neural Cloud TTS (per-scene)
         if not scene_success:
             voice = cfg.get("nepali_voice", "ne-NP-SagarNeural") if scene_lang == "ne" else cfg.get("english_voice", "en-US-ChristopherNeural")
-            rate = cfg.get("voice_rate", "-8%")
-            pitch = cfg.get("voice_pitch", "-2Hz")
+            rate = cfg.get("voice_rate", "-15%")
+            pitch = cfg.get("voice_pitch", "-3Hz")
             
             info = asyncio.run(_synthesize_edge_line(narration, voice, rate, pitch, out_file))
             scene["audio_path"] = info["audio_path"]
