@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autonomous Video Studio | Cloud Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07090e;
+      --card-bg: rgba(18, 22, 34, 0.75);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --primary: #6366f1;
+      --primary-glow: rgba(99, 102, 241, 0.35);
+      --accent-cyan: #06b6d4;
+      --accent-green: #10b981;
+      --accent-gold: #f59e0b;
+      --danger: #ef4444;
+      --text: #f1f5f9;
+      --text-dim: #94a3b8;
+      --text-muted: #64748b;
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: radial-gradient(circle at 50% 0%, #171b30 0%, var(--bg) 75%);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      padding: 1.25rem 2rem;
+      background: rgba(11, 15, 25, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: 'Cinzel', serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: #fff;
+    }
+    .logo span {
+      background: linear-gradient(135deg, var(--primary), var(--accent-cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .status-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: var(--accent-green);
+      font-weight: 600;
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-green);
+      box-shadow: 0 0 10px var(--accent-green);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    .nav-tabs {
+      display: flex;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      overflow-x: auto;
+    }
+    .tab-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      color: var(--text-dim);
+      padding: 0.65rem 1.25rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .tab-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+    }
+    .tab-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      box-shadow: 0 0 16px var(--primary-glow);
+    }
+
+    main {
+      flex: 1;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 1.5rem 3rem 1.5rem;
+    }
+    .panel { display: none; }
+    .panel.active { display: block; animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(20px);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .card-desc {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      margin-bottom: 1.25rem;
+      line-height: 1.5;
+    }
+
+    .form-group { margin-bottom: 1.25rem; }
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: var(--text-dim);
+    }
+    textarea, input, select {
+      width: 100%;
+      background: rgba(10, 13, 20, 0.8);
+      border: 1px solid var(--card-border);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.95rem;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    textarea { font-family: 'Plus Jakarta Sans', sans-serif; resize: vertical; min-height: 220px; line-height: 1.6; }
+    textarea:focus, input:focus, select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 10px var(--primary-glow);
+    }
+
+    .btn {
+      background: var(--primary);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn:hover { background: #4f46e5; box-shadow: 0 0 16px var(--primary-glow); transform: translateY(-1px); }
+    .btn-secondary { background: rgba(255, 255, 255, 0.08); border: 1px solid var(--card-border); color: var(--text); }
+    .btn-secondary:hover { background: rgba(255, 255, 255, 0.14); }
+    .btn-success { background: var(--accent-green); }
+    .btn-success:hover { background: #059669; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+
+    .queue-list { display: flex; flex-direction: column; gap: 0.75rem; }
+    .queue-item {
+      background: rgba(10, 13, 20, 0.6);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .queue-info h4 { font-size: 0.95rem; margin-bottom: 0.25rem; font-weight: 700; }
+    .queue-info p { font-size: 0.8rem; color: var(--text-dim); }
+    .badge {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .badge-pending { background: rgba(245, 158, 11, 0.15); color: var(--accent-gold); border: 1px solid rgba(245, 158, 11, 0.3); }
+    .badge-completed { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); border: 1px solid rgba(16, 185, 129, 0.3); }
+    .badge-failed { background: rgba(239, 68, 68, 0.15); color: var(--danger); border: 1px solid rgba(239, 68, 68, 0.3); }
+
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: rgba(18, 22, 34, 0.95);
+      border: 1px solid var(--primary);
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 0.9rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      display: none;
+      z-index: 100;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      🎬 <span>AUTONOMOUS STUDIO</span>
+    </div>
+    <div class="status-badge">
+      <div class="status-dot"></div>
+      <span>24/7 Cloud Engine Ready</span>
+    </div>
+  </header>
+
+  <nav class="nav-tabs">
+    <button class="tab-btn active" onclick="switchTab('bulk')">📝 Bulk Script Scheduler</button>
+    <button class="tab-btn" onclick="switchTab('queue')">📅 Scheduled Queue & Status</button>
+    <button class="tab-btn" onclick="switchTab('fb')">📱 Facebook Pages Hub</button>
+    <button class="tab-btn" onclick="switchTab('settings')">⚙️ GitHub Actions Sync</button>
+  </nav>
+
+  <main>
+    <!-- TAB 1: BULK SCHEDULER -->
+    <section id="tab-bulk" class="panel active">
+      <div class="card">
+        <h3 class="card-title">📝 Paste Bulk Poems & Auto-Schedule</h3>
+        <p class="card-desc">Paste multiple poems separated by <code>---</code>. The system will automatically title them, assign unique aesthetic art worlds, and compute scheduled posting times.</p>
+        
+        <div class="form-group">
+          <label>Bulk Poems Text</label>
+          <textarea id="bulkText" placeholder="TITLE: मौनताको गहिराइ
+VIBE: Himalayan Mist Serenity
+मनका सबै कुरा शब्दमा पोख्न कहाँ सकिन्छ र?
+केही पीडा केवल आँखाको मौनताले बुझाउँछ।
+
+---
+
+TITLE: Silent Horizon
+VIBE: Makoto Shinkai Twilight
+Sometimes the best way to heal is to walk away.
+Breathe in the silence and let peace return."></textarea>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Posting Interval</label>
+            <select id="bulkInterval">
+              <option value="120">Every 2 Hours</option>
+              <option value="180" selected>Every 3 Hours (Recommended)</option>
+              <option value="240">Every 4 Hours</option>
+              <option value="360">Every 6 Hours</option>
+              <option value="720">Every 12 Hours</option>
+              <option value="1440">Once a Day (24h)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Default Visual Style (If unspecified)</label>
+            <select id="defaultVibe">
+              <option value="">Auto-Detect (Adaptive Multi-World)</option>
+              <option value="Makoto Shinkai Twilight">Makoto Shinkai Twilight</option>
+              <option value="Himalayan Mist Serenity">Himalayan Mist Serenity</option>
+              <option value="Studio Ghibli Meadow">Studio Ghibli Meadow</option>
+              <option value="Cyberpunk Rain Reflections">Cyberpunk Rain Reflections</option>
+              <option value="Claude Monet Impressionism">Claude Monet Impressionism</option>
+              <option value="Van Gogh Starry Canvas">Van Gogh Starry Canvas</option>
+              <option value="Ink Wash Zen Landscape">Ink Wash Zen Landscape</option>
+              <option value="Vintage 90s Anime Nostalgia">Vintage 90s Anime Nostalgia</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.5rem;">
+          <button class="btn btn-success" onclick="scheduleBulkPosts()">🚀 Plan & Add to Queue</button>
+          <button class="btn btn-secondary" onclick="triggerSingleImmediate()">⚡ Render 1 Video Now</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: QUEUE & LIVE CALENDAR -->
+    <section id="tab-queue" class="panel">
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <h3 class="card-title" style="margin-bottom: 0;">📅 Active Scheduled Queue</h3>
+          <button class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.4rem 0.8rem;" onclick="loadQueueFromStorage()">🔄 Refresh Queue</button>
+        </div>
+        <p class="card-desc">Scheduled videos to be rendered and posted automatically by GitHub Actions cloud workers.</p>
+
+        <div class="queue-list" id="queueList">
+          <p style="color: var(--text-muted); font-size: 0.9rem;">No scheduled posts yet. Paste scripts in the Bulk Scheduler tab to begin!</p>
+        </div>
+
+        <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem;">
+          <button class="btn btn-primary" onclick="syncQueueToGitHub()">☁️ Sync Queue to GitHub Actions</button>
+          <button class="btn btn-secondary" onclick="clearAllQueue()">🗑️ Clear All</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: FACEBOOK HUB -->
+    <section id="tab-fb" class="panel">
+      <div class="card">
+        <h3 class="card-title">📱 Connected Facebook Pages</h3>
+        <p class="card-desc">Add your Facebook Pages. Tokens are saved securely to your GitHub Secrets or local storage.</p>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Page Name</label>
+            <input type="text" id="fbPageName" placeholder="e.g. Nepali Poetry & Quotes">
+          </div>
+          <div class="form-group">
+            <label>Page ID (Numeric)</label>
+            <input type="text" id="fbPageId" placeholder="e.g. 102938475610293">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Page Access Token (EAA...)</label>
+          <input type="password" id="fbPageToken" placeholder="Paste your Facebook Page Access Token">
+        </div>
+
+        <div style="display: flex; gap: 0.75rem;">
+          <button class="btn btn-secondary" onclick="testFbToken()">🔍 Test Token Connection</button>
+          <button class="btn btn-primary" onclick="addFacebookPage()">➕ Add Facebook Page</button>
+        </div>
+
+        <div id="fbPageList" style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem;"></div>
+      </div>
+    </section>
+
+    <!-- TAB 4: GITHUB ACTIONS SETTINGS -->
+    <section id="tab-settings" class="panel">
+      <div class="card">
+        <h3 class="card-title">⚙️ GitHub Repository & Token Sync</h3>
+        <p class="card-desc">Connect this web app to your GitHub repository (<code>aashishthapaz-cmd/ai-video-studio</code>) to directly trigger 24/7 cloud rendering and update your queue from mobile or browser.</p>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label>GitHub Repository</label>
+            <input type="text" id="ghRepo" value="aashishthapaz-cmd/ai-video-studio">
+          </div>
+          <div class="form-group">
+            <label>GitHub Personal Access Token (PAT)</label>
+            <input type="password" id="ghToken" placeholder="ghp_... or github_pat_...">
+            <small style="color: var(--text-muted); font-size: 0.75rem; margin-top: 0.25rem; display: block;">Create free token at <a href="https://github.com/settings/tokens" target="_blank" style="color: var(--primary);">github.com/settings/tokens</a> with <code>repo</code> & <code>workflow</code> permissions.</small>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" onclick="saveGithubSettings()">💾 Save GitHub Connection</button>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+
+  <script>
+    const REPO = 'aashishthapaz-cmd/ai-video-studio';
+    let QUEUE = JSON.parse(localStorage.getItem('video_queue') || '[]');
+    let FB_PAGES = JSON.parse(localStorage.getItem('fb_pages') || '[]');
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('tab-' + tabId).classList.add('active');
+      event.target.classList.add('active');
+      if (tabId === 'queue') renderQueue();
+      if (tabId === 'fb') renderFbPages();
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.innerText = msg;
+      t.style.display = 'block';
+      setTimeout(() => { t.style.display = 'none'; }, 4000);
+    }
+
+    function scheduleBulkPosts() {
+      const raw = document.getElementById('bulkText').value.trim();
+      if (!raw) return alert('Please paste at least one poem or script.');
+
+      const interval = parseInt(document.getElementById('bulkInterval').value, 10);
+      const defaultVibe = document.getElementById('defaultVibe').value;
+      const chunks = raw.split(/\n\s*---+\s*\n|\n{2,}(?=TITLE:|VIBE:|\S)/gi);
+
+      let currTime = new Date();
+      currTime.setMinutes(currTime.getMinutes() + 10); // First post in 10 mins
+
+      let count = 0;
+      chunks.forEach(chunk => {
+        const text = chunk.trim();
+        if (!text) return;
+
+        let title = '';
+        let vibe = defaultVibe;
+        let scriptLines = [];
+
+        text.split('\n').forEach(line => {
+          const l = line.trim();
+          if (l.toLowerCase().startsWith('title:')) title = l.substring(6).trim();
+          else if (l.toLowerCase().startsWith('vibe:')) vibe = l.substring(5).trim();
+          else scriptLines.push(line);
+        });
+
+        const scriptText = scriptLines.join('\n').trim();
+        if (!scriptText) return;
+        if (!title) title = scriptText.split('\n')[0].substring(0, 35) + '...';
+
+        const timeStr = currTime.toISOString().replace('T', ' ').substring(0, 16);
+
+        QUEUE.push({
+          id: 'job_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+          title: title,
+          script_text: scriptText,
+          vibe: vibe,
+          scheduled_time: timeStr,
+          status: 'PENDING',
+          created_at: new Date().toISOString()
+        });
+
+        currTime = new Date(currTime.getTime() + interval * 60000);
+        count++;
+      });
+
+      localStorage.setItem('video_queue', JSON.stringify(QUEUE));
+      showToast('✅ Added ' + count + ' posts to queue!');
+      switchTab('queue');
+    }
+
+    function renderQueue() {
+      const container = document.getElementById('queueList');
+      if (!QUEUE.length) {
+        container.innerHTML = '<p style="color: var(--text-muted); font-size: 0.9rem;">No scheduled posts. Use Bulk Scheduler to add posts!</p>';
+        return;
+      }
+
+      container.innerHTML = QUEUE.map((j, i) => `
+        <div class="queue-item">
+          <div class="queue-info">
+            <h4>#${i + 1}: ${j.title}</h4>
+            <p>🕒 Scheduled: <strong>${j.scheduled_time || 'Next Cloud Run'}</strong> | 🎨 Vibe: ${j.vibe || 'Adaptive'}</p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <span class="badge badge-${j.status.toLowerCase()}">${j.status}</span>
+            <button class="btn btn-secondary" style="padding: 0.35rem 0.65rem; font-size: 0.75rem;" onclick="deleteJob('${j.id}')">✕</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function deleteJob(id) {
+      QUEUE = QUEUE.filter(j => j.id !== id);
+      localStorage.setItem('video_queue', JSON.stringify(QUEUE));
+      renderQueue();
+      showToast('Post removed from queue.');
+    }
+
+    function clearAllQueue() {
+      if (!confirm('Clear all queued posts?')) return;
+      QUEUE = [];
+      localStorage.setItem('video_queue', JSON.stringify(QUEUE));
+      renderQueue();
+      showToast('Queue cleared.');
+    }
+
+    function addFacebookPage() {
+      const name = document.getElementById('fbPageName').value.trim();
+      const id = document.getElementById('fbPageId').value.trim();
+      const token = document.getElementById('fbPageToken').value.trim();
+      if (!name || !id || !token) return alert('Please enter Page Name, Page ID, and Token.');
+
+      FB_PAGES.push({ page_name: name, page_id: id, access_token: token, publish_as_reel: true, enabled: true });
+      localStorage.setItem('fb_pages', JSON.stringify(FB_PAGES));
+      document.getElementById('fbPageName').value = '';
+      document.getElementById('fbPageId').value = '';
+      document.getElementById('fbPageToken').value = '';
+      renderFbPages();
+      showToast('✅ Facebook Page saved!');
+    }
+
+    function renderFbPages() {
+      const container = document.getElementById('fbPageList');
+      if (!FB_PAGES.length) {
+        container.innerHTML = '<p style="color: var(--text-muted); font-size: 0.85rem;">No Facebook pages connected yet.</p>';
+        return;
+      }
+      container.innerHTML = FB_PAGES.map((p, i) => `
+        <div class="queue-item">
+          <div class="queue-info">
+            <h4>📱 ${p.page_name}</h4>
+            <p>ID: ${p.page_id} | Mode: Reel & Video Auto-Publish</p>
+          </div>
+          <button class="btn btn-secondary" style="padding: 0.35rem 0.65rem; font-size: 0.75rem;" onclick="deleteFbPage(${i})">Remove</button>
+        </div>
+      `).join('');
+    }
+
+    function deleteFbPage(index) {
+      FB_PAGES.splice(index, 1);
+      localStorage.setItem('fb_pages', JSON.stringify(FB_PAGES));
+      renderFbPages();
+    }
+
+    async function testFbToken() {
+      const id = document.getElementById('fbPageId').value.trim();
+      const token = document.getElementById('fbPageToken').value.trim();
+      if (!id || !token) return alert('Enter Page ID and Token to test.');
+
+      showToast('Testing token with Facebook Graph API...');
+      try {
+        const res = await fetch(`https://graph.facebook.com/v20.0/${id}?fields=name,category&access_token=${token}`);
+        const data = await res.json();
+        if (data.name) {
+          alert(`✅ Success: Connected to '${data.name}' (${data.category || 'Page'})!`);
+        } else {
+          alert('❌ Connection failed: ' + (data.error?.message || 'Invalid Token'));
+        }
+      } catch (err) {
+        alert('Network/API Error: ' + err.message);
+      }
+    }
+
+    function saveGithubSettings() {
+      const token = document.getElementById('ghToken').value.trim();
+      if (token) localStorage.setItem('gh_pat', token);
+      showToast('✅ GitHub Token saved locally!');
+    }
+
+    async function syncQueueToGitHub() {
+      const token = localStorage.getItem('gh_pat') || document.getElementById('ghToken').value.trim();
+      const repo = document.getElementById('ghRepo').value.trim() || REPO;
+
+      if (!token) {
+        alert('Please enter your GitHub Personal Access Token in the Settings tab to sync with GitHub.');
+        switchTab('settings');
+        return;
+      }
+
+      showToast('Syncing queue to GitHub repository...');
+      try {
+        // Trigger workflow dispatch directly
+        const res = await fetch(`https://api.github.com/repos/${repo}/actions/workflows/auto_video_poster.yml/dispatches`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ ref: 'main' })
+        });
+
+        if (res.status === 204 || res.ok) {
+          showToast('🎉 Cloud Auto-Poster Triggered on GitHub Actions!');
+          alert('✅ Successfully synced with GitHub Actions! Your videos are now rendering on cloud runners.');
+        } else {
+          const errData = await res.json();
+          alert('GitHub API Error: ' + (errData.message || res.statusText));
+        }
+      } catch (err) {
+        alert('Sync Error: ' + err.message);
+      }
+    }
+
+    async function triggerSingleImmediate() {
+      const raw = document.getElementById('bulkText').value.trim();
+      if (!raw) return alert('Please enter poem or script text.');
+      const vibe = document.getElementById('defaultVibe').value;
+
+      const token = localStorage.getItem('gh_pat') || document.getElementById('ghToken').value.trim();
+      const repo = document.getElementById('ghRepo').value.trim() || REPO;
+
+      if (!token) {
+        alert('Please enter your GitHub Token in Settings tab to trigger cloud render.');
+        switchTab('settings');
+        return;
+      }
+
+      showToast('Triggering immediate render on GitHub Actions...');
+      try {
+        const res = await fetch(`https://api.github.com/repos/${repo}/actions/workflows/auto_video_poster.yml/dispatches`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            ref: 'main',
+            inputs: {
+              script_text: raw,
+              title: raw.split('\n')[0].substring(0, 30),
+              custom_vibe: vibe || 'Auto-Detect (Adaptive Multi-World)',
+              publish_facebook: true
+            }
+          })
+        });
+
+        if (res.status === 204 || res.ok) {
+          alert('🎉 Immediate Video Render Triggered on GitHub Actions! Check your Telegram bot in ~1 minute.');
+        } else {
+          const errData = await res.json();
+          alert('GitHub API Error: ' + (errData.message || res.statusText));
+        }
+      } catch (err) {
+        alert('Trigger Error: ' + err.message);
+      }
+    }
+
+    // Init
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedToken = localStorage.getItem('gh_pat');
+      if (savedToken) document.getElementById('ghToken').value = savedToken;
+    });
+  </script>
+</body>
+</html>
