@@ -627,11 +627,10 @@ def _caption_words_and_durations(caption: TimedCaption):
     durations = list(caption.word_durations[: len(words)])
     if len(durations) < len(words):
         total_time = max(0.5, caption.end - caption.start)
-        # Natural spoken time accounts for ~88-92% of the scene duration, leaving quiet breath pause
-        spoken_time = max(0.4, min(total_time, total_time * 0.90 if len(words) > 3 else total_time * 0.94))
+        # Accurately span the spoken scene duration without premature rushing
         weights = [_word_timing_weight(w) for w in words]
         w_sum = sum(weights) or 1.0
-        durations = [max(0.10, round((w / w_sum) * spoken_time, 3)) for w in weights]
+        durations = [max(0.10, round((w / w_sum) * total_time, 3)) for w in weights]
     return words, durations
 
 
@@ -651,17 +650,18 @@ def _poetry_caption_text(caption: TimedCaption) -> str:
     
     # Line 2 MUST wait until Line 1 finishes to eliminate double-speed premature highlighting
     line1_total_centis = sum(max(8, int(round(d * 100))) for d in l1_durs)
-    line2_parts = [f"{{\\k{line1_total_centis}}}"]
+    line2_formatted = []
     for idx, w in enumerate(l2_words):
         centis = max(8, int(round(l2_durs[idx] * 100)))
-        line2_parts.append(f"{{\\kf{centis}}}{_escape_ass(_display_word(w))}")
-    line2_text = " ".join(line2_parts)
+        line2_formatted.append(f"{{\\kf{centis}}}{_escape_ass(_display_word(w))}")
+    line2_text = f"{{\\k{line1_total_centis}}}" + " ".join(line2_formatted)
     
     return line1_text + r"\N" + line2_text
 
 
 def _reference_caption_text(caption: TimedCaption) -> str:
     return _poetry_caption_text(caption)
+
 
 
 def _creative_caption_events(caption: TimedCaption, caption_style: str = "creative_stack", video_format: str = "portrait") -> list[str]:
@@ -942,16 +942,6 @@ def _caption_text(value: str, preset: str = "modern") -> str:
     return value.upper()
 
 
-def _reference_caption_text(caption: TimedCaption) -> str:
-    words, durations = _caption_words_and_durations(caption)
-    if not words:
-        return ""
-    if len(words) <= 7:
-        return _karaoke_line(words, durations)
-    midpoint = max(1, min(len(words) - 1, round(len(words) * 0.52)))
-    line_1 = _karaoke_line(words[:midpoint], durations[:midpoint])
-    line_2 = _karaoke_line(words[midpoint:], durations[midpoint:])
-    return f"{line_1}\\N{line_2}"
 
 
 def _escape_ass(value: str) -> str:

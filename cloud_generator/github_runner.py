@@ -35,6 +35,7 @@ def run():
     parser.add_argument("--script", type=str, default="", help="Poem or script text")
     parser.add_argument("--script-file", type=str, default="", help="Path to text script file")
     parser.add_argument("--vibe", type=str, default="", help="Visual aesthetic / art style")
+    parser.add_argument("--niche", type=str, default="", help="Poetry Niche (e.g. typewriters_voice_nostalgia, dark_romantic_academia)")
     parser.add_argument("--publish-fb", type=str, default="true", help="Auto-publish to Facebook (true/false)")
     args = parser.parse_args()
 
@@ -62,8 +63,10 @@ def run():
         if vibe in ("Auto-Detect (Adaptive Multi-World)", "Typewriters Voice Nostalgia", ""):
             vibe = "typewriters_voice_nostalgia"
 
+        niche_in = args.niche.strip() or os.environ.get("NICHE_INPUT", "").strip()
         print(f"\n[Mode: Direct] Starting generation for: '{title}'", flush=True)
         print(f"Aesthetic Vibe: {vibe or 'Adaptive Multi-World'}", flush=True)
+        print(f"Poetry Niche: {niche_in or 'Auto-Detect'}", flush=True)
         print(f"Auto-Publish Facebook: {publish_fb}", flush=True)
 
         def on_prog(pct, msg):
@@ -76,7 +79,8 @@ def run():
                 script_text=script_content,
                 custom_vibe=vibe,
                 progress_callback=on_prog,
-                auto_publish_fb=publish_fb
+                auto_publish_fb=publish_fb,
+                niche_id=niche_in
             )
             render_time = round(time.time() - t0, 2)
             out_file = res.get("output_file", "")
@@ -113,9 +117,15 @@ def run():
             return
 
         target_job = None
+        now_epoch = time.time()
         for j in pending_jobs:
+            epoch = j.get("scheduled_epoch")
             sched = j.get("scheduled_time", "")
-            if not sched or sched <= now_str:
+            if epoch and isinstance(epoch, (int, float)):
+                if now_epoch >= epoch:
+                    target_job = j
+                    break
+            elif not sched or sched <= now_str:
                 target_job = j
                 break
         
@@ -124,11 +134,11 @@ def run():
 
         job_id = target_job.get("id")
         job_title = target_job.get("title", "Scheduled Post")
-        print(f"🎯 Processing queued job: '{job_title}' (ID: {job_id})...", flush=True)
+        print(f"🎯 Processing queued job: '{job_title}' (ID: {job_id}) | Niche: {target_job.get('niche_id')}...", flush=True)
 
         try:
             res = execute_single_job(job_id)
-            if res.get("status") == "COMPLETED":
+            if res.get("ok") or res.get("status") == "COMPLETED":
                 print(f"\n✅ Queued Job '{job_title}' COMPLETED!", flush=True)
                 print(f"   Output: {res.get('output_file')}", flush=True)
             else:

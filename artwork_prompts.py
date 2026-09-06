@@ -852,15 +852,21 @@ def _procedural_scene_prompt(line: str, scene_idx: int, total_scenes: int, vibe:
             "quiet rainy night with fine textural cross-hatching and warm amber light glowing on dark surfaces"
         ]
         
+        motifs = _extract_poetic_motifs(line)
+        poetic_subject = motifs.get("focal", "").strip() or motifs.get("scenery", "").strip()
+        
         env = environments_pool[scene_idx % len(environments_pool)]
         fig = wanderer_figures[(scene_idx * 3 + 1) % len(wanderer_figures)]
         atm = atmospheres[(scene_idx * 2) % len(atmospheres)]
         
         prompt = (
-            f"Editorial linocut woodblock illustration, Typewriters Voice art style, scratchboard engraving texture with fine ink cross-hatching. "
-            f"Featuring {env}, {fig}. {atm}. "
-            f"High contrast radiant amber and cadmium yellow light against deep midnight navy and slate blue, "
-            f"matte gouache print, vertical 9:16 portrait composition, masterpiece editorial illustration, no text, no letters, no words"
+            f"Contemporary editorial graphic illustration in the signature style of Typewriters Voice. "
+            f"Clean black ink line art with delicate cross-hatch shading and fine horizontal ripple textures, flat gouache color blocking. "
+            f"Depicting {env}, {fig}. {atm}. "
+            f"Poetic essence: {poetic_subject}. "
+            f"High contrast radiant golden amber and cadmium yellow lantern glow pooling against deep nocturnal indigo navy and slate blue. "
+            f"Vibrant accents of mustard yellow and crimson red, rich matte print, modern graphic storybook serigraph, "
+            f"vertical 9:16 portrait composition, masterpiece, no text, no words, no letters, no watermark, no photographic realism"
         )
         return prompt
 

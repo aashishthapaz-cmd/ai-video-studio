@@ -14,7 +14,7 @@ def generate_pollinations_image(prompt: str, output_path: Path, width: int = 108
     clean_prompt = prompt.replace("|", " ").strip()
     clean_prompt = " ".join(clean_prompt.split())
     encoded_prompt = urllib.parse.quote(clean_prompt)
-    url = f"https://image.pollinations.ai/prompt/{encoded_prompt}?width={width}&height={height}&model={model}&nologo=true&seed={seed}"
+    url = f"https://image.pollinations.ai/prompt/{encoded_prompt}?width={width}&height={height}&model={model}&nologo=true&enhance=false&seed={seed}"
     if api_key:
         url += f"&token={api_key}"
     
@@ -28,7 +28,7 @@ def generate_pollinations_image(prompt: str, output_path: Path, width: int = 108
     for attempt in range(retries):
         try:
             req = urllib.request.Request(url, headers=headers)
-            with urllib.request.urlopen(req, timeout=45) as resp:
+            with urllib.request.urlopen(req, timeout=50) as resp:
                 if resp.status == 200:
                     data = resp.read()
                     if len(data) > 5000: # Valid image check
@@ -42,7 +42,9 @@ def generate_pollinations_image(prompt: str, output_path: Path, width: int = 108
         except urllib.error.HTTPError as e:
             last_err = e
             if e.code == 429:
-                raise RuntimeError(f"Pollinations rate limit (HTTP 429)")
+                # Exponential backoff on rate limit
+                time.sleep(3.5 * (attempt + 1))
+                continue
             time.sleep(2.0 * (attempt + 1))
         except Exception as e:
             last_err = e

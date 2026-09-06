@@ -91,13 +91,13 @@ NICHE_REGISTRY: Dict[str, PoetryNiche] = {
         niche_id="typewriters_voice_nostalgia",
         name="Typewriters Voice Nostalgia",
         tagline="Bittersweet reflections, vintage storybook art, and quiet resilience",
-        description="Editorial linocut / woodblock print with fine ink cross-hatching, deep nocturnal navy skies, glowing amber lanterns, and breathy whisper voice.",
+        description="Contemporary editorial graphic illustration with clean pen-and-ink line art, flat gouache color blocking, deep nocturnal navy skies, glowing amber lanterns, and breathy whisper voice.",
         art=ArtisticVibeConfig(
             vibe_id="typewriters_voice_nostalgia",
-            display_name="Editorial Linocut & Woodblock Print",
-            medium="editorial linocut, woodblock print, scratchboard engraving, textured gouache",
-            palette="deep midnight navy, slate blue, warm glowing amber, cadmium yellow, ochre lanterns",
-            lighting="high contrast warm amber and cadmium yellow glow radiating against dark midnight slate sky",
+            display_name="Editorial Graphic Novel & Gouache Line Art",
+            medium="contemporary editorial graphic illustration, clean pen-and-ink linework with delicate cross-hatching and horizontal line ripples, flat gouache color blocking",
+            palette="deep midnight navy, slate blue, warm glowing amber, cadmium yellow, ochre lanterns, mustard yellow, crimson red",
+            lighting="high contrast warm golden amber and cadmium yellow glow radiating against dark midnight slate sky",
             motifs=[
                 "curved windswept bonsai tree on a snowy hill under fine ink cross-hatched night sky",
                 "giant surreal stone monolith rising between ancient European canal townhouses",
@@ -106,19 +106,19 @@ NICHE_REGISTRY: Dict[str, PoetryNiche] = {
                 "solitary wanderer in a yellow trenchcoat holding a bright umbrella on a misty bridge"
             ],
             prompt_prefix=(
-                "Masterpiece vertical 9:16 editorial storybook illustration, fine linocut and woodblock print, "
-                "scratchboard engraving texture, deep midnight navy and slate blue sky with fine ink line hatching, "
-                "high-contrast radiant warm amber and cadmium yellow lantern glow. Clean composition with spacious center for typography, "
-                "pure evocative artwork, no text, no words, no letters, no typography, no watermarks."
+                "Masterpiece vertical 9:16 contemporary editorial graphic illustration in the signature style of Typewriters Voice, "
+                "clean black ink line art with delicate cross-hatch shading and fine horizontal ripple textures, flat gouache color blocking, "
+                "deep nocturnal indigo navy and slate blue sky with fine ink line hatching, high-contrast radiant warm golden amber and cadmium yellow lantern glow, "
+                "vibrant accents of mustard yellow and crimson red, rich matte print, pure evocative artwork, no text, no words, no letters, no typography, no watermarks, no photographic realism."
             )
         ),
         voice=VoiceConfig(
             engine="f5_cloning",
             voice_id="assets/reference_voice/whishper_prompt.wav",
-            rate="0.82",
-            pitch="-2Hz",
-            nfe_step=32,
-            tone_description="Intimate, breathy, calm whisper with slow poetic cadence"
+            rate="0.74",
+            pitch="-3Hz",
+            nfe_step=36,
+            tone_description="Intimate, breathy, deeply calm whisper with slow poetic cadence"
         ),
         caption=CaptionConfig(
             style_name="ReferenceCursive",

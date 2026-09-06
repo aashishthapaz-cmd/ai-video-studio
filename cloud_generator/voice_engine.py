@@ -373,24 +373,26 @@ def extract_acoustic_word_durations(audio_path: Path, script_text: str, language
                     durations = []
                     for idx in range(len(w_segments)):
                         if idx < len(w_segments) - 1:
-                            # Inter-word span: starts at word i and ends when word i+1 begins
-                            dur = max(0.08, w_segments[idx + 1][1] - w_segments[idx][1])
+                            # Lead-in silence on first word is preserved so word transitions match acoustic onsets
+                            start_ref = 0.0 if idx == 0 else w_segments[idx][1]
+                            dur = max(0.08, w_segments[idx + 1][1] - start_ref)
                         else:
-                            dur = max(0.12, w_segments[idx][2] - w_segments[idx][1])
+                            start_ref = 0.0 if idx == 0 else w_segments[idx][1]
+                            dur = max(0.15, audio_dur - start_ref)
                         durations.append(round(dur, 3))
                     return durations
                     
-                total_acoustic = max(0.4, w_segments[-1][2] - w_segments[0][1])
+                total_acoustic = max(0.4, audio_dur)
                 weights = [max(1, len(w)) for w in script_words]
                 w_sum = sum(weights) or 1.0
                 return [max(0.08, round((w / w_sum) * total_acoustic, 3)) for w in weights]
         except Exception:
             pass
             
-    spoken_dur = max(0.4, audio_dur * 0.90)
+    total_time = max(0.4, audio_dur)
     weights = [max(1, len(w)) for w in script_words]
     w_sum = sum(weights) or 1.0
-    return [max(0.08, round((w / w_sum) * spoken_dur, 3)) for w in weights]
+    return [max(0.08, round((w / w_sum) * total_time, 3)) for w in weights]
 
 _CACHED_F5 = None
 
@@ -436,8 +438,8 @@ def synthesize_f5_tts_batch(scenes: list, audio_dir: Path, reference_audio: Path
                 ref_text=ref_text,
                 gen_text=text,
                 file_wave=str(out_file),
-                speed=0.82,
-                nfe_step=32
+                speed=0.74,
+                nfe_step=36
             )
         except TypeError:
             f5.infer(
@@ -487,7 +489,7 @@ def synthesize_xtts_v2_batch(scenes: list, audio_dir: Path, reference_audio: Pat
             speaker_wav=str(ref_path.resolve()),
             language="en",
             file_path=str(out_file),
-            speed=0.82
+            speed=0.75
         )
         dur = get_audio_duration(out_file)
         s["audio_path"] = str(out_file)
@@ -572,7 +574,7 @@ def synthesize_project_audio(scenes: list, audio_dir: Path, voice_override: str 
                 voice = cfg.get("nepali_voice", "ne-NP-SagarNeural")
             else:
                 voice = voice_override if (voice_override and not voice_override.endswith(".wav")) else cfg.get("english_voice", "en-US-ChristopherNeural")
-            rate = rate_override or cfg.get("voice_rate", "-15%")
+            rate = rate_override or cfg.get("voice_rate", "-18%")
             pitch = pitch_override or cfg.get("voice_pitch", "-3Hz")
             
             info = asyncio.run(_synthesize_edge_line(narration, voice, rate, pitch, out_file))

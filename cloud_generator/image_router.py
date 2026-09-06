@@ -149,12 +149,13 @@ def generate_all_scene_images(scenes: list, assets_dir: Path, progress_callback=
                     scene["image_path"] = str(img_path)
                     scene["image_engine"] = res["engine"]
                     success = True
+                    time.sleep(1.5)
                     break
                 else:
                     logger.warning(f"Duplicate image hash detected for {scene_id} (identical to {seen_hashes[img_hash]}). Regenerating with new seed...")
-                    time.sleep(1.0)
+                    time.sleep(1.5)
             else:
-                time.sleep(1.0)
+                time.sleep(1.5)
                 
         if not success:
             # Distinct fallback canvas with unique per-scene palette
