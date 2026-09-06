@@ -364,21 +364,30 @@ def extract_acoustic_word_durations(audio_path: Path, script_text: str, language
             w_segments = []
             for s in segments:
                 for w in (s.words or []):
-                    if w.word.strip():
-                        w_segments.append((w.word.strip(), w.start, w.end, max(0.08, w.end - w.start)))
+                    clean_w = w.word.strip()
+                    if clean_w:
+                        w_segments.append((clean_w, max(0.0, float(w.start)), max(0.0, float(w.end))))
                         
             if w_segments:
                 if len(w_segments) == len(script_words):
-                    return [w[3] for w in w_segments]
+                    durations = []
+                    for idx in range(len(w_segments)):
+                        if idx < len(w_segments) - 1:
+                            # Inter-word span: starts at word i and ends when word i+1 begins
+                            dur = max(0.08, w_segments[idx + 1][1] - w_segments[idx][1])
+                        else:
+                            dur = max(0.12, w_segments[idx][2] - w_segments[idx][1])
+                        durations.append(round(dur, 3))
+                    return durations
                     
-                total_acoustic = sum(w[3] for w in w_segments)
+                total_acoustic = max(0.4, w_segments[-1][2] - w_segments[0][1])
                 weights = [max(1, len(w)) for w in script_words]
                 w_sum = sum(weights) or 1.0
                 return [max(0.08, round((w / w_sum) * total_acoustic, 3)) for w in weights]
-        except Exception as e:
+        except Exception:
             pass
             
-    spoken_dur = max(0.4, audio_dur * 0.88)
+    spoken_dur = max(0.4, audio_dur * 0.90)
     weights = [max(1, len(w)) for w in script_words]
     w_sum = sum(weights) or 1.0
     return [max(0.08, round((w / w_sum) * spoken_dur, 3)) for w in weights]

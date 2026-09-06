@@ -602,8 +602,8 @@ def _karaoke_line(words: list[str], durations: list[float]) -> str:
     for index, word in enumerate(words):
         if index:
             parts.append(" ")
-        centis = max(8, int(durations[index] * 100))
-        parts.append(f"{{\\k{centis}}}{_escape_ass(_display_word(word))}")
+        centis = max(8, int(round(durations[index] * 100)))
+        parts.append(f"{{\\kf{centis}}}{_escape_ass(_display_word(word))}")
     return "".join(parts)
 
 
@@ -614,8 +614,8 @@ def _caption_words_and_durations(caption: TimedCaption):
     durations = list(caption.word_durations[: len(words)])
     if len(durations) < len(words):
         total_time = max(0.5, caption.end - caption.start)
-        # Natural spoken time accounts for ~85-90% of the scene duration, leaving quiet breath pause
-        spoken_time = max(0.4, min(total_time, total_time * 0.88 if len(words) > 3 else total_time * 0.92))
+        # Natural spoken time accounts for ~88-92% of the scene duration, leaving quiet breath pause
+        spoken_time = max(0.4, min(total_time, total_time * 0.90 if len(words) > 3 else total_time * 0.94))
         weights = [_word_timing_weight(w) for w in words]
         w_sum = sum(weights) or 1.0
         durations = [max(0.10, round((w / w_sum) * spoken_time, 3)) for w in weights]

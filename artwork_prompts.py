@@ -156,30 +156,32 @@ db = ArtisticDatabase()
 
 ARTISTIC_VIBES = {
     "typewriters_voice_nostalgia": {
-        "name": "Typewriters Voice Nostalgic Poetry",
-        "medium_suffix": "authentic macro still-life photography, Typewriters Voice aesthetic, vintage manual typewriter keys and carriage, aged parchment paper, warm golden hour window light, steaming ceramic coffee cup, dried pressed botanicals, 35mm film photography, Kodak Portra 400 tones, shallow depth of field, f/1.8 bokeh, vertical 9:16 portrait composition, fill entire frame, no watermark, no text, no letters, no words",
+        "name": "Typewriters Voice Nostalgic Nocturne",
+        "medium_suffix": "Ligne claire storybook illustration, Typewriters Voice aesthetic, fine ink cross-hatching and textured gouache, high contrast warm amber and cadmium orange light pooling against deep indigo and slate blue night, cozy nocturnal sanctuary, vertical 9:16 portrait composition, photorealistic storybook art, no text, no letters, no words",
         "palettes": [
-            "warm vintage sepia, aged parchment cream, dark antique walnut, soft golden amber glow, muted espresso",
-            "nostalgic coffee stain beige, warm terracotta, deep rain-slicked slate, candle amber, antique brass",
-            "soft dusk lavender, warm honey lamplight, muted rosewood, vintage linen white, shadow navy",
-            "rich dark oak, aged ivory paper, roasted coffee brown, glowing beeswax gold, soft copper"
+            "deep midnight navy, warm glowing amber, cadmium orange lantern, slate blue, aged book cream",
+            "rain-slicked slate indigo, golden lamplight ochre, warm terracotta brick, dark charcoal, soft candlelight",
+            "nocturnal Prussian blue, luminous honey yellow, burnt sienna, cozy bookshop amber, starlit navy",
+            "foggy river slate, glowing gaslamp gold, antique timber walnut, deep ocean midnight, soft candle cream"
         ],
         "lighting": [
-            "warm flickering candlelight and soft tungsten lamplight illuminating a rustic wooden writing desk with rain on window",
-            "hazy golden hour sunset streaming across dark oak desk casting soft long diagonal shadows on parchment paper",
-            "moody atmospheric evening interior with warm amber streetlamp bokeh reflecting through rain-streaked window",
-            "soft morning dawn light filtering through sheer linen curtains onto vintage typewriter keys and coffee steam"
+            "warm golden amber interior light spilling from shop windows onto textured dark cobblestones in evening drizzle",
+            "soft glowing vintage streetlamps and candle flames casting warm amber reflections across dark rippling water",
+            "intimate warm lantern glow cutting through quiet misty night beneath a luminous crescent moon and stars",
+            "warm orange light radiating from cozy cottage windows into deep midnight indigo countryside"
         ],
-        "particles": ["subtle authentic 35mm film grain and soft golden dust motes", "delicate warm steam gently rising from ceramic coffee mug", "rain streaks running down dark window glass with creamy warm bokeh"],
+        "particles": ["fine white diagonal rain hatch lines in dark sky", "delicate twinkling stars and soft golden dust particles", "gentle chimney smoke rising into deep indigo midnight heavens"],
         "environments": [
-            "an antique Olympia manual typewriter resting on a rustic dark walnut desk with aged parchment paper inserted in the roller, a steaming ceramic mug of dark coffee, and a flickering amber candle with rain on the window",
-            "a top-down flat lay view of vintage typewriter mechanical round keys, textured deckle-edge kraft paper, a vintage brass fountain pen, and a small vase of dried lavender sprigs on dark wood",
-            "a close-up macro view of vintage typewriter keycaps in foreground with soft focus, a glowing beeswax candle, and an open antique hardcover book with reading glasses at dusk",
-            "an antique black typewriter carriage loaded with ivory linen paper, a warm cup of chamomile tea, and scattered vintage polaroid prints under warm afternoon sunbeams",
-            "a cozy writing desk corner beside a rain-streaked window with a vintage Remington typewriter, a steaming espresso cup, and pressed autumn maple leaves",
-            "a vintage manual typewriter resting on weathered oak planks beside a glowing brass desk lamp, glass inkwell, and dried eucalyptus sprigs",
-            "an intimate over-the-roller perspective of textured cotton parchment paper loaded in vintage typewriter carriage with warm candle flame and coffee cup",
-            "a nostalgic attic writing desk with an antique Hermes typewriter, dried baby's breath flowers in a ceramic jar, and soft golden sunset light through dormer window"
+            "an illuminated arched wooden bookstore facade with warm amber bookshelves and paper prints on a dark cobblestone lane",
+            "a solitary cozy red brick cottage with glowing warm amber windows and smoking stone chimney under a starlit midnight sky",
+            "an ancient stone arch bridge over a quiet canal with glowing gas lanterns casting long golden amber reflections on dark water",
+            "a solitary weathered stone lighthouse atop a dramatic coastal cliff beaming a bright warm golden light ray across dark ocean waves",
+            "a cozy European corner bistro with warm amber light glowing from the dining terrace and a solitary coffee cup on round table",
+            "a quaint Parisian bookstall kiosk along the stone riverwall illuminated by a glowing hanging lantern at dusk",
+            "a rustic wooden A-frame cabin nestled in quiet pine woods with warm golden light glowing through the front glass facade",
+            "a solitary wooden boat dock with a single lantern extending into a calm misty midnight lake beneath glowing crescent moon",
+            "a vintage illuminated railway carriage window with warm amber glow looking out into dark passing countryside hills",
+            "a solitary giant ancient oak tree with glowing amber autumn foliage on a quiet grassy knoll beneath starry midnight cosmos"
         ]
     },
     "ghibli_lush_countryside": {
@@ -805,54 +807,78 @@ def _procedural_scene_prompt(line: str, scene_idx: int, total_scenes: int, vibe:
     vibe_id = vibe.get("id", "") or ""
     vibe_name = vibe.get("name", "") or ""
     
-    # Specialized generator for Typewriters Voice authentic photo aesthetic
+    # Specialized generator for Typewriters Voice authentic European storybook illustration aesthetic
     if "typewriter" in vibe_id.lower() or "typewriter" in vibe_name.lower():
-        typewriter_models = [
-            "an antique Olympia SM manual typewriter with round metallic keys",
-            "a vintage Remington Quiet-Riter typewriter with dark enamel frame",
-            "a classic Royal portable typewriter with chrome carriage lever",
-            "an antique Hermes 3000 manual typewriter with circular keycaps",
-            "a vintage Underwood typewriter with authentic mechanical typebars and ribbon spools"
-        ]
-        papers = [
-            "clean blank aged ivory cotton parchment paper rolled into the carriage platen",
-            "textured deckle-edge kraft paper resting flat beside the mechanical keyboard",
-            "aged linen stationery paper with delicate tactile texture loaded in the typewriter",
-            "clean cream-colored parchment sheet inserted into the vintage roller ready to type"
-        ]
-        props = [
-            "a steaming ceramic mug of dark roast coffee with delicate steam, a glowing amber beeswax candle, and a small glass vase of dried lavender",
-            "a vintage brass fountain pen, an open antique hardcover journal with reading glasses, and pressed autumn maple leaves",
-            "a warm flickering candle in a glass jar, a ceramic cup of chamomile tea, and scattered vintage polaroid photos",
-            "a small bouquet of dried baby's breath flowers, a brass desk clock, and a glass inkwell resting on the dark wooden desk",
-            "a steaming espresso cup with rich crema, dried eucalyptus sprigs, and a lit pillar candle casting warm highlights"
-        ]
-        backdrops = [
-            "a dark rain-streaked windowpane in background with soft warm city streetlamp bokeh",
-            "warm golden hour sunlight streaming across the rustic dark oak desk casting soft long diagonal shadows",
-            "a cozy moody evening interior with warm tungsten Edison lamplight glowing on polished walnut wood",
-            "soft gentle morning daylight filtering through sheer linen curtains onto the desk surface"
-        ]
-        camera_angles = [
-            "Macro close-up photography focusing on typewriter keycaps and paper roller, shallow depth of field, f/1.8 bokeh",
-            "Top-down flat lay still-life composition of typewriter, paper, coffee cup, and dried botanicals",
-            "Cinematic 45-degree angle capturing the mechanical carriage, glowing candle flame, and rain-slicked window background",
-            "Intimate over-the-roller perspective highlighting textured paper and warm desk atmosphere",
-            "Close-up detail shot with crisp focal point on parchment paper and soft dreamy background blur"
+        environments_pool = [
+            # Bookstores, Kiosks & Libraries
+            "an illuminated arched wooden bookstore facade with warm amber bookshelves and illustrated art prints on a dark cobblestone lane",
+            "a quaint Parisian bookstall kiosk along the stone riverwall illuminated by a glowing hanging lantern at dusk",
+            "a cozy second-hand bookstore storefront on an old stone street with stacks of vintage books lit by glowing streetlamp",
+            "an intimate corner bookshop with warm yellow light spilling from large multi-pane display windows onto wet cobblestones",
+            "a cozy antiquarian library alcove with oak bookshelves, glowing banker's lamp, and rain against tall arched window",
+            
+            # Cottages, Cabins & Shelters
+            "a solitary cozy red brick cottage with glowing warm amber windows and smoking stone chimney under a starlit midnight sky",
+            "a rustic wooden A-frame cabin nestled in quiet evergreen pine woods with warm golden light glowing through glass facade",
+            "a solitary stone cottage on a quiet grassy hillside with warm amber light shining from the window beneath crescent moon",
+            "a charming English countryside cottage with blooming window boxes lit by warm lantern light on a winding stone path",
+            "a cozy seaside dune cottage with warm yellow light glowing against the dark ocean horizon and soft starry mist",
+            
+            # Bridges, Canals & Rivers
+            "an ancient stone arch bridge over a quiet canal with glowing gas lanterns casting long golden amber reflections on dark water",
+            "a solitary wooden boat dock with a single glowing lantern extending into a calm misty midnight lake beneath crescent moon",
+            "a cobblestone riverside embankment flanked by weeping willow trees and illuminated streetlamps reflecting on rippling river",
+            "a romantic European canal alley at night with warm lamp glow reflecting off historic stone walls into quiet dark water",
+            "a historic pedestrian bridge over a misty river overlooking distant glowing silhouettes of old town spires",
+            
+            # Lighthouses, Coastal Cliffs & Harbors
+            "a solitary weathered stone lighthouse atop a dramatic coastal cliff beaming a bright warm golden light ray across dark ocean waves",
+            "a quiet harbor pier at midnight with small wooden fishing dories moored under warm glowing harbor lanterns",
+            "a solitary wooden bench on an ocean overlook cliff bathed in the sweeping warm beam of a distant lighthouse under starry sky",
+            
+            # Cafes, Bistros & Late-Night Sanctuaries
+            "a cozy European corner bistro with warm amber light glowing from the dining terrace and a solitary coffee cup on round table",
+            "a quaint nocturnal street bakery with warm cadmium-yellow light showing fresh bread and pastries through steam-fogged glass",
+            "a quiet cobblestone street cafe beneath a striped canvas awning in evening drizzle with glowing Edison lanterns",
+            
+            # Journeys, Trains & Waypoints
+            "a vintage illuminated railway carriage window with warm amber glow looking out into dark passing countryside hills",
+            "a quiet European railway station platform at midnight with an antique station clock and glowing iron lantern in mist",
+            "a solitary traveler with a small suitcase waiting beside a warm illuminated countryside bus shelter under stars",
+            
+            # Ancient Trees, Meadows & Nocturnal Nature
+            "a solitary giant ancient oak tree with glowing amber autumn foliage on a quiet grassy knoll beneath starry midnight cosmos",
+            "a wooden park bench beneath a glowing streetlamp beside a peaceful dark pond with floating golden leaves",
+            "a solitary hilltop stone overlook gazing at distant glowing city skyline beneath shooting stars"
         ]
         
-        tw_model = typewriter_models[scene_idx % len(typewriter_models)]
-        paper = papers[(scene_idx + 1) % len(papers)]
-        prop = props[(scene_idx + 2) % len(props)]
-        backdrop = backdrops[(scene_idx + 3) % len(backdrops)]
-        angle = camera_angles[scene_idx % len(camera_angles)]
+        wanderer_figures = [
+            "a solitary figure in an ochre yellow coat browsing the warm shop display from behind",
+            "a solitary wanderer in a yellow raincoat walking peacefully along the stone path toward the warm light",
+            "a solitary traveler holding a red umbrella gazing out over the calm midnight water",
+            "a solitary person in a warm yellow trenchcoat standing quietly beneath the glowing streetlamp",
+            "a solitary figure seated on the wooden bench contemplating the starry night sky",
+            "a solitary traveler walking along the rain-slicked cobblestones under the warm lantern glow",
+            "a solitary wanderer in a yellow coat standing on the stone bridge looking at the water reflections"
+        ]
+        
+        atmospheres = [
+            "moody deep midnight indigo and slate navy night sky with fine white diagonal rain hatch lines",
+            "deep dark starlit night sky with a luminous yellow crescent moon and delicate twinkling stars",
+            "peaceful nocturnal atmosphere with soft evening mist and gentle golden lantern glow",
+            "atmospheric twilight gradient from deep Prussian blue to dark indigo with distant shooting star",
+            "quiet rainy night with fine textural cross-hatching and warm amber light pooling across wet cobblestones"
+        ]
+        
+        env = environments_pool[scene_idx % len(environments_pool)]
+        fig = wanderer_figures[(scene_idx * 3 + 1) % len(wanderer_figures)]
+        atm = atmospheres[(scene_idx * 2) % len(atmospheres)]
         
         prompt = (
-            f"Authentic 35mm analog film still-life photography, Typewriters Voice aesthetic. "
-            f"Featuring {tw_model} on a rustic dark wooden desk, with {paper}. "
-            f"Accompanied by {prop}, {backdrop}. {angle}. "
-            f"Kodak Portra 400 warm color palette, subtle natural film grain, shallow depth of field, f/1.8 bokeh, "
-            f"vertical 9:16 portrait composition, photorealistic, no text, no letters, no watermark, no writing"
+            f"Ligne claire storybook illustration, Typewriters Voice aesthetic, fine ink cross-hatching and textured gouache. "
+            f"Featuring {env}, {fig}. {atm}. "
+            f"High contrast warm amber and cadmium orange light pooling against deep indigo and slate blue night, "
+            f"cozy nocturnal sanctuary, vertical 9:16 portrait composition, photorealistic storybook art, no text, no letters, no words"
         )
         return prompt
 
