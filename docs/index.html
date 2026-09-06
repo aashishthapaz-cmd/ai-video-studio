@@ -414,7 +414,15 @@ Breathe in the silence and let peace return."></textarea>
 
       const interval = parseInt(document.getElementById('bulkInterval').value, 10);
       const defaultVibe = document.getElementById('defaultVibe').value;
-      const chunks = raw.split(/\n\s*---+\s*\n|\n{2,}(?=TITLE:|VIBE:|\S)/gi);
+      
+      let chunks = [];
+      if (/(?:^|\n)\s*\d+[\.\)]\s+/i.test(raw)) {
+        chunks = raw.split(/(?=(?:^|\n)\s*\d+[\.\)]\s+)/gi);
+      } else if (/\n\s*(?:---+|===+|###+)\s*\n/.test(raw)) {
+        chunks = raw.split(/\n\s*(?:---+|===+|###+)\s*\n/gi);
+      } else {
+        chunks = raw.split(/\n\s*\n+/g);
+      }
 
       let currTime = new Date();
       currTime.setMinutes(currTime.getMinutes() + 10); // First post in 10 mins
@@ -426,13 +434,29 @@ Breathe in the silence and let peace return."></textarea>
 
         let title = '';
         let vibe = defaultVibe;
-        let scriptLines = [];
+        let lines = text.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+        if (!lines.length) return;
 
-        text.split('\n').forEach(line => {
-          const l = line.trim();
-          if (l.toLowerCase().startsWith('title:')) title = l.substring(6).trim();
-          else if (l.toLowerCase().startsWith('vibe:')) vibe = l.substring(5).trim();
-          else scriptLines.push(line);
+        let firstLine = lines[0];
+        let match = firstLine.match(/^(?:#?\d+[\.\)\-:]\s*|title:\s*)(.*)$/i);
+        let bodyLines = [];
+
+        if (match && lines.length > 1) {
+          title = match[1].trim();
+          bodyLines = lines.slice(1);
+        } else {
+          bodyLines = lines;
+        }
+
+        let scriptLines = [];
+        bodyLines.forEach(line => {
+          if (line.toLowerCase().startsWith('title:')) {
+            title = line.substring(6).trim();
+          } else if (line.toLowerCase().startsWith('vibe:') || line.toLowerCase().startsWith('theme:')) {
+            vibe = line.substring(5).trim();
+          } else {
+            scriptLines.push(line);
+          }
         });
 
         const scriptText = scriptLines.join('\n').trim();
@@ -445,7 +469,7 @@ Breathe in the silence and let peace return."></textarea>
           id: 'job_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
           title: title,
           script_text: scriptText,
-          vibe: vibe,
+          vibe: vibe || 'Auto-Detect',
           scheduled_time: timeStr,
           status: 'PENDING',
           created_at: new Date().toISOString()

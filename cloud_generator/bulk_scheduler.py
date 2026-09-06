@@ -84,12 +84,23 @@ def parse_bulk_scripts(
     default_theme: str = "auto",
     default_page_ids: list = None
 ) -> list:
-    chunks = re.split(r'\n\s*(?:---+|===+|###+)\s*\n', raw_text.strip())
+    text = raw_text.strip()
+    if not text:
+        return []
+
+    # Smart chunk splitting: numbered items (1. , 2. ), separator lines (---), or double linebreaks
+    if re.search(r'(?:^|\n)\s*\d+[\.\)]\s+', text):
+        chunks = re.split(r'(?=(?:^|\n)\s*\d+[\.\)]\s+)', text)
+    elif re.search(r'\n\s*(?:---+|===+|###+)\s*\n', text):
+        chunks = re.split(r'\n\s*(?:---+|===+|###+)\s*\n', text)
+    else:
+        chunks = re.split(r'\n\s*\n+', text)
+
     raw_items = []
     
     for chunk in chunks:
-        text = chunk.strip()
-        if not text:
+        c_text = chunk.strip()
+        if not c_text:
             continue
             
         title = None
@@ -100,8 +111,21 @@ def parse_bulk_scripts(
         script_lines = []
         
         in_script = False
-        lines = text.split("\n")
-        for line in lines:
+        lines = [l.strip() for l in c_text.split("\n") if l.strip()]
+        if not lines:
+            continue
+
+        first_line = lines[0]
+        # Match "1. Title" or "1) Title" or "#1 Title" or "Title: ..."
+        m = re.match(r'^(?:#?\d+[\.\)\-:]\s*|title:\s*)(.*)$', first_line, re.IGNORECASE)
+        if m and len(lines) > 1:
+            title = m.group(1).strip()
+            body_lines = lines[1:]
+        else:
+            title = None
+            body_lines = lines
+
+        for line in body_lines:
             line_str = line.strip()
             if not in_script:
                 if line_str.lower().startswith("title:"):
@@ -133,8 +157,8 @@ def parse_bulk_scripts(
             continue
             
         if not title:
-            first_line = script_lines[0].strip() if script_lines else "Poetic Reflection"
-            title = first_line[:40].rstrip(".,!? ")
+            first_l = script_lines[0].strip() if script_lines else "Poetic Reflection"
+            title = first_l[:40].rstrip(".,!? ")
 
         raw_items.append({
             "title": title,
