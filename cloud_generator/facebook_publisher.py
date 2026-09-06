@@ -77,6 +77,25 @@ def _build_multipart_payload(fields: dict, file_field: str, file_path: Path):
     }
     return headers, bytes(body)
 
+def format_typewriter_facebook_caption(title: str, poem_text: str, custom_hashtags: str = None) -> str:
+    """
+    Formats evocative Facebook post copy in the signature @Typewritersvoice style:
+    - Poetic hook line with aesthetic emoji
+    - Clean, beautifully spaced stanzas
+    - Poignant emotional reflection
+    - Curated aesthetic & poetry hashtags
+    """
+    raw_lines = [l.strip() for l in str(poem_text or "").splitlines() if l.strip()]
+    if not raw_lines:
+        return f"{title}\n\n#typewriter #poetry #love #healing #quotes #aesthetic #reels"
+
+    hook = f'“{raw_lines[0]}” 🍂✨'
+    poem_body = "\n".join(raw_lines)
+    reflection = "Save this for the days you need a gentle reminder. 📜🕯️\nTag someone who needs to hear this today."
+    hashtags = custom_hashtags or "#typewriter #typewritersvoice #poetry #spokenword #healing #mentalhealth #aesthetic #reels #quotes #love #heartbreak #peace"
+    
+    return f"{hook}\n\n{poem_body}\n\n{reflection}\n\n{hashtags}"
+
 def publish_video_to_facebook_page(
     video_path: Path,
     title: str,

@@ -9,14 +9,14 @@ try:
     from .voice_engine import synthesize_project_audio
     from .image_router import generate_all_scene_images
     from .video_compiler import compile_cloud_video, sanitize_title
-    from .facebook_publisher import publish_to_all_enabled_pages
+    from .facebook_publisher import publish_to_all_enabled_pages, format_typewriter_facebook_caption
 except ImportError:
     from config import WORKSPACE_DIR, load_settings
     from prompt_engine import plan_scenes_for_poem
     from voice_engine import synthesize_project_audio
     from image_router import generate_all_scene_images
     from video_compiler import compile_cloud_video, sanitize_title
-    from facebook_publisher import publish_to_all_enabled_pages
+    from facebook_publisher import publish_to_all_enabled_pages, format_typewriter_facebook_caption
 
 logger = logging.getLogger("CloudPipeline")
 
@@ -86,10 +86,11 @@ def run_cloud_pipeline(title: str, script_text: str, custom_vibe: str = "", prog
     if auto_publish_fb:
         report(92, "Auto-publishing video to configured Facebook Pages...")
         try:
+            fb_desc = format_typewriter_facebook_caption(title, script_text)
             fb_results = publish_to_all_enabled_pages(
                 video_path=final_output,
                 title=title,
-                description=script_text,
+                description=fb_desc,
                 target_page_ids=target_page_ids
             )
             success_count = sum(1 for r in fb_results if r.get("ok"))

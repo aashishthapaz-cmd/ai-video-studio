@@ -155,6 +155,33 @@ db = ArtisticDatabase()
 # =========================================================================
 
 ARTISTIC_VIBES = {
+    "typewriters_voice_nostalgia": {
+        "name": "Typewriters Voice Nostalgic Poetry",
+        "medium_suffix": "poetic fine-art photography, Typewriters Voice aesthetic, nostalgic 35mm analog film aesthetic, Kodak Portra 400 warm tone, gentle natural film grain, soft warm golden hour light leak, vertical 9:16 portrait composition, fill frame, no text, no letters, no watermark, no border",
+        "palettes": [
+            "warm vintage sepia, aged parchment cream, dark antique walnut, soft golden amber glow, muted espresso",
+            "nostalgic coffee stain beige, warm terracotta, deep rain-slicked slate, candle amber, antique brass",
+            "soft dusk lavender, warm honey lamplight, muted rosewood, vintage linen white, shadow navy"
+        ],
+        "lighting": [
+            "warm soft tungsten lamplight and flickering candle glow illuminating a rustic wooden writing desk with rain on window",
+            "hazy golden hour sunset with gentle 35mm warm lens flare grazing across nostalgic autumn landscape",
+            "moody atmospheric dusk streetlamp glow reflecting across wet cobblestones with soft misty bokeh"
+        ],
+        "particles": ["subtle authentic 35mm film grain and soft golden dust motes", "gentle rain streaks running down window glass with soft bokeh", "delicate warm steam rising into quiet evening air"],
+        "environments": [
+            "an antique vintage typewriter resting on a rustic wooden desk beside an open rain-streaked window and a warm flickering candle at dusk",
+            "a solitary silhouette holding an umbrella on a quiet cobblestone alleyway in evening rain with warm glowing streetlamps",
+            "a cozy vintage coffee shop corner table with an open journal, ceramic coffee mug, and rain tapping on large plate-glass window",
+            "two solitary silhouettes sitting close on a scenic grassy hill under a vast starry twilight purple sky at dusk",
+            "a peaceful autumn pathway lined with golden ginkgo and maple trees with gentle sunbeams piercing morning mist",
+            "a quiet bookstore reading nook with floor-to-ceiling dark mahogany shelves and warm amber brass lamp light",
+            "a vintage wooden windowsill with delicate sheer curtains billowing in late afternoon golden hour breeze",
+            "a lonely acoustic guitar and vintage record player resting on a warm wooden floor beside sunlit open French doors",
+            "a serene coastal cliff at sunset with wildflowers and a lone wooden bench overlooking the calm golden ocean horizon",
+            "a quiet attic writing desk with scattered antique books, brass magnifying glass, and warm candle glow at midnight"
+        ]
+    },
     "ghibli_lush_countryside": {
         "name": "Studio Ghibli Lush Naturalism",
         "medium_suffix": "Studio Ghibli fine-art animation background, hand-painted gouache landscape, vibrant lush nature, whimsical atmospheric storytelling, soft hand-drawn linework, vertical 9:16 composition, no text, no writing",
@@ -592,43 +619,43 @@ ARTISTIC_VIBES = {
 
 TOPIC_VIBE_POOLS = {
     "heartbreak_departure": [
-        "lofi_90s_neon_rain", "shin_hanga_woodblock", "edward_hopper_solitude", "shinkai_celestial_twilight",
+        "typewriters_voice_nostalgia", "lofi_90s_neon_rain", "shin_hanga_woodblock", "edward_hopper_solitude", "shinkai_celestial_twilight",
         "cozy_midnight_coffee_vinyl", "celtic_misty_highlands", "coastal_lighthouse_solitude", "wabi_sabi_zen_mist"
     ],
     "healing_restoration": [
-        "ghibli_lush_countryside", "monet_pastel_impressionism", "wabi_sabi_zen_mist", "nordic_fog_hygge",
+        "typewriters_voice_nostalgia", "ghibli_lush_countryside", "monet_pastel_impressionism", "wabi_sabi_zen_mist", "nordic_fog_hygge",
         "misty_bamboo_zen", "autumn_ginkgo_sanctuary", "mediterranean_golden_coast", "bioluminescent_wonderland"
     ],
     "father_family_legacy": [
-        "dark_academia_chiaroscuro", "vintage_70s_film", "autumn_ginkgo_sanctuary", "edward_hopper_solitude",
+        "typewriters_voice_nostalgia", "dark_academia_chiaroscuro", "vintage_70s_film", "autumn_ginkgo_sanctuary", "edward_hopper_solitude",
         "ghibli_lush_countryside", "cozy_midnight_coffee_vinyl", "celtic_misty_highlands"
     ],
     "destiny_faith_universe": [
-        "shinkai_celestial_twilight", "surrealist_dreamscape", "bioluminescent_wonderland", "coastal_lighthouse_solitude",
+        "typewriters_voice_nostalgia", "shinkai_celestial_twilight", "surrealist_dreamscape", "bioluminescent_wonderland", "coastal_lighthouse_solitude",
         "wabi_sabi_zen_mist", "shin_hanga_woodblock", "ghibli_lush_countryside"
     ],
     "mind_wisdom_clarity": [
-        "dark_academia_chiaroscuro", "wabi_sabi_zen_mist", "misty_bamboo_zen", "edward_hopper_solitude",
+        "typewriters_voice_nostalgia", "dark_academia_chiaroscuro", "wabi_sabi_zen_mist", "misty_bamboo_zen", "edward_hopper_solitude",
         "shinkai_celestial_twilight", "cozy_midnight_coffee_vinyl", "shin_hanga_woodblock"
     ],
     "solitude_night_reflection": [
-        "lofi_90s_neon_rain", "cozy_midnight_coffee_vinyl", "shinkai_celestial_twilight", "edward_hopper_solitude",
+        "typewriters_voice_nostalgia", "lofi_90s_neon_rain", "cozy_midnight_coffee_vinyl", "shinkai_celestial_twilight", "edward_hopper_solitude",
         "shin_hanga_woodblock", "nordic_fog_hygge", "coastal_lighthouse_solitude"
     ],
     "love_devotion_connection": [
-        "monet_pastel_impressionism", "ghibli_lush_countryside", "autumn_ginkgo_sanctuary", "mediterranean_golden_coast",
+        "typewriters_voice_nostalgia", "monet_pastel_impressionism", "ghibli_lush_countryside", "autumn_ginkgo_sanctuary", "mediterranean_golden_coast",
         "shinkai_celestial_twilight", "vintage_70s_film", "bioluminescent_wonderland"
     ],
     "courage_resilience_strength": [
-        "celtic_misty_highlands", "coastal_lighthouse_solitude", "wabi_sabi_zen_mist", "shinkai_celestial_twilight",
+        "typewriters_voice_nostalgia", "celtic_misty_highlands", "coastal_lighthouse_solitude", "wabi_sabi_zen_mist", "shinkai_celestial_twilight",
         "nordic_fog_hygge", "autumn_ginkgo_sanctuary"
     ],
     "time_impermanence_memory": [
-        "autumn_ginkgo_sanctuary", "vintage_70s_film", "shin_hanga_woodblock", "wabi_sabi_zen_mist",
+        "typewriters_voice_nostalgia", "autumn_ginkgo_sanctuary", "vintage_70s_film", "shin_hanga_woodblock", "wabi_sabi_zen_mist",
         "dark_academia_chiaroscuro", "edward_hopper_solitude", "celtic_misty_highlands"
     ],
     "general_poetic_odyssey": [
-        "ghibli_lush_countryside", "shinkai_celestial_twilight", "lofi_90s_neon_rain", "shin_hanga_woodblock",
+        "typewriters_voice_nostalgia", "ghibli_lush_countryside", "shinkai_celestial_twilight", "lofi_90s_neon_rain", "shin_hanga_woodblock",
         "edward_hopper_solitude", "monet_pastel_impressionism", "dark_academia_chiaroscuro", "wabi_sabi_zen_mist",
         "nordic_fog_hygge", "bioluminescent_wonderland", "vintage_70s_film", "surrealist_dreamscape",
         "autumn_ginkgo_sanctuary", "mediterranean_golden_coast", "celtic_misty_highlands", "cozy_midnight_coffee_vinyl"
@@ -861,14 +888,23 @@ def generate_plan(data: dict, settings: dict | None = None) -> dict:
     if not lines:
         return _fallback_plan(title, lines)
 
-    # 1. Classify Topic
+    # 1. Classify Topic & Vibe
+    explicit_vibe = str(data.get("vibe") or data.get("custom_vibe") or "").strip().lower()
     topic_category = _classify_poem_topic(title, lines)
-    candidate_vibes = TOPIC_VIBE_POOLS.get(topic_category, TOPIC_VIBE_POOLS["general_poetic_odyssey"])
     
-    # 2. Database Pick Novel Vibe (Enforces Anti-Repetition even on repeat topics!)
-    chosen_vibe_id = db.pick_novel_vibe(topic_category, candidate_vibes)
-    vibe = ARTISTIC_VIBES.get(chosen_vibe_id, ARTISTIC_VIBES["ghibli_lush_countryside"])
-    vibe["id"] = chosen_vibe_id
+    chosen_vibe_id = None
+    if explicit_vibe:
+        for vid in ARTISTIC_VIBES:
+            if vid in explicit_vibe or explicit_vibe in vid or explicit_vibe in ARTISTIC_VIBES[vid]["name"].lower():
+                chosen_vibe_id = vid
+                break
+                
+    if not chosen_vibe_id:
+        candidate_vibes = TOPIC_VIBE_POOLS.get(topic_category, TOPIC_VIBE_POOLS["general_poetic_odyssey"])
+        chosen_vibe_id = db.pick_novel_vibe(topic_category, candidate_vibes)
+        
+    vibe = ARTISTIC_VIBES.get(chosen_vibe_id, ARTISTIC_VIBES["typewriters_voice_nostalgia"])
+    vibe["id"] = chosen_vibe_id or "typewriters_voice_nostalgia"
 
     # 3. Try Ollama Planning
     models = _candidate_models(settings)

@@ -23,6 +23,7 @@ on:
         required: false
         type: choice
         options:
+          - 'Typewriters Voice Nostalgia'
           - 'Auto-Detect (Adaptive Multi-World)'
           - 'Makoto Shinkai Twilight'
           - 'Himalayan Mist Serenity'
@@ -33,7 +34,7 @@ on:
           - 'Ink Wash Zen Landscape'
           - 'Vintage 90s Anime Nostalgia'
           - 'Dark Romantic Academia'
-        default: 'Auto-Detect (Adaptive Multi-World)'
+        default: 'Typewriters Voice Nostalgia'
       publish_facebook:
         description: 'Publish automatically to connected Facebook Pages'
         required: false

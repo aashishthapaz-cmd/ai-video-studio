@@ -65,7 +65,8 @@ def plan_scenes_for_poem(title: str, script_text: str, custom_vibe: str = "") ->
         "title": title or "Cloud Poem",
         "script": script_text,
         "scenes": scenes,
-        "content_type": "poem"
+        "content_type": "poem",
+        "vibe": custom_vibe or "typewriters_voice_nostalgia"
     }
     
     # Generate rich 70-110 word artistic prompts using the aesthetic engine

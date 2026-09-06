@@ -289,6 +289,63 @@ def extract_acoustic_word_durations(audio_path: Path, script_text: str, language
     w_sum = sum(weights) or 1.0
     return [max(0.08, round((w / w_sum) * spoken_dur, 3)) for w in weights]
 
+_CACHED_KOKORO = None
+
+def get_kokoro_model():
+    global _CACHED_KOKORO
+    if _CACHED_KOKORO is None:
+        try:
+            from kokoro_onnx import Kokoro
+            target_dir = PROJECT_ROOT / "assets" / "models" / "kokoro"
+            target_dir.mkdir(parents=True, exist_ok=True)
+            model_path = target_dir / "kokoro-v0_19.onnx"
+            voices_path = target_dir / "voices.bin"
+            
+            if not voices_path.exists():
+                print("[Kokoro] Downloading voices.bin (~6MB)...")
+                urllib.request.urlretrieve("https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files/voices.bin", str(voices_path))
+            if not model_path.exists():
+                print("[Kokoro] Downloading kokoro-v0_19.onnx (~340MB)...")
+                urllib.request.urlretrieve("https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files/kokoro-v0_19.onnx", str(model_path))
+                
+            _CACHED_KOKORO = Kokoro(str(model_path), str(voices_path))
+        except Exception as e:
+            print(f"[Kokoro] Initialization warning: {e}")
+            _CACHED_KOKORO = False
+    return _CACHED_KOKORO
+
+def synthesize_kokoro_batch(scenes: list, audio_dir: Path) -> list:
+    """Synthesizes all scenes using Kokoro Neural Whisper voice blend on CPU."""
+    kokoro = get_kokoro_model()
+    if not kokoro:
+        raise RuntimeError("Kokoro model not available")
+        
+    try:
+        import soundfile as sf
+        s_adam = kokoro.get_voice_style("am_adam")
+        s_mich = kokoro.get_voice_style("am_michael")
+        blended_voice = 0.6 * s_adam + 0.4 * s_mich
+    except Exception:
+        blended_voice = "am_adam"
+
+    for i, s in enumerate(scenes):
+        scene_id = s.get("id", f"scene_{i+1:03d}")
+        out_file = audio_dir / f"{scene_id}.wav"
+        text = s.get("narration", "").strip()
+        if not text:
+            continue
+            
+        samples, sample_rate = kokoro.create(text, voice=blended_voice, speed=0.82, lang="en-us")
+        sf.write(str(out_file), samples, sample_rate)
+        
+        dur = get_audio_duration(out_file)
+        s["audio_path"] = str(out_file)
+        s["duration"] = round(dur, 2)
+        s["voice"] = "Kokoro Neural Whisper"
+        s["word_durations"] = extract_acoustic_word_durations(out_file, text, language="en")
+        
+    return scenes
+
 def synthesize_project_audio(scenes: list, audio_dir: Path) -> list:
     """
     Unified voice synthesis orchestrator:
@@ -297,14 +354,14 @@ def synthesize_project_audio(scenes: list, audio_dir: Path) -> list:
     """
     audio_dir.mkdir(parents=True, exist_ok=True)
     cfg = load_settings()
-    voice_pref = cfg.get("voice_engine", "edge_cloud")
+    voice_pref = cfg.get("voice_engine", "voxcpm_reference")
     
     # Check language of the overall script
     all_narrations = [s.get("narration", "").strip() for s in scenes if s.get("narration", "").strip()]
     full_sample = " ".join(all_narrations)
     overall_lang = detect_language(full_sample)
 
-    # 1. Fast Batch VoxCPM (if requested and available)
+    # 1. Fast Batch VoxCPM (Local GPU / exact reference audio clone)
     if (voice_pref in ("voxcpm_reference", "voxcpm")) and overall_lang == "en" and VOX_PY.exists() and DEFAULT_REFERENCE_VOICE.exists():
         try:
             print("[Voice] Synthesizing all scenes via Fast Batch VoxCPM2...")
@@ -313,7 +370,15 @@ def synthesize_project_audio(scenes: list, audio_dir: Path) -> list:
                 sc["word_durations"] = extract_acoustic_word_durations(Path(sc["audio_path"]), sc.get("narration", ""), language="en")
             return res_scenes
         except Exception as e:
-            print(f"[Voice] Local VoxCPM batch warning ({e}), falling back to per-scene synthesis...")
+            print(f"[Voice] Local VoxCPM batch warning ({e}), falling back to cloud neural voice...")
+
+    # 2. Kokoro Neural Whisper (100% Free Cloud VM execution on CPU)
+    if overall_lang == "en":
+        try:
+            print("[Voice] Synthesizing all scenes via Kokoro Neural Whisper CPU Engine...")
+            return synthesize_kokoro_batch(scenes, audio_dir)
+        except Exception as e:
+            print(f"[Voice] Kokoro synthesis warning ({e}), falling back to Edge TTS...")
 
     results = []
     
@@ -327,7 +392,7 @@ def synthesize_project_audio(scenes: list, audio_dir: Path) -> list:
         out_file = audio_dir / f"{scene_id}.mp3"
         scene_success = False
 
-        # 2. ElevenLabs Cloud API (per-scene)
+        # 3. ElevenLabs Cloud API (per-scene)
         if not scene_success and cfg.get("elevenlabs_api_key") and (voice_pref in ("elevenlabs", "cloud_cloning")):
             try:
                 res = synthesize_elevenlabs(narration, out_file, cfg["elevenlabs_api_key"])
@@ -338,22 +403,11 @@ def synthesize_project_audio(scenes: list, audio_dir: Path) -> list:
             except Exception as e:
                 print(f"[Voice] ElevenLabs warning for {scene_id}: {e}")
 
-        # 3. Fish Audio Cloud API (per-scene)
-        if not scene_success and cfg.get("fish_audio_api_key") and (voice_pref in ("fish_audio", "cloud_cloning")):
-            try:
-                res = synthesize_fish_audio(narration, out_file, cfg["fish_audio_api_key"])
-                scene["audio_path"] = res["audio_path"]
-                scene["duration"] = round(res["duration"], 2)
-                scene["voice"] = "Fish Audio Cloud"
-                scene_success = True
-            except Exception as e:
-                print(f"[Voice] Fish Audio warning for {scene_id}: {e}")
-
         # 4. Standard / Fallback: Edge Neural Cloud TTS (per-scene)
         if not scene_success:
             voice = cfg.get("nepali_voice", "ne-NP-SagarNeural") if scene_lang == "ne" else cfg.get("english_voice", "en-US-ChristopherNeural")
-            rate = cfg.get("voice_rate", "-4%")
-            pitch = cfg.get("voice_pitch", "+0Hz")
+            rate = cfg.get("voice_rate", "-8%")
+            pitch = cfg.get("voice_pitch", "-2Hz")
             
             info = asyncio.run(_synthesize_edge_line(narration, voice, rate, pitch, out_file))
             scene["audio_path"] = info["audio_path"]

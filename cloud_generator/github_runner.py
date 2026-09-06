@@ -59,8 +59,8 @@ def run():
     if script_content:
         title = args.title.strip() or "Poetic Whispers"
         vibe = args.vibe.strip()
-        if vibe == "Auto-Detect (Adaptive Multi-World)":
-            vibe = ""
+        if vibe in ("Auto-Detect (Adaptive Multi-World)", "Typewriters Voice Nostalgia", ""):
+            vibe = "typewriters_voice_nostalgia"
 
         print(f"\n[Mode: Direct] Starting generation for: '{title}'", flush=True)
         print(f"Aesthetic Vibe: {vibe or 'Adaptive Multi-World'}", flush=True)
