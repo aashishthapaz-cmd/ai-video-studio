@@ -962,8 +962,17 @@ def generate_plan(data: dict, settings: dict | None = None) -> dict:
     
     chosen_vibe_id = None
     if explicit_vibe:
+        norm_exp = explicit_vibe.replace("_", " ").strip()
         for vid in ARTISTIC_VIBES:
-            if vid in explicit_vibe or explicit_vibe in vid or explicit_vibe in ARTISTIC_VIBES[vid]["name"].lower():
+            norm_vid = vid.replace("_", " ").strip()
+            norm_name = ARTISTIC_VIBES[vid].get("name", "").lower()
+            if (
+                norm_vid in norm_exp
+                or norm_exp in norm_vid
+                or ("typewriter" in norm_exp and "typewriter" in norm_vid)
+                or norm_exp in norm_name
+                or norm_name in norm_exp
+            ):
                 chosen_vibe_id = vid
                 break
                 
