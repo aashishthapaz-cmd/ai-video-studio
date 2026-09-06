@@ -68,13 +68,36 @@ def notify_job_start(job: dict):
     )
     return dispatch_alert(msg)
 
+def send_telegram_video(video_path: str, caption: str = "") -> dict:
+    cfg = load_settings()
+    token = cfg.get('telegram_bot_token', '').strip()
+    chat = cfg.get('telegram_chat_id', '').strip()
+    if not token or not chat:
+        return {'ok': False, 'error': 'Telegram bot token or chat ID is missing'}
+    p = Path(video_path)
+    if not p.exists():
+        return {'ok': False, 'error': f'Video file not found: {video_path}'}
+    url = f'https://api.telegram.org/bot{token}/sendVideo'
+    try:
+        with open(p, 'rb') as f:
+            r = requests.post(
+                url,
+                data={'chat_id': chat, 'caption': caption[:1024], 'parse_mode': 'Markdown'},
+                files={'video': f},
+                timeout=60
+            )
+        data = r.json()
+        return {'ok': data.get('ok', False), 'result': data}
+    except Exception as e:
+        return {'ok': False, 'error': str(e)}
+
 def notify_job_success(job: dict, fb_results: list, render_time: float, video_path: str = None):
     title = job.get('title', 'Untitled Video')
     lines = [
-        f"[Video Published Successfully]\n",
-        f"Title: {title}\n",
-        f"Total Render Time: {render_time:.1f}s\n",
-        f"Facebook Publishing Results:\n"
+        f"🎬 *Video Rendered & Ready!*\n\n",
+        f"📌 *Title:* {title}\n",
+        f"⚡ *Render Time:* {render_time:.1f}s\n\n",
+        f"📱 *Facebook Publishing Results:*\n"
     ]
     if not fb_results:
         lines.append("No Facebook pages were enabled for auto-posting.\n")
@@ -85,17 +108,23 @@ def notify_job_success(job: dict, fb_results: list, render_time: float, video_pa
                 post_id = res.get('post_id', 'N/A')
                 reel_id = res.get('reel_video_id', '')
                 url = f'https://facebook.com/{post_id}' if post_id != 'N/A' else 'Published'
-                lines.append(f"  - {page_name}: Posted Successfully!\n")
+                lines.append(f"  ✅ *{page_name}*: Posted Successfully!\n")
                 if reel_id:
-                    lines.append(f"    Reel ID: {reel_id}\n")
-                lines.append(f"    Link: {url}\n")
+                    lines.append(f"     Reel ID: `{reel_id}`\n")
+                lines.append(f"     Link: {url}\n")
             else:
                 err = res.get('error', 'Unknown error')
-                lines.append(f"  - {page_name}: FAILED\n")
-                lines.append(f"    Error: {err}\n")
-                lines.append(f"    Suggestion: Check Page Token permissions at Facebook Developer console.\n")
-    lines.append("\nVideo stored temporarily in cloud queue. Will auto-sync to local PC on next boot.")
-    return dispatch_alert(''.join(lines))
+                lines.append(f"  ❌ *{page_name}*: FAILED\n")
+                lines.append(f"     Error: `{err}`\n")
+    
+    caption_text = ''.join(lines)
+    # Deliver playable MP4 video directly to Telegram!
+    if video_path and Path(video_path).exists():
+        res_tg = send_telegram_video(video_path, caption=caption_text)
+        if res_tg.get('ok'):
+            return res_tg
+            
+    return dispatch_alert(caption_text)
 
 def notify_job_failure(job: dict, error_msg: str, stage: str = 'Video Generation'):
     title = job.get('title', 'Untitled Video')
