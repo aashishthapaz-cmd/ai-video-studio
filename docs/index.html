@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Autonomous Video Studio & Multi-Page Hub</title>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Autonomous Video Studio & Multi-Page Hub v2.5</title>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -308,8 +311,8 @@
     <div class="logo">
       <div class="logo-icon">🎬</div>
       <div>
-        <span>AUTONOMOUS VIDEO STUDIO</span>
-        <div style="font-size: 0.72rem; color: var(--text-muted); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; letter-spacing: normal;">24/7 Cloud Factory & Auto-Poster</div>
+        <span>AUTONOMOUS VIDEO STUDIO <small style="font-size: 0.65rem; background: rgba(99,102,241,0.25); color: #c7d2fe; padding: 2px 7px; border-radius: 6px; border: 1px solid rgba(99,102,241,0.4);">v2.5 Full Hub</small></span>
+        <div style="font-size: 0.72rem; color: var(--text-muted); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; letter-spacing: normal;">24/7 Cloud Factory • Bots Hub • Auto-Poster</div>
       </div>
     </div>
     <div class="header-actions">
@@ -590,7 +593,10 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
           </div>
           <div class="form-group">
             <label>GitHub Personal Access Token (PAT)</label>
-            <input type="password" id="ghToken" placeholder="github_pat_... or ghp_...">
+            <input type="password" id="ghToken" placeholder="ghp_... (Classic Token Recommended)">
+            <div style="margin-top: 6px; font-size: 0.75rem; color: var(--accent-cyan);">
+              👉 <strong>Recommended (30 seconds):</strong> <a href="https://github.com/settings/tokens/new?scopes=repo,workflow&description=AI_Video_Studio_Automation" target="_blank" style="color: #38bdf8; text-decoration: underline; font-weight: 700;">Click here to generate a 1-Click Classic Token (repo & workflow pre-selected)</a>
+            </div>
           </div>
         </div>
 
@@ -981,7 +987,12 @@ Your scheduled videos and Facebook publication updates will arrive here 🚀',
           return true;
         } else {
           const err = await res.json().catch(() => ({ message: res.statusText }));
-          alert('Workflow Dispatch Error: ' + (err.message || res.statusText));
+          const msg = err.message || res.statusText;
+          if (res.status === 403 && msg.includes('Resource not accessible')) {
+            alert('⚠️ GitHub Token Permission Error:\n\nYour Fine-Grained Token does not have write permissions for GitHub Actions workflows.\n\nFIX (Takes 30 seconds):\n1. Generate a Classic Token at:\nhttps://github.com/settings/tokens/new?scopes=repo,workflow&description=AI_Video_Studio_Automation\n2. Paste the new ghp_... token into the Settings tab and click Save.');
+          } else {
+            alert('Workflow Dispatch Error (' + res.status + '): ' + msg);
+          }
           return false;
         }
       } catch (err) {
