@@ -8,6 +8,17 @@
     "video_id": "",
     "post_url": "",
     "error": "Facebook Error (190): Got unexpected null",
+    "timestamp": "2026-09-06 16:45:23"
+  },
+  {
+    "title": "We'll Both Have Bad Days",
+    "video_path": "/home/runner/work/ai-video-studio/ai-video-studio/Output/We'll Both Have Bad Days.mp4",
+    "page_name": "My Page",
+    "page_id": "YOUR_PAGE_ID",
+    "success": false,
+    "video_id": "",
+    "post_url": "",
+    "error": "Facebook Error (190): Got unexpected null",
     "timestamp": "2026-09-06 14:20:32"
   },
   {
