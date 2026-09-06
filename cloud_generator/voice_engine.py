@@ -51,7 +51,7 @@ def get_audio_duration(file_path: Path) -> float:
 
 def synthesize_huggingface_space_clone(scenes: list, audio_dir: Path, reference_audio: Path = None, hf_token: str = None) -> list:
     """
-    Synthesizes voice cloning in the cloud via Hugging Face Spaces (Nymbo XTTS-v2, tonyassi)
+    Synthesizes voice cloning in the cloud via Hugging Face Spaces (mrfakename/E2-F5-TTS, Nymbo XTTS-v2, tonyassi)
     with the exact reference audio (whishper.wav).
     Zero local GPU requirement.
     """
@@ -65,8 +65,10 @@ def synthesize_huggingface_space_clone(scenes: list, audio_dir: Path, reference_
     
     client = None
     endpoint_name = "/predict"
+    chosen_space = None
     spaces_to_try = [
         ("Nymbo/Voice-Clone-Multilingual", "/predict"),
+        ("mrfakename/E2-F5-TTS", "/predict"),
         ("tonyassi/voice-clone", "/clone")
     ]
     
@@ -74,6 +76,7 @@ def synthesize_huggingface_space_clone(scenes: list, audio_dir: Path, reference_
         try:
             client = Client(sp, token=tok)
             endpoint_name = ep
+            chosen_space = sp
             print(f"[Voice] Connected to Hugging Face Voice Clone Space: {sp} (endpoint: {ep})")
             break
         except Exception as e:
@@ -96,7 +99,15 @@ def synthesize_huggingface_space_clone(scenes: list, audio_dir: Path, reference_
         print(f"[Voice HF] Synthesizing scene {i+1}/{len(scenes)}: '{text[:50]}...'")
         
         def _predict_hf():
-            if endpoint_name == "/predict":
+            if chosen_space == "mrfakename/E2-F5-TTS":
+                return client.predict(
+                    ref_audio=ref_file_handle,
+                    ref_text=WHISPER_REFERENCE_TRANSCRIPT,
+                    gen_text=text,
+                    remove_silence=False,
+                    api_name="/predict"
+                )
+            elif chosen_space == "Nymbo/Voice-Clone-Multilingual":
                 return client.predict(
                     text=text,
                     speaker_wav=ref_file_handle,
@@ -107,13 +118,13 @@ def synthesize_huggingface_space_clone(scenes: list, audio_dir: Path, reference_
                 return client.predict(
                     text=text,
                     audio=ref_file_handle,
-                    api_name="/clone"
+                    api_name=endpoint_name
                 )
 
         try:
             with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
                 future = executor.submit(_predict_hf)
-                res = future.result(timeout=25)
+                res = future.result(timeout=45)
                 
             if isinstance(res, dict):
                 audio_src = res.get("path") or res.get("url") or res.get("name")
@@ -126,7 +137,7 @@ def synthesize_huggingface_space_clone(scenes: list, audio_dir: Path, reference_
             dur = get_audio_duration(out_file)
             s["audio_path"] = str(out_file)
             s["duration"] = round(dur, 2)
-            s["voice"] = "Hugging Face Reference Whisper Clone"
+            s["voice"] = f"Hugging Face ({chosen_space}) Reference Whisper Clone"
             s["word_durations"] = extract_acoustic_word_durations(out_file, text, language="en")
         except Exception as e:
             print(f"[Voice HF] Scene {i+1} notice ({type(e).__name__}: {e}), generating via Edge Neural TTS...")
@@ -348,8 +359,18 @@ _CACHED_F5 = None
 def get_f5_engine(device="cpu"):
     global _CACHED_F5
     if _CACHED_F5 is None:
-        from f5_tts.api import F5TTS
-        _CACHED_F5 = F5TTS(model_type="F5-TTS_Base", device=device)
+        try:
+            from f5_tts.api import F5TTS
+            try:
+                _CACHED_F5 = F5TTS(device=device)
+            except TypeError:
+                try:
+                    _CACHED_F5 = F5TTS(model_type="F5-TTS_Base", device=device)
+                except TypeError:
+                    _CACHED_F5 = F5TTS()
+        except Exception as e:
+            print(f"[Voice] Error importing or initializing local F5-TTS: {e}")
+            raise e
     return _CACHED_F5
 
 def synthesize_f5_tts_batch(scenes: list, audio_dir: Path, reference_audio: Path = None) -> list:
@@ -371,14 +392,22 @@ def synthesize_f5_tts_batch(scenes: list, audio_dir: Path, reference_audio: Path
             continue
             
         print(f"[Voice F5-TTS] Synthesizing scene {i+1}/{len(scenes)}: '{text[:50]}...'")
-        f5.infer(
-            ref_file=str(ref_path.resolve()),
-            ref_text=WHISPER_REFERENCE_TRANSCRIPT,
-            gen_text=text,
-            file_wave=str(out_file),
-            speed=0.9,
-            nfe_step=16
-        )
+        try:
+            f5.infer(
+                ref_file=str(ref_path.resolve()),
+                ref_text=WHISPER_REFERENCE_TRANSCRIPT,
+                gen_text=text,
+                file_wave=str(out_file),
+                speed=0.9,
+                nfe_step=16
+            )
+        except TypeError:
+            f5.infer(
+                ref_file=str(ref_path.resolve()),
+                ref_text=WHISPER_REFERENCE_TRANSCRIPT,
+                gen_text=text,
+                file_wave=str(out_file)
+            )
         dur = get_audio_duration(out_file)
         s["audio_path"] = str(out_file)
         s["duration"] = round(dur, 2)
