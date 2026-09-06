@@ -129,25 +129,16 @@ def synthesize_huggingface_space_clone(scenes: list, audio_dir: Path, reference_
             s["voice"] = "Hugging Face Reference Whisper Clone"
             s["word_durations"] = extract_acoustic_word_durations(out_file, text, language="en")
         except Exception as e:
-            print(f"[Voice HF] Scene {i+1} notice ({type(e).__name__}: {e}), generating via Kokoro Neural Whisper...")
-            kokoro = get_kokoro_model()
-            if kokoro:
-                import soundfile as sf
-                try:
-                    s_adam = kokoro.get_voice_style("am_adam")
-                    s_mich = kokoro.get_voice_style("am_michael")
-                    blended = 0.6 * s_adam + 0.4 * s_mich
-                except Exception:
-                    blended = "am_adam"
-                samples, sample_rate = kokoro.create(text, voice=blended, speed=0.82, lang="en-us")
-                sf.write(str(out_file), samples, sample_rate)
-                dur = get_audio_duration(out_file)
-                s["audio_path"] = str(out_file)
-                s["duration"] = round(dur, 2)
-                s["voice"] = "Kokoro Neural Whisper"
-                s["word_durations"] = extract_acoustic_word_durations(out_file, text, language="en")
-            else:
-                raise e
+            print(f"[Voice HF] Scene {i+1} notice ({type(e).__name__}: {e}), generating via Edge Neural TTS...")
+            voice = "en-US-ChristopherNeural"
+            rate = "-8%"
+            pitch = "-2Hz"
+            info = asyncio.run(_synthesize_edge_line(text, voice, rate, pitch, out_file))
+            dur = get_audio_duration(out_file)
+            s["audio_path"] = str(out_file)
+            s["duration"] = round(dur, 2)
+            s["voice"] = voice
+            s["word_durations"] = extract_acoustic_word_durations(out_file, text, language="en")
         
     return scenes
 
@@ -352,63 +343,6 @@ def extract_acoustic_word_durations(audio_path: Path, script_text: str, language
     w_sum = sum(weights) or 1.0
     return [max(0.08, round((w / w_sum) * spoken_dur, 3)) for w in weights]
 
-_CACHED_KOKORO = None
-
-def get_kokoro_model():
-    global _CACHED_KOKORO
-    if _CACHED_KOKORO is None:
-        try:
-            from kokoro_onnx import Kokoro
-            target_dir = PROJECT_ROOT / "assets" / "models" / "kokoro"
-            target_dir.mkdir(parents=True, exist_ok=True)
-            model_path = target_dir / "kokoro-v0_19.onnx"
-            voices_path = target_dir / "voices.bin"
-            
-            if not voices_path.exists():
-                print("[Kokoro] Downloading voices.bin (~6MB)...")
-                urllib.request.urlretrieve("https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files/voices.bin", str(voices_path))
-            if not model_path.exists():
-                print("[Kokoro] Downloading kokoro-v0_19.onnx (~340MB)...")
-                urllib.request.urlretrieve("https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files/kokoro-v0_19.onnx", str(model_path))
-                
-            _CACHED_KOKORO = Kokoro(str(model_path), str(voices_path))
-        except Exception as e:
-            print(f"[Kokoro] Initialization warning: {e}")
-            _CACHED_KOKORO = False
-    return _CACHED_KOKORO
-
-def synthesize_kokoro_batch(scenes: list, audio_dir: Path) -> list:
-    """Synthesizes all scenes using Kokoro Neural Whisper voice blend on CPU."""
-    kokoro = get_kokoro_model()
-    if not kokoro:
-        raise RuntimeError("Kokoro model not available")
-        
-    try:
-        import soundfile as sf
-        s_adam = kokoro.get_voice_style("am_adam")
-        s_mich = kokoro.get_voice_style("am_michael")
-        blended_voice = 0.6 * s_adam + 0.4 * s_mich
-    except Exception:
-        blended_voice = "am_adam"
-
-    for i, s in enumerate(scenes):
-        scene_id = s.get("id", f"scene_{i+1:03d}")
-        out_file = audio_dir / f"{scene_id}.wav"
-        text = s.get("narration", "").strip()
-        if not text:
-            continue
-            
-        samples, sample_rate = kokoro.create(text, voice=blended_voice, speed=0.82, lang="en-us")
-        sf.write(str(out_file), samples, sample_rate)
-        
-        dur = get_audio_duration(out_file)
-        s["audio_path"] = str(out_file)
-        s["duration"] = round(dur, 2)
-        s["voice"] = "Kokoro Neural Whisper"
-        s["word_durations"] = extract_acoustic_word_durations(out_file, text, language="en")
-        
-    return scenes
-
 def synthesize_project_audio(scenes: list, audio_dir: Path) -> list:
     """
     Unified voice synthesis orchestrator:
@@ -417,7 +351,7 @@ def synthesize_project_audio(scenes: list, audio_dir: Path) -> list:
     """
     audio_dir.mkdir(parents=True, exist_ok=True)
     cfg = load_settings()
-    voice_pref = cfg.get("voice_engine", "voxcpm_reference")
+    voice_pref = cfg.get("voice_engine", "huggingface_whisper_clone")
     
     # Check language of the overall script
     all_narrations = [s.get("narration", "").strip() for s in scenes if s.get("narration", "").strip()]
@@ -433,7 +367,7 @@ def synthesize_project_audio(scenes: list, audio_dir: Path) -> list:
                 sc["word_durations"] = extract_acoustic_word_durations(Path(sc["audio_path"]), sc.get("narration", ""), language="en")
             return res_scenes
         except Exception as e:
-            print(f"[Voice] Local VoxCPM batch warning ({e}), falling back to cloud neural voice...")
+            print(f"[Voice] Local VoxCPM batch warning ({e}), falling back to cloud voice cloner...")
 
     # 2. Hugging Face Serverless Voice Cloning (Clones reference whishper.wav via Hugging Face API)
     hf_tok = os.environ.get("HF_TOKEN") or cfg.get("huggingface_token", "")
@@ -442,15 +376,7 @@ def synthesize_project_audio(scenes: list, audio_dir: Path) -> list:
             print("[Voice] Synthesizing all scenes via Hugging Face Cloud Voice Cloning with reference audio...")
             return synthesize_huggingface_space_clone(scenes, audio_dir, reference_audio=DEFAULT_REFERENCE_VOICE, hf_token=hf_tok)
         except Exception as e:
-            print(f"[Voice] Hugging Face Voice Cloning warning ({e}), falling back to Kokoro Neural Whisper...")
-
-    # 3. Kokoro Neural Whisper (100% Free Cloud VM execution on CPU)
-    if overall_lang == "en":
-        try:
-            print("[Voice] Synthesizing all scenes via Kokoro Neural Whisper CPU Engine...")
-            return synthesize_kokoro_batch(scenes, audio_dir)
-        except Exception as e:
-            print(f"[Voice] Kokoro synthesis warning ({e}), falling back to Edge TTS...")
+            print(f"[Voice] Hugging Face Voice Cloning warning ({e}), falling back to Edge Neural TTS...")
 
     results = []
     
