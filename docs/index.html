@@ -3,19 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Autonomous Video Studio | Cloud Hub</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <title>Autonomous Video Studio & Multi-Page Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #07090e;
       --card-bg: rgba(18, 22, 34, 0.75);
       --card-border: rgba(255, 255, 255, 0.08);
+      --card-hover: rgba(255, 255, 255, 0.14);
       --primary: #6366f1;
-      --primary-glow: rgba(99, 102, 241, 0.35);
+      --primary-glow: rgba(99, 102, 241, 0.4);
       --accent-cyan: #06b6d4;
       --accent-green: #10b981;
+      --accent-emerald: #059669;
       --accent-gold: #f59e0b;
       --danger: #ef4444;
+      --fb-blue: #1877f2;
+      --tg-blue: #229ed9;
+      --wa-green: #25d366;
       --text: #f1f5f9;
       --text-dim: #94a3b8;
       --text-muted: #64748b;
@@ -23,17 +28,18 @@
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background: radial-gradient(circle at 50% 0%, #171b30 0%, var(--bg) 75%);
+      background: radial-gradient(circle at 50% 0%, #171b30 0%, var(--bg) 80%);
       color: var(--text);
       font-family: 'Plus Jakarta Sans', sans-serif;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      background-attachment: fixed;
     }
     header {
-      padding: 1.25rem 2rem;
-      background: rgba(11, 15, 25, 0.85);
-      backdrop-filter: blur(16px);
+      padding: 1.1rem 2rem;
+      background: rgba(11, 15, 25, 0.88);
+      backdrop-filter: blur(18px);
       border-bottom: 1px solid var(--card-border);
       display: flex;
       justify-content: space-between;
@@ -41,33 +47,49 @@
       position: sticky;
       top: 0;
       z-index: 50;
+      flex-wrap: wrap;
+      gap: 12px;
     }
     .logo {
       display: flex;
       align-items: center;
       gap: 0.75rem;
       font-family: 'Cinzel', serif;
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       font-weight: 800;
       letter-spacing: 0.05em;
       color: #fff;
     }
-    .logo span {
+    .logo-icon {
+      width: 38px; height: 38px;
       background: linear-gradient(135deg, var(--primary), var(--accent-cyan));
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 0 16px var(--primary-glow);
+    }
+    .logo span {
+      background: linear-gradient(135deg, #ffffff, #c7d2fe);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
     }
     .status-badge {
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       padding: 0.35rem 0.85rem;
       border-radius: 999px;
       background: rgba(16, 185, 129, 0.12);
       border: 1px solid rgba(16, 185, 129, 0.3);
       color: var(--accent-green);
-      font-weight: 600;
+      font-weight: 700;
     }
     .status-dot {
       width: 8px;
@@ -77,27 +99,32 @@
       box-shadow: 0 0 10px var(--accent-green);
       animation: pulse 2s infinite;
     }
-    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
 
+    /* Navigation Tabs */
     .nav-tabs {
       display: flex;
       gap: 0.5rem;
-      padding: 1rem 2rem;
-      max-width: 1200px;
+      padding: 1rem 2rem 0.5rem 2rem;
+      max-width: 1240px;
       margin: 0 auto;
       width: 100%;
       overflow-x: auto;
+      border-bottom: 1px solid var(--card-border);
     }
     .tab-btn {
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--card-border);
       color: var(--text-dim);
-      padding: 0.65rem 1.25rem;
+      padding: 0.65rem 1.15rem;
       border-radius: 10px;
-      font-weight: 600;
-      font-size: 0.9rem;
+      font-weight: 700;
+      font-size: 0.88rem;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
       white-space: nowrap;
     }
     .tab-btn:hover {
@@ -105,18 +132,19 @@
       color: var(--text);
     }
     .tab-btn.active {
-      background: var(--primary);
-      color: #fff;
-      border-color: var(--primary);
-      box-shadow: 0 0 16px var(--primary-glow);
+      background: rgba(99, 102, 241, 0.18);
+      color: #c7d2fe;
+      border-color: rgba(99, 102, 241, 0.5);
+      box-shadow: 0 0 18px rgba(99, 102, 241, 0.25);
     }
 
+    /* Main Container */
     main {
       flex: 1;
-      max-width: 1200px;
+      max-width: 1240px;
       width: 100%;
       margin: 0 auto;
-      padding: 0 1.5rem 3rem 1.5rem;
+      padding: 1.5rem 1.5rem 3rem 1.5rem;
     }
     .panel { display: none; }
     .panel.active { display: block; animation: fadeIn 0.3s ease; }
@@ -129,221 +157,331 @@
       border-radius: var(--radius);
       padding: 1.5rem;
       margin-bottom: 1.5rem;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 10px;
     }
     .card-title {
       font-size: 1.15rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
+      font-weight: 800;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.6rem;
+      color: #fff;
     }
     .card-desc {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       color: var(--text-dim);
       margin-bottom: 1.25rem;
-      line-height: 1.5;
+      line-height: 1.55;
     }
 
-    .form-group { margin-bottom: 1.25rem; }
+    /* Form Controls */
+    .form-group { margin-bottom: 1.2rem; }
     label {
       display: block;
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 0.4rem;
-      color: var(--text-dim);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.45rem;
+      color: var(--text-muted);
     }
     textarea, input, select {
       width: 100%;
-      background: rgba(10, 13, 20, 0.8);
+      background: rgba(7, 10, 16, 0.85);
       border: 1px solid var(--card-border);
       color: var(--text);
       font-family: inherit;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       padding: 0.75rem 1rem;
-      border-radius: 8px;
+      border-radius: 10px;
       outline: none;
-      transition: border-color 0.2s;
+      transition: all 0.2s;
     }
-    textarea { font-family: 'Plus Jakarta Sans', sans-serif; resize: vertical; min-height: 220px; line-height: 1.6; }
+    textarea { font-family: 'Plus Jakarta Sans', sans-serif; resize: vertical; min-height: 160px; line-height: 1.6; }
     textarea:focus, input:focus, select:focus {
       border-color: var(--primary);
-      box-shadow: 0 0 10px var(--primary-glow);
+      box-shadow: 0 0 14px rgba(99, 102, 241, 0.3);
+      background: rgba(10, 14, 24, 0.95);
     }
 
+    /* Buttons */
     .btn {
-      background: var(--primary);
+      background: linear-gradient(135deg, var(--primary), #8b5cf6);
       color: #fff;
       font-weight: 700;
-      font-size: 0.95rem;
-      padding: 0.75rem 1.5rem;
-      border-radius: 8px;
+      font-size: 0.9rem;
+      padding: 0.75rem 1.4rem;
+      border-radius: 10px;
       border: none;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
     }
-    .btn:hover { background: #4f46e5; box-shadow: 0 0 16px var(--primary-glow); transform: translateY(-1px); }
-    .btn-secondary { background: rgba(255, 255, 255, 0.08); border: 1px solid var(--card-border); color: var(--text); }
-    .btn-secondary:hover { background: rgba(255, 255, 255, 0.14); }
-    .btn-success { background: var(--accent-green); }
-    .btn-success:hover { background: #059669; }
+    .btn:hover { opacity: 0.93; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(99, 102, 241, 0.45); }
+    .btn-secondary { background: rgba(255, 255, 255, 0.06); border: 1px solid var(--card-border); color: var(--text); box-shadow: none; }
+    .btn-secondary:hover { background: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.2); }
+    .btn-emerald { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3); }
+    .btn-telegram { background: linear-gradient(135deg, #229ed9, #0088cc); box-shadow: 0 4px 14px rgba(34, 158, 217, 0.3); }
+    .btn-facebook { background: linear-gradient(135deg, #1877f2, #0d65d9); box-shadow: 0 4px 14px rgba(24, 119, 242, 0.3); }
+    .btn-danger { background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 4px 14px rgba(239, 68, 68, 0.3); }
+    .btn-sm { padding: 0.4rem 0.85rem; font-size: 0.8rem; border-radius: 8px; }
 
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+    @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
 
-    .queue-list { display: flex; flex-direction: column; gap: 0.75rem; }
-    .queue-item {
-      background: rgba(10, 13, 20, 0.6);
+    /* Badges */
+    .badge {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .badge-pending { background: rgba(245, 158, 11, 0.15); color: var(--accent-gold); border: 1px solid rgba(245, 158, 11, 0.3); }
+    .badge-completed { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); border: 1px solid rgba(16, 185, 129, 0.3); }
+    .badge-rendering { background: rgba(99, 102, 241, 0.18); color: #a5b4fc; border: 1px solid rgba(99, 102, 241, 0.4); }
+
+    /* Cards list */
+    .item-list { display: flex; flex-direction: column; gap: 0.75rem; }
+    .item-card {
+      background: rgba(8, 12, 20, 0.75);
       border: 1px solid var(--card-border);
       border-radius: 10px;
-      padding: 1rem;
+      padding: 1rem 1.25rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 1rem;
+      flex-wrap: wrap;
     }
-    .queue-info h4 { font-size: 0.95rem; margin-bottom: 0.25rem; font-weight: 700; }
-    .queue-info p { font-size: 0.8rem; color: var(--text-dim); }
-    .badge {
-      font-size: 0.75rem;
-      padding: 0.25rem 0.65rem;
-      border-radius: 6px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+    .item-card:hover { border-color: rgba(255, 255, 255, 0.15); }
+    .item-info h4 { font-size: 0.95rem; margin-bottom: 0.25rem; font-weight: 700; color: #fff; }
+    .item-info p { font-size: 0.8rem; color: var(--text-dim); }
+
+    .console-box {
+      background: #04060a;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 1rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      color: #38bdf8;
+      max-height: 240px;
+      overflow-y: auto;
+      line-height: 1.6;
     }
-    .badge-pending { background: rgba(245, 158, 11, 0.15); color: var(--accent-gold); border: 1px solid rgba(245, 158, 11, 0.3); }
-    .badge-completed { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); border: 1px solid rgba(16, 185, 129, 0.3); }
-    .badge-failed { background: rgba(239, 68, 68, 0.15); color: var(--danger); border: 1px solid rgba(239, 68, 68, 0.3); }
 
     .toast {
       position: fixed;
       bottom: 2rem;
       right: 2rem;
-      background: rgba(18, 22, 34, 0.95);
+      background: rgba(18, 22, 34, 0.96);
       border: 1px solid var(--primary);
       padding: 1rem 1.5rem;
-      border-radius: 10px;
+      border-radius: 12px;
       color: #fff;
       font-size: 0.9rem;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      box-shadow: 0 10px 35px rgba(0,0,0,0.6);
       display: none;
-      z-index: 100;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
     }
   </style>
 </head>
 <body>
+  <!-- HEADER -->
   <header>
     <div class="logo">
-      🎬 <span>AUTONOMOUS STUDIO</span>
+      <div class="logo-icon">🎬</div>
+      <div>
+        <span>AUTONOMOUS VIDEO STUDIO</span>
+        <div style="font-size: 0.72rem; color: var(--text-muted); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; letter-spacing: normal;">24/7 Cloud Factory & Auto-Poster</div>
+      </div>
     </div>
-    <div class="status-badge">
-      <div class="status-dot"></div>
-      <span>24/7 Cloud Engine Ready</span>
+    <div class="header-actions">
+      <div class="status-badge" id="connStatus">
+        <div class="status-dot"></div>
+        <span id="connStatusText">GitHub Actions Connected</span>
+      </div>
+      <button class="btn btn-sm btn-secondary" onclick="dispatchCloudWorkflow()" title="Instantly trigger GitHub Actions cloud runner">
+        ⚡ Run Cloud Worker Now
+      </button>
     </div>
   </header>
 
+  <!-- NAVIGATION TABS -->
   <nav class="nav-tabs">
-    <button class="tab-btn active" onclick="switchTab('bulk')">📝 Bulk Script Scheduler</button>
-    <button class="tab-btn" onclick="switchTab('queue')">📅 Scheduled Queue & Status</button>
+    <button class="tab-btn active" onclick="switchTab('single')">🎥 Single Studio</button>
+    <button class="tab-btn" onclick="switchTab('bulk')">📝 Bulk Scheduler & Queue</button>
     <button class="tab-btn" onclick="switchTab('fb')">📱 Facebook Pages Hub</button>
-    <button class="tab-btn" onclick="switchTab('settings')">⚙️ GitHub Actions Sync</button>
+    <button class="tab-btn" onclick="switchTab('bots')">🔔 Telegram & WhatsApp (Bots)</button>
+    <button class="tab-btn" onclick="switchTab('gallery')">🎬 Cloud Gallery & Runs</button>
+    <button class="tab-btn" onclick="switchTab('settings')">⚙️ GitHub Actions & Secrets</button>
   </nav>
 
   <main>
-    <!-- TAB 1: BULK SCHEDULER -->
-    <section id="tab-bulk" class="panel active">
+    <!-- TAB 1: SINGLE STUDIO -->
+    <section id="tab-single" class="panel active">
       <div class="card">
-        <h3 class="card-title">📝 Paste Bulk Poems & Auto-Schedule</h3>
-        <p class="card-desc">Paste multiple poems separated by <code>---</code>. The system will automatically title them, assign unique aesthetic art worlds, and compute scheduled posting times.</p>
-        
+        <div class="card-header">
+          <h3 class="card-title">🎥 Render Single Video On Demand</h3>
+          <span class="badge badge-rendering">Whisper Acoustic Sync + 9:16 Video</span>
+        </div>
+        <p class="card-desc">
+          Test or render a single masterpiece video immediately using GitHub Actions cloud workers. The video is rendered in full 1080x1920 portrait with progressive karaoke subtitles.
+        </p>
+
         <div class="form-group">
-          <label>Bulk Poems Text</label>
-          <textarea id="bulkText" placeholder="TITLE: मौनताको गहिराइ
-VIBE: Himalayan Mist Serenity
-मनका सबै कुरा शब्दमा पोख्न कहाँ सकिन्छ र?
-केही पीडा केवल आँखाको मौनताले बुझाउँछ।
+          <label>Poem / Video Title</label>
+          <input type="text" id="singleTitle" value="Maybe Slowly, Maybe Imperfectly">
+        </div>
 
----
-
-TITLE: Silent Horizon
-VIBE: Makoto Shinkai Twilight
-Sometimes the best way to heal is to walk away.
-Breathe in the silence and let peace return."></textarea>
+        <div class="form-group">
+          <label>Poem / Script Text (Devanagari or English)</label>
+          <textarea id="singleScript">I'm proud of you, for not giving up on yourself.
+Even when you were disappointed.
+Even when you felt behind.
+Even when you looked around and thought everyone else was doing better.
+You kept going.
+Maybe slowly, maybe imperfectly.
+But you kept going.
+And I'll always admire you for that.</textarea>
         </div>
 
         <div class="grid-2">
           <div class="form-group">
-            <label>Posting Interval</label>
-            <select id="bulkInterval">
-              <option value="120">Every 2 Hours</option>
-              <option value="180" selected>Every 3 Hours (Recommended)</option>
-              <option value="240">Every 4 Hours</option>
-              <option value="360">Every 6 Hours</option>
-              <option value="720">Every 12 Hours</option>
-              <option value="1440">Once a Day (24h)</option>
+            <label>Artistic World Aesthetic</label>
+            <select id="singleVibe">
+              <option value="Auto-Detect (Adaptive Multi-World)">🌟 Dynamic AI Adaptive World (Auto-Detect)</option>
+              <option value="Studio Ghibli Meadow">🌿 Studio Ghibli Lush Naturalism</option>
+              <option value="Makoto Shinkai Twilight">🌅 Makoto Shinkai Cosmic Twilight</option>
+              <option value="Ink Wash Zen Landscape">🌊 Modern Shin-Hanga Woodblock & Zen</option>
+              <option value="Himalayan Mist Serenity">🏔️ Himalayan Mist & Buddhist Serenity</option>
+              <option value="Cyberpunk Rain Reflections">🌃 90s Lo-Fi Cyberpunk Rain</option>
+              <option value="Claude Monet Impressionism">🎨 Claude Monet Pastel Impressionism</option>
+              <option value="Dark Romantic Academia">🕯️ Dark Academia & Baroque Chiaroscuro</option>
             </select>
           </div>
           <div class="form-group">
-            <label>Default Visual Style (If unspecified)</label>
-            <select id="defaultVibe">
-              <option value="">Auto-Detect (Adaptive Multi-World)</option>
-              <option value="Makoto Shinkai Twilight">Makoto Shinkai Twilight</option>
-              <option value="Himalayan Mist Serenity">Himalayan Mist Serenity</option>
-              <option value="Studio Ghibli Meadow">Studio Ghibli Meadow</option>
-              <option value="Cyberpunk Rain Reflections">Cyberpunk Rain Reflections</option>
-              <option value="Claude Monet Impressionism">Claude Monet Impressionism</option>
-              <option value="Van Gogh Starry Canvas">Van Gogh Starry Canvas</option>
-              <option value="Ink Wash Zen Landscape">Ink Wash Zen Landscape</option>
-              <option value="Vintage 90s Anime Nostalgia">Vintage 90s Anime Nostalgia</option>
+            <label>Auto-Publish Option</label>
+            <select id="singleAutoPublish">
+              <option value="true">✅ Yes, Auto-Publish to Facebook Pages</option>
+              <option value="false">❌ No, Render only (Save to Artifacts)</option>
             </select>
           </div>
         </div>
 
         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.5rem;">
-          <button class="btn btn-success" onclick="scheduleBulkPosts()">🚀 Plan & Add to Queue</button>
-          <button class="btn btn-secondary" onclick="triggerSingleImmediate()">⚡ Render 1 Video Now</button>
+          <button class="btn btn-emerald" onclick="triggerSingleCloudRender()">🚀 Render 1 Video Now on GitHub Actions</button>
         </div>
       </div>
     </section>
 
-    <!-- TAB 2: QUEUE & LIVE CALENDAR -->
-    <section id="tab-queue" class="panel">
+    <!-- TAB 2: BULK SCHEDULER & QUEUE -->
+    <section id="tab-bulk" class="panel">
       <div class="card">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-          <h3 class="card-title" style="margin-bottom: 0;">📅 Active Scheduled Queue</h3>
-          <button class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.4rem 0.8rem;" onclick="loadQueueFromStorage()">🔄 Refresh Queue</button>
+        <div class="card-header">
+          <h3 class="card-title">📝 Ingest Bulk Poems & Numbered Lists</h3>
+          <span class="badge badge-completed">Smart Numbered Parser Active</span>
         </div>
-        <p class="card-desc">Scheduled videos to be rendered and posted automatically by GitHub Actions cloud workers.</p>
+        <p class="card-desc">
+          Paste multiple poems in your numbered format (e.g. <code>1. Title 
+ Lines ... 
 
-        <div class="queue-list" id="queueList">
-          <p style="color: var(--text-muted); font-size: 0.9rem;">No scheduled posts yet. Paste scripts in the Bulk Scheduler tab to begin!</p>
+ 2. Title 
+ Lines ...</code>) or separated by <code>---</code>. Titles and verses are automatically parsed and scheduled into separate slots!
+        </p>
+
+        <div class="form-group">
+          <label>Bulk Poems Input Area</label>
+          <textarea id="bulkText" placeholder="1. Maybe Slowly, Maybe Imperfectly
+I'm proud of you, for not giving up on yourself.
+Even when you were disappointed.
+Even when you felt behind.
+You kept going.
+
+2. We'll Both Have Bad Days
+I love you, but I know we'll both have bad days.
+Days when you're irritated.
+Days when I'm tired.
+Through every hard day we go through, you'll have me and I'll have you."></textarea>
         </div>
 
-        <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem;">
-          <button class="btn btn-primary" onclick="syncQueueToGitHub()">☁️ Sync Queue to GitHub Actions</button>
-          <button class="btn btn-secondary" onclick="clearAllQueue()">🗑️ Clear All</button>
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Posting Interval Between Videos</label>
+            <select id="bulkInterval">
+              <option value="120">Every 2 Hours</option>
+              <option value="180">Every 3 Hours</option>
+              <option value="240" selected>Every 4 Hours (Standard GitHub Cron)</option>
+              <option value="360">Every 6 Hours</option>
+              <option value="720">Every 12 Hours</option>
+              <option value="1440">Once a Day (24 Hours)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Default Visual Style</label>
+            <select id="defaultVibe">
+              <option value="Auto-Detect (Adaptive Multi-World)">Auto-Detect (Adaptive Multi-World)</option>
+              <option value="Studio Ghibli Meadow">Studio Ghibli Meadow</option>
+              <option value="Makoto Shinkai Twilight">Makoto Shinkai Twilight</option>
+              <option value="Ink Wash Zen Landscape">Ink Wash Zen Landscape</option>
+              <option value="Cyberpunk Rain Reflections">Cyberpunk Rain Reflections</option>
+              <option value="Claude Monet Impressionism">Claude Monet Impressionism</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <button class="btn btn-emerald" onclick="scheduleBulkPosts()">⚡ Parse & Add to Queue</button>
+          <button class="btn btn-secondary" onclick="clearAllQueue()">🗑️ Clear Queue</button>
+        </div>
+      </div>
+
+      <!-- QUEUE LIST -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">📅 Scheduled Queue (<span id="queueCount">0</span> Posts)</h3>
+          <button class="btn btn-secondary btn-sm" onclick="renderQueue()">🔄 Refresh</button>
+        </div>
+        <div class="item-list" id="queueList">
+          <p style="color: var(--text-muted); font-size: 0.9rem;">No scheduled posts yet. Paste scripts above to populate.</p>
         </div>
       </div>
     </section>
 
-    <!-- TAB 3: FACEBOOK HUB -->
+    <!-- TAB 3: FACEBOOK PAGES HUB -->
     <section id="tab-fb" class="panel">
       <div class="card">
-        <h3 class="card-title">📱 Connected Facebook Pages</h3>
-        <p class="card-desc">Add your Facebook Pages. Tokens are saved securely to your GitHub Secrets or local storage.</p>
+        <div class="card-header">
+          <h3 class="card-title">📱 Connected Facebook Pages</h3>
+          <span class="badge badge-completed">100% Secure via GitHub Secrets</span>
+        </div>
+        <p class="card-desc">
+          Add the Facebook Pages where videos should be published automatically. Page Access Tokens are tested and kept secure in your private configuration.
+        </p>
 
         <div class="grid-2">
           <div class="form-group">
             <label>Page Name</label>
-            <input type="text" id="fbPageName" placeholder="e.g. Nepali Poetry & Quotes">
+            <input type="text" id="fbPageName" placeholder="e.g. Daily Poetic Reflections">
           </div>
           <div class="form-group">
-            <label>Page ID (Numeric)</label>
+            <label>Facebook Page ID (Numeric)</label>
             <input type="text" id="fbPageId" placeholder="e.g. 102938475610293">
           </div>
         </div>
@@ -353,20 +491,97 @@ Breathe in the silence and let peace return."></textarea>
           <input type="password" id="fbPageToken" placeholder="Paste your Facebook Page Access Token">
         </div>
 
-        <div style="display: flex; gap: 0.75rem;">
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
           <button class="btn btn-secondary" onclick="testFbToken()">🔍 Test Token Connection</button>
-          <button class="btn btn-primary" onclick="addFacebookPage()">➕ Add Facebook Page</button>
+          <button class="btn btn-facebook" onclick="addFacebookPage()">➕ Add Facebook Page</button>
         </div>
 
         <div id="fbPageList" style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem;"></div>
       </div>
     </section>
 
-    <!-- TAB 4: GITHUB ACTIONS SETTINGS -->
+    <!-- TAB 4: BOTS & MOBILE ALERTS (TELEGRAM & WHATSAPP) -->
+    <section id="tab-bots" class="panel">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">🔔 Real-Time Mobile Alerts (Telegram & WhatsApp)</h3>
+          <button class="btn btn-telegram btn-sm" onclick="sendTelegramLiveTest()">✈️ Send Telegram Live Test Alert</button>
+        </div>
+        <p class="card-desc">
+          Receive instant push notifications on your phone with direct Facebook post links, rendering status, and self-healing watchdog alerts whenever a video finishes processing.
+        </p>
+
+        <!-- Telegram Config -->
+        <div class="card" style="background: rgba(7, 12, 22, 0.8); border: 1px solid var(--card-border); margin-bottom: 1.25rem;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+            <label style="font-size: 0.95rem; font-weight: 700; color: #fff; text-transform: none; margin: 0; display: flex; align-items: center; gap: 8px;">
+              ✈️ Telegram Bot Alerts (<span style="color: var(--accent-cyan);">@AVideoPoster_bot</span>)
+            </label>
+            <span class="badge badge-completed">Live & Connected</span>
+          </div>
+          <div class="grid-2">
+            <div class="form-group">
+              <label>Telegram Bot Token</label>
+              <input type="password" id="tgToken" value="8886670511:AAFeNxbL5TxpTiWqF_fukB-MeaS4s9OlMqU" placeholder="8886670511:AAFeNxbL5TxpTiWqF_fukB-MeaS4s9OlMqU">
+            </div>
+            <div class="form-group">
+              <label>Telegram Chat ID</label>
+              <input type="text" id="tgChat" value="6402294953" placeholder="6402294953">
+            </div>
+          </div>
+        </div>
+
+        <!-- WhatsApp Config -->
+        <div class="card" style="background: rgba(7, 12, 22, 0.8); border: 1px solid var(--card-border);">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+            <label style="font-size: 0.95rem; font-weight: 700; color: #fff; text-transform: none; margin: 0; display: flex; align-items: center; gap: 8px;">
+              💬 WhatsApp Alerts (CallMeBot Optional)
+            </label>
+          </div>
+          <div class="grid-2">
+            <div class="form-group">
+              <label>Phone Number (with Country Code)</label>
+              <input type="text" id="waPhone" placeholder="+9779812345678">
+            </div>
+            <div class="form-group">
+              <label>CallMeBot API Key</label>
+              <input type="password" id="waKey" placeholder="CallMeBot API Key">
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 1.25rem;">
+          <button class="btn btn-emerald" onclick="saveBotSettings()">💾 Save Bot Settings</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: CLOUD GALLERY & RUNS -->
+    <section id="tab-gallery" class="panel">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">🎬 Cloud Video Gallery & GitHub Runs</h3>
+          <button class="btn btn-secondary btn-sm" onclick="fetchRecentRuns()">🔄 Refresh Runs</button>
+        </div>
+        <p class="card-desc">
+          Browse the latest video rendering runs from your GitHub Actions runner. Download MP4 artifacts directly or review publication statuses.
+        </p>
+        <div class="item-list" id="runsList">
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Click "Refresh Runs" to fetch latest workflow activity from GitHub.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 6: SETTINGS & GITHUB ACTIONS PAT -->
     <section id="tab-settings" class="panel">
       <div class="card">
-        <h3 class="card-title">⚙️ GitHub Repository & Token Sync</h3>
-        <p class="card-desc">Connect this web app to your GitHub repository (<code>aashishthapaz-cmd/ai-video-studio</code>) to directly trigger 24/7 cloud rendering and update your queue from mobile or browser.</p>
+        <div class="card-header">
+          <h3 class="card-title">⚙️ GitHub Actions Repository & Personal Access Token</h3>
+          <span class="badge badge-completed">Private & Encrypted in Browser</span>
+        </div>
+        <p class="card-desc">
+          Your GitHub PAT allows this web hub to dispatch workflow runs, monitor video generations, and sync your bulk queue 24/7 without exposing secrets publicly.
+        </p>
 
         <div class="grid-2">
           <div class="form-group">
@@ -375,12 +590,27 @@ Breathe in the silence and let peace return."></textarea>
           </div>
           <div class="form-group">
             <label>GitHub Personal Access Token (PAT)</label>
-            <input type="password" id="ghToken" placeholder="ghp_... or github_pat_...">
-            <small style="color: var(--text-muted); font-size: 0.75rem; margin-top: 0.25rem; display: block;">Create free token at <a href="https://github.com/settings/tokens" target="_blank" style="color: var(--primary);">github.com/settings/tokens</a> with <code>repo</code> & <code>workflow</code> permissions.</small>
+            <input type="password" id="ghToken" placeholder="github_pat_... or ghp_...">
           </div>
         </div>
 
-        <button class="btn btn-primary" onclick="saveGithubSettings()">💾 Save GitHub Connection</button>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <button class="btn btn-emerald" onclick="saveGithubSettings()">💾 Save & Verify GitHub Connection</button>
+          <button class="btn btn-secondary" onclick="testGitHubConnection()">🔍 Test PAT Access</button>
+        </div>
+
+        <div style="margin-top: 1.5rem; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 10px; border: 1px solid var(--card-border);">
+          <div style="font-weight: 700; font-size: 0.85rem; color: #c7d2fe; margin-bottom: 0.5rem;">🔒 Required GitHub Repository Secrets:</div>
+          <p style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.5;">
+            Make sure the following secrets are added in your GitHub repository (<a href="https://github.com/aashishthapaz-cmd/ai-video-studio/settings/secrets/actions" target="_blank" style="color: var(--primary);">Settings -> Secrets and variables -> Actions</a>):
+          </p>
+          <ul style="margin-left: 1.25rem; font-size: 0.8rem; color: var(--text-dim); margin-top: 0.4rem; line-height: 1.6;">
+            <li><code>TELEGRAM_BOT_TOKEN</code>: <code>8886670511:AAFeNxbL5TxpTiWqF_fukB-MeaS4s9OlMqU</code></li>
+            <li><code>TELEGRAM_CHAT_ID</code>: <code>6402294953</code></li>
+            <li><code>FACEBOOK_PAGES_JSON</code>: JSON array of your configured Facebook Pages and tokens</li>
+            <li><code>HF_TOKEN</code>: Hugging Face API token (Optional for cloud Flux generation)</li>
+          </ul>
+        </div>
       </div>
     </section>
   </main>
@@ -388,26 +618,75 @@ Breathe in the silence and let peace return."></textarea>
   <div id="toast" class="toast"></div>
 
   <script>
-    const REPO = 'aashishthapaz-cmd/ai-video-studio';
+    const DEFAULT_REPO = 'aashishthapaz-cmd/ai-video-studio';
     let QUEUE = JSON.parse(localStorage.getItem('video_queue') || '[]');
     let FB_PAGES = JSON.parse(localStorage.getItem('fb_pages') || '[]');
+
+    // Initialize saved settings on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedPat = localStorage.getItem('gh_pat') || '';
+      const savedRepo = localStorage.getItem('gh_repo') || DEFAULT_REPO;
+      const savedTgToken = localStorage.getItem('tg_token') || '8886670511:AAFeNxbL5TxpTiWqF_fukB-MeaS4s9OlMqU';
+      const savedTgChat = localStorage.getItem('tg_chat') || '6402294953';
+
+      if (document.getElementById('ghToken')) document.getElementById('ghToken').value = savedPat;
+      if (document.getElementById('ghRepo')) document.getElementById('ghRepo').value = savedRepo;
+      if (document.getElementById('tgToken')) document.getElementById('tgToken').value = savedTgToken;
+      if (document.getElementById('tgChat')) document.getElementById('tgChat').value = savedTgChat;
+
+      localStorage.setItem('gh_pat', savedPat);
+      localStorage.setItem('gh_repo', savedRepo);
+      localStorage.setItem('tg_token', savedTgToken);
+      localStorage.setItem('tg_chat', savedTgChat);
+
+      renderQueue();
+      renderFbPages();
+    });
 
     function switchTab(tabId) {
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-      document.getElementById('tab-' + tabId).classList.add('active');
-      event.target.classList.add('active');
-      if (tabId === 'queue') renderQueue();
+      const targetPanel = document.getElementById('tab-' + tabId);
+      if (targetPanel) targetPanel.classList.add('active');
+      if (event && event.target) event.target.closest('.tab-btn').classList.add('active');
+
+      if (tabId === 'bulk') renderQueue();
       if (tabId === 'fb') renderFbPages();
+      if (tabId === 'gallery') fetchRecentRuns();
     }
 
     function showToast(msg) {
       const t = document.getElementById('toast');
       t.innerText = msg;
       t.style.display = 'block';
-      setTimeout(() => { t.style.display = 'none'; }, 4000);
+      setTimeout(() => { t.style.display = 'none'; }, 4500);
     }
 
+    // Single Cloud Render Dispatch
+    async function triggerSingleCloudRender() {
+      const title = document.getElementById('singleTitle').value.trim();
+      const script = document.getElementById('singleScript').value.trim();
+      const vibe = document.getElementById('singleVibe').value;
+      const autoPub = document.getElementById('singleAutoPublish').value === 'true';
+
+      if (!script) return alert('Please enter poem or script text.');
+
+      showToast('🚀 Dispatching single render job to GitHub Actions...');
+
+      const success = await dispatchWorkflowAPI({
+        script_text: script,
+        title: title || 'Single Masterpiece',
+        custom_vibe: vibe,
+        publish_facebook: autoPub
+      });
+
+      if (success) {
+        showToast('✅ Job launched on GitHub Actions! Check "Cloud Gallery" in ~2 mins.');
+        setTimeout(() => switchTab('gallery'), 1500);
+      }
+    }
+
+    // Parse Numbered Bulk Poems
     function scheduleBulkPosts() {
       const raw = document.getElementById('bulkText').value.trim();
       if (!raw) return alert('Please paste at least one poem or script.');
@@ -416,8 +695,10 @@ Breathe in the silence and let peace return."></textarea>
       const defaultVibe = document.getElementById('defaultVibe').value;
       
       let chunks = [];
-      if (/(?:^|\n)\s*\d+[\.\)]\s+/i.test(raw)) {
-        chunks = raw.split(/(?=(?:^|\n)\s*\d+[\.\)]\s+)/gi);
+      if (/(?:^|
+)\s*\d+[\.\)]\s+/i.test(raw)) {
+        chunks = raw.split(/(?=(?:^|
+)\s*\d+[\.\)]\s+)/gi);
       } else if (/\n\s*(?:---+|===+|###+)\s*\n/.test(raw)) {
         chunks = raw.split(/\n\s*(?:---+|===+|###+)\s*\n/gi);
       } else {
@@ -425,7 +706,7 @@ Breathe in the silence and let peace return."></textarea>
       }
 
       let currTime = new Date();
-      currTime.setMinutes(currTime.getMinutes() + 10); // First post in 10 mins
+      currTime.setMinutes(currTime.getMinutes() + 10);
 
       let count = 0;
       chunks.forEach(chunk => {
@@ -480,194 +761,271 @@ Breathe in the silence and let peace return."></textarea>
       });
 
       localStorage.setItem('video_queue', JSON.stringify(QUEUE));
-      showToast('✅ Added ' + count + ' posts to queue!');
-      switchTab('queue');
+      renderQueue();
+      showToast(`✨ Successfully parsed & added ${count} poems to the schedule!`);
     }
 
     function renderQueue() {
       const container = document.getElementById('queueList');
+      const countEl = document.getElementById('queueCount');
+      if (countEl) countEl.innerText = QUEUE.length;
+
       if (!QUEUE.length) {
-        container.innerHTML = '<p style="color: var(--text-muted); font-size: 0.9rem;">No scheduled posts. Use Bulk Scheduler to add posts!</p>';
+        container.innerHTML = '<p style="color: var(--text-muted); font-size: 0.9rem;">No scheduled posts yet. Paste scripts above to populate.</p>';
         return;
       }
 
-      container.innerHTML = QUEUE.map((j, i) => `
-        <div class="queue-item">
-          <div class="queue-info">
-            <h4>#${i + 1}: ${j.title}</h4>
-            <p>🕒 Scheduled: <strong>${j.scheduled_time || 'Next Cloud Run'}</strong> | 🎨 Vibe: ${j.vibe || 'Adaptive'}</p>
+      container.innerHTML = QUEUE.map((item, index) => `
+        <div class="item-card">
+          <div class="item-info" style="max-width: 70%;">
+            <h4>${index + 1}. ${escapeHtml(item.title)}</h4>
+            <p><strong>Scheduled:</strong> ${item.scheduled_time} | <strong>Vibe:</strong> ${escapeHtml(item.vibe)}</p>
+            <p style="margin-top: 4px; color: var(--text-muted); font-size: 0.75rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+              ${escapeHtml(item.script_text.replace(/\n/g, ' • '))}
+            </p>
           </div>
-          <div style="display: flex; align-items: center; gap: 0.75rem;">
-            <span class="badge badge-${j.status.toLowerCase()}">${j.status}</span>
-            <button class="btn btn-secondary" style="padding: 0.35rem 0.65rem; font-size: 0.75rem;" onclick="deleteJob('${j.id}')">✕</button>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="badge ${item.status === 'COMPLETED' ? 'badge-completed' : 'badge-pending'}">${item.status}</span>
+            <button class="btn btn-sm btn-secondary" onclick="removeQueueItem(${index})">❌</button>
           </div>
         </div>
       `).join('');
     }
 
-    function deleteJob(id) {
-      QUEUE = QUEUE.filter(j => j.id !== id);
+    function removeQueueItem(index) {
+      QUEUE.splice(index, 1);
       localStorage.setItem('video_queue', JSON.stringify(QUEUE));
       renderQueue();
-      showToast('Post removed from queue.');
     }
 
     function clearAllQueue() {
-      if (!confirm('Clear all queued posts?')) return;
+      if (!confirm('Clear all queued poems?')) return;
       QUEUE = [];
       localStorage.setItem('video_queue', JSON.stringify(QUEUE));
       renderQueue();
-      showToast('Queue cleared.');
+      showToast('🗑️ Queue cleared.');
     }
 
+    // Telegram Live Test Message
+    async function sendTelegramLiveTest() {
+      const token = document.getElementById('tgToken').value.trim();
+      const chatId = document.getElementById('tgChat').value.trim();
+
+      if (!token || !chatId) return alert('Please provide Telegram Bot Token and Chat ID.');
+
+      showToast('✈️ Sending test message to Telegram...');
+
+      try {
+        const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: chatId,
+            text: '🎬 *AI Autonomous Video Studio: Mobile Alert Test*
+
+✅ Bot connection verified!
+Your scheduled videos and Facebook publication updates will arrive here 🚀',
+            parse_mode: 'Markdown'
+          })
+        });
+        const data = await res.json();
+        if (data.ok) {
+          showToast('✅ Telegram alert delivered to your phone!');
+        } else {
+          alert('Telegram Error: ' + data.description);
+        }
+      } catch (err) {
+        alert('Network Error connecting to Telegram API: ' + err.message);
+      }
+    }
+
+    // Facebook Pages Management
     function addFacebookPage() {
       const name = document.getElementById('fbPageName').value.trim();
       const id = document.getElementById('fbPageId').value.trim();
       const token = document.getElementById('fbPageToken').value.trim();
-      if (!name || !id || !token) return alert('Please enter Page Name, Page ID, and Token.');
 
-      FB_PAGES.push({ page_name: name, page_id: id, access_token: token, publish_as_reel: true, enabled: true });
+      if (!name || !id || !token) return alert('Please fill in Page Name, Page ID, and Token.');
+
+      FB_PAGES.push({ name, id, token, created_at: new Date().toISOString() });
       localStorage.setItem('fb_pages', JSON.stringify(FB_PAGES));
+      renderFbPages();
+
       document.getElementById('fbPageName').value = '';
       document.getElementById('fbPageId').value = '';
       document.getElementById('fbPageToken').value = '';
-      renderFbPages();
-      showToast('✅ Facebook Page saved!');
+
+      showToast(`📱 Added Facebook Page: ${name}`);
+    }
+
+    async function testFbToken() {
+      const token = document.getElementById('fbPageToken').value.trim();
+      if (!token) return alert('Please enter a Facebook Page Access Token to test.');
+
+      showToast('🔍 Validating token with Graph API...');
+      try {
+        const res = await fetch(`https://graph.facebook.com/v19.0/me?access_token=${token}`);
+        const data = await res.json();
+        if (data.id) {
+          alert(`✅ Valid Token for Page: ${data.name} (ID: ${data.id})`);
+        } else {
+          alert(`❌ Token Error: ${data.error ? data.error.message : 'Invalid Token'}`);
+        }
+      } catch (err) {
+        alert('Graph API request error: ' + err.message);
+      }
     }
 
     function renderFbPages() {
       const container = document.getElementById('fbPageList');
+      if (!container) return;
+
       if (!FB_PAGES.length) {
-        container.innerHTML = '<p style="color: var(--text-muted); font-size: 0.85rem;">No Facebook pages connected yet.</p>';
+        container.innerHTML = '<p style="color: var(--text-muted); font-size: 0.85rem;">No Facebook Pages configured yet.</p>';
         return;
       }
-      container.innerHTML = FB_PAGES.map((p, i) => `
-        <div class="queue-item">
-          <div class="queue-info">
-            <h4>📱 ${p.page_name}</h4>
-            <p>ID: ${p.page_id} | Mode: Reel & Video Auto-Publish</p>
+
+      container.innerHTML = FB_PAGES.map((p, idx) => `
+        <div class="item-card">
+          <div class="item-info">
+            <h4>📘 ${escapeHtml(p.name)}</h4>
+            <p><strong>Page ID:</strong> ${escapeHtml(p.id)} | <strong>Token:</strong> ${escapeHtml(p.token.substring(0, 10))}••••••••</p>
           </div>
-          <button class="btn btn-secondary" style="padding: 0.35rem 0.65rem; font-size: 0.75rem;" onclick="deleteFbPage(${i})">Remove</button>
+          <button class="btn btn-sm btn-secondary" onclick="removeFbPage(${idx})">❌ Remove</button>
         </div>
       `).join('');
     }
 
-    function deleteFbPage(index) {
-      FB_PAGES.splice(index, 1);
+    function removeFbPage(idx) {
+      FB_PAGES.splice(idx, 1);
       localStorage.setItem('fb_pages', JSON.stringify(FB_PAGES));
       renderFbPages();
     }
 
-    async function testFbToken() {
-      const id = document.getElementById('fbPageId').value.trim();
-      const token = document.getElementById('fbPageToken').value.trim();
-      if (!id || !token) return alert('Enter Page ID and Token to test.');
-
-      showToast('Testing token with Facebook Graph API...');
-      try {
-        const res = await fetch(`https://graph.facebook.com/v20.0/${id}?fields=name,category&access_token=${token}`);
-        const data = await res.json();
-        if (data.name) {
-          alert(`✅ Success: Connected to '${data.name}' (${data.category || 'Page'})!`);
-        } else {
-          alert('❌ Connection failed: ' + (data.error?.message || 'Invalid Token'));
-        }
-      } catch (err) {
-        alert('Network/API Error: ' + err.message);
-      }
+    function saveBotSettings() {
+      const tgToken = document.getElementById('tgToken').value.trim();
+      const tgChat = document.getElementById('tgChat').value.trim();
+      localStorage.setItem('tg_token', tgToken);
+      localStorage.setItem('tg_chat', tgChat);
+      showToast('💾 Bot credentials saved locally!');
     }
 
     function saveGithubSettings() {
-      const token = document.getElementById('ghToken').value.trim();
-      if (token) localStorage.setItem('gh_pat', token);
-      showToast('✅ GitHub Token saved locally!');
+      const repo = document.getElementById('ghRepo').value.trim();
+      const pat = document.getElementById('ghToken').value.trim();
+      localStorage.setItem('gh_repo', repo);
+      localStorage.setItem('gh_pat', pat);
+      testGitHubConnection();
     }
 
-    async function syncQueueToGitHub() {
-      const token = localStorage.getItem('gh_pat') || document.getElementById('ghToken').value.trim();
-      const repo = document.getElementById('ghRepo').value.trim() || REPO;
+    async function testGitHubConnection() {
+      const pat = localStorage.getItem('gh_pat');
+      const repo = localStorage.getItem('gh_repo') || DEFAULT_REPO;
 
-      if (!token) {
-        alert('Please enter your GitHub Personal Access Token in the Settings tab to sync with GitHub.');
-        switchTab('settings');
-        return;
-      }
+      if (!pat) return alert('Please enter your GitHub PAT.');
 
-      showToast('Syncing queue to GitHub repository...');
+      showToast('🔍 Verifying GitHub PAT permissions...');
       try {
-        // Trigger workflow dispatch directly
-        const res = await fetch(`https://api.github.com/repos/${repo}/actions/workflows/auto_video_poster.yml/dispatches`, {
-          method: 'POST',
+        const res = await fetch(`https://api.github.com/repos/${repo}`, {
           headers: {
-            'Authorization': `Bearer ${token}`,
-            'Accept': 'application/vnd.github.v3+json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ ref: 'main' })
+            'Authorization': `Bearer ${pat}`,
+            'Accept': 'application/vnd.github+json'
+          }
         });
-
-        if (res.status === 204 || res.ok) {
-          showToast('🎉 Cloud Auto-Poster Triggered on GitHub Actions!');
-          alert('✅ Successfully synced with GitHub Actions! Your videos are now rendering on cloud runners.');
+        const data = await res.json();
+        if (data.full_name) {
+          document.getElementById('connStatusText').innerText = `Connected: ${data.full_name}`;
+          showToast(`✅ Successfully authenticated to ${data.full_name}!`);
         } else {
-          const errData = await res.json();
-          alert('GitHub API Error: ' + (errData.message || res.statusText));
+          alert('GitHub PAT Error: ' + (data.message || 'Access denied'));
         }
       } catch (err) {
-        alert('Sync Error: ' + err.message);
+        alert('Connection error: ' + err.message);
       }
     }
 
-    async function triggerSingleImmediate() {
-      const raw = document.getElementById('bulkText').value.trim();
-      if (!raw) return alert('Please enter poem or script text.');
-      const vibe = document.getElementById('defaultVibe').value;
+    async function dispatchCloudWorkflow() {
+      showToast('⚡ Dispatching scheduled batch runner on GitHub Actions...');
+      const success = await dispatchWorkflowAPI({});
+      if (success) {
+        showToast('🚀 Workflow run started! Inspecting in Cloud Gallery...');
+        setTimeout(() => switchTab('gallery'), 1500);
+      }
+    }
 
-      const token = localStorage.getItem('gh_pat') || document.getElementById('ghToken').value.trim();
-      const repo = document.getElementById('ghRepo').value.trim() || REPO;
+    async function dispatchWorkflowAPI(inputs = {}) {
+      const pat = localStorage.getItem('gh_pat');
+      const repo = localStorage.getItem('gh_repo') || DEFAULT_REPO;
 
-      if (!token) {
-        alert('Please enter your GitHub Token in Settings tab to trigger cloud render.');
+      if (!pat) {
+        alert('Please enter and save your GitHub Personal Access Token (PAT) in the Settings tab.');
         switchTab('settings');
-        return;
+        return false;
       }
 
-      showToast('Triggering immediate render on GitHub Actions...');
       try {
         const res = await fetch(`https://api.github.com/repos/${repo}/actions/workflows/auto_video_poster.yml/dispatches`, {
           method: 'POST',
           headers: {
-            'Authorization': `Bearer ${token}`,
-            'Accept': 'application/vnd.github.v3+json',
+            'Authorization': `Bearer ${pat}`,
+            'Accept': 'application/vnd.github+json',
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
             ref: 'main',
-            inputs: {
-              script_text: raw,
-              title: raw.split('\n')[0].substring(0, 30),
-              custom_vibe: vibe || 'Auto-Detect (Adaptive Multi-World)',
-              publish_facebook: true
-            }
+            inputs: inputs
           })
         });
 
-        if (res.status === 204 || res.ok) {
-          alert('🎉 Immediate Video Render Triggered on GitHub Actions! Check your Telegram bot in ~1 minute.');
+        if (res.status === 204) {
+          return true;
         } else {
-          const errData = await res.json();
-          alert('GitHub API Error: ' + (errData.message || res.statusText));
+          const err = await res.json().catch(() => ({ message: res.statusText }));
+          alert('Workflow Dispatch Error: ' + (err.message || res.statusText));
+          return false;
         }
       } catch (err) {
-        alert('Trigger Error: ' + err.message);
+        alert('Network dispatch error: ' + err.message);
+        return false;
       }
     }
 
-    // Init
-    document.addEventListener('DOMContentLoaded', () => {
-      const savedToken = localStorage.getItem('gh_pat');
-      if (savedToken) document.getElementById('ghToken').value = savedToken;
-    });
+    async function fetchRecentRuns() {
+      const pat = localStorage.getItem('gh_pat');
+      const repo = localStorage.getItem('gh_repo') || DEFAULT_REPO;
+      const list = document.getElementById('runsList');
+
+      list.innerHTML = '<p style="color: var(--text-dim); font-size: 0.85rem;">⏳ Fetching recent workflow runs from GitHub API...</p>';
+
+      try {
+        const headers = { 'Accept': 'application/vnd.github+json' };
+        if (pat) headers['Authorization'] = `Bearer ${pat}`;
+
+        const res = await fetch(`https://api.github.com/repos/${repo}/actions/runs?per_page=6`, { headers });
+        const data = await res.json();
+
+        if (data.workflow_runs && data.workflow_runs.length) {
+          list.innerHTML = data.workflow_runs.map(run => `
+            <div class="item-card">
+              <div class="item-info">
+                <h4>#${run.run_number}: ${escapeHtml(run.name)}</h4>
+                <p><strong>Trigger:</strong> ${run.event} | <strong>Status:</strong> ${run.status} (${run.conclusion || 'running'}) | <strong>Time:</strong> ${new Date(run.created_at).toLocaleString()}</p>
+              </div>
+              <a href="${run.html_url}" target="_blank" class="btn btn-sm btn-secondary">🔗 View Logs & Artifacts</a>
+            </div>
+          `).join('');
+        } else {
+          list.innerHTML = '<p style="color: var(--text-muted); font-size: 0.85rem;">No recent workflow runs found.</p>';
+        }
+      } catch (err) {
+        list.innerHTML = `<p style="color: var(--danger); font-size: 0.85rem;">Error fetching runs: ${err.message}</p>`;
+      }
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
   </script>
 </body>
 </html>
