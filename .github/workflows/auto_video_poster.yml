@@ -76,6 +76,24 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y --no-install-recommends             ffmpeg             fonts-dejavu-core             fonts-noto-core             fonts-noto-cjk             fonts-noto-extra             git             curl
 
+      - name: 📦 Cache Pip Dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('cloud_generator/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: 🧠 Cache AI Models (Whisper & Kokoro)
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/huggingface
+            assets/models/kokoro
+          key: ${{ runner.os }}-models-v1
+          restore-keys: |
+            ${{ runner.os }}-models-
+
       - name: 📦 Install Python Dependencies
         run: |
           python -m pip install --upgrade pip
@@ -89,12 +107,12 @@ jobs:
           FACEBOOK_PAGES_JSON: ${{ secrets.FACEBOOK_PAGES_JSON }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          SCRIPT_INPUT: ${{ inputs.script_text }}
+          TITLE_INPUT: ${{ inputs.title }}
+          VIBE_INPUT: ${{ inputs.custom_vibe }}
+          PUBLISH_FB_INPUT: ${{ inputs.publish_facebook }}
         run: |
-          python cloud_generator/github_runner.py \
-            --script "${{ inputs.script_text }}" \
-            --title "${{ inputs.title }}" \
-            --vibe "${{ inputs.custom_vibe }}" \
-            --publish-fb "${{ inputs.publish_facebook || 'true' }}"
+          python cloud_generator/github_runner.py
 
       - name: 💾 Commit & Push Updated Job Queue & History
         if: always()

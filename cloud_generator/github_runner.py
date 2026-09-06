@@ -49,7 +49,7 @@ def run():
     except Exception as e:
         print(f"[Warning] Self-repair notice: {e}", flush=True)
 
-    script_content = args.script.strip()
+    script_content = args.script.strip() or os.environ.get("SCRIPT_INPUT", "").strip()
     if not script_content and args.script_file:
         p = Path(args.script_file)
         if p.exists():
@@ -57,8 +57,8 @@ def run():
 
     # Mode 1: Direct Script Execution
     if script_content:
-        title = args.title.strip() or "Poetic Whispers"
-        vibe = args.vibe.strip()
+        title = args.title.strip() or os.environ.get("TITLE_INPUT", "").strip() or "Poetic Whispers"
+        vibe = args.vibe.strip() or os.environ.get("VIBE_INPUT", "").strip()
         if vibe in ("Auto-Detect (Adaptive Multi-World)", "Typewriters Voice Nostalgia", ""):
             vibe = "typewriters_voice_nostalgia"
 

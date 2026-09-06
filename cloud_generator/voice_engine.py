@@ -83,6 +83,7 @@ def synthesize_huggingface_space_clone(scenes: list, audio_dir: Path, reference_
     if not client:
         raise RuntimeError("No reachable Hugging Face Voice Cloning Space available")
 
+    import concurrent.futures
     ref_file_handle = handle_file(str(ref_path.resolve()))
 
     for i, s in enumerate(scenes):
@@ -93,20 +94,26 @@ def synthesize_huggingface_space_clone(scenes: list, audio_dir: Path, reference_
             continue
             
         print(f"[Voice HF] Synthesizing scene {i+1}/{len(scenes)}: '{text[:50]}...'")
-        try:
+        
+        def _predict_hf():
             if endpoint_name == "/predict":
-                res = client.predict(
+                return client.predict(
                     text=text,
                     speaker_wav=ref_file_handle,
                     language="en",
                     api_name="/predict"
                 )
             else:
-                res = client.predict(
+                return client.predict(
                     text=text,
                     audio=ref_file_handle,
                     api_name="/clone"
                 )
+
+        try:
+            with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
+                future = executor.submit(_predict_hf)
+                res = future.result(timeout=25)
                 
             if isinstance(res, dict):
                 audio_src = res.get("path") or res.get("url") or res.get("name")
@@ -122,7 +129,7 @@ def synthesize_huggingface_space_clone(scenes: list, audio_dir: Path, reference_
             s["voice"] = "Hugging Face Reference Whisper Clone"
             s["word_durations"] = extract_acoustic_word_durations(out_file, text, language="en")
         except Exception as e:
-            print(f"[Voice HF] Scene {i+1} failed on HF ({e}), synthesizing via Kokoro Neural Whisper...")
+            print(f"[Voice HF] Scene {i+1} notice ({type(e).__name__}: {e}), generating via Kokoro Neural Whisper...")
             kokoro = get_kokoro_model()
             if kokoro:
                 import soundfile as sf
