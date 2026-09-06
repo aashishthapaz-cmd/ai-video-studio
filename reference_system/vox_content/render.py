@@ -413,8 +413,29 @@ def _clip_ken_burns(image: Path, output: Path, seconds: float, preset: str = "mo
     ]
     completed = _run_background(command)
     if completed.returncode != 0:
-        detail = (completed.stderr or completed.stdout or "").strip()
-        raise RuntimeError(f"Scene motion render failed for {image.name}: {detail[-1200:]}")
+        fallback_cmd = [
+            "ffmpeg",
+            "-y",
+            "-loop",
+            "1",
+            "-framerate",
+            "30",
+            "-t",
+            f"{seconds:.2f}",
+            "-i",
+            str(image),
+            "-vf",
+            f"scale={canvas_w}:{canvas_h}:force_original_aspect_ratio=increase,crop={canvas_w}:{canvas_h},{zoom},{fade_filter},setsar=1,trim=duration={seconds:.2f},setpts=PTS-STARTPTS",
+            "-an",
+            "-c:v", "libx264", "-preset", "veryfast", "-threads", "2",
+            "-pix_fmt",
+            "yuv420p",
+            str(output),
+        ]
+        completed = _run_background(fallback_cmd)
+        if completed.returncode != 0:
+            detail = (completed.stderr or completed.stdout or "").strip()
+            raise RuntimeError(f"Scene motion render failed for {image.name}: {detail[-1200:]}")
 
 
 def _clip_parallax(image: Path, output: Path, seconds: float, preset: str = "modern", variant: int = 1, video_format: str = "portrait") -> None:
@@ -586,6 +607,18 @@ def _video_encoder_args(intermediate: bool = False) -> list[str]:
 
 
 def _has_encoder(name: str) -> bool:
+    if name in {"h264_nvenc", "nvenc"}:
+        try:
+            completed = subprocess.run(
+                ["ffmpeg", "-hide_banner", "-f", "lavfi", "-i", "nullsrc=s=64x64:d=0.04", "-c:v", "h264_nvenc", "-f", "null", "-"],
+                capture_output=True,
+                text=True,
+                timeout=4,
+                creationflags=_background_creationflags(),
+            )
+            return completed.returncode == 0
+        except Exception:
+            return False
     try:
         completed = subprocess.run(
             ["ffmpeg", "-hide_banner", "-encoders"],

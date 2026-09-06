@@ -19,13 +19,13 @@ try:
     from cloud_generator.config import load_settings, save_settings, OUTPUT_DIR
     from cloud_generator.pipeline import run_cloud_pipeline
     from cloud_generator.bulk_scheduler import load_queue, save_queue, execute_single_job
-    from cloud_generator.notifier import dispatch_alert, send_telegram_message
+    from cloud_generator.notifier import dispatch_alert, send_telegram_message, notify_job_success, notify_job_failure
     from cloud_generator.self_healing import run_self_repair
 except ImportError:
     from config import load_settings, save_settings, OUTPUT_DIR
     from pipeline import run_cloud_pipeline
     from bulk_scheduler import load_queue, save_queue, execute_single_job
-    from notifier import dispatch_alert, send_telegram_message
+    from notifier import dispatch_alert, send_telegram_message, notify_job_success, notify_job_failure
     from self_healing import run_self_repair
 
 def run():
@@ -86,19 +86,17 @@ def run():
             print(f"   Output: {out_file}", flush=True)
             print(f"   Duration: {res.get('duration')}s | Scenes: {res.get('scenes')}", flush=True)
 
-            dispatch_alert(
-                job_title=title,
-                status="SUCCESS",
-                duration=res.get("duration", 0),
-                output_file=out_file,
-                fb_results=fb_res
+            notify_job_success(
+                job={"title": title},
+                fb_results=fb_res,
+                render_time=render_time,
+                video_path=out_file
             )
 
         except Exception as err:
             print(f"\n❌ Error during video generation: {err}", flush=True)
-            dispatch_alert(
-                job_title=title,
-                status="FAILED",
+            notify_job_failure(
+                job={"title": title},
                 error_msg=str(err)
             )
             sys.exit(1)
