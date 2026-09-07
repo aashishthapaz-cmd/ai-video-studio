@@ -44,7 +44,7 @@ DEFAULT_SETTINGS = {
     "transition_duration": 0.5,
     "motion_style": "parallax_2_5d",
     "overlay_opacity": 0.15,
-    "music_volume": 0.22,
+    "music_volume": 0.48,
     "huggingface_token": os.getenv("HF_TOKEN", ""),
     "cloudflare_account_id": os.getenv("CLOUDFLARE_ACCOUNT_ID", ""),
     "cloudflare_api_token": os.getenv("CLOUDFLARE_API_TOKEN", ""),

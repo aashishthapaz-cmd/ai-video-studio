@@ -17,15 +17,15 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: ProCaption,Arial,72,&H0000D7FF,&H60FFFFFF,&H00111111,&H90000000,-1,0,0,0,100,100,0,0,3,3,0,2,70,70,210,1
-Style: PoetrySmall,Cormorant Garamond,46,&H0000D7FF,&H60FFFFFF,&H00111111,&H90000000,0,1,0,0,88,100,0,0,1,1.7,0,5,70,70,0,1
-Style: ReferenceCursive,Segoe Print,78,&H0000D7FF,&H60FFFFFF,&H00111111,&H90000000,0,1,0,0,96,100,0,0,1,2.5,2.0,5,90,90,0,1
-Style: ReferenceMark,Segoe Script,22,&H00FFFFFF,&H60FFFFFF,&HAA000000,&H00000000,0,1,0,0,88,100,0,0,1,0.7,1.0,5,40,40,0,1
-Style: DarkAcademiaSerif,Cormorant Garamond,82,&H00C0C0FF,&H50FFFFFF,&H00080808,&H90000000,0,1,0,0,94,100,0,0,1,2.2,2.2,5,90,90,0,1
-Style: RomanticScript,Segoe Script,74,&H0033CCFF,&H60FFFFFF,&H00181008,&H90000000,0,1,0,0,96,100,0,0,1,2.4,1.8,5,90,90,0,1
-Style: StoicMinimal,Montserrat,70,&H00D0FFD0,&H60FFFFFF,&H00111811,&H90000000,-1,0,0,0,96,100,0,0,1,2.6,2.0,5,90,90,0,1
-Style: CosmicSerif,Cinzel,74,&H00EEEEEE,&H50FFFFFF,&H000B0B14,&H90000000,-1,0,0,0,96,100,0,0,1,2.5,2.5,5,90,90,0,1
-Style: TypewriterMono,Courier New,72,&H0000D7FF,&H60FFFFFF,&H00111111,&H90000000,-1,0,0,0,92,100,0,0,1,2.4,2.0,5,90,90,0,1
+Style: ProCaption,Arial,72,&H0000D7FF,&H0000D7FF,&H00111111,&H90000000,-1,0,0,0,100,100,0,0,3,3,0,2,70,70,210,1
+Style: PoetrySmall,Cormorant Garamond,46,&H0000D7FF,&H0000D7FF,&H00111111,&H90000000,0,1,0,0,88,100,0,0,1,1.7,0,5,70,70,0,1
+Style: ReferenceCursive,Segoe Print,78,&H0000D7FF,&H0000D7FF,&H00111111,&H90000000,0,1,0,0,96,100,0,0,1,2.5,2.0,5,90,90,0,1
+Style: ReferenceMark,Segoe Script,22,&H00FFFFFF,&H00FFFFFF,&HAA000000,&H00000000,0,1,0,0,88,100,0,0,1,0.7,1.0,5,40,40,0,1
+Style: DarkAcademiaSerif,Cormorant Garamond,82,&H0000D7FF,&H0000D7FF,&H00080808,&H90000000,0,1,0,0,94,100,0,0,1,2.2,2.2,5,90,90,0,1
+Style: RomanticScript,Segoe Script,74,&H0000D7FF,&H0000D7FF,&H00181008,&H90000000,0,1,0,0,96,100,0,0,1,2.4,1.8,5,90,90,0,1
+Style: StoicMinimal,Montserrat,70,&H0000D7FF,&H0000D7FF,&H00111811,&H90000000,-1,0,0,0,96,100,0,0,1,2.6,2.0,5,90,90,0,1
+Style: CosmicSerif,Cinzel,74,&H0000D7FF,&H0000D7FF,&H000B0B14,&H90000000,-1,0,0,0,96,100,0,0,1,2.5,2.5,5,90,90,0,1
+Style: TypewriterMono,Courier New,72,&H0000D7FF,&H0000D7FF,&H00111111,&H90000000,-1,0,0,0,92,100,0,0,1,2.4,2.0,5,90,90,0,1
 Style: NepaliReference,Noto Sans Devanagari,68,&H0000D7FF,&H60FFFFFF,&H00111111,&H90000000,-1,0,0,0,100,100,0,0,1,2.5,2.0,5,90,90,0,1
 Style: NepaliCaption,Noto Sans Devanagari,58,&H0000D7FF,&H60FFFFFF,&H00111111,&H90000000,-1,0,0,0,100,100,0,0,1,2.0,1.5,5,70,70,0,1
 Style: CreativeScript,Cormorant Garamond,58,&H0000D7FF,&H60FFFFFF,&HD0000000,&H00000000,0,1,0,0,100,100,0,0,1,0.45,2.1,5,60,60,0,1
@@ -635,28 +635,16 @@ def _caption_words_and_durations(caption: TimedCaption):
 
 
 def _poetry_caption_text(caption: TimedCaption) -> str:
-    words, durations = _caption_words_and_durations(caption)
+    clean_text = _clean(caption.text)
+    words = clean_text.split()
     if not words:
         return ""
     if len(words) <= 6:
-        return _karaoke_line(words, durations)
-        
+        return _escape_ass(" ".join(words))
     midpoint = max(1, min(len(words) - 1, round(len(words) * 0.52)))
-    l1_words, l1_durs = words[:midpoint], durations[:midpoint]
-    l2_words, l2_durs = words[midpoint:], durations[midpoint:]
-
-    # Line 1 renders from t=0 of the event
-    line1_text = _karaoke_line(l1_words, l1_durs)
-    
-    # Line 2 MUST wait until Line 1 finishes to eliminate double-speed premature highlighting
-    line1_total_centis = sum(max(8, int(round(d * 100))) for d in l1_durs)
-    line2_formatted = []
-    for idx, w in enumerate(l2_words):
-        centis = max(8, int(round(l2_durs[idx] * 100)))
-        line2_formatted.append(f"{{\\kf{centis}}}{_escape_ass(_display_word(w))}")
-    line2_text = f"{{\\k{line1_total_centis}}}" + " ".join(line2_formatted)
-    
-    return line1_text + r"\N" + line2_text
+    l1 = " ".join(words[:midpoint])
+    l2 = " ".join(words[midpoint:])
+    return _escape_ass(l1) + r"\N" + _escape_ass(l2)
 
 
 def _reference_caption_text(caption: TimedCaption) -> str:

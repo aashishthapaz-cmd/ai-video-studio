@@ -26,8 +26,9 @@ def sanitize_title(title: str) -> str:
     return safe or 'cloud_video'
 
 def audio_fx_filter():
-    """Warm acoustic broadcast mastering for poetic human voice."""
+    """Warm acoustic broadcast mastering for poetic human voice with instant zero-delay start."""
     return (
+        "silenceremove=start_periods=1:start_duration=0.01:start_threshold=-45dB,"
         "highpass=f=45,"
         "lowpass=f=16000,"
         "equalizer=f=200:t=q:w=1.0:g=1.0,"
@@ -61,6 +62,7 @@ def compile_cloud_video(scenes: list, title: str, workspace_dir: Path, captions_
     5. Niche-tuned Subtitle Typography (Cursive, Serif, Minimalist Bold, etc.)
     """
     workspace_dir.mkdir(parents=True, exist_ok=True)
+    cfg = load_settings()
     
     # Resolve caption style from argument or scenes
     active_caption_style = caption_style or (scenes[0].get("caption_style") if scenes and isinstance(scenes[0], dict) else "reference_cursive") or "reference_cursive"
@@ -173,7 +175,7 @@ def compile_cloud_video(scenes: list, title: str, workspace_dir: Path, captions_
         overlay_path=overlay_path,
         overlay_opacity=0.15 if overlay_path else 0.0,
         music_path=music_path,
-        music_volume=0.22 if music_path else 0.0,
+        music_volume=float(cfg.get("music_volume", 0.48)) if music_path else 0.0,
         music_fade_seconds=3.0,
         motion_style="parallax_2_5d"
     )

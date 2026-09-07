@@ -18,7 +18,7 @@
   "transition_duration": 0.5,
   "motion_style": "parallax_2_5d",
   "overlay_opacity": 0.15,
-  "music_volume": 0.22,
+  "music_volume": 0.48,
   "huggingface_token": "",
   "cloudflare_account_id": "",
   "cloudflare_api_token": "",

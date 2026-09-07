@@ -209,12 +209,13 @@ def publish_to_all_enabled_pages(video_path: Path, title: str, description: str,
         page_name = page.get("name") or page.get("page_name") or page_id
         page_hashtags = page.get("default_hashtags") or hashtags
         
-        if not page_id or not access_token:
+        if not page_id or not access_token or page_id in ("YOUR_PAGE_ID", "test_page_id") or "YOUR_PAGE_ACCESS_TOKEN" in access_token or access_token.startswith("YOUR_"):
+            print(f"ℹ️ [Facebook] Skipping '{page_name}' ({page_id}): Placeholder credentials detected. Set real Page ID and Access Token in FACEBOOK_PAGES_JSON secret to publish.", flush=True)
             results.append({
                 "page_name": page_name,
                 "page_id": page_id,
                 "ok": False,
-                "error": "Missing Page ID or Access Token"
+                "error": "Placeholder credentials configured. Real Page Access Token required."
             })
             continue
             

@@ -316,11 +316,28 @@ def synthesize_voxcpm_batch(scenes: list, audio_dir: Path, reference_audio: Path
         
     return scenes
 
+def trim_lead_silence(audio_path: Path) -> Path:
+    """Removes dead initial silence from speech audio so speech begins immediately."""
+    tmp_path = audio_path.parent / f"trim_{audio_path.name}"
+    cmd = [
+        "ffmpeg", "-y", "-i", str(audio_path),
+        "-af", "silenceremove=start_periods=1:start_duration=0.01:start_threshold=-45dB",
+        "-c:a", "pcm_s16le" if audio_path.suffix.lower() == ".wav" else "libmp3lame",
+        str(tmp_path)
+    ]
+    res = subprocess.run(cmd, capture_output=True, text=True)
+    if res.returncode == 0 and tmp_path.exists() and tmp_path.stat().st_size > 1000:
+        shutil.move(str(tmp_path), str(audio_path))
+    elif tmp_path.exists():
+        tmp_path.unlink()
+    return audio_path
+
 async def _synthesize_edge_line(text: str, voice: str, rate: str, pitch: str, output_path: Path) -> dict:
     """Synthesize a single line using Edge Neural Cloud TTS."""
     output_path.parent.mkdir(parents=True, exist_ok=True)
     communicate = edge_tts.Communicate(text, voice, rate=rate, pitch=pitch)
     await communicate.save(str(output_path))
+    trim_lead_silence(output_path)
     duration = get_audio_duration(output_path)
     return {
         "text": text,
