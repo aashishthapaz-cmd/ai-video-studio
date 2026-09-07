@@ -26,9 +26,8 @@ def sanitize_title(title: str) -> str:
     return safe or 'cloud_video'
 
 def audio_fx_filter():
-    """Warm acoustic broadcast mastering for poetic human voice with instant zero-delay start."""
+    """Warm acoustic broadcast mastering for poetic human voice with exact timeline sync."""
     return (
-        "silenceremove=start_periods=1:start_duration=0.01:start_threshold=-45dB,"
         "highpass=f=45,"
         "lowpass=f=16000,"
         "equalizer=f=200:t=q:w=1.0:g=1.0,"

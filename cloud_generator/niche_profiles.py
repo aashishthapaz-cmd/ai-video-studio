@@ -123,15 +123,15 @@ NICHE_REGISTRY: Dict[str, PoetryNiche] = {
         ),
         caption=CaptionConfig(
             style_name="ReferenceCursive",
-            font_name="Segoe Print",
-            font_size=78,
+            font_name="Caveat",
+            font_size=88,
             primary_color="&H0000D7FF",  # Radiant Amber Gold
-            secondary_color="&H60FFFFFF",
+            secondary_color="&H0000D7FF",
             outline_color="&H00111111",
             bold=0,
-            italic=1,
+            italic=0,
             outline=2.5,
-            shadow=2.0
+            shadow=1.8
         ),
         copy=CopyConfig(
             hook_emojis="🍂✨📜🕯️",

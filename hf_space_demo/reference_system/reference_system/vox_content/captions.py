@@ -17,21 +17,21 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: ProCaption,Arial,72,&H0000D7FF,&H0000D7FF,&H00111111,&H90000000,-1,0,0,0,100,100,0,0,3,3,0,2,70,70,210,1
-Style: PoetrySmall,Cormorant Garamond,46,&H0000D7FF,&H0000D7FF,&H00111111,&H90000000,0,1,0,0,88,100,0,0,1,1.7,0,5,70,70,0,1
-Style: ReferenceCursive,Segoe Print,78,&H0000D7FF,&H0000D7FF,&H00111111,&H90000000,0,1,0,0,96,100,0,0,1,2.5,2.0,5,90,90,0,1
-Style: ReferenceMark,Segoe Script,22,&H00FFFFFF,&H00FFFFFF,&HAA000000,&H00000000,0,1,0,0,88,100,0,0,1,0.7,1.0,5,40,40,0,1
-Style: DarkAcademiaSerif,Cormorant Garamond,82,&H0000D7FF,&H0000D7FF,&H00080808,&H90000000,0,1,0,0,94,100,0,0,1,2.2,2.2,5,90,90,0,1
-Style: RomanticScript,Segoe Script,74,&H0000D7FF,&H0000D7FF,&H00181008,&H90000000,0,1,0,0,96,100,0,0,1,2.4,1.8,5,90,90,0,1
-Style: StoicMinimal,Montserrat,70,&H0000D7FF,&H0000D7FF,&H00111811,&H90000000,-1,0,0,0,96,100,0,0,1,2.6,2.0,5,90,90,0,1
-Style: CosmicSerif,Cinzel,74,&H0000D7FF,&H0000D7FF,&H000B0B14,&H90000000,-1,0,0,0,96,100,0,0,1,2.5,2.5,5,90,90,0,1
-Style: TypewriterMono,Courier New,72,&H0000D7FF,&H0000D7FF,&H00111111,&H90000000,-1,0,0,0,92,100,0,0,1,2.4,2.0,5,90,90,0,1
-Style: NepaliReference,Noto Sans Devanagari,68,&H0000D7FF,&H60FFFFFF,&H00111111,&H90000000,-1,0,0,0,100,100,0,0,1,2.5,2.0,5,90,90,0,1
-Style: NepaliCaption,Noto Sans Devanagari,58,&H0000D7FF,&H60FFFFFF,&H00111111,&H90000000,-1,0,0,0,100,100,0,0,1,2.0,1.5,5,70,70,0,1
-Style: CreativeScript,Cormorant Garamond,58,&H0000D7FF,&H60FFFFFF,&HD0000000,&H00000000,0,1,0,0,100,100,0,0,1,0.45,2.1,5,60,60,0,1
-Style: CreativeBold,Arial,42,&H0000D7FF,&H60FFFFFF,&HE0000000,&H00000000,0,0,0,0,92,100,0,0,1,1.55,3.1,5,60,60,0,1
-Style: CreativeYellow,Arial,78,&H0000D7FF,&H60FFFFFF,&HE0000000,&H00000000,-1,0,0,0,90,100,0,0,1,2.0,4.0,5,60,60,0,1
-Style: CreativeTiny,Arial,32,&H0000D7FF,&H60FFFFFF,&HE0000000,&H00000000,0,0,0,0,90,100,0,0,1,1.3,2.7,5,60,60,0,1
+Style: ProCaption,Caveat,88,&H0000D7FF,&H0000D7FF,&H00111111,&H90000000,0,0,0,0,100,100,0,0,1,2.2,1.8,5,70,70,0,1
+Style: PoetrySmall,Caveat,84,&H0000D7FF,&H0000D7FF,&H00111111,&H90000000,0,0,0,0,100,100,0,0,1,2.2,1.8,5,70,70,0,1
+Style: ReferenceCursive,Caveat,90,&H0000D7FF,&H0000D7FF,&H00111111,&H90000000,0,0,0,0,100,100,0,0,1,2.5,1.8,5,80,80,0,1
+Style: ReferenceMark,Caveat,30,&H00FFFFFF,&H00FFFFFF,&HAA000000,&H00000000,0,0,0,0,100,100,0,0,1,1.0,1.0,5,40,40,0,1
+Style: DarkAcademiaSerif,Caveat,90,&H0000D7FF,&H0000D7FF,&H00080808,&H90000000,0,0,0,0,100,100,0,0,1,2.5,1.8,5,80,80,0,1
+Style: RomanticScript,Caveat,90,&H0000D7FF,&H0000D7FF,&H00181008,&H90000000,0,0,0,0,100,100,0,0,1,2.5,1.8,5,80,80,0,1
+Style: StoicMinimal,Caveat,88,&H0000D7FF,&H0000D7FF,&H00111811,&H90000000,0,0,0,0,100,100,0,0,1,2.5,1.8,5,80,80,0,1
+Style: CosmicSerif,Caveat,90,&H0000D7FF,&H0000D7FF,&H000B0B14,&H90000000,0,0,0,0,100,100,0,0,1,2.5,1.8,5,80,80,0,1
+Style: TypewriterMono,Caveat,88,&H0000D7FF,&H0000D7FF,&H00111111,&H90000000,0,0,0,0,100,100,0,0,1,2.4,1.8,5,80,80,0,1
+Style: NepaliReference,Noto Sans Devanagari,72,&H0000D7FF,&H0000D7FF,&H00111111,&H90000000,-1,0,0,0,100,100,0,0,1,2.5,2.0,5,90,90,0,1
+Style: NepaliCaption,Noto Sans Devanagari,64,&H0000D7FF,&H0000D7FF,&H00111111,&H90000000,-1,0,0,0,100,100,0,0,1,2.0,1.5,5,70,70,0,1
+Style: CreativeScript,Caveat,88,&H0000D7FF,&H0000D7FF,&HD0000000,&H00000000,0,0,0,0,100,100,0,0,1,2.2,1.8,5,60,60,0,1
+Style: CreativeBold,Caveat,88,&H0000D7FF,&H0000D7FF,&HE0000000,&H00000000,0,0,0,0,100,100,0,0,1,2.2,1.8,5,60,60,0,1
+Style: CreativeYellow,Caveat,90,&H0000D7FF,&H0000D7FF,&HE0000000,&H00000000,0,0,0,0,100,100,0,0,1,2.5,2.0,5,60,60,0,1
+Style: CreativeTiny,Caveat,40,&H0000D7FF,&H0000D7FF,&HE0000000,&H00000000,0,0,0,0,100,100,0,0,1,1.5,1.5,5,60,60,0,1
 Style: TinyCredit,Arial,26,&H99FFFFFF,&H00000000,&H55000000,&H00000000,0,0,0,0,100,100,0,0,1,1,0,1,40,40,40,1
 
 [Events]
@@ -636,12 +636,14 @@ def _caption_words_and_durations(caption: TimedCaption):
 
 def _poetry_caption_text(caption: TimedCaption) -> str:
     clean_text = _clean(caption.text)
+    clean_text = re.sub(r'\s+', ' ', clean_text).strip()
     words = clean_text.split()
     if not words:
         return ""
-    if len(words) <= 6:
+    if len(words) <= 5:
         return _escape_ass(" ".join(words))
-    midpoint = max(1, min(len(words) - 1, round(len(words) * 0.52)))
+    # Exactly 2 lines max: split at midpoint with a single \\N separator
+    midpoint = max(1, min(len(words) - 1, round(len(words) * 0.50)))
     l1 = " ".join(words[:midpoint])
     l2 = " ".join(words[midpoint:])
     return _escape_ass(l1) + r"\N" + _escape_ass(l2)

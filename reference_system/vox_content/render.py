@@ -143,16 +143,14 @@ def _video_filter(captions_path: str, preset: str, narration_total: float, total
     fade = _video_fade_filter(narration_total, total)
     if preset == "poetry_reference":
         return (
-            f"{_grain_filter(18)}"
-            "eq=contrast=0.96:saturation=0.74:brightness=-0.025:gamma=1.04,"
-            "vignette=PI/4,"
+            f"{_grain_filter(12)}"
+            "eq=contrast=1.02:saturation=0.92:brightness=-0.01:gamma=1.02,"
             f"{subtitles},"
             f"{fade}"
         )
     return (
         f"{_grain_filter(9)}"
-        "eq=contrast=1.10:saturation=0.92:brightness=-0.015,"
-        "vignette=PI/5,"
+        "eq=contrast=1.05:saturation=0.92:brightness=-0.01,"
         f"{subtitles},"
         f"{fade}"
     )
@@ -271,8 +269,8 @@ def _subtitles_filter(captions_path: str) -> str:
 
 def _base_grade(preset: str) -> str:
     if preset == "poetry_reference":
-        return f"{_grain_filter(18)}eq=contrast=0.96:saturation=0.74:brightness=-0.025:gamma=1.04,vignette=PI/4"
-    return f"{_grain_filter(9)}eq=contrast=1.10:saturation=0.92:brightness=-0.015,vignette=PI/5"
+        return f"{_grain_filter(12)}eq=contrast=1.02:saturation=0.92:brightness=-0.01:gamma=1.02"
+    return f"{_grain_filter(9)}eq=contrast=1.05:saturation=0.92:brightness=-0.01"
 
 
 def _grain_filter(strength: int) -> str:

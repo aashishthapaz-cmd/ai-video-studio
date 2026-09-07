@@ -143,16 +143,14 @@ def _video_filter(captions_path: str, preset: str, narration_total: float, total
     fade = _video_fade_filter(narration_total, total)
     if preset == "poetry_reference":
         return (
-            f"{_grain_filter(18)}"
-            "eq=contrast=0.96:saturation=0.74:brightness=-0.025:gamma=1.04,"
-            "vignette=PI/4,"
+            f"{_grain_filter(12)}"
+            "eq=contrast=1.02:saturation=0.92:brightness=-0.01:gamma=1.02,"
             f"{subtitles},"
             f"{fade}"
         )
     return (
         f"{_grain_filter(9)}"
-        "eq=contrast=1.10:saturation=0.92:brightness=-0.015,"
-        "vignette=PI/5,"
+        "eq=contrast=1.05:saturation=0.92:brightness=-0.01,"
         f"{subtitles},"
         f"{fade}"
     )
@@ -271,8 +269,8 @@ def _subtitles_filter(captions_path: str) -> str:
 
 def _base_grade(preset: str) -> str:
     if preset == "poetry_reference":
-        return f"{_grain_filter(18)}eq=contrast=0.96:saturation=0.74:brightness=-0.025:gamma=1.04,vignette=PI/4"
-    return f"{_grain_filter(9)}eq=contrast=1.10:saturation=0.92:brightness=-0.015,vignette=PI/5"
+        return f"{_grain_filter(12)}eq=contrast=1.02:saturation=0.92:brightness=-0.01:gamma=1.02"
+    return f"{_grain_filter(9)}eq=contrast=1.05:saturation=0.92:brightness=-0.01"
 
 
 def _grain_filter(strength: int) -> str:
@@ -413,8 +411,29 @@ def _clip_ken_burns(image: Path, output: Path, seconds: float, preset: str = "mo
     ]
     completed = _run_background(command)
     if completed.returncode != 0:
-        detail = (completed.stderr or completed.stdout or "").strip()
-        raise RuntimeError(f"Scene motion render failed for {image.name}: {detail[-1200:]}")
+        fallback_cmd = [
+            "ffmpeg",
+            "-y",
+            "-loop",
+            "1",
+            "-framerate",
+            "30",
+            "-t",
+            f"{seconds:.2f}",
+            "-i",
+            str(image),
+            "-vf",
+            f"scale={canvas_w}:{canvas_h}:force_original_aspect_ratio=increase,crop={canvas_w}:{canvas_h},{zoom},{fade_filter},setsar=1,trim=duration={seconds:.2f},setpts=PTS-STARTPTS",
+            "-an",
+            "-c:v", "libx264", "-preset", "veryfast", "-threads", "2",
+            "-pix_fmt",
+            "yuv420p",
+            str(output),
+        ]
+        completed = _run_background(fallback_cmd)
+        if completed.returncode != 0:
+            detail = (completed.stderr or completed.stdout or "").strip()
+            raise RuntimeError(f"Scene motion render failed for {image.name}: {detail[-1200:]}")
 
 
 def _clip_parallax(image: Path, output: Path, seconds: float, preset: str = "modern", variant: int = 1, video_format: str = "portrait") -> None:
@@ -586,6 +605,18 @@ def _video_encoder_args(intermediate: bool = False) -> list[str]:
 
 
 def _has_encoder(name: str) -> bool:
+    if name in {"h264_nvenc", "nvenc"}:
+        try:
+            completed = subprocess.run(
+                ["ffmpeg", "-hide_banner", "-f", "lavfi", "-i", "nullsrc=s=64x64:d=0.04", "-c:v", "h264_nvenc", "-f", "null", "-"],
+                capture_output=True,
+                text=True,
+                timeout=4,
+                creationflags=_background_creationflags(),
+            )
+            return completed.returncode == 0
+        except Exception:
+            return False
     try:
         completed = subprocess.run(
             ["ffmpeg", "-hide_banner", "-encoders"],
