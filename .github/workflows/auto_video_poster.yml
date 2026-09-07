@@ -69,7 +69,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: video-render-pipeline
+  group: ${{ github.workflow }}-${{ github.event_name == 'workflow_dispatch' && github.run_id || 'scheduled-queue' }}
   cancel-in-progress: false
 
 jobs:
