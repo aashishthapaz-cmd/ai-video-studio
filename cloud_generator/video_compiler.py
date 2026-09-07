@@ -117,9 +117,19 @@ def compile_cloud_video(scenes: list, title: str, workspace_dir: Path, captions_
         for s, dur in zip(scenes, durations):
             text = str(s.get("narration", "")).strip()
             if text:
-                sub_end = curr_t + dur - 0.04
-                word_durs = tuple(s.get("word_durations", ()))
-                rows.append(TimedCaption(curr_t, sub_end, text, word_durations=word_durs))
+                words = text.split()
+                # If a scene narration is long (> 10 words), split into sequential 2-line cues across scene duration
+                if len(words) > 10:
+                    mid = len(words) // 2
+                    chunk1 = " ".join(words[:mid])
+                    chunk2 = " ".join(words[mid:])
+                    half_dur = dur / 2.0
+                    rows.append(TimedCaption(curr_t, curr_t + half_dur - 0.04, chunk1))
+                    rows.append(TimedCaption(curr_t + half_dur, curr_t + dur - 0.04, chunk2))
+                else:
+                    sub_end = curr_t + dur - 0.04
+                    word_durs = tuple(s.get("word_durations", ()))
+                    rows.append(TimedCaption(curr_t, sub_end, text, word_durations=word_durs))
             curr_t += dur
             
         write_timed_ass(

@@ -77,6 +77,32 @@ def get_audio_duration(file_path: Path) -> float:
     except Exception:
         return 5.0
 
+def prepare_poetic_speech_text(text: str) -> str:
+    """
+    Transforms raw poetic script into rich, breathy spoken-word prose with deliberate pauses.
+    Inserts natural breath pauses at commas, clauses, line breaks, and periods.
+    """
+    t = str(text or "").strip()
+    if not t:
+        return ""
+    # Normalize dashes and em-dashes
+    t = re.sub(r'[—–]|--', ', ', t)
+    # Ensure line breaks become natural pauses
+    t = re.sub(r'\n+', ', ', t)
+    # Normalize colons and semicolons
+    t = re.sub(r'[;:]', ',', t)
+    # Normalize ellipses
+    t = re.sub(r'\.{2,}', '...', t)
+    # Expand end of sentence punctuation to have a calm breath pause
+    t = re.sub(r'(?<!\.)([.!?])(?!\.)\s*', r'\1... ', t)
+    # Ensure commas have natural spacing
+    t = re.sub(r',\s*', ', ', t)
+    # Normalize any duplicate punctuation
+    t = re.sub(r',\s*,+', ', ', t)
+    t = re.sub(r'\.{4,}', '...', t)
+    t = re.sub(r'\s+', ' ', t).strip()
+    return t
+
 def synthesize_huggingface_space_clone(scenes: list, audio_dir: Path, reference_audio: Path = None, hf_token: str = None) -> list:
     """
     Synthesizes voice cloning in the cloud via Hugging Face Spaces (Nymbo XTTS-v2, tonyassi, E2-F5-TTS)
@@ -118,31 +144,32 @@ def synthesize_huggingface_space_clone(scenes: list, audio_dir: Path, reference_
     for i, s in enumerate(scenes):
         scene_id = s.get("id", f"scene_{i+1:03d}")
         out_file = audio_dir / f"{scene_id}.wav"
-        text = s.get("narration", "").strip()
-        if not text:
+        raw_text = s.get("narration", "").strip()
+        if not raw_text:
             continue
             
-        print(f"[Voice HF] Synthesizing scene {i+1}/{len(scenes)}: '{text[:50]}...'")
+        speech_text = prepare_poetic_speech_text(raw_text)
+        print(f"[Voice HF] Synthesizing scene {i+1}/{len(scenes)}: '{raw_text[:50]}...'")
         
         def _predict_hf():
             if chosen_space == "mrfakename/E2-F5-TTS":
                 return client.predict(
                     ref_audio=ref_file_handle,
                     ref_text=ref_text,
-                    gen_text=text,
+                    gen_text=speech_text,
                     remove_silence=False,
                     api_name="/predict"
                 )
             elif chosen_space == "Nymbo/Voice-Clone-Multilingual":
                 return client.predict(
-                    text=text,
+                    text=speech_text,
                     speaker_wav=ref_file_handle,
                     language="en",
                     api_name="/predict"
                 )
             else:
                 return client.predict(
-                    text=text,
+                    text=speech_text,
                     audio=ref_file_handle,
                     api_name=endpoint_name
                 )
@@ -160,16 +187,41 @@ def synthesize_huggingface_space_clone(scenes: list, audio_dir: Path, reference_
                 audio_src = res
                 
             shutil.copyfile(audio_src, str(out_file))
-            trim_lead_silence(out_file)
+            trim_and_pad_scene_audio(out_file, tail_pad_sec=0.35)
             dur = get_audio_duration(out_file)
             s["audio_path"] = str(out_file)
             s["duration"] = round(dur, 2)
             s["voice"] = f"Hugging Face ({chosen_space}) Reference Whisper Clone"
+            s["word_durations"] = extract_acoustic_word_durations(out_file, raw_text, language="en")
         except Exception as e:
             print(f"[Voice HF] Scene {i+1} notice ({type(e).__name__}: {e})")
             raise RuntimeError(f"Hugging Face voice cloning failed for scene {i+1}: {e}")
         
     return scenes
+
+def trim_and_pad_scene_audio(audio_path: Path, tail_pad_sec: float = 0.35) -> Path:
+    """
+    Gently trims harsh dead lead silence (preserving natural breath intakes at -55dB)
+    and adds calm ambient trailing silence padding to avoid rushed scene transitions.
+    """
+    tmp_path = audio_path.parent / f"proc_{audio_path.name}"
+    is_wav = audio_path.suffix.lower() == ".wav"
+    filter_chain = f"silenceremove=start_periods=1:start_duration=0.01:start_threshold=-55dB,apad=pad_dur={tail_pad_sec}"
+    cmd = [
+        "ffmpeg", "-y", "-i", str(audio_path),
+        "-af", filter_chain,
+        "-c:a", "pcm_s16le" if is_wav else "libmp3lame",
+        str(tmp_path)
+    ]
+    res = subprocess.run(cmd, capture_output=True, text=True)
+    if res.returncode == 0 and tmp_path.exists() and tmp_path.stat().st_size > 1000:
+        shutil.move(str(tmp_path), str(audio_path))
+    elif tmp_path.exists():
+        tmp_path.unlink()
+    return audio_path
+
+def trim_lead_silence(audio_path: Path) -> Path:
+    return trim_and_pad_scene_audio(audio_path, tail_pad_sec=0.35)
 
 def synthesize_fish_audio(text: str, output_path: Path, api_key: str, reference_audio: Path = None) -> dict:
     """Synthesizes human voice cloning via Fish Audio Cloud API."""
@@ -178,8 +230,9 @@ def synthesize_fish_audio(text: str, output_path: Path, api_key: str, reference_
         "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/json"
     }
+    speech_text = prepare_poetic_speech_text(text)
     payload = {
-        "text": text,
+        "text": speech_text,
         "format": "mp3",
         "reference_id": "whisper_poetic_clone"
     }
@@ -188,6 +241,7 @@ def synthesize_fish_audio(text: str, output_path: Path, api_key: str, reference_
         data = resp.read()
         output_path.parent.mkdir(parents=True, exist_ok=True)
         output_path.write_bytes(data)
+        trim_and_pad_scene_audio(output_path, tail_pad_sec=0.35)
         return {
             "text": text,
             "audio_path": str(output_path),
@@ -196,19 +250,20 @@ def synthesize_fish_audio(text: str, output_path: Path, api_key: str, reference_
         }
 
 def synthesize_elevenlabs(text: str, output_path: Path, api_key: str, voice_id: str = "21m00Tcm4TlvDq8ikWAM") -> dict:
-    """Synthesizes ultra-realistic voice via ElevenLabs Cloud API."""
+    """Synthesizes ultra-realistic voice via ElevenLabs Cloud API with slow poetic pacing."""
     url = f"https://api.elevenlabs.io/v1/text-to-speech/{voice_id}"
     headers = {
         "xi-api-key": api_key,
         "Content-Type": "application/json"
     }
+    speech_text = prepare_poetic_speech_text(text)
     payload = {
-        "text": text,
+        "text": speech_text,
         "model_id": "eleven_multilingual_v2",
         "voice_settings": {
-            "stability": 0.55,
+            "stability": 0.60,
             "similarity_boost": 0.85,
-            "style": 0.40,
+            "style": 0.35,
             "use_speaker_boost": True
         }
     }
@@ -217,6 +272,7 @@ def synthesize_elevenlabs(text: str, output_path: Path, api_key: str, voice_id: 
         data = resp.read()
         output_path.parent.mkdir(parents=True, exist_ok=True)
         output_path.write_bytes(data)
+        trim_and_pad_scene_audio(output_path, tail_pad_sec=0.35)
         return {
             "text": text,
             "audio_path": str(output_path),
@@ -233,9 +289,10 @@ def synthesize_voxcpm_local(text: str, output_path: Path, reference_audio: Path 
     if not VOX_PY.exists() or not VOX_BRIDGE.exists() or not ref_path.exists():
         raise FileNotFoundError(f"Local VoxCPM missing: PY={VOX_PY.exists()}, REF={ref_path.exists()}")
         
+    speech_text = prepare_poetic_speech_text(text)
     req_file = output_path.parent / "voxcpm_req.json"
     req_payload = {
-        "text": text,
+        "text": speech_text,
         "output": str(output_path),
         "language": "en",
         "reference_audio": str(ref_path),
@@ -250,6 +307,7 @@ def synthesize_voxcpm_local(text: str, output_path: Path, reference_audio: Path 
     if res.returncode != 0 or not output_path.exists() or output_path.stat().st_size < 1000:
         raise RuntimeError(f"Local VoxCPM failed: {res.stderr[-400:].strip() if res.stderr else ''}")
         
+    trim_and_pad_scene_audio(output_path, tail_pad_sec=0.35)
     dur = get_audio_duration(output_path)
     return {
         "text": text,
@@ -269,13 +327,15 @@ def synthesize_voxcpm_batch(scenes: list, audio_dir: Path, reference_audio: Path
     for i, s in enumerate(scenes):
         scene_id = s.get("id", f"scene_{i+1:03d}")
         out_file = audio_dir / f"{scene_id}.wav"
+        speech_text = prepare_poetic_speech_text(s.get("narration", "").strip())
         batch_items.append({
-            "text": s.get("narration", "").strip(),
+            "text": speech_text,
             "output": str(out_file)
         })
         
+    first_text = prepare_poetic_speech_text(scenes[0].get("narration", ""))
     req_payload = {
-        "text": scenes[0].get("narration", ""),
+        "text": first_text,
         "output": str(audio_dir / "placeholder.wav"),
         "batch": batch_items,
         "language": "en",
@@ -291,37 +351,16 @@ def synthesize_voxcpm_batch(scenes: list, audio_dir: Path, reference_audio: Path
     if res.returncode != 0:
         raise RuntimeError(f"Local VoxCPM batch failed: {res.stderr[-400:].strip() if res.stderr else ''}")
         
-    try:
-        data = json.loads(res.stdout.strip() if res.stdout else "{}")
-        item_map = {item["output"]: item["duration"] for item in data.get("batch", [])}
-    except Exception:
-        item_map = {}
-
     for i, s in enumerate(scenes):
         scene_id = s.get("id", f"scene_{i+1:03d}")
         out_file = audio_dir / f"{scene_id}.wav"
-        dur = item_map.get(str(out_file)) or get_audio_duration(out_file)
+        trim_and_pad_scene_audio(out_file, tail_pad_sec=0.35)
+        dur = get_audio_duration(out_file)
         s["audio_path"] = str(out_file)
         s["duration"] = round(dur, 2)
         s["voice"] = "VoxCPM Reference Clone"
         
     return scenes
-
-def trim_lead_silence(audio_path: Path) -> Path:
-    """Removes dead initial silence from speech audio so speech begins immediately."""
-    tmp_path = audio_path.parent / f"trim_{audio_path.name}"
-    cmd = [
-        "ffmpeg", "-y", "-i", str(audio_path),
-        "-af", "silenceremove=start_periods=1:start_duration=0.01:start_threshold=-45dB",
-        "-c:a", "pcm_s16le" if audio_path.suffix.lower() == ".wav" else "libmp3lame",
-        str(tmp_path)
-    ]
-    res = subprocess.run(cmd, capture_output=True, text=True)
-    if res.returncode == 0 and tmp_path.exists() and tmp_path.stat().st_size > 1000:
-        shutil.move(str(tmp_path), str(audio_path))
-    elif tmp_path.exists():
-        tmp_path.unlink()
-    return audio_path
 
 _CACHED_WHISPER = None
 
@@ -408,7 +447,7 @@ def get_f5_engine(device="cpu"):
 def synthesize_f5_tts_batch(scenes: list, audio_dir: Path, reference_audio: Path = None) -> list:
     """
     Synthesizes exact voice cloning using SWivid/F5-TTS (Option 1 Primary).
-    Clones reference audio whishper_prompt.wav with emotional nuances and whisper breathing.
+    Clones reference audio whishper_prompt.wav with emotional nuances, slow tempo, and whisper breathing.
     """
     ref_path, ref_text = get_effective_reference_voice(reference_audio, work_dir=audio_dir)
     if not ref_path.exists():
@@ -419,33 +458,43 @@ def synthesize_f5_tts_batch(scenes: list, audio_dir: Path, reference_audio: Path
     for i, s in enumerate(scenes):
         scene_id = s.get("id", f"scene_{i+1:03d}")
         out_file = audio_dir / f"{scene_id}.wav"
-        text = s.get("narration", "").strip()
-        if not text:
+        raw_text = s.get("narration", "").strip()
+        if not raw_text:
             continue
             
-        print(f"[Voice F5-TTS] Synthesizing scene {i+1}/{len(scenes)}: '{text[:50]}...'")
+        speech_text = prepare_poetic_speech_text(raw_text)
+        print(f"[Voice F5-TTS] Synthesizing scene {i+1}/{len(scenes)}: '{raw_text[:50]}...'")
         try:
             f5.infer(
                 ref_file=str(ref_path.resolve()),
                 ref_text=ref_text,
-                gen_text=text,
+                gen_text=speech_text,
                 file_wave=str(out_file),
-                speed=0.74,
+                speed=0.68,
                 nfe_step=36
             )
         except TypeError:
-            f5.infer(
-                ref_file=str(ref_path.resolve()),
-                ref_text=ref_text,
-                gen_text=text,
-                file_wave=str(out_file)
-            )
-        trim_lead_silence(out_file)
+            try:
+                f5.infer(
+                    ref_file=str(ref_path.resolve()),
+                    ref_text=ref_text,
+                    gen_text=speech_text,
+                    file_wave=str(out_file),
+                    speed=0.68
+                )
+            except TypeError:
+                f5.infer(
+                    ref_file=str(ref_path.resolve()),
+                    ref_text=ref_text,
+                    gen_text=speech_text,
+                    file_wave=str(out_file)
+                )
+        trim_and_pad_scene_audio(out_file, tail_pad_sec=0.35)
         dur = get_audio_duration(out_file)
         s["audio_path"] = str(out_file)
         s["duration"] = round(dur, 2)
         s["voice"] = "F5-TTS Reference Whisper Clone"
-        s["word_durations"] = extract_acoustic_word_durations(out_file, text, language="en")
+        s["word_durations"] = extract_acoustic_word_durations(out_file, raw_text, language="en")
         
     return scenes
 
@@ -472,24 +521,25 @@ def synthesize_xtts_v2_batch(scenes: list, audio_dir: Path, reference_audio: Pat
     for i, s in enumerate(scenes):
         scene_id = s.get("id", f"scene_{i+1:03d}")
         out_file = audio_dir / f"{scene_id}.wav"
-        text = s.get("narration", "").strip()
-        if not text:
+        raw_text = s.get("narration", "").strip()
+        if not raw_text:
             continue
             
-        print(f"[Voice XTTS-v2] Synthesizing scene {i+1}/{len(scenes)}: '{text[:50]}...'")
+        speech_text = prepare_poetic_speech_text(raw_text)
+        print(f"[Voice XTTS-v2] Synthesizing scene {i+1}/{len(scenes)}: '{raw_text[:50]}...'")
         xtts.tts_to_file(
-            text=text,
+            text=speech_text,
             speaker_wav=str(ref_path.resolve()),
             language="en",
             file_path=str(out_file),
-            speed=0.75
+            speed=0.68
         )
-        trim_lead_silence(out_file)
+        trim_and_pad_scene_audio(out_file, tail_pad_sec=0.35)
         dur = get_audio_duration(out_file)
         s["audio_path"] = str(out_file)
         s["duration"] = round(dur, 2)
         s["voice"] = "XTTS-v2 Reference Whisper Clone"
-        s["word_durations"] = extract_acoustic_word_durations(out_file, text, language="en")
+        s["word_durations"] = extract_acoustic_word_durations(out_file, raw_text, language="en")
         
     return scenes
 

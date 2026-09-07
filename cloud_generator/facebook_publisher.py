@@ -222,7 +222,8 @@ def publish_to_all_enabled_pages(video_path: Path, title: str, description: str,
     
     # Filter target pages
     if target_page_ids and "all" not in target_page_ids:
-        pages = [p for p in pages if (p.get("id") in target_page_ids or p.get("page_id") in target_page_ids)]
+        target_str_ids = {str(x).strip() for x in target_page_ids if str(x).strip()}
+        pages = [p for p in pages if (str(p.get("id") or "").strip() in target_str_ids or str(p.get("page_id") or "").strip() in target_str_ids)]
         
     results = []
     for page in pages:
