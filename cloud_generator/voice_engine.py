@@ -79,27 +79,27 @@ def get_audio_duration(file_path: Path) -> float:
 
 def prepare_poetic_speech_text(text: str) -> str:
     """
-    Transforms raw poetic script into rich, breathy spoken-word prose with deliberate pauses.
-    Inserts natural breath pauses at commas, clauses, line breaks, and periods.
+    Transforms raw poetic script into natural, smooth spoken-word text.
+    Preserves natural sentence flow without injecting robotic ellipses or awkward mid-clause pauses.
     """
     t = str(text or "").strip()
     if not t:
         return ""
-    # Normalize dashes and em-dashes
+    # Normalize em-dashes and long dashes to simple comma pause
     t = re.sub(r'[—–]|--', ', ', t)
-    # Ensure line breaks become natural pauses
-    t = re.sub(r'\n+', ', ', t)
-    # Normalize colons and semicolons
+    # Ensure line breaks become a gentle breath space
+    t = re.sub(r'\n+', ' ', t)
+    # Normalize semicolons and colons
     t = re.sub(r'[;:]', ',', t)
-    # Normalize ellipses
-    t = re.sub(r'\.{2,}', '...', t)
-    # Expand end of sentence punctuation to have a calm breath pause
-    t = re.sub(r'(?<!\.)([.!?])(?!\.)\s*', r'\1... ', t)
-    # Ensure commas have natural spacing
-    t = re.sub(r',\s*', ', ', t)
-    # Normalize any duplicate punctuation
+    # Clean multiple dots into single period
+    t = re.sub(r'\.{2,}', '.', t)
+    # Ensure commas have clean single spacing
+    t = re.sub(r'\s*,\s*', ', ', t)
+    # Ensure periods have clean single spacing
+    t = re.sub(r'\s*\.\s*', '. ', t)
+    # Clean duplicate punctuation
     t = re.sub(r',\s*,+', ', ', t)
-    t = re.sub(r'\.{4,}', '...', t)
+    t = re.sub(r'\.\s*\.+', '. ', t)
     t = re.sub(r'\s+', ' ', t).strip()
     return t
 

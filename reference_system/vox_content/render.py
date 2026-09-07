@@ -387,9 +387,6 @@ def _clip_ken_burns(image: Path, output: Path, seconds: float, preset: str = "mo
     canvas_w = max(width + 180, int(width * 1.16))
     canvas_h = max(height + 180, int(height * 1.16))
     zoom = _motion_filter(image, seconds, preset, variant, video_format)
-    # Cinematic 0.5s dip-to-black transition: 0.25s fade-in from black at start, 0.25s fade-out to black at end
-    fade_out_st = max(0.0, seconds - 0.25)
-    fade_filter = f"fade=t=in:st=0:d=0.25,fade=t=out:st={fade_out_st:.3f}:d=0.25"
     command = [
             "ffmpeg",
             "-y",
@@ -402,7 +399,7 @@ def _clip_ken_burns(image: Path, output: Path, seconds: float, preset: str = "mo
             "-i",
             str(image),
             "-vf",
-            f"scale={canvas_w}:{canvas_h}:force_original_aspect_ratio=increase,crop={canvas_w}:{canvas_h},{zoom},{fade_filter},setsar=1,trim=duration={seconds:.2f},setpts=PTS-STARTPTS",
+            f"scale={canvas_w}:{canvas_h}:force_original_aspect_ratio=increase,crop={canvas_w}:{canvas_h},{zoom},setsar=1,trim=duration={seconds:.2f},setpts=PTS-STARTPTS",
             "-an",
             *_video_encoder_args(intermediate=True),
             "-pix_fmt",
@@ -423,7 +420,7 @@ def _clip_ken_burns(image: Path, output: Path, seconds: float, preset: str = "mo
             "-i",
             str(image),
             "-vf",
-            f"scale={canvas_w}:{canvas_h}:force_original_aspect_ratio=increase,crop={canvas_w}:{canvas_h},{zoom},{fade_filter},setsar=1,trim=duration={seconds:.2f},setpts=PTS-STARTPTS",
+            f"scale={canvas_w}:{canvas_h}:force_original_aspect_ratio=increase,crop={canvas_w}:{canvas_h},{zoom},setsar=1,trim=duration={seconds:.2f},setpts=PTS-STARTPTS",
             "-an",
             "-c:v", "libx264", "-preset", "veryfast", "-threads", "2",
             "-pix_fmt",
@@ -450,9 +447,6 @@ def _clip_parallax(image: Path, output: Path, seconds: float, preset: str = "mod
     parallax_eased = f"(({parallax_progress})*({parallax_progress})*({parallax_progress})*(({parallax_progress})*(({parallax_progress})*6-15)+10))"
     overlay_x = f"{start_x}+({travel_x - start_x})*{parallax_eased}"
     overlay_y = f"{start_y}+({travel_y - start_y})*{parallax_eased}"
-    # Cinematic 0.5s dip-to-black transition
-    fade_out_st = max(0.0, seconds - 0.25)
-    fade_filter = f"fade=t=in:st=0:d=0.25,fade=t=out:st={fade_out_st:.3f}:d=0.25"
     command = [
         "ffmpeg",
         "-y",
@@ -477,7 +471,7 @@ def _clip_parallax(image: Path, output: Path, seconds: float, preset: str = "mod
             f"[0:v]{bg_motion},setsar=1[bg];"
             f"[1:v]format=rgba[fg];"
             f"[bg][fg]overlay=x='{overlay_x}':y='{overlay_y}':format=auto:shortest=1,"
-            f"{fade_filter},trim=duration={seconds:.2f},setpts=PTS-STARTPTS[v]"
+            f"trim=duration={seconds:.2f},setpts=PTS-STARTPTS[v]"
         ),
         "-map",
         "[v]",
@@ -540,10 +534,10 @@ def _motion_filter(
     eased = f"(({progress})*({progress})*({progress})*(({progress})*(({progress})*6-15)+10))"
     
     min_zoom = 1.0000
-    zoom_span = rng.uniform(0.045, 0.065) if max_zoom is None else (max_zoom - min_zoom)
+    zoom_span = rng.uniform(0.015, 0.025) if max_zoom is None else min(0.025, max_zoom - min_zoom)
     max_zoom_val = min_zoom + zoom_span
 
-    # Randomized smooth camera animation effects
+    # Randomized subtle, calm camera animation effects
     styles = [
         "slow_zoom_in",
         "slow_zoom_out",
@@ -557,34 +551,34 @@ def _motion_filter(
 
     if chosen_style == "slow_zoom_in":
         z = f"min({min_zoom:.5f}+({zoom_span:.5f})*{eased},{max_zoom_val:.5f})"
-        start_x, end_x = rng.choice([(0.50, 0.50), (0.45, 0.55), (0.55, 0.45)])
-        start_y, end_y = rng.choice([(0.50, 0.50), (0.40, 0.48), (0.48, 0.40)])
+        start_x, end_x = rng.choice([(0.50, 0.50), (0.49, 0.51), (0.51, 0.49)])
+        start_y, end_y = rng.choice([(0.50, 0.50), (0.49, 0.51), (0.51, 0.49)])
     elif chosen_style == "slow_zoom_out":
         z = f"max({max_zoom_val:.5f}-({zoom_span:.5f})*{eased},{min_zoom:.5f})"
-        start_x, end_x = rng.choice([(0.50, 0.50), (0.55, 0.45), (0.45, 0.55)])
-        start_y, end_y = rng.choice([(0.45, 0.50), (0.40, 0.50), (0.50, 0.45)])
+        start_x, end_x = rng.choice([(0.50, 0.50), (0.51, 0.49), (0.49, 0.51)])
+        start_y, end_y = rng.choice([(0.49, 0.51), (0.50, 0.50), (0.51, 0.49)])
     elif chosen_style == "slow_pan_left":
         base_zoom = min_zoom + zoom_span * 0.8
         z = f"{base_zoom:.5f}"
-        start_x, end_x = 0.68, 0.32
+        start_x, end_x = 0.53, 0.47
         start_y, end_y = 0.50, 0.50
     elif chosen_style == "slow_pan_right":
         base_zoom = min_zoom + zoom_span * 0.8
         z = f"{base_zoom:.5f}"
-        start_x, end_x = 0.32, 0.68
+        start_x, end_x = 0.47, 0.53
         start_y, end_y = 0.50, 0.50
     elif chosen_style == "slow_drift_up":
         z = f"min({min_zoom:.5f}+({zoom_span*0.7:.5f})*{eased},{min_zoom+zoom_span*0.7:.5f})"
         start_x, end_x = 0.50, 0.50
-        start_y, end_y = 0.62, 0.38
+        start_y, end_y = 0.53, 0.47
     elif chosen_style == "slow_drift_down":
         z = f"min({min_zoom:.5f}+({zoom_span*0.7:.5f})*{eased},{min_zoom+zoom_span*0.7:.5f})"
         start_x, end_x = 0.50, 0.50
-        start_y, end_y = 0.38, 0.62
+        start_y, end_y = 0.47, 0.53
     else: # slow_diagonal_drift
         z = f"min({min_zoom:.5f}+({zoom_span:.5f})*{eased},{max_zoom_val:.5f})"
-        start_x, end_x = rng.choice([(0.38, 0.62), (0.62, 0.38)])
-        start_y, end_y = rng.choice([(0.38, 0.62), (0.62, 0.38)])
+        start_x, end_x = rng.choice([(0.48, 0.52), (0.52, 0.48)])
+        start_y, end_y = rng.choice([(0.48, 0.52), (0.52, 0.48)])
 
     x_factor = f"({start_x:.3f}+({end_x:.3f}-{start_x:.3f})*{eased})"
     y_factor = f"({start_y:.3f}+({end_y:.3f}-{start_y:.3f})*{eased})"

@@ -57,6 +57,11 @@ def generate_scene_image(prompt: str, output_path: Path, width: int = None, heig
     if seed is None:
         seed = random.randint(100000, 999999999)
 
+    # Ensure borderless framing is strictly mandated in the prompt
+    borderless_constraint = ", borderless full bleed 9:16 portrait vertical frame, edge-to-edge cinematic composition, no borders, no white frame, no black bars, no margins"
+    if "borderless" not in prompt.lower() and "no borders" not in prompt.lower():
+        prompt = prompt.rstrip(" ,.;:") + borderless_constraint
+
     priority = [preferred_engine] if preferred_engine else cfg.get("image_engine_priority", ["pollinations", "cloudflare", "huggingface"])
     
     errors = []
@@ -74,7 +79,7 @@ def generate_scene_image(prompt: str, output_path: Path, width: int = None, heig
                 except Exception as e:
                     if model != "turbo":
                         try:
-                            time.sleep(1.0)
+                            time.sleep(1.5)
                             img = generate_pollinations_image(prompt, output_path, width=width, height=height, seed=seed, model="turbo", api_key=api_key)
                             return {"ok": True, "engine": "Pollinations (turbo fallback)", "path": img}
                         except Exception:
@@ -106,7 +111,7 @@ def generate_scene_image(prompt: str, output_path: Path, width: int = None, heig
 
 def generate_all_scene_images(scenes: list, assets_dir: Path, progress_callback=None) -> list:
     """
-    Generates guaranteed unique images for all scenes with zero repetition.
+    Generates guaranteed unique, borderless images for all scenes using consistent primary cloud engines.
     Strictly verifies image uniqueness and hashes to ensure no image is ever repeated.
     """
     assets_dir.mkdir(parents=True, exist_ok=True)
@@ -118,55 +123,58 @@ def generate_all_scene_images(scenes: list, assets_dir: Path, progress_callback=
         scene_id = scene.get("id", f"scene_{i+1:03d}")
         raw_prompt = scene.get("prompt", "").strip() or scene.get("narration", "").strip()
         
-        # Ensure every scene (and especially the closing 2 scenes) has rich cinematic visual cues
-        is_closing_scene = (i >= total - 2)
-        aesthetic_booster = ""
+        # Enforce rich cinematic cues and borderless full-bleed framing across ALL scenes
+        borderless_addon = ", borderless full bleed 9:16 portrait vertical frame, edge-to-edge cinematic composition, no borders, no white frame, no black bars, no margins"
         if len(raw_prompt.split()) < 20 or "cinematic" not in raw_prompt.lower():
-            if is_closing_scene:
-                aesthetic_booster = ", emotional warm sunset chiaroscuro, cinematic 35mm film photography, masterpiece, rich depth of field, delicate atmospheric golden glow, 8k resolution"
-            else:
-                aesthetic_booster = ", cinematic mood, soft film grain, natural ambient lighting, 35mm photography, high aesthetic, detailed textures, masterpiece"
-                
-        base_prompt = raw_prompt.rstrip(" ,.;:") + aesthetic_booster
+            aesthetic_booster = ", cinematic mood, soft film grain, natural ambient lighting, 35mm photography, high aesthetic, detailed textures, masterpiece"
+            base_prompt = raw_prompt.rstrip(" ,.;:") + aesthetic_booster + borderless_addon
+        else:
+            base_prompt = raw_prompt.rstrip(" ,.;:") + borderless_addon
+            
         out_file = assets_dir / f"{scene_id}.png"
         
         if progress_callback:
             progress_callback(i + 1, total, f"Generating unique image for {scene_id}")
             
         success = False
-        for attempt in range(3):
+        for attempt in range(5):
             # High-entropy random seed for every attempt
             seed = random.randint(100000, 999999999)
             
-            # Add subtle framing nuance on retries to prevent remote cache hits
-            angle_salts = [
+            # Subtle variation on retry to prevent remote cache collisions
+            variation_salts = [
                 "",
-                f", unique composition perspective angle {i+1}",
-                f", distinctive atmospheric lighting variation {i+1}",
-                f", non-repeating scenic depth {i+1}"
+                f", unique atmospheric lighting perspective {i+1}",
+                f", distinctive scenic depth angle {i+1}",
+                f", evocative atmospheric composition {i+1}",
+                f", serene visual balance {i+1}"
             ]
-            prompt = base_prompt.rstrip(" ,.;:") + angle_salts[attempt % len(angle_salts)]
+            prompt = base_prompt.rstrip(" ,.;:") + variation_salts[attempt % len(variation_salts)]
 
-            res = generate_scene_image(prompt, out_file, seed=seed)
-            img_path = Path(res["path"])
-            
-            if img_path.exists() and img_path.stat().st_size > 1000:
-                img_bytes = img_path.read_bytes()
-                img_hash = hashlib.md5(img_bytes).hexdigest()
+            try:
+                res = generate_scene_image(prompt, out_file, seed=seed)
+                img_path = Path(res["path"])
                 
-                # Check for duplicate image across scenes
-                if img_hash not in seen_hashes:
-                    seen_hashes[img_hash] = scene_id
-                    scene["image_path"] = str(img_path)
-                    scene["image_engine"] = res["engine"]
-                    success = True
-                    time.sleep(1.2)
-                    break
+                if img_path.exists() and img_path.stat().st_size > 1000:
+                    img_bytes = img_path.read_bytes()
+                    img_hash = hashlib.md5(img_bytes).hexdigest()
+                    
+                    # Check for duplicate image across scenes
+                    if img_hash not in seen_hashes:
+                        seen_hashes[img_hash] = scene_id
+                        scene["image_path"] = str(img_path)
+                        scene["image_engine"] = res["engine"]
+                        success = True
+                        time.sleep(1.0)
+                        break
+                    else:
+                        logger.warning(f"Duplicate image hash detected for {scene_id} (identical to {seen_hashes[img_hash]}). Retrying with new seed...")
+                        time.sleep(1.5)
                 else:
-                    logger.warning(f"Duplicate image hash detected for {scene_id} (identical to {seen_hashes[img_hash]}). Regenerating with new seed...")
-                    time.sleep(1.2)
-            else:
-                time.sleep(1.2)
+                    time.sleep(1.5)
+            except Exception as e:
+                logger.warning(f"Attempt {attempt+1} failed for {scene_id}: {e}")
+                time.sleep(2.0)
                 
         if not success:
             # Distinct fallback canvas with unique per-scene palette
@@ -177,6 +185,6 @@ def generate_all_scene_images(scenes: list, assets_dir: Path, progress_callback=
         results.append(scene)
         
         if i < total - 1:
-            time.sleep(1.0)
+            time.sleep(0.8)
             
     return results
