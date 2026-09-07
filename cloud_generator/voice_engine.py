@@ -96,8 +96,6 @@ def synthesize_huggingface_space_clone(scenes: list, audio_dir: Path, reference_
     endpoint_name = "/predict"
     chosen_space = None
     spaces_to_try = [
-        ("Nymbo/Voice-Clone-Multilingual", "/predict"),
-        ("tonyassi/voice-clone", "/clone"),
         ("mrfakename/E2-F5-TTS", "/predict")
     ]
     
