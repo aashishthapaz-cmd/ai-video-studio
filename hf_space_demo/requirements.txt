@@ -1,5 +1,5 @@
 gradio>=4.0.0
-edge-tts>=7.2.8
+gradio_client>=0.17.0
 Pillow>=10.0.0
 aiohttp>=3.9.0
 requests>=2.31.0

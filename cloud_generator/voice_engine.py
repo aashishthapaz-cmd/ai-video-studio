@@ -9,7 +9,6 @@ import shutil
 import urllib.request
 import urllib.parse
 from pathlib import Path
-import edge_tts
 try:
     from .config import load_settings, PROJECT_ROOT
 except ImportError:
@@ -166,18 +165,9 @@ def synthesize_huggingface_space_clone(scenes: list, audio_dir: Path, reference_
             s["audio_path"] = str(out_file)
             s["duration"] = round(dur, 2)
             s["voice"] = f"Hugging Face ({chosen_space}) Reference Whisper Clone"
-            s["word_durations"] = extract_acoustic_word_durations(out_file, text, language="en")
         except Exception as e:
-            print(f"[Voice HF] Scene {i+1} notice ({type(e).__name__}: {e}), generating via Edge Neural TTS...")
-            voice = "en-US-ChristopherNeural"
-            rate = "-15%"
-            pitch = "-3Hz"
-            info = asyncio.run(_synthesize_edge_line(text, voice, rate, pitch, out_file))
-            dur = get_audio_duration(out_file)
-            s["audio_path"] = str(out_file)
-            s["duration"] = round(dur, 2)
-            s["voice"] = voice
-            s["word_durations"] = extract_acoustic_word_durations(out_file, text, language="en")
+            print(f"[Voice HF] Scene {i+1} notice ({type(e).__name__}: {e})")
+            raise RuntimeError(f"Hugging Face voice cloning failed for scene {i+1}: {e}")
         
     return scenes
 
@@ -332,20 +322,6 @@ def trim_lead_silence(audio_path: Path) -> Path:
     elif tmp_path.exists():
         tmp_path.unlink()
     return audio_path
-
-async def _synthesize_edge_line(text: str, voice: str, rate: str, pitch: str, output_path: Path) -> dict:
-    """Synthesize a single line using Edge Neural Cloud TTS."""
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    communicate = edge_tts.Communicate(text, voice, rate=rate, pitch=pitch)
-    await communicate.save(str(output_path))
-    trim_lead_silence(output_path)
-    duration = get_audio_duration(output_path)
-    return {
-        "text": text,
-        "audio_path": str(output_path),
-        "duration": duration,
-        "voice": voice
-    }
 
 _CACHED_WHISPER = None
 
@@ -520,9 +496,9 @@ def synthesize_xtts_v2_batch(scenes: list, audio_dir: Path, reference_audio: Pat
 def synthesize_project_audio(scenes: list, audio_dir: Path, voice_override: str = None, rate_override: str = None, pitch_override: str = None, engine_override: str = None) -> list:
     """
     Unified voice synthesis orchestrator:
-    Synthesizes exact per-scene audio chunks with millisecond accuracy across all engines.
+    Synthesizes exact per-scene audio chunks with millisecond accuracy across voice cloning engines.
     Guarantees 100% frame-accurate caption synchronization and zero timing drift.
-    Supports niche-specific voice models, pacing rates, and pitch overrides.
+    Strictly uses reference whisper voice cloning (F5-TTS, XTTS-v2, Hugging Face Spaces, VoxCPM, ElevenLabs, Fish Audio).
     """
     audio_dir.mkdir(parents=True, exist_ok=True)
     cfg = load_settings()
@@ -536,15 +512,13 @@ def synthesize_project_audio(scenes: list, audio_dir: Path, voice_override: str 
     ref_exists = DEFAULT_REFERENCE_VOICE.exists() or FULL_REFERENCE_VOICE.exists()
     custom_ref = Path(voice_override) if (voice_override and Path(voice_override).exists()) else DEFAULT_REFERENCE_VOICE
 
-    # If niche specifically asks for Edge Neural TTS, skip F5-TTS/XTTS
-    if voice_pref != "edge_tts":
-        # 1. Primary: Option 1 SWivid/F5-TTS Voice Cloning (Exact reference whisper clone)
-        if overall_lang == "en" and ref_exists:
-            try:
-                print(f"[Voice] Synthesizing all scenes via Option 1: SWivid/F5-TTS Reference Voice Cloner ({custom_ref.name})...")
-                return synthesize_f5_tts_batch(scenes, audio_dir, reference_audio=custom_ref)
-            except Exception as e:
-                print(f"[Voice] F5-TTS notice ({e}), falling back to Option 2: coqui-ai/TTS (XTTS-v2)...")
+    # 1. Primary: Option 1 SWivid/F5-TTS Voice Cloning (Exact reference whisper clone)
+    if overall_lang == "en" and ref_exists:
+        try:
+            print(f"[Voice] Synthesizing all scenes via Option 1: SWivid/F5-TTS Reference Voice Cloner ({custom_ref.name})...")
+            return synthesize_f5_tts_batch(scenes, audio_dir, reference_audio=custom_ref)
+        except Exception as e:
+            print(f"[Voice] F5-TTS notice ({e}), falling back to Option 2: coqui-ai/TTS (XTTS-v2)...")
 
     # 2. Secondary Fallback: Option 2 coqui-ai/TTS (XTTS-v2)
     if overall_lang == "en" and ref_exists:
@@ -554,17 +528,27 @@ def synthesize_project_audio(scenes: list, audio_dir: Path, voice_override: str 
         except Exception as e:
             print(f"[Voice] XTTS-v2 notice ({e}), falling back to Hugging Face Cloud Voice Cloner...")
 
-    # 3. Tertiary Fallback: Hugging Face Serverless Voice Cloning
+    # 3. Tertiary Fallback: Hugging Face Serverless Voice Cloning Spaces
     hf_tok = os.environ.get("HF_TOKEN") or cfg.get("huggingface_token", "")
     if overall_lang == "en" and ref_exists:
         try:
             print("[Voice] Synthesizing all scenes via Hugging Face Cloud Voice Cloning with reference audio...")
             return synthesize_huggingface_space_clone(scenes, audio_dir, reference_audio=DEFAULT_REFERENCE_VOICE, hf_token=hf_tok)
         except Exception as e:
-            print(f"[Voice] Hugging Face Voice Cloning warning ({e}), falling back to Edge Neural TTS...")
+            print(f"[Voice] Hugging Face Voice Cloning warning ({e}), falling back to API / Local options...")
+
+    # 4. Local Fast Batch VoxCPM (if available)
+    if overall_lang == "en" and VOX_PY.exists() and DEFAULT_REFERENCE_VOICE.exists():
+        try:
+            print("[Voice] Synthesizing all scenes via Fast Batch VoxCPM2...")
+            res_scenes = synthesize_voxcpm_batch(scenes, audio_dir)
+            for sc in res_scenes:
+                sc["word_durations"] = extract_acoustic_word_durations(Path(sc["audio_path"]), sc.get("narration", ""), language="en")
+            return res_scenes
+        except Exception as e:
+            print(f"[Voice] Local VoxCPM batch warning ({e}), falling back to per-scene API cloning...")
 
     results = []
-    edge_tasks = []
     
     for i, scene in enumerate(scenes):
         narration = scene.get("narration", "").strip()
@@ -576,8 +560,8 @@ def synthesize_project_audio(scenes: list, audio_dir: Path, voice_override: str 
         out_file = audio_dir / f"{scene_id}.mp3"
         scene_success = False
 
-        # 4. ElevenLabs Cloud API (per-scene)
-        if not scene_success and cfg.get("elevenlabs_api_key") and (voice_pref in ("elevenlabs", "cloud_cloning")):
+        # 5. ElevenLabs Cloud API (per-scene)
+        if not scene_success and cfg.get("elevenlabs_api_key"):
             try:
                 res = synthesize_elevenlabs(narration, out_file, cfg["elevenlabs_api_key"])
                 scene["audio_path"] = res["audio_path"]
@@ -587,37 +571,26 @@ def synthesize_project_audio(scenes: list, audio_dir: Path, voice_override: str 
             except Exception as e:
                 print(f"[Voice] ElevenLabs warning for {scene_id}: {e}")
 
-        # 5. Standard / Fast: Edge Neural Cloud TTS
-        if not scene_success:
-            if scene_lang == "ne":
-                voice = cfg.get("nepali_voice", "ne-NP-SagarNeural")
-            else:
-                voice = voice_override if (voice_override and not voice_override.endswith(".wav")) else cfg.get("english_voice", "en-US-ChristopherNeural")
-            rate = rate_override or cfg.get("voice_rate", "-18%")
-            pitch = pitch_override or cfg.get("voice_pitch", "-3Hz")
-            
-            edge_tasks.append({
-                "scene": scene,
-                "text": narration,
-                "voice": voice,
-                "rate": rate,
-                "pitch": pitch,
-                "out_file": out_file,
-                "lang": scene_lang
-            })
+        # 6. Fish Audio Cloud API (per-scene)
+        if not scene_success and cfg.get("fish_audio_api_key"):
+            try:
+                res = synthesize_fish_audio(narration, out_file, cfg["fish_audio_api_key"])
+                scene["audio_path"] = res["audio_path"]
+                scene["duration"] = round(res["duration"], 2)
+                scene["voice"] = "Fish Audio Cloud"
+                scene_success = True
+            except Exception as e:
+                print(f"[Voice] Fish Audio warning for {scene_id}: {e}")
 
-    if edge_tasks:
-        async def _batch_synth():
-            aws = [_synthesize_edge_line(t["text"], t["voice"], t["rate"], t["pitch"], t["out_file"]) for t in edge_tasks]
-            return await asyncio.gather(*aws)
-        
-        synth_results = asyncio.run(_batch_synth())
-        for task, info in zip(edge_tasks, synth_results):
-            sc = task["scene"]
-            sc["audio_path"] = info["audio_path"]
-            sc["duration"] = round(info["duration"], 2)
-            sc["voice"] = task["voice"]
-            sc["word_durations"] = extract_acoustic_word_durations(task["out_file"], task["text"], language=task["lang"])
-            results.append(sc)
+        if not scene_success:
+            raise RuntimeError(
+                f"[Voice Engine Error] Could not synthesize voice for scene {scene_id} ('{narration[:30]}...'). "
+                f"All reference voice cloning options (F5-TTS, XTTS-v2, HF Spaces, VoxCPM, ElevenLabs, Fish Audio) were exhausted. "
+                f"Edge TTS is strictly disabled."
+            )
+
+        # Extract precise acoustic word durations for 100% subtitle highlight sync
+        scene["word_durations"] = extract_acoustic_word_durations(out_file, narration, language=scene_lang)
+        results.append(scene)
 
     return results

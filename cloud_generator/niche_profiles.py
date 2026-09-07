@@ -28,8 +28,8 @@ class ArtisticVibeConfig:
 
 @dataclass
 class VoiceConfig:
-    engine: str  # 'f5_cloning' or 'edge_tts'
-    voice_id: str # file path or Edge TTS voice name
+    engine: str  # 'f5_cloning', 'xtts_v2', or 'huggingface_spaces'
+    voice_id: str # file path or reference voice identifier
     rate: str = "0.82" # or '-10%'
     pitch: str = "-2Hz"
     nfe_step: int = 32
@@ -173,12 +173,12 @@ NICHE_REGISTRY: Dict[str, PoetryNiche] = {
             )
         ),
         voice=VoiceConfig(
-            engine="edge_tts",
-            voice_id="en-US-ChristopherNeural",
-            rate="-14%",
+            engine="f5_cloning",
+            voice_id="assets/reference_voice/whishper_prompt.wav",
+            rate="0.74",
             pitch="-3Hz",
-            nfe_step=32,
-            tone_description="Deep, sorrowful, contemplative male voice with slow emotional breath"
+            nfe_step=36,
+            tone_description="Deep, sorrowful, contemplative whisper voice with slow emotional cadence"
         ),
         caption=CaptionConfig(
             style_name="DarkAcademiaSerif",
@@ -232,12 +232,12 @@ NICHE_REGISTRY: Dict[str, PoetryNiche] = {
             )
         ),
         voice=VoiceConfig(
-            engine="edge_tts",
-            voice_id="en-US-JennyNeural",
-            rate="-8%",
-            pitch="-1Hz",
-            nfe_step=32,
-            tone_description="Soft, tender, warmly affectionate voice with gentle smile and slow cadence"
+            engine="f5_cloning",
+            voice_id="assets/reference_voice/whishper_prompt.wav",
+            rate="0.76",
+            pitch="-2Hz",
+            nfe_step=36,
+            tone_description="Soft, tender, warmly affectionate whisper voice with gentle slow cadence"
         ),
         caption=CaptionConfig(
             style_name="RomanticScript",
@@ -291,12 +291,12 @@ NICHE_REGISTRY: Dict[str, PoetryNiche] = {
             )
         ),
         voice=VoiceConfig(
-            engine="edge_tts",
-            voice_id="en-US-GuyNeural",
-            rate="-11%",
-            pitch="-2Hz",
-            nfe_step=32,
-            tone_description="Grounded, calm, reassuring mentor cadence that feels like a steady anchor"
+            engine="f5_cloning",
+            voice_id="assets/reference_voice/whishper_prompt.wav",
+            rate="0.74",
+            pitch="-3Hz",
+            nfe_step=36,
+            tone_description="Grounded, calm, reassuring whisper cadence that feels like a steady anchor"
         ),
         caption=CaptionConfig(
             style_name="StoicMinimal",
@@ -350,12 +350,12 @@ NICHE_REGISTRY: Dict[str, PoetryNiche] = {
             )
         ),
         voice=VoiceConfig(
-            engine="edge_tts",
-            voice_id="en-US-EricNeural",
-            rate="-10%",
+            engine="f5_cloning",
+            voice_id="assets/reference_voice/whishper_prompt.wav",
+            rate="0.74",
             pitch="-3Hz",
-            nfe_step=32,
-            tone_description="Deep, resonant, philosophical storyteller voice with slow cinematic cadence"
+            nfe_step=36,
+            tone_description="Deep, resonant, philosophical whisper voice with slow cinematic cadence"
         ),
         caption=CaptionConfig(
             style_name="CosmicSerif",

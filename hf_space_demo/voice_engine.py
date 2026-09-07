@@ -9,7 +9,6 @@ import shutil
 import urllib.request
 import urllib.parse
 from pathlib import Path
-import edge_tts
 try:
     from .config import load_settings, PROJECT_ROOT
 except ImportError:
@@ -224,19 +223,6 @@ def synthesize_voxcpm_batch(scenes: list, audio_dir: Path, reference_audio: Path
         
     return scenes
 
-async def _synthesize_edge_line(text: str, voice: str, rate: str, pitch: str, output_path: Path) -> dict:
-    """Synthesize a single line using Edge Neural Cloud TTS."""
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    communicate = edge_tts.Communicate(text, voice, rate=rate, pitch=pitch)
-    await communicate.save(str(output_path))
-    duration = get_audio_duration(output_path)
-    return {
-        "text": text,
-        "audio_path": str(output_path),
-        "duration": duration,
-        "voice": voice
-    }
-
 _CACHED_WHISPER = None
 
 def get_alignment_whisper():
@@ -292,12 +278,13 @@ def extract_acoustic_word_durations(audio_path: Path, script_text: str, language
 def synthesize_project_audio(scenes: list, audio_dir: Path) -> list:
     """
     Unified voice synthesis orchestrator:
-    Synthesizes exact per-scene audio chunks with millisecond accuracy across all engines.
+    Synthesizes exact per-scene audio chunks with millisecond accuracy across voice cloning engines.
     Guarantees 100% frame-accurate caption synchronization and zero timing drift.
+    Strictly uses reference whisper voice cloning (HF Spaces, VoxCPM, ElevenLabs, Fish Audio).
     """
     audio_dir.mkdir(parents=True, exist_ok=True)
     cfg = load_settings()
-    voice_pref = cfg.get("voice_engine", "edge_cloud")
+    voice_pref = cfg.get("voice_engine", "hf_spaces")
     
     # Check language of the overall script
     all_narrations = [s.get("narration", "").strip() for s in scenes if s.get("narration", "").strip()]
@@ -313,7 +300,29 @@ def synthesize_project_audio(scenes: list, audio_dir: Path) -> list:
                 sc["word_durations"] = extract_acoustic_word_durations(Path(sc["audio_path"]), sc.get("narration", ""), language="en")
             return res_scenes
         except Exception as e:
-            print(f"[Voice] Local VoxCPM batch warning ({e}), falling back to per-scene synthesis...")
+            print(f"[Voice] Local VoxCPM batch warning ({e}), falling back to cloud voice cloning...")
+
+    # 2. Hugging Face Serverless Voice Cloning
+    hf_tok = os.environ.get("HF_TOKEN") or cfg.get("huggingface_token", "")
+    if overall_lang == "en" and DEFAULT_REFERENCE_VOICE.exists():
+        try:
+            print("[Voice] Synthesizing all scenes via Hugging Face Cloud Voice Cloning...")
+            res_scenes = []
+            for i, scene in enumerate(scenes):
+                narration = scene.get("narration", "").strip()
+                if not narration:
+                    continue
+                scene_id = scene.get("id", f"scene_{i+1:03d}")
+                out_file = audio_dir / f"{scene_id}.wav"
+                info = synthesize_huggingface_xtts(narration, out_file, hf_tok)
+                scene["audio_path"] = info["audio_path"]
+                scene["duration"] = round(info["duration"], 2)
+                scene["voice"] = "Hugging Face XTTS-v2 Reference Whisper Clone"
+                scene["word_durations"] = extract_acoustic_word_durations(out_file, narration, language="en")
+                res_scenes.append(scene)
+            return res_scenes
+        except Exception as e:
+            print(f"[Voice] Hugging Face Voice Cloning warning ({e}), falling back to API cloning...")
 
     results = []
     
@@ -327,8 +336,8 @@ def synthesize_project_audio(scenes: list, audio_dir: Path) -> list:
         out_file = audio_dir / f"{scene_id}.mp3"
         scene_success = False
 
-        # 2. ElevenLabs Cloud API (per-scene)
-        if not scene_success and cfg.get("elevenlabs_api_key") and (voice_pref in ("elevenlabs", "cloud_cloning")):
+        # 3. ElevenLabs Cloud API (per-scene)
+        if not scene_success and cfg.get("elevenlabs_api_key"):
             try:
                 res = synthesize_elevenlabs(narration, out_file, cfg["elevenlabs_api_key"])
                 scene["audio_path"] = res["audio_path"]
@@ -338,8 +347,8 @@ def synthesize_project_audio(scenes: list, audio_dir: Path) -> list:
             except Exception as e:
                 print(f"[Voice] ElevenLabs warning for {scene_id}: {e}")
 
-        # 3. Fish Audio Cloud API (per-scene)
-        if not scene_success and cfg.get("fish_audio_api_key") and (voice_pref in ("fish_audio", "cloud_cloning")):
+        # 4. Fish Audio Cloud API (per-scene)
+        if not scene_success and cfg.get("fish_audio_api_key"):
             try:
                 res = synthesize_fish_audio(narration, out_file, cfg["fish_audio_api_key"])
                 scene["audio_path"] = res["audio_path"]
@@ -349,17 +358,11 @@ def synthesize_project_audio(scenes: list, audio_dir: Path) -> list:
             except Exception as e:
                 print(f"[Voice] Fish Audio warning for {scene_id}: {e}")
 
-        # 4. Standard / Fallback: Edge Neural Cloud TTS (per-scene)
         if not scene_success:
-            voice = cfg.get("nepali_voice", "ne-NP-SagarNeural") if scene_lang == "ne" else cfg.get("english_voice", "en-US-ChristopherNeural")
-            rate = cfg.get("voice_rate", "-4%")
-            pitch = cfg.get("voice_pitch", "+0Hz")
-            
-            info = asyncio.run(_synthesize_edge_line(narration, voice, rate, pitch, out_file))
-            scene["audio_path"] = info["audio_path"]
-            scene["duration"] = round(info["duration"], 2)
-            scene["voice"] = voice
-            scene_success = True
+            raise RuntimeError(
+                f"[Voice Engine Error] Could not synthesize voice for scene {scene_id} ('{narration[:30]}...'). "
+                f"All reference voice cloning options were exhausted. Edge TTS is strictly disabled."
+            )
 
         # Extract precise acoustic word durations for 100% subtitle highlight sync
         scene["word_durations"] = extract_acoustic_word_durations(out_file, narration, language=scene_lang)
