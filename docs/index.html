@@ -297,6 +297,35 @@
       z-index: 1000;
       backdrop-filter: blur(10px);
     }
+
+    /* Modal Overlay & Card */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(4, 7, 14, 0.82);
+      backdrop-filter: blur(10px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 1.5rem;
+    }
+    .modal-card {
+      background: rgba(18, 24, 40, 0.98);
+      border: 1px solid rgba(99, 102, 241, 0.35);
+      border-radius: 16px;
+      max-width: 680px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 1.75rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(99, 102, 241, 0.2);
+      animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes modalPop {
+      from { opacity: 0; transform: scale(0.95) translateY(10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
   </style>
 </head>
 <body>
@@ -484,14 +513,36 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
         </div>
       </div>
 
-      <!-- LOCAL QUEUE PARSER -->
+      <!-- LIVE CLOUD QUEUE HOSTED ON GITHUB ACTIONS -->
+      <div class="card" style="border-color: rgba(16, 185, 129, 0.35); background: rgba(10, 24, 28, 0.85);">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title" style="color: #a7f3d0;">
+              📅 Live GitHub Actions Cloud Queue (<span id="cloudQueueCount">0</span> Scheduled)
+            </h3>
+            <div style="font-size: 0.8rem; color: var(--text-dim); margin-top: 3px;">
+              Live scheduled posts running on GitHub Actions runner. Edit or delete any post instantly.
+            </div>
+          </div>
+          <div style="display:flex; gap:8px; flex-wrap: wrap;">
+            <button class="btn btn-secondary btn-sm" onclick="fetchCloudQueueFromGithub()">🔄 Refresh from GitHub</button>
+            <button class="btn btn-danger btn-sm" onclick="clearAllPendingCloudQueue()">🗑️ Clear All Pending</button>
+          </div>
+        </div>
+
+        <div class="item-list" id="cloudQueueList">
+          <p style="color: var(--text-muted); font-size: 0.88rem;">Click "Refresh from GitHub" to inspect scheduled cloud jobs.</p>
+        </div>
+      </div>
+
+      <!-- LOCAL QUEUE PARSER (DRAFT & REVIEW) -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">📝 Local Queue Builder</h3>
+          <h3 class="card-title">📝 Local Queue Builder (Draft & Staging)</h3>
           <span class="badge badge-completed">Smart Numbered Parser Active</span>
         </div>
         <p class="card-desc">
-          Build a local queue first, review it, then push to GitHub Actions. Supports numbered format (<code>1. Title \n Lines...</code>) or <code>---</code> separators.
+          Draft and review poems locally before pushing to GitHub Actions. Supports numbered format (<code>1. Title \n Lines...</code>) or <code>---</code> separators.
         </p>
 
         <div class="form-group">
@@ -538,21 +589,21 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
 
         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
           <button class="btn btn-emerald" onclick="scheduleBulkPosts()">⚡ Parse & Add to Local Queue</button>
-          <button class="btn btn-secondary" onclick="clearAllQueue()">🗑️ Clear Queue</button>
+          <button class="btn btn-secondary" onclick="clearAllQueue()">🗑️ Clear Drafts</button>
         </div>
       </div>
 
-      <!-- QUEUE LIST -->
+      <!-- DRAFT QUEUE LIST -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">📅 Scheduled Queue (<span id="queueCount">0</span> Posts)</h3>
+          <h3 class="card-title">📋 Local Staging Queue (<span id="queueCount">0</span> Drafts)</h3>
           <div style="display:flex;gap:8px;">
             <button class="btn btn-secondary btn-sm" onclick="renderQueue()">🔄 Refresh</button>
-            <button class="btn btn-sm" onclick="pushQueueToGithub()" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);">🚀 Push Queue to GitHub Actions</button>
+            <button class="btn btn-sm" onclick="pushQueueToGithub()" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);">🚀 Push Drafts to GitHub Actions</button>
           </div>
         </div>
         <div class="item-list" id="queueList">
-          <p style="color: var(--text-muted); font-size: 0.9rem;">No scheduled posts yet. Paste scripts above to populate.</p>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">No local draft posts. Paste scripts above to populate.</p>
         </div>
       </div>
     </section>
@@ -730,6 +781,62 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
     </section>
   </main>
 
+  <!-- EDIT MODAL FOR CLOUD QUEUED POSTS -->
+  <div id="editModal" class="modal-overlay" onclick="if(event.target === this) closeEditModal()">
+    <div class="modal-card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+        <h3 style="font-size: 1.15rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 8px;">
+          ✏️ Edit Scheduled Post on GitHub Actions
+        </h3>
+        <button class="btn btn-secondary btn-sm" onclick="closeEditModal()" style="padding: 4px 10px; font-size: 1rem;">✕</button>
+      </div>
+
+      <div class="form-group">
+        <label>Poem / Video Title</label>
+        <input type="text" id="editJobTitle" placeholder="Poem Title">
+      </div>
+
+      <div class="grid-2">
+        <div class="form-group">
+          <label>📅 Scheduled Time (USA EST)</label>
+          <input type="datetime-local" id="editJobTime">
+        </div>
+        <div class="form-group">
+          <label>🎯 Target Facebook Page</label>
+          <select id="editJobTargetPage">
+            <option value="ALL Pages">📢 ALL Enabled Pages</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Visual Style / Aesthetic</label>
+        <select id="editJobVibe">
+          <option value="Typewriters Voice Nostalgia" selected>✍️ Typewriters Voice Nostalgia</option>
+          <option value="Auto-Detect (Adaptive Multi-World)">Auto-Detect (Adaptive Multi-World)</option>
+          <option value="Studio Ghibli Meadow">Studio Ghibli Meadow</option>
+          <option value="Makoto Shinkai Twilight">Makoto Shinkai Twilight</option>
+          <option value="Himalayan Mist Serenity">Himalayan Mist Serenity</option>
+          <option value="Dark Romantic Academia">Dark Romantic Academia</option>
+          <option value="Claude Monet Impressionism">Claude Monet Impressionism</option>
+          <option value="Cyberpunk Rain Reflections">Cyberpunk Rain Reflections</option>
+          <option value="Van Gogh Starry Canvas">Van Gogh Starry Canvas</option>
+          <option value="Ink Wash Zen Landscape">Ink Wash Zen Landscape</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Poem / Script Text</label>
+        <textarea id="editJobScript" style="min-height: 150px;"></textarea>
+      </div>
+
+      <div style="display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 1.25rem;">
+        <button class="btn btn-secondary" onclick="closeEditModal()">Cancel</button>
+        <button class="btn btn-emerald" onclick="saveJobEdit()">💾 Save Changes to GitHub Actions</button>
+      </div>
+    </div>
+  </div>
+
   <div id="toast" class="toast"></div>
 
   <script>
@@ -763,14 +870,36 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       localStorage.setItem('tg_chat', savedTgChat);
 
       populateAllTargetPageDropdowns();
+      fetchCloudQueueFromGithub();
       renderQueue();
       renderFbPages();
     });
 
+    let CLOUD_QUEUE = [];
+    let CLOUD_QUEUE_SHA = null;
+    let CURRENT_EDIT_INDEX = null;
+
+    function utf8ToBase64(str) {
+      return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
+        return String.fromCharCode('0x' + p1);
+      }));
+    }
+
+    function base64ToUtf8(str) {
+      try {
+        return decodeURIComponent(atob(str).split('').map(function(c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+      } catch (e) {
+        return atob(str);
+      }
+    }
+
     function populateAllTargetPageDropdowns() {
       const singleSelect = document.getElementById('singleTargetPage');
       const bulkSelect = document.getElementById('bulkCloudPage');
-      const selects = [singleSelect, bulkSelect].filter(Boolean);
+      const editSelect = document.getElementById('editJobTargetPage');
+      const selects = [singleSelect, bulkSelect, editSelect].filter(Boolean);
       if (!selects.length) return;
 
       selects.forEach(function(sel) {
@@ -811,6 +940,266 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       });
     }
 
+    async function fetchCloudQueueFromGithub() {
+      const pat = localStorage.getItem('gh_pat');
+      const repo = localStorage.getItem('gh_repo') || DEFAULT_REPO;
+      const container = document.getElementById('cloudQueueList');
+      const countEl = document.getElementById('cloudQueueCount');
+      if (!container) return;
+
+      container.innerHTML = '<p style="color: var(--text-dim); font-size: 0.88rem;">⏳ Loading scheduled posts from GitHub Actions repository...</p>';
+
+      try {
+        const headers = { 'Accept': 'application/vnd.github+json' };
+        if (pat) headers['Authorization'] = 'Bearer ' + pat;
+
+        const res = await fetch('https://api.github.com/repos/' + repo + '/contents/cloud_generator/jobs_queue.json?ref=main&t=' + Date.now(), { headers: headers });
+        if (!res.ok) {
+          if (res.status === 404) {
+            CLOUD_QUEUE = [];
+            CLOUD_QUEUE_SHA = null;
+            renderCloudQueue();
+            return;
+          }
+          throw new Error('GitHub API returned ' + res.status + ' (' + res.statusText + ')');
+        }
+        const data = await res.json();
+        CLOUD_QUEUE_SHA = data.sha;
+        const rawJson = base64ToUtf8(data.content.replace(/\s/g, ''));
+        CLOUD_QUEUE = JSON.parse(rawJson || '[]');
+        renderCloudQueue();
+      } catch (err) {
+        container.innerHTML = `<div style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; padding: 0.85rem; color: #fca5a5; font-size: 0.85rem;">
+          ⚠️ Could not load GitHub queue: ${escapeHtml(err.message)}.<br>
+          <span style="font-size: 0.78rem; color: var(--text-muted);">Make sure your GitHub PAT is entered in the Settings tab if the repository is private.</span>
+        </div>`;
+      }
+    }
+
+    function renderCloudQueue() {
+      const container = document.getElementById('cloudQueueList');
+      const countEl = document.getElementById('cloudQueueCount');
+      if (countEl) countEl.innerText = CLOUD_QUEUE.length;
+      if (!container) return;
+
+      if (!CLOUD_QUEUE.length) {
+        container.innerHTML = '<div style="background: rgba(255,255,255,0.02); padding: 1.25rem; border-radius: 10px; border: 1px dashed var(--card-border); color: var(--text-muted); font-size: 0.88rem; text-align: center;">No scheduled posts in GitHub Actions queue. Use "Bulk Schedule" above to dispatch poems.</div>';
+        return;
+      }
+
+      container.innerHTML = CLOUD_QUEUE.map(function(item, index) {
+        let statusBadgeClass = 'badge-pending';
+        if (item.status === 'COMPLETED' || item.status === 'PUBLISHED') statusBadgeClass = 'badge-completed';
+        else if (item.status === 'RUNNING' || item.status === 'RENDERING') statusBadgeClass = 'badge-rendering';
+        else if (item.status === 'FAILED' || item.status === 'ERROR') statusBadgeClass = 'badge-danger';
+
+        const pageDisplay = (item.target_page_ids && item.target_page_ids.length) ? item.target_page_ids.join(', ') : 'ALL Enabled Pages';
+        const schedDisplay = item.scheduled_time_usa || item.scheduled_time || 'Immediate / Next Slot';
+
+        return `
+          <div class="item-card" style="border-color: rgba(16,185,129,0.25); background: rgba(8, 20, 24, 0.75);">
+            <div class="item-info" style="flex: 1; min-width: 260px;">
+              <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 4px;">
+                <h4 style="margin: 0;">${index + 1}. ${escapeHtml(item.title)}</h4>
+                <span class="badge ${statusBadgeClass}">${item.status || 'PENDING'}</span>
+              </div>
+              <p style="font-size: 0.82rem; color: #a5b4fc; margin-bottom: 4px;">
+                📅 <strong>Scheduled:</strong> ${escapeHtml(schedDisplay)} | 🎯 <strong>Target:</strong> ${escapeHtml(pageDisplay)}
+              </p>
+              <p style="font-size: 0.78rem; color: var(--text-dim); margin-bottom: 4px;">
+                🎨 <strong>Vibe:</strong> ${escapeHtml(item.theme || item.vibe || 'Typewriters Voice Nostalgia')}
+              </p>
+              <p style="color: var(--text-muted); font-size: 0.75rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 580px;">
+                ${escapeHtml((item.script_text || '').replace(/\n/g, ' • '))}
+              </p>
+            </div>
+            <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+              <button class="btn btn-sm btn-secondary" onclick="openEditModal(${index})" title="Edit Title, Schedule Time, Script or Target Page">✏️ Edit</button>
+              <button class="btn btn-sm btn-emerald" onclick="runCloudJobNow(${index})" title="Run this video render and Facebook post immediately">⚡ Run Now</button>
+              <button class="btn btn-sm btn-danger" onclick="deleteCloudJob(${index})" title="Delete permanently from GitHub Actions schedule">🗑️ Delete</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    async function commitCloudQueueToGithub(updatedQueue, commitMessage) {
+      const pat = localStorage.getItem('gh_pat');
+      const repo = localStorage.getItem('gh_repo') || DEFAULT_REPO;
+
+      if (!pat) {
+        alert('Please enter your GitHub Token in the Settings tab to modify the GitHub Actions schedule.');
+        switchTab('settings');
+        return false;
+      }
+
+      showToast('🔐 Syncing queue changes directly to GitHub Actions...');
+
+      try {
+        // Fetch fresh SHA first to prevent sha mismatch conflicts
+        const getRes = await fetch('https://api.github.com/repos/' + repo + '/contents/cloud_generator/jobs_queue.json?ref=main&t=' + Date.now(), {
+          headers: { 'Authorization': 'Bearer ' + pat, 'Accept': 'application/vnd.github+json' }
+        });
+        if (getRes.ok) {
+          const getData = await getRes.json();
+          CLOUD_QUEUE_SHA = getData.sha;
+        }
+
+        const jsonStr = JSON.stringify(updatedQueue, null, 2);
+        const base64Content = utf8ToBase64(jsonStr);
+
+        const putBody = {
+          message: commitMessage || 'chore(queue): Update scheduled queue via Web Studio',
+          content: base64Content,
+          branch: 'main'
+        };
+        if (CLOUD_QUEUE_SHA) {
+          putBody.sha = CLOUD_QUEUE_SHA;
+        }
+
+        const putRes = await fetch('https://api.github.com/repos/' + repo + '/contents/cloud_generator/jobs_queue.json', {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'Bearer ' + pat,
+            'Accept': 'application/vnd.github+json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(putBody)
+        });
+
+        if (putRes.status === 200 || putRes.status === 201) {
+          const resData = await putRes.json();
+          CLOUD_QUEUE_SHA = resData.content ? resData.content.sha : null;
+          CLOUD_QUEUE = updatedQueue;
+          renderCloudQueue();
+          return true;
+        } else {
+          const errData = await putRes.json().catch(function() { return { message: putRes.statusText }; });
+          throw new Error(errData.message || 'GitHub API error (' + putRes.status + ')');
+        }
+      } catch (err) {
+        alert('Error updating GitHub Actions queue: ' + err.message);
+        return false;
+      }
+    }
+
+    async function deleteCloudJob(jobIndex) {
+      const job = CLOUD_QUEUE[jobIndex];
+      if (!job) return;
+      if (!confirm('Permanently delete "' + job.title + '" from GitHub Actions? It will be removed immediately from cloud processing.')) return;
+
+      const newQueue = CLOUD_QUEUE.filter(function(_, idx) { return idx !== jobIndex; });
+      const success = await commitCloudQueueToGithub(newQueue, 'chore(queue): Delete scheduled job "' + job.title + '"');
+      if (success) {
+        showToast('🗑️ "' + job.title + '" instantly deleted from GitHub Actions schedule!');
+      }
+    }
+
+    async function clearAllPendingCloudQueue() {
+      const pendingCount = CLOUD_QUEUE.filter(function(j) { return j.status === 'PENDING'; }).length;
+      if (!pendingCount) {
+        alert('No pending scheduled jobs to clear.');
+        return;
+      }
+      if (!confirm('Are you sure you want to delete all ' + pendingCount + ' pending scheduled posts from GitHub Actions?')) return;
+
+      const newQueue = CLOUD_QUEUE.filter(function(j) { return j.status !== 'PENDING'; });
+      const success = await commitCloudQueueToGithub(newQueue, 'chore(queue): Clear all pending scheduled jobs');
+      if (success) {
+        showToast('🗑️ Cleared ' + pendingCount + ' pending jobs from GitHub Actions!');
+      }
+    }
+
+    function openEditModal(index) {
+      const job = CLOUD_QUEUE[index];
+      if (!job) return;
+      CURRENT_EDIT_INDEX = index;
+
+      document.getElementById('editJobTitle').value = job.title || '';
+      document.getElementById('editJobScript').value = job.script_text || '';
+
+      // Set datetime-local value
+      let timeVal = (job.scheduled_time || '').replace(' ', 'T');
+      document.getElementById('editJobTime').value = timeVal;
+
+      const vibeSel = document.getElementById('editJobVibe');
+      if (vibeSel) vibeSel.value = job.theme || job.vibe || 'Typewriters Voice Nostalgia';
+
+      const pageSel = document.getElementById('editJobTargetPage');
+      if (pageSel) {
+        const pages = job.target_page_ids || [];
+        pageSel.value = pages.length ? pages[0] : 'ALL Pages';
+      }
+
+      document.getElementById('editModal').style.display = 'flex';
+    }
+
+    function closeEditModal() {
+      document.getElementById('editModal').style.display = 'none';
+      CURRENT_EDIT_INDEX = null;
+    }
+
+    async function saveJobEdit() {
+      if (CURRENT_EDIT_INDEX === null) return;
+      const job = CLOUD_QUEUE[CURRENT_EDIT_INDEX];
+      if (!job) return;
+
+      const newTitle = document.getElementById('editJobTitle').value.trim();
+      const newScript = document.getElementById('editJobScript').value.trim();
+      const newTimeInput = document.getElementById('editJobTime').value.trim();
+      const newVibe = document.getElementById('editJobVibe').value;
+      const newPage = document.getElementById('editJobTargetPage').value;
+
+      if (!newTitle || !newScript) {
+        alert('Title and Poem script are required.');
+        return;
+      }
+
+      job.title = newTitle;
+      job.script_text = newScript;
+      if (newTimeInput) {
+        const formattedTime = newTimeInput.replace('T', ' ');
+        job.scheduled_time = formattedTime;
+        job.scheduled_time_usa = formattedTime + ' EST';
+        try {
+          const d = new Date(newTimeInput);
+          job.scheduled_epoch = Math.floor(d.getTime() / 1000);
+        } catch (e) {}
+      }
+      job.theme = newVibe;
+      job.vibe = newVibe;
+      job.target_page_ids = (newPage === 'ALL Pages' || !newPage) ? [] : [newPage];
+      job.updated_at = new Date().toISOString();
+
+      closeEditModal();
+      const success = await commitCloudQueueToGithub(CLOUD_QUEUE, 'chore(queue): Edit scheduled job "' + newTitle + '"');
+      if (success) {
+        showToast('✅ Saved changes to GitHub Actions for "' + newTitle + '"!');
+      }
+    }
+
+    async function runCloudJobNow(index) {
+      const job = CLOUD_QUEUE[index];
+      if (!job) return;
+      if (!confirm('Run and auto-post "' + job.title + '" immediately via GitHub Actions?')) return;
+
+      showToast('🚀 Dispatching instant render for "' + job.title + '"...');
+      const targetPage = job.target_page_ids && job.target_page_ids.length ? job.target_page_ids[0] : 'ALL Pages';
+      const success = await dispatchWorkflowAPI({
+        script_text: job.script_text,
+        title: job.title,
+        custom_vibe: job.theme || job.vibe || 'Typewriters Voice Nostalgia',
+        poetry_niche: job.niche_id || 'Auto-Detect from Poem',
+        target_page: targetPage,
+        publish_facebook: true
+      });
+
+      if (success) {
+        showToast('✅ Render run launched for "' + job.title + '"! Check Cloud Gallery & Runs.');
+        setTimeout(function() { switchTab('gallery'); }, 1800);
+      }
+    }
+
     function switchTab(tabId, btnElement) {
       const allButtons = document.querySelectorAll('.tab-btn');
       const allPanels = document.querySelectorAll('.panel');
@@ -830,7 +1219,10 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
         if (matchingBtn) matchingBtn.classList.add('active');
       }
 
-      if (tabId === 'bulk') renderQueue();
+      if (tabId === 'bulk') {
+        fetchCloudQueueFromGithub();
+        renderQueue();
+      }
       if (tabId === 'fb') renderFbPages();
       if (tabId === 'gallery') fetchRecentRuns();
     }
