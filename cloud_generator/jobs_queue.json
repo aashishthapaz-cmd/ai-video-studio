@@ -6,8 +6,9 @@
     "niche_id": "typewriters_voice_nostalgia",
     "niche_name": "Typewriters Voice Nostalgia",
     "voice": "assets/reference_voice/whishper_prompt.wav",
-    "theme": "",
-    "target_page_ids": [],
+    "target_page_ids": [
+      "1084268771446346"
+    ],
     "scheduled_time": "2026-09-07 20:30",
     "scheduled_time_usa": "2026-09-07 20:30 EST",
     "scheduled_epoch": 1788792300,
