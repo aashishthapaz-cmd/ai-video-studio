@@ -8,7 +8,8 @@
   <meta http-equiv="Expires" content="0">
   <title>Autonomous Video Studio & Multi-Page Hub v3.0 — Bulk Scheduler</title>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/libsodium-wrappers@0.7.13/dist/modules/libsodium-wrappers.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/libsodium@0.8.4/dist/modules/libsodium.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/libsodium-wrappers@0.8.4/dist/modules/libsodium-wrappers.js"></script>
   <style>
     :root {
       --bg: #07090e;
@@ -586,6 +587,7 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
           <button class="btn btn-secondary" onclick="testFbToken()">🔍 Test Token Connection</button>
           <button class="btn btn-facebook" onclick="addFacebookPage()">➕ Save Page & Token</button>
           <button class="btn btn-emerald" onclick="syncPagesToGithubSecrets()">🔐 Sync to GitHub Secrets</button>
+          <button class="btn btn-secondary" onclick="copyPagesJsonToClipboard()">📋 Copy JSON for GitHub Secret</button>
         </div>
       </div>
     </section>
@@ -1089,10 +1091,13 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       showToast('🔐 Encrypting and syncing Facebook Pages to GitHub Secrets...');
 
       try {
-        if (typeof sodium === 'undefined') {
-          throw new Error('libsodium not loaded. Please refresh the page.');
+        const sLib = window.sodium || window.libsodiumWrappers || window.libsodium;
+        if (!sLib) {
+          alert('Libsodium is initializing or blocked by browser extensions. Copying JSON to clipboard for manual paste...');
+          copyPagesJsonToClipboard();
+          return;
         }
-        await sodium.ready;
+        await sLib.ready;
 
         // 1. Get repository public key
         const pkRes = await fetch('https://api.github.com/repos/' + repo + '/actions/secrets/public-key', {
@@ -1123,10 +1128,10 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
         });
 
         const secretValue = JSON.stringify(formattedPages);
-        const binkey = sodium.from_base64(pkData.key, sodium.base64_variants.ORIGINAL);
-        const binsec = sodium.from_string(secretValue);
-        const encBytes = sodium.crypto_box_seal(binsec, binkey);
-        const encBase64 = sodium.to_base64(encBytes, sodium.base64_variants.ORIGINAL);
+        const binkey = sLib.from_base64(pkData.key, sLib.base64_variants.ORIGINAL);
+        const binsec = sLib.from_string(secretValue);
+        const encBytes = sLib.crypto_box_seal(binsec, binkey);
+        const encBase64 = sLib.to_base64(encBytes, sLib.base64_variants.ORIGINAL);
 
         // 3. PUT secret to GitHub
         const putRes = await fetch('https://api.github.com/repos/' + repo + '/actions/secrets/FACEBOOK_PAGES_JSON', {
@@ -1150,8 +1155,36 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
           throw new Error(putErr.message || 'Failed to save secret');
         }
       } catch (err) {
-        alert('Error syncing to GitHub Secrets: ' + err.message);
+        alert('Notice during sync: ' + err.message + '\n\nOpening manual JSON copy...');
+        copyPagesJsonToClipboard();
       }
+    }
+
+    function copyPagesJsonToClipboard() {
+      if (!FB_PAGES.length) {
+        alert('No Facebook Pages configured yet.');
+        return;
+      }
+      const formattedPages = FB_PAGES.map(function(p) {
+        return {
+          page_id: p.id,
+          name: p.name,
+          access_token: p.token,
+          enabled: true,
+          as_reel: true,
+          niche_id: p.niche || 'typewriters_voice_nostalgia',
+          usa_time_slots: ["08:30", "13:00", "20:30"],
+          timezone: "America/New_York",
+          hashtags: "#typewriter #typewritersvoice #poetry #spokenword #healing #mentalhealth #aesthetic #reels #quotes #love"
+        };
+      });
+      const str = JSON.stringify(formattedPages, null, 2);
+      navigator.clipboard.writeText(str).then(function() {
+        alert('📋 Formatted JSON Copied to Clipboard!\n\nNow open GitHub Settings ➔ Secrets ➔ Actions, click Edit on FACEBOOK_PAGES_JSON, and paste it.');
+        window.open('https://github.com/' + (localStorage.getItem('gh_repo') || DEFAULT_REPO) + '/settings/secrets/actions', '_blank');
+      }).catch(function() {
+        prompt('Copy this JSON and paste into GitHub Secret FACEBOOK_PAGES_JSON:', str);
+      });
     }
 
     function renderFbPages() {
