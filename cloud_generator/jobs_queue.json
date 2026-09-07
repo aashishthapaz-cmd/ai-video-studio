@@ -6,13 +6,11 @@
     "niche_id": "typewriters_voice_nostalgia",
     "niche_name": "Typewriters Voice Nostalgia",
     "voice": "assets/reference_voice/whishper_prompt.wav",
-    "theme": "typewriters_voice_nostalgia",
-    "target_page_ids": [
-      "1084268771446346"
-    ],
-    "scheduled_time": "2026-09-08 08:30",
-    "scheduled_time_usa": "2026-09-08 08:30 EDT",
-    "scheduled_epoch": 1788870600,
+    "theme": "",
+    "target_page_ids": [],
+    "scheduled_time": "2026-09-07 20:30",
+    "scheduled_time_usa": "2026-09-07 20:30 EST",
+    "scheduled_epoch": 1788792300,
     "timezone": "America/New_York",
     "status": "PENDING",
     "created_at": "2026-09-07 15:05:46",
@@ -20,7 +18,9 @@
     "output_file": null,
     "facebook_results": null,
     "error": null,
-    "synced_to_local": false
+    "synced_to_local": false,
+    "vibe": "",
+    "updated_at": "2026-09-07T16:05:27.073Z"
   },
   {
     "id": "job_1788793546_ba167e",
