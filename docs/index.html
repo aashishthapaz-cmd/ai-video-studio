@@ -6,7 +6,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <title>Autonomous Video Studio & Multi-Page Hub v2.5</title>
+  <title>Autonomous Video Studio & Multi-Page Hub v3.0 — Bulk Scheduler</title>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -295,8 +295,8 @@
     <div class="logo">
       <div class="logo-icon">🎬</div>
       <div>
-        <span>AUTONOMOUS VIDEO STUDIO <small style="font-size: 0.65rem; background: rgba(99,102,241,0.25); color: #c7d2fe; padding: 2px 7px; border-radius: 6px; border: 1px solid rgba(99,102,241,0.4);">v2.5 Live</small></span>
-        <div style="font-size: 0.72rem; color: var(--text-muted); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; letter-spacing: normal;">24/7 Cloud Factory • Bots Hub • Auto-Poster</div>
+        <span>AUTONOMOUS VIDEO STUDIO <small style="font-size: 0.65rem; background: rgba(99,102,241,0.25); color: #c7d2fe; padding: 2px 7px; border-radius: 6px; border: 1px solid rgba(99,102,241,0.4);">v3.0 Live</small></span>
+        <div style="font-size: 0.72rem; color: var(--text-muted); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; letter-spacing: normal;">24/7 Cloud Factory • Per-Page Bulk Scheduler • Auto-Poster</div>
       </div>
     </div>
     <div class="header-actions">
@@ -321,15 +321,14 @@
   </nav>
 
   <main>
-    <!-- TAB 1: SINGLE STUDIO -->
     <section id="tab-single" class="panel active">
       <div class="card">
         <div class="card-header">
           <h3 class="card-title">🎥 Render Single Video On Demand</h3>
-          <span class="badge badge-rendering">Whisper Acoustic Sync + 9:16 Video</span>
+          <span class="badge badge-rendering">Breathy Poetic Voice + 9:16 Portrait</span>
         </div>
         <p class="card-desc">
-          Test or render a single masterpiece video immediately using GitHub Actions cloud workers. The video is rendered in full 1080x1920 portrait with progressive karaoke subtitles.
+          Render a single masterpiece video immediately via GitHub Actions. Full 1080×1920 portrait with solid yellow captions, cinematic music, and auto-post to your Facebook page.
         </p>
 
         <div class="form-group">
@@ -338,7 +337,7 @@
         </div>
 
         <div class="form-group">
-          <label>Poem / Script Text (Devanagari or English)</label>
+          <label>Poem / Script Text</label>
           <textarea id="singleScript">I'm proud of you, for not giving up on yourself.
 Even when you were disappointed.
 Even when you felt behind.
@@ -353,40 +352,118 @@ And I'll always admire you for that.</textarea>
           <div class="form-group">
             <label>Artistic World Aesthetic</label>
             <select id="singleVibe">
-              <option value="Auto-Detect (Adaptive Multi-World)">🌟 Dynamic AI Adaptive World (Auto-Detect)</option>
-              <option value="Studio Ghibli Meadow">🌿 Studio Ghibli Lush Naturalism</option>
+              <option value="Typewriters Voice Nostalgia" selected>✍️ Typewriters Voice Nostalgia (Default)</option>
+              <option value="Auto-Detect (Adaptive Multi-World)">🌟 Auto-Detect (Adaptive Multi-World)</option>
               <option value="Makoto Shinkai Twilight">🌅 Makoto Shinkai Cosmic Twilight</option>
-              <option value="Ink Wash Zen Landscape">🌊 Modern Shin-Hanga Woodblock & Zen</option>
               <option value="Himalayan Mist Serenity">🏔️ Himalayan Mist & Buddhist Serenity</option>
+              <option value="Studio Ghibli Meadow">🌿 Studio Ghibli Lush Naturalism</option>
               <option value="Cyberpunk Rain Reflections">🌃 90s Lo-Fi Cyberpunk Rain</option>
               <option value="Claude Monet Impressionism">🎨 Claude Monet Pastel Impressionism</option>
               <option value="Dark Romantic Academia">🕯️ Dark Academia & Baroque Chiaroscuro</option>
+              <option value="Van Gogh Starry Canvas">🌠 Van Gogh Starry Canvas</option>
+              <option value="Ink Wash Zen Landscape">🌊 Ink Wash Zen Landscape</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Poetry Niche (Tuned Art, Voice & Font)</label>
+            <select id="singleNiche">
+              <option value="Auto-Detect from Poem">🔍 Auto-Detect from Poem</option>
+              <option value="Typewriters Voice Nostalgia" selected>✍️ Typewriters Voice Nostalgia</option>
+              <option value="Dark Romantic Academia">🕯️ Dark Romantic Academia</option>
+              <option value="Romantic Devotion & Soulmates">💞 Romantic Devotion & Soulmates</option>
+              <option value="Healing, Self-Worth & Stoic Solace">🌿 Healing, Self-Worth & Stoic Solace</option>
+              <option value="Cosmic & Philosophical Reflections">🌌 Cosmic & Philosophical Reflections</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label>🎯 Target Facebook Page</label>
+            <select id="singleTargetPage">
+              <option value="ALL Pages">📢 ALL Enabled Pages</option>
+              <option value="Typewriters Voice (1054247421115636)" selected>✍️ Typewriters Voice (1054247421115636)</option>
             </select>
           </div>
           <div class="form-group">
             <label>Auto-Publish Option</label>
             <select id="singleAutoPublish">
-              <option value="true">✅ Yes, Auto-Publish to Facebook Pages</option>
-              <option value="false">❌ No, Render only (Save to Artifacts)</option>
+              <option value="true" selected>✅ Yes — Auto-Post to Facebook</option>
+              <option value="false">❌ No — Render Only (Save to Artifacts)</option>
             </select>
           </div>
         </div>
 
         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.5rem;">
-          <button class="btn btn-emerald" onclick="triggerSingleCloudRender()">🚀 Render 1 Video Now on GitHub Actions</button>
+          <button class="btn btn-emerald" onclick="triggerSingleCloudRender()">🚀 Render & Post Now via GitHub Actions</button>
         </div>
       </div>
     </section>
 
     <!-- TAB 2: BULK SCHEDULER & QUEUE -->
     <section id="tab-bulk" class="panel">
+      <!-- BULK DISPATCH TO GITHUB ACTIONS -->
+      <div class="card" style="border-color: rgba(99,102,241,0.35); background: rgba(15,18,35,0.85);">
+        <div class="card-header">
+          <h3 class="card-title">⚡ Bulk Schedule to GitHub Actions</h3>
+          <span class="badge badge-rendering">Direct Cloud Dispatch</span>
+        </div>
+        <p class="card-desc">
+          Paste multiple poems separated by <code>---</code> and dispatch them all at once to GitHub Actions. Each poem will be rendered and auto-posted at scheduled USA EST peak times (08:30 / 13:00 / 20:30).
+        </p>
+
+        <div class="form-group">
+          <label>Bulk Poems — Separated by <code>---</code></label>
+          <textarea id="bulkCloudText" style="min-height: 220px;" placeholder="And maybe love is just this — showing up when everything inside you says leave.
+Staying, even when your hands are shaking.
+Even when the words are wrong.
+
+---
+
+I'm proud of you, for not giving up on yourself.
+Even when you were disappointed.
+Even when you felt behind.
+You kept going.
+
+---
+
+Title: She Was Always Going To Leave
+Some people come into your life like a warm wind in October.
+Beautiful and brief.
+And you hold on tighter, knowing they'll go."></textarea>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label>🎯 Target Page for ALL Poems</label>
+            <select id="bulkCloudPage">
+              <option value="ALL Pages">📢 ALL Enabled Pages (Auto-Distribute)</option>
+              <option value="Typewriters Voice (1054247421115636)" selected>✍️ Typewriters Voice (1054247421115636)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>📅 Start Time (USA EST — leave empty = start at next peak slot)</label>
+            <input type="text" id="bulkCloudStartTime" placeholder="e.g. 2024-01-15 08:30 (YYYY-MM-DD HH:MM)">
+          </div>
+        </div>
+
+        <div style="background: rgba(99,102,241,0.08); border: 1px solid rgba(99,102,241,0.2); border-radius: 10px; padding: 0.85rem 1rem; margin-bottom: 1.2rem; font-size: 0.82rem; color: #a5b4fc;">
+          📡 <strong>Peak USA Posting Times:</strong> 08:30 AM EST · 1:00 PM EST · 8:30 PM EST — GitHub Actions cron auto-runs at all 3 slots daily
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <button class="btn" onclick="dispatchBulkToGithub()">⚡ Dispatch All Poems to GitHub Actions Now</button>
+        </div>
+      </div>
+
+      <!-- LOCAL QUEUE PARSER -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">📝 Ingest Bulk Poems & Numbered Lists</h3>
+          <h3 class="card-title">📝 Local Queue Builder</h3>
           <span class="badge badge-completed">Smart Numbered Parser Active</span>
         </div>
         <p class="card-desc">
-          Paste multiple poems in your numbered format (e.g. <code>1. Title \n Lines ... \n\n 2. Title \n Lines ...</code>) or separated by <code>---</code>. Titles and verses are automatically parsed and scheduled into separate slots!
+          Build a local queue first, review it, then push to GitHub Actions. Supports numbered format (<code>1. Title \n Lines...</code>) or <code>---</code> separators.
         </p>
 
         <div class="form-group">
@@ -419,6 +496,7 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
           <div class="form-group">
             <label>Default Visual Style</label>
             <select id="defaultVibe">
+              <option value="Typewriters Voice Nostalgia" selected>✍️ Typewriters Voice Nostalgia</option>
               <option value="Auto-Detect (Adaptive Multi-World)">Auto-Detect (Adaptive Multi-World)</option>
               <option value="Studio Ghibli Meadow">Studio Ghibli Meadow</option>
               <option value="Makoto Shinkai Twilight">Makoto Shinkai Twilight</option>
@@ -430,7 +508,7 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
         </div>
 
         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-          <button class="btn btn-emerald" onclick="scheduleBulkPosts()">⚡ Parse & Add to Queue</button>
+          <button class="btn btn-emerald" onclick="scheduleBulkPosts()">⚡ Parse & Add to Local Queue</button>
           <button class="btn btn-secondary" onclick="clearAllQueue()">🗑️ Clear Queue</button>
         </div>
       </div>
@@ -439,7 +517,10 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       <div class="card">
         <div class="card-header">
           <h3 class="card-title">📅 Scheduled Queue (<span id="queueCount">0</span> Posts)</h3>
-          <button class="btn btn-secondary btn-sm" onclick="renderQueue()">🔄 Refresh</button>
+          <div style="display:flex;gap:8px;">
+            <button class="btn btn-secondary btn-sm" onclick="renderQueue()">🔄 Refresh</button>
+            <button class="btn btn-sm" onclick="pushQueueToGithub()" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);">🚀 Push Queue to GitHub Actions</button>
+          </div>
         </div>
         <div class="item-list" id="queueList">
           <p style="color: var(--text-muted); font-size: 0.9rem;">No scheduled posts yet. Paste scripts above to populate.</p>
@@ -449,13 +530,41 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
 
     <!-- TAB 3: FACEBOOK PAGES HUB -->
     <section id="tab-fb" class="panel">
-      <div class="card">
+      <!-- CONNECTED PAGES -->
+      <div class="card" style="border-color: rgba(24,119,242,0.35);">
         <div class="card-header">
-          <h3 class="card-title">📱 Connected Facebook Pages</h3>
-          <span class="badge badge-completed">100% Secure via GitHub Secrets</span>
+          <h3 class="card-title">📘 Connected Facebook Pages (GitHub Secrets)</h3>
+          <span class="badge badge-completed">✅ Real Token Active</span>
         </div>
         <p class="card-desc">
-          Add the Facebook Pages where videos should be published automatically. Page Access Tokens are tested and kept secure in your private configuration.
+          These pages are configured in your <code>FACEBOOK_PAGES_JSON</code> GitHub Secret and auto-post at USA peak times. Tokens are 100% private — never exposed in the UI.
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+          <!-- Typewriters Voice Page -->
+          <div class="item-card" style="border-color: rgba(24,119,242,0.3); background: rgba(10,20,50,0.6);">
+            <div class="item-info">
+              <h4>📘 Typewriters Voice <span style="font-size: 0.75rem; color: var(--accent-green); background: rgba(16,185,129,0.12); padding: 2px 8px; border-radius: 6px; border: 1px solid rgba(16,185,129,0.3); margin-left: 6px;">✅ Active</span></h4>
+              <p><strong>Page ID:</strong> 1054247421115636 | <strong>Niche:</strong> Typewriters Voice Nostalgia</p>
+              <p style="margin-top: 4px;"><strong>USA Post Slots:</strong> 🕗 08:30 AM EST · 🕑 1:00 PM EST · 🕘 8:30 PM EST</p>
+              <p style="margin-top: 4px; color: var(--text-muted); font-size: 0.78rem;">Token: EAAVi0Y9h7tg•••••••• (secured in GitHub Secret FACEBOOK_PAGES_JSON)</p>
+            </div>
+            <div style="display: flex; gap: 8px; flex-direction: column; align-items: flex-end;">
+              <button class="btn btn-sm btn-facebook" onclick="testConnectedPage('1054247421115636')">🔍 Verify Token</button>
+              <button class="btn btn-sm btn-emerald" onclick="postNowToPage('Typewriters Voice (1054247421115636)')">▶ Post Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADD NEW PAGE -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">➕ Add Another Facebook Page</h3>
+          <span class="badge badge-pending">Stored Locally → Update GitHub Secret</span>
+        </div>
+        <p class="card-desc">
+          Add new pages for other poetry niches. After adding, update the <code>FACEBOOK_PAGES_JSON</code> secret in GitHub Settings → Secrets → Actions.
         </p>
 
         <div class="grid-2">
@@ -469,14 +578,26 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
           </div>
         </div>
 
-        <div class="form-group">
-          <label>Page Access Token (EAA...)</label>
-          <input type="password" id="fbPageToken" placeholder="Paste your Facebook Page Access Token">
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Page Access Token (EAA...)</label>
+            <input type="password" id="fbPageToken" placeholder="Paste your Facebook Page Access Token">
+          </div>
+          <div class="form-group">
+            <label>Poetry Niche</label>
+            <select id="fbPageNiche">
+              <option value="typewriters_voice_nostalgia">✍️ Typewriters Voice Nostalgia</option>
+              <option value="dark_romantic_academia">🕯️ Dark Romantic Academia</option>
+              <option value="romantic_devotion_soulmates">💞 Romantic Devotion & Soulmates</option>
+              <option value="healing_self_worth">🌿 Healing, Self-Worth & Stoic Solace</option>
+              <option value="cosmic_philosophical">🌌 Cosmic & Philosophical Reflections</option>
+            </select>
+          </div>
         </div>
 
         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-          <button class="btn btn-secondary" onclick="testFbToken()">🔍 Test Token Connection</button>
-          <button class="btn btn-facebook" onclick="addFacebookPage()">➕ Add Facebook Page</button>
+          <button class="btn btn-secondary" onclick="testFbToken()">🔍 Test Token</button>
+          <button class="btn btn-facebook" onclick="addFacebookPage()">➕ Add Page</button>
         </div>
 
         <div id="fbPageList" style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem;"></div>
@@ -667,7 +788,9 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       const title = document.getElementById('singleTitle').value.trim();
       const script = document.getElementById('singleScript').value.trim();
       const vibe = document.getElementById('singleVibe').value;
-      const autoPub = document.getElementById('singleAutoPublish').value === 'true';
+      const niche = document.getElementById('singleNiche') ? document.getElementById('singleNiche').value : 'Auto-Detect from Poem';
+      const targetPage = document.getElementById('singleTargetPage') ? document.getElementById('singleTargetPage').value : 'ALL Pages';
+      const autoPub = document.getElementById('singleAutoPublish').value;
 
       if (!script) {
         alert('Please enter poem or script text.');
@@ -680,12 +803,14 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
         script_text: script,
         title: title || 'Single Masterpiece',
         custom_vibe: vibe,
-        publish_facebook: autoPub
+        poetry_niche: niche,
+        target_page: targetPage,
+        publish_facebook: autoPub === 'true'
       });
 
       if (success) {
-        showToast('✅ Job launched on GitHub Actions! Check "Cloud Gallery" in ~2 mins.');
-        setTimeout(function() { switchTab('gallery'); }, 1500);
+        showToast('✅ Job launched! ' + (autoPub === 'true' ? 'Will post to ' + targetPage + ' when done.' : 'Render only — check Cloud Gallery.'));
+        setTimeout(function() { switchTab('gallery'); }, 1800);
       }
     }
 
@@ -817,7 +942,63 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       showToast('🗑️ Queue cleared.');
     }
 
-    // Telegram Live Test Message
+    // Direct Bulk Dispatch to GitHub Actions
+    async function dispatchBulkToGithub() {
+      const raw = document.getElementById('bulkCloudText').value.trim();
+      const targetPage = document.getElementById('bulkCloudPage').value;
+      const startTime = document.getElementById('bulkCloudStartTime').value.trim();
+
+      if (!raw) {
+        alert('Please paste at least one poem separated by ---');
+        return;
+      }
+
+      const count = raw.split(/\n\s*---+\s*\n/).filter(function(s) { return s.trim(); }).length;
+      showToast('⚡ Dispatching ' + count + ' poem(s) to GitHub Actions bulk scheduler...');
+
+      const success = await dispatchWorkflowAPI({
+        bulk_poems: raw,
+        target_page: targetPage,
+        bulk_start_time: startTime,
+        publish_facebook: true
+      });
+
+      if (success) {
+        showToast('✅ ' + count + ' poems dispatched! GitHub Actions will schedule each at USA EST peak slots → ' + targetPage);
+        setTimeout(function() { switchTab('gallery'); }, 2000);
+      }
+    }
+
+    // Push Local Queue to GitHub Actions (send first pending item)
+    async function pushQueueToGithub() {
+      const pending = QUEUE.filter(function(j) { return j.status === 'PENDING'; });
+      if (!pending.length) {
+        alert('No pending jobs in queue to push.');
+        return;
+      }
+
+      showToast('🚀 Pushing ' + pending.length + ' queued poem(s) to GitHub Actions...');
+
+      // Join all pending poems as bulk_poems
+      const bulkText = pending.map(function(j) {
+        return 'Title: ' + j.title + '\n' + j.script_text;
+      }).join('\n\n---\n\n');
+
+      const success = await dispatchWorkflowAPI({
+        bulk_poems: bulkText,
+        target_page: 'ALL Pages',
+        publish_facebook: true
+      });
+
+      if (success) {
+        QUEUE.forEach(function(j) { if (j.status === 'PENDING') j.status = 'DISPATCHED'; });
+        localStorage.setItem('video_queue', JSON.stringify(QUEUE));
+        renderQueue();
+        showToast('✅ Queue dispatched to GitHub Actions! ' + pending.length + ' poems scheduled.');
+      }
+    }
+
+
     async function sendTelegramLiveTest() {
       const token = document.getElementById('tgToken').value.trim();
       const chatId = document.getElementById('tgChat').value.trim();
@@ -920,6 +1101,42 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       localStorage.setItem('fb_pages', JSON.stringify(FB_PAGES));
       renderFbPages();
     }
+
+    // Test the hardcoded connected page token
+    async function testConnectedPage(pageId) {
+      showToast('🔍 Verifying Typewriters Voice token via Graph API...');
+      try {
+        const res = await fetch('https://graph.facebook.com/v25.0/' + pageId + '?fields=id,name&access_token=' + encodeURIComponent('CHECK_GITHUB_SECRET'));
+        const data = await res.json();
+        if (data.error) {
+          showToast('⚠️ Token check: ' + (data.error.message || 'Cannot verify from browser — token is in GitHub Secret'));
+        } else {
+          showToast('✅ Page verified: ' + data.name);
+        }
+      } catch (e) {
+        showToast('ℹ️ Token is secured in GitHub Secret — cannot verify directly from browser.');
+      }
+    }
+
+    // Post now to a specific page by dispatching a quick test poem
+    async function postNowToPage(targetPage) {
+      const poem = 'And maybe love is just this — showing up when everything inside you says leave.\nStaying, even when your hands are shaking.\nEven when the words are wrong.\nEven when silence is all you have to give.';
+      showToast('▶ Dispatching instant post to ' + targetPage + '...');
+      const success = await dispatchWorkflowAPI({
+        script_text: poem,
+        title: 'And Maybe Love Is Just This',
+        custom_vibe: 'Typewriters Voice Nostalgia',
+        poetry_niche: 'Typewriters Voice Nostalgia',
+        target_page: targetPage,
+        publish_facebook: true
+      });
+      if (success) {
+        showToast('✅ Video render + post dispatched to ' + targetPage + '!');
+        setTimeout(function() { switchTab('gallery'); }, 2000);
+      }
+    }
+
+
 
     function saveBotSettings() {
       const tgToken = document.getElementById('tgToken').value.trim();
