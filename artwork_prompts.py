@@ -811,14 +811,14 @@ def _procedural_scene_prompt(line: str, scene_idx: int, total_scenes: int, vibe:
     if "typewriter" in vibe_id.lower() or "typewriter" in vibe_name.lower():
         environments_pool = [
             # Surreal Natural & Elemental Motifs (Direct User Reference Match)
-            "a dramatically curved windswept dark bonsai tree on a quiet snowy hill with fine vertical line hatching against a deep dark navy sky",
-            "a surreal gnarled bonsai tree growing from a wooden boat on calm water split between deep crimson red and glowing golden yellow woodcut ripples",
-            "a historic European canal with terracotta buildings and a giant surreal dark blue stone monolith rising into the dark hatched sky",
-            "a dark city street corner with a glowing red-wood bakery window and a giant surreal glowing monolith rising between old townhouses into the dark sky",
-            "a quiet European canal quay with horizontal linocut wave ripples on deep blue water and warm golden streetlamp glow on stone pavement",
+            "an expansive nocturnal landscape with a tall majestic curved windswept dark pine tree on a rolling snowy hillside with fine vertical snow lines against a deep dark navy sky",
+            "a serene open water view with an ancient gnarled tree growing from a wooden rowboat on calm water cleanly split between deep crimson red and glowing golden yellow woodcut ripples",
+            "an expansive historic European canal with terracotta buildings and a giant surreal dark blue stone monolith rising majestically into the dark starlit sky",
+            "a full-frame European city street corner with a glowing red-wood bakery window and a giant surreal glowing blue monolith rising between old townhouses into the dark night",
+            "an expansive European canal quay with horizontal wave ripple lines on deep blue water and warm golden streetlamp glow on stone pavement",
             
             # Cozy Bookstores, Kiosks & Printmakers (Direct User Reference Match)
-            "an illuminated arched red-wood bookstore facade with warm amber bookshelves and illustrated art prints on a dark cobblestone lane",
+            "a full-frame nocturnal view of an illuminated arched red-wood bookstore facade with warm amber bookshelves and illustrated art prints on a dark cobblestone lane",
             "a quaint nocturnal bakery storefront radiating intense warm amber and cadmium-yellow light through glass displays onto dark cobblestones",
             "an intimate European corner bookshop with warm yellow light spilling from large multi-pane windows onto wet stone pavement",
             "a cozy second-hand bookstore storefront on an old stone street with stacks of vintage books lit by glowing streetlamp",
@@ -831,13 +831,13 @@ def _procedural_scene_prompt(line: str, scene_idx: int, total_scenes: int, vibe:
             "a solitary weathered stone lighthouse atop a dramatic coastal cliff beaming a bright warm golden light ray across dark rolling ocean waves",
             "a solitary wooden boat dock with a single glowing lantern extending into a calm misty midnight lake beneath crescent moon",
             "a quiet European railway station platform at midnight with an antique station clock and glowing iron lantern in mist",
-            "a solitary giant ancient oak tree with glowing amber autumn foliage on a quiet grassy knoll beneath starry midnight cosmos"
+            "an expansive meadow with a giant ancient oak tree with glowing amber autumn foliage on a quiet grassy knoll beneath starry midnight cosmos"
         ]
         
         wanderer_figures = [
-            "a tiny solitary figure holding a bright lime-yellow umbrella walking peacefully beneath the tree",
-            "a solitary figure in a bright yellow trenchcoat browsing the warm glowing shop display from behind",
-            "a solitary fisherman in a red sweater standing on the golden cobblestone quay with a fishing rod",
+            "a tiny solitary figure holding a bright neon lime-yellow umbrella walking peacefully up the snowy hill",
+            "a solitary figure in a bright mustard yellow trenchcoat browsing the warm glowing shop display from behind",
+            "a solitary fisherman in a bright red sweater standing on the golden cobblestone quay with a fishing rod",
             "a tiny stylized figure with a red umbrella standing in a yellow canoe on the glowing water",
             "a solitary wanderer in a yellow coat standing on the stone canal bridge looking at the water reflections",
             "a solitary traveler holding a red umbrella gazing out over the calm midnight water",
@@ -860,13 +860,13 @@ def _procedural_scene_prompt(line: str, scene_idx: int, total_scenes: int, vibe:
         atm = atmospheres[(scene_idx * 2) % len(atmospheres)]
         
         prompt = (
-            f"Contemporary editorial graphic illustration in the signature style of Typewriters Voice. "
+            f"Full-bleed edge-to-edge graphic novel illustration in the signature style of Typewriters Voice and Guy Billout. "
             f"Clean black ink line art with delicate cross-hatch shading and fine horizontal ripple textures, flat gouache color blocking. "
             f"Depicting {env}, {fig}. {atm}. "
             f"Poetic essence: {poetic_subject}. "
             f"High contrast radiant golden amber and cadmium yellow lantern glow pooling against deep nocturnal indigo navy and slate blue. "
-            f"Vibrant accents of mustard yellow and crimson red, rich matte print, modern graphic storybook serigraph, "
-            f"vertical 9:16 portrait composition, masterpiece, no text, no words, no letters, no watermark, no photographic realism"
+            f"Saturated accents of mustard yellow and crimson red, rich matte serigraph print, expansive composition filling the entire 9:16 frame, "
+            f"masterpiece, 8k, edge to edge, no text, no words, no letters, no watermark, no borders, no frames, no oval, no cameo, no miniature pot, no vase, no white background, no photographic realism"
         )
         return prompt
 

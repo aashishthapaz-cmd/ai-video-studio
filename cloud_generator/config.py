@@ -70,6 +70,8 @@ def load_settings():
         merged["cloudflare_account_id"] = os.getenv("CLOUDFLARE_ACCOUNT_ID")
     if os.getenv("CLOUDFLARE_API_TOKEN"):
         merged["cloudflare_api_token"] = os.getenv("CLOUDFLARE_API_TOKEN")
+    if os.getenv("POLLINATIONS_API_KEY"):
+        merged["pollinations_api_key"] = os.getenv("POLLINATIONS_API_KEY")
     if os.getenv("FACEBOOK_PAGES_JSON"):
         try:
             pages = json.loads(os.getenv("FACEBOOK_PAGES_JSON"))

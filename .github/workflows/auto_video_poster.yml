@@ -120,6 +120,7 @@ jobs:
           FACEBOOK_PAGES_JSON: ${{ secrets.FACEBOOK_PAGES_JSON }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          POLLINATIONS_API_KEY: ${{ secrets.POLLINATIONS_API_KEY }}
           SCRIPT_INPUT: ${{ inputs.script_text }}
           TITLE_INPUT: ${{ inputs.title }}
           VIBE_INPUT: ${{ inputs.custom_vibe }}

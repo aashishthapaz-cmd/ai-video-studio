@@ -99,17 +99,18 @@ NICHE_REGISTRY: Dict[str, PoetryNiche] = {
             palette="deep midnight navy, slate blue, warm glowing amber, cadmium yellow, ochre lanterns, mustard yellow, crimson red",
             lighting="high contrast warm golden amber and cadmium yellow glow radiating against dark midnight slate sky",
             motifs=[
-                "curved windswept bonsai tree on a snowy hill under fine ink cross-hatched night sky",
+                "tall majestic windswept pine tree on a snowy hill under fine ink cross-hatched night sky",
                 "giant surreal stone monolith rising between ancient European canal townhouses",
-                "bonsai tree floating in a wooden rowboat on split crimson and amber reflective water",
+                "ancient gnarled tree floating in a wooden rowboat on split crimson and amber reflective water",
                 "glowing arched wooden shopfront with warm lanterns casting golden light across wet cobblestones",
                 "solitary wanderer in a yellow trenchcoat holding a bright umbrella on a misty bridge"
             ],
             prompt_prefix=(
-                "Masterpiece vertical 9:16 contemporary editorial graphic illustration in the signature style of Typewriters Voice, "
+                "Masterpiece vertical 9:16 full-bleed edge-to-edge graphic novel illustration in the signature style of Typewriters Voice and Guy Billout, "
                 "clean black ink line art with delicate cross-hatch shading and fine horizontal ripple textures, flat gouache color blocking, "
                 "deep nocturnal indigo navy and slate blue sky with fine ink line hatching, high-contrast radiant warm golden amber and cadmium yellow lantern glow, "
-                "vibrant accents of mustard yellow and crimson red, rich matte print, pure evocative artwork, no text, no words, no letters, no typography, no watermarks, no photographic realism."
+                "saturated accents of mustard yellow and crimson red, rich matte serigraph print, expansive composition filling the entire 9:16 frame, "
+                "pure evocative artwork, no text, no words, no letters, no typography, no watermarks, no borders, no frames, no oval, no cameo, no miniature pot, no vase, no white background, no photographic realism."
             )
         ),
         voice=VoiceConfig(
