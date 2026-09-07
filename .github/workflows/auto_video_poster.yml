@@ -160,6 +160,7 @@ jobs:
             echo "No queue changes to commit."
           else
             git commit -m "🤖 Auto-update job queue & publication history [skip ci]"
+            git pull --rebase origin ${{ github.ref_name }} || true
             git push origin HEAD:${{ github.ref_name }} || true
           fi
 
