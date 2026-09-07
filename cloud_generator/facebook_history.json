@@ -1,5 +1,16 @@
 [
   {
+    "title": "Showing Up",
+    "video_path": "/home/runner/work/ai-video-studio/ai-video-studio/Output/Showing Up.mp4",
+    "page_name": "Typewriters Voice",
+    "page_id": "1054247421115636",
+    "success": false,
+    "video_id": "",
+    "post_url": "",
+    "error": "Facebook Error (190): Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.",
+    "timestamp": "2026-09-07 13:57:00"
+  },
+  {
     "title": "We Will Both Have Bad Days",
     "video_path": "/home/runner/work/ai-video-studio/ai-video-studio/Output/We Will Both Have Bad Days.mp4",
     "page_name": "My Page",
