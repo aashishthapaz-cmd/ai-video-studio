@@ -103,14 +103,14 @@ def notify_job_success(job: dict, fb_results: list, render_time: float, video_pa
         lines.append("No Facebook pages were enabled for auto-posting.\n")
     else:
         for res in fb_results:
-            page_name = res.get('page_name', 'Facebook Page')
-            if res.get('success'):
-                post_id = res.get('post_id', 'N/A')
-                reel_id = res.get('reel_video_id', '')
-                url = f'https://facebook.com/{post_id}' if post_id != 'N/A' else 'Published'
+            page_name = res.get('page_name', res.get('page_id', 'Facebook Page'))
+            is_ok = bool(res.get('ok') or res.get('success'))
+            if is_ok:
+                post_id = res.get('video_id') or res.get('post_id', 'N/A')
+                url = res.get('post_url') or (f'https://facebook.com/{post_id}' if post_id != 'N/A' else 'Published')
                 lines.append(f"  ✅ *{page_name}*: Posted Successfully!\n")
-                if reel_id:
-                    lines.append(f"     Reel ID: `{reel_id}`\n")
+                if post_id and post_id != 'N/A':
+                    lines.append(f"     Video ID: `{post_id}`\n")
                 lines.append(f"     Link: {url}\n")
             else:
                 err = res.get('error', 'Unknown error')

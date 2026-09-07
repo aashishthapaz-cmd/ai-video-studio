@@ -255,8 +255,9 @@ def run():
             if fb_res:
                 print(f"\n📘 Facebook Publishing Results ({len(fb_res)} page(s)):", flush=True)
                 for r in fb_res:
-                    status_icon = "✅" if r.get("success") else "❌"
-                    print(f"   {status_icon} {r.get('page_name', r.get('page_id', '?'))}: {r.get('video_id', r.get('error', 'unknown'))}", flush=True)
+                    status_icon = "✅" if (r.get("ok") or r.get("success")) else "❌"
+                    post_id = r.get("video_id") or r.get("post_id") or r.get("error", "unknown")
+                    print(f"   {status_icon} {r.get('page_name', r.get('page_id', '?'))}: {post_id}", flush=True)
 
             notify_job_success(
                 job={"title": title},
@@ -324,8 +325,9 @@ def run():
                 if fb_res:
                     print(f"\n📘 Facebook Publishing Results ({len(fb_res)} page(s)):", flush=True)
                     for r in fb_res:
-                        status_icon = "✅" if r.get("success") else "❌"
-                        print(f"   {status_icon} {r.get('page_name', r.get('page_id', '?'))}: {r.get('video_id', r.get('error', 'unknown'))}", flush=True)
+                        status_icon = "✅" if (r.get("ok") or r.get("success")) else "❌"
+                        post_id = r.get("video_id") or r.get("post_id") or r.get("error", "unknown")
+                        print(f"   {status_icon} {r.get('page_name', r.get('page_id', '?'))}: {post_id}", flush=True)
             else:
                 print(f"\n⚠️ Job finished with status: {res.get('status')} - Error: {res.get('error')}", flush=True)
                 sys.exit(1)

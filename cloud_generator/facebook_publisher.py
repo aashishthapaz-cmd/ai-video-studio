@@ -178,8 +178,10 @@ def publish_video_to_facebook_page(
                 video_id = data.get("id")
                 return {
                     "ok": True,
+                    "success": True,
                     "page_id": page_id,
                     "video_id": video_id,
+                    "post_id": video_id,
                     "post_url": f"https://facebook.com/{video_id}" if video_id else f"https://facebook.com/{page_id}",
                     "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ"),
                     "attempts": attempt
@@ -209,7 +211,14 @@ def publish_video_to_facebook_page(
             backoff = attempt * 5
             time.sleep(backoff)
             
-    return {"ok": False, "page_id": page_id, "error": last_err or "Upload failed after retries"}
+    return {
+        "ok": False,
+        "success": False,
+        "page_id": page_id,
+        "video_id": None,
+        "post_id": None,
+        "error": last_err or "Upload failed after retries"
+    }
 
 def publish_to_all_enabled_pages(video_path: Path, title: str, description: str, hashtags: str = None, target_page_ids: list = None) -> list:
     """
