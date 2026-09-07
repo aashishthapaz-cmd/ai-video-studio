@@ -1,22 +1,5 @@
 [
   {
-    "id": "job_1788677016_725acd",
-    "title": "Whispers of the Valley",
-    "script_text": "In the gentle embrace of the mountains,\npeace settles softly like evening snow.",
-    "voice": "cloud_cloning",
-    "theme": "Ghibli Lush",
-    "scheduled_time": "2026-09-06 12:33",
-    "status": "PUBLISHED",
-    "created_at": "2026-09-06 12:28:36",
-    "render_time": 109.9,
-    "output_file": "D:\\Auto video Generator\\Output\\Whispers of the Valley.mp4",
-    "facebook_results": [],
-    "error": null,
-    "synced_to_local": false,
-    "started_at": "2026-09-06 12:33:09",
-    "completed_at": "2026-09-06 12:34:59"
-  },
-  {
     "id": "job_1788677016_2351e4",
     "title": "Radiance in the Rain",
     "script_text": "Every drop carries a memory of clouds.",
