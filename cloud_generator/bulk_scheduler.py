@@ -378,14 +378,8 @@ def execute_single_job(job_id: str) -> dict:
         if output_file:
             store_video_in_cloud_buffer(job_id, output_file, job["title"])
             
-        update_job(job_id, {
-            "status": "PUBLISHED",
-            "completed_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "render_time": round(total_time, 1),
-            "output_file": output_file,
-            "facebook_results": fb_res,
-            "error": None
-        })
+        # Automatically delete the job from scheduled queue list so it is immediately removed
+        delete_job(job_id)
         
         notify_job_success(job, fb_res, total_time, output_file)
         return {
@@ -398,11 +392,8 @@ def execute_single_job(job_id: str) -> dict:
         }
     except Exception as e:
         err_msg = str(e)
-        update_job(job_id, {
-            "status": "FAILED",
-            "completed_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "error": err_msg
-        })
+        # Delete from scheduled queue list so failed jobs do not block future scheduled queue runs
+        delete_job(job_id)
         notify_job_failure(job, err_msg)
         return {"ok": False, "status": "FAILED", "job_id": job_id, "error": err_msg}
 
