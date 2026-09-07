@@ -993,7 +993,16 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
         else if (item.status === 'RUNNING' || item.status === 'RENDERING') statusBadgeClass = 'badge-rendering';
         else if (item.status === 'FAILED' || item.status === 'ERROR') statusBadgeClass = 'badge-danger';
 
-        const pageDisplay = (item.target_page_ids && item.target_page_ids.length) ? item.target_page_ids.join(', ') : 'ALL Enabled Pages';
+        let pageDisplay = '📢 ALL Enabled Pages';
+        if (item.target_page_ids && item.target_page_ids.length) {
+          pageDisplay = item.target_page_ids.map(function(pid) {
+            if (FB_PAGES && FB_PAGES.length) {
+              const matched = FB_PAGES.find(function(p) { return String(p.id || p.page_id) === String(pid); });
+              if (matched) return matched.name + ' (' + pid + ')';
+            }
+            return pid;
+          }).join(', ');
+        }
         const schedDisplay = item.scheduled_time_usa || item.scheduled_time || 'Immediate / Next Slot';
 
         return `
@@ -1004,7 +1013,7 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
                 <span class="badge ${statusBadgeClass}">${item.status || 'PENDING'}</span>
               </div>
               <p style="font-size: 0.82rem; color: #a5b4fc; margin-bottom: 4px;">
-                📅 <strong>Scheduled:</strong> ${escapeHtml(schedDisplay)} | 🎯 <strong>Target:</strong> ${escapeHtml(pageDisplay)}
+                📅 <strong>Scheduled:</strong> ${escapeHtml(schedDisplay)} | 🎯 <strong>Target:</strong> <span style="color: #6ee7b7;">${escapeHtml(pageDisplay)}</span>
               </p>
               <p style="font-size: 0.78rem; color: var(--text-dim); margin-bottom: 4px;">
                 🎨 <strong>Vibe:</strong> ${escapeHtml(item.theme || item.vibe || 'Typewriters Voice Nostalgia')}

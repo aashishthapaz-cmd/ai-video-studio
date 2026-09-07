@@ -1,12 +1,14 @@
 name: 🎬 Autonomous AI Video Studio & Auto-Poster
 
 on:
-  # 1. Scheduled Posting via Cron (USA peak engagement times — EST/EDT)
-  #    08:30 EST = 14:00 UTC  |  13:00 EST = 18:00 UTC  |  20:30 EST = 01:30 UTC next day
+  # 1. Scheduled Posting via Cron (USA peak engagement times + Hourly Check)
+  #    Hourly check wakes up to process any pending post whose scheduled time has arrived.
+  #    08:30 AM EDT = 12:30 UTC  |  13:00 PM EDT = 17:00 UTC  |  20:30 PM EDT = 00:30 UTC next day
   schedule:
-    - cron: '30 14 * * *'   # 08:30 AM EST daily
-    - cron: '0 18 * * *'    # 13:00 PM EST daily
-    - cron: '30 1 * * *'    # 20:30 PM EST daily
+    - cron: '0 * * * *'     # Hourly check at minute 0
+    - cron: '30 12 * * *'   # 08:30 AM EDT peak slot
+    - cron: '0 17 * * *'    # 13:00 PM EDT peak slot
+    - cron: '30 0 * * *'    # 20:30 PM EDT peak slot
 
   # 2. Manual / Mobile Trigger via GitHub Web UI or GitHub App
   workflow_dispatch:

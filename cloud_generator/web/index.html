@@ -3,705 +3,709 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Autonomous AI Video Studio & Multi-Page Hub</title>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Autonomous Video Studio & Multi-Page Hub v3.0 — Bulk Scheduler</title>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/libsodium@0.8.4/dist/modules/libsodium.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/libsodium-wrappers@0.8.4/dist/modules/libsodium-wrappers.js"></script>
   <style>
     :root {
-      --bg-dark: #07090e;
+      --bg: #07090e;
       --card-bg: rgba(18, 22, 34, 0.75);
       --card-border: rgba(255, 255, 255, 0.08);
-      --card-hover: rgba(255, 255, 255, 0.12);
       --primary: #6366f1;
       --primary-glow: rgba(99, 102, 241, 0.4);
       --accent-cyan: #06b6d4;
       --accent-green: #10b981;
-      --accent-emerald: #059669;
       --accent-gold: #f59e0b;
       --danger: #ef4444;
       --fb-blue: #1877f2;
-      --text-main: #f1f5f9;
+      --tg-blue: #229ed9;
+      --text: #f1f5f9;
       --text-dim: #94a3b8;
       --text-muted: #64748b;
       --radius: 14px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
+      background: radial-gradient(circle at 50% 0%, #171b30 0%, var(--bg) 80%);
+      color: var(--text);
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background: var(--bg-dark);
-      background-image: 
-        radial-gradient(circle at 5% 15%, rgba(99, 102, 241, 0.12) 0%, transparent 45%),
-        radial-gradient(circle at 95% 85%, rgba(6, 182, 212, 0.08) 0%, transparent 45%),
-        radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.04) 0%, transparent 60%);
-      background-attachment: fixed;
-      color: var(--text-main);
       min-height: 100vh;
-      padding: 24px;
-      display: flex;
-      justify-content: center;
-    }
-    .wrapper {
-      width: 100%;
-      max-width: 1240px;
       display: flex;
       flex-direction: column;
-      gap: 22px;
+      background-attachment: fixed;
     }
-    
-    /* Header & Telemetry */
     header {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius);
-      padding: 20px 24px;
-      backdrop-filter: blur(20px);
-      box-shadow: 0 10px 35px rgba(0,0,0,0.5);
+      padding: 1.1rem 2rem;
+      background: rgba(11, 15, 25, 0.9);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--card-border);
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 50;
       flex-wrap: wrap;
-      gap: 16px;
+      gap: 12px;
     }
-    .brand { display: flex; align-items: center; gap: 14px; }
-    .brand-icon {
-      width: 48px; height: 48px;
-      background: linear-gradient(135deg, #6366f1, #a855f7, #06b6d4);
-      border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 24px;
-      box-shadow: 0 0 20px var(--primary-glow);
-    }
-    .brand-text h1 {
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
       font-family: 'Cinzel', serif;
-      font-size: 20px;
+      font-size: 1.2rem;
       font-weight: 800;
       letter-spacing: 0.05em;
+      color: #fff;
+    }
+    .logo-icon {
+      width: 38px; height: 38px;
+      background: linear-gradient(135deg, var(--primary), var(--accent-cyan));
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 0 16px var(--primary-glow);
+    }
+    .logo span {
       background: linear-gradient(135deg, #ffffff, #c7d2fe);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .brand-text p { font-size: 12px; color: var(--text-dim); }
-
-    .telemetry-bar {
+    .header-actions {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
     }
-    .stat-pill {
-      background: rgba(0, 0, 0, 0.4);
-      border: 1px solid var(--card-border);
-      padding: 6px 14px;
-      border-radius: 999px;
-      font-size: 12px;
+    .status-badge {
       display: flex;
       align-items: center;
-      gap: 6px;
-      color: var(--text-dim);
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: var(--accent-green);
+      font-weight: 700;
     }
-    .stat-pill strong { color: var(--text-main); font-weight: 700; }
     .status-dot {
-      width: 8px; height: 8px; border-radius: 50%;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
       background: var(--accent-green);
-      box-shadow: 0 0 8px var(--accent-green);
+      box-shadow: 0 0 10px var(--accent-green);
       animation: pulse 2s infinite;
     }
-    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
 
     /* Navigation Tabs */
-    .nav-bar {
+    .nav-tabs {
       display: flex;
-      gap: 8px;
-      border-bottom: 1px solid var(--card-border);
-      padding-bottom: 8px;
+      gap: 0.5rem;
+      padding: 1rem 2rem 0.5rem 2rem;
+      max-width: 1240px;
+      margin: 0 auto;
+      width: 100%;
       overflow-x: auto;
+      border-bottom: 1px solid var(--card-border);
     }
     .tab-btn {
-      background: transparent;
-      border: 1px solid transparent;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
       color: var(--text-dim);
-      padding: 10px 18px;
+      padding: 0.65rem 1.15rem;
       border-radius: 10px;
-      font-size: 13px;
-      font-weight: 600;
+      font-weight: 700;
+      font-size: 0.88rem;
       cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       display: flex;
       align-items: center;
       gap: 8px;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       white-space: nowrap;
     }
-    .tab-btn:hover { background: rgba(255, 255, 255, 0.05); color: var(--text-main); }
+    .tab-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+    }
     .tab-btn.active {
-      background: rgba(99, 102, 241, 0.16);
-      border-color: rgba(99, 102, 241, 0.4);
-      color: #a5b4fc;
-      box-shadow: 0 0 16px rgba(99, 102, 241, 0.2);
+      background: rgba(99, 102, 241, 0.18);
+      color: #c7d2fe;
+      border-color: rgba(99, 102, 241, 0.5);
+      box-shadow: 0 0 18px rgba(99, 102, 241, 0.25);
     }
 
-    /* Cards & Layout */
-    .tab-pane { display: none; }
-    .tab-pane.active { display: block; animation: fadeIn 0.3s ease; }
+    /* Main Container */
+    main {
+      flex: 1;
+      max-width: 1240px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 3rem 1.5rem;
+    }
+    .panel { display: none; }
+    .panel.active { display: block; animation: fadeIn 0.3s ease; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
     .card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      border-radius: var(--radius);
-      padding: 24px;
       backdrop-filter: blur(20px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-      margin-bottom: 22px;
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
     }
     .card-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 18px;
+      margin-bottom: 1rem;
       flex-wrap: wrap;
-      gap: 12px;
-    }
-    .card-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--text-main);
-      display: flex;
-      align-items: center;
       gap: 10px;
     }
-    .card-subtitle { font-size: 13px; color: var(--text-dim); margin-bottom: 16px; line-height: 1.5; }
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: #fff;
+    }
+    .card-desc {
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      margin-bottom: 1.25rem;
+      line-height: 1.55;
+    }
 
-    /* Forms */
-    .form-group { margin-bottom: 16px; }
+    /* Form Controls */
+    .form-group { margin-bottom: 1.2rem; }
     label {
       display: block;
-      font-size: 11px;
+      font-size: 0.78rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 7px;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.45rem;
       color: var(--text-muted);
     }
-    input, textarea, select {
+    textarea, input, select {
       width: 100%;
-      background: rgba(5, 7, 12, 0.8);
+      background: rgba(7, 10, 16, 0.85);
       border: 1px solid var(--card-border);
-      border-radius: 10px;
-      color: var(--text-main);
-      padding: 12px 16px;
+      color: var(--text);
       font-family: inherit;
-      font-size: 14px;
+      font-size: 0.92rem;
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
       outline: none;
       transition: all 0.2s;
     }
-    input:focus, textarea:focus, select:focus {
+    textarea { font-family: 'Plus Jakarta Sans', sans-serif; resize: vertical; min-height: 160px; line-height: 1.6; }
+    textarea:focus, input:focus, select:focus {
       border-color: var(--primary);
-      box-shadow: 0 0 15px rgba(99, 102, 241, 0.25);
-      background: rgba(8, 11, 20, 0.95);
+      box-shadow: 0 0 14px rgba(99, 102, 241, 0.3);
+      background: rgba(10, 14, 24, 0.95);
     }
-    textarea { resize: vertical; min-height: 130px; line-height: 1.6; }
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
-    @media (max-width: 768px) {
-      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+      filter: invert(1);
+      cursor: pointer;
+      opacity: 0.85;
+    }
+    input[type="datetime-local"]::-webkit-calendar-picker-indicator:hover {
+      opacity: 1;
     }
 
     /* Buttons */
     .btn {
       background: linear-gradient(135deg, var(--primary), #8b5cf6);
-      color: white;
-      border: none;
-      border-radius: 10px;
-      padding: 11px 20px;
-      font-size: 13px;
+      color: #fff;
       font-weight: 700;
+      font-size: 0.9rem;
+      padding: 0.75rem 1.4rem;
+      border-radius: 10px;
+      border: none;
       cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      gap: 0.5rem;
       box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
     }
-    .btn:hover { opacity: 0.92; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(99, 102, 241, 0.45); }
-    .btn:active { transform: translateY(1px); }
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.06);
-      color: var(--text-main);
-      border: 1px solid var(--card-border);
-      box-shadow: none;
-    }
-    .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.2); }
+    .btn:hover { opacity: 0.93; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(99, 102, 241, 0.45); }
+    .btn-secondary { background: rgba(255, 255, 255, 0.06); border: 1px solid var(--card-border); color: var(--text); box-shadow: none; }
+    .btn-secondary:hover { background: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.2); }
     .btn-emerald { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3); }
+    .btn-telegram { background: linear-gradient(135deg, #229ed9, #0088cc); box-shadow: 0 4px 14px rgba(34, 158, 217, 0.3); }
+    .btn-facebook { background: linear-gradient(135deg, #1877f2, #0d65d9); box-shadow: 0 4px 14px rgba(24, 119, 242, 0.3); }
     .btn-danger { background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 4px 14px rgba(239, 68, 68, 0.3); }
-    .btn-sm { padding: 6px 12px; font-size: 11px; border-radius: 8px; }
+    .btn-sm { padding: 0.4rem 0.85rem; font-size: 0.8rem; border-radius: 8px; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+    @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
 
     /* Badges */
     .badge {
-      font-size: 11px;
-      font-weight: 700;
-      padding: 4px 10px;
+      font-size: 0.75rem;
+      padding: 0.25rem 0.65rem;
       border-radius: 999px;
+      font-weight: 700;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
     }
-    .badge-pending { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
-    .badge-rendering { background: rgba(99, 102, 241, 0.18); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.4); animation: pulse 1.5s infinite; }
-    .badge-published { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
-    .badge-failed { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
-    .badge-connected { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
-    .badge-tokenerr { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+    .badge-pending { background: rgba(245, 158, 11, 0.15); color: var(--accent-gold); border: 1px solid rgba(245, 158, 11, 0.3); }
+    .badge-completed { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); border: 1px solid rgba(16, 185, 129, 0.3); }
+    .badge-rendering { background: rgba(99, 102, 241, 0.18); color: #a5b4fc; border: 1px solid rgba(99, 102, 241, 0.4); }
 
-    /* Tables */
-    .table-responsive { overflow-x: auto; border-radius: 10px; border: 1px solid var(--card-border); }
-    table { width: 100%; border-collapse: collapse; font-size: 13px; text-align: left; }
-    th {
-      background: rgba(0, 0, 0, 0.3);
-      color: var(--text-muted);
-      padding: 12px 14px;
-      font-size: 11px;
-      text-transform: uppercase;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      border-bottom: 1px solid var(--card-border);
-    }
-    td { padding: 14px; border-bottom: 1px solid rgba(255, 255, 255, 0.04); vertical-align: middle; }
-    tr:hover td { background: rgba(255, 255, 255, 0.02); }
-
-    /* Facebook Page Grid Cards */
-    .fb-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      gap: 18px;
-    }
-    .fb-page-card {
-      background: rgba(8, 12, 22, 0.8);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius);
-      padding: 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      transition: all 0.2s;
-    }
-    .fb-page-card:hover { border-color: rgba(99, 102, 241, 0.3); transform: translateY(-2px); }
-    .fb-card-top { display: flex; justify-content: space-between; align-items: flex-start; }
-    .fb-page-name { font-weight: 700; font-size: 15px; color: var(--text-main); }
-    .fb-page-meta { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
-    .fb-time-slots {
-      display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px;
-    }
-    .slot-pill {
-      background: rgba(99, 102, 241, 0.12);
-      border: 1px solid rgba(99, 102, 241, 0.25);
-      color: #c7d2fe;
-      padding: 3px 8px;
-      border-radius: 6px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-    }
-
-    /* Video Gallery Cards */
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 18px;
-    }
-    .video-card {
-      background: rgba(8, 12, 22, 0.85);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-    .video-preview-holder {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 9/16;
-      background: #000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .video-preview-holder video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .video-card-body {
-      padding: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    /* Console logs */
-    .console-box {
-      background: #04060a;
+    /* Cards list */
+    .item-list { display: flex; flex-direction: column; gap: 0.75rem; }
+    .item-card {
+      background: rgba(8, 12, 20, 0.75);
       border: 1px solid var(--card-border);
       border-radius: 10px;
-      padding: 14px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: #38bdf8;
-      max-height: 220px;
-      overflow-y: auto;
-      line-height: 1.6;
+      padding: 1rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .item-card:hover { border-color: rgba(255, 255, 255, 0.15); }
+    .item-info h4 { font-size: 0.95rem; margin-bottom: 0.25rem; font-weight: 700; color: #fff; }
+    .item-info p { font-size: 0.8rem; color: var(--text-dim); }
+
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: rgba(18, 22, 34, 0.96);
+      border: 1px solid var(--primary);
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      color: #fff;
+      font-size: 0.9rem;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.6);
+      display: none;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
     }
 
-    /* Modal */
+    /* Modal Overlay & Card */
     .modal-overlay {
-      display: none;
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(8px);
-      z-index: 1000;
+      background: rgba(4, 7, 14, 0.82);
+      backdrop-filter: blur(10px);
+      display: none;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      z-index: 1000;
+      padding: 1.5rem;
     }
-    .modal-overlay.active { display: flex; }
-    .modal-dialog {
-      background: #0e131f;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: var(--radius);
+    .modal-card {
+      background: rgba(18, 24, 40, 0.98);
+      border: 1px solid rgba(99, 102, 241, 0.35);
+      border-radius: 16px;
+      max-width: 680px;
       width: 100%;
-      max-width: 580px;
-      padding: 24px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-      animation: modalPop 0.25s ease;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 1.75rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(99, 102, 241, 0.2);
+      animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    @keyframes modalPop { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+    @keyframes modalPop {
+      from { opacity: 0; transform: scale(0.95) translateY(10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
   </style>
 </head>
 <body>
-  <div class="wrapper">
-    <!-- TOP HEADER & LIVE TELEMETRY -->
-    <header>
-      <div class="brand">
-        <div class="brand-icon">🎬</div>
-        <div class="brand-text">
-          <h1>AI AUTONOMOUS VIDEO FACTORY</h1>
-          <p>Zero-Cost Generation • Self-Healing Watchdog • Multi-Page Facebook Hub</p>
-        </div>
+  <!-- HEADER -->
+  <header>
+    <div class="logo">
+      <div class="logo-icon">🎬</div>
+      <div>
+        <span>AUTONOMOUS VIDEO STUDIO <small style="font-size: 0.65rem; background: rgba(99,102,241,0.25); color: #c7d2fe; padding: 2px 7px; border-radius: 6px; border: 1px solid rgba(99,102,241,0.4);">v3.0 Live</small></span>
+        <div style="font-size: 0.72rem; color: var(--text-muted); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; letter-spacing: normal;">24/7 Cloud Factory • Per-Page Bulk Scheduler • Auto-Poster</div>
       </div>
-      <div class="telemetry-bar">
-        <div class="stat-pill" id="healthPill">
-          <span class="status-dot"></span> Watchdog: <strong id="healthStatusText">ACTIVE</strong>
-        </div>
-        <div class="stat-pill">
-          📦 Cloud Buffer: <strong id="telemetryBuffer">0 MB</strong>
-        </div>
-        <div class="stat-pill">
-          📱 Active Pages: <strong id="telemetryPages">0</strong>
-        </div>
-        <button class="btn btn-sm btn-secondary" onclick="triggerSelfRepair()" title="Instant self-recovery, clean old workspaces, unstick jobs">
-          🛡️ Self-Repair
-        </button>
-      </div>
-    </header>
-
-    <!-- NAVIGATION BAR -->
-    <div class="nav-bar">
-      <button class="tab-btn active" onclick="showTab('tab-single')">🎥 Single Studio</button>
-      <button class="tab-btn" onclick="showTab('tab-bulk')">📅 Bulk Scheduler & Queue</button>
-      <button class="tab-btn" onclick="showTab('tab-facebook')">📱 Facebook Pages Hub</button>
-      <button class="tab-btn" onclick="showTab('tab-gallery')">🎬 Video Gallery</button>
-      <button class="tab-btn" onclick="showTab('tab-notifications')">🔔 Telegram & WhatsApp</button>
-      <button class="tab-btn" onclick="showTab('tab-sync')">📥 Local PC Sync</button>
-      <button class="tab-btn" onclick="showTab('tab-settings')">⚙️ Settings</button>
     </div>
+    <div class="header-actions">
+      <div class="status-badge" id="connStatus">
+        <div class="status-dot"></div>
+        <span id="connStatusText">GitHub Actions Connected</span>
+      </div>
+      <button class="btn btn-sm btn-secondary" onclick="dispatchCloudWorkflow()" title="Instantly trigger GitHub Actions cloud runner">
+        ⚡ Run Cloud Worker Now
+      </button>
+    </div>
+  </header>
 
-    <!-- TAB 1: SINGLE STUDIO -->
-    <div id="tab-single" class="tab-pane active">
+  <!-- NAVIGATION TABS -->
+  <nav class="nav-tabs">
+    <button class="tab-btn active" id="btn-single" onclick="switchTab('single', this)">🎥 Single Studio</button>
+    <button class="tab-btn" id="btn-bulk" onclick="switchTab('bulk', this)">📝 Bulk Scheduler & Queue</button>
+    <button class="tab-btn" id="btn-fb" onclick="switchTab('fb', this)">📱 Facebook Pages Hub</button>
+    <button class="tab-btn" id="btn-bots" onclick="switchTab('bots', this)">🔔 Telegram & WhatsApp (Bots)</button>
+    <button class="tab-btn" id="btn-gallery" onclick="switchTab('gallery', this)">🎬 Cloud Gallery & Runs</button>
+    <button class="tab-btn" id="btn-settings" onclick="switchTab('settings', this)">⚙️ GitHub Actions & Secrets</button>
+  </nav>
+
+  <main>
+    <section id="tab-single" class="panel active">
       <div class="card">
         <div class="card-header">
-          <div class="card-title">✨ Create Single Masterpiece Video</div>
-          <span class="badge badge-published">Edge Neural TTS + 2.5D Parallax</span>
+          <h3 class="card-title">🎥 Render Single Video On Demand</h3>
+          <span class="badge badge-rendering">Breathy Poetic Voice + 9:16 Portrait</span>
         </div>
-        <p class="card-subtitle">
-          Generate an aesthetic 9:16 portrait video with zero-cost AI cloud image generation, syllable-synchronized karaoke subtitles, and camera panning.
+        <p class="card-desc">
+          Render a single masterpiece video immediately via GitHub Actions. Full 1080×1920 portrait with solid yellow captions, cinematic music, and auto-post to your Facebook page.
         </p>
+
         <div class="form-group">
           <label>Poem / Video Title</label>
-          <input type="text" id="singleTitle" value="The Whisper of Silent Rain">
+          <input type="text" id="singleTitle" value="Maybe Slowly, Maybe Imperfectly">
         </div>
+
         <div class="form-group">
-          <label>Poem / Script Text (Devanagari or English)</label>
-          <textarea id="singleScript">मनका सबै कुरा शब्दमा पोख्न कहाँ सकिन्छ र?
-केही पीडा केवल आँखाको मौनताले बुझाउँछ।
-जब समयले साथ छोड्छ, आफ्नै छायाँ पनि टाढा हुन्छ,
-तर धर्य राख, हरेक कालो रातपछि सुनौलो बिहानी अवश्य आउँछ।</textarea>
+          <label>Poem / Script Text</label>
+          <textarea id="singleScript">I'm proud of you, for not giving up on yourself.
+Even when you were disappointed.
+Even when you felt behind.
+Even when you looked around and thought everyone else was doing better.
+You kept going.
+Maybe slowly, maybe imperfectly.
+But you kept going.
+And I'll always admire you for that.</textarea>
         </div>
+
         <div class="grid-2">
           <div class="form-group">
             <label>Artistic World Aesthetic</label>
-            <select id="singleTheme">
-              <option value="auto">🌟 Dynamic AI Selection (Poem Breakdown)</option>
-              <option value="Ghibli Lush Watercolor">🌿 Ghibli Lush Watercolor & Meadow</option>
-              <option value="Makoto Shinkai Twilight">🌅 Makoto Shinkai Twilight Glow</option>
-              <option value="Ukiyo-e Woodblock Indigo">🌊 Ukiyo-e Woodblock Japanese Indigo</option>
+            <select id="singleVibe">
+              <option value="Typewriters Voice Nostalgia" selected>✍️ Typewriters Voice Nostalgia (Default)</option>
+              <option value="Auto-Detect (Adaptive Multi-World)">🌟 Auto-Detect (Adaptive Multi-World)</option>
+              <option value="Makoto Shinkai Twilight">🌅 Makoto Shinkai Cosmic Twilight</option>
               <option value="Himalayan Mist Serenity">🏔️ Himalayan Mist & Buddhist Serenity</option>
-              <option value="Bioluminescent Deep Forest">✨ Bioluminescent Night Forest</option>
-              <option value="Cyberpunk Neon Rain">🌃 Cyberpunk Rainy Alleyway</option>
+              <option value="Studio Ghibli Meadow">🌿 Studio Ghibli Lush Naturalism</option>
+              <option value="Cyberpunk Rain Reflections">🌃 90s Lo-Fi Cyberpunk Rain</option>
+              <option value="Claude Monet Impressionism">🎨 Claude Monet Pastel Impressionism</option>
+              <option value="Dark Romantic Academia">🕯️ Dark Academia & Baroque Chiaroscuro</option>
+              <option value="Van Gogh Starry Canvas">🌠 Van Gogh Starry Canvas</option>
+              <option value="Ink Wash Zen Landscape">🌊 Ink Wash Zen Landscape</option>
             </select>
           </div>
           <div class="form-group">
-            <label>Voice Synthesizer</label>
-            <select id="singleVoice">
-              <option value="cloud_cloning">🎙️ Whisper Reference (Zero VRAM Clone)</option>
-              <option value="ne-NP-SagarNeural">🇳🇵 Nepali Sagar (Male Deep)</option>
-              <option value="ne-NP-HemkalaNeural">🇳🇵 Nepali Hemkala (Female Warm)</option>
-              <option value="en-US-ChristopherNeural">🗣️ English Christopher (Poetic)</option>
+            <label>Poetry Niche (Tuned Art, Voice & Font)</label>
+            <select id="singleNiche">
+              <option value="Auto-Detect from Poem">🔍 Auto-Detect from Poem</option>
+              <option value="Typewriters Voice Nostalgia" selected>✍️ Typewriters Voice Nostalgia</option>
+              <option value="Dark Romantic Academia">🕯️ Dark Romantic Academia</option>
+              <option value="Romantic Devotion & Soulmates">💞 Romantic Devotion & Soulmates</option>
+              <option value="Healing, Self-Worth & Stoic Solace">🌿 Healing, Self-Worth & Stoic Solace</option>
+              <option value="Cosmic & Philosophical Reflections">🌌 Cosmic & Philosophical Reflections</option>
             </select>
           </div>
         </div>
-        
-        <!-- Target FB Pages for Single Job -->
-        <div class="form-group">
-          <label>Target Facebook Pages for Instant Auto-Publish</label>
-          <div id="singleFbPagesList" style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px;">
-            <!-- Populated dynamically -->
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label>🎯 Target Facebook Page</label>
+            <select id="singleTargetPage">
+              <option value="ALL Pages">📢 ALL Enabled Pages</option>
+              <option value="Typewriters Voice (1054247421115636)" selected>✍️ Typewriters Voice (1054247421115636)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Auto-Publish Option</label>
+            <select id="singleAutoPublish">
+              <option value="true" selected>✅ Yes — Auto-Post to Facebook</option>
+              <option value="false">❌ No — Render Only (Save to Artifacts)</option>
+            </select>
           </div>
         </div>
 
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px;">
-          <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; text-transform: none; margin: 0;">
-            <input type="checkbox" id="singleAutoFb" checked style="width: auto;"> Auto-publish to selected Facebook Pages upon completion
-          </label>
-          <button class="btn" id="singleGenBtn" onclick="generateSingle()">🚀 Render Full Video</button>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.5rem;">
+          <button class="btn btn-emerald" onclick="triggerSingleCloudRender()">🚀 Render & Post Now via GitHub Actions</button>
         </div>
       </div>
+    </section>
 
-      <!-- Live Render Progress Card -->
-      <div class="card" id="singleProgressCard" style="display: none;">
+    <!-- TAB 2: BULK SCHEDULER & QUEUE -->
+    <section id="tab-bulk" class="panel">
+      <!-- BULK DISPATCH TO GITHUB ACTIONS -->
+      <div class="card" style="border-color: rgba(99,102,241,0.35); background: rgba(15,18,35,0.85);">
         <div class="card-header">
-          <div class="card-title">⚙️ Generation Mission Control</div>
-          <span class="badge badge-rendering" id="singleProgressPct">0%</span>
+          <h3 class="card-title">⚡ Bulk Schedule to GitHub Actions</h3>
+          <span class="badge badge-rendering">Numbered Poems & Hourly Cloud Scheduler</span>
         </div>
-        <p id="singleStatusText" style="color: var(--primary); font-weight: 700; margin-bottom: 10px;">Initializing cloud pipeline...</p>
-        <div class="console-box" id="singleLogBox"></div>
-        <div id="singleOutputPreview" style="margin-top: 18px; display: none;">
-          <video id="singleResultVideo" controls style="width: 100%; max-width: 320px; border-radius: 10px; border: 1px solid var(--card-border);"></video>
-        </div>
-      </div>
-    </div>
-
-    <!-- TAB 2: BULK SCHEDULER -->
-    <div id="tab-bulk" class="tab-pane">
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title">📅 Ingest Bulk Scripts & Auto-Schedule</div>
-          <span class="badge badge-published">Autonomous Round-Robin</span>
-        </div>
-        <p class="card-subtitle">
-          Paste multiple poems/scripts separated by <code>---</code>. The factory parses individual titles, custom time overrides, and page targets, or automatically calculates schedule slots according to your configured Facebook Page time tables!
+        <p class="card-desc">
+          Paste multiple poems numbered (<code>1. Title \n Poem lines...</code>) or separated by <code>---</code>. The caption posted to Facebook will strictly be <strong>Exact Title + 🌿 💛 + 5 Hashtags</strong> (no poem text in caption).
         </p>
+
         <div class="form-group">
-          <label>Bulk Script Ingestion (Markdown/Delimited)</label>
-          <textarea id="bulkText" style="min-height: 200px;">Title: पहाडको मौनता
-Script:
-हिउँले ढाकिएका ती शान्त डाँडाहरू,
-जहाँ समय पनि एकछिन रोकिन्छ।
-आफ्नो मनको आवाज सुन्न,
-कहिलेकाहीँ एकान्त नै काफी हुन्छ।
+          <label>Bulk Poems Input (Numbered <code>1. 2. ...</code> or Separated by <code>---</code>)</label>
+          <textarea id="bulkCloudText" style="min-height: 240px;" placeholder="1. Maybe Slowly, Maybe Imperfectly
+I'm proud of you, for not giving up on yourself.
+Even when you were disappointed.
+Even when you felt behind.
+Even when you looked around and thought everyone else was doing better.
+You kept going.
+Maybe slowly, maybe imperfectly.
+But you kept going.
+And I'll always admire you for that.
 
----
-Title: आँसुको मूल्य
-Script:
-हरेक झरेको आँसु कमजोरी होइन,
-कहिलेकाहीँ सहनशीलताको प्रमाण हो।
-मुस्कानको पछाडि लुकेको पीडा,
-केवल बुझ्नेले मात्र देख्न सक्छ।
-
----
-Title: नयाँ बिहानीको आशा
-Script:
-रात जतिसुकै लामो र कालो भए पनि,
-उज्यालोलाई कसैले रोक्न सक्दैन।
-तिमी आफ्नो कर्ममा विश्वास राख,
-सफलताले एकदिन तिम्रो ढोका ढकढकाउनेछ।</textarea>
+2. We'll Both Have Bad Days
+I love you, but I know we'll both have bad days.
+Days when you're irritated.
+Days when I'm tired.
+Days when we take things personally that weren't meant that way.
+But even then, one bad day won't change what you mean to me.
+Through every hard day we go through, you'll have me and I'll have you."></textarea>
         </div>
-        
+
         <div class="grid-3">
           <div class="form-group">
-            <label>Poetry Niche & Aesthetic World</label>
-            <select id="bulkNiche">
-              <option value="auto">🌟 Auto-Detect Niche from Poem Content</option>
-              <option value="typewriters_voice_nostalgia">📜 Typewriters Voice Nostalgia (Editorial Linocut Woodblock)</option>
-              <option value="dark_romantic_academia">🥀 Dark Romantic Academia (Baroque Oil & Melancholy)</option>
-              <option value="romantic_devotion">❤️ Romantic Devotion & Soulmates (Golden Hour Watercolor)</option>
-              <option value="healing_self_worth">🌱 Healing & Stoic Solace (Minimalist Zen Dawn)</option>
-              <option value="cosmic_philosophy">🌌 Cosmic & Philosophical Reflections (Celestial Canvas)</option>
+            <label>🎯 Target Facebook Page</label>
+            <select id="bulkCloudPage">
+              <option value="ALL Pages">📢 ALL Enabled Pages (Auto-Distribute)</option>
+              <option value="Typewriters Voice (1054247421115636)" selected>✍️ Typewriters Voice (1054247421115636)</option>
             </select>
           </div>
           <div class="form-group">
-            <label>Exact Scheduling Start Time</label>
-            <input type="text" id="bulkStartTime" placeholder="YYYY-MM-DD HH:MM (or leave blank for next slot)">
-          </div>
-          <div class="form-group">
-            <label>USA Posting Timezone</label>
-            <select id="bulkTimezone">
-              <option value="America/New_York" selected>🇺🇸 US Eastern (EST/EDT) - New York</option>
-              <option value="America/Chicago">🇺🇸 US Central (CST/CDT) - Chicago</option>
-              <option value="America/Denver">🇺🇸 US Mountain (MST/MDT) - Denver</option>
-              <option value="America/Los_Angeles">🇺🇸 US Pacific (PST/PDT) - Los Angeles</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="grid-3" style="margin-top: 10px;">
-          <div class="form-group">
-            <label>Scheduling Mode</label>
-            <select id="bulkScheduleMode" onchange="toggleBulkScheduleFields()">
-              <option value="page_slots">⏰ Match Daily USA Peak Slots (08:30, 13:00, 20:30)</option>
-              <option value="interval">⏳ Fixed Interval Spacing</option>
-            </select>
-          </div>
-          <div class="form-group" id="bulkIntervalGroup" style="display: none;">
-            <label>Interval Between Posts</label>
-            <select id="bulkInterval">
+            <label>⏰ Posting Frequency / Interval</label>
+            <select id="bulkCloudInterval">
               <option value="60">Every 1 Hour</option>
-              <option value="120" selected>Every 2 Hours</option>
+              <option value="120">Every 2 Hours</option>
+              <option value="180">Every 3 Hours</option>
               <option value="240">Every 4 Hours</option>
               <option value="360">Every 6 Hours</option>
               <option value="720">Every 12 Hours</option>
-              <option value="1440">Every 24 Hours (Daily)</option>
+              <option value="1440">Every 24 Hours (Once a Day)</option>
+              <option value="peak_slots" selected>🌟 Peak USA Slots (08:30 / 13:00 / 20:30 EST)</option>
             </select>
           </div>
           <div class="form-group">
-            <label>Target Facebook Page</label>
-            <select id="bulkTargetPage">
-              <option value="all">🌐 All Connected Pages</option>
+            <label>📅 Start Date & Time (Calendar Picker)</label>
+            <input type="datetime-local" id="bulkCloudStartTime">
+          </div>
+        </div>
+
+        <div style="background: rgba(99,102,241,0.08); border: 1px solid rgba(99,102,241,0.2); border-radius: 10px; padding: 0.85rem 1rem; margin-bottom: 1.2rem; font-size: 0.82rem; color: #a5b4fc; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+          <div>
+            📡 <strong>Facebook Caption Format:</strong> <code>Title 🌿 💛 #love #poetry #lovequotes #soulmates #foryou</code> (Clean title only, zero clutter).
+          </div>
+          <div style="font-size: 0.78rem; color: var(--accent-cyan);">
+            Leave Start Date empty to start at next peak/interval slot.
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <button class="btn" onclick="dispatchBulkToGithub()">⚡ Dispatch All Poems to GitHub Actions Now</button>
+        </div>
+      </div>
+
+      <!-- LIVE CLOUD QUEUE HOSTED ON GITHUB ACTIONS -->
+      <div class="card" style="border-color: rgba(16, 185, 129, 0.35); background: rgba(10, 24, 28, 0.85);">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title" style="color: #a7f3d0;">
+              📅 Live GitHub Actions Cloud Queue (<span id="cloudQueueCount">0</span> Scheduled)
+            </h3>
+            <div style="font-size: 0.8rem; color: var(--text-dim); margin-top: 3px;">
+              Live scheduled posts running on GitHub Actions runner. Edit or delete any post instantly.
+            </div>
+          </div>
+          <div style="display:flex; gap:8px; flex-wrap: wrap;">
+            <button class="btn btn-secondary btn-sm" onclick="fetchCloudQueueFromGithub()">🔄 Refresh from GitHub</button>
+            <button class="btn btn-danger btn-sm" onclick="clearAllPendingCloudQueue()">🗑️ Clear All Pending</button>
+          </div>
+        </div>
+
+        <div class="item-list" id="cloudQueueList">
+          <p style="color: var(--text-muted); font-size: 0.88rem;">Click "Refresh from GitHub" to inspect scheduled cloud jobs.</p>
+        </div>
+      </div>
+
+      <!-- LOCAL QUEUE PARSER (DRAFT & REVIEW) -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">📝 Local Queue Builder (Draft & Staging)</h3>
+          <span class="badge badge-completed">Smart Numbered Parser Active</span>
+        </div>
+        <p class="card-desc">
+          Draft and review poems locally before pushing to GitHub Actions. Supports numbered format (<code>1. Title \n Lines...</code>) or <code>---</code> separators.
+        </p>
+
+        <div class="form-group">
+          <label>Bulk Poems Input Area</label>
+          <textarea id="bulkText" placeholder="1. Maybe Slowly, Maybe Imperfectly
+I'm proud of you, for not giving up on yourself.
+Even when you were disappointed.
+Even when you felt behind.
+You kept going.
+
+2. We'll Both Have Bad Days
+I love you, but I know we'll both have bad days.
+Days when you're irritated.
+Days when I'm tired.
+Through every hard day we go through, you'll have me and I'll have you."></textarea>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Posting Interval Between Videos</label>
+            <select id="bulkInterval">
+              <option value="60">Every 1 Hour</option>
+              <option value="120">Every 2 Hours</option>
+              <option value="180">Every 3 Hours</option>
+              <option value="240" selected>Every 4 Hours (Standard GitHub Cron)</option>
+              <option value="360">Every 6 Hours</option>
+              <option value="720">Every 12 Hours</option>
+              <option value="1440">Once a Day (24 Hours)</option>
             </select>
           </div>
-          <div class="form-group" style="display: flex; align-items: center; gap: 8px; padding-top: 24px;">
-            <input type="checkbox" id="bulkAutoDistribute" style="width: 18px; height: 18px; cursor: pointer;">
-            <label for="bulkAutoDistribute" style="cursor: pointer; margin-bottom: 0; font-size: 13px;">Auto-Distribute Across Multi-Pages</label>
+          <div class="form-group">
+            <label>Default Visual Style</label>
+            <select id="defaultVibe">
+              <option value="Typewriters Voice Nostalgia" selected>✍️ Typewriters Voice Nostalgia</option>
+              <option value="Auto-Detect (Adaptive Multi-World)">Auto-Detect (Adaptive Multi-World)</option>
+              <option value="Studio Ghibli Meadow">Studio Ghibli Meadow</option>
+              <option value="Makoto Shinkai Twilight">Makoto Shinkai Twilight</option>
+              <option value="Ink Wash Zen Landscape">Ink Wash Zen Landscape</option>
+              <option value="Cyberpunk Rain Reflections">Cyberpunk Rain Reflections</option>
+              <option value="Claude Monet Impressionism">Claude Monet Impressionism</option>
+            </select>
           </div>
         </div>
 
-        <button class="btn" style="margin-top: 14px;" onclick="submitBulkJobs()">⚡ Ingest Scripts & Schedule Bulk Posts</button>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <button class="btn btn-emerald" onclick="scheduleBulkPosts()">⚡ Parse & Add to Local Queue</button>
+          <button class="btn btn-secondary" onclick="clearAllQueue()">🗑️ Clear Drafts</button>
+        </div>
       </div>
 
-      <!-- Live Scheduled Queue -->
+      <!-- DRAFT QUEUE LIST -->
       <div class="card">
         <div class="card-header">
-          <div class="card-title">📋 Live Production & Posting Queue</div>
-          <div style="display: flex; gap: 8px;">
-            <button class="btn btn-sm btn-secondary" onclick="clearCompletedJobs()">🧹 Clear Completed</button>
-            <button class="btn btn-sm btn-secondary" onclick="loadBulkQueue()">🔄 Refresh Queue</button>
+          <h3 class="card-title">📋 Local Staging Queue (<span id="queueCount">0</span> Drafts)</h3>
+          <div style="display:flex;gap:8px;">
+            <button class="btn btn-secondary btn-sm" onclick="renderQueue()">🔄 Refresh</button>
+            <button class="btn btn-sm" onclick="pushQueueToGithub()" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);">🚀 Push Drafts to GitHub Actions</button>
           </div>
         </div>
-        <div class="table-responsive">
-          <table>
-            <thead>
-              <tr>
-                <th>Job Title</th>
-                <th>Target Time</th>
-                <th>Target Pages</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="queueTableBody">
-              <tr><td colspan="5" style="text-align: center; color: var(--text-dim); padding: 20px;">Loading queue...</td></tr>
-            </tbody>
-          </table>
+        <div class="item-list" id="queueList">
+          <p style="color: var(--text-muted); font-size: 0.9rem;">No local draft posts. Paste scripts above to populate.</p>
         </div>
       </div>
-    </div>
+    </section>
 
     <!-- TAB 3: FACEBOOK PAGES HUB -->
-    <div id="tab-facebook" class="tab-pane">
-      <div class="card">
+    <section id="tab-fb" class="panel">
+      <!-- SYNC STATUS BANNER -->
+      <div class="card" style="border-color: rgba(24,119,242,0.4); background: rgba(10,18,36,0.85);">
         <div class="card-header">
-          <div class="card-title">📱 Multi-Page Facebook Management Hub</div>
-          <button class="btn btn-sm" onclick="openAddFbModal()">➕ Add New Facebook Page</button>
+          <h3 class="card-title">📘 Facebook Pages & GitHub Secrets Hub</h3>
+          <button class="btn btn-facebook" onclick="syncPagesToGithubSecrets()">🔐 Sync All Pages to GitHub Secrets Now</button>
         </div>
-        <p class="card-subtitle">
-          Manage multiple Facebook Pages with independent access tokens, isolated error boundaries, and custom daily posting time schedules (e.g. 09:00, 15:00, 21:00).
+        <p class="card-desc">
+          Manage your poetry niche Facebook Pages and Page Access Tokens. When you add or refresh tokens here, click <strong>"🔐 Sync All Pages to GitHub Secrets Now"</strong> to encrypt and save them directly to your repository's <code>FACEBOOK_PAGES_JSON</code> secret in one click!
         </p>
-        <div class="fb-grid" id="fbPagesGrid">
-          <!-- Populated dynamically -->
-        </div>
+
+        <div id="fbPageList" style="margin-top: 1rem; display: flex; flex-direction: column; gap: 0.75rem;"></div>
       </div>
 
-      <!-- Publication History -->
+      <!-- ADD NEW PAGE -->
       <div class="card">
         <div class="card-header">
-          <div class="card-title">📜 Publication History & Live FB Post Links</div>
-          <button class="btn btn-sm btn-secondary" onclick="loadFbHistory()">🔄 Refresh History</button>
+          <h3 class="card-title">➕ Add or Update Facebook Page Token</h3>
+          <span class="badge badge-pending">Instant Graph API Validation</span>
         </div>
-        <div class="table-responsive">
-          <table>
-            <thead>
-              <tr>
-                <th>Video Title</th>
-                <th>Facebook Page</th>
-                <th>Time</th>
-                <th>Status</th>
-                <th>Post Link</th>
-              </tr>
-            </thead>
-            <tbody id="fbHistoryTableBody">
-              <tr><td colspan="5" style="text-align: center; color: var(--text-dim); padding: 20px;">Loading history...</td></tr>
-            </tbody>
-          </table>
+        <p class="card-desc">
+          Generate a Page Access Token with <code>pages_manage_posts</code>, <code>pages_read_engagement</code>, and <code>pages_show_list</code> permissions from <a href="https://developers.facebook.com/tools/explorer/" target="_blank" style="color: var(--accent-cyan);">Facebook Graph API Explorer</a> or Facebook Business Suite.
+        </p>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Page Name</label>
+            <input type="text" id="fbPageName" placeholder="e.g. Typewriters Voice">
+          </div>
+          <div class="form-group">
+            <label>Facebook Page ID (Numeric)</label>
+            <input type="text" id="fbPageId" placeholder="e.g. 1054247421115636">
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Page Access Token (EAA...)</label>
+            <input type="password" id="fbPageToken" placeholder="Paste your Facebook Page Access Token">
+          </div>
+          <div class="form-group">
+            <label>Poetry Niche</label>
+            <select id="fbPageNiche">
+              <option value="typewriters_voice_nostalgia" selected>✍️ Typewriters Voice Nostalgia</option>
+              <option value="dark_romantic_academia">🕯️ Dark Romantic Academia</option>
+              <option value="romantic_devotion_soulmates">💞 Romantic Devotion & Soulmates</option>
+              <option value="healing_self_worth">🌿 Healing, Self-Worth & Stoic Solace</option>
+              <option value="cosmic_philosophical">🌌 Cosmic & Philosophical Reflections</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <button class="btn btn-secondary" onclick="testFbToken()">🔍 Test Token Connection</button>
+          <button class="btn btn-facebook" onclick="addFacebookPage()">➕ Save Page & Token</button>
+          <button class="btn btn-emerald" onclick="syncPagesToGithubSecrets()">🔐 Sync to GitHub Secrets</button>
+          <button class="btn btn-secondary" onclick="copyPagesJsonToClipboard()">📋 Copy JSON for GitHub Secret</button>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- TAB 4: VIDEO GALLERY -->
-    <div id="tab-gallery" class="tab-pane">
+    <!-- TAB 4: BOTS & MOBILE ALERTS (TELEGRAM & WHATSAPP) -->
+    <section id="tab-bots" class="panel">
       <div class="card">
         <div class="card-header">
-          <div class="card-title">🎬 Produced Videos Studio Player</div>
-          <button class="btn btn-sm btn-secondary" onclick="loadVideoGallery()">🔄 Refresh Gallery</button>
+          <h3 class="card-title">🔔 Real-Time Mobile Alerts (Telegram & WhatsApp)</h3>
+          <button class="btn btn-telegram btn-sm" onclick="sendTelegramLiveTest()">✈️ Send Telegram Live Test Alert</button>
         </div>
-        <div class="gallery-grid" id="videoGalleryGrid">
-          <!-- Populated dynamically -->
-        </div>
-      </div>
-    </div>
-
-    <!-- TAB 5: NOTIFICATIONS -->
-    <div id="tab-notifications" class="tab-pane">
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title">🔔 Real-Time Mobile Alerts (Telegram & WhatsApp)</div>
-          <button class="btn btn-sm btn-secondary" onclick="sendTestAlert()">🔔 Send Test Alert</button>
-        </div>
-        <p class="card-subtitle">
-          Receive automated Telegram & WhatsApp updates whenever videos render, publish to Facebook (with direct links), or if any token requires attention.
+        <p class="card-desc">
+          Receive instant push notifications on your phone with direct Facebook post links, rendering status, and self-healing watchdog alerts whenever a video finishes processing.
         </p>
 
         <!-- Telegram Config -->
-        <div class="card" style="background: rgba(0,0,0,0.25); border: 1px solid var(--card-border);">
+        <div class="card" style="background: rgba(7, 12, 22, 0.8); border: 1px solid var(--card-border); margin-bottom: 1.25rem;">
           <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; text-transform: none; margin: 0; font-size: 14px; font-weight: 700; color: #fff;">
-              <input type="checkbox" id="enableTelegram" style="width: auto;"> ✈️ Enable Telegram Bot Alerts (@AVideoPoster_bot)
+            <label style="font-size: 0.95rem; font-weight: 700; color: #fff; text-transform: none; margin: 0; display: flex; align-items: center; gap: 8px;">
+              ✈️ Telegram Bot Alerts (<span style="color: var(--accent-cyan);">@AVideoPoster_bot</span>)
             </label>
-            <span class="badge badge-published">100% Free & Fast</span>
+            <span class="badge badge-completed">Live & Connected</span>
           </div>
           <div class="grid-2">
             <div class="form-group">
               <label>Telegram Bot Token</label>
-              <input type="password" id="tgToken" placeholder="8886670511:AAFeNxbL5TxpTiWqF_fukB-MeaS4s9OlMqU">
+              <input type="password" id="tgToken" value="8886670511:AAFeNxbL5TxpTiWqF_fukB-MeaS4s9OlMqU" placeholder="8886670511:AAFeNxbL5TxpTiWqF_fukB-MeaS4s9OlMqU">
             </div>
             <div class="form-group">
               <label>Telegram Chat ID</label>
-              <input type="text" id="tgChat" placeholder="6402294953">
+              <input type="text" id="tgChat" value="6402294953" placeholder="6402294953">
             </div>
           </div>
         </div>
 
         <!-- WhatsApp Config -->
-        <div class="card" style="background: rgba(0,0,0,0.25); border: 1px solid var(--card-border); margin-top: 14px;">
+        <div class="card" style="background: rgba(7, 12, 22, 0.8); border: 1px solid var(--card-border);">
           <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; text-transform: none; margin: 0; font-size: 14px; font-weight: 700; color: #fff;">
-              <input type="checkbox" id="enableWhatsapp" style="width: auto;"> 💬 Enable WhatsApp Alerts (CallMeBot)
+            <label style="font-size: 0.95rem; font-weight: 700; color: #fff; text-transform: none; margin: 0; display: flex; align-items: center; gap: 8px;">
+              💬 WhatsApp Alerts (CallMeBot Optional)
             </label>
           </div>
           <div class="grid-2">
@@ -711,595 +715,1178 @@ Script:
             </div>
             <div class="form-group">
               <label>CallMeBot API Key</label>
-              <input type="password" id="waKey" placeholder="API Key">
+              <input type="password" id="waKey" placeholder="CallMeBot API Key">
             </div>
           </div>
         </div>
 
-        <button class="btn btn-emerald" style="margin-top: 10px;" onclick="saveNotificationSettings()">💾 Save Notification Settings</button>
+        <div style="margin-top: 1.25rem;">
+          <button class="btn btn-emerald" onclick="saveBotSettings()">💾 Save Bot Settings</button>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <!-- TAB 6: LOCAL PC SYNC -->
-    <div id="tab-sync" class="tab-pane">
+    <!-- TAB 5: CLOUD GALLERY & RUNS -->
+    <section id="tab-gallery" class="panel">
       <div class="card">
         <div class="card-header">
-          <div class="card-title">📥 Local PC Auto-Pull & Zero-Disk Cloud Cleaner</div>
-          <button class="btn btn-sm btn-secondary" onclick="loadSyncStats()">🔄 Refresh Buffer</button>
+          <h3 class="card-title">🎬 Cloud Video Gallery & GitHub Runs</h3>
+          <button class="btn btn-secondary btn-sm" onclick="fetchRecentRuns()">🔄 Refresh Runs</button>
         </div>
-        <p class="card-subtitle">
-          Videos generated in the cloud are temporarily held in the buffer. Whenever your local PC boots up, <code>local_sync_daemon.py</code> pulls the full 1080x1920 MP4 files directly into <code>D:\Auto video Generator\Output\</code> and purges cloud files to maintain 0 MB disk footprint.
+        <p class="card-desc">
+          Browse the latest video rendering runs from your GitHub Actions runner. Download MP4 artifacts directly or review publication statuses.
         </p>
-        <div class="console-box" style="margin-bottom: 16px;">
-          # Run one-time sync from your local PC:<br>
-          python local_sync_daemon.py --once<br><br>
-          # Run background daemon (checks every 60 seconds):<br>
-          python local_sync_daemon.py
-        </div>
-        <div class="stat-pill" style="display: inline-flex; font-size: 14px; padding: 10px 18px;">
-          📦 Buffer Status: <strong id="syncBufferDetails" style="margin-left: 6px;">0 videos pending sync</strong>
+        <div class="item-list" id="runsList">
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Click "Refresh Runs" to fetch latest workflow activity from GitHub.</p>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- TAB 7: SETTINGS -->
-    <div id="tab-settings" class="tab-pane">
+    <!-- TAB 6: SETTINGS & GITHUB ACTIONS PAT -->
+    <section id="tab-settings" class="panel">
       <div class="card">
         <div class="card-header">
-          <div class="card-title">⚙️ Cloud Engine Credentials & Watchdog Tuning</div>
+          <h3 class="card-title">⚙️ GitHub Actions Repository & Personal Access Token</h3>
+          <span class="badge badge-completed">Private & Encrypted in Browser</span>
         </div>
-        <div class="form-group">
-          <label>Hugging Face Write Token (hf_...)</label>
-          <input type="password" id="hfToken" placeholder="hf_...">
-        </div>
+        <p class="card-desc">
+          Your GitHub Classic Token allows this web hub to dispatch workflow runs, monitor video generations, and sync your bulk queue 24/7 without exposing secrets publicly.
+        </p>
+
         <div class="grid-2">
           <div class="form-group">
-            <label>Cloudflare Account ID (Optional)</label>
-            <input type="text" id="cfAccountId" placeholder="Cloudflare Account ID">
+            <label>GitHub Repository</label>
+            <input type="text" id="ghRepo" value="aashishthapaz-cmd/ai-video-studio">
           </div>
           <div class="form-group">
-            <label>Cloudflare API Token (Optional)</label>
-            <input type="password" id="cfApiToken" placeholder="Cloudflare API Token">
+            <label>GitHub Personal Access Token (PAT)</label>
+            <input type="password" id="ghToken" placeholder="ghp_... (Classic Token Active)">
           </div>
         </div>
-        <button class="btn btn-emerald" onclick="saveGeneralSettings()">💾 Save Engine Settings</button>
+
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <button class="btn btn-emerald" onclick="saveGithubSettings()">💾 Save & Verify GitHub Connection</button>
+          <button class="btn btn-secondary" onclick="testGitHubConnection()">🔍 Test PAT Access</button>
+        </div>
+
+        <div style="margin-top: 1.5rem; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 10px; border: 1px solid var(--card-border);">
+          <div style="font-weight: 700; font-size: 0.85rem; color: #c7d2fe; margin-bottom: 0.5rem;">🔒 Encrypted Repository Secrets Configured:</div>
+          <ul style="margin-left: 1.25rem; font-size: 0.8rem; color: var(--text-dim); margin-top: 0.4rem; line-height: 1.6;">
+            <li>✅ <code>TELEGRAM_BOT_TOKEN</code>: Encrypted & Active in GitHub Secrets</li>
+            <li>✅ <code>TELEGRAM_CHAT_ID</code>: Encrypted & Active in GitHub Secrets</li>
+            <li>✅ <code>FACEBOOK_PAGES_JSON</code>: Configured for 24/7 Publishing</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- EDIT MODAL FOR CLOUD QUEUED POSTS -->
+  <div id="editModal" class="modal-overlay" onclick="if(event.target === this) closeEditModal()">
+    <div class="modal-card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+        <h3 style="font-size: 1.15rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 8px;">
+          ✏️ Edit Scheduled Post on GitHub Actions
+        </h3>
+        <button class="btn btn-secondary btn-sm" onclick="closeEditModal()" style="padding: 4px 10px; font-size: 1rem;">✕</button>
+      </div>
+
+      <div class="form-group">
+        <label>Poem / Video Title</label>
+        <input type="text" id="editJobTitle" placeholder="Poem Title">
+      </div>
+
+      <div class="grid-2">
+        <div class="form-group">
+          <label>📅 Scheduled Time (USA EST)</label>
+          <input type="datetime-local" id="editJobTime">
+        </div>
+        <div class="form-group">
+          <label>🎯 Target Facebook Page</label>
+          <select id="editJobTargetPage">
+            <option value="ALL Pages">📢 ALL Enabled Pages</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Visual Style / Aesthetic</label>
+        <select id="editJobVibe">
+          <option value="Typewriters Voice Nostalgia" selected>✍️ Typewriters Voice Nostalgia</option>
+          <option value="Auto-Detect (Adaptive Multi-World)">Auto-Detect (Adaptive Multi-World)</option>
+          <option value="Studio Ghibli Meadow">Studio Ghibli Meadow</option>
+          <option value="Makoto Shinkai Twilight">Makoto Shinkai Twilight</option>
+          <option value="Himalayan Mist Serenity">Himalayan Mist Serenity</option>
+          <option value="Dark Romantic Academia">Dark Romantic Academia</option>
+          <option value="Claude Monet Impressionism">Claude Monet Impressionism</option>
+          <option value="Cyberpunk Rain Reflections">Cyberpunk Rain Reflections</option>
+          <option value="Van Gogh Starry Canvas">Van Gogh Starry Canvas</option>
+          <option value="Ink Wash Zen Landscape">Ink Wash Zen Landscape</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Poem / Script Text</label>
+        <textarea id="editJobScript" style="min-height: 150px;"></textarea>
+      </div>
+
+      <div style="display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 1.25rem;">
+        <button class="btn btn-secondary" onclick="closeEditModal()">Cancel</button>
+        <button class="btn btn-emerald" onclick="saveJobEdit()">💾 Save Changes to GitHub Actions</button>
       </div>
     </div>
-
   </div>
 
-  <!-- ADD / EDIT FACEBOOK PAGE MODAL -->
-  <div class="modal-overlay" id="fbModal">
-    <div class="modal-dialog">
-      <div class="card-header">
-        <div class="card-title" id="fbModalTitle">📱 Configure Facebook Page</div>
-        <button class="btn btn-sm btn-secondary" onclick="closeAddFbModal()">✕</button>
-      </div>
-      <div class="form-group">
-        <label>Page Name</label>
-        <input type="text" id="modalFbName" placeholder="e.g. Nepali Poetic Soul">
-      </div>
-      <div class="form-group">
-        <label>Facebook Page ID</label>
-        <input type="text" id="modalFbId" placeholder="e.g. 10928374659283">
-      </div>
-      <div class="form-group">
-        <label>Page Access Token (EAA...)</label>
-        <input type="password" id="modalFbToken" placeholder="Paste Page Access Token">
-      </div>
-      <div class="form-group">
-        <label>Daily Posting Time Slots (Comma-separated 24h format)</label>
-        <input type="text" id="modalFbSlots" value="09:00, 15:00, 21:00" placeholder="09:00, 15:00, 21:00">
-      </div>
-      <div class="form-group">
-        <label>Default Hashtags</label>
-        <input type="text" id="modalFbHashtags" value="#poetry #nepali #reels #anime #art #ghibli">
-      </div>
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 18px;">
-        <button class="btn btn-secondary" onclick="testModalFbToken()">🔍 Test Token Health</button>
-        <button class="btn btn-emerald" onclick="saveModalFbPage()">💾 Save Page</button>
-      </div>
-      <p id="modalFbTestMsg" style="font-size: 12px; margin-top: 12px;"></p>
-    </div>
-  </div>
+  <div id="toast" class="toast"></div>
 
   <script>
-    let CURRENT_SETTINGS = {};
+    const DEFAULT_REPO = 'aashishthapaz-cmd/ai-video-studio';
+    let QUEUE = [];
+    let FB_PAGES = [];
 
-    function showTab(tabId) {
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
-      event.target.classList.add('active');
-      const target = document.getElementById(tabId);
-      if (target) target.classList.add('active');
-      if (tabId === 'tab-bulk') loadBulkQueue();
-      if (tabId === 'tab-facebook') { loadFbPagesList(); loadFbHistory(); }
-      if (tabId === 'tab-gallery') loadVideoGallery();
-      if (tabId === 'tab-sync') loadSyncStats();
+    try {
+      QUEUE = JSON.parse(localStorage.getItem('video_queue') || '[]');
+    } catch(e) { QUEUE = []; }
+
+    try {
+      FB_PAGES = JSON.parse(localStorage.getItem('fb_pages') || '[]');
+    } catch(e) { FB_PAGES = []; }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      const savedPat = localStorage.getItem('gh_pat') || '';
+      const savedRepo = localStorage.getItem('gh_repo') || DEFAULT_REPO;
+      const savedTgToken = localStorage.getItem('tg_token') || '8886670511:AAFeNxbL5TxpTiWqF_fukB-MeaS4s9OlMqU';
+      const savedTgChat = localStorage.getItem('tg_chat') || '6402294953';
+
+      if (document.getElementById('ghToken')) document.getElementById('ghToken').value = savedPat;
+      if (document.getElementById('ghRepo')) document.getElementById('ghRepo').value = savedRepo;
+      if (document.getElementById('tgToken')) document.getElementById('tgToken').value = savedTgToken;
+      if (document.getElementById('tgChat')) document.getElementById('tgChat').value = savedTgChat;
+
+      localStorage.setItem('gh_pat', savedPat);
+      localStorage.setItem('gh_repo', savedRepo);
+      localStorage.setItem('tg_token', savedTgToken);
+      localStorage.setItem('tg_chat', savedTgChat);
+
+      populateAllTargetPageDropdowns();
+      fetchCloudQueueFromGithub();
+      renderQueue();
+      renderFbPages();
+    });
+
+    let CLOUD_QUEUE = [];
+    let CLOUD_QUEUE_SHA = null;
+    let CURRENT_EDIT_INDEX = null;
+
+    function utf8ToBase64(str) {
+      return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
+        return String.fromCharCode('0x' + p1);
+      }));
     }
 
-    async function loadHealthAndTelemetry() {
+    function base64ToUtf8(str) {
       try {
-        const r = await fetch('/api/system/health');
-        const h = await r.json();
-        document.getElementById('healthStatusText').innerText = h.watchdog_running ? 'ACTIVE' : 'STANDBY';
-        document.getElementById('telemetryBuffer').innerText = (h.cloud_buffer ? h.cloud_buffer.total_size_mb : 0) + ' MB';
-        document.getElementById('telemetryPages').innerText = (h.facebook_pages ? h.facebook_pages.total : 0);
-      } catch (e) { console.error(e); }
-    }
-
-    async function triggerSelfRepair() {
-      const btn = event.target;
-      btn.innerText = '⏳ Repairing...';
-      try {
-        const r = await fetch('/api/system/repair', { method: 'POST' });
-        const res = await r.json();
-        alert('🛡️ Self-Repair Complete!\n' + JSON.stringify(res.repair_report, null, 2));
-        loadHealthAndTelemetry();
-        loadBulkQueue();
+        return decodeURIComponent(atob(str).split('').map(function(c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
       } catch (e) {
-        alert('Self-repair error: ' + e);
-      } finally {
-        btn.innerText = '🛡️ Self-Repair';
+        return atob(str);
       }
     }
 
-    async function loadAllSettings() {
-      try {
-        const r = await fetch('/api/settings');
-        CURRENT_SETTINGS = await r.json();
-        
-        // Notifications
-        document.getElementById('enableTelegram').checked = !!CURRENT_SETTINGS.enable_telegram;
-        if (CURRENT_SETTINGS.telegram_bot_token) document.getElementById('tgToken').value = CURRENT_SETTINGS.telegram_bot_token;
-        if (CURRENT_SETTINGS.telegram_chat_id) document.getElementById('tgChat').value = CURRENT_SETTINGS.telegram_chat_id;
-        document.getElementById('enableWhatsapp').checked = !!CURRENT_SETTINGS.enable_whatsapp;
-        if (CURRENT_SETTINGS.whatsapp_phone) document.getElementById('waPhone').value = CURRENT_SETTINGS.whatsapp_phone;
-        if (CURRENT_SETTINGS.whatsapp_apikey) document.getElementById('waKey').value = CURRENT_SETTINGS.whatsapp_apikey;
-        
-        // Engine
-        if (CURRENT_SETTINGS.huggingface_token) document.getElementById('hfToken').value = CURRENT_SETTINGS.huggingface_token;
-        if (CURRENT_SETTINGS.cloudflare_account_id) document.getElementById('cfAccountId').value = CURRENT_SETTINGS.cloudflare_account_id;
-        if (CURRENT_SETTINGS.cloudflare_api_token) document.getElementById('cfApiToken').value = CURRENT_SETTINGS.cloudflare_api_token;
+    function populateAllTargetPageDropdowns() {
+      const singleSelect = document.getElementById('singleTargetPage');
+      const bulkSelect = document.getElementById('bulkCloudPage');
+      const editSelect = document.getElementById('editJobTargetPage');
+      const selects = [singleSelect, bulkSelect, editSelect].filter(Boolean);
+      if (!selects.length) return;
 
-        renderFbPagesDropdown();
-        loadFbPagesList();
-      } catch (e) { console.error(e); }
-    }
+      selects.forEach(function(sel) {
+        const currentVal = sel.value;
+        sel.innerHTML = '';
 
-    function renderFbPagesDropdown() {
-      const pages = CURRENT_SETTINGS.facebook_pages || [];
-      const singleList = document.getElementById('singleFbPagesList');
-      const bulkSelect = document.getElementById('bulkTargetPage');
-      
-      singleList.innerHTML = '';
-      bulkSelect.innerHTML = '<option value="all">🌐 All Enabled Pages</option>';
+        // Default "ALL Pages" option
+        const optAll = document.createElement('option');
+        optAll.value = 'ALL Pages';
+        optAll.innerText = sel.id === 'bulkCloudPage' ? '📢 ALL Enabled Pages (Auto-Distribute)' : '📢 ALL Enabled Pages';
+        sel.appendChild(optAll);
 
-      if (pages.length === 0) {
-        singleList.innerHTML = '<span style="font-size: 12px; color: var(--text-dim);">No pages connected yet. Add one in the Facebook Hub!</span>';
-        return;
-      }
+        // Populate from FB_PAGES if available
+        if (FB_PAGES && FB_PAGES.length) {
+          FB_PAGES.forEach(function(p) {
+            const opt = document.createElement('option');
+            opt.value = p.name + ' (' + p.id + ')';
+            opt.innerText = '📘 ' + p.name + ' (' + p.id + ')';
+            sel.appendChild(opt);
+          });
+        } else {
+          // Fallback default
+          const optDef = document.createElement('option');
+          optDef.value = 'Typewriters Voice (1054247421115636)';
+          optDef.innerText = '✍️ Typewriters Voice (1054247421115636)';
+          sel.appendChild(optDef);
+        }
 
-      pages.forEach(p => {
-        const pid = p.id || p.page_id;
-        const pname = p.name || p.page_name || pid;
-        const checked = p.enabled !== false ? 'checked' : '';
-        
-        // Single Checkbox
-        const label = document.createElement('label');
-        label.style = 'display: inline-flex; align-items: center; gap: 6px; background: rgba(0,0,0,0.3); border: 1px solid var(--card-border); padding: 4px 10px; border-radius: 6px; font-size: 12px; color: #fff; cursor: pointer;';
-        label.innerHTML = `<input type="checkbox" class="single-target-fb" value="${pid}" ${checked} style="width: auto;"> ${pname}`;
-        singleList.appendChild(label);
-
-        // Bulk Option
-        const opt = document.createElement('option');
-        opt.value = pid;
-        opt.innerText = `📱 ${pname}`;
-        bulkSelect.appendChild(opt);
+        // Restore selection if still present
+        if (currentVal) {
+          for (let i = 0; i < sel.options.length; i++) {
+            if (sel.options[i].value === currentVal) {
+              sel.selectedIndex = i;
+              break;
+            }
+          }
+        }
       });
     }
 
-    function toggleBulkScheduleFields() {
-      const mode = document.getElementById('bulkScheduleMode').value;
-      document.getElementById('bulkIntervalGroup').style.display = mode === 'interval' ? 'block' : 'none';
-    }
+    async function fetchCloudQueueFromGithub() {
+      const pat = localStorage.getItem('gh_pat');
+      const repo = localStorage.getItem('gh_repo') || DEFAULT_REPO;
+      const container = document.getElementById('cloudQueueList');
+      const countEl = document.getElementById('cloudQueueCount');
+      if (!container) return;
 
-    async function generateSingle() {
-      const btn = document.getElementById('singleGenBtn');
-      btn.disabled = true;
-      btn.innerText = '⏳ Rendering...';
-      document.getElementById('singleProgressCard').style.display = 'block';
-      document.getElementById('singleOutputPreview').style.display = 'none';
-
-      const targetPages = [];
-      document.querySelectorAll('.single-target-fb:checked').forEach(cb => targetPages.push(cb.value));
-
-      const payload = {
-        title: document.getElementById('singleTitle').value.trim(),
-        script: document.getElementById('singleScript').value.trim(),
-        theme: document.getElementById('singleTheme').value,
-        voice: document.getElementById('singleVoice').value,
-        auto_publish_fb: document.getElementById('singleAutoFb').checked,
-        target_page_ids: targetPages
-      };
+      container.innerHTML = '<p style="color: var(--text-dim); font-size: 0.88rem;">⏳ Loading scheduled posts from GitHub Actions repository...</p>';
 
       try {
-        const r = await fetch('/api/generate', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify(payload)
-        });
-        pollSingleStatus();
-      } catch (e) {
-        alert('Failed to start generation: ' + e);
-        btn.disabled = false;
-        btn.innerText = '🚀 Render Full Video';
+        const headers = { 'Accept': 'application/vnd.github+json' };
+        if (pat) headers['Authorization'] = 'Bearer ' + pat;
+
+        const res = await fetch('https://api.github.com/repos/' + repo + '/contents/cloud_generator/jobs_queue.json?ref=main&t=' + Date.now(), { headers: headers });
+        if (!res.ok) {
+          if (res.status === 404) {
+            CLOUD_QUEUE = [];
+            CLOUD_QUEUE_SHA = null;
+            renderCloudQueue();
+            return;
+          }
+          throw new Error('GitHub API returned ' + res.status + ' (' + res.statusText + ')');
+        }
+        const data = await res.json();
+        CLOUD_QUEUE_SHA = data.sha;
+        const rawJson = base64ToUtf8(data.content.replace(/\s/g, ''));
+        CLOUD_QUEUE = JSON.parse(rawJson || '[]');
+        renderCloudQueue();
+      } catch (err) {
+        container.innerHTML = `<div style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; padding: 0.85rem; color: #fca5a5; font-size: 0.85rem;">
+          ⚠️ Could not load GitHub queue: ${escapeHtml(err.message)}.<br>
+          <span style="font-size: 0.78rem; color: var(--text-muted);">Make sure your GitHub PAT is entered in the Settings tab if the repository is private.</span>
+        </div>`;
       }
     }
 
-    function pollSingleStatus() {
-      const timer = setInterval(async () => {
-        try {
-          const r = await fetch('/api/status');
-          const data = await r.json();
-          document.getElementById('singleProgressPct').innerText = data.progress + '%';
-          document.getElementById('singleStatusText').innerText = data.status;
-          document.getElementById('singleLogBox').innerHTML = data.logs.join('<br>');
-          
-          if (!data.running) {
-            clearInterval(timer);
-            document.getElementById('singleGenBtn').disabled = false;
-            document.getElementById('singleGenBtn').innerText = '🚀 Render Full Video';
-            if (data.output_file) {
-              const fname = data.output_file.split(/[\\/]/).pop();
-              const vtag = document.getElementById('singleResultVideo');
-              vtag.src = '/outputs/' + encodeURIComponent(fname);
-              document.getElementById('singleOutputPreview').style.display = 'block';
-            }
-          }
-        } catch (e) {}
-      }, 1500);
-    }
+    function renderCloudQueue() {
+      const container = document.getElementById('cloudQueueList');
+      const countEl = document.getElementById('cloudQueueCount');
+      if (countEl) countEl.innerText = CLOUD_QUEUE.length;
+      if (!container) return;
 
-    async function submitBulkJobs() {
-      const raw = document.getElementById('bulkText').value.trim();
-      if (!raw) return alert('Please enter bulk script text.');
-      
-      const targetPageVal = document.getElementById('bulkTargetPage').value;
-      const targetPages = targetPageVal === 'all' ? [] : [targetPageVal];
-
-      const payload = {
-        raw_text: raw,
-        start_time: document.getElementById('bulkStartTime').value.trim() || null,
-        interval_minutes: parseInt(document.getElementById('bulkInterval').value),
-        niche_id: document.getElementById('bulkNiche').value,
-        timezone: document.getElementById('bulkTimezone').value,
-        auto_distribute: document.getElementById('bulkAutoDistribute').checked,
-        target_page_ids: targetPages
-      };
-
-      try {
-        const r = await fetch('/api/bulk/create', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify(payload)
-        });
-        const res = await r.json();
-        if (res.ok) {
-          alert(`✅ Successfully enqueued ${res.added_jobs} job(s) with USA-based scheduling & niche profiles!`);
-          loadBulkQueue();
-        } else {
-          alert('Error: ' + res.error);
-        }
-      } catch (e) { alert('Failed: ' + e); }
-    }
-
-    async function loadBulkQueue() {
-      try {
-        const r = await fetch('/api/bulk/queue');
-        const data = await r.json();
-        const tbody = document.getElementById('queueTableBody');
-        const queue = data.queue || [];
-        
-        if (queue.length === 0) {
-          tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--text-dim); padding: 20px;">Queue is empty. Ingest scripts above to begin!</td></tr>';
-          return;
-        }
-
-        tbody.innerHTML = queue.map((j, idx) => {
-          let badge = 'badge-pending';
-          if (j.status === 'RENDERING') badge = 'badge-rendering';
-          if (j.status === 'PUBLISHED') badge = 'badge-published';
-          if (j.status === 'FAILED') badge = 'badge-failed';
-
-          const pagesText = (j.target_page_ids && j.target_page_ids.length > 0) ? j.target_page_ids.join(', ') : 'All Enabled';
-          const schedTime = j.scheduled_time_usa || j.scheduled_time || 'Immediate';
-          const nicheLabel = j.niche_name || j.niche_id || 'Auto Niche';
-
-          return `<tr>
-            <td>
-              <div style="font-weight: 700; color: #fff;">${j.title}</div>
-              <div style="font-size: 11px; margin-top: 3px;">
-                <span style="font-size: 10px; padding: 2px 6px; border-radius: 4px; background: rgba(99,102,241,0.18); color: #a5b4fc; border: 1px solid rgba(99,102,241,0.3); font-weight: 600;">${nicheLabel}</span>
-              </div>
-            </td>
-            <td style="font-family: 'JetBrains Mono', monospace; color: #38bdf8; font-size: 12px;">${schedTime}</td>
-            <td><span class="slot-pill">${pagesText}</span></td>
-            <td><span class="badge ${badge}">${j.status}</span></td>
-            <td>
-              <div style="display: flex; gap: 6px;">
-                <button class="btn btn-sm btn-secondary" onclick="runJobNow('${j.id}')" title="Run Now">▶️</button>
-                <button class="btn btn-sm btn-secondary" onclick="retryJob('${j.id}')" title="Retry Job">🔄</button>
-                <button class="btn btn-sm btn-danger" onclick="deleteJob('${j.id}')" title="Delete">🗑️</button>
-              </div>
-            </td>
-          </tr>`;
-        }).join('');
-      } catch (e) { console.error(e); }
-    }
-
-    async function runJobNow(jobId) {
-      await fetch('/api/bulk/run_now', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({job_id: jobId}) });
-      alert('🚀 Job execution triggered!');
-      loadBulkQueue();
-    }
-
-    async function retryJob(jobId) {
-      await fetch('/api/bulk/retry', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({job_id: jobId}) });
-      loadBulkQueue();
-    }
-
-    async function deleteJob(jobId) {
-      if (!confirm('Delete this scheduled job?')) return;
-      await fetch('/api/bulk/delete', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({job_id: jobId}) });
-      loadBulkQueue();
-    }
-
-    async function clearCompletedJobs() {
-      await fetch('/api/bulk/clear_completed', { method: 'POST' });
-      loadBulkQueue();
-    }
-
-    /* Facebook Page Hub */
-    async function loadFbPagesList() {
-      const grid = document.getElementById('fbPagesGrid');
-      const pages = CURRENT_SETTINGS.facebook_pages || [];
-      if (pages.length === 0) {
-        grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: var(--text-dim); padding: 30px;">No Facebook Pages configured yet. Click "Add New Facebook Page" to connect!</div>';
+      if (!CLOUD_QUEUE.length) {
+        container.innerHTML = '<div style="background: rgba(255,255,255,0.02); padding: 1.25rem; border-radius: 10px; border: 1px dashed var(--card-border); color: var(--text-muted); font-size: 0.88rem; text-align: center;">No scheduled posts in GitHub Actions queue. Use "Bulk Schedule" above to dispatch poems.</div>';
         return;
       }
-      grid.innerHTML = pages.map(p => {
-        const isOk = p.status === 'CONNECTED';
-        const badge = isOk ? '<span class="badge badge-connected">🟢 CONNECTED</span>' : '<span class="badge badge-tokenerr">🔴 TOKEN ISSUE</span>';
-        const slots = (p.time_slots || []).map(s => `<span class="slot-pill">${s}</span>`).join(' ');
-        
-        return `<div class="fb-page-card">
-          <div class="fb-card-top">
-            <div>
-              <div class="fb-page-name">${p.name || p.page_id}</div>
-              <div class="fb-page-meta">ID: <code>${p.page_id || p.id}</code></div>
+
+      container.innerHTML = CLOUD_QUEUE.map(function(item, index) {
+        let statusBadgeClass = 'badge-pending';
+        if (item.status === 'COMPLETED' || item.status === 'PUBLISHED') statusBadgeClass = 'badge-completed';
+        else if (item.status === 'RUNNING' || item.status === 'RENDERING') statusBadgeClass = 'badge-rendering';
+        else if (item.status === 'FAILED' || item.status === 'ERROR') statusBadgeClass = 'badge-danger';
+
+        let pageDisplay = '📢 ALL Enabled Pages';
+        if (item.target_page_ids && item.target_page_ids.length) {
+          pageDisplay = item.target_page_ids.map(function(pid) {
+            if (FB_PAGES && FB_PAGES.length) {
+              const matched = FB_PAGES.find(function(p) { return String(p.id || p.page_id) === String(pid); });
+              if (matched) return matched.name + ' (' + pid + ')';
+            }
+            return pid;
+          }).join(', ');
+        }
+        const schedDisplay = item.scheduled_time_usa || item.scheduled_time || 'Immediate / Next Slot';
+
+        return `
+          <div class="item-card" style="border-color: rgba(16,185,129,0.25); background: rgba(8, 20, 24, 0.75);">
+            <div class="item-info" style="flex: 1; min-width: 260px;">
+              <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 4px;">
+                <h4 style="margin: 0;">${index + 1}. ${escapeHtml(item.title)}</h4>
+                <span class="badge ${statusBadgeClass}">${item.status || 'PENDING'}</span>
+              </div>
+              <p style="font-size: 0.82rem; color: #a5b4fc; margin-bottom: 4px;">
+                📅 <strong>Scheduled:</strong> ${escapeHtml(schedDisplay)} | 🎯 <strong>Target:</strong> <span style="color: #6ee7b7;">${escapeHtml(pageDisplay)}</span>
+              </p>
+              <p style="font-size: 0.78rem; color: var(--text-dim); margin-bottom: 4px;">
+                🎨 <strong>Vibe:</strong> ${escapeHtml(item.theme || item.vibe || 'Typewriters Voice Nostalgia')}
+              </p>
+              <p style="color: var(--text-muted); font-size: 0.75rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 580px;">
+                ${escapeHtml((item.script_text || '').replace(/\n/g, ' • '))}
+              </p>
             </div>
-            ${badge}
+            <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+              <button class="btn btn-sm btn-secondary" onclick="openEditModal(${index})" title="Edit Title, Schedule Time, Script or Target Page">✏️ Edit</button>
+              <button class="btn btn-sm btn-emerald" onclick="runCloudJobNow(${index})" title="Run this video render and Facebook post immediately">⚡ Run Now</button>
+              <button class="btn btn-sm btn-danger" onclick="deleteCloudJob(${index})" title="Delete permanently from GitHub Actions schedule">🗑️ Delete</button>
+            </div>
           </div>
-          <div>
-            <label>Posting Schedule</label>
-            <div class="fb-time-slots">${slots || '<span class="slot-pill">Interval</span>'}</div>
-          </div>
-          <div>
-            <label>Default Hashtags</label>
-            <div style="font-size: 11px; color: var(--text-dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${p.default_hashtags || '#poetry'}</div>
-          </div>
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
-            <button class="btn btn-sm btn-secondary" onclick="editFbPage('${p.page_id || p.id}')">✏️ Edit</button>
-            <button class="btn btn-sm btn-danger" onclick="deleteFbPage('${p.page_id || p.id}')">🗑️ Remove</button>
-          </div>
-        </div>`;
+        `;
       }).join('');
     }
 
-    function openAddFbModal() {
-      document.getElementById('fbModalTitle').innerText = '➕ Connect New Facebook Page';
-      document.getElementById('modalFbName').value = '';
-      document.getElementById('modalFbId').value = '';
-      document.getElementById('modalFbToken').value = '';
-      document.getElementById('modalFbSlots').value = '09:00, 15:00, 21:00';
-      document.getElementById('modalFbTestMsg').innerText = '';
-      document.getElementById('fbModal').classList.add('active');
-    }
+    async function commitCloudQueueToGithub(updatedQueue, commitMessage) {
+      const pat = localStorage.getItem('gh_pat');
+      const repo = localStorage.getItem('gh_repo') || DEFAULT_REPO;
 
-    function closeAddFbModal() {
-      document.getElementById('fbModal').classList.remove('active');
-    }
+      if (!pat) {
+        alert('Please enter your GitHub Token in the Settings tab to modify the GitHub Actions schedule.');
+        switchTab('settings');
+        return false;
+      }
 
-    function editFbPage(pid) {
-      const page = (CURRENT_SETTINGS.facebook_pages || []).find(p => (p.id || p.page_id) === pid);
-      if (!page) return;
-      document.getElementById('fbModalTitle').innerText = '✏️ Edit ' + (page.name || pid);
-      document.getElementById('modalFbName').value = page.name || '';
-      document.getElementById('modalFbId').value = page.id || page.page_id || '';
-      document.getElementById('modalFbToken').value = page.access_token || '';
-      document.getElementById('modalFbSlots').value = (page.time_slots || []).join(', ');
-      document.getElementById('modalFbHashtags').value = page.default_hashtags || '';
-      document.getElementById('modalFbTestMsg').innerText = '';
-      document.getElementById('fbModal').classList.add('active');
-    }
+      showToast('🔐 Syncing queue changes directly to GitHub Actions...');
 
-    async function testModalFbToken() {
-      const pid = document.getElementById('modalFbId').value.trim();
-      const token = document.getElementById('modalFbToken').value.trim();
-      const msg = document.getElementById('modalFbTestMsg');
-      msg.innerText = '🔍 Validating token with Graph API...';
       try {
-        const r = await fetch('/api/facebook/test', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({page_id: pid, access_token: token})
+        // Fetch fresh SHA first to prevent sha mismatch conflicts
+        const getRes = await fetch('https://api.github.com/repos/' + repo + '/contents/cloud_generator/jobs_queue.json?ref=main&t=' + Date.now(), {
+          headers: { 'Authorization': 'Bearer ' + pat, 'Accept': 'application/vnd.github+json' }
         });
-        const res = await r.json();
-        if (res.ok) {
-          msg.innerHTML = `<span style="color: #34d399;">✅ Connected! Page: <strong>${res.page_name}</strong> (Category: ${res.category})</span>`;
-          if (!document.getElementById('modalFbName').value) {
-            document.getElementById('modalFbName').value = res.page_name;
+        if (getRes.ok) {
+          const getData = await getRes.json();
+          CLOUD_QUEUE_SHA = getData.sha;
+        }
+
+        const jsonStr = JSON.stringify(updatedQueue, null, 2);
+        const base64Content = utf8ToBase64(jsonStr);
+
+        const putBody = {
+          message: commitMessage || 'chore(queue): Update scheduled queue via Web Studio',
+          content: base64Content,
+          branch: 'main'
+        };
+        if (CLOUD_QUEUE_SHA) {
+          putBody.sha = CLOUD_QUEUE_SHA;
+        }
+
+        const putRes = await fetch('https://api.github.com/repos/' + repo + '/contents/cloud_generator/jobs_queue.json', {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'Bearer ' + pat,
+            'Accept': 'application/vnd.github+json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(putBody)
+        });
+
+        if (putRes.status === 200 || putRes.status === 201) {
+          const resData = await putRes.json();
+          CLOUD_QUEUE_SHA = resData.content ? resData.content.sha : null;
+          CLOUD_QUEUE = updatedQueue;
+          renderCloudQueue();
+          return true;
+        } else {
+          const errData = await putRes.json().catch(function() { return { message: putRes.statusText }; });
+          throw new Error(errData.message || 'GitHub API error (' + putRes.status + ')');
+        }
+      } catch (err) {
+        alert('Error updating GitHub Actions queue: ' + err.message);
+        return false;
+      }
+    }
+
+    async function deleteCloudJob(jobIndex) {
+      const job = CLOUD_QUEUE[jobIndex];
+      if (!job) return;
+      if (!confirm('Permanently delete "' + job.title + '" from GitHub Actions? It will be removed immediately from cloud processing.')) return;
+
+      const newQueue = CLOUD_QUEUE.filter(function(_, idx) { return idx !== jobIndex; });
+      const success = await commitCloudQueueToGithub(newQueue, 'chore(queue): Delete scheduled job "' + job.title + '"');
+      if (success) {
+        showToast('🗑️ "' + job.title + '" instantly deleted from GitHub Actions schedule!');
+      }
+    }
+
+    async function clearAllPendingCloudQueue() {
+      const pendingCount = CLOUD_QUEUE.filter(function(j) { return j.status === 'PENDING'; }).length;
+      if (!pendingCount) {
+        alert('No pending scheduled jobs to clear.');
+        return;
+      }
+      if (!confirm('Are you sure you want to delete all ' + pendingCount + ' pending scheduled posts from GitHub Actions?')) return;
+
+      const newQueue = CLOUD_QUEUE.filter(function(j) { return j.status !== 'PENDING'; });
+      const success = await commitCloudQueueToGithub(newQueue, 'chore(queue): Clear all pending scheduled jobs');
+      if (success) {
+        showToast('🗑️ Cleared ' + pendingCount + ' pending jobs from GitHub Actions!');
+      }
+    }
+
+    function openEditModal(index) {
+      const job = CLOUD_QUEUE[index];
+      if (!job) return;
+      CURRENT_EDIT_INDEX = index;
+
+      document.getElementById('editJobTitle').value = job.title || '';
+      document.getElementById('editJobScript').value = job.script_text || '';
+
+      // Set datetime-local value
+      let timeVal = (job.scheduled_time || '').replace(' ', 'T');
+      document.getElementById('editJobTime').value = timeVal;
+
+      const vibeSel = document.getElementById('editJobVibe');
+      if (vibeSel) vibeSel.value = job.theme || job.vibe || 'Typewriters Voice Nostalgia';
+
+      const pageSel = document.getElementById('editJobTargetPage');
+      if (pageSel) {
+        const pages = job.target_page_ids || [];
+        pageSel.value = pages.length ? pages[0] : 'ALL Pages';
+      }
+
+      document.getElementById('editModal').style.display = 'flex';
+    }
+
+    function closeEditModal() {
+      document.getElementById('editModal').style.display = 'none';
+      CURRENT_EDIT_INDEX = null;
+    }
+
+    async function saveJobEdit() {
+      if (CURRENT_EDIT_INDEX === null) return;
+      const job = CLOUD_QUEUE[CURRENT_EDIT_INDEX];
+      if (!job) return;
+
+      const newTitle = document.getElementById('editJobTitle').value.trim();
+      const newScript = document.getElementById('editJobScript').value.trim();
+      const newTimeInput = document.getElementById('editJobTime').value.trim();
+      const newVibe = document.getElementById('editJobVibe').value;
+      const newPage = document.getElementById('editJobTargetPage').value;
+
+      if (!newTitle || !newScript) {
+        alert('Title and Poem script are required.');
+        return;
+      }
+
+      job.title = newTitle;
+      job.script_text = newScript;
+      if (newTimeInput) {
+        const formattedTime = newTimeInput.replace('T', ' ');
+        job.scheduled_time = formattedTime;
+        job.scheduled_time_usa = formattedTime + ' EST';
+        try {
+          const d = new Date(newTimeInput);
+          job.scheduled_epoch = Math.floor(d.getTime() / 1000);
+        } catch (e) {}
+      }
+      job.theme = newVibe;
+      job.vibe = newVibe;
+      job.target_page_ids = (newPage === 'ALL Pages' || !newPage) ? [] : [newPage];
+      job.updated_at = new Date().toISOString();
+
+      closeEditModal();
+      const success = await commitCloudQueueToGithub(CLOUD_QUEUE, 'chore(queue): Edit scheduled job "' + newTitle + '"');
+      if (success) {
+        showToast('✅ Saved changes to GitHub Actions for "' + newTitle + '"!');
+      }
+    }
+
+    async function runCloudJobNow(index) {
+      const job = CLOUD_QUEUE[index];
+      if (!job) return;
+      if (!confirm('Run and auto-post "' + job.title + '" immediately via GitHub Actions?')) return;
+
+      showToast('🚀 Dispatching instant render for "' + job.title + '"...');
+      const targetPage = job.target_page_ids && job.target_page_ids.length ? job.target_page_ids[0] : 'ALL Pages';
+      const success = await dispatchWorkflowAPI({
+        script_text: job.script_text,
+        title: job.title,
+        custom_vibe: job.theme || job.vibe || 'Typewriters Voice Nostalgia',
+        poetry_niche: job.niche_id || 'Auto-Detect from Poem',
+        target_page: targetPage,
+        publish_facebook: true
+      });
+
+      if (success) {
+        showToast('✅ Render run launched for "' + job.title + '"! Check Cloud Gallery & Runs.');
+        setTimeout(function() { switchTab('gallery'); }, 1800);
+      }
+    }
+
+    function switchTab(tabId, btnElement) {
+      const allButtons = document.querySelectorAll('.tab-btn');
+      const allPanels = document.querySelectorAll('.panel');
+
+      allButtons.forEach(function(b) { b.classList.remove('active'); });
+      allPanels.forEach(function(p) { p.classList.remove('active'); });
+
+      const targetPanel = document.getElementById('tab-' + tabId);
+      if (targetPanel) {
+        targetPanel.classList.add('active');
+      }
+
+      if (btnElement) {
+        btnElement.classList.add('active');
+      } else {
+        const matchingBtn = document.getElementById('btn-' + tabId);
+        if (matchingBtn) matchingBtn.classList.add('active');
+      }
+
+      if (tabId === 'bulk') {
+        fetchCloudQueueFromGithub();
+        renderQueue();
+      }
+      if (tabId === 'fb') renderFbPages();
+      if (tabId === 'gallery') fetchRecentRuns();
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      if (!t) return;
+      t.innerText = msg;
+      t.style.display = 'block';
+      setTimeout(function() { t.style.display = 'none'; }, 4500);
+    }
+
+    // Single Cloud Render Dispatch
+    async function triggerSingleCloudRender() {
+      const title = document.getElementById('singleTitle').value.trim();
+      const script = document.getElementById('singleScript').value.trim();
+      const vibe = document.getElementById('singleVibe').value;
+      const niche = document.getElementById('singleNiche') ? document.getElementById('singleNiche').value : 'Auto-Detect from Poem';
+      const targetPage = document.getElementById('singleTargetPage') ? document.getElementById('singleTargetPage').value : 'ALL Pages';
+      const autoPub = document.getElementById('singleAutoPublish').value;
+
+      if (!script) {
+        alert('Please enter poem or script text.');
+        return;
+      }
+
+      showToast('🚀 Dispatching single render job to GitHub Actions...');
+
+      const success = await dispatchWorkflowAPI({
+        script_text: script,
+        title: title || 'Single Masterpiece',
+        custom_vibe: vibe,
+        poetry_niche: niche,
+        target_page: targetPage,
+        publish_facebook: autoPub === 'true'
+      });
+
+      if (success) {
+        showToast('✅ Job launched! ' + (autoPub === 'true' ? 'Will post to ' + targetPage + ' when done.' : 'Render only — check Cloud Gallery.'));
+        setTimeout(function() { switchTab('gallery'); }, 1800);
+      }
+    }
+
+    // Safe Parse Numbered Bulk Poems
+    function scheduleBulkPosts() {
+      const raw = document.getElementById('bulkText').value.trim();
+      if (!raw) {
+        alert('Please paste at least one poem or script.');
+        return;
+      }
+
+      const interval = parseInt(document.getElementById('bulkInterval').value, 10);
+      const defaultVibe = document.getElementById('defaultVibe').value;
+      
+      let chunks = [];
+      const numPattern = new RegExp('(?:^|\\n)\\s*\\d+[\\.\\)]\\s+', 'i');
+      const sepPattern = new RegExp('\\n\\s*(?:---+|===+|###+)\\s*\\n');
+
+      if (numPattern.test(raw)) {
+        chunks = raw.split(new RegExp('(?=(?:^|\\n)\\s*\\d+[\\.\\)]\\s+)', 'gi'));
+      } else if (sepPattern.test(raw)) {
+        chunks = raw.split(new RegExp('\\n\\s*(?:---+|===+|###+)\\s*\\n', 'gi'));
+      } else {
+        chunks = raw.split(new RegExp('\\n\\s*\\n+', 'g'));
+      }
+
+      let currTime = new Date();
+      currTime.setMinutes(currTime.getMinutes() + 10);
+
+      let count = 0;
+      chunks.forEach(function(chunk) {
+        const text = chunk.trim();
+        if (!text) return;
+
+        let title = '';
+        let vibe = defaultVibe;
+        let lines = text.split('\n').map(function(l) { return l.trim(); }).filter(function(l) { return l.length > 0; });
+        if (!lines.length) return;
+
+        let firstLine = lines[0];
+        let match = firstLine.match(new RegExp('^(?:#?\\d+[\\.\\)\\-:]\\s*|title:\\s*)(.*)$', 'i'));
+        let bodyLines = [];
+
+        if (match && lines.length > 1) {
+          title = match[1].trim();
+          bodyLines = lines.slice(1);
+        } else {
+          bodyLines = lines;
+        }
+
+        let scriptLines = [];
+        bodyLines.forEach(function(line) {
+          const lower = line.toLowerCase();
+          if (lower.startsWith('title:')) {
+            title = line.substring(6).trim();
+          } else if (lower.startsWith('vibe:') || lower.startsWith('theme:')) {
+            vibe = line.substring(5).trim();
+          } else {
+            scriptLines.push(line);
           }
-        } else {
-          msg.innerHTML = `<span style="color: #f87171;">❌ ${res.error}</span>`;
-        }
-      } catch (e) { msg.innerText = 'Error: ' + e; }
-    }
-
-    async function saveModalFbPage() {
-      const pid = document.getElementById('modalFbId').value.trim();
-      const token = document.getElementById('modalFbToken').value.trim();
-      const name = document.getElementById('modalFbName').value.trim();
-      const slotsRaw = document.getElementById('modalFbSlots').value.trim();
-      const slots = slotsRaw.split(',').map(s => s.trim()).filter(s => s);
-      const hashtags = document.getElementById('modalFbHashtags').value.trim();
-
-      if (!pid || !token) return alert('Page ID and Access Token are required!');
-
-      const payload = {
-        page_id: pid,
-        name: name,
-        access_token: token,
-        time_slots: slots,
-        default_hashtags: hashtags,
-        schedule_type: 'time_slots'
-      };
-
-      try {
-        const r = await fetch('/api/facebook/page/save', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify(payload)
         });
-        const res = await r.json();
-        if (res.ok) {
-          closeAddFbModal();
-          await loadAllSettings();
-          alert('✅ Facebook Page saved successfully!');
+
+        const scriptText = scriptLines.join('\n').trim();
+        if (!scriptText) return;
+        if (!title) title = scriptText.split('\n')[0].substring(0, 35) + '...';
+
+        const timeStr = currTime.toISOString().replace('T', ' ').substring(0, 16);
+
+        QUEUE.push({
+          id: 'job_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+          title: title,
+          script_text: scriptText,
+          vibe: vibe || 'Auto-Detect',
+          scheduled_time: timeStr,
+          status: 'PENDING',
+          created_at: new Date().toISOString()
+        });
+
+        currTime = new Date(currTime.getTime() + interval * 60000);
+        count++;
+      });
+
+      localStorage.setItem('video_queue', JSON.stringify(QUEUE));
+      renderQueue();
+      showToast('✨ Successfully parsed & added ' + count + ' poems to the schedule!');
+    }
+
+    function renderQueue() {
+      const container = document.getElementById('queueList');
+      const countEl = document.getElementById('queueCount');
+      if (countEl) countEl.innerText = QUEUE.length;
+      if (!container) return;
+
+      if (!QUEUE.length) {
+        container.innerHTML = '<p style="color: var(--text-muted); font-size: 0.9rem;">No scheduled posts yet. Paste scripts above to populate.</p>';
+        return;
+      }
+
+      container.innerHTML = QUEUE.map(function(item, index) {
+        return `
+          <div class="item-card">
+            <div class="item-info" style="max-width: 70%;">
+              <h4>${index + 1}. ${escapeHtml(item.title)}</h4>
+              <p><strong>Scheduled:</strong> ${item.scheduled_time} | <strong>Vibe:</strong> ${escapeHtml(item.vibe)}</p>
+              <p style="margin-top: 4px; color: var(--text-muted); font-size: 0.75rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                ${escapeHtml(item.script_text.replace(/\n/g, ' • '))}
+              </p>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="badge ${item.status === 'COMPLETED' ? 'badge-completed' : 'badge-pending'}">${item.status}</span>
+              <button class="btn btn-sm btn-secondary" onclick="removeQueueItem(${index})">❌</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function removeQueueItem(index) {
+      QUEUE.splice(index, 1);
+      localStorage.setItem('video_queue', JSON.stringify(QUEUE));
+      renderQueue();
+    }
+
+    function clearAllQueue() {
+      if (!confirm('Clear all queued poems?')) return;
+      QUEUE = [];
+      localStorage.setItem('video_queue', JSON.stringify(QUEUE));
+      renderQueue();
+      showToast('🗑️ Queue cleared.');
+    }
+
+    // Direct Bulk Dispatch to GitHub Actions
+    async function dispatchBulkToGithub() {
+      const raw = document.getElementById('bulkCloudText').value.trim();
+      const targetPage = document.getElementById('bulkCloudPage').value;
+      const intervalVal = document.getElementById('bulkCloudInterval') ? document.getElementById('bulkCloudInterval').value : 'peak_slots';
+      const startTimeInput = document.getElementById('bulkCloudStartTime').value.trim();
+
+      if (!raw) {
+        alert('Please paste at least one poem in the input box.');
+        return;
+      }
+
+      // Format start time if datetime-local used (YYYY-MM-DDTHH:MM -> YYYY-MM-DD HH:MM)
+      let formattedStartTime = '';
+      if (startTimeInput) {
+        formattedStartTime = startTimeInput.replace('T', ' ');
+      }
+
+      // Count poems accurately for toast (supports numbered, ---, or paragraphs)
+      let count = 0;
+      if (new RegExp('(?:^|\\n)\\s*\\d+[\\.\\)]\\s+', 'i').test(raw)) {
+        count = raw.split(new RegExp('(?=(?:^|\\n)\\s*\\d+[\\.\\)]\\s+)', 'gi')).filter(function(s) { return s.trim(); }).length;
+      } else if (new RegExp('\\n\\s*(?:---+|===+|###+)\\s*\\n').test(raw)) {
+        count = raw.split(new RegExp('\\n\\s*(?:---+|===+|###+)\\s*\\n', 'gi')).filter(function(s) { return s.trim(); }).length;
+      } else {
+        count = raw.split(new RegExp('\\n\\s*\\n+', 'g')).filter(function(s) { return s.trim(); }).length;
+      }
+
+      showToast('⚡ Dispatching ' + count + ' poem(s) to GitHub Actions bulk scheduler...');
+
+      const success = await dispatchWorkflowAPI({
+        bulk_poems: raw,
+        target_page: targetPage,
+        bulk_start_time: formattedStartTime,
+        bulk_interval: intervalVal,
+        publish_facebook: true
+      });
+
+      if (success) {
+        const intervalDesc = intervalVal === 'peak_slots' ? 'at USA EST peak slots' : 'every ' + (parseInt(intervalVal, 10) >= 60 ? (parseInt(intervalVal, 10)/60) + 'h' : intervalVal + 'm');
+        showToast('✅ ' + count + ' poems dispatched! GitHub Actions will schedule each ' + intervalDesc + ' → ' + targetPage);
+        setTimeout(function() { switchTab('gallery'); }, 2000);
+      }
+    }
+
+    // Push Local Queue to GitHub Actions (send first pending item)
+    async function pushQueueToGithub() {
+      const pending = QUEUE.filter(function(j) { return j.status === 'PENDING'; });
+      if (!pending.length) {
+        alert('No pending jobs in queue to push.');
+        return;
+      }
+
+      showToast('🚀 Pushing ' + pending.length + ' queued poem(s) to GitHub Actions...');
+
+      // Join all pending poems as bulk_poems
+      const bulkText = pending.map(function(j) {
+        return 'Title: ' + j.title + '\n' + j.script_text;
+      }).join('\n\n---\n\n');
+
+      const success = await dispatchWorkflowAPI({
+        bulk_poems: bulkText,
+        target_page: 'ALL Pages',
+        publish_facebook: true
+      });
+
+      if (success) {
+        QUEUE.forEach(function(j) { if (j.status === 'PENDING') j.status = 'DISPATCHED'; });
+        localStorage.setItem('video_queue', JSON.stringify(QUEUE));
+        renderQueue();
+        showToast('✅ Queue dispatched to GitHub Actions! ' + pending.length + ' poems scheduled.');
+      }
+    }
+
+
+    async function sendTelegramLiveTest() {
+      const token = document.getElementById('tgToken').value.trim();
+      const chatId = document.getElementById('tgChat').value.trim();
+
+      if (!token || !chatId) {
+        alert('Please provide Telegram Bot Token and Chat ID.');
+        return;
+      }
+
+      showToast('✈️ Sending test message to Telegram...');
+
+      try {
+        const res = await fetch('https://api.telegram.org/bot' + token + '/sendMessage', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: chatId,
+            text: '🎬 *AI Autonomous Video Studio: Mobile Alert Test*\n\n✅ Bot connection verified!\nYour scheduled videos and Facebook publication updates will arrive here 🚀',
+            parse_mode: 'Markdown'
+          })
+        });
+        const data = await res.json();
+        if (data.ok) {
+          showToast('✅ Telegram alert delivered to your phone!');
         } else {
-          alert('Error: ' + res.error);
+          alert('Telegram Error: ' + data.description);
         }
-      } catch (e) { alert('Save error: ' + e); }
+      } catch (err) {
+        alert('Network Error connecting to Telegram API: ' + err.message);
+      }
     }
 
-    async function deleteFbPage(pid) {
-      if (!confirm('Are you sure you want to remove this Facebook Page?')) return;
-      await fetch('/api/facebook/page/delete', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({page_id: pid})
+    // Facebook Pages Management
+    function addFacebookPage() {
+      const name = document.getElementById('fbPageName').value.trim();
+      const id = document.getElementById('fbPageId').value.trim();
+      const token = document.getElementById('fbPageToken').value.trim();
+      const niche = document.getElementById('fbPageNiche') ? document.getElementById('fbPageNiche').value : 'typewriters_voice_nostalgia';
+
+      if (!name || !id || !token) {
+        alert('Please fill in Page Name, Page ID, and Token.');
+        return;
+      }
+
+      // Check if page already exists, update if so
+      const existingIdx = FB_PAGES.findIndex(function(p) { return p.id === id; });
+      if (existingIdx >= 0) {
+        FB_PAGES[existingIdx] = { name: name, id: id, token: token, niche: niche, updated_at: new Date().toISOString() };
+      } else {
+        FB_PAGES.push({ name: name, id: id, token: token, niche: niche, created_at: new Date().toISOString() });
+      }
+
+      localStorage.setItem('fb_pages', JSON.stringify(FB_PAGES));
+      populateAllTargetPageDropdowns();
+      renderFbPages();
+
+      document.getElementById('fbPageToken').value = '';
+      showToast('📱 Saved Page "' + name + '". Click "🔐 Sync to GitHub Secrets" to push to GitHub Actions!');
+    }
+
+    async function testFbToken() {
+      const token = document.getElementById('fbPageToken').value.trim();
+      const pageId = document.getElementById('fbPageId').value.trim();
+      if (!token) {
+        alert('Please enter a Facebook Page Access Token to test.');
+        return;
+      }
+
+      showToast('🔍 Validating token with Graph API...');
+      try {
+        const testUrl = pageId ? 'https://graph.facebook.com/v25.0/' + pageId + '?fields=id,name,category&access_token=' + encodeURIComponent(token)
+                               : 'https://graph.facebook.com/v25.0/me?fields=id,name&access_token=' + encodeURIComponent(token);
+        const res = await fetch(testUrl);
+        const data = await res.json();
+        if (data.id && !data.error) {
+          alert('✅ Token is VALID!\n\nPage: ' + data.name + ' (ID: ' + data.id + ')\nCategory: ' + (data.category || 'Page') + '\n\nNow click "🔐 Sync to GitHub Secrets" to save it for auto-posting!');
+        } else {
+          const err = data.error || {};
+          let msg = '❌ Facebook Error (' + (err.code || 'unknown') + '): ' + (err.message || 'Invalid Token');
+          if (err.code === 190) {
+            msg += '\n\n💡 The Facebook session has expired or changed. Please generate a fresh Page Access Token from Graph API Explorer or Facebook Business Suite.';
+          }
+          alert(msg);
+        }
+      } catch (err) {
+        alert('Graph API network error: ' + err.message);
+      }
+    }
+
+    async function syncPagesToGithubSecrets() {
+      const pat = localStorage.getItem('gh_pat');
+      const repo = localStorage.getItem('gh_repo') || DEFAULT_REPO;
+      if (!pat) {
+        alert('Please enter your GitHub Classic Token in Settings first.');
+        switchTab('settings');
+        return;
+      }
+      if (!FB_PAGES.length) {
+        alert('No Facebook Pages found. Please add your Page and Token first.');
+        return;
+      }
+
+      showToast('🔐 Encrypting and syncing Facebook Pages to GitHub Secrets...');
+
+      try {
+        const sLib = window.sodium || window.libsodiumWrappers || window.libsodium;
+        if (!sLib) {
+          alert('Libsodium is initializing or blocked by browser extensions. Copying JSON to clipboard for manual paste...');
+          copyPagesJsonToClipboard();
+          return;
+        }
+        await sLib.ready;
+
+        // 1. Get repository public key
+        const pkRes = await fetch('https://api.github.com/repos/' + repo + '/actions/secrets/public-key', {
+          headers: {
+            'Authorization': 'Bearer ' + pat,
+            'Accept': 'application/vnd.github+json'
+          }
+        });
+        if (!pkRes.ok) {
+          const err = await pkRes.json().catch(function() { return { message: pkRes.statusText }; });
+          throw new Error(err.message || 'Failed to fetch repository public key');
+        }
+        const pkData = await pkRes.json();
+
+        // 2. Prepare JSON payload
+        const formattedPages = FB_PAGES.map(function(p) {
+          return {
+            page_id: p.id,
+            name: p.name,
+            access_token: p.token,
+            enabled: true,
+            as_reel: true,
+            niche_id: p.niche || 'typewriters_voice_nostalgia',
+            usa_time_slots: ["08:30", "13:00", "20:30"],
+            timezone: "America/New_York",
+            hashtags: "#typewriter #typewritersvoice #poetry #spokenword #healing #mentalhealth #aesthetic #reels #quotes #love"
+          };
+        });
+
+        const secretValue = JSON.stringify(formattedPages);
+        const binkey = sLib.from_base64(pkData.key, sLib.base64_variants.ORIGINAL);
+        const binsec = sLib.from_string(secretValue);
+        const encBytes = sLib.crypto_box_seal(binsec, binkey);
+        const encBase64 = sLib.to_base64(encBytes, sLib.base64_variants.ORIGINAL);
+
+        // 3. PUT secret to GitHub
+        const putRes = await fetch('https://api.github.com/repos/' + repo + '/actions/secrets/FACEBOOK_PAGES_JSON', {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'Bearer ' + pat,
+            'Accept': 'application/vnd.github+json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            encrypted_value: encBase64,
+            key_id: pkData.key_id
+          })
+        });
+
+        if (putRes.status === 201 || putRes.status === 204) {
+          showToast('✅ Successfully synced ' + formattedPages.length + ' page(s) to GitHub Secret FACEBOOK_PAGES_JSON!');
+          renderFbPages();
+        } else {
+          const putErr = await putRes.json().catch(function() { return { message: putRes.statusText }; });
+          throw new Error(putErr.message || 'Failed to save secret');
+        }
+      } catch (err) {
+        alert('Notice during sync: ' + err.message + '\n\nOpening manual JSON copy...');
+        copyPagesJsonToClipboard();
+      }
+    }
+
+    function copyPagesJsonToClipboard() {
+      if (!FB_PAGES.length) {
+        alert('No Facebook Pages configured yet.');
+        return;
+      }
+      const formattedPages = FB_PAGES.map(function(p) {
+        return {
+          page_id: p.id,
+          name: p.name,
+          access_token: p.token,
+          enabled: true,
+          as_reel: true,
+          niche_id: p.niche || 'typewriters_voice_nostalgia',
+          usa_time_slots: ["08:30", "13:00", "20:30"],
+          timezone: "America/New_York",
+          hashtags: "#typewriter #typewritersvoice #poetry #spokenword #healing #mentalhealth #aesthetic #reels #quotes #love"
+        };
       });
-      await loadAllSettings();
+      const str = JSON.stringify(formattedPages, null, 2);
+      navigator.clipboard.writeText(str).then(function() {
+        alert('📋 Formatted JSON Copied to Clipboard!\n\nNow open GitHub Settings ➔ Secrets ➔ Actions, click Edit on FACEBOOK_PAGES_JSON, and paste it.');
+        window.open('https://github.com/' + (localStorage.getItem('gh_repo') || DEFAULT_REPO) + '/settings/secrets/actions', '_blank');
+      }).catch(function() {
+        prompt('Copy this JSON and paste into GitHub Secret FACEBOOK_PAGES_JSON:', str);
+      });
     }
 
-    async function loadFbHistory() {
-      try {
-        const r = await fetch('/api/facebook/history');
-        const hist = await r.json();
-        const tbody = document.getElementById('fbHistoryTableBody');
-        if (!hist || hist.length === 0) {
-          tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--text-dim); padding: 20px;">No posts published yet.</td></tr>';
-          return;
-        }
-        tbody.innerHTML = hist.map(h => {
-          const badge = h.success ? '<span class="badge badge-published">SUCCESS</span>' : '<span class="badge badge-failed">FAILED</span>';
-          const link = h.post_url ? `<a href="${h.post_url}" target="_blank" style="color: #38bdf8; text-decoration: none;">🔗 View Post</a>` : 'N/A';
-          return `<tr>
-            <td style="font-weight: 600; color: #fff;">${h.title}</td>
-            <td>${h.page_name || h.page_id}</td>
-            <td style="font-family: 'JetBrains Mono', monospace; font-size: 11px;">${h.timestamp}</td>
-            <td>${badge}</td>
-            <td>${link}</td>
-          </tr>`;
-        }).join('');
-      } catch (e) { console.error(e); }
-    }
+    function renderFbPages() {
+      const container = document.getElementById('fbPageList');
+      if (!container) return;
 
-    /* Video Gallery */
-    async function loadVideoGallery() {
-      try {
-        const r = await fetch('/api/outputs');
-        const files = await r.json();
-        const grid = document.getElementById('videoGalleryGrid');
-        if (!files || files.length === 0) {
-          grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: var(--text-dim); padding: 30px;">No generated videos found. Render your first video!</div>';
-          return;
-        }
-        grid.innerHTML = files.map(f => {
-          return `<div class="video-card">
-            <div class="video-preview-holder">
-              <video src="${f.url}" preload="metadata" controls></video>
+      if (!FB_PAGES.length) {
+        container.innerHTML = '<div style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 8px; border: 1px dashed var(--card-border); color: var(--text-dim); font-size: 0.88rem;">No custom Facebook Pages configured in browser hub yet. Paste your Page ID & fresh Token below and click "Save Page & Token", then click "🔐 Sync to GitHub Secrets".</div>';
+        return;
+      }
+
+      container.innerHTML = FB_PAGES.map(function(p, idx) {
+        return `
+          <div class="item-card" style="border-color: rgba(24,119,242,0.3); background: rgba(10,20,50,0.6);">
+            <div class="item-info">
+              <h4>📘 ${escapeHtml(p.name)} <span style="font-size: 0.75rem; color: var(--accent-green); background: rgba(16,185,129,0.12); padding: 2px 8px; border-radius: 6px; border: 1px solid rgba(16,185,129,0.3); margin-left: 6px;">Configured</span></h4>
+              <p><strong>Page ID:</strong> ${escapeHtml(p.id)} | <strong>Niche:</strong> ${escapeHtml(p.niche || 'typewriters_voice_nostalgia')}</p>
+              <p style="margin-top: 4px; color: var(--text-muted); font-size: 0.78rem;"><strong>Token:</strong> ${escapeHtml(p.token.substring(0, 15))}•••••••• (${p.token.length} chars)</p>
             </div>
-            <div class="video-card-body">
-              <div style="font-weight: 700; font-size: 13px; color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${f.name}</div>
-              <div style="font-size: 11px; color: var(--text-dim); display: flex; justify-content: space-between;">
-                <span>${f.size_mb} MB</span>
-                <span>${f.modified}</span>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              <button class="btn btn-sm btn-facebook" onclick="testSavedPageToken(${idx})">🔍 Test</button>
+              <button class="btn btn-sm btn-emerald" onclick="postNowToPage('${escapeHtml(p.name)} (${escapeHtml(p.id)}')">▶ Post</button>
+              <button class="btn btn-sm btn-secondary" onclick="removeFbPage(${idx})">❌</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    async function testSavedPageToken(idx) {
+      const p = FB_PAGES[idx];
+      if (!p || !p.token) return;
+      showToast('🔍 Testing token for ' + p.name + '...');
+      try {
+        const res = await fetch('https://graph.facebook.com/v25.0/' + p.id + '?fields=id,name,category&access_token=' + encodeURIComponent(p.token));
+        const data = await res.json();
+        if (data.id && !data.error) {
+          alert('✅ Token is VALID for ' + data.name + ' (ID: ' + data.id + ')!');
+        } else {
+          const err = data.error || {};
+          let msg = '❌ Facebook Error (' + (err.code || 'unknown') + '): ' + (err.message || 'Invalid');
+          if (err.code === 190) {
+            msg += '\n\n💡 Session has expired or password changed. Please generate a new token and update it here!';
+          }
+          alert(msg);
+        }
+      } catch (e) {
+        alert('Network error: ' + e.message);
+      }
+    }
+
+    function removeFbPage(idx) {
+      if (!confirm('Remove page "' + (FB_PAGES[idx] ? FB_PAGES[idx].name : '') + '"?')) return;
+      FB_PAGES.splice(idx, 1);
+      localStorage.setItem('fb_pages', JSON.stringify(FB_PAGES));
+      populateAllTargetPageDropdowns();
+      renderFbPages();
+      showToast('🗑️ Page removed. Click "🔐 Sync to GitHub Secrets" to update GitHub.');
+    }
+
+    // Post now to a specific page by dispatching a quick test poem
+    async function postNowToPage(targetPage) {
+      const poem = 'And maybe love is just this —\nshowing up when everything inside you says leave.\nStaying, even when your hands are shaking.\nEven when the words are wrong.\nEven when silence is all you have to give.';
+      showToast('▶ Dispatching instant post to ' + targetPage + '...');
+      const success = await dispatchWorkflowAPI({
+        script_text: poem,
+        title: 'And Maybe Love Is Just This',
+        custom_vibe: 'Typewriters Voice Nostalgia',
+        poetry_niche: 'Typewriters Voice Nostalgia',
+        target_page: targetPage,
+        publish_facebook: true
+      });
+      if (success) {
+        showToast('✅ Video render + post dispatched to ' + targetPage + '!');
+        setTimeout(function() { switchTab('gallery'); }, 2000);
+      }
+    }
+
+
+
+    function saveBotSettings() {
+      const tgToken = document.getElementById('tgToken').value.trim();
+      const tgChat = document.getElementById('tgChat').value.trim();
+      localStorage.setItem('tg_token', tgToken);
+      localStorage.setItem('tg_chat', tgChat);
+      showToast('💾 Bot credentials saved locally!');
+    }
+
+    function saveGithubSettings() {
+      const repo = document.getElementById('ghRepo').value.trim();
+      const pat = document.getElementById('ghToken').value.trim();
+      localStorage.setItem('gh_repo', repo);
+      localStorage.setItem('gh_pat', pat);
+      testGitHubConnection();
+    }
+
+    async function testGitHubConnection() {
+      const pat = localStorage.getItem('gh_pat');
+      const repo = localStorage.getItem('gh_repo') || DEFAULT_REPO;
+
+      if (!pat) {
+        alert('Please enter your GitHub PAT.');
+        return;
+      }
+
+      showToast('🔍 Verifying GitHub PAT permissions...');
+      try {
+        const res = await fetch('https://api.github.com/repos/' + repo, {
+          headers: {
+            'Authorization': 'Bearer ' + pat,
+            'Accept': 'application/vnd.github+json'
+          }
+        });
+        const data = await res.json();
+        if (data.full_name) {
+          document.getElementById('connStatusText').innerText = 'Connected: ' + data.full_name;
+          showToast('✅ Successfully authenticated to ' + data.full_name + '!');
+        } else {
+          alert('GitHub PAT Error: ' + (data.message || 'Access denied'));
+        }
+      } catch (err) {
+        alert('Connection error: ' + err.message);
+      }
+    }
+
+    async function dispatchCloudWorkflow() {
+      showToast('⚡ Dispatching scheduled batch runner on GitHub Actions...');
+      const success = await dispatchWorkflowAPI({});
+      if (success) {
+        showToast('🚀 Workflow run started! Inspecting in Cloud Gallery...');
+        setTimeout(function() { switchTab('gallery'); }, 1500);
+      }
+    }
+
+    async function dispatchWorkflowAPI(inputs) {
+      const pat = localStorage.getItem('gh_pat');
+      const repo = localStorage.getItem('gh_repo') || DEFAULT_REPO;
+
+      if (!pat) {
+        alert('Please enter your GitHub Token in the Settings tab.');
+        switchTab('settings');
+        return false;
+      }
+
+      try {
+        const res = await fetch('https://api.github.com/repos/' + repo + '/actions/workflows/auto_video_poster.yml/dispatches', {
+          method: 'POST',
+          headers: {
+            'Authorization': 'Bearer ' + pat,
+            'Accept': 'application/vnd.github+json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            ref: 'main',
+            inputs: inputs || {}
+          })
+        });
+
+        if (res.status === 204) {
+          return true;
+        } else {
+          const err = await res.json().catch(function() { return { message: res.statusText }; });
+          alert('Workflow Dispatch Error (' + res.status + '): ' + (err.message || res.statusText));
+          return false;
+        }
+      } catch (err) {
+        alert('Network dispatch error: ' + err.message);
+        return false;
+      }
+    }
+
+    async function fetchRecentRuns() {
+      const pat = localStorage.getItem('gh_pat');
+      const repo = localStorage.getItem('gh_repo') || DEFAULT_REPO;
+      const list = document.getElementById('runsList');
+      if (!list) return;
+
+      list.innerHTML = '<p style="color: var(--text-dim); font-size: 0.85rem;">⏳ Fetching recent workflow runs from GitHub API...</p>';
+
+      try {
+        const headers = { 'Accept': 'application/vnd.github+json' };
+        if (pat) headers['Authorization'] = 'Bearer ' + pat;
+
+        const res = await fetch('https://api.github.com/repos/' + repo + '/actions/runs?per_page=6', { headers: headers });
+        const data = await res.json();
+
+        if (data.workflow_runs && data.workflow_runs.length) {
+          list.innerHTML = data.workflow_runs.map(function(run) {
+            return `
+              <div class="item-card">
+                <div class="item-info">
+                  <h4>#${run.run_number}: ${escapeHtml(run.name)}</h4>
+                  <p><strong>Trigger:</strong> ${run.event} | <strong>Status:</strong> ${run.status} (${run.conclusion || 'running'}) | <strong>Time:</strong> ${new Date(run.created_at).toLocaleString()}</p>
+                </div>
+                <a href="${run.html_url}" target="_blank" class="btn btn-sm btn-secondary">🔗 View Logs & Artifacts</a>
               </div>
-              <a href="${f.url}" download class="btn btn-sm btn-secondary" style="justify-content: center; text-decoration: none; margin-top: 4px;">⬇️ Download MP4</a>
-            </div>
-          </div>`;
-        }).join('');
-      } catch (e) { console.error(e); }
+            `;
+          }).join('');
+        } else {
+          list.innerHTML = '<p style="color: var(--text-muted); font-size: 0.85rem;">No recent workflow runs found.</p>';
+        }
+      } catch (err) {
+        list.innerHTML = '<p style="color: var(--danger); font-size: 0.85rem;">Error fetching runs: ' + err.message + '</p>';
+      }
     }
 
-    /* Notifications */
-    async function saveNotificationSettings() {
-      const payload = {
-        enable_telegram: document.getElementById('enableTelegram').checked,
-        telegram_bot_token: document.getElementById('tgToken').value.trim(),
-        telegram_chat_id: document.getElementById('tgChat').value.trim(),
-        enable_whatsapp: document.getElementById('enableWhatsapp').checked,
-        whatsapp_phone: document.getElementById('waPhone').value.trim(),
-        whatsapp_apikey: document.getElementById('waKey').value.trim()
-      };
-      await fetch('/api/settings', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(payload)
-      });
-      alert('✅ Notification settings updated successfully!');
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     }
-
-    async function sendTestAlert() {
-      const r = await fetch('/api/notify/test', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({message: '🔔 Test Notification from AI Video Factory Mission Control!'})
-      });
-      const res = await r.json();
-      alert('Dispatched test alert:\n' + JSON.stringify(res.results, null, 2));
-    }
-
-    async function loadSyncStats() {
-      try {
-        const r = await fetch('/api/sync/pending');
-        const data = await r.json();
-        document.getElementById('syncBufferDetails').innerText = `${data.stats.total_files} videos pending sync (${data.stats.total_size_mb} MB)`;
-      } catch (e) {}
-    }
-
-    async function saveGeneralSettings() {
-      const payload = {
-        huggingface_token: document.getElementById('hfToken').value.trim(),
-        cloudflare_account_id: document.getElementById('cfAccountId').value.trim(),
-        cloudflare_api_token: document.getElementById('cfApiToken').value.trim()
-      };
-      await fetch('/api/settings', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(payload)
-      });
-      alert('✅ Engine settings saved successfully!');
-    }
-
-    window.onload = () => {
-      loadHealthAndTelemetry();
-      loadAllSettings();
-      loadBulkQueue();
-      setInterval(loadHealthAndTelemetry, 10000);
-    };
   </script>
 </body>
 </html>
