@@ -1,9 +1,12 @@
 name: 🎬 Autonomous AI Video Studio & Auto-Poster
 
 on:
-  # 1. Scheduled Posting via Cron (Runs every 4 hours automatically)
+  # 1. Scheduled Posting via Cron (USA peak engagement times — EST/EDT)
+  #    08:30 EST = 14:00 UTC  |  13:00 EST = 18:00 UTC  |  20:30 EST = 01:30 UTC next day
   schedule:
-    - cron: '0 3,7,11,15,19 * * *'
+    - cron: '30 14 * * *'   # 08:30 AM EST daily
+    - cron: '0 18 * * *'    # 13:00 PM EST daily
+    - cron: '30 1 * * *'    # 20:30 PM EST daily
 
   # 2. Manual / Mobile Trigger via GitHub Web UI or GitHub App
   workflow_dispatch:
@@ -47,15 +50,35 @@ on:
           - 'Healing, Self-Worth & Stoic Solace'
           - 'Cosmic & Philosophical Reflections'
         default: 'Auto-Detect from Poem'
+      target_page:
+        description: 'Target Facebook Page (leave empty = post to ALL enabled pages)'
+        required: false
+        type: choice
+        options:
+          - 'ALL Pages'
+          - 'Typewriters Voice (1054247421115636)'
+        default: 'ALL Pages'
       publish_facebook:
         description: 'Publish automatically to connected Facebook Pages'
         required: false
         type: boolean
         default: true
+      bulk_poems:
+        description: |
+          BULK MODE: Paste multiple poems separated by "---" (each posts to its page at scheduled times).
+          Format: Title: My Poem\nTime: 2024-01-15 08:30\nPage: Typewriters Voice\n[poem text]
+        required: false
+        type: string
+        default: ''
+      bulk_start_time:
+        description: 'Bulk: Start time for first post (e.g. "2024-01-15 08:30 EST")'
+        required: false
+        type: string
+        default: ''
 
   # 3. Webhook / Repository Dispatch Trigger (e.g. from Telegram Bot / External API)
   repository_dispatch:
-    types: [generate_video, process_queue]
+    types: [generate_video, process_queue, bulk_schedule]
 
 permissions:
   contents: write
@@ -86,7 +109,14 @@ jobs:
       - name: 🎬 Install FFmpeg & Multi-Lingual Fonts
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y --no-install-recommends             ffmpeg             fonts-dejavu-core             fonts-noto-core             fonts-noto-cjk             fonts-noto-extra             git             curl
+          sudo apt-get install -y --no-install-recommends \
+            ffmpeg \
+            fonts-dejavu-core \
+            fonts-noto-core \
+            fonts-noto-cjk \
+            fonts-noto-extra \
+            git \
+            curl
 
       - name: 📦 Cache Pip Dependencies
         uses: actions/cache@v4
@@ -125,7 +155,11 @@ jobs:
           TITLE_INPUT: ${{ inputs.title }}
           VIBE_INPUT: ${{ inputs.custom_vibe }}
           NICHE_INPUT: ${{ inputs.poetry_niche }}
+          TARGET_PAGE_INPUT: ${{ inputs.target_page }}
           PUBLISH_FB_INPUT: ${{ inputs.publish_facebook }}
+          BULK_POEMS_INPUT: ${{ inputs.bulk_poems }}
+          BULK_START_TIME_INPUT: ${{ inputs.bulk_start_time }}
+          DISPATCH_PAYLOAD: ${{ toJson(github.event.client_payload) }}
         run: |
           python cloud_generator/github_runner.py
 

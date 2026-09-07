@@ -90,7 +90,15 @@ def load_settings():
         try:
             pages = json.loads(os.getenv("FACEBOOK_PAGES_JSON"))
             if isinstance(pages, list):
-                merged["facebook_pages"] = pages
+                # Filter out placeholder/dummy entries
+                real_pages = [
+                    p for p in pages
+                    if p.get("page_id") and "YOUR_" not in str(p.get("page_id", ""))
+                    and p.get("access_token") and "YOUR_" not in str(p.get("access_token", ""))
+                ]
+                merged["facebook_pages"] = real_pages
+                if real_pages:
+                    merged["auto_publish_facebook"] = True
         except Exception:
             pass
 
