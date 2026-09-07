@@ -215,7 +215,76 @@ def parse_bulk_scripts(
             "target_pages": target_pages
         })
 
-    # Compute scheduled times in Nepal timezone
+    # Determine distribution mode
+    # Modes: "all_pages_individual" (default for ALL Pages), "broadcast_all", "round_robin", "single_page"
+    is_individual_all = False
+    if not default_page_ids or default_page_ids == ["ALL Pages"] or "individual" in str(default_page_ids).lower() or auto_distribute_pages:
+        is_individual_all = True
+
+    jobs = []
+
+    # ─── MODE 1: INDIVIDUAL FULL BATCH FOR EACH ENABLED PAGE ─────────────
+    if is_individual_all and enabled_pages:
+        for p_idx, page_obj in enumerate(enabled_pages):
+            pid = str(page_obj.get("id") or page_obj.get("page_id"))
+            pname = page_obj.get("name", f"Page {p_idx+1}")
+            page_niche = page_obj.get("niche_id")
+
+            # Compute timeline for this specific page
+            computed_slots = compute_next_time_slots(
+                len(raw_items),
+                target_page_id=pid,
+                start_time_str=start_time_str,
+                interval_minutes=interval_minutes,
+                timezone_str=timezone_str,
+                available_pages=enabled_pages
+            )
+
+            for idx, item in enumerate(raw_items):
+                slot_info = computed_slots[idx] if idx < len(computed_slots) else {}
+
+                if item.get("custom_time"):
+                    sched_time_str = item["custom_time"]
+                    sched_epoch = None
+                    sched_nepal = sched_time_str
+                    sched_usa = sched_time_str
+                else:
+                    sched_time_str = slot_info.get("scheduled_time")
+                    sched_epoch = slot_info.get("epoch")
+                    sched_nepal = slot_info.get("scheduled_time_nepal")
+                    sched_usa = slot_info.get("scheduled_time_usa")
+
+                chosen_niche_id = item.get("niche") or page_niche or detect_niche_from_text(item["title"], item["script_text"])
+                niche = get_niche(chosen_niche_id)
+
+                job = {
+                    "id": f"job_{int(time.time())}_{uuid.uuid4().hex[:6]}",
+                    "title": item["title"],
+                    "script_text": item["script_text"],
+                    "niche_id": niche.niche_id,
+                    "niche_name": niche.name,
+                    "voice": item.get("voice") or niche.voice.voice_id,
+                    "theme": item.get("theme") or niche.art.vibe_id,
+                    "target_page_ids": [pid],
+                    "target_page_name": pname,
+                    "scheduled_time": sched_time_str,
+                    "scheduled_time_nepal": sched_nepal,
+                    "scheduled_time_usa": sched_usa,
+                    "scheduled_epoch": sched_epoch,
+                    "timezone": timezone_str,
+                    "status": "PENDING",
+                    "created_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                    "render_time": None,
+                    "output_file": None,
+                    "facebook_results": None,
+                    "error": None,
+                    "synced_to_local": False
+                }
+                jobs.append(job)
+
+        return jobs
+
+    # ─── MODE 2: SINGLE TARGET OR DIRECT ASSIGNED PAGES ──────────────────
     first_page_id = default_page_ids[0] if (default_page_ids and isinstance(default_page_ids, list) and len(default_page_ids) > 0) else None
     computed_slots = compute_next_time_slots(
         len(raw_items), 
@@ -226,12 +295,10 @@ def parse_bulk_scripts(
         available_pages=enabled_pages
     )
 
-    jobs = []
     for idx, item in enumerate(raw_items):
         slot_info = computed_slots[idx] if idx < len(computed_slots) else {}
-        
-        # Handle custom time override if provided
-        if item["custom_time"]:
+
+        if item.get("custom_time"):
             sched_time_str = item["custom_time"]
             sched_epoch = None
             sched_nepal = sched_time_str
@@ -242,16 +309,8 @@ def parse_bulk_scripts(
             sched_nepal = slot_info.get("scheduled_time_nepal")
             sched_usa = slot_info.get("scheduled_time_usa")
 
-        # Multi-page assignment: round-robin if auto_distribute_pages or target_pages empty
-        assigned_pages = item["target_pages"]
-        if (auto_distribute_pages or not assigned_pages) and enabled_pages:
-            assigned_page = enabled_pages[idx % len(enabled_pages)]
-            assigned_pages = [str(assigned_page.get("id") or assigned_page.get("page_id"))]
-        elif not assigned_pages and default_page_ids:
-            assigned_pages = list(default_page_ids)
-
-        # Resolve niche
-        chosen_niche_id = item["niche"]
+        assigned_pages = item.get("target_pages") or default_page_ids or []
+        chosen_niche_id = item.get("niche")
         if not chosen_niche_id and assigned_pages:
             matched_p = next((p for p in pages if str(p.get("id") or p.get("page_id")) in assigned_pages), None)
             if matched_p and matched_p.get("niche_id"):
@@ -268,8 +327,8 @@ def parse_bulk_scripts(
             "script_text": item["script_text"],
             "niche_id": niche.niche_id,
             "niche_name": niche.name,
-            "voice": item["voice"] or niche.voice.voice_id,
-            "theme": item["theme"] or niche.art.vibe_id,
+            "voice": item.get("voice") or niche.voice.voice_id,
+            "theme": item.get("theme") or niche.art.vibe_id,
             "target_page_ids": assigned_pages,
             "scheduled_time": sched_time_str,
             "scheduled_time_nepal": sched_nepal,
@@ -285,7 +344,7 @@ def parse_bulk_scripts(
             "synced_to_local": False
         }
         jobs.append(job)
-        
+
     return jobs
 
 def enqueue_bulk_jobs(jobs: list) -> list:

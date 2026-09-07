@@ -476,8 +476,8 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
           <div class="form-group">
             <label>🎯 Target Facebook Page</label>
             <select id="bulkCloudPage">
-              <option value="ALL Pages">📢 ALL Enabled Pages (Auto-Distribute)</option>
-              <option value="Typewriters Voice (1054247421115636)" selected>✍️ Typewriters Voice (1054247421115636)</option>
+              <option value="ALL Pages" selected>📢 ALL Enabled Pages Individually (Full Batch to Each Page)</option>
+              <option value="ALL Pages (Broadcast)">🌐 ALL Pages Simultaneously (1 Video Upload to All Pages)</option>
             </select>
           </div>
           <div class="form-group">
@@ -914,11 +914,23 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
         const currentVal = sel.value;
         sel.innerHTML = '';
 
-        // Default "ALL Pages" option
-        const optAll = document.createElement('option');
-        optAll.value = 'ALL Pages';
-        optAll.innerText = sel.id === 'bulkCloudPage' ? '📢 ALL Enabled Pages (Auto-Distribute)' : '📢 ALL Enabled Pages';
-        sel.appendChild(optAll);
+        // Default options
+        if (sel.id === 'bulkCloudPage') {
+          const optIndiv = document.createElement('option');
+          optIndiv.value = 'ALL Pages';
+          optIndiv.innerText = '📢 ALL Enabled Pages Individually (Full Batch to Each Page)';
+          sel.appendChild(optIndiv);
+
+          const optBroad = document.createElement('option');
+          optBroad.value = 'ALL Pages (Broadcast)';
+          optBroad.innerText = '🌐 ALL Pages Simultaneously (1 Video Upload to All Pages)';
+          sel.appendChild(optBroad);
+        } else {
+          const optAll = document.createElement('option');
+          optAll.value = 'ALL Pages';
+          optAll.innerText = '📢 ALL Enabled Pages';
+          sel.appendChild(optAll);
+        }
 
         // Populate from FB_PAGES if available
         if (FB_PAGES && FB_PAGES.length) {
