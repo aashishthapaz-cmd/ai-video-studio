@@ -24,39 +24,17 @@ on:
       custom_vibe:
         description: 'Visual Style & World'
         required: false
-        type: choice
-        options:
-          - 'Typewriters Voice Nostalgia'
-          - 'Auto-Detect (Adaptive Multi-World)'
-          - 'Makoto Shinkai Twilight'
-          - 'Himalayan Mist Serenity'
-          - 'Studio Ghibli Meadow'
-          - 'Cyberpunk Rain Reflections'
-          - 'Claude Monet Impressionism'
-          - 'Van Gogh Starry Canvas'
-          - 'Ink Wash Zen Landscape'
-          - 'Vintage 90s Anime Nostalgia'
-          - 'Dark Romantic Academia'
+        type: string
         default: 'Typewriters Voice Nostalgia'
       poetry_niche:
         description: 'Poetry Niche (Tuned Art, Voice, Font & Tone)'
         required: false
-        type: choice
-        options:
-          - 'Auto-Detect from Poem'
-          - 'Typewriters Voice Nostalgia'
-          - 'Dark Romantic Academia'
-          - 'Romantic Devotion & Soulmates'
-          - 'Healing, Self-Worth & Stoic Solace'
-          - 'Cosmic & Philosophical Reflections'
+        type: string
         default: 'Auto-Detect from Poem'
       target_page:
-        description: 'Target Facebook Page (leave empty = post to ALL enabled pages)'
+        description: 'Target Facebook Page (leave empty or "ALL Pages" = post to ALL enabled pages)'
         required: false
-        type: choice
-        options:
-          - 'ALL Pages'
-          - 'Typewriters Voice (1054247421115636)'
+        type: string
         default: 'ALL Pages'
       publish_facebook:
         description: 'Publish automatically to connected Facebook Pages'

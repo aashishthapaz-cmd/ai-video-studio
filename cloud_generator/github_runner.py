@@ -84,9 +84,12 @@ def _resolve_target_page_ids(target_page_input: str, all_pages: list) -> list:
     m = re.search(r'\((\d+)\)', target_page_input)
     if m:
         return [m.group(1)]
+    if target_page_input.strip().isdigit():
+        return [target_page_input.strip()]
     # Try matching by name
     for p in all_pages:
-        if p.get("name", "").lower() in target_page_input.lower():
+        p_name = p.get("name", "")
+        if p_name and (p_name.lower() in target_page_input.lower() or target_page_input.lower() in p_name.lower()):
             return [str(p.get("page_id") or p.get("id"))]
     return []
 
