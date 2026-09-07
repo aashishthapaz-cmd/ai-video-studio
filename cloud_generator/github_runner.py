@@ -188,16 +188,17 @@ def run():
 
         print(f"\n[Mode: Bulk Schedule] Parsing poem batch with {interval_minutes}m interval...", flush=True)
 
-        page_ids_for_bulk = target_page_ids if target_page_ids else (
-            [str(p.get("page_id") or p.get("id")) for p in enabled_pages] if enabled_pages else []
-        )
+        page_ids_for_bulk = target_page_ids if target_page_ids else []
+        is_auto_distribute = (not target_page_ids or len(target_page_ids) == 0 or target_page_input in ("ALL Pages", "ALL", "all", ""))
 
         jobs = parse_bulk_scripts(
             raw_text=bulk_poems,
             start_time_str=bulk_start_time or None,
             interval_minutes=interval_minutes,
             default_page_ids=page_ids_for_bulk,
-            auto_distribute_pages=(not target_page_ids and len(enabled_pages) > 1)
+            auto_distribute_pages=is_auto_distribute,
+            available_pages=enabled_pages,
+            timezone_str="Asia/Kathmandu"
         )
 
         if not jobs:
@@ -205,9 +206,10 @@ def run():
             return
 
         enqueue_bulk_jobs(jobs)
-        print(f"\n✅ Enqueued {len(jobs)} poem jobs to the scheduling queue!", flush=True)
+        print(f"\n✅ Enqueued {len(jobs)} poem jobs across {len(enabled_pages)} Facebook Page(s)!", flush=True)
         for j in jobs:
-            print(f"   📅 '{j['title']}' → {j.get('scheduled_time_usa', j.get('scheduled_time', 'ASAP'))} | Page(s): {j.get('target_page_ids', 'ALL')} | Niche: {j.get('niche_id')}", flush=True)
+            sched_str = j.get('scheduled_time_nepal', j.get('scheduled_time_usa', j.get('scheduled_time', 'ASAP')))
+            print(f"   📅 '{j['title']}' → {sched_str} | Page(s): {j.get('target_page_ids', 'ALL')} | Niche: {j.get('niche_id')}", flush=True)
         return
 
     # ─── MODE: DIRECT SCRIPT ─────────────────────────────────────────────

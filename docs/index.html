@@ -494,17 +494,17 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
             </select>
           </div>
           <div class="form-group">
-            <label>📅 Start Date & Time (Calendar Picker)</label>
+            <label>📅 Start Date & Time (Nepal Time — Calendar Picker)</label>
             <input type="datetime-local" id="bulkCloudStartTime">
           </div>
         </div>
 
         <div style="background: rgba(99,102,241,0.08); border: 1px solid rgba(99,102,241,0.2); border-radius: 10px; padding: 0.85rem 1rem; margin-bottom: 1.2rem; font-size: 0.82rem; color: #a5b4fc; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
           <div>
-            📡 <strong>Facebook Caption Format:</strong> <code>Title 🌿 💛 #love #poetry #lovequotes #soulmates #foryou</code> (Clean title only, zero clutter).
+            📡 <strong>Facebook Caption Format:</strong> <code>Title 🌿 💛 #love #poetry #lovequotes #soulmates #foryou</code> (Clean exact title only).
           </div>
           <div style="font-size: 0.78rem; color: var(--accent-cyan);">
-            Leave Start Date empty to start at next peak/interval slot.
+            🇳🇵 Timings are scheduled and displayed in Nepal Time (NPT) + USA (EDT/EST).
           </div>
         </div>
 
@@ -869,6 +869,14 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       localStorage.setItem('tg_token', savedTgToken);
       localStorage.setItem('tg_chat', savedTgChat);
 
+      // Set default start time picker to current local time if empty
+      const startPicker = document.getElementById('bulkCloudStartTime');
+      if (startPicker && !startPicker.value) {
+        const now = new Date();
+        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+        startPicker.value = now.toISOString().slice(0, 16);
+      }
+
       populateAllTargetPageDropdowns();
       fetchCloudQueueFromGithub();
       renderQueue();
@@ -1003,7 +1011,16 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
             return pid;
           }).join(', ');
         }
-        const schedDisplay = item.scheduled_time_usa || item.scheduled_time || 'Immediate / Next Slot';
+
+        let schedDisplay = item.scheduled_time_nepal || item.scheduled_time || 'Immediate / Next Slot';
+        if (item.scheduled_epoch) {
+          const d = new Date(item.scheduled_epoch * 1000);
+          const npt = d.toLocaleString('en-US', { timeZone: 'Asia/Kathmandu', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true });
+          const usa = d.toLocaleString('en-US', { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit', hour12: true, timeZoneName: 'short' });
+          schedDisplay = `🇳🇵 ${npt} (Nepal) • 🇺🇸 ${usa} (USA)`;
+        } else if (item.scheduled_time_usa) {
+          schedDisplay = item.scheduled_time_usa;
+        }
 
         return `
           <div class="item-card" style="border-color: rgba(16,185,129,0.25); background: rgba(8, 20, 24, 0.75);">
@@ -1013,7 +1030,7 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
                 <span class="badge ${statusBadgeClass}">${item.status || 'PENDING'}</span>
               </div>
               <p style="font-size: 0.82rem; color: #a5b4fc; margin-bottom: 4px;">
-                📅 <strong>Scheduled:</strong> ${escapeHtml(schedDisplay)} | 🎯 <strong>Target:</strong> <span style="color: #6ee7b7;">${escapeHtml(pageDisplay)}</span>
+                📅 <strong>Scheduled:</strong> <span style="color: #fde047; font-weight: 600;">${escapeHtml(schedDisplay)}</span> | 🎯 <strong>Target:</strong> <span style="color: #6ee7b7; font-weight: 600;">${escapeHtml(pageDisplay)}</span>
               </p>
               <p style="font-size: 0.78rem; color: var(--text-dim); margin-bottom: 4px;">
                 🎨 <strong>Vibe:</strong> ${escapeHtml(item.theme || item.vibe || 'Typewriters Voice Nostalgia')}

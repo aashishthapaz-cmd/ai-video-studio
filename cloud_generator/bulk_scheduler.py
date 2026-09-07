@@ -41,95 +41,67 @@ def compute_next_time_slots(
     target_page_id: str = None, 
     start_time_str: str = None, 
     interval_minutes: int = 120,
-    timezone_str: str = "America/New_York",
-    custom_daily_slots: list = None
+    timezone_str: str = "Asia/Kathmandu",
+    custom_daily_slots: list = None,
+    available_pages: list = None
 ) -> list:
     """
-    Computes upcoming schedule timestamps strictly localized to the target USA timezone (e.g. America/New_York).
-    Aligns to daily peak engagement slots (e.g. 08:30, 13:00, 20:30 EST/EDT) or interval spacing.
+    Computes upcoming schedule timestamps localized to Nepal time (Asia/Kathmandu) and USA timezone.
+    Aligns to interval spacing or daily peak slots.
     Returns a list of dicts with:
-      - scheduled_time: "YYYY-MM-DD HH:MM"
-      - scheduled_time_usa: "YYYY-MM-DD HH:MM EST"
-      - epoch: Unix timestamp (int) for bulletproof timezone-independent comparison
-      - timezone: "America/New_York"
+      - scheduled_time: "YYYY-MM-DD HH:MM" (Nepal Time)
+      - scheduled_time_nepal: "YYYY-MM-DD HH:MM NPT"
+      - scheduled_time_usa: "YYYY-MM-DD HH:MM EDT/EST"
+      - epoch: Unix timestamp (int) for bulletproof universal execution
+      - timezone: "Asia/Kathmandu"
     """
     try:
-        tz = ZoneInfo(timezone_str or "America/New_York")
+        tz_npt = ZoneInfo("Asia/Kathmandu")
     except Exception:
-        tz = ZoneInfo("America/New_York")
+        tz_npt = ZoneInfo("UTC")
+    try:
+        tz_usa = ZoneInfo("America/New_York")
+    except Exception:
+        tz_usa = ZoneInfo("UTC")
 
-    now_tz = datetime.now(tz)
+    now_npt = datetime.now(tz_npt)
 
     if start_time_str:
         cleaned_start = start_time_str.strip()
-        # Remove any timezone name like "EST", "EDT", "UTC" if present at end
         cleaned_start = re.sub(r'\s+[A-Za-z/_-]+$', '', cleaned_start)
         try:
             naive_dt = datetime.strptime(cleaned_start, "%Y-%m-%d %H:%M")
-            base_time = naive_dt.replace(tzinfo=tz)
+            base_time = naive_dt.replace(tzinfo=tz_npt)
         except Exception:
             try:
                 naive_dt = datetime.strptime(cleaned_start, "%Y-%m-%d")
-                base_time = naive_dt.replace(hour=8, minute=30, tzinfo=tz)
+                base_time = naive_dt.replace(hour=now_npt.hour, minute=now_npt.minute, tzinfo=tz_npt)
             except Exception:
-                base_time = now_tz + timedelta(minutes=5)
+                base_time = now_npt + timedelta(minutes=2)
     else:
-        base_time = now_tz + timedelta(minutes=5)
+        base_time = now_npt + timedelta(minutes=2)
 
-    # Ensure base_time is not in the past relative to current USA time
-    if base_time < now_tz:
-        base_time = now_tz + timedelta(minutes=2)
+    # If base_time is in the past, push forward by 2 minutes
+    if base_time < now_npt:
+        base_time = now_npt + timedelta(minutes=2)
 
-    cfg = load_settings()
-    pages = cfg.get("facebook_pages", [])
+    pages = available_pages if (available_pages is not None) else load_settings().get("facebook_pages", [])
     matched_page = next((p for p in pages if str(p.get("id") or p.get("page_id")) == str(target_page_id)), None)
 
-    # Resolve daily slots
-    daily_slots = custom_daily_slots
-    if not daily_slots and matched_page:
-        daily_slots = matched_page.get("usa_time_slots") or matched_page.get("time_slots")
-    if not daily_slots:
-        daily_slots = ["08:30", "13:00", "20:30"]
-
-    daily_slots = sorted(list(set(daily_slots)))
-
     slots = []
-    use_interval = (matched_page and matched_page.get("schedule_type") == "interval") or (interval_minutes != 120 and not matched_page)
-
-    if not use_interval and daily_slots:
-        # Calculate next occurrences of configured daily USA time slots
-        curr_day = base_time.date()
-        max_days = max(365, count * 2)
-        day_count = 0
-        while len(slots) < count and day_count < max_days:
-            for s in daily_slots:
-                try:
-                    parts = s.split(":")
-                    h, m = int(parts[0]), int(parts[1])
-                    slot_dt = datetime(curr_day.year, curr_day.month, curr_day.day, h, m, tzinfo=tz)
-                    if slot_dt >= base_time and len(slots) < count:
-                        epoch = int(slot_dt.timestamp())
-                        slots.append({
-                            "scheduled_time": slot_dt.strftime("%Y-%m-%d %H:%M"),
-                            "scheduled_time_usa": slot_dt.strftime("%Y-%m-%d %H:%M %Z"),
-                            "epoch": epoch,
-                            "timezone": str(tz)
-                        })
-                except Exception:
-                    continue
-            curr_day += timedelta(days=1)
-            day_count += 1
-    else:
-        # Interval spacing from base_time
-        for i in range(count):
-            slot_dt = base_time + timedelta(minutes=i * interval_minutes)
-            epoch = int(slot_dt.timestamp())
-            slots.append({
-                "scheduled_time": slot_dt.strftime("%Y-%m-%d %H:%M"),
-                "scheduled_time_usa": slot_dt.strftime("%Y-%m-%d %H:%M %Z"),
-                "epoch": epoch,
-                "timezone": str(tz)
-            })
+    # Generate sequential interval slots from base_time
+    for i in range(count):
+        slot_dt = base_time + timedelta(minutes=i * interval_minutes)
+        epoch = int(slot_dt.timestamp())
+        npt_dt = datetime.fromtimestamp(epoch, tz=tz_npt)
+        usa_dt = datetime.fromtimestamp(epoch, tz=tz_usa)
+        slots.append({
+            "scheduled_time": npt_dt.strftime("%Y-%m-%d %H:%M"),
+            "scheduled_time_nepal": npt_dt.strftime("%Y-%m-%d %H:%M NPT"),
+            "scheduled_time_usa": usa_dt.strftime("%Y-%m-%d %H:%M %Z"),
+            "epoch": epoch,
+            "timezone": "Asia/Kathmandu"
+        })
 
     return slots
 
@@ -141,14 +113,15 @@ def parse_bulk_scripts(
     default_theme: str = None,
     default_page_ids: list = None,
     default_niche: str = None,
-    timezone_str: str = "America/New_York",
-    auto_distribute_pages: bool = False
+    timezone_str: str = "Asia/Kathmandu",
+    auto_distribute_pages: bool = False,
+    available_pages: list = None
 ) -> list:
     """
     Parses bulk poetry submissions and maps each poem to:
-    1. Assigned Facebook Page(s)
+    1. Assigned Facebook Page(s) across all connected pages
     2. Assigned Poetry Niche (Art, Voice, Typography, Copywriting)
-    3. Exact USA-based posting slot (Timestamp + Epoch)
+    3. Exact Nepal & USA posting slot (Timestamp + Epoch)
     """
     text = raw_text.strip()
     if not text:
@@ -162,9 +135,8 @@ def parse_bulk_scripts(
     else:
         chunks = re.split(r'\n\s*\n+', text)
 
-    cfg = load_settings()
-    available_pages = cfg.get("facebook_pages", [])
-    enabled_pages = [p for p in available_pages if p.get("enabled", True)]
+    pages = available_pages if (available_pages is not None) else load_settings().get("facebook_pages", [])
+    enabled_pages = [p for p in pages if p.get("enabled", True)]
 
     raw_items = []
     
@@ -243,14 +215,15 @@ def parse_bulk_scripts(
             "target_pages": target_pages
         })
 
-    # Compute scheduled times in USA timezone
+    # Compute scheduled times in Nepal timezone
     first_page_id = default_page_ids[0] if (default_page_ids and isinstance(default_page_ids, list) and len(default_page_ids) > 0) else None
     computed_slots = compute_next_time_slots(
         len(raw_items), 
         target_page_id=first_page_id, 
         start_time_str=start_time_str, 
         interval_minutes=interval_minutes,
-        timezone_str=timezone_str
+        timezone_str=timezone_str,
+        available_pages=enabled_pages
     )
 
     jobs = []
@@ -261,22 +234,26 @@ def parse_bulk_scripts(
         if item["custom_time"]:
             sched_time_str = item["custom_time"]
             sched_epoch = None
+            sched_nepal = sched_time_str
             sched_usa = sched_time_str
         else:
             sched_time_str = slot_info.get("scheduled_time")
             sched_epoch = slot_info.get("epoch")
+            sched_nepal = slot_info.get("scheduled_time_nepal")
             sched_usa = slot_info.get("scheduled_time_usa")
 
-        # Multi-page auto-distribution
+        # Multi-page assignment: round-robin if auto_distribute_pages or target_pages empty
         assigned_pages = item["target_pages"]
-        if auto_distribute_pages and enabled_pages:
+        if (auto_distribute_pages or not assigned_pages) and enabled_pages:
             assigned_page = enabled_pages[idx % len(enabled_pages)]
             assigned_pages = [str(assigned_page.get("id") or assigned_page.get("page_id"))]
+        elif not assigned_pages and default_page_ids:
+            assigned_pages = list(default_page_ids)
 
         # Resolve niche
         chosen_niche_id = item["niche"]
         if not chosen_niche_id and assigned_pages:
-            matched_p = next((p for p in available_pages if str(p.get("id") or p.get("page_id")) in assigned_pages), None)
+            matched_p = next((p for p in pages if str(p.get("id") or p.get("page_id")) in assigned_pages), None)
             if matched_p and matched_p.get("niche_id"):
                 chosen_niche_id = matched_p.get("niche_id")
 
@@ -295,6 +272,7 @@ def parse_bulk_scripts(
             "theme": item["theme"] or niche.art.vibe_id,
             "target_page_ids": assigned_pages,
             "scheduled_time": sched_time_str,
+            "scheduled_time_nepal": sched_nepal,
             "scheduled_time_usa": sched_usa,
             "scheduled_epoch": sched_epoch,
             "timezone": timezone_str,
