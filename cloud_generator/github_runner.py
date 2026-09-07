@@ -163,7 +163,27 @@ def run():
 
     # ─── MODE: BULK SCHEDULE ─────────────────────────────────────────────
     if bulk_poems:
-        print(f"\n[Mode: Bulk Schedule] Parsing {len(bulk_poems.split('---'))} poem chunks...", flush=True)
+        bulk_interval_str = os.environ.get("BULK_INTERVAL_INPUT", "").strip()
+        interval_minutes = 120
+        if bulk_interval_str:
+            if bulk_interval_str in ("60", "1h", "1"):
+                interval_minutes = 60
+            elif bulk_interval_str in ("120", "2h", "2"):
+                interval_minutes = 120
+            elif bulk_interval_str in ("180", "3h", "3"):
+                interval_minutes = 180
+            elif bulk_interval_str in ("240", "4h", "4"):
+                interval_minutes = 240
+            elif bulk_interval_str in ("360", "6h", "6"):
+                interval_minutes = 360
+            elif bulk_interval_str in ("720", "12h", "12"):
+                interval_minutes = 720
+            elif bulk_interval_str in ("1440", "24h", "24", "1d"):
+                interval_minutes = 1440
+            elif bulk_interval_str.isdigit():
+                interval_minutes = int(bulk_interval_str)
+
+        print(f"\n[Mode: Bulk Schedule] Parsing poem batch with {interval_minutes}m interval...", flush=True)
 
         page_ids_for_bulk = target_page_ids if target_page_ids else (
             [str(p.get("page_id") or p.get("id")) for p in enabled_pages] if enabled_pages else []
@@ -172,7 +192,7 @@ def run():
         jobs = parse_bulk_scripts(
             raw_text=bulk_poems,
             start_time_str=bulk_start_time or None,
-            interval_minutes=240,
+            interval_minutes=interval_minutes,
             default_page_ids=page_ids_for_bulk,
             auto_distribute_pages=(not target_page_ids and len(enabled_pages) > 1)
         )

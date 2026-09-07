@@ -213,6 +213,14 @@
       box-shadow: 0 0 14px rgba(99, 102, 241, 0.3);
       background: rgba(10, 14, 24, 0.95);
     }
+    input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+      filter: invert(1);
+      cursor: pointer;
+      opacity: 0.85;
+    }
+    input[type="datetime-local"]::-webkit-calendar-picker-indicator:hover {
+      opacity: 1;
+    }
 
     /* Buttons */
     .btn {
@@ -408,49 +416,67 @@ And I'll always admire you for that.</textarea>
       <div class="card" style="border-color: rgba(99,102,241,0.35); background: rgba(15,18,35,0.85);">
         <div class="card-header">
           <h3 class="card-title">⚡ Bulk Schedule to GitHub Actions</h3>
-          <span class="badge badge-rendering">Direct Cloud Dispatch</span>
+          <span class="badge badge-rendering">Numbered Poems & Hourly Cloud Scheduler</span>
         </div>
         <p class="card-desc">
-          Paste multiple poems separated by <code>---</code> and dispatch them all at once to GitHub Actions. Each poem will be rendered and auto-posted at scheduled USA EST peak times (08:30 / 13:00 / 20:30).
+          Paste multiple poems numbered (<code>1. Title \n Poem lines...</code>) or separated by <code>---</code>. The exact title will be used in Facebook captions with 1 emoji, clean poem body, and max 5 hashtags.
         </p>
 
         <div class="form-group">
-          <label>Bulk Poems — Separated by <code>---</code></label>
-          <textarea id="bulkCloudText" style="min-height: 220px;" placeholder="And maybe love is just this — showing up when everything inside you says leave.
-Staying, even when your hands are shaking.
-Even when the words are wrong.
-
----
-
+          <label>Bulk Poems Input (Numbered <code>1. 2. ...</code> or Separated by <code>---</code>)</label>
+          <textarea id="bulkCloudText" style="min-height: 240px;" placeholder="1. Maybe Slowly, Maybe Imperfectly
 I'm proud of you, for not giving up on yourself.
 Even when you were disappointed.
 Even when you felt behind.
+Even when you looked around and thought everyone else was doing better.
 You kept going.
+Maybe slowly, maybe imperfectly.
+But you kept going.
+And I'll always admire you for that.
 
----
-
-Title: She Was Always Going To Leave
-Some people come into your life like a warm wind in October.
-Beautiful and brief.
-And you hold on tighter, knowing they'll go."></textarea>
+2. We'll Both Have Bad Days
+I love you, but I know we'll both have bad days.
+Days when you're irritated.
+Days when I'm tired.
+Days when we take things personally that weren't meant that way.
+But even then, one bad day won't change what you mean to me.
+Through every hard day we go through, you'll have me and I'll have you."></textarea>
         </div>
 
-        <div class="grid-2">
+        <div class="grid-3">
           <div class="form-group">
-            <label>🎯 Target Page for ALL Poems</label>
+            <label>🎯 Target Facebook Page</label>
             <select id="bulkCloudPage">
               <option value="ALL Pages">📢 ALL Enabled Pages (Auto-Distribute)</option>
               <option value="Typewriters Voice (1054247421115636)" selected>✍️ Typewriters Voice (1054247421115636)</option>
             </select>
           </div>
           <div class="form-group">
-            <label>📅 Start Time (USA EST — leave empty = start at next peak slot)</label>
-            <input type="text" id="bulkCloudStartTime" placeholder="e.g. 2024-01-15 08:30 (YYYY-MM-DD HH:MM)">
+            <label>⏰ Posting Frequency / Interval</label>
+            <select id="bulkCloudInterval">
+              <option value="60">Every 1 Hour</option>
+              <option value="120">Every 2 Hours</option>
+              <option value="180">Every 3 Hours</option>
+              <option value="240">Every 4 Hours</option>
+              <option value="360">Every 6 Hours</option>
+              <option value="720">Every 12 Hours</option>
+              <option value="1440">Every 24 Hours (Once a Day)</option>
+              <option value="peak_slots" selected>🌟 Peak USA Slots (08:30 / 13:00 / 20:30 EST)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>📅 Start Date & Time (Calendar Picker)</label>
+            <input type="datetime-local" id="bulkCloudStartTime">
           </div>
         </div>
 
-        <div style="background: rgba(99,102,241,0.08); border: 1px solid rgba(99,102,241,0.2); border-radius: 10px; padding: 0.85rem 1rem; margin-bottom: 1.2rem; font-size: 0.82rem; color: #a5b4fc;">
-          📡 <strong>Peak USA Posting Times:</strong> 08:30 AM EST · 1:00 PM EST · 8:30 PM EST — GitHub Actions cron auto-runs at all 3 slots daily
+        <div style="background: rgba(99,102,241,0.08); border: 1px solid rgba(99,102,241,0.2); border-radius: 10px; padding: 0.85rem 1rem; margin-bottom: 1.2rem; font-size: 0.82rem; color: #a5b4fc; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+          <div>
+            📡 <strong>Auto-Poster:</strong> Generates 9:16 portrait video with Caveat Google font, zero voice lead silence, 1-emoji + 5-hashtag caption, and auto-posts to Facebook.
+          </div>
+          <div style="font-size: 0.78rem; color: var(--accent-cyan);">
+            Leave Start Date empty to start at next peak/interval slot.
+          </div>
         </div>
 
         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
@@ -487,6 +513,7 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
           <div class="form-group">
             <label>Posting Interval Between Videos</label>
             <select id="bulkInterval">
+              <option value="60">Every 1 Hour</option>
               <option value="120">Every 2 Hours</option>
               <option value="180">Every 3 Hours</option>
               <option value="240" selected>Every 4 Hours (Standard GitHub Cron)</option>
@@ -735,9 +762,54 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       localStorage.setItem('tg_token', savedTgToken);
       localStorage.setItem('tg_chat', savedTgChat);
 
+      populateAllTargetPageDropdowns();
       renderQueue();
       renderFbPages();
     });
+
+    function populateAllTargetPageDropdowns() {
+      const singleSelect = document.getElementById('singleTargetPage');
+      const bulkSelect = document.getElementById('bulkCloudPage');
+      const selects = [singleSelect, bulkSelect].filter(Boolean);
+      if (!selects.length) return;
+
+      selects.forEach(function(sel) {
+        const currentVal = sel.value;
+        sel.innerHTML = '';
+
+        // Default "ALL Pages" option
+        const optAll = document.createElement('option');
+        optAll.value = 'ALL Pages';
+        optAll.innerText = sel.id === 'bulkCloudPage' ? '📢 ALL Enabled Pages (Auto-Distribute)' : '📢 ALL Enabled Pages';
+        sel.appendChild(optAll);
+
+        // Populate from FB_PAGES if available
+        if (FB_PAGES && FB_PAGES.length) {
+          FB_PAGES.forEach(function(p) {
+            const opt = document.createElement('option');
+            opt.value = p.name + ' (' + p.id + ')';
+            opt.innerText = '📘 ' + p.name + ' (' + p.id + ')';
+            sel.appendChild(opt);
+          });
+        } else {
+          // Fallback default
+          const optDef = document.createElement('option');
+          optDef.value = 'Typewriters Voice (1054247421115636)';
+          optDef.innerText = '✍️ Typewriters Voice (1054247421115636)';
+          sel.appendChild(optDef);
+        }
+
+        // Restore selection if still present
+        if (currentVal) {
+          for (let i = 0; i < sel.options.length; i++) {
+            if (sel.options[i].value === currentVal) {
+              sel.selectedIndex = i;
+              break;
+            }
+          }
+        }
+      });
+    }
 
     function switchTab(tabId, btnElement) {
       const allButtons = document.querySelectorAll('.tab-btn');
@@ -934,25 +1006,43 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
     async function dispatchBulkToGithub() {
       const raw = document.getElementById('bulkCloudText').value.trim();
       const targetPage = document.getElementById('bulkCloudPage').value;
-      const startTime = document.getElementById('bulkCloudStartTime').value.trim();
+      const intervalVal = document.getElementById('bulkCloudInterval') ? document.getElementById('bulkCloudInterval').value : 'peak_slots';
+      const startTimeInput = document.getElementById('bulkCloudStartTime').value.trim();
 
       if (!raw) {
-        alert('Please paste at least one poem separated by ---');
+        alert('Please paste at least one poem in the input box.');
         return;
       }
 
-      const count = raw.split(/\n\s*---+\s*\n/).filter(function(s) { return s.trim(); }).length;
+      // Format start time if datetime-local used (YYYY-MM-DDTHH:MM -> YYYY-MM-DD HH:MM)
+      let formattedStartTime = '';
+      if (startTimeInput) {
+        formattedStartTime = startTimeInput.replace('T', ' ');
+      }
+
+      // Count poems accurately for toast (supports numbered, ---, or paragraphs)
+      let count = 0;
+      if (new RegExp('(?:^|\\n)\\s*\\d+[\\.\\)]\\s+', 'i').test(raw)) {
+        count = raw.split(new RegExp('(?=(?:^|\\n)\\s*\\d+[\\.\\)]\\s+)', 'gi')).filter(function(s) { return s.trim(); }).length;
+      } else if (new RegExp('\\n\\s*(?:---+|===+|###+)\\s*\\n').test(raw)) {
+        count = raw.split(new RegExp('\\n\\s*(?:---+|===+|###+)\\s*\\n', 'gi')).filter(function(s) { return s.trim(); }).length;
+      } else {
+        count = raw.split(new RegExp('\\n\\s*\\n+', 'g')).filter(function(s) { return s.trim(); }).length;
+      }
+
       showToast('⚡ Dispatching ' + count + ' poem(s) to GitHub Actions bulk scheduler...');
 
       const success = await dispatchWorkflowAPI({
         bulk_poems: raw,
         target_page: targetPage,
-        bulk_start_time: startTime,
+        bulk_start_time: formattedStartTime,
+        bulk_interval: intervalVal,
         publish_facebook: true
       });
 
       if (success) {
-        showToast('✅ ' + count + ' poems dispatched! GitHub Actions will schedule each at USA EST peak slots → ' + targetPage);
+        const intervalDesc = intervalVal === 'peak_slots' ? 'at USA EST peak slots' : 'every ' + (parseInt(intervalVal, 10) >= 60 ? (parseInt(intervalVal, 10)/60) + 'h' : intervalVal + 'm');
+        showToast('✅ ' + count + ' poems dispatched! GitHub Actions will schedule each ' + intervalDesc + ' → ' + targetPage);
         setTimeout(function() { switchTab('gallery'); }, 2000);
       }
     }
@@ -1040,6 +1130,7 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       }
 
       localStorage.setItem('fb_pages', JSON.stringify(FB_PAGES));
+      populateAllTargetPageDropdowns();
       renderFbPages();
 
       document.getElementById('fbPageToken').value = '';
@@ -1240,6 +1331,7 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       if (!confirm('Remove page "' + (FB_PAGES[idx] ? FB_PAGES[idx].name : '') + '"?')) return;
       FB_PAGES.splice(idx, 1);
       localStorage.setItem('fb_pages', JSON.stringify(FB_PAGES));
+      populateAllTargetPageDropdowns();
       renderFbPages();
       showToast('🗑️ Page removed. Click "🔐 Sync to GitHub Secrets" to update GitHub.');
     }

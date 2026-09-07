@@ -79,38 +79,70 @@ def _build_multipart_payload(fields: dict, file_field: str, file_path: Path):
 
 def format_typewriter_facebook_caption(title: str, poem_text: str, custom_hashtags: str = None) -> str:
     """
-    Formats evocative Facebook post copy in the signature @Typewritersvoice style:
-    - Poetic hook line with aesthetic emoji
-    - Clean, beautifully spaced stanzas
-    - Poignant emotional reflection
-    - Curated aesthetic & poetry hashtags
+    Formats clean, high-engagement Facebook post copy:
+    - Title with 1 aesthetic emoji
+    - Cleanly spaced poem body
+    - Maximum 5 relevant hashtags
     """
+    clean_title = str(title or "").strip()
     raw_lines = [l.strip() for l in str(poem_text or "").splitlines() if l.strip()]
-    if not raw_lines:
-        return f"{title}\n\n#typewriter #poetry #love #healing #quotes #aesthetic #reels"
-
-    hook = f'“{raw_lines[0]}” 🍂✨'
     poem_body = "\n".join(raw_lines)
-    reflection = "Save this for the days you need a gentle reminder. 📜🕯️\nTag someone who needs to hear this today."
-    hashtags = custom_hashtags or "#typewriter #typewritersvoice #poetry #spokenword #healing #mentalhealth #aesthetic #reels #quotes #love #heartbreak #peace"
     
-    return f"{hook}\n\n{poem_body}\n\n{reflection}\n\n{hashtags}"
+    # 1 clean emoji
+    emoji = "📜"
+    
+    # Max 5 relevant hashtags
+    if custom_hashtags:
+        tags = [t.strip() for t in custom_hashtags.split() if t.startswith("#")][:5]
+    else:
+        tags = ["#typewritersvoice", "#poetry", "#healing", "#quotes", "#reels"]
+    tags_str = " ".join(tags[:5])
+    
+    if clean_title and clean_title.lower() not in ("untitled", "cloud video", "poem", "quick post"):
+        header = f"{clean_title} {emoji}"
+    elif raw_lines:
+        header = f"{raw_lines[0]} {emoji}"
+    else:
+        header = f"Poetic Reflection {emoji}"
+        
+    return f"{header}\n\n{poem_body}\n\n{tags_str}"
 
 def format_niche_facebook_caption(title: str, poem_text: str, niche) -> str:
     """
     Formats evocative Facebook post copy tuned to the specific poetry niche:
-    Uses niche-specific hook emojis, emotional call to action, and curated hashtags.
+    - Uses exact poem title
+    - 1 niche-specific emoji
+    - Clean poem body
+    - Maximum 5 relevant hashtags
     """
+    clean_title = str(title or "").strip()
     raw_lines = [l.strip() for l in str(poem_text or "").splitlines() if l.strip()]
-    if not raw_lines:
-        return f"{title}\n\n{niche.copy.default_hashtags}"
-
-    hook = f'“{raw_lines[0]}” {niche.copy.hook_emojis}'
     poem_body = "\n".join(raw_lines)
-    reflection = niche.copy.call_to_action
-    hashtags = niche.copy.default_hashtags
     
-    return f"{hook}\n\n{poem_body}\n\n{reflection}\n\n{hashtags}"
+    # 1 emoji
+    emoji = "📜"
+    if niche and hasattr(niche, "copy") and getattr(niche.copy, "hook_emojis", ""):
+        # Take first emoji
+        emojis = [c for c in niche.copy.hook_emojis if ord(c) > 127]
+        if emojis:
+            emoji = emojis[0]
+            
+    # Max 5 relevant hashtags
+    tags = ["#typewritersvoice", "#poetry", "#healing", "#quotes", "#reels"]
+    if niche and hasattr(niche, "copy") and getattr(niche.copy, "default_hashtags", ""):
+        custom_tags = [t.strip() for t in niche.copy.default_hashtags.split() if t.startswith("#")]
+        if custom_tags:
+            tags = custom_tags[:5]
+    tags_str = " ".join(tags[:5])
+    
+    if clean_title and clean_title.lower() not in ("untitled", "cloud video", "poem", "quick post"):
+        header = f"{clean_title} {emoji}"
+    elif raw_lines:
+        header = f"{raw_lines[0]} {emoji}"
+    else:
+        header = f"Poetic Reflection {emoji}"
+        
+    return f"{header}\n\n{poem_body}\n\n{tags_str}"
 
 def publish_video_to_facebook_page(
     video_path: Path,

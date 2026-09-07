@@ -75,6 +75,11 @@ on:
         required: false
         type: string
         default: ''
+      bulk_interval:
+        description: 'Bulk: Interval between posts (e.g. "1h", "2h", "3h", "4h", "6h", "12h", "24h", "peak_slots")'
+        required: false
+        type: string
+        default: 'peak_slots'
 
   # 3. Webhook / Repository Dispatch Trigger (e.g. from Telegram Bot / External API)
   repository_dispatch:
@@ -162,6 +167,7 @@ jobs:
           PUBLISH_FB_INPUT: ${{ inputs.publish_facebook }}
           BULK_POEMS_INPUT: ${{ inputs.bulk_poems }}
           BULK_START_TIME_INPUT: ${{ inputs.bulk_start_time }}
+          BULK_INTERVAL_INPUT: ${{ inputs.bulk_interval }}
           DISPATCH_PAYLOAD: ${{ toJson(github.event.client_payload) }}
         run: |
           python cloud_generator/github_runner.py
