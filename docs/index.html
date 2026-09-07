@@ -8,6 +8,7 @@
   <meta http-equiv="Expires" content="0">
   <title>Autonomous Video Studio & Multi-Page Hub v3.0 — Bulk Scheduler</title>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/libsodium-wrappers@0.7.13/dist/modules/libsodium-wrappers.js"></script>
   <style>
     :root {
       --bg: #07090e;
@@ -530,51 +531,37 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
 
     <!-- TAB 3: FACEBOOK PAGES HUB -->
     <section id="tab-fb" class="panel">
-      <!-- CONNECTED PAGES -->
-      <div class="card" style="border-color: rgba(24,119,242,0.35);">
+      <!-- SYNC STATUS BANNER -->
+      <div class="card" style="border-color: rgba(24,119,242,0.4); background: rgba(10,18,36,0.85);">
         <div class="card-header">
-          <h3 class="card-title">📘 Connected Facebook Pages (GitHub Secrets)</h3>
-          <span class="badge badge-completed">✅ Real Token Active</span>
+          <h3 class="card-title">📘 Facebook Pages & GitHub Secrets Hub</h3>
+          <button class="btn btn-facebook" onclick="syncPagesToGithubSecrets()">🔐 Sync All Pages to GitHub Secrets Now</button>
         </div>
         <p class="card-desc">
-          These pages are configured in your <code>FACEBOOK_PAGES_JSON</code> GitHub Secret and auto-post at USA peak times. Tokens are 100% private — never exposed in the UI.
+          Manage your poetry niche Facebook Pages and Page Access Tokens. When you add or refresh tokens here, click <strong>"🔐 Sync All Pages to GitHub Secrets Now"</strong> to encrypt and save them directly to your repository's <code>FACEBOOK_PAGES_JSON</code> secret in one click!
         </p>
 
-        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-          <!-- Typewriters Voice Page -->
-          <div class="item-card" style="border-color: rgba(24,119,242,0.3); background: rgba(10,20,50,0.6);">
-            <div class="item-info">
-              <h4>📘 Typewriters Voice <span style="font-size: 0.75rem; color: var(--accent-green); background: rgba(16,185,129,0.12); padding: 2px 8px; border-radius: 6px; border: 1px solid rgba(16,185,129,0.3); margin-left: 6px;">✅ Active</span></h4>
-              <p><strong>Page ID:</strong> 1054247421115636 | <strong>Niche:</strong> Typewriters Voice Nostalgia</p>
-              <p style="margin-top: 4px;"><strong>USA Post Slots:</strong> 🕗 08:30 AM EST · 🕑 1:00 PM EST · 🕘 8:30 PM EST</p>
-              <p style="margin-top: 4px; color: var(--text-muted); font-size: 0.78rem;">Token: EAAVi0Y9h7tg•••••••• (secured in GitHub Secret FACEBOOK_PAGES_JSON)</p>
-            </div>
-            <div style="display: flex; gap: 8px; flex-direction: column; align-items: flex-end;">
-              <button class="btn btn-sm btn-facebook" onclick="testConnectedPage('1054247421115636')">🔍 Verify Token</button>
-              <button class="btn btn-sm btn-emerald" onclick="postNowToPage('Typewriters Voice (1054247421115636)')">▶ Post Now</button>
-            </div>
-          </div>
-        </div>
+        <div id="fbPageList" style="margin-top: 1rem; display: flex; flex-direction: column; gap: 0.75rem;"></div>
       </div>
 
       <!-- ADD NEW PAGE -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">➕ Add Another Facebook Page</h3>
-          <span class="badge badge-pending">Stored Locally → Update GitHub Secret</span>
+          <h3 class="card-title">➕ Add or Update Facebook Page Token</h3>
+          <span class="badge badge-pending">Instant Graph API Validation</span>
         </div>
         <p class="card-desc">
-          Add new pages for other poetry niches. After adding, update the <code>FACEBOOK_PAGES_JSON</code> secret in GitHub Settings → Secrets → Actions.
+          Generate a Page Access Token with <code>pages_manage_posts</code>, <code>pages_read_engagement</code>, and <code>pages_show_list</code> permissions from <a href="https://developers.facebook.com/tools/explorer/" target="_blank" style="color: var(--accent-cyan);">Facebook Graph API Explorer</a> or Facebook Business Suite.
         </p>
 
         <div class="grid-2">
           <div class="form-group">
             <label>Page Name</label>
-            <input type="text" id="fbPageName" placeholder="e.g. Daily Poetic Reflections">
+            <input type="text" id="fbPageName" placeholder="e.g. Typewriters Voice">
           </div>
           <div class="form-group">
             <label>Facebook Page ID (Numeric)</label>
-            <input type="text" id="fbPageId" placeholder="e.g. 102938475610293">
+            <input type="text" id="fbPageId" placeholder="e.g. 1054247421115636">
           </div>
         </div>
 
@@ -586,7 +573,7 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
           <div class="form-group">
             <label>Poetry Niche</label>
             <select id="fbPageNiche">
-              <option value="typewriters_voice_nostalgia">✍️ Typewriters Voice Nostalgia</option>
+              <option value="typewriters_voice_nostalgia" selected>✍️ Typewriters Voice Nostalgia</option>
               <option value="dark_romantic_academia">🕯️ Dark Romantic Academia</option>
               <option value="romantic_devotion_soulmates">💞 Romantic Devotion & Soulmates</option>
               <option value="healing_self_worth">🌿 Healing, Self-Worth & Stoic Solace</option>
@@ -596,11 +583,10 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
         </div>
 
         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-          <button class="btn btn-secondary" onclick="testFbToken()">🔍 Test Token</button>
-          <button class="btn btn-facebook" onclick="addFacebookPage()">➕ Add Page</button>
+          <button class="btn btn-secondary" onclick="testFbToken()">🔍 Test Token Connection</button>
+          <button class="btn btn-facebook" onclick="addFacebookPage()">➕ Save Page & Token</button>
+          <button class="btn btn-emerald" onclick="syncPagesToGithubSecrets()">🔐 Sync to GitHub Secrets</button>
         </div>
-
-        <div id="fbPageList" style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem;"></div>
       </div>
     </section>
 
@@ -1036,25 +1022,31 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       const name = document.getElementById('fbPageName').value.trim();
       const id = document.getElementById('fbPageId').value.trim();
       const token = document.getElementById('fbPageToken').value.trim();
+      const niche = document.getElementById('fbPageNiche') ? document.getElementById('fbPageNiche').value : 'typewriters_voice_nostalgia';
 
       if (!name || !id || !token) {
         alert('Please fill in Page Name, Page ID, and Token.');
         return;
       }
 
-      FB_PAGES.push({ name: name, id: id, token: token, created_at: new Date().toISOString() });
+      // Check if page already exists, update if so
+      const existingIdx = FB_PAGES.findIndex(function(p) { return p.id === id; });
+      if (existingIdx >= 0) {
+        FB_PAGES[existingIdx] = { name: name, id: id, token: token, niche: niche, updated_at: new Date().toISOString() };
+      } else {
+        FB_PAGES.push({ name: name, id: id, token: token, niche: niche, created_at: new Date().toISOString() });
+      }
+
       localStorage.setItem('fb_pages', JSON.stringify(FB_PAGES));
       renderFbPages();
 
-      document.getElementById('fbPageName').value = '';
-      document.getElementById('fbPageId').value = '';
       document.getElementById('fbPageToken').value = '';
-
-      showToast('📱 Added Facebook Page: ' + name);
+      showToast('📱 Saved Page "' + name + '". Click "🔐 Sync to GitHub Secrets" to push to GitHub Actions!');
     }
 
     async function testFbToken() {
       const token = document.getElementById('fbPageToken').value.trim();
+      const pageId = document.getElementById('fbPageId').value.trim();
       if (!token) {
         alert('Please enter a Facebook Page Access Token to test.');
         return;
@@ -1062,15 +1054,103 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
 
       showToast('🔍 Validating token with Graph API...');
       try {
-        const res = await fetch('https://graph.facebook.com/v19.0/me?access_token=' + token);
+        const testUrl = pageId ? 'https://graph.facebook.com/v25.0/' + pageId + '?fields=id,name,category&access_token=' + encodeURIComponent(token)
+                               : 'https://graph.facebook.com/v25.0/me?fields=id,name&access_token=' + encodeURIComponent(token);
+        const res = await fetch(testUrl);
         const data = await res.json();
-        if (data.id) {
-          alert('✅ Valid Token for Page: ' + data.name + ' (ID: ' + data.id + ')');
+        if (data.id && !data.error) {
+          alert('✅ Token is VALID!\n\nPage: ' + data.name + ' (ID: ' + data.id + ')\nCategory: ' + (data.category || 'Page') + '\n\nNow click "🔐 Sync to GitHub Secrets" to save it for auto-posting!');
         } else {
-          alert('❌ Token Error: ' + (data.error ? data.error.message : 'Invalid Token'));
+          const err = data.error || {};
+          let msg = '❌ Facebook Error (' + (err.code || 'unknown') + '): ' + (err.message || 'Invalid Token');
+          if (err.code === 190) {
+            msg += '\n\n💡 The Facebook session has expired or changed. Please generate a fresh Page Access Token from Graph API Explorer or Facebook Business Suite.';
+          }
+          alert(msg);
         }
       } catch (err) {
-        alert('Graph API request error: ' + err.message);
+        alert('Graph API network error: ' + err.message);
+      }
+    }
+
+    async function syncPagesToGithubSecrets() {
+      const pat = localStorage.getItem('gh_pat');
+      const repo = localStorage.getItem('gh_repo') || DEFAULT_REPO;
+      if (!pat) {
+        alert('Please enter your GitHub Classic Token in Settings first.');
+        switchTab('settings');
+        return;
+      }
+      if (!FB_PAGES.length) {
+        alert('No Facebook Pages found. Please add your Page and Token first.');
+        return;
+      }
+
+      showToast('🔐 Encrypting and syncing Facebook Pages to GitHub Secrets...');
+
+      try {
+        if (typeof sodium === 'undefined') {
+          throw new Error('libsodium not loaded. Please refresh the page.');
+        }
+        await sodium.ready;
+
+        // 1. Get repository public key
+        const pkRes = await fetch('https://api.github.com/repos/' + repo + '/actions/secrets/public-key', {
+          headers: {
+            'Authorization': 'Bearer ' + pat,
+            'Accept': 'application/vnd.github+json'
+          }
+        });
+        if (!pkRes.ok) {
+          const err = await pkRes.json().catch(function() { return { message: pkRes.statusText }; });
+          throw new Error(err.message || 'Failed to fetch repository public key');
+        }
+        const pkData = await pkRes.json();
+
+        // 2. Prepare JSON payload
+        const formattedPages = FB_PAGES.map(function(p) {
+          return {
+            page_id: p.id,
+            name: p.name,
+            access_token: p.token,
+            enabled: true,
+            as_reel: true,
+            niche_id: p.niche || 'typewriters_voice_nostalgia',
+            usa_time_slots: ["08:30", "13:00", "20:30"],
+            timezone: "America/New_York",
+            hashtags: "#typewriter #typewritersvoice #poetry #spokenword #healing #mentalhealth #aesthetic #reels #quotes #love"
+          };
+        });
+
+        const secretValue = JSON.stringify(formattedPages);
+        const binkey = sodium.from_base64(pkData.key, sodium.base64_variants.ORIGINAL);
+        const binsec = sodium.from_string(secretValue);
+        const encBytes = sodium.crypto_box_seal(binsec, binkey);
+        const encBase64 = sodium.to_base64(encBytes, sodium.base64_variants.ORIGINAL);
+
+        // 3. PUT secret to GitHub
+        const putRes = await fetch('https://api.github.com/repos/' + repo + '/actions/secrets/FACEBOOK_PAGES_JSON', {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'Bearer ' + pat,
+            'Accept': 'application/vnd.github+json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            encrypted_value: encBase64,
+            key_id: pkData.key_id
+          })
+        });
+
+        if (putRes.status === 201 || putRes.status === 204) {
+          showToast('✅ Successfully synced ' + formattedPages.length + ' page(s) to GitHub Secret FACEBOOK_PAGES_JSON!');
+          renderFbPages();
+        } else {
+          const putErr = await putRes.json().catch(function() { return { message: putRes.statusText }; });
+          throw new Error(putErr.message || 'Failed to save secret');
+        }
+      } catch (err) {
+        alert('Error syncing to GitHub Secrets: ' + err.message);
       }
     }
 
@@ -1079,48 +1159,61 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       if (!container) return;
 
       if (!FB_PAGES.length) {
-        container.innerHTML = '<p style="color: var(--text-muted); font-size: 0.85rem;">No Facebook Pages configured yet.</p>';
+        container.innerHTML = '<div style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 8px; border: 1px dashed var(--card-border); color: var(--text-dim); font-size: 0.88rem;">No custom Facebook Pages configured in browser hub yet. Paste your Page ID & fresh Token below and click "Save Page & Token", then click "🔐 Sync to GitHub Secrets".</div>';
         return;
       }
 
       container.innerHTML = FB_PAGES.map(function(p, idx) {
         return `
-          <div class="item-card">
+          <div class="item-card" style="border-color: rgba(24,119,242,0.3); background: rgba(10,20,50,0.6);">
             <div class="item-info">
-              <h4>📘 ${escapeHtml(p.name)}</h4>
-              <p><strong>Page ID:</strong> ${escapeHtml(p.id)} | <strong>Token:</strong> ${escapeHtml(p.token.substring(0, 10))}••••••••</p>
+              <h4>📘 ${escapeHtml(p.name)} <span style="font-size: 0.75rem; color: var(--accent-green); background: rgba(16,185,129,0.12); padding: 2px 8px; border-radius: 6px; border: 1px solid rgba(16,185,129,0.3); margin-left: 6px;">Configured</span></h4>
+              <p><strong>Page ID:</strong> ${escapeHtml(p.id)} | <strong>Niche:</strong> ${escapeHtml(p.niche || 'typewriters_voice_nostalgia')}</p>
+              <p style="margin-top: 4px; color: var(--text-muted); font-size: 0.78rem;"><strong>Token:</strong> ${escapeHtml(p.token.substring(0, 15))}•••••••• (${p.token.length} chars)</p>
             </div>
-            <button class="btn btn-sm btn-secondary" onclick="removeFbPage(${idx})">❌ Remove</button>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              <button class="btn btn-sm btn-facebook" onclick="testSavedPageToken(${idx})">🔍 Test</button>
+              <button class="btn btn-sm btn-emerald" onclick="postNowToPage('${escapeHtml(p.name)} (${escapeHtml(p.id)}')">▶ Post</button>
+              <button class="btn btn-sm btn-secondary" onclick="removeFbPage(${idx})">❌</button>
+            </div>
           </div>
         `;
       }).join('');
     }
 
+    async function testSavedPageToken(idx) {
+      const p = FB_PAGES[idx];
+      if (!p || !p.token) return;
+      showToast('🔍 Testing token for ' + p.name + '...');
+      try {
+        const res = await fetch('https://graph.facebook.com/v25.0/' + p.id + '?fields=id,name,category&access_token=' + encodeURIComponent(p.token));
+        const data = await res.json();
+        if (data.id && !data.error) {
+          alert('✅ Token is VALID for ' + data.name + ' (ID: ' + data.id + ')!');
+        } else {
+          const err = data.error || {};
+          let msg = '❌ Facebook Error (' + (err.code || 'unknown') + '): ' + (err.message || 'Invalid');
+          if (err.code === 190) {
+            msg += '\n\n💡 Session has expired or password changed. Please generate a new token and update it here!';
+          }
+          alert(msg);
+        }
+      } catch (e) {
+        alert('Network error: ' + e.message);
+      }
+    }
+
     function removeFbPage(idx) {
+      if (!confirm('Remove page "' + (FB_PAGES[idx] ? FB_PAGES[idx].name : '') + '"?')) return;
       FB_PAGES.splice(idx, 1);
       localStorage.setItem('fb_pages', JSON.stringify(FB_PAGES));
       renderFbPages();
-    }
-
-    // Test the hardcoded connected page token
-    async function testConnectedPage(pageId) {
-      showToast('🔍 Verifying Typewriters Voice token via Graph API...');
-      try {
-        const res = await fetch('https://graph.facebook.com/v25.0/' + pageId + '?fields=id,name&access_token=' + encodeURIComponent('CHECK_GITHUB_SECRET'));
-        const data = await res.json();
-        if (data.error) {
-          showToast('⚠️ Token check: ' + (data.error.message || 'Cannot verify from browser — token is in GitHub Secret'));
-        } else {
-          showToast('✅ Page verified: ' + data.name);
-        }
-      } catch (e) {
-        showToast('ℹ️ Token is secured in GitHub Secret — cannot verify directly from browser.');
-      }
+      showToast('🗑️ Page removed. Click "🔐 Sync to GitHub Secrets" to update GitHub.');
     }
 
     // Post now to a specific page by dispatching a quick test poem
     async function postNowToPage(targetPage) {
-      const poem = 'And maybe love is just this — showing up when everything inside you says leave.\nStaying, even when your hands are shaking.\nEven when the words are wrong.\nEven when silence is all you have to give.';
+      const poem = 'And maybe love is just this —\nshowing up when everything inside you says leave.\nStaying, even when your hands are shaking.\nEven when the words are wrong.\nEven when silence is all you have to give.';
       showToast('▶ Dispatching instant post to ' + targetPage + '...');
       const success = await dispatchWorkflowAPI({
         script_text: poem,

@@ -161,6 +161,7 @@ def synthesize_huggingface_space_clone(scenes: list, audio_dir: Path, reference_
                 audio_src = res
                 
             shutil.copyfile(audio_src, str(out_file))
+            trim_lead_silence(out_file)
             dur = get_audio_duration(out_file)
             s["audio_path"] = str(out_file)
             s["duration"] = round(dur, 2)
@@ -463,6 +464,7 @@ def synthesize_f5_tts_batch(scenes: list, audio_dir: Path, reference_audio: Path
                 gen_text=text,
                 file_wave=str(out_file)
             )
+        trim_lead_silence(out_file)
         dur = get_audio_duration(out_file)
         s["audio_path"] = str(out_file)
         s["duration"] = round(dur, 2)
@@ -506,6 +508,7 @@ def synthesize_xtts_v2_batch(scenes: list, audio_dir: Path, reference_audio: Pat
             file_path=str(out_file),
             speed=0.75
         )
+        trim_lead_silence(out_file)
         dur = get_audio_duration(out_file)
         s["audio_path"] = str(out_file)
         s["duration"] = round(dur, 2)

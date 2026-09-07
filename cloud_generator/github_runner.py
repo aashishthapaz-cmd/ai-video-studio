@@ -36,8 +36,21 @@ except ImportError:
 
 
 def _inject_fb_pages_from_env(cfg: dict) -> dict:
-    """Inject FACEBOOK_PAGES_JSON env var into settings if present and pages list is empty."""
+    """Inject FACEBOOK_PAGES_JSON env var or DISPATCH_PAYLOAD into settings."""
     pages_json = os.environ.get("FACEBOOK_PAGES_JSON", "").strip()
+
+    # Check if dispatch payload has pages
+    dispatch_payload_str = os.environ.get("DISPATCH_PAYLOAD", "").strip()
+    if dispatch_payload_str and dispatch_payload_str != "null":
+        try:
+            d_payload = json.loads(dispatch_payload_str)
+            if isinstance(d_payload, dict) and "facebook_pages" in d_payload:
+                d_pages = d_payload["facebook_pages"]
+                if isinstance(d_pages, list) and d_pages:
+                    pages_json = json.dumps(d_pages)
+        except Exception:
+            pass
+
     if not pages_json:
         return cfg
     try:
@@ -52,9 +65,11 @@ def _inject_fb_pages_from_env(cfg: dict) -> dict:
                     real_pages.append(p)
             if real_pages:
                 cfg["facebook_pages"] = real_pages
-                print(f"[FB] Loaded {len(real_pages)} Facebook page(s) from FACEBOOK_PAGES_JSON env var.", flush=True)
+                cfg["auto_publish_facebook"] = True
+                print(f"[FB] Loaded {len(real_pages)} Facebook page(s) successfully.", flush=True)
                 for p in real_pages:
-                    print(f"     - {p.get('name', 'Unknown')} | Page ID: {p.get('page_id') or p.get('id')} | Niche: {p.get('niche_id', 'auto')}", flush=True)
+                    tok_preview = (p.get('access_token') or '')[:12] + '••••••••'
+                    print(f"     - {p.get('name', 'Unknown')} | Page ID: {p.get('page_id') or p.get('id')} | Token: {tok_preview} | Niche: {p.get('niche_id', 'auto')}", flush=True)
     except Exception as e:
         print(f"[FB] Warning: Failed to parse FACEBOOK_PAGES_JSON: {e}", flush=True)
     return cfg
