@@ -476,8 +476,8 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
           <div class="form-group">
             <label>🎯 Target Facebook Page</label>
             <select id="bulkCloudPage">
-              <option value="ALL Pages" selected>📢 ALL Enabled Pages Individually (Full Batch to Each Page)</option>
-              <option value="ALL Pages (Broadcast)">🌐 ALL Pages Simultaneously (1 Video Upload to All Pages)</option>
+              <option value="ALL Pages">📢 ALL Enabled Pages (Auto-Distribute)</option>
+              <option value="Typewriters Voice (1054247421115636)" selected>✍️ Typewriters Voice (1054247421115636)</option>
             </select>
           </div>
           <div class="form-group">
@@ -527,6 +527,19 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
           <div style="display:flex; gap:8px; flex-wrap: wrap;">
             <button class="btn btn-secondary btn-sm" onclick="fetchCloudQueueFromGithub()">🔄 Refresh from GitHub</button>
             <button class="btn btn-danger btn-sm" onclick="clearAllPendingCloudQueue()">🗑️ Clear All Pending</button>
+          </div>
+        </div>
+
+        <!-- FILTER BY PAGE TOOLBAR -->
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 1rem; flex-wrap: wrap; background: rgba(0,0,0,0.28); padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+          <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+            <label style="font-size: 0.84rem; color: #a5b4fc; font-weight: 600; margin: 0;">🔍 Filter by Page:</label>
+            <select id="queuePageFilter" onchange="filterCloudQueueByPage(this.value)" style="padding: 6px 12px; border-radius: 6px; font-size: 0.82rem; background: var(--bg-card); color: var(--text-main); border: 1px solid var(--card-border); min-width: 240px;">
+              <option value="ALL">📢 All Pages (Show All Posts)</option>
+            </select>
+          </div>
+          <div id="queueFilterStats" style="font-size: 0.82rem; color: #6ee7b7; font-weight: 600;">
+            Showing all scheduled posts
           </div>
         </div>
 
@@ -903,47 +916,57 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       }
     }
 
+    let CURRENT_QUEUE_PAGE_FILTER = 'ALL';
+
+    function filterCloudQueueByPage(pageVal) {
+      CURRENT_QUEUE_PAGE_FILTER = pageVal || 'ALL';
+      renderCloudQueue();
+    }
+
     function populateAllTargetPageDropdowns() {
       const singleSelect = document.getElementById('singleTargetPage');
       const bulkSelect = document.getElementById('bulkCloudPage');
       const editSelect = document.getElementById('editJobTargetPage');
-      const selects = [singleSelect, bulkSelect, editSelect].filter(Boolean);
+      const filterSelect = document.getElementById('queuePageFilter');
+      const selects = [singleSelect, bulkSelect, editSelect, filterSelect].filter(Boolean);
       if (!selects.length) return;
 
       selects.forEach(function(sel) {
         const currentVal = sel.value;
         sel.innerHTML = '';
 
-        // Default options
-        if (sel.id === 'bulkCloudPage') {
-          const optIndiv = document.createElement('option');
-          optIndiv.value = 'ALL Pages';
-          optIndiv.innerText = '📢 ALL Enabled Pages Individually (Full Batch to Each Page)';
-          sel.appendChild(optIndiv);
-
-          const optBroad = document.createElement('option');
-          optBroad.value = 'ALL Pages (Broadcast)';
-          optBroad.innerText = '🌐 ALL Pages Simultaneously (1 Video Upload to All Pages)';
-          sel.appendChild(optBroad);
+        // Default option
+        const optAll = document.createElement('option');
+        if (sel.id === 'queuePageFilter') {
+          optAll.value = 'ALL';
+          optAll.innerText = '📢 All Pages (Show All Posts)';
+        } else if (sel.id === 'bulkCloudPage') {
+          optAll.value = 'ALL Pages';
+          optAll.innerText = '📢 ALL Enabled Pages (Auto-Distribute)';
         } else {
-          const optAll = document.createElement('option');
           optAll.value = 'ALL Pages';
           optAll.innerText = '📢 ALL Enabled Pages';
-          sel.appendChild(optAll);
         }
+        sel.appendChild(optAll);
 
         // Populate from FB_PAGES if available
         if (FB_PAGES && FB_PAGES.length) {
           FB_PAGES.forEach(function(p) {
             const opt = document.createElement('option');
-            opt.value = p.name + ' (' + p.id + ')';
-            opt.innerText = '📘 ' + p.name + ' (' + p.id + ')';
+            const pageIdStr = String(p.id || p.page_id);
+            if (sel.id === 'queuePageFilter') {
+              opt.value = pageIdStr;
+              opt.innerText = '📘 ' + p.name + ' (' + pageIdStr + ')';
+            } else {
+              opt.value = p.name + ' (' + pageIdStr + ')';
+              opt.innerText = '📘 ' + p.name + ' (' + pageIdStr + ')';
+            }
             sel.appendChild(opt);
           });
         } else {
           // Fallback default
           const optDef = document.createElement('option');
-          optDef.value = 'Typewriters Voice (1054247421115636)';
+          optDef.value = sel.id === 'queuePageFilter' ? '1054247421115636' : 'Typewriters Voice (1054247421115636)';
           optDef.innerText = '✍️ Typewriters Voice (1054247421115636)';
           sel.appendChild(optDef);
         }
@@ -999,15 +1022,39 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
     function renderCloudQueue() {
       const container = document.getElementById('cloudQueueList');
       const countEl = document.getElementById('cloudQueueCount');
+      const statsEl = document.getElementById('queueFilterStats');
       if (countEl) countEl.innerText = CLOUD_QUEUE.length;
       if (!container) return;
 
-      if (!CLOUD_QUEUE.length) {
-        container.innerHTML = '<div style="background: rgba(255,255,255,0.02); padding: 1.25rem; border-radius: 10px; border: 1px dashed var(--card-border); color: var(--text-muted); font-size: 0.88rem; text-align: center;">No scheduled posts in GitHub Actions queue. Use "Bulk Schedule" above to dispatch poems.</div>';
+      let filtered = CLOUD_QUEUE;
+      if (CURRENT_QUEUE_PAGE_FILTER && CURRENT_QUEUE_PAGE_FILTER !== 'ALL' && CURRENT_QUEUE_PAGE_FILTER !== 'ALL Pages') {
+        filtered = CLOUD_QUEUE.filter(function(item) {
+          if (!item.target_page_ids || !item.target_page_ids.length) return false;
+          return item.target_page_ids.some(function(pid) {
+            return String(pid) === String(CURRENT_QUEUE_PAGE_FILTER);
+          });
+        });
+      }
+
+      if (statsEl) {
+        if (CURRENT_QUEUE_PAGE_FILTER === 'ALL' || CURRENT_QUEUE_PAGE_FILTER === 'ALL Pages') {
+          statsEl.innerText = `Showing all ${CLOUD_QUEUE.length} scheduled posts`;
+        } else {
+          let pageName = CURRENT_QUEUE_PAGE_FILTER;
+          if (FB_PAGES && FB_PAGES.length) {
+            const found = FB_PAGES.find(function(p) { return String(p.id || p.page_id) === String(CURRENT_QUEUE_PAGE_FILTER); });
+            if (found) pageName = found.name;
+          }
+          statsEl.innerText = `Showing ${filtered.length} scheduled post(s) for ${pageName}`;
+        }
+      }
+
+      if (!filtered.length) {
+        container.innerHTML = `<div style="background: rgba(255,255,255,0.02); padding: 1.25rem; border-radius: 10px; border: 1px dashed var(--card-border); color: var(--text-muted); font-size: 0.88rem; text-align: center;">No scheduled posts found for this page in the GitHub Actions queue.</div>`;
         return;
       }
 
-      container.innerHTML = CLOUD_QUEUE.map(function(item, index) {
+      container.innerHTML = filtered.map(function(item, index) {
         let statusBadgeClass = 'badge-pending';
         if (item.status === 'COMPLETED' || item.status === 'PUBLISHED') statusBadgeClass = 'badge-completed';
         else if (item.status === 'RUNNING' || item.status === 'RENDERING') statusBadgeClass = 'badge-rendering';
