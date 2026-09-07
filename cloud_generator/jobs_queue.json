@@ -1,29 +1,5 @@
 [
   {
-    "id": "job_1788793546_f47ec9",
-    "title": "Maybe Slowly, Maybe Imperfectly",
-    "script_text": "I'm proud of you, for not giving up on yourself.\nEven when you were disappointed.\nEven when you felt behind.\nEven when you looked around and thought everyone else was doing better.\nYou kept going.\nMaybe slowly, maybe imperfectly.\nBut you kept going.\nAnd I'll always admire you for that.",
-    "niche_id": "typewriters_voice_nostalgia",
-    "niche_name": "Typewriters Voice Nostalgia",
-    "voice": "assets/reference_voice/whishper_prompt.wav",
-    "target_page_ids": [
-      "1084268771446346"
-    ],
-    "scheduled_time": "2026-09-07 20:30",
-    "scheduled_time_usa": "2026-09-07 20:30 EST",
-    "scheduled_epoch": 1788792300,
-    "timezone": "America/New_York",
-    "status": "PENDING",
-    "created_at": "2026-09-07 15:05:46",
-    "render_time": null,
-    "output_file": null,
-    "facebook_results": null,
-    "error": null,
-    "synced_to_local": false,
-    "vibe": "",
-    "updated_at": "2026-09-07T16:05:27.073Z"
-  },
-  {
     "id": "job_1788793546_ba167e",
     "title": "We'll Both Have Bad Days",
     "script_text": "I love you, but I know we'll both have bad days.\nDays when you're irritated.\nDays when I'm tired.\nDays when we take things personally that weren't meant that way.\nBut even then, one bad day won't change what you mean to me.\nThrough every hard day we go through, you'll have me and I'll have you.",
