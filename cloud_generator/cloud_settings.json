@@ -1,11 +1,11 @@
 {
   "image_engine_priority": [
-    "pollinations",
+    "huggingface",
     "cloudflare",
-    "huggingface"
+    "pollinations"
   ],
   "pollinations_model": "flux",
-  "voice_engine": "huggingface_whisper_clone",
+  "voice_engine": "voxcpm_reference",
   "reference_voice_path": "assets/reference_voice/whishper.wav",
   "english_voice": "en-US-ChristopherNeural",
   "nepali_voice": "ne-NP-SagarNeural",

@@ -1,26 +1,53 @@
 import time
 import json
+import io
 import urllib.request
 from pathlib import Path
+from PIL import Image
 
 def generate_huggingface_image(prompt: str, output_path: Path, hf_token: str, model: str = "black-forest-labs/FLUX.1-schnell", width: int = 1080, height: int = 1920, seed: int = None, retries: int = 3) -> str:
     """
     Generates an image via Hugging Face Serverless Inference API (Free tier).
-    Requires a free Hugging Face User Access Token (hf_...).
+    Supports FLUX.1-schnell, SDXL, OpenJourney, etc.
     """
     if not hf_token:
         raise ValueError("Hugging Face API token is required. Get one for free at huggingface.co/settings/tokens")
     
-    url = f"https://api-inference.huggingface.co/models/{model}"
+    # 1. Try Hugging Face Hub InferenceClient (Primary)
+    try:
+        from huggingface_hub import InferenceClient
+        client = InferenceClient(api_key=hf_token, timeout=60)
+        img = client.text_to_image(
+            prompt=prompt,
+            model=model,
+            width=min(width, 1024),
+            height=min(height, 1024),
+            seed=seed
+        )
+        if img:
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+            # If aspect ratio requires resizing to exact output resolution:
+            if img.size != (width, height):
+                img_resized = img.resize((width, height), Image.Resampling.LANCZOS)
+                img_resized.save(output_path, "PNG", quality=95)
+            else:
+                img.save(output_path, "PNG")
+            return str(output_path)
+    except Exception as e:
+        logger_err = str(e)
+    
+    # 2. Direct HTTP Fallback
+    url = f"https://router.huggingface.co/hf-inference/models/{model}"
     headers = {
         "Authorization": f"Bearer {hf_token}",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
     }
     payload = {
         "inputs": prompt,
         "parameters": {
-            "width": width,
-            "height": height
+            "width": min(width, 1024),
+            "height": min(height, 1024)
         }
     }
     if seed is not None:
@@ -37,7 +64,6 @@ def generate_huggingface_image(prompt: str, output_path: Path, hf_token: str, mo
                     output_path.write_bytes(raw)
                     return str(output_path)
         except urllib.error.HTTPError as e:
-            # Model loading 503
             if e.code == 503:
                 try:
                     err_json = json.loads(e.read().decode("utf-8"))
@@ -56,4 +82,4 @@ def generate_huggingface_image(prompt: str, output_path: Path, hf_token: str, mo
             else:
                 raise e
     
-    raise RuntimeError("Hugging Face generation failed.")
+    raise RuntimeError(f"Hugging Face generation failed: {logger_err}")

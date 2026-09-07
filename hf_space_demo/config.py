@@ -12,24 +12,24 @@ OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 WORKSPACE_DIR.mkdir(parents=True, exist_ok=True)
 
 DEFAULT_SETTINGS = {
-    "image_engine_priority": ["pollinations", "cloudflare", "huggingface"],
+    "image_engine_priority": ["huggingface", "cloudflare", "pollinations"],
     "pollinations_model": "flux",
-    "voice_engine": "edge_tts",
+    "voice_engine": "voxcpm_reference",
     "english_voice": "en-US-ChristopherNeural",
     "nepali_voice": "ne-NP-SagarNeural",
-    "voice_rate": "-4%",
-    "voice_pitch": "+0Hz",
+    "voice_rate": "-8%",
+    "voice_pitch": "-2Hz",
     "output_width": 1080,
     "output_height": 1920,
     "video_transition": "dip_to_black",
     "transition_duration": 0.5,
-    "motion_style": "quintic_random",
+    "motion_style": "parallax_2_5d",
     "huggingface_token": os.getenv("HF_TOKEN", ""),
     "cloudflare_account_id": os.getenv("CLOUDFLARE_ACCOUNT_ID", ""),
     "cloudflare_api_token": os.getenv("CLOUDFLARE_API_TOKEN", ""),
     "pollinations_api_key": os.getenv("POLLINATIONS_API_KEY", ""),
     "auto_publish_facebook": False,
-    "default_hashtags": "#poetry #anime #ghibli #reels #art #aesthetic #nepalipoetry",
+    "default_hashtags": "#typewriter #typewritersvoice #poetry #spokenword #healing #mentalhealth #aesthetic #reels #quotes #love",
     "facebook_pages": []
 }
 

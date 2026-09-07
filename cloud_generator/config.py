@@ -10,12 +10,26 @@ WORKSPACE_DIR = BASE_DIR / "workspaces"
 TEMP_CLOUD_DIR = BASE_DIR / "temp_cloud_store"
 JOBS_QUEUE_FILE = BASE_DIR / "jobs_queue.json"
 
+# Auto-load .env from project root or base dir
+for env_candidate in [PROJECT_ROOT / ".env", BASE_DIR / ".env"]:
+    if env_candidate.is_file():
+        try:
+            for line in env_candidate.read_text(encoding="utf-8").splitlines():
+                line = line.strip()
+                if line and not line.startswith("#") and "=" in line:
+                    k, v = line.split("=", 1)
+                    k, v = k.strip(), v.strip().strip("'\"")
+                    if k and k not in os.environ:
+                        os.environ[k] = v
+        except Exception:
+            pass
+
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 WORKSPACE_DIR.mkdir(parents=True, exist_ok=True)
 TEMP_CLOUD_DIR.mkdir(parents=True, exist_ok=True)
 
 DEFAULT_SETTINGS = {
-    "image_engine_priority": ["pollinations", "cloudflare", "huggingface"],
+    "image_engine_priority": ["huggingface", "cloudflare", "pollinations"],
     "pollinations_model": "flux",
     "voice_engine": "voxcpm_reference",
     "reference_voice_path": "assets/reference_voice/whishper.wav",

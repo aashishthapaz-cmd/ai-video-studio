@@ -20,6 +20,12 @@ temp_test/
 logs/
 assets/models/
 
+# Secrets & Environment
+.env
+.env.*
+*.secret
+
 # System & OS
 .DS_Store
 Thumbs.db
+
