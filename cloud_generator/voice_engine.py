@@ -564,6 +564,7 @@ def synthesize_project_audio(scenes: list, audio_dir: Path, voice_override: str 
             print(f"[Voice] Hugging Face Voice Cloning warning ({e}), falling back to Edge Neural TTS...")
 
     results = []
+    edge_tasks = []
     
     for i, scene in enumerate(scenes):
         narration = scene.get("narration", "").strip()
@@ -586,7 +587,7 @@ def synthesize_project_audio(scenes: list, audio_dir: Path, voice_override: str 
             except Exception as e:
                 print(f"[Voice] ElevenLabs warning for {scene_id}: {e}")
 
-        # 5. Standard / Fallback: Edge Neural Cloud TTS (per-scene)
+        # 5. Standard / Fast: Edge Neural Cloud TTS
         if not scene_success:
             if scene_lang == "ne":
                 voice = cfg.get("nepali_voice", "ne-NP-SagarNeural")
@@ -595,14 +596,28 @@ def synthesize_project_audio(scenes: list, audio_dir: Path, voice_override: str 
             rate = rate_override or cfg.get("voice_rate", "-18%")
             pitch = pitch_override or cfg.get("voice_pitch", "-3Hz")
             
-            info = asyncio.run(_synthesize_edge_line(narration, voice, rate, pitch, out_file))
-            scene["audio_path"] = info["audio_path"]
-            scene["duration"] = round(info["duration"], 2)
-            scene["voice"] = voice
-            scene_success = True
+            edge_tasks.append({
+                "scene": scene,
+                "text": narration,
+                "voice": voice,
+                "rate": rate,
+                "pitch": pitch,
+                "out_file": out_file,
+                "lang": scene_lang
+            })
 
-        # Extract precise acoustic word durations for 100% subtitle highlight sync
-        scene["word_durations"] = extract_acoustic_word_durations(out_file, narration, language=scene_lang)
-        results.append(scene)
+    if edge_tasks:
+        async def _batch_synth():
+            aws = [_synthesize_edge_line(t["text"], t["voice"], t["rate"], t["pitch"], t["out_file"]) for t in edge_tasks]
+            return await asyncio.gather(*aws)
+        
+        synth_results = asyncio.run(_batch_synth())
+        for task, info in zip(edge_tasks, synth_results):
+            sc = task["scene"]
+            sc["audio_path"] = info["audio_path"]
+            sc["duration"] = round(info["duration"], 2)
+            sc["voice"] = task["voice"]
+            sc["word_durations"] = extract_acoustic_word_durations(task["out_file"], task["text"], language=task["lang"])
+            results.append(sc)
 
     return results

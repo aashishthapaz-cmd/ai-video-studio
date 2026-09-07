@@ -49,6 +49,7 @@ def render(
     if scene_durations:
         requested_total = sum(max(0.01, float(value)) for value in scene_durations[:len(assets)])
         duration_scale = narration_total / requested_total if requested_total > 0 else 1.0
+    clip_tasks = []
     for index, asset in enumerate(assets, start=1):
         clip = output.parent / f"clip_{index}.mp4"
         if scene_durations and index - 1 < len(scene_durations):
@@ -57,8 +58,18 @@ def render(
                 seconds += END_FADE_SECONDS
         else:
             seconds = total / max(1, len(assets))
-        _clip(asset.path, clip, max(1.0, seconds), preset=preset, variant=index, video_format=video_format, motion_style=motion_style)
+        clip_tasks.append((asset.path, clip, max(1.0, seconds), preset, index, video_format, motion_style))
         clips.append(clip)
+
+    import concurrent.futures
+    def _render_task(t):
+        img_p, clp_p, sec, pr, var, vf, mot = t
+        _clip(img_p, clp_p, sec, preset=pr, variant=var, video_format=vf, motion_style=mot)
+        return clp_p
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=min(4, max(1, len(clip_tasks)))) as executor:
+        list(executor.map(_render_task, clip_tasks))
+
     concat = output.parent / "concat.txt"
     concat.write_text("".join(f"file '{clip.resolve().as_posix()}'\n" for clip in clips), encoding="utf-8")
     cap = str(captions).replace("\\", "/").replace(":", "\\:")
