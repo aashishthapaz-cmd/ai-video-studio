@@ -230,30 +230,6 @@
     "synced_to_local": false
   },
   {
-    "id": "job_1788798263_933962",
-    "title": "We Suffer More In Imagination",
-    "script_text": "We suffer more in imagination than in reality.\nWe live inside our heads all the time.\nIt doesn't matter what the reality actually is.\nThe problem is we overthink everything.\nMost of our pain doesn't come from what happens, but from what we imagine might happen.",
-    "niche_id": "typewriters_voice_nostalgia",
-    "niche_name": "Typewriters Voice Nostalgia",
-    "voice": "assets/reference_voice/whishper_prompt.wav",
-    "theme": "typewriters_voice_nostalgia",
-    "target_page_ids": [
-      "1111538525383568"
-    ],
-    "scheduled_time": "2026-09-08 06:11",
-    "scheduled_time_nepal": "2026-09-08 06:11 NPT",
-    "scheduled_time_usa": "2026-09-07 20:26 EDT",
-    "scheduled_epoch": 1788827183,
-    "timezone": "Asia/Kathmandu",
-    "status": "PENDING",
-    "created_at": "2026-09-07 16:24:23",
-    "render_time": null,
-    "output_file": null,
-    "facebook_results": null,
-    "error": null,
-    "synced_to_local": false
-  },
-  {
     "id": "job_1788798263_47fb3f",
     "title": "Why That Happens Every Time",
     "script_text": "I forgive people easily. I trust people easily.\nI forget the bad things they did easily.\nI always believe they'll be different this time.\nI keep giving chances they never deserve, and I see the good in people, even when they show me the worst.\nAnd somehow, I end up being the one who gets hurt, every single time.",
