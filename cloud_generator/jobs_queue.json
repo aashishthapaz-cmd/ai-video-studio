@@ -230,30 +230,6 @@
     "synced_to_local": false
   },
   {
-    "id": "job_1788798263_a305b5",
-    "title": "Understanding Is Art",
-    "script_text": "Understanding is art, and not everyone is an artist.\nSome paint with their eyes. Some paint with their ego.\nOnly a few paint with their heart.\nThe greatest works are never hung on walls.\nThey live quietly inside people's hearts.",
-    "niche_id": "typewriters_voice_nostalgia",
-    "niche_name": "Typewriters Voice Nostalgia",
-    "voice": "assets/reference_voice/whishper_prompt.wav",
-    "theme": "typewriters_voice_nostalgia",
-    "target_page_ids": [
-      "1111538525383568"
-    ],
-    "scheduled_time": "2026-09-08 02:11",
-    "scheduled_time_nepal": "2026-09-08 02:11 NPT",
-    "scheduled_time_usa": "2026-09-07 16:26 EDT",
-    "scheduled_epoch": 1788812783,
-    "timezone": "Asia/Kathmandu",
-    "status": "PENDING",
-    "created_at": "2026-09-07 16:24:23",
-    "render_time": null,
-    "output_file": null,
-    "facebook_results": null,
-    "error": null,
-    "synced_to_local": false
-  },
-  {
     "id": "job_1788798263_933962",
     "title": "We Suffer More In Imagination",
     "script_text": "We suffer more in imagination than in reality.\nWe live inside our heads all the time.\nIt doesn't matter what the reality actually is.\nThe problem is we overthink everything.\nMost of our pain doesn't come from what happens, but from what we imagine might happen.",
