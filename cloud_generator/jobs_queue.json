@@ -207,29 +207,6 @@
     "synced_to_local": false
   },
   {
-    "id": "job_1788794342_0cd751",
-    "title": "You Feel Like A Part Of Me",
-    "script_text": "I wasn't looking for you when I met you.\nBut now, with you, it feels like a part of me always wanted this.\nMy heart stopped searching for anything else,\nthe moment it found you.",
-    "niche_id": "typewriters_voice_nostalgia",
-    "niche_name": "Typewriters Voice Nostalgia",
-    "voice": "assets/reference_voice/whishper_prompt.wav",
-    "theme": "typewriters_voice_nostalgia",
-    "target_page_ids": [
-      "1189803517542569"
-    ],
-    "scheduled_time": "2026-09-07 20:30",
-    "scheduled_time_usa": "2026-09-07 20:30 EDT",
-    "scheduled_epoch": 1788827400,
-    "timezone": "America/New_York",
-    "status": "PENDING",
-    "created_at": "2026-09-07 15:19:02",
-    "render_time": null,
-    "output_file": null,
-    "facebook_results": null,
-    "error": null,
-    "synced_to_local": false
-  },
-  {
     "id": "job_1788794342_76079f",
     "title": "The Only Moment You Can Shape",
     "script_text": "No amount of regret rewrites yesterday.\nNo amount of worry controls tomorrow.\nNo guilt can undo what's already happened.\nNo overthinking has ever brought peace.\nThe only moment you can shape is this one.\nLive it with intention. Make it beautiful.",
