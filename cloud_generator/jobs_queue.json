@@ -207,29 +207,6 @@
     "synced_to_local": false
   },
   {
-    "id": "job_1788794342_76079f",
-    "title": "The Only Moment You Can Shape",
-    "script_text": "No amount of regret rewrites yesterday.\nNo amount of worry controls tomorrow.\nNo guilt can undo what's already happened.\nNo overthinking has ever brought peace.\nThe only moment you can shape is this one.\nLive it with intention. Make it beautiful.",
-    "niche_id": "typewriters_voice_nostalgia",
-    "niche_name": "Typewriters Voice Nostalgia",
-    "voice": "assets/reference_voice/whishper_prompt.wav",
-    "theme": "typewriters_voice_nostalgia",
-    "target_page_ids": [
-      "1189803517542569"
-    ],
-    "scheduled_time": "2026-09-08 08:30",
-    "scheduled_time_usa": "2026-09-08 08:30 EDT",
-    "scheduled_epoch": 1788870600,
-    "timezone": "America/New_York",
-    "status": "PENDING",
-    "created_at": "2026-09-07 15:19:02",
-    "render_time": null,
-    "output_file": null,
-    "facebook_results": null,
-    "error": null,
-    "synced_to_local": false
-  },
-  {
     "id": "job_1788798263_17003c",
     "title": "Your Wound Is Not Your Fault",
     "script_text": "Your wound is not your fault, but your healing is your responsibility.\nNo one can rewrite your past, but you can decide how your story continues.\nHeal, so the pain ends with you, not with the people you love.",
