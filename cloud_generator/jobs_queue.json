@@ -207,30 +207,6 @@
     "synced_to_local": false
   },
   {
-    "id": "job_1788798263_17003c",
-    "title": "Your Wound Is Not Your Fault",
-    "script_text": "Your wound is not your fault, but your healing is your responsibility.\nNo one can rewrite your past, but you can decide how your story continues.\nHeal, so the pain ends with you, not with the people you love.",
-    "niche_id": "typewriters_voice_nostalgia",
-    "niche_name": "Typewriters Voice Nostalgia",
-    "voice": "assets/reference_voice/whishper_prompt.wav",
-    "theme": "typewriters_voice_nostalgia",
-    "target_page_ids": [
-      "1111538525383568"
-    ],
-    "scheduled_time": "2026-09-08 14:11",
-    "scheduled_time_nepal": "2026-09-08 14:11 NPT",
-    "scheduled_time_usa": "2026-09-08 04:26 EDT",
-    "scheduled_epoch": 1788855983,
-    "timezone": "Asia/Kathmandu",
-    "status": "PENDING",
-    "created_at": "2026-09-07 16:24:23",
-    "render_time": null,
-    "output_file": null,
-    "facebook_results": null,
-    "error": null,
-    "synced_to_local": false
-  },
-  {
     "id": "job_1788798263_663f56",
     "title": "Your Best Chapter Is Still Waiting",
     "script_text": "If you're strong enough to fall in love and give everything you have,\nyou're strong enough to let it all go.\nStrong enough to pick up your pieces and start over.\nBecause the end of one story is never the end of your story.\nYour best chapter is still waiting to be written.",
