@@ -1,28 +1,5 @@
 [
   {
-    "id": "job_1788793546_ba167e",
-    "title": "We'll Both Have Bad Days",
-    "script_text": "I love you, but I know we'll both have bad days.\nDays when you're irritated.\nDays when I'm tired.\nDays when we take things personally that weren't meant that way.\nBut even then, one bad day won't change what you mean to me.\nThrough every hard day we go through, you'll have me and I'll have you.",
-    "niche_id": "typewriters_voice_nostalgia",
-    "niche_name": "Typewriters Voice Nostalgia",
-    "voice": "assets/reference_voice/whishper_prompt.wav",
-    "theme": "typewriters_voice_nostalgia",
-    "target_page_ids": [
-      "1084268771446346"
-    ],
-    "scheduled_time": "2026-09-08 13:00",
-    "scheduled_time_usa": "2026-09-08 13:00 EDT",
-    "scheduled_epoch": 1788886800,
-    "timezone": "America/New_York",
-    "status": "PENDING",
-    "created_at": "2026-09-07 15:05:46",
-    "render_time": null,
-    "output_file": null,
-    "facebook_results": null,
-    "error": null,
-    "synced_to_local": false
-  },
-  {
     "id": "job_1788793546_1c8213",
     "title": "I Don't Want To Keep Score",
     "script_text": "I love you, and I don't want us to keep score.\nWho was irritated first, who did more, who was right, who made the last mistake.\nI don't want to win against you.\nI want us to get through things together.\nBecause no matter what we're going through, it will always be us, me and you.",
