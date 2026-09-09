@@ -1,28 +1,5 @@
 [
   {
-    "id": "job_1788793546_c3040b",
-    "title": "Honesty Is Part Of Loving You",
-    "script_text": "Loving you doesn't always mean I'll agree with you.\nSometimes I'll be real with you.\nI'll tell you what you don't want to hear.\nNot to hurt you, not to prove you wrong.\nBut because I care about you.\nAnd honesty is part of loving you.",
-    "niche_id": "typewriters_voice_nostalgia",
-    "niche_name": "Typewriters Voice Nostalgia",
-    "voice": "assets/reference_voice/whishper_prompt.wav",
-    "theme": "typewriters_voice_nostalgia",
-    "target_page_ids": [
-      "1084268771446346"
-    ],
-    "scheduled_time": "2026-09-09 20:30",
-    "scheduled_time_usa": "2026-09-09 20:30 EDT",
-    "scheduled_epoch": 1789000200,
-    "timezone": "America/New_York",
-    "status": "PENDING",
-    "created_at": "2026-09-07 15:05:46",
-    "render_time": null,
-    "output_file": null,
-    "facebook_results": null,
-    "error": null,
-    "synced_to_local": false
-  },
-  {
     "id": "job_1788793546_b18c9d",
     "title": "Proud Of The Things Nobody Claps For",
     "script_text": "I'm proud of you.\nAnd not only when you succeed.\nI'm proud of the things nobody claps for.\nThe days you kept going.\nThe things you carried quietly.\nThe times you almost gave up.\nYou may not always see how far you've come.\nBut I do.\nI always believe in you.",
