@@ -161,30 +161,6 @@
     "synced_to_local": false
   },
   {
-    "id": "job_1788798263_444912",
-    "title": "Sometimes You Just Have To Accept It",
-    "script_text": "Sometimes you just have to accept the situation.\nUnderstand that it's okay. It happens. It's life.\nNot every ending needs an explanation.\nNot every loss deserves another chance.\nSome chapters are only meant to teach, not to stay.\nAnd one day, you'll thank life for what it didn't let you keep.",
-    "niche_id": "typewriters_voice_nostalgia",
-    "niche_name": "Typewriters Voice Nostalgia",
-    "voice": "assets/reference_voice/whishper_prompt.wav",
-    "theme": "typewriters_voice_nostalgia",
-    "target_page_ids": [
-      "1111538525383568"
-    ],
-    "scheduled_time": "2026-09-09 06:11",
-    "scheduled_time_nepal": "2026-09-09 06:11 NPT",
-    "scheduled_time_usa": "2026-09-08 20:26 EDT",
-    "scheduled_epoch": 1788913583,
-    "timezone": "Asia/Kathmandu",
-    "status": "PENDING",
-    "created_at": "2026-09-07 16:24:23",
-    "render_time": null,
-    "output_file": null,
-    "facebook_results": null,
-    "error": null,
-    "synced_to_local": false
-  },
-  {
     "id": "job_1788798263_cfd6a8",
     "title": "A Soul Your Own Has Always Known",
     "script_text": "There is a legend that says when you meet your soulmate,\nyou'll feel a sudden sense of calm and peace,\nas if you've finally come home after a very long journey.\nAnd in their eyes, you'll recognize a soul your own has always known.",
