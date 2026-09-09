@@ -46,29 +46,6 @@
     "synced_to_local": false
   },
   {
-    "id": "job_1788793546_8087ac",
-    "title": "You Know You Got Me",
-    "script_text": "Sometimes I'm annoyed, and I really want to stay annoyed.\nThen you say something stupid.\nI try not to laugh.\nYou notice.\nAnd now you're smiling because you know you got me.\nSo I'm trying even harder not to smile.\nI hate when you do that.\nBut I love that you know just how to.",
-    "niche_id": "typewriters_voice_nostalgia",
-    "niche_name": "Typewriters Voice Nostalgia",
-    "voice": "assets/reference_voice/whishper_prompt.wav",
-    "theme": "typewriters_voice_nostalgia",
-    "target_page_ids": [
-      "1084268771446346"
-    ],
-    "scheduled_time": "2026-09-11 08:30",
-    "scheduled_time_usa": "2026-09-11 08:30 EDT",
-    "scheduled_epoch": 1789129800,
-    "timezone": "America/New_York",
-    "status": "PENDING",
-    "created_at": "2026-09-07 15:05:46",
-    "render_time": null,
-    "output_file": null,
-    "facebook_results": null,
-    "error": null,
-    "synced_to_local": false
-  },
-  {
     "id": "job_1788800390_301f73",
     "title": "He Was Just Doing His Best",
     "script_text": "As you grow older, you begin to understand.\nYour father was just a man, trying his best with what he knew.\nHe put your needs before his own.\nHe traded some of his dreams for the dreams he had for you.\nHe was living life for the first time too.",
