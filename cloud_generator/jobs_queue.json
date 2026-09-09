@@ -23,30 +23,6 @@
     "synced_to_local": false
   },
   {
-    "id": "job_1788800390_301f73",
-    "title": "He Was Just Doing His Best",
-    "script_text": "As you grow older, you begin to understand.\nYour father was just a man, trying his best with what he knew.\nHe put your needs before his own.\nHe traded some of his dreams for the dreams he had for you.\nHe was living life for the first time too.",
-    "niche_id": "typewriters_voice_nostalgia",
-    "niche_name": "Typewriters Voice Nostalgia",
-    "voice": "assets/reference_voice/whishper_prompt.wav",
-    "theme": "typewriters_voice_nostalgia",
-    "target_page_ids": [
-      "1256616857537225"
-    ],
-    "scheduled_time": "2026-09-07 22:46",
-    "scheduled_time_nepal": "2026-09-07 22:46 NPT",
-    "scheduled_time_usa": "2026-09-07 13:01 EDT",
-    "scheduled_epoch": 1788800510,
-    "timezone": "Asia/Kathmandu",
-    "status": "PENDING",
-    "created_at": "2026-09-07 16:59:50",
-    "render_time": null,
-    "output_file": null,
-    "facebook_results": null,
-    "error": null,
-    "synced_to_local": false
-  },
-  {
     "id": "job_1788800390_88e245",
     "title": "As Adults We Understand Villains",
     "script_text": "As kids, we love the heroes.\nBut as adults, we understand the villains.\nLife teaches us that people aren't simply good or bad.\nSometimes the villain is just someone who got tired of being hurt,\nsomeone who stopped explaining themselves, someone who finally chose themselves after being forgotten.",
