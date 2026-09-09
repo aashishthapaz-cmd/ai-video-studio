@@ -1,28 +1,5 @@
 [
   {
-    "id": "job_1788793546_1c8213",
-    "title": "I Don't Want To Keep Score",
-    "script_text": "I love you, and I don't want us to keep score.\nWho was irritated first, who did more, who was right, who made the last mistake.\nI don't want to win against you.\nI want us to get through things together.\nBecause no matter what we're going through, it will always be us, me and you.",
-    "niche_id": "typewriters_voice_nostalgia",
-    "niche_name": "Typewriters Voice Nostalgia",
-    "voice": "assets/reference_voice/whishper_prompt.wav",
-    "theme": "typewriters_voice_nostalgia",
-    "target_page_ids": [
-      "1084268771446346"
-    ],
-    "scheduled_time": "2026-09-08 20:30",
-    "scheduled_time_usa": "2026-09-08 20:30 EDT",
-    "scheduled_epoch": 1788913800,
-    "timezone": "America/New_York",
-    "status": "PENDING",
-    "created_at": "2026-09-07 15:05:46",
-    "render_time": null,
-    "output_file": null,
-    "facebook_results": null,
-    "error": null,
-    "synced_to_local": false
-  },
-  {
     "id": "job_1788793546_2b8e98",
     "title": "So Much Further Than Where You Started",
     "script_text": "I'm proud of you.\nBecause I remember when this used to feel impossible.\nWhen you doubted yourself.\nWhen you didn't know if you could do it.\nAnd now look at you.\nMaybe you're still not where you want to be.\nBut you're so much further than where you started.\nEvery step brought you here.\nAnd I'm so proud of you.",
