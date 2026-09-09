@@ -88,7 +88,8 @@ def generate_scene_image(
 
     priority = (
         [preferred_engine] if preferred_engine
-        else cfg.get("image_engine_priority", ["huggingface", "pollinations", "cloudflare"])
+        # HuggingFace → Cloudflare → Pollinations (last resort only)
+        else cfg.get("image_engine_priority", ["huggingface", "cloudflare", "pollinations"])
     )
 
     errors = []

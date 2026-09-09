@@ -710,88 +710,127 @@ MOTION_STYLES_POOL = [
     "slow_pan_right",
     "slow_drift_up",
     "slow_drift_down",
-    "slow_diagonal_drift"
+"slow_diagonal_drift"
 ]
 
 def _extract_poetic_motifs(line: str, topic: str = "") -> dict:
     """
-    Extracts core visual imagery, celestial elements, natural landscapes,
-    weather conditions, architectural structures, and emotional tone directly from the poem text.
-    Works natively on both English and Nepali / Devanagari text.
+    Deep semantic poem analyzer.
+    Extracts the HUMAN SUBJECT, emotional meaning, relationship, action/gesture,
+    and setting from the actual poem line — so that generated images directly
+    portray what the poem is about, not generic landscapes.
+    Works on English and Nepali / Devanagari text.
     """
     lower = line.lower()
-    
-    # 1. Weather & Atmosphere
-    weather = []
-    if any(k in lower for k in ["rain", "rainy", "storm", "drizzle", "puddle", "पर्षा", "पानी", "झरी", "बर्षा", "झरि"]):
-        weather.append("gentle cinematic rainfall creating delicate concentric rings in water puddles")
-    elif any(k in lower for k in ["snow", "winter", "frost", "cold", "flurry", "हिउँ", "चिसो"]):
-        weather.append("soft delicate snowflakes floating in quiet stillness")
-    elif any(k in lower for k in ["mist", "fog", "haze", "cloud", "steam", "कुहिरो", "हुस्सु", "बादल"]):
-        weather.append("ethereal swirling mist and low-hanging atmospheric fog")
-    elif any(k in lower for k in ["sun", "sunny", "golden", "warm", "sunlight", "घाम", "उज्यालो", "प्रकाश"]):
-        weather.append("radiant golden sunbeams breaking through atmosphere")
-    elif any(k in lower for k in ["wind", "breeze", "whisper", "हावा", "बतास", "सिरसिर"]):
-        weather.append("gentle rustling breeze carrying drifting airborne leaves")
-    else:
-        weather.append("crisp atmospheric clarity with subtle floating dust motes")
 
-    # 2. Celestial & Time of Day
-    time_of_day = []
-    if any(k in lower for k in ["star", "galaxy", "cosmos", "comet", "constellation", "तारा", "ताराहरू", "आकाश"]):
-        time_of_day.append("under an expansive starry cosmic sky glittering with distant constellations")
-    elif any(k in lower for k in ["moon", "moonlight", "lunar", "crescent", "चन्द्रमा", "जून"]):
-        time_of_day.append("illuminated by the serene silver luminescence of a glowing moon")
-    elif any(k in lower for k in ["night", "midnight", "dark", "dusk", "2am", "रात", "सन्नाटा", "अँध्यारो"]):
-        time_of_day.append("at deep quiet twilight with deep indigo gradients")
-    elif any(k in lower for k in ["sunset", "twilight", "evening", "horizon", "साँझ", "गो Godhuli", "क्षितिज"]):
-        time_of_day.append("during breathtaking magic-hour twilight with magenta and amber glow")
-    elif any(k in lower for k in ["morning", "dawn", "sunrise", "wake", "बिहानी", "उषा", "प्रभात"]):
-        time_of_day.append("at peaceful early dawn with dewy pastel luminescence")
-    else:
-        time_of_day.append("under dramatic atmospheric lighting with rich depth")
+    # ── 1. HUMAN SUBJECT DETECTION (highest priority) ──────────────────────
+    # Identifies the actual person/relationship the poem is about
+    human_subject = None
 
-    # 3. Nature & Scenery Elements
-    scenery = []
-    if any(k in lower for k in ["window", "pane", "room", "balcony", "porch", "veranda", "sill", "interior", "house", "home", "झ्याल", "कोठा", "बार्दली", "घर"]):
-        scenery.append("a quiet cozy room with a large rain-streaked wooden window overlooking the open world")
-    if any(k in lower for k in ["street", "road", "alley", "path", "trail", "lane", "way", "walk", "सडक", "बाटो", "गल्ली", "गोरेटो"]):
-        scenery.append("a solitary winding stone path with textured surface reflections leading toward horizon")
-    if any(k in lower for k in ["mountain", "hill", "peak", "valley", "cliff", "ridge", "पहाड", "हिमाल", "डाँडा", "उपत्यका", "भीर"]):
-        scenery.append("towering serene mountain ridges shrouded in soft velvet shadows")
-    if any(k in lower for k in ["river", "stream", "lake", "ocean", "sea", "wave", "water", "shore", "coast", "खोला", "नदी", "ताल", "समुद्र", "छाल", "किनार"]):
-        scenery.append("calm reflective waters capturing mirror-like ripples and atmospheric glow")
-    if any(k in lower for k in ["tree", "forest", "wood", "bamboo", "branch", "रुख", "वन", "जङ्गल", "बाँस"]):
-        scenery.append("an ancient mossy forest canopy with sun-dappled foliage")
-    if any(k in lower for k in ["flower", "rose", "sakura", "blossom", "leaf", "leaves", "autumn", "meadow", "garden", "फूल", "गुलाब", "पात", "कमल", "बगैंचा", "फाँट"]):
-        scenery.append("a tranquil wildflower meadow with drifting petals and vibrant organic flora")
-    if any(k in lower for k in ["sky", "cloud", "clouds", "heavens", "horizon", "stars", "आकाश", "गगन", "बादल", "क्षितिज"]):
-        scenery.append("an expansive panoramic horizon with layered dramatic clouds and celestial depth")
+    if any(k in lower for k in ["father", "dad", "papa", "बुबा", "बाबा", "पिता", "my old man"]):
+        human_subject = "father"
+    elif any(k in lower for k in ["mother", "mom", "mama", "आमा", "माता", "mum"]):
+        human_subject = "mother"
+    elif any(k in lower for k in ["child", "son", "daughter", "baby", "little one", "छोरा", "छोरी", "बच्चा", "सन्तान"]):
+        human_subject = "child"
+    elif any(k in lower for k in ["lover", "beloved", "darling", "sweetheart", "partner", "husband", "wife",
+                                   "प्रेमी", "प्रेमिका", "साथी", "श्रीमान", "श्रीमती"]):
+        human_subject = "lover"
+    elif any(k in lower for k in ["friend", "friendship", "साथी", "मित्र", "दोस्त"]):
+        human_subject = "friend"
+    elif any(k in lower for k in ["self", "myself", "i am", "i was", "i have", "i've", "i'm", "i kept", "i'm proud", "you kept", "you were", "you felt", "you looked"]):
+        human_subject = "self_reflection"
+    elif any(k in lower for k in ["stranger", "someone", "person", "figure", "soul", "अर्को", "कोही"]):
+        human_subject = "anonymous_figure"
 
-    # 4. Focal Anchors & Metaphors
-    focal = []
-    if any(k in lower for k in ["lamp", "lantern", "light", "candle", "flame", "glow", "बत्ती", "दियो", "शिखा"]):
-        focal.append("a warm glowing lantern casting amber reflections across textured ground")
-    if any(k in lower for k in ["window", "glass", "balcony", "door", "room", "house", "झ्याल", "ढोका", "कोठा", "घर"]):
-        focal.append("an evocative wooden window frame looking out into the expansive world")
-    if any(k in lower for k in ["bridge", "temple", "pagoda", "bench", "train", "station", "पुल", "मन्दिर", "गुम्बा"]):
-        focal.append("an atmospheric architectural structure standing peacefully in timeless contemplation")
-    if any(k in lower for k in ["alone", "lonely", "silhouette", "figure", "journey", "walk", "एकान्त", "एक्लै", "यात्री"]):
-        focal.append("a tiny solitary traveler silhouette in vast negative space")
-    if any(k in lower for k in ["heart", "love", "memory", "remember", "soul", "peace", "माया", "मुटु", "सम्झना", "मन", "शान्ति"]):
-        focal.append("an intimate poetic atmosphere charged with tender emotional resonance")
+    # ── 2. EMOTIONAL CORE ──────────────────────────────────────────────────
+    emotion = "quiet contemplation"
+    if any(k in lower for k in ["sacrifice", "gave up", "gave everything", "worked", "struggled", "hardship", "suffering", "tired", "worn", "burden"]):
+        emotion = "sacrifice and silent struggle"
+    elif any(k in lower for k in ["proud", "pride", "admire", "strength", "resilience", "kept going", "didn't give up", "persevere"]):
+        emotion = "quiet pride and resilience"
+    elif any(k in lower for k in ["love", "tenderness", "devotion", "cherish", "hold", "embrace", "माया", "स्नेह"]):
+        emotion = "tender love and devotion"
+    elif any(k in lower for k in ["grief", "loss", "miss", "gone", "tears", "hurt", "pain", "ache", "broken", "दुःख", "पीडा"]):
+        emotion = "deep grief and longing"
+    elif any(k in lower for k in ["heal", "peace", "calm", "breathe", "rest", "freedom", "hope", "better", "bloom"]):
+        emotion = "healing and gentle hope"
+    elif any(k in lower for k in ["alone", "lonely", "empty", "silence", "dark", "midnight", "lost", "एक्लो", "सन्नाटा"]):
+        emotion = "solitude and introspection"
+    elif any(k in lower for k in ["joy", "happy", "smile", "laugh", "celebrate", "beautiful", "wonderful"]):
+        emotion = "warmth and quiet joy"
 
-    default_sceneries = [
-        "a tranquil natural landscape with layered spatial depth",
-        "a serene open countryside sanctuary under vast skies",
-        "a quiet poetic vista bathed in atmospheric perspective"
-    ]
+    # ── 3. KEY ACTION / GESTURE ────────────────────────────────────────────
+    action = None
+    if any(k in lower for k in ["working", "worked hard", "working hard", "labor", "build", "built", "carry", "carried", "lift", "lifted"]):
+        action = "toiling with weathered hands in humble labor"
+    elif any(k in lower for k in ["walking", "walked", "journey", "path", "road", "moving forward", "kept going"]):
+        action = "walking a long road alone at dusk"
+    elif any(k in lower for k in ["sitting", "sat", "rest", "resting", "waiting", "alone in"]):
+        action = "sitting quietly in still solitude"
+    elif any(k in lower for k in ["holding", "held", "embrace", "hug", "arms", "touch", "hand"]):
+        action = "holding with quiet protective tenderness"
+    elif any(k in lower for k in ["looking", "watching", "staring", "gazing", "seeing", "saw"]):
+        action = "gazing into the distance with quiet reflection"
+    elif any(k in lower for k in ["crying", "cried", "tears", "weeping", "wept"]):
+        action = "standing still with tears unseen"
+    elif any(k in lower for k in ["sleeping", "asleep", "dreaming", "dream"]):
+        action = "resting in quiet dreamlike stillness"
+
+    # ── 4. WEATHER & ATMOSPHERE ────────────────────────────────────────────
+    weather = "crisp atmospheric clarity with subtle floating dust motes"
+    if any(k in lower for k in ["rain", "rainy", "storm", "drizzle", "puddle", "पानी", "झरी", "बर्षा"]):
+        weather = "gentle cinematic rainfall creating delicate concentric rings on wet cobblestones"
+    elif any(k in lower for k in ["snow", "winter", "frost", "cold", "हिउँ", "चिसो"]):
+        weather = "soft delicate snowflakes drifting in quiet winter stillness"
+    elif any(k in lower for k in ["mist", "fog", "haze", "कुहिरो", "हुस्सु"]):
+        weather = "ethereal swirling mist and low-hanging atmospheric fog"
+    elif any(k in lower for k in ["sun", "sunlight", "warm", "golden", "घाम", "उज्यालो"]):
+        weather = "radiant golden sunbeams casting long warm shadows"
+    elif any(k in lower for k in ["wind", "breeze", "हावा", "बतास"]):
+        weather = "a gentle rustling breeze carrying fallen leaves"
+
+    # ── 5. TIME OF DAY ─────────────────────────────────────────────────────
+    time_of_day = "under dramatic atmospheric lighting with rich layered depth"
+    if any(k in lower for k in ["star", "galaxy", "constellation", "cosmos", "तारा", "आकाश"]):
+        time_of_day = "under an expansive starry midnight sky"
+    elif any(k in lower for k in ["moon", "moonlight", "lunar", "चन्द्रमा", "जून"]):
+        time_of_day = "bathed in the silver luminescence of a full moon"
+    elif any(k in lower for k in ["night", "midnight", "dark", "2am", "रात", "अँध्यारो"]):
+        time_of_day = "in the deep quiet of a nocturnal midnight"
+    elif any(k in lower for k in ["sunset", "twilight", "evening", "साँझ", "क्षितिज"]):
+        time_of_day = "during breathtaking magic-hour golden twilight"
+    elif any(k in lower for k in ["morning", "dawn", "sunrise", "बिहानी", "उषा"]):
+        time_of_day = "at peaceful early dawn with soft pastel light"
+
+    # ── 6. SETTING / SCENERY ───────────────────────────────────────────────
+    scenery_parts = []
+    if any(k in lower for k in ["field", "farm", "crops", "harvest", "soil", "खेत", "माटो"]):
+        scenery_parts.append("a humble rural field with dark soil and golden crops")
+    if any(k in lower for k in ["home", "house", "room", "kitchen", "door", "घर", "कोठा", "ढोका"]):
+        scenery_parts.append("a modest weathered home with warm amber window light")
+    if any(k in lower for k in ["road", "path", "street", "alley", "बाटो", "सडक", "गल्ली"]):
+        scenery_parts.append("a long empty road stretching toward a dim horizon")
+    if any(k in lower for k in ["mountain", "hill", "valley", "पहाड", "हिमाल", "डाँडा"]):
+        scenery_parts.append("vast mountain silhouettes shrouded in evening mist")
+    if any(k in lower for k in ["water", "river", "lake", "ocean", "नदी", "ताल", "समुद्र"]):
+        scenery_parts.append("calm reflective water mirroring the heavy sky above")
+    if any(k in lower for k in ["tree", "forest", "wood", "रुख", "वन", "जङ्गल"]):
+        scenery_parts.append("ancient trees standing in quiet mossy stillness")
+    if any(k in lower for k in ["bench", "chair", "table", "light", "lamp", "candle"]):
+        scenery_parts.append("a single dim lamp casting warm amber light across worn surfaces")
+    if not scenery_parts:
+        scenery_parts = ["a quiet timeless setting with rich atmospheric depth"]
+
+    scenery = random.choice(scenery_parts)
 
     return {
-        "weather": random.choice(weather),
-        "time_of_day": random.choice(time_of_day),
-        "scenery": random.choice(scenery) if scenery else random.choice(default_sceneries),
-        "focal": random.choice(focal) if focal else "an evocative focal element framed by ample negative space",
+        "human_subject": human_subject,
+        "emotion": emotion,
+        "action": action,
+        "weather": weather,
+        "time_of_day": time_of_day,
+        "scenery": scenery,
         "raw_line": line
     }
 
@@ -801,127 +840,158 @@ def _extract_poetic_motifs(line: str, topic: str = "") -> dict:
 
 def _procedural_scene_prompt(line: str, scene_idx: int, total_scenes: int, vibe: dict) -> str:
     """
-    Generates a unique, high-entropy 70-110 word fine-art visual prompt
-    derived directly from the semantic metaphors and imagery of the poem line.
+    Generates a fine-art image prompt that is semantically locked to the poem's
+    actual subject, emotional meaning, and human relationships.
+    Every scene accurately portrays what the poem is about — not generic landscapes.
     """
     vibe_id = vibe.get("id", "") or ""
     vibe_name = vibe.get("name", "") or ""
-    
-    # Specialized generator for Typewriters Voice authentic editorial linocut woodblock aesthetic
-    if "typewriter" in vibe_id.lower() or "typewriter" in vibe_name.lower():
-        environments_pool = [
-            # Surreal Natural & Elemental Motifs (Direct User Reference Match)
-            "an expansive nocturnal landscape with a tall majestic curved windswept dark pine tree on a rolling snowy hillside with fine vertical snow lines against a deep dark navy sky",
-            "a serene open water view with an ancient gnarled tree growing from a wooden rowboat on calm water cleanly split between deep crimson red and glowing golden yellow woodcut ripples",
-            "an expansive historic European canal with terracotta buildings and a giant surreal dark blue stone monolith rising majestically into the dark starlit sky",
-            "a full-frame European city street corner with a glowing red-wood bakery window and a giant surreal glowing blue monolith rising between old townhouses into the dark night",
-            "an expansive European canal quay with horizontal wave ripple lines on deep blue water and warm golden streetlamp glow on stone pavement",
-            
-            # Cozy Bookstores, Kiosks & Printmakers (Direct User Reference Match)
-            "a full-frame nocturnal view of an illuminated arched red-wood bookstore facade with warm amber bookshelves and illustrated art prints on a dark cobblestone lane",
-            "a quaint nocturnal bakery storefront radiating intense warm amber and cadmium-yellow light through glass displays onto dark cobblestones",
-            "an intimate European corner bookshop with warm yellow light spilling from large multi-pane windows onto wet stone pavement",
-            "a cozy second-hand bookstore storefront on an old stone street with stacks of vintage books lit by glowing streetlamp",
-            "a quaint Parisian bookstall kiosk along the stone riverwall illuminated by a glowing hanging lantern at dusk",
-            
-            # Cottages, Cabins & Nocturnal Waypoints
-            "a solitary cozy red brick cottage with glowing warm amber windows and smoking stone chimney under a starlit midnight sky",
-            "a rustic wooden A-frame cabin nestled in quiet evergreen pine woods with warm golden light glowing through glass facade",
-            "an ancient stone arch bridge over a quiet canal with glowing gas lanterns casting long golden amber reflections on dark water",
-            "a solitary weathered stone lighthouse atop a dramatic coastal cliff beaming a bright warm golden light ray across dark rolling ocean waves",
-            "a solitary wooden boat dock with a single glowing lantern extending into a calm misty midnight lake beneath crescent moon",
-            "a quiet European railway station platform at midnight with an antique station clock and glowing iron lantern in mist",
-            "an expansive meadow with a giant ancient oak tree with glowing amber autumn foliage on a quiet grassy knoll beneath starry midnight cosmos"
-        ]
-        
-        wanderer_figures = [
-            "a tiny solitary figure holding a bright neon lime-yellow umbrella walking peacefully up the snowy hill",
-            "a solitary figure in a bright mustard yellow trenchcoat browsing the warm glowing shop display from behind",
-            "a solitary fisherman in a bright red sweater standing on the golden cobblestone quay with a fishing rod",
-            "a tiny stylized figure with a red umbrella standing in a yellow canoe on the glowing water",
-            "a solitary wanderer in a yellow coat standing on the stone canal bridge looking at the water reflections",
-            "a solitary traveler holding a red umbrella gazing out over the calm midnight water",
-            "a solitary person in a warm yellow coat standing quietly beneath the glowing streetlamp"
-        ]
-        
-        atmospheres = [
-            "moody deep midnight navy and slate blue night sky with fine vertical rain hatch lines and woodcut texture",
-            "deep dark starlit night sky with fine horizontal line hatch texture and delicate stars",
-            "peaceful nocturnal atmosphere with soft evening mist and glowing warm amber lantern light",
-            "high contrast chiaroscuro with intense warm golden light pooling against deep charcoal and navy shadows",
-            "quiet rainy night with fine textural cross-hatching and warm amber light glowing on dark surfaces"
-        ]
-        
-        motifs = _extract_poetic_motifs(line)
-        poetic_subject = motifs.get("focal", "").strip() or motifs.get("scenery", "").strip()
-
-        # ── Per-poem seeded shuffle: each poem title produces a different unique ordering ──
-        # Using hash of line content so consecutive poems never share the same sequence
-        poem_seed = int(hashlib.md5(f"{line}:{scene_idx}".encode()).hexdigest()[:8], 16)
-        rng = random.Random(poem_seed)
-
-        # Shuffle each pool independently so environments, figures, and atmospheres
-        # are all uniquely paired — no deterministic cycling pattern possible
-        shuffled_envs = environments_pool[:]
-        shuffled_figs = wanderer_figures[:]
-        shuffled_atms = atmospheres[:]
-        rng.shuffle(shuffled_envs)
-        rng.shuffle(shuffled_figs)
-        rng.shuffle(shuffled_atms)
-
-        env = shuffled_envs[scene_idx % len(shuffled_envs)]
-        fig = shuffled_figs[scene_idx % len(shuffled_figs)]
-        atm = shuffled_atms[scene_idx % len(shuffled_atms)]
-        
-        prompt = (
-            f"Full-bleed edge-to-edge graphic novel illustration in the signature style of Typewriters Voice and Guy Billout. "
-            f"Clean black ink line art with delicate cross-hatch shading and fine horizontal ripple textures, flat gouache color blocking. "
-            f"Depicting {env}, {fig}. {atm}. "
-            f"Poetic essence: {poetic_subject}. "
-            f"High contrast radiant golden amber and cadmium yellow lantern glow pooling against deep nocturnal indigo navy and slate blue. "
-            f"Saturated accents of mustard yellow and crimson red, rich matte serigraph print, expansive composition filling the entire 9:16 frame, "
-            f"masterpiece, 8k, edge to edge, no text, no words, no letters, no watermark, no borders, no frames, no oval, no cameo, no miniature pot, no vase, no white background, no photographic realism"
-        )
-        return prompt
+    is_typewriter_vibe = "typewriter" in vibe_id.lower() or "typewriter" in vibe_name.lower()
 
     motifs = _extract_poetic_motifs(line)
-    
-    # Pick novel environment base from vibe's palette / database
-    env = db.pick_novel_environment(vibe.get("environments", []), vibe_id=vibe.get("id", ""))
-    palette = random.choice(vibe.get("palettes", ["rich harmonious fine art colors"]))
-    lighting = random.choice(vibe.get("lighting", ["dramatic atmospheric illumination"]))
-    particles = random.choice(vibe.get("particles", ["delicate atmospheric particles"]))
-    suffix = vibe.get("medium_suffix", "fine art anime aesthetic, vertical 9:16 composition, no text, no writing")
-    
-    framings = [
-        "wide environmental establishing composition with tiny solitary silhouette in vast negative space",
-        "cinematic low-angle ground perspective capturing rich surface reflections and expansive sky",
-        "high-angle contemplative bird's-eye view with geometric shadows and atmospheric depth",
-        "intimate over-the-shoulder perspective looking past foreground elements toward evocative horizon",
-        "layered composition with soft foreground bokeh, sharp midground, and infinite background horizon",
-        "framed architectural view looking through sunlit stone archway or wooden window frame into nature"
+    human_subject = motifs.get("human_subject")
+    emotion = motifs.get("emotion", "quiet contemplation")
+    action = motifs.get("action")
+    weather = motifs.get("weather", "crisp atmospheric clarity")
+    time_of_day = motifs.get("time_of_day", "under dramatic atmospheric lighting")
+    scenery = motifs.get("scenery", "a quiet timeless setting with rich atmospheric depth")
+
+    # ── ARTISTIC STYLE BLOCK ─────────────────────────────────────────────────
+    # For Typewriters Voice: use authentic Guy Billout / editorial linocut style
+    if is_typewriter_vibe:
+        art_style = (
+            "Full-bleed edge-to-edge graphic novel illustration in the style of Typewriters Voice and Guy Billout. "
+            "Clean black ink line art with fine cross-hatch shading, flat gouache color blocking, "
+            "high contrast warm amber and cadmium yellow light pooling against deep indigo and slate blue night. "
+            "Rich matte serigraph print, expansive composition filling the entire 9:16 portrait frame"
+        )
+        atm_variants = [
+            "moody deep midnight navy and slate blue with fine vertical rain hatch lines and woodcut texture",
+            "deep dark starlit night sky with fine horizontal hatch texture and delicate stars glinting",
+            "peaceful nocturnal atmosphere with soft evening mist and glowing warm amber lantern light",
+            "high contrast chiaroscuro with intense warm golden light pooling against deep charcoal navy shadows",
+            "quiet rainy night with fine textural cross-hatching and warm amber light glowing on dark surfaces",
+        ]
+    else:
+        art_style = (
+            "Full-bleed edge-to-edge fine-art painterly illustration. "
+            "Rich oil painting textures, masterful chiaroscuro lighting, cinematic mood, "
+            "high detail and atmospheric depth, vertical 9:16 portrait composition"
+        )
+        atm_variants = [
+            "warm painterly golden hour light with long dramatic shadows",
+            "cool blue-hour twilight with soft diffused ambient glow",
+            "dramatic overcast light with rich muted tones and heavy mood",
+            "soft morning mist with hazy diffused pastel light",
+            "warm candlelit amber light contrasting against deep velvety darkness",
+        ]
+
+    # Per-line seeded atmosphere selection for variety without repetition
+    poem_seed = int(hashlib.md5(f"{line}:{scene_idx}".encode()).hexdigest()[:8], 16)
+    rng = random.Random(poem_seed)
+    shuffled_atms = atm_variants[:]
+    rng.shuffle(shuffled_atms)
+    atmosphere = shuffled_atms[scene_idx % len(shuffled_atms)]
+
+    # ── SUBJECT-DRIVEN SCENE CONSTRUCTION ───────────────────────────────────
+    # This is the key: the image description is built around the ACTUAL POEM SUBJECT
+
+    SUBJECT_SCENE_TEMPLATES = {
+        "father": [
+            "an elderly weathered father figure with calloused hands and bent shoulders, {action_phrase}, "
+            "{scenery}, {time_of_day}, his worn coat and furrowed brow carrying the weight of silent sacrifice",
+            "a solitary father silhouette standing at the edge of {scenery}, {time_of_day}, "
+            "facing away, his posture conveying decades of quiet labor and unspoken love",
+            "close artful view of a father's roughened hands — holding a tool, holding nothing, holding everything — "
+            "with {scenery} blurred softly behind, {time_of_day}, conveying {emotion}",
+            "a humble father in simple worn clothes {action_phrase} at {scenery}, {time_of_day}, "
+            "the image saturated with the feeling of {emotion}",
+        ],
+        "mother": [
+            "a gentle mother figure in a modest kitchen or doorway, warm amber light behind her, "
+            "{action_phrase}, {scenery}, the quiet tenderness of {emotion} in every line of her silhouette",
+            "a mother's silhouette seen from behind in {scenery}, {time_of_day}, "
+            "her posture soft and protective, the atmosphere heavy with {emotion}",
+            "close artistic view of a mother's gentle hands — folded in her lap, stirring, or reaching — "
+            "{scenery} soft behind her, {time_of_day}, conveying {emotion}",
+        ],
+        "child": [
+            "a small child silhouette in {scenery}, {time_of_day}, "
+            "tiny and alone in a vast quiet world, the scene carrying the feeling of {emotion}",
+            "a child sitting quietly at {scenery}, {time_of_day}, small hands resting still, "
+            "the atmosphere softly conveying {emotion}",
+        ],
+        "lover": [
+            "two silhouettes — one or both — at {scenery}, {time_of_day}, "
+            "the space between them charged with {emotion}, {action_phrase}",
+            "a solitary figure at {scenery}, {time_of_day}, {action_phrase}, "
+            "the mood of {emotion} woven through every shadow and light",
+        ],
+        "friend": [
+            "two figures walking together through {scenery}, {time_of_day}, "
+            "the quiet intimacy of {emotion} in their shared pace and posture",
+            "a solitary figure sitting at {scenery}, {time_of_day}, "
+            "the atmosphere soft with {emotion} and quiet memory",
+        ],
+        "self_reflection": [
+            "a lone figure standing at {scenery}, {time_of_day}, {action_phrase}, "
+            "the composition saturated with the feeling of {emotion} — intimate, honest, and still",
+            "a solitary silhouette in {scenery}, {time_of_day}, "
+            "turned inward, the image a quiet painting of {emotion}",
+            "wide shot of a single human figure, small against {scenery}, {time_of_day}, "
+            "their posture carrying the weight and grace of {emotion}",
+        ],
+        "anonymous_figure": [
+            "a solitary figure in {scenery}, {time_of_day}, {action_phrase}, "
+            "their identity undefined but their presence heavy with {emotion}",
+        ],
+    }
+
+    # Fallback landscape template (when poem doesn't mention any person)
+    LANDSCAPE_TEMPLATES = [
+        "A vast and emotionally charged scene: {scenery}, {time_of_day}, {weather}, "
+        "the entire frame saturated with the feeling of {emotion}",
+        "A breathtaking fine-art landscape: {scenery}, {time_of_day}, {weather}, "
+        "evoking {emotion} through every shadow, light, and texture",
+        "A quiet, painterly scene showing {scenery} under {time_of_day}, {weather}, "
+        "the mood of {emotion} infusing every corner of the frame",
     ]
-    framing = framings[scene_idx % len(framings)]
 
-    # Semantic integration of poem line
-    scene_core = f"{motifs['scenery']}, featuring {motifs['focal']}, {motifs['time_of_day']}"
-    
-    # Unique variation seed for every generation run
-    generation_entropy = random.choice([
-        "accentuated by subtle atmospheric luminescence",
-        "rendered with breathtaking spatial harmony and quiet wonder",
-        "with delicate textural details and soft luminous gradients",
-        "evoking deep emotional stillness and poetic contemplation"
-    ])
+    action_phrase = action if action else "standing quietly in contemplation"
 
+    if human_subject and human_subject in SUBJECT_SCENE_TEMPLATES:
+        templates = SUBJECT_SCENE_TEMPLATES[human_subject]
+        shuffled_templates = templates[:]
+        rng.shuffle(shuffled_templates)
+        template = shuffled_templates[scene_idx % len(shuffled_templates)]
+        scene_description = template.format(
+            action_phrase=action_phrase,
+            scenery=scenery,
+            time_of_day=time_of_day,
+            emotion=emotion,
+        )
+    else:
+        template = LANDSCAPE_TEMPLATES[scene_idx % len(LANDSCAPE_TEMPLATES)]
+        scene_description = template.format(
+            scenery=scenery,
+            time_of_day=time_of_day,
+            weather=weather,
+            emotion=emotion,
+        )
+
+    # ── FINAL PROMPT ASSEMBLY ────────────────────────────────────────────────
     prompt = (
-        f"A breathtaking fine-art scene depicting {scene_core}. "
-        f"{motifs['weather']}, {lighting}, with {particles}. "
-        f"{framing}. Color harmony of {palette}. "
-        f"{generation_entropy}. Ample negative space, rule-of-thirds composition, rich layered depth. "
-        f"| {suffix}"
+        f"{art_style}. "
+        f"{scene_description}. "
+        f"{atmosphere}. "
+        f"{weather}. "
+        f"Masterpiece quality, 8k detail, edge-to-edge full bleed, no text, no words, no letters, "
+        f"no watermark, no borders, no frames, no white background, no white border, no oval, "
+        f"no cameo, no vignette frame, no photographic realism, no stock photo"
     )
-    return _normalize_prompt(prompt, suffix)
+    return prompt
+
+
 
 
 def _normalize_prompt(prompt: str, suffix: str = "") -> str:
