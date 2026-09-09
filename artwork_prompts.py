@@ -854,10 +854,24 @@ def _procedural_scene_prompt(line: str, scene_idx: int, total_scenes: int, vibe:
         
         motifs = _extract_poetic_motifs(line)
         poetic_subject = motifs.get("focal", "").strip() or motifs.get("scenery", "").strip()
-        
-        env = environments_pool[scene_idx % len(environments_pool)]
-        fig = wanderer_figures[(scene_idx * 3 + 1) % len(wanderer_figures)]
-        atm = atmospheres[(scene_idx * 2) % len(atmospheres)]
+
+        # ── Per-poem seeded shuffle: each poem title produces a different unique ordering ──
+        # Using hash of line content so consecutive poems never share the same sequence
+        poem_seed = int(hashlib.md5(f"{line}:{scene_idx}".encode()).hexdigest()[:8], 16)
+        rng = random.Random(poem_seed)
+
+        # Shuffle each pool independently so environments, figures, and atmospheres
+        # are all uniquely paired — no deterministic cycling pattern possible
+        shuffled_envs = environments_pool[:]
+        shuffled_figs = wanderer_figures[:]
+        shuffled_atms = atmospheres[:]
+        rng.shuffle(shuffled_envs)
+        rng.shuffle(shuffled_figs)
+        rng.shuffle(shuffled_atms)
+
+        env = shuffled_envs[scene_idx % len(shuffled_envs)]
+        fig = shuffled_figs[scene_idx % len(shuffled_figs)]
+        atm = shuffled_atms[scene_idx % len(shuffled_atms)]
         
         prompt = (
             f"Full-bleed edge-to-edge graphic novel illustration in the signature style of Typewriters Voice and Guy Billout. "

@@ -4,6 +4,7 @@ import time
 import uuid
 import re
 import threading
+import subprocess
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 from pathlib import Path
@@ -35,6 +36,51 @@ def load_queue() -> list:
 def save_queue(queue: list):
     with _SCHEDULER_LOCK:
         JOBS_QUEUE_FILE.write_text(json.dumps(queue, indent=2, ensure_ascii=False), encoding="utf-8")
+
+
+def _commit_queue_to_git(message: str = "🤖 Live queue sync [skip ci]"):
+    """
+    Immediately commits and pushes the updated jobs_queue.json to the remote repo
+    so the Live Cloud Queue web UI reflects the change without waiting for the
+    GitHub Actions final step to run.
+    Only runs when executed inside a GitHub Actions environment.
+    """
+    if not os.environ.get("GITHUB_ACTIONS"):
+        return  # skip when running locally
+    try:
+        repo_root = CURR_DIR.parent
+        cmds = [
+            ["git", "config", "--global", "user.name", "Autonomous Studio Bot"],
+            ["git", "config", "--global", "user.email", "bot@autovideostudio.internal"],
+            ["git", "-C", str(repo_root), "add", str(JOBS_QUEUE_FILE)],
+        ]
+        for cmd in cmds:
+            subprocess.run(cmd, check=False, capture_output=True)
+
+        # Only commit if there are staged changes
+        diff = subprocess.run(
+            ["git", "-C", str(repo_root), "diff", "--staged", "--quiet"],
+            capture_output=True
+        )
+        if diff.returncode != 0:  # staged changes exist
+            subprocess.run(
+                ["git", "-C", str(repo_root), "commit", "-m", message],
+                check=False, capture_output=True
+            )
+            subprocess.run(
+                ["git", "-C", str(repo_root), "pull", "--rebase", "origin", "main"],
+                check=False, capture_output=True
+            )
+            subprocess.run(
+                ["git", "-C", str(repo_root), "push", "origin", "HEAD:main"],
+                check=False, capture_output=True
+            )
+            print(f"[Queue Sync] Committed updated queue to GitHub: {message}", flush=True)
+        else:
+            print("[Queue Sync] No queue changes to commit.", flush=True)
+    except Exception as e:
+        print(f"[Queue Sync] Warning: git commit failed (non-fatal): {e}", flush=True)
+
 
 def compute_next_time_slots(
     count: int, 
@@ -380,6 +426,8 @@ def execute_single_job(job_id: str) -> dict:
             
         # Automatically delete the job from scheduled queue list so it is immediately removed
         delete_job(job_id)
+        # Immediately push updated queue to GitHub so web UI reflects the change
+        _commit_queue_to_git(f"🤖 Queue: completed '{job.get('title', job_id)}' [skip ci]")
         
         notify_job_success(job, fb_res, total_time, output_file)
         return {
@@ -394,6 +442,8 @@ def execute_single_job(job_id: str) -> dict:
         err_msg = str(e)
         # Delete from scheduled queue list so failed jobs do not block future scheduled queue runs
         delete_job(job_id)
+        # Immediately push updated queue to GitHub so web UI reflects the change
+        _commit_queue_to_git(f"🤖 Queue: removed failed job '{job.get('title', job_id)}' [skip ci]")
         notify_job_failure(job, err_msg)
         return {"ok": False, "status": "FAILED", "job_id": job_id, "error": err_msg}
 

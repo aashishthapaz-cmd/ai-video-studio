@@ -295,45 +295,63 @@ def run():
                 pending_jobs = page_pending
                 print(f"[Queue] Filtered to {len(pending_jobs)} jobs for page(s): {target_page_ids}", flush=True)
 
-        target_job = None
+        # Collect ALL jobs that are due now (not just the first one)
         now_epoch = time.time()
+        due_jobs = []
+        overdue_fallback = None  # fallback: oldest job if nothing is due yet
         for j in pending_jobs:
             epoch = j.get("scheduled_epoch")
             sched = j.get("scheduled_time", "")
             if epoch and isinstance(epoch, (int, float)):
                 if now_epoch >= epoch:
-                    target_job = j
-                    break
+                    due_jobs.append(j)
+                elif overdue_fallback is None:
+                    overdue_fallback = j
             elif not sched or sched <= now_str:
-                target_job = j
-                break
+                due_jobs.append(j)
+            elif overdue_fallback is None:
+                overdue_fallback = j
 
-        if not target_job:
-            target_job = pending_jobs[0]
-
-        job_id = target_job.get("id")
-        job_title = target_job.get("title", "Scheduled Post")
-        print(f"🎯 Processing queued job: '{job_title}' (ID: {job_id}) | Niche: {target_job.get('niche_id')} | Page(s): {target_job.get('target_page_ids', 'ALL')}...", flush=True)
-
-        try:
-            res = execute_single_job(job_id)
-            if res.get("ok") or res.get("status") == "COMPLETED":
-                print(f"\n✅ Queued Job '{job_title}' COMPLETED!", flush=True)
-                print(f"   Output: {res.get('output_file')}", flush=True)
-
-                fb_res = res.get("facebook_results", [])
-                if fb_res:
-                    print(f"\n📘 Facebook Publishing Results ({len(fb_res)} page(s)):", flush=True)
-                    for r in fb_res:
-                        status_icon = "✅" if (r.get("ok") or r.get("success")) else "❌"
-                        post_id = r.get("video_id") or r.get("post_id") or r.get("error", "unknown")
-                        print(f"   {status_icon} {r.get('page_name', r.get('page_id', '?'))}: {post_id}", flush=True)
+        if not due_jobs:
+            # No posts are due yet — process the oldest one anyway so no post is lost
+            if overdue_fallback:
+                due_jobs = [overdue_fallback]
+                print(f"[Queue] No posts due yet. Processing next queued job: '{overdue_fallback.get('title')}' as fallback.", flush=True)
             else:
-                print(f"\n⚠️ Job finished with status: {res.get('status')} - Error: {res.get('error')}", flush=True)
-                sys.exit(1)
-        except Exception as err:
-            print(f"\n❌ Failed to process job {job_id}: {err}", flush=True)
+                print("ℹ️ No jobs due yet and no fallback available.", flush=True)
+                return
+
+        print(f"\n🚀 Processing {len(due_jobs)} due job(s) this run...", flush=True)
+
+        overall_ok = True
+        for idx, target_job in enumerate(due_jobs):
+            job_id = target_job.get("id")
+            job_title = target_job.get("title", "Scheduled Post")
+            print(f"\n[{idx+1}/{len(due_jobs)}] 🎯 Processing: '{job_title}' (ID: {job_id}) | Niche: {target_job.get('niche_id')} | Page(s): {target_job.get('target_page_ids', 'ALL')}", flush=True)
+
+            try:
+                res = execute_single_job(job_id)
+                if res.get("ok") or res.get("status") == "COMPLETED":
+                    print(f"\n✅ Job '{job_title}' COMPLETED!", flush=True)
+                    print(f"   Output: {res.get('output_file')}", flush=True)
+
+                    fb_res = res.get("facebook_results", [])
+                    if fb_res:
+                        print(f"\n📘 Facebook Publishing Results ({len(fb_res)} page(s)):", flush=True)
+                        for r in fb_res:
+                            status_icon = "✅" if (r.get("ok") or r.get("success")) else "❌"
+                            post_id = r.get("video_id") or r.get("post_id") or r.get("error", "unknown")
+                            print(f"   {status_icon} {r.get('page_name', r.get('page_id', '?'))}: {post_id}", flush=True)
+                else:
+                    print(f"\n⚠️ Job '{job_title}' finished with status: {res.get('status')} - Error: {res.get('error')}", flush=True)
+                    overall_ok = False
+            except Exception as err:
+                print(f"\n❌ Failed to process job {job_id} ('{job_title}'): {err}", flush=True)
+                overall_ok = False
+
+        if not overall_ok:
             sys.exit(1)
+
 
     print("\n" + "=" * 70, flush=True)
     print("  AUTONOMOUS GITHUB RUNNER FINISHED SUCCESSFULLY", flush=True)

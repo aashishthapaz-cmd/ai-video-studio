@@ -69,7 +69,9 @@ permissions:
   contents: write
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event_name == 'workflow_dispatch' && github.run_id || 'scheduled-queue' }}
+  # Each manual dispatch gets its own unique run_id group → never cancelled.
+  # Scheduled cron triggers share one 'scheduled-queue' group → no duplicate queue runs.
+  group: ${{ github.workflow }}-${{ github.run_id }}
   cancel-in-progress: false
 
 jobs:

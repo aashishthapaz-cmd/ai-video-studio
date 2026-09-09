@@ -5,81 +5,109 @@ import urllib.request
 from pathlib import Path
 from PIL import Image
 
-def generate_huggingface_image(prompt: str, output_path: Path, hf_token: str, model: str = "black-forest-labs/FLUX.1-schnell", width: int = 1080, height: int = 1920, seed: int = None, retries: int = 3) -> str:
+# Models tried in order — each is free-tier on HuggingFace Serverless Inference
+HF_MODELS_CASCADE = [
+    "black-forest-labs/FLUX.1-schnell",
+    "stabilityai/stable-diffusion-xl-base-1.0",
+    "runwayml/stable-diffusion-v1-5",
+]
+
+def _save_image_bytes(raw: bytes, output_path: Path, target_w: int, target_h: int) -> str:
+    """Decode raw bytes, resize to exact target, save as PNG."""
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    img = Image.open(io.BytesIO(raw)).convert("RGB")
+    if img.size != (target_w, target_h):
+        img = img.resize((target_w, target_h), Image.Resampling.LANCZOS)
+    img.save(output_path, "PNG", optimize=False)
+    return str(output_path)
+
+
+def generate_huggingface_image(
+    prompt: str,
+    output_path: Path,
+    hf_token: str,
+    model: str = "black-forest-labs/FLUX.1-schnell",
+    width: int = 1080,
+    height: int = 1920,
+    seed: int = None,
+    retries: int = 6,
+) -> str:
     """
-    Generates an image via Hugging Face Serverless Inference API (Free tier).
-    Supports FLUX.1-schnell, SDXL, OpenJourney, etc.
+    Generates an image via Hugging Face Serverless Inference API.
+    Falls back through HF_MODELS_CASCADE if the requested model fails.
+    Always outputs at the exact (width, height) specified.
     """
     if not hf_token:
-        raise ValueError("Hugging Face API token is required. Get one for free at huggingface.co/settings/tokens")
-    
-    # 1. Try Hugging Face Hub InferenceClient (Primary)
-    try:
-        from huggingface_hub import InferenceClient
-        client = InferenceClient(api_key=hf_token, timeout=60)
-        img = client.text_to_image(
-            prompt=prompt,
-            model=model,
-            width=min(width, 1024),
-            height=min(height, 1024),
-            seed=seed
-        )
-        if img:
-            output_path.parent.mkdir(parents=True, exist_ok=True)
-            # If aspect ratio requires resizing to exact output resolution:
-            if img.size != (width, height):
-                img_resized = img.resize((width, height), Image.Resampling.LANCZOS)
-                img_resized.save(output_path, "PNG", quality=95)
-            else:
-                img.save(output_path, "PNG")
-            return str(output_path)
-    except Exception as e:
-        logger_err = str(e)
-    
-    # 2. Direct HTTP Fallback
-    url = f"https://router.huggingface.co/hf-inference/models/{model}"
-    headers = {
-        "Authorization": f"Bearer {hf_token}",
-        "Content-Type": "application/json",
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
-    }
-    payload = {
-        "inputs": prompt,
-        "parameters": {
-            "width": min(width, 1024),
-            "height": min(height, 1024)
-        }
-    }
-    if seed is not None:
-        payload["parameters"]["seed"] = seed
+        raise ValueError("Hugging Face API token required. Get one free at huggingface.co/settings/tokens")
 
-    data = json.dumps(payload).encode("utf-8")
-    for attempt in range(retries):
+    # Build full cascade: requested model first, then the rest
+    cascade = [model] + [m for m in HF_MODELS_CASCADE if m != model]
+
+    last_error = None
+    for current_model in cascade:
+        # Cap at 1024 for generation then upscale — most HF models top out at 1024
+        gen_w = min(width, 1024)
+        gen_h = min(height, 1024)
+
+        # ── 1. Try huggingface_hub InferenceClient (fastest) ──────────────
         try:
-            req = urllib.request.Request(url, data=data, headers=headers, method="POST")
-            with urllib.request.urlopen(req, timeout=60) as resp:
-                raw = resp.read()
-                if resp.status == 200 and len(raw) > 5000:
-                    output_path.parent.mkdir(parents=True, exist_ok=True)
-                    output_path.write_bytes(raw)
-                    return str(output_path)
-        except urllib.error.HTTPError as e:
-            if e.code == 503:
-                try:
-                    err_json = json.loads(e.read().decode("utf-8"))
-                    wait_time = min(err_json.get("estimated_time", 10.0), 20.0)
-                    time.sleep(wait_time)
-                    continue
-                except Exception:
-                    time.sleep(5.0)
-            elif attempt < retries - 1:
-                time.sleep(2.0 * (attempt + 1))
-            else:
-                raise
+            from huggingface_hub import InferenceClient
+            client = InferenceClient(api_key=hf_token, timeout=90)
+            img = client.text_to_image(
+                prompt=prompt,
+                model=current_model,
+                width=gen_w,
+                height=gen_h,
+                **({"seed": seed} if seed is not None else {}),
+            )
+            if img:
+                img = img.convert("RGB")
+                if img.size != (width, height):
+                    img = img.resize((width, height), Image.Resampling.LANCZOS)
+                output_path.parent.mkdir(parents=True, exist_ok=True)
+                img.save(output_path, "PNG", optimize=False)
+                return str(output_path)
         except Exception as e:
-            if attempt < retries - 1:
-                time.sleep(2.0 * (attempt + 1))
-            else:
-                raise e
-    
-    raise RuntimeError(f"Hugging Face generation failed: {logger_err}")
+            last_error = e
+
+        # ── 2. Direct HTTP fallback ────────────────────────────────────────
+        url = f"https://router.huggingface.co/hf-inference/models/{current_model}"
+        headers = {
+            "Authorization": f"Bearer {hf_token}",
+            "Content-Type": "application/json",
+            "User-Agent": "AutoVideoStudio/1.0",
+        }
+        payload: dict = {"inputs": prompt, "parameters": {"width": gen_w, "height": gen_h}}
+        if seed is not None:
+            payload["parameters"]["seed"] = seed
+
+        data = json.dumps(payload).encode("utf-8")
+        for attempt in range(retries):
+            try:
+                req = urllib.request.Request(url, data=data, headers=headers, method="POST")
+                with urllib.request.urlopen(req, timeout=90) as resp:
+                    raw = resp.read()
+                    if resp.status == 200 and len(raw) > 5000:
+                        return _save_image_bytes(raw, output_path, width, height)
+            except urllib.error.HTTPError as e:
+                if e.code == 503:
+                    try:
+                        wait = min(json.loads(e.read().decode()).get("estimated_time", 10.0), 25.0)
+                    except Exception:
+                        wait = 10.0
+                    time.sleep(wait)
+                    continue
+                elif e.code in (404, 400):
+                    last_error = e
+                    break  # this model not available, try next in cascade
+                else:
+                    if attempt < retries - 1:
+                        time.sleep(3.0 * (attempt + 1))
+                    else:
+                        last_error = e
+            except Exception as e:
+                last_error = e
+                if attempt < retries - 1:
+                    time.sleep(3.0 * (attempt + 1))
+
+    raise RuntimeError(f"All HuggingFace models failed. Last error: {last_error}")
