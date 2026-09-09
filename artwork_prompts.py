@@ -842,7 +842,9 @@ def _procedural_scene_prompt(line: str, scene_idx: int, total_scenes: int, vibe:
     """
     Generates a fine-art image prompt that is semantically locked to the poem's
     actual subject, emotional meaning, and human relationships.
-    Every scene accurately portrays what the poem is about — not generic landscapes.
+    - Explicitly genders subjects (father = old man, mother = woman)
+    - Forces Typewriters Voice / Guy Billout editorial linocut style
+    - Hard-bans: AI portrait defaults, white borders, photorealistic faces, frames
     """
     vibe_id = vibe.get("id", "") or ""
     vibe_name = vibe.get("name", "") or ""
@@ -853,111 +855,141 @@ def _procedural_scene_prompt(line: str, scene_idx: int, total_scenes: int, vibe:
     emotion = motifs.get("emotion", "quiet contemplation")
     action = motifs.get("action")
     weather = motifs.get("weather", "crisp atmospheric clarity")
-    time_of_day = motifs.get("time_of_day", "under dramatic atmospheric lighting")
+    time_of_day = motifs.get("time_of_day", "under soft atmospheric lighting")
     scenery = motifs.get("scenery", "a quiet timeless setting with rich atmospheric depth")
 
-    # ── ARTISTIC STYLE BLOCK ─────────────────────────────────────────────────
-    # For Typewriters Voice: use authentic Guy Billout / editorial linocut style
+    # ── STRICT ART STYLE: Guy Billout editorial illustration ─────────────────
+    # This style description MUST appear at the front so AI models prioritize it
     if is_typewriter_vibe:
         art_style = (
-            "Full-bleed edge-to-edge graphic novel illustration in the style of Typewriters Voice and Guy Billout. "
-            "Clean black ink line art with fine cross-hatch shading, flat gouache color blocking, "
-            "high contrast warm amber and cadmium yellow light pooling against deep indigo and slate blue night. "
-            "Rich matte serigraph print, expansive composition filling the entire 9:16 portrait frame"
+            "Editorial linocut woodblock illustration, Guy Billout style, Typewriters Voice aesthetic. "
+            "Flat bold ink shapes with fine cross-hatch shading, gouache paint texture, "
+            "high contrast deep navy and slate blue shadows with warm amber and mustard yellow light accents. "
+            "Bold graphic composition, slightly abstracted, NO photorealism"
         )
         atm_variants = [
-            "moody deep midnight navy and slate blue with fine vertical rain hatch lines and woodcut texture",
-            "deep dark starlit night sky with fine horizontal hatch texture and delicate stars glinting",
-            "peaceful nocturnal atmosphere with soft evening mist and glowing warm amber lantern light",
-            "high contrast chiaroscuro with intense warm golden light pooling against deep charcoal navy shadows",
-            "quiet rainy night with fine textural cross-hatching and warm amber light glowing on dark surfaces",
+            "moody deep midnight navy and slate blue tones with fine cross-hatch woodcut texture throughout",
+            "deep dark starlit night with fine horizontal hatch lines and glinting amber lantern glow",
+            "quiet rainy evening with fine textural cross-hatching and warm amber glow on dark wet surfaces",
+            "high contrast chiaroscuro with bright warm golden light pooling against deep charcoal shadows",
+            "peaceful nocturnal mist with soft amber lantern light and deep indigo background",
         ]
     else:
         art_style = (
-            "Full-bleed edge-to-edge fine-art painterly illustration. "
-            "Rich oil painting textures, masterful chiaroscuro lighting, cinematic mood, "
-            "high detail and atmospheric depth, vertical 9:16 portrait composition"
+            "Fine art painterly illustration, oil painting style, Rembrandt chiaroscuro lighting. "
+            "Rich paint textures, expressive brushwork, emotionally charged atmosphere. "
+            "NOT photorealistic, NOT a photograph, NOT digital render"
         )
         atm_variants = [
-            "warm painterly golden hour light with long dramatic shadows",
-            "cool blue-hour twilight with soft diffused ambient glow",
-            "dramatic overcast light with rich muted tones and heavy mood",
-            "soft morning mist with hazy diffused pastel light",
+            "warm painterly golden hour light with long dramatic shadows and rich impasto texture",
+            "cool blue-hour twilight with soft diffused ambient glow and loose brushwork",
+            "dramatic overcast light with rich muted tones and heavy emotional atmosphere",
+            "soft morning mist with hazy diffused pastel light and gentle painterly strokes",
             "warm candlelit amber light contrasting against deep velvety darkness",
         ]
 
-    # Per-line seeded atmosphere selection for variety without repetition
+    # Per-line seeded atmosphere selection for variety
     poem_seed = int(hashlib.md5(f"{line}:{scene_idx}".encode()).hexdigest()[:8], 16)
     rng = random.Random(poem_seed)
     shuffled_atms = atm_variants[:]
     rng.shuffle(shuffled_atms)
     atmosphere = shuffled_atms[scene_idx % len(shuffled_atms)]
 
-    # ── SUBJECT-DRIVEN SCENE CONSTRUCTION ───────────────────────────────────
-    # This is the key: the image description is built around the ACTUAL POEM SUBJECT
+    # ── SUBJECT-DRIVEN SCENE (explicitly gendered to prevent AI face defaults) ───
 
+    # Negative suffix per subject type to explicitly ban wrong gender/style
+    SUBJECT_NEGATIVE = {
+        "father": "no woman, no female face, no girl, no young face, no glamour portrait",
+        "mother": "no man, no male face, no boy, no military figure",
+        "child": "no adult face, no glamour, no model",
+        "lover": "no violence, no explicit content",
+        "self_reflection": "no crowd, no multiple figures",
+        "friend": "no violence",
+        "anonymous_figure": "no specific face",
+    }
+
+    # Full subject scene templates — EXPLICIT gender language prevents AI from defaulting to young women
     SUBJECT_SCENE_TEMPLATES = {
         "father": [
-            "an elderly weathered father figure with calloused hands and bent shoulders, {action_phrase}, "
-            "{scenery}, {time_of_day}, his worn coat and furrowed brow carrying the weight of silent sacrifice",
-            "a solitary father silhouette standing at the edge of {scenery}, {time_of_day}, "
-            "facing away, his posture conveying decades of quiet labor and unspoken love",
-            "close artful view of a father's roughened hands — holding a tool, holding nothing, holding everything — "
-            "with {scenery} blurred softly behind, {time_of_day}, conveying {emotion}",
-            "a humble father in simple worn clothes {action_phrase} at {scenery}, {time_of_day}, "
-            "the image saturated with the feeling of {emotion}",
+            # Always: old man, weathered, calloused, heavy shoulders — NEVER generic "figure"
+            "a lone elderly man — weathered face, grey stubble, heavy stooped shoulders — "
+            "{action_phrase} at {scenery}, {time_of_day}. "
+            "His roughened calloused hands and worn simple clothing tell decades of silent sacrifice. "
+            "Seen from behind or in silhouette, conveying {emotion}",
+
+            "close painterly view of an old man's rough calloused hands resting on a table or tool, "
+            "{scenery} dimly behind him, {time_of_day}. "
+            "No face shown — only the hands that carried a family's weight. Emotion: {emotion}",
+
+            "a tired old man in simple worn clothes {action_phrase}, "
+            "small and solitary against {scenery}, {time_of_day}. "
+            "His bent posture and heavy steps show years of sacrifice. Feeling: {emotion}",
+
+            "silhouette of a working-class old man standing alone at {scenery}, {time_of_day}, "
+            "facing away from viewer toward the horizon, his coat worn, his figure humble and strong. "
+            "The weight of {emotion} is in every line of his shape",
         ],
         "mother": [
-            "a gentle mother figure in a modest kitchen or doorway, warm amber light behind her, "
-            "{action_phrase}, {scenery}, the quiet tenderness of {emotion} in every line of her silhouette",
-            "a mother's silhouette seen from behind in {scenery}, {time_of_day}, "
-            "her posture soft and protective, the atmosphere heavy with {emotion}",
-            "close artistic view of a mother's gentle hands — folded in her lap, stirring, or reaching — "
-            "{scenery} soft behind her, {time_of_day}, conveying {emotion}",
+            "a gentle older woman in simple house clothes {action_phrase} at {scenery}, {time_of_day}. "
+            "Her silhouette seen from behind, soft and protective, the atmosphere carrying {emotion}",
+
+            "close painterly view of a woman's gentle hands — folded quietly or reaching — "
+            "with {scenery} warm and soft behind her, {time_of_day}. "
+            "Her presence carries {emotion}",
+
+            "a lone older woman standing quietly at {scenery}, {time_of_day}, "
+            "her posture carrying quiet strength and {emotion}",
         ],
         "child": [
-            "a small child silhouette in {scenery}, {time_of_day}, "
-            "tiny and alone in a vast quiet world, the scene carrying the feeling of {emotion}",
-            "a child sitting quietly at {scenery}, {time_of_day}, small hands resting still, "
-            "the atmosphere softly conveying {emotion}",
+            "a small child silhouette standing in {scenery}, {time_of_day}, "
+            "tiny and alone in a vast quiet world filled with {emotion}",
+
+            "a child sitting quietly with small hands resting still, "
+            "{scenery} behind them, {time_of_day}. The atmosphere holds {emotion}",
         ],
         "lover": [
-            "two silhouettes — one or both — at {scenery}, {time_of_day}, "
-            "the space between them charged with {emotion}, {action_phrase}",
-            "a solitary figure at {scenery}, {time_of_day}, {action_phrase}, "
-            "the mood of {emotion} woven through every shadow and light",
+            "two distant silhouettes — a man and a woman — standing apart at {scenery}, {time_of_day}. "
+            "The space between them is charged with {emotion}",
+
+            "a lone figure standing at {scenery}, {time_of_day}, {action_phrase}. "
+            "The mood of {emotion} woven through every shadow",
         ],
         "friend": [
-            "two figures walking together through {scenery}, {time_of_day}, "
-            "the quiet intimacy of {emotion} in their shared pace and posture",
+            "two human figures walking side by side through {scenery}, {time_of_day}. "
+            "The quiet companionship of {emotion} in their shared pace",
+
             "a solitary figure sitting at {scenery}, {time_of_day}, "
-            "the atmosphere soft with {emotion} and quiet memory",
+            "lost in the memory of {emotion}",
         ],
         "self_reflection": [
-            "a lone figure standing at {scenery}, {time_of_day}, {action_phrase}, "
-            "the composition saturated with the feeling of {emotion} — intimate, honest, and still",
-            "a solitary silhouette in {scenery}, {time_of_day}, "
-            "turned inward, the image a quiet painting of {emotion}",
-            "wide shot of a single human figure, small against {scenery}, {time_of_day}, "
-            "their posture carrying the weight and grace of {emotion}",
+            "a lone human figure — back to viewer — standing small at {scenery}, {time_of_day}. "
+            "{action_phrase}. The composition is saturated with {emotion}",
+
+            "wide shot: a single small figure dwarfed by {scenery}, {time_of_day}. "
+            "Their posture carries the weight and grace of {emotion}",
+
+            "a solitary silhouette at {scenery}, {time_of_day}, "
+            "turned inward. A quiet painting of {emotion} and honest self-reflection",
         ],
         "anonymous_figure": [
-            "a solitary figure in {scenery}, {time_of_day}, {action_phrase}, "
-            "their identity undefined but their presence heavy with {emotion}",
+            "a solitary anonymous human figure at {scenery}, {time_of_day}, {action_phrase}. "
+            "Identity undefined — only the feeling of {emotion} matters",
         ],
     }
 
-    # Fallback landscape template (when poem doesn't mention any person)
     LANDSCAPE_TEMPLATES = [
-        "A vast and emotionally charged scene: {scenery}, {time_of_day}, {weather}, "
-        "the entire frame saturated with the feeling of {emotion}",
-        "A breathtaking fine-art landscape: {scenery}, {time_of_day}, {weather}, "
-        "evoking {emotion} through every shadow, light, and texture",
-        "A quiet, painterly scene showing {scenery} under {time_of_day}, {weather}, "
-        "the mood of {emotion} infusing every corner of the frame",
+        "A vast emotionally charged scene: {scenery}, {time_of_day}, {weather}. "
+        "Every shadow and light carries the feeling of {emotion}. "
+        "No human faces, wide cinematic composition",
+
+        "A fine-art landscape: {scenery} under {time_of_day}, {weather}. "
+        "{emotion} infuses every corner of the frame through color, light, and texture",
+
+        "{scenery}, {time_of_day}. {weather}. "
+        "The overwhelming feeling is {emotion} — captured through atmosphere not faces",
     ]
 
-    action_phrase = action if action else "standing quietly in contemplation"
+    action_phrase = action if action else "standing in quiet still contemplation"
 
     if human_subject and human_subject in SUBJECT_SCENE_TEMPLATES:
         templates = SUBJECT_SCENE_TEMPLATES[human_subject]
@@ -970,6 +1002,7 @@ def _procedural_scene_prompt(line: str, scene_idx: int, total_scenes: int, vibe:
             time_of_day=time_of_day,
             emotion=emotion,
         )
+        subject_negative = SUBJECT_NEGATIVE.get(human_subject, "")
     else:
         template = LANDSCAPE_TEMPLATES[scene_idx % len(LANDSCAPE_TEMPLATES)]
         scene_description = template.format(
@@ -978,18 +1011,35 @@ def _procedural_scene_prompt(line: str, scene_idx: int, total_scenes: int, vibe:
             weather=weather,
             emotion=emotion,
         )
+        subject_negative = ""
+
+    # ── UNIVERSAL STRICT NEGATIVE TAGS (appended to every prompt) ────────────
+    # These prevent ALL the bad outputs seen in the screenshots
+    universal_negative = (
+        "no white border, no white frame, no black bar, no letterbox, no pillarbox, "
+        "no vignette frame, no oval frame, no polaroid border, no film border, "
+        "no picture frame, no canvas edge, no margin, no padding, no watermark, "
+        "no text, no words, no letters, no typography, no logo, "
+        "no photorealistic portrait, no stock photo, no AI face default, "
+        "no glamour, no fashion photo, no beauty shot, no selfie, no close-up face, "
+        "no anime girl, no realistic woman unless mother poem, no deformed anatomy"
+    )
+
+    if subject_negative:
+        universal_negative = subject_negative + ", " + universal_negative
 
     # ── FINAL PROMPT ASSEMBLY ────────────────────────────────────────────────
     prompt = (
         f"{art_style}. "
         f"{scene_description}. "
-        f"{atmosphere}. "
-        f"{weather}. "
-        f"Masterpiece quality, 8k detail, edge-to-edge full bleed, no text, no words, no letters, "
-        f"no watermark, no borders, no frames, no white background, no white border, no oval, "
-        f"no cameo, no vignette frame, no photographic realism, no stock photo"
+        f"{atmosphere}. {weather}. "
+        f"Masterpiece, 8k, edge-to-edge full bleed 9:16 portrait, "
+        f"no borders, no frames, no white background. "
+        f"{universal_negative}"
     )
     return prompt
+
+
 
 
 

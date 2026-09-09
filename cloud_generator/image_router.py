@@ -78,13 +78,21 @@ def generate_scene_image(
     if seed is None:
         seed = random.randint(100000, 999999999)
 
-    # Enforce borderless full-bleed framing on every prompt
-    borderless_constraint = (
-        ", borderless full bleed 9:16 portrait vertical frame, "
-        "edge-to-edge cinematic composition, no borders, no white frame, no black bars, no margins"
+    # ── UNIVERSAL HARD CONSTRAINTS appended to EVERY prompt ──────────────────
+    # These enforce full-bleed framing AND prevent all bad AI output types
+    # seen in screenshots (white bars, gradient fallback, female default for father, etc.)
+    UNIVERSAL_SUFFIX = (
+        ", edge-to-edge full bleed 9:16 portrait vertical frame, "
+        "no white border, no white frame, no black bar, no letterbox, no pillarbox, "
+        "no vignette frame, no oval frame, no polaroid border, no film grain border, "
+        "no picture frame, no canvas edge, no margin, no padding, "
+        "no watermark, no text, no words, no letters, no logo, "
+        "no photorealistic portrait, no stock photo, no glamour portrait, no beauty shot, "
+        "no anime girl default, no AI face placeholder, edge-to-edge"
     )
-    if "borderless" not in prompt.lower() and "no borders" not in prompt.lower():
-        prompt = prompt.rstrip(" ,.;:") + borderless_constraint
+    # Only append if the critical tags are missing (avoids doubling up)
+    if "edge-to-edge" not in prompt.lower():
+        prompt = prompt.rstrip(" ,.;:") + UNIVERSAL_SUFFIX
 
     priority = (
         [preferred_engine] if preferred_engine
