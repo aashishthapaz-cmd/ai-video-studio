@@ -396,6 +396,108 @@ def clear_completed_jobs() -> int:
         save_queue(new_q)
     return removed
 
+
+def expire_stale_jobs(max_age_hours: int = 24) -> int:
+    """
+    Removes PENDING jobs whose scheduled_epoch is more than max_age_hours in the past.
+    These are jobs that were never processed (GitHub was down, runner timed out, etc.)
+    and are now too old to post — posting them now would confuse followers with outdated content.
+    Returns the number of jobs removed.
+    """
+    q = load_queue()
+    cutoff = time.time() - (max_age_hours * 3600)
+    kept = []
+    removed_count = 0
+    for j in q:
+        epoch = j.get("scheduled_epoch")
+        status = j.get("status", "PENDING")
+        if status == "PENDING" and epoch and isinstance(epoch, (int, float)) and epoch < cutoff:
+            removed_count += 1
+            print(f"[Queue] Expired & removed stale job: '{j.get('title')}' (was scheduled {j.get('scheduled_time')})", flush=True)
+        else:
+            kept.append(j)
+    if removed_count > 0:
+        save_queue(kept)
+        print(f"[Queue] Cleaned {removed_count} expired stale jobs.", flush=True)
+    return removed_count
+
+
+def reset_stuck_rendering(max_rendering_hours: int = 2) -> int:
+    """
+    Resets jobs stuck in RENDERING status back to PENDING.
+    This happens when GitHub Actions runner times out mid-job (45min limit).
+    Jobs stuck in RENDERING for more than max_rendering_hours are considered crashed.
+    Returns the number of jobs reset.
+    """
+    q = load_queue()
+    now = datetime.now()
+    reset_count = 0
+    for j in q:
+        if j.get("status") == "RENDERING":
+            started_at_str = j.get("started_at", "")
+            try:
+                started_at = datetime.strptime(started_at_str, "%Y-%m-%d %H:%M:%S")
+                age_hours = (now - started_at).total_seconds() / 3600
+                if age_hours > max_rendering_hours:
+                    j["status"] = "PENDING"
+                    j["error"] = f"Reset: was stuck in RENDERING for {age_hours:.1f}h (runner timeout)"
+                    j.pop("started_at", None)
+                    reset_count += 1
+                    print(f"[Queue] Reset stuck RENDERING job: '{j.get('title')}' (stuck {age_hours:.1f}h)", flush=True)
+            except Exception:
+                # Can't parse started_at — reset it to be safe
+                j["status"] = "PENDING"
+                j.pop("started_at", None)
+                reset_count += 1
+    if reset_count > 0:
+        save_queue(q)
+        print(f"[Queue] Reset {reset_count} stuck RENDERING jobs to PENDING.", flush=True)
+    return reset_count
+
+
+def deduplicate_queue() -> int:
+    """
+    Removes duplicate PENDING jobs for the same (title + page) combination.
+    Keeps only the earliest scheduled instance to prevent double-posting.
+    Returns the number of duplicates removed.
+    """
+    q = load_queue()
+    seen = {}  # (title_lower, page_id) -> first job encountered
+    kept = []
+    removed_count = 0
+    for j in q:
+        if j.get("status") != "PENDING":
+            kept.append(j)
+            continue
+        title_key = (j.get("title", "").strip().lower(), str(j.get("target_page_ids", [])))
+        if title_key in seen:
+            removed_count += 1
+            print(f"[Queue] Removed duplicate: '{j.get('title')}' for page {j.get('target_page_ids')}", flush=True)
+        else:
+            seen[title_key] = True
+            kept.append(j)
+    if removed_count > 0:
+        save_queue(kept)
+        print(f"[Queue] Removed {removed_count} duplicate jobs.", flush=True)
+    return removed_count
+
+
+def run_queue_housekeeping() -> dict:
+    """
+    Runs all queue maintenance tasks at the start of every GitHub Actions run:
+    1. Reset RENDERING jobs stuck > 2hrs (runner timeout recovery)
+    2. Remove PENDING jobs expired > 72hrs (avoid posting stale content)
+    3. Remove duplicate (title + page) entries
+    Returns summary dict of what was cleaned.
+    """
+    reset = reset_stuck_rendering(max_rendering_hours=2)
+    expired = expire_stale_jobs(max_age_hours=72)
+    dupes = deduplicate_queue()
+    if reset or expired or dupes:
+        _commit_queue_to_git("🤖 Queue: housekeeping — reset/expire/dedup [skip ci]")
+    return {"reset_rendering": reset, "expired": expired, "duplicates_removed": dupes}
+
+
 def execute_single_job(job_id: str) -> dict:
     q = load_queue()
     job = next((j for j in q if j.get("id") == job_id), None)

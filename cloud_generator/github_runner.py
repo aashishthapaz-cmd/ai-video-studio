@@ -277,7 +277,16 @@ def run():
     # ─── MODE: QUEUE PROCESSOR ───────────────────────────────────────────
     else:
         print("\n[Mode: Queue] Checking scheduled jobs queue...", flush=True)
+
+        # ── STEP 1: Housekeeping — run at start of EVERY queue run ──────────
+        # Fixes stuck RENDERING jobs, removes expired stale posts, deduplicates
+        from bulk_scheduler import run_queue_housekeeping
+        hk = run_queue_housekeeping()
+        if any(hk.values()):
+            print(f"[Queue] Housekeeping: reset={hk['reset_rendering']}, expired={hk['expired']}, dupes={hk['duplicates_removed']}", flush=True)
+
         queue = load_queue()
+        now_epoch = time.time()
         now_str = time.strftime("%Y-%m-%d %H:%M")
 
         pending_jobs = [j for j in queue if j.get("status") == "PENDING"]
@@ -295,33 +304,38 @@ def run():
                 pending_jobs = page_pending
                 print(f"[Queue] Filtered to {len(pending_jobs)} jobs for page(s): {target_page_ids}", flush=True)
 
-        # Collect ALL jobs that are due now (not just the first one)
-        now_epoch = time.time()
+        # ── STEP 2: Collect only TRULY DUE jobs ─────────────────────────────
+        # CRITICAL: Never process expired jobs as fallback — that causes double-posting
+        # A job is only due if scheduled_epoch <= now. Period.
         due_jobs = []
-        overdue_fallback = None  # fallback: oldest job if nothing is due yet
         for j in pending_jobs:
             epoch = j.get("scheduled_epoch")
             sched = j.get("scheduled_time", "")
             if epoch and isinstance(epoch, (int, float)):
                 if now_epoch >= epoch:
                     due_jobs.append(j)
-                elif overdue_fallback is None:
-                    overdue_fallback = j
-            elif not sched or sched <= now_str:
+            elif sched and sched <= now_str:
                 due_jobs.append(j)
-            elif overdue_fallback is None:
-                overdue_fallback = j
 
         if not due_jobs:
-            # No posts are due yet — process the oldest one anyway so no post is lost
-            if overdue_fallback:
-                due_jobs = [overdue_fallback]
-                print(f"[Queue] No posts due yet. Processing next queued job: '{overdue_fallback.get('title')}' as fallback.", flush=True)
+            next_job = pending_jobs[0] if pending_jobs else None
+            if next_job:
+                next_time = next_job.get("scheduled_time", "unknown")
+                print(f"ℹ️ No jobs due yet. Next scheduled: '{next_job.get('title')}' at {next_time}", flush=True)
             else:
-                print("ℹ️ No jobs due yet and no fallback available.", flush=True)
-                return
+                print("ℹ️ No jobs due yet.", flush=True)
+            return
 
-        print(f"\n🚀 Processing {len(due_jobs)} due job(s) this run...", flush=True)
+        # ── STEP 3: Process max 1 job per run (GitHub Actions = 45min limit) ─
+        # Each video generation takes 5-30min. Processing more than 1 per run
+        # risks timeout, which leaves jobs stuck in RENDERING state.
+        # The hourly cron means multiple due jobs will each get their own run.
+        MAX_JOBS_PER_RUN = 1
+        if len(due_jobs) > MAX_JOBS_PER_RUN:
+            print(f"[Queue] {len(due_jobs)} jobs due. Processing {MAX_JOBS_PER_RUN} this run (hourly cron will handle the rest).", flush=True)
+            due_jobs = due_jobs[:MAX_JOBS_PER_RUN]
+
+        print(f"\n🚀 Processing {len(due_jobs)} job(s) this run...", flush=True)
 
         overall_ok = True
         for idx, target_job in enumerate(due_jobs):
@@ -351,6 +365,8 @@ def run():
 
         if not overall_ok:
             sys.exit(1)
+
+
 
 
     print("\n" + "=" * 70, flush=True)
