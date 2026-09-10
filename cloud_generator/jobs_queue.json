@@ -95,30 +95,6 @@
     "synced_to_local": false
   },
   {
-    "id": "job_1788802149_8f2268",
-    "title": "My Soul Yearns For A Soul Like My Own",
-    "script_text": "My soul yearns for a soul like my own.\nIn this crowded world, that might be the hardest thing to find.\nSomeone who carries a heart full of understanding,\nand still knows what it means to feel alone.\nSomeone who understands the way I love.",
-    "niche_id": "typewriters_voice_nostalgia",
-    "niche_name": "Typewriters Voice Nostalgia",
-    "voice": "assets/reference_voice/whishper_prompt.wav",
-    "theme": "typewriters_voice_nostalgia",
-    "target_page_ids": [
-      "1272627002607185"
-    ],
-    "scheduled_time": "2026-09-10 17:30",
-    "scheduled_time_nepal": "2026-09-10 17:30 NPT",
-    "scheduled_time_usa": "2026-09-10 07:45 EDT",
-    "scheduled_epoch": 1789040700,
-    "timezone": "Asia/Kathmandu",
-    "status": "PENDING",
-    "created_at": "2026-09-07 17:29:09",
-    "render_time": null,
-    "output_file": null,
-    "facebook_results": null,
-    "error": null,
-    "synced_to_local": false
-  },
-  {
     "id": "job_1788802149_b6c33e",
     "title": "Questions For Your Mother",
     "script_text": "Five questions to ask your mother while you still can.\nWhat did you want to become before you had me?\nWhat's a moment you're quietly proud of me for?\nWhat's something you gave up for us that we never noticed?\nAnd what's one thing you want me to always remember, after you're gone?",
