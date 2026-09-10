@@ -43,9 +43,10 @@
     "render_time": null,
     "output_file": null,
     "facebook_results": null,
-    "error": null,
+    "error": "Auto-recovered from unexpected process restart (was RENDERING)",
     "synced_to_local": false,
-    "started_at": "2026-09-09 22:47:06"
+    "started_at": "2026-09-10 00:50:29",
+    "recovered_at": "2026-09-10 00:50:24"
   },
   {
     "id": "job_1788800390_162711",
