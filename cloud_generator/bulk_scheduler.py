@@ -397,11 +397,11 @@ def clear_completed_jobs() -> int:
     return removed
 
 
-def expire_stale_jobs(max_age_hours: int = 24) -> int:
+def expire_stale_jobs(max_age_hours: int = 6) -> int:
     """
     Removes PENDING jobs whose scheduled_epoch is more than max_age_hours in the past.
-    These are jobs that were never processed (GitHub was down, runner timed out, etc.)
-    and are now too old to post — posting them now would confuse followers with outdated content.
+    Posts older than 6 hours are too stale to publish — followers would see wrong timing.
+    Set max_age_hours higher if you want GitHub to still process missed slots.
     Returns the number of jobs removed.
     """
     q = load_queue()
@@ -427,31 +427,56 @@ def reset_stuck_rendering(max_rendering_hours: int = 2) -> int:
     Resets jobs stuck in RENDERING status back to PENDING.
     This happens when GitHub Actions runner times out mid-job (45min limit).
     Jobs stuck in RENDERING for more than max_rendering_hours are considered crashed.
-    Returns the number of jobs reset.
+    Returns the number of jobs reset or removed.
     """
     q = load_queue()
     now = datetime.now()
+    now_epoch = time.time()
+    cutoff_24h = now_epoch - 86400  # jobs scheduled >24h ago are stale
+
+    kept = []
     reset_count = 0
     for j in q:
         if j.get("status") == "RENDERING":
             started_at_str = j.get("started_at", "")
+            scheduled_epoch = j.get("scheduled_epoch", 0) or 0
             try:
                 started_at = datetime.strptime(started_at_str, "%Y-%m-%d %H:%M:%S")
                 age_hours = (now - started_at).total_seconds() / 3600
                 if age_hours > max_rendering_hours:
+                    # If the original scheduled time is expired (>24h past),
+                    # DELETE the job — don't reset to PENDING (avoids infinite loop!)
+                    if scheduled_epoch and scheduled_epoch < cutoff_24h:
+                        print(f"[Queue] DELETED expired RENDERING job: '{j.get('title')}' (stuck {age_hours:.1f}h, scheduled {j.get('scheduled_time')})", flush=True)
+                        reset_count += 1
+                        # Don't append to kept → effectively deletes it
+                        continue
+                    else:
+                        # Recent job that timed out — reset to PENDING so it retries
+                        j["status"] = "PENDING"
+                        j["error"] = f"Reset: stuck in RENDERING for {age_hours:.1f}h (runner timeout)"
+                        j.pop("started_at", None)
+                        reset_count += 1
+                        print(f"[Queue] Reset stuck RENDERING job: '{j.get('title')}' (stuck {age_hours:.1f}h)", flush=True)
+                        kept.append(j)
+                        continue
+            except Exception:
+                # Can't parse started_at — if epoch is expired, delete; else reset
+                if scheduled_epoch and scheduled_epoch < cutoff_24h:
+                    print(f"[Queue] DELETED unparseable RENDERING job: '{j.get('title')}'", flush=True)
+                    reset_count += 1
+                    continue
+                else:
                     j["status"] = "PENDING"
-                    j["error"] = f"Reset: was stuck in RENDERING for {age_hours:.1f}h (runner timeout)"
                     j.pop("started_at", None)
                     reset_count += 1
-                    print(f"[Queue] Reset stuck RENDERING job: '{j.get('title')}' (stuck {age_hours:.1f}h)", flush=True)
-            except Exception:
-                # Can't parse started_at — reset it to be safe
-                j["status"] = "PENDING"
-                j.pop("started_at", None)
-                reset_count += 1
+                    kept.append(j)
+                    continue
+        kept.append(j)
+
     if reset_count > 0:
-        save_queue(q)
-        print(f"[Queue] Reset {reset_count} stuck RENDERING jobs to PENDING.", flush=True)
+        save_queue(kept)
+        print(f"[Queue] Handled {reset_count} stuck RENDERING jobs.", flush=True)
     return reset_count
 
 
