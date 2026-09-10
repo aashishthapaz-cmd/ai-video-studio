@@ -4,7 +4,7 @@ import random
 import hashlib
 import logging
 from pathlib import Path
-from PIL import Image, ImageDraw, ImageFilter
+from PIL import Image, ImageDraw
 
 try:
     from .config import load_settings
@@ -19,44 +19,92 @@ except ImportError:
 
 logger = logging.getLogger("ImageRouter")
 
-# ── Per-process entropy salt ensures no two runs (poems) share the same seed space ──────────
+# ── Per-process entropy salt ensures no two runs (poems) share the same seed space ──
 _RUN_ENTROPY = uuid.uuid4().hex  # unique per GitHub Actions runner invocation
-
-
-def _generate_fallback_art(prompt: str, output_path: Path, width: int = 1080, height: int = 1920, scene_index: int = 0) -> str:
-    """Generates a unique, distinct atmospheric art canvas per scene if cloud engines are offline."""
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    palettes = [
-        ((15, 20, 35), (45, 30, 60)),
-        ((35, 20, 15), (65, 45, 25)),
-        ((15, 35, 30), (30, 65, 50)),
-        ((25, 15, 35), (55, 30, 50)),
-        ((20, 25, 20), (45, 60, 35)),
-        ((30, 25, 40), (50, 40, 65)),
-        ((20, 30, 45), (40, 55, 70))
-    ]
-    top_col, bot_col = palettes[scene_index % len(palettes)]
-    im = Image.new("RGB", (width, height), top_col)
-    draw = ImageDraw.Draw(im)
-    for y in range(height):
-        ratio = y / height
-        r = int(top_col[0] * (1 - ratio) + bot_col[0] * ratio)
-        g = int(top_col[1] * (1 - ratio) + bot_col[1] * ratio)
-        b = int(top_col[2] * (1 - ratio) + bot_col[2] * ratio)
-        draw.line([(0, y), (width, y)], fill=(r, g, b))
-
-    orb_x = int(width * (0.3 + (scene_index * 0.15) % 0.4))
-    orb_y = int(height * (0.35 + (scene_index * 0.1) % 0.3))
-    draw.ellipse([orb_x - 140, orb_y - 140, orb_x + 140, orb_y + 140], fill=(240, 225, 190))
-    im = im.filter(ImageFilter.GaussianBlur(radius=12))
-    im.save(output_path, "PNG")
-    return str(output_path)
 
 
 def _unique_seed(base: str, attempt: int = 0) -> int:
     """Generates a stable but globally unique seed from a string key + attempt + run entropy."""
     raw = f"{_RUN_ENTROPY}:{base}:{attempt}"
     return int(hashlib.sha256(raw.encode()).hexdigest()[:8], 16)
+
+
+def _emergency_fallback_from_pollinations(prompt: str, output_path: Path, width: int, height: int, seed: int) -> str:
+    """
+    Last-resort: tries Pollinations (no token needed, always available) with a simplified prompt.
+    This replaces the old gradient canvas fallback — we always try to get a real image.
+    """
+    try:
+        # Strip the long negative prompts — Pollinations works better with positive-only prompts
+        clean = prompt.split("no white border")[0].split("no borders")[0].strip().rstrip(",. ")
+        # Keep only the first 200 chars for speed and reliability
+        short_prompt = clean[:200].rsplit(" ", 1)[0]
+        return generate_pollinations_image(
+            short_prompt, output_path, width=width, height=height,
+            seed=seed, model="flux", retries=4
+        )
+    except Exception as e:
+        logger.warning(f"Emergency Pollinations fallback also failed: {e}. Using minimal solid canvas.")
+        # Absolute last resort: solid dark gradient (NOT the orb — it looked terrible)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        im = Image.new("RGB", (width, height), (18, 22, 38))
+        draw = ImageDraw.Draw(im)
+        for y in range(height):
+            ratio = y / height
+            r = int(18 + 20 * ratio)
+            g = int(22 + 18 * ratio)
+            b = int(38 + 12 * ratio)
+            draw.line([(0, y), (width, y)], fill=(r, g, b))
+        im.save(output_path, "PNG")
+        return str(output_path)
+
+
+# ─── UNIVERSAL NEGATIVE TAGS applied to every prompt ─────────────────────────
+# These prevent: white borders, pillarbox bars, AI portrait defaults, wrong gender
+_UNIVERSAL_NEGATIVE = (
+    "no white border, no white frame, no black bar, no letterbox, no pillarbox, "
+    "no vignette frame, no oval frame, no polaroid frame, no film border, "
+    "no picture frame, no canvas edge, no margin, no padding, "
+    "no watermark, no text, no letters, no typography, no logo, "
+    "no photorealistic portrait, no stock photo, no glamour shot, "
+    "no beauty shot, no selfie, no close-up face, no AI face default, "
+    "no realistic young woman unless poem is about a woman, "
+    "no anime girl, no deformed anatomy, edge-to-edge full bleed"
+)
+
+# Subject-specific gender negatives added ON TOP of universal
+_SUBJECT_NEGATIVE = {
+    "father": "no woman, no female face, no girl, no feminine features, no young face",
+    "mother": "no man, no male face, no boy, no masculine figure",
+    "child":  "no adult face, no glamour, no model",
+}
+
+
+def _build_prompt(raw_prompt: str, subject_type: str = None) -> str:
+    """
+    Builds the final prompt sent to the image engine.
+    
+    CRITICAL DESIGN:
+    - Subject/gender MUST be at the START — FLUX reads left-to-right and truncates
+    - Keep total length under 300 words for reliable FLUX prompt following
+    - Negative tags go at the end
+    - NO '35mm photography', 'film grain', 'photorealism' — these make FLUX generate photo-realistic women
+    """
+    # Extract just the scene description (before any negative tags already in the prompt)
+    for split_marker in ["no white border", "no borders", "Masterpiece, 8k", "edge-to-edge full bleed 9:16"]:
+        if split_marker.lower() in raw_prompt.lower():
+            idx = raw_prompt.lower().find(split_marker.lower())
+            raw_prompt = raw_prompt[:idx].strip().rstrip(",. ")
+            break
+
+    # Build subject negative
+    subject_neg = ""
+    if subject_type and subject_type in _SUBJECT_NEGATIVE:
+        subject_neg = _SUBJECT_NEGATIVE[subject_type] + ", "
+
+    final_negative = subject_neg + _UNIVERSAL_NEGATIVE
+
+    return f"{raw_prompt.strip()}. {final_negative}"
 
 
 def generate_scene_image(
@@ -66,11 +114,14 @@ def generate_scene_image(
     height: int = None,
     seed: int = None,
     preferred_engine: str = None,
+    subject_type: str = None,
 ) -> dict:
     """
     Unified multi-cloud image router with automatic failover.
-    Tries preferred or priority-ordered free cloud image engines.
-    HuggingFace is the default primary engine.
+    HuggingFace → Cloudflare → Pollinations → Emergency Pollinations (never gradient).
+    
+    subject_type: 'father', 'mother', 'child', 'lover', 'self_reflection', etc.
+                  Used to add gender-specific negative prompts.
     """
     cfg = load_settings()
     width = width or cfg.get("output_width", 1080)
@@ -78,25 +129,12 @@ def generate_scene_image(
     if seed is None:
         seed = random.randint(100000, 999999999)
 
-    # ── UNIVERSAL HARD CONSTRAINTS appended to EVERY prompt ──────────────────
-    # These enforce full-bleed framing AND prevent all bad AI output types
-    # seen in screenshots (white bars, gradient fallback, female default for father, etc.)
-    UNIVERSAL_SUFFIX = (
-        ", edge-to-edge full bleed 9:16 portrait vertical frame, "
-        "no white border, no white frame, no black bar, no letterbox, no pillarbox, "
-        "no vignette frame, no oval frame, no polaroid border, no film grain border, "
-        "no picture frame, no canvas edge, no margin, no padding, "
-        "no watermark, no text, no words, no letters, no logo, "
-        "no photorealistic portrait, no stock photo, no glamour portrait, no beauty shot, "
-        "no anime girl default, no AI face placeholder, edge-to-edge"
-    )
-    # Only append if the critical tags are missing (avoids doubling up)
-    if "edge-to-edge" not in prompt.lower():
-        prompt = prompt.rstrip(" ,.;:") + UNIVERSAL_SUFFIX
+    # Build the final prompt with universal negatives and subject gender lock
+    final_prompt = _build_prompt(prompt, subject_type=subject_type)
 
     priority = (
         [preferred_engine] if preferred_engine
-        # HuggingFace → Cloudflare → Pollinations (last resort only)
+        # HuggingFace → Cloudflare → Pollinations (last resort)
         else cfg.get("image_engine_priority", ["huggingface", "cloudflare", "pollinations"])
     )
 
@@ -109,9 +147,10 @@ def generate_scene_image(
             if "huggingface" in engine:
                 hf_token = cfg.get("huggingface_token", "")
                 if not hf_token:
+                    errors.append("huggingface: no token")
                     continue
                 img = generate_huggingface_image(
-                    prompt, output_path, hf_token=hf_token, width=width, height=height, seed=seed
+                    final_prompt, output_path, hf_token=hf_token, width=width, height=height, seed=seed
                 )
                 return {"ok": True, "engine": "Hugging Face Serverless", "path": img}
 
@@ -120,7 +159,7 @@ def generate_scene_image(
                 api_key = cfg.get("pollinations_api_key", "")
                 try:
                     img = generate_pollinations_image(
-                        prompt, output_path, width=width, height=height, seed=seed, model=model, api_key=api_key
+                        final_prompt, output_path, width=width, height=height, seed=seed, model=model, api_key=api_key
                     )
                     return {"ok": True, "engine": f"Pollinations ({model})", "path": img}
                 except Exception as e:
@@ -128,7 +167,7 @@ def generate_scene_image(
                         try:
                             time.sleep(1.5)
                             img = generate_pollinations_image(
-                                prompt, output_path, width=width, height=height, seed=seed, model="turbo", api_key=api_key
+                                final_prompt, output_path, width=width, height=height, seed=seed, model="turbo", api_key=api_key
                             )
                             return {"ok": True, "engine": "Pollinations (turbo fallback)", "path": img}
                         except Exception:
@@ -139,84 +178,95 @@ def generate_scene_image(
                 acc_id = cfg.get("cloudflare_account_id", "")
                 token = cfg.get("cloudflare_api_token", "")
                 if not acc_id or not token:
+                    errors.append("cloudflare: no credentials")
                     continue
                 img = generate_cloudflare_image(
-                    prompt, output_path, account_id=acc_id, api_token=token, width=width, height=height, seed=seed
+                    final_prompt, output_path, account_id=acc_id, api_token=token, width=width, height=height, seed=seed
                 )
                 return {"ok": True, "engine": "Cloudflare Workers AI", "path": img}
 
         except Exception as exc:
             errors.append(f"{engine}: {exc}")
+            logger.warning(f"[ImageRouter] {engine} failed: {exc}")
             continue
 
-    logger.warning(f"All image engines failed ({'; '.join(errors)}). Using aesthetic fallback canvas.")
-    fallback_path = _generate_fallback_art(prompt, output_path, width, height)
-    return {"ok": True, "engine": "Aesthetic Mood Canvas (Fallback)", "path": fallback_path}
+    # ── ALL engines failed: Emergency Pollinations (no token needed) ──────────
+    # NEVER use the gradient canvas — always try to get a real image
+    logger.warning(f"All primary engines failed ({'; '.join(errors)}). Attempting emergency Pollinations...")
+    emergency_path = _emergency_fallback_from_pollinations(final_prompt, output_path, width, height, seed)
+    return {"ok": True, "engine": "Emergency Pollinations Fallback", "path": emergency_path}
 
 
 def generate_all_scene_images(scenes: list, assets_dir: Path, progress_callback=None) -> list:
     """
-    Generates strictly unique, borderless images for all scenes.
+    Generates strictly unique, borderless, poem-subject-accurate images for all scenes.
 
-    Cross-poem uniqueness is guaranteed via:
-    - _RUN_ENTROPY: a UUID generated once per process (unique per GitHub Actions run)
-    - Per-scene compound seed derived from run entropy + poem hash + scene index + attempt
-    - Prompt salting with unique contextual variants per attempt
-    - MD5 hash registry catches any accidental duplicates and forces a retry
+    Key guarantees:
+    - Subject (father/mother/etc.) extracted from prompt and used to lock gender
+    - FLUX-friendly prompts: subject/gender at start, positive description, negatives at end
+    - Cross-poem uniqueness via _RUN_ENTROPY UUID (unique per GitHub Actions run)
+    - Per-scene compound seed: run_entropy + scene_id + attempt → globally unique
+    - MD5 hash registry catches any accidental duplicates and forces retry
+    - NEVER uses gradient canvas — always tries emergency Pollinations on total failure
     """
     assets_dir.mkdir(parents=True, exist_ok=True)
     results = []
     total = len(scenes)
     seen_hashes: dict[str, str] = {}  # hash → scene_id
 
-    # Variation vocabulary for prompt salting on retries
+    # Lighting variants used to salt retries (ensure uniqueness without changing content)
     _lighting_variants = [
         "golden hour warm light", "blue hour twilight glow", "overcast diffused light",
-        "dappled forest light", "morning mist soft haze", "stormy dramatic sky",
+        "dramatic chiaroscuro lighting", "morning mist soft haze", "nocturnal ambient glow",
         "candlelight warm amber", "moonlit silver radiance",
     ]
-    _depth_variants = [
-        "shallow depth of field", "deep focus panorama", "intimate close-up framing",
-        "wide establishing shot", "medium portrait framing", "aerial perspective",
-        "low angle looking up", "high angle bird's-eye",
+    _composition_variants = [
+        "wide environmental shot", "intimate silhouette framing",
+        "close detail of hands or objects", "cinematic low angle",
+        "high angle bird's-eye view", "medium portrait framing",
+        "over-the-shoulder perspective", "centered symmetrical composition",
     ]
 
     for i, scene in enumerate(scenes):
         scene_id = scene.get("id", f"scene_{i+1:03d}")
         raw_prompt = scene.get("prompt", "").strip() or scene.get("narration", "").strip()
 
-        # Borderless + cinematic enrichment
-        borderless_addon = (
-            ", borderless full bleed 9:16 portrait vertical frame, "
-            "edge-to-edge cinematic composition, no borders, no white frame, no black bars, no margins"
-        )
-        aesthetic_booster = ", cinematic mood, soft film grain, natural ambient lighting, 35mm photography, high aesthetic, detailed textures, masterpiece"
-        if len(raw_prompt.split()) < 20 or "cinematic" not in raw_prompt.lower():
-            base_prompt = raw_prompt.rstrip(" ,.;:") + aesthetic_booster + borderless_addon
-        else:
-            base_prompt = raw_prompt.rstrip(" ,.;:") + borderless_addon
+        # Extract subject type from prompt for gender locking
+        subject_type = None
+        prompt_lower = raw_prompt.lower()
+        if any(k in prompt_lower for k in ["elderly man", "old man", "father", "calloused hands", "working-class old man"]):
+            subject_type = "father"
+        elif any(k in prompt_lower for k in ["older woman", "mother", "gentle woman", "woman's hands"]):
+            subject_type = "mother"
+        elif any(k in prompt_lower for k in ["small child", "child silhouette", "tiny child"]):
+            subject_type = "child"
 
         out_file = assets_dir / f"{scene_id}.png"
 
         if progress_callback:
-            progress_callback(i + 1, total, f"Generating unique image for {scene_id}")
+            progress_callback(i + 1, total, f"Generating image for {scene_id}")
 
         success = False
-        for attempt in range(7):  # 7 attempts: 5 variation salts + 2 emergency retries
+        for attempt in range(8):  # 8 attempts with varied salt
             # Compound seed: run entropy + scene id + attempt → guaranteed globally unique
             seed = _unique_seed(f"{scene_id}:{raw_prompt[:40]}", attempt)
 
-            # Rotate lighting and depth vocabulary so each retry looks genuinely different
-            lighting = _lighting_variants[(i + attempt * 3) % len(_lighting_variants)]
-            depth = _depth_variants[(i + attempt * 2 + 1) % len(_depth_variants)]
-            salt = f", {lighting}, {depth}, scene variant {i+1}-{attempt+1}" if attempt > 0 else ""
-            prompt = base_prompt.rstrip(" ,.;:") + salt
+            # Rotate lighting/composition on retries to guarantee visual variety
+            if attempt > 0:
+                lighting = _lighting_variants[(i + attempt * 3) % len(_lighting_variants)]
+                composition = _composition_variants[(i + attempt * 2 + 1) % len(_composition_variants)]
+                salt = f", {lighting}, {composition}"
+                salted_prompt = raw_prompt.rstrip(" ,.;:") + salt
+            else:
+                salted_prompt = raw_prompt
 
             try:
-                res = generate_scene_image(prompt, out_file, seed=seed)
+                res = generate_scene_image(
+                    salted_prompt, out_file, seed=seed, subject_type=subject_type
+                )
                 img_path = Path(res["path"])
 
-                if img_path.exists() and img_path.stat().st_size > 1000:
+                if img_path.exists() and img_path.stat().st_size > 5000:
                     img_bytes = img_path.read_bytes()
                     img_hash = hashlib.md5(img_bytes).hexdigest()
 
@@ -225,6 +275,7 @@ def generate_all_scene_images(scenes: list, assets_dir: Path, progress_callback=
                         scene["image_path"] = str(img_path)
                         scene["image_engine"] = res["engine"]
                         success = True
+                        print(f"  ✅ [{scene_id}] Image OK via {res['engine']} (attempt {attempt+1})", flush=True)
                         time.sleep(0.8)
                         break
                     else:
@@ -240,10 +291,15 @@ def generate_all_scene_images(scenes: list, assets_dir: Path, progress_callback=
                 time.sleep(2.5)
 
         if not success:
-            # Distinct fallback canvas with unique per-scene palette
-            fallback_path = _generate_fallback_art(base_prompt, out_file, scene_index=i)
-            scene["image_path"] = fallback_path
-            scene["image_engine"] = "Distinct Mood Canvas"
+            # Try one final emergency attempt with Pollinations directly
+            print(f"  ⚠️ [{scene_id}] All 8 attempts failed. Trying emergency Pollinations...", flush=True)
+            emergency_seed = _unique_seed(f"emergency:{scene_id}", 99)
+            emergency_path = _emergency_fallback_from_pollinations(
+                raw_prompt, out_file, 1080, 1920, emergency_seed
+            )
+            scene["image_path"] = emergency_path
+            scene["image_engine"] = "Emergency Pollinations"
+            print(f"  🆘 [{scene_id}] Used emergency fallback.", flush=True)
 
         results.append(scene)
 

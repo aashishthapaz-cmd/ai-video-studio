@@ -1002,7 +1002,6 @@ def _procedural_scene_prompt(line: str, scene_idx: int, total_scenes: int, vibe:
             time_of_day=time_of_day,
             emotion=emotion,
         )
-        subject_negative = SUBJECT_NEGATIVE.get(human_subject, "")
     else:
         template = LANDSCAPE_TEMPLATES[scene_idx % len(LANDSCAPE_TEMPLATES)]
         scene_description = template.format(
@@ -1011,33 +1010,36 @@ def _procedural_scene_prompt(line: str, scene_idx: int, total_scenes: int, vibe:
             weather=weather,
             emotion=emotion,
         )
-        subject_negative = ""
 
-    # ── UNIVERSAL STRICT NEGATIVE TAGS (appended to every prompt) ────────────
-    # These prevent ALL the bad outputs seen in the screenshots
-    universal_negative = (
-        "no white border, no white frame, no black bar, no letterbox, no pillarbox, "
-        "no vignette frame, no oval frame, no polaroid border, no film border, "
-        "no picture frame, no canvas edge, no margin, no padding, no watermark, "
-        "no text, no words, no letters, no typography, no logo, "
-        "no photorealistic portrait, no stock photo, no AI face default, "
-        "no glamour, no fashion photo, no beauty shot, no selfie, no close-up face, "
-        "no anime girl, no realistic woman unless mother poem, no deformed anatomy"
-    )
+    # ── GENDER ANCHOR: MUST be position #1 in the prompt ─────────────────────
+    # FLUX.1-schnell reads left-to-right and has a strong female default bias.
+    # Putting an explicit gender/age token first is the ONLY reliable way to
+    # override that bias. The art style and scene description come AFTER.
+    GENDER_ANCHORS = {
+        "father":          "Elderly man. Old male figure. Aged working-class man.",
+        "mother":          "Older woman. Elderly female figure. Gentle aged woman.",
+        "child":           "Small child. Young boy or girl. Tiny child figure.",
+        "lover":           "Two people. A man and a woman, or one solitary person.",
+        "friend":          "Two human figures. People walking together.",
+        "self_reflection": "Solitary person, gender neutral, seen from behind or in silhouette.",
+        "anonymous_figure": "Lone anonymous human figure.",
+    }
+    gender_anchor = GENDER_ANCHORS.get(human_subject, "") if human_subject else ""
 
-    if subject_negative:
-        universal_negative = subject_negative + ", " + universal_negative
+    # ── FINAL PROMPT ASSEMBLY (FLUX-optimized, short and clear) ──────────────
+    # Order: [GENDER ANCHOR] → [ART STYLE] → [SCENE] → [ATMOSPHERE + WEATHER]
+    # Negative tags are added by image_router._build_prompt() — not here
+    parts = []
+    if gender_anchor:
+        parts.append(gender_anchor)
+    parts.append(art_style)
+    parts.append(scene_description)
+    parts.append(f"{atmosphere}. {weather}")
+    parts.append("Masterpiece, 8k, edge-to-edge full bleed 9:16 portrait")
 
-    # ── FINAL PROMPT ASSEMBLY ────────────────────────────────────────────────
-    prompt = (
-        f"{art_style}. "
-        f"{scene_description}. "
-        f"{atmosphere}. {weather}. "
-        f"Masterpiece, 8k, edge-to-edge full bleed 9:16 portrait, "
-        f"no borders, no frames, no white background. "
-        f"{universal_negative}"
-    )
+    prompt = " ".join(p.strip().rstrip(".") + "." for p in parts if p.strip())
     return prompt
+
 
 
 
