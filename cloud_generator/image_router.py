@@ -247,7 +247,8 @@ def generate_all_scene_images(scenes: list, assets_dir: Path, progress_callback=
             progress_callback(i + 1, total, f"Generating image for {scene_id}")
 
         success = False
-        for attempt in range(8):  # 8 attempts with varied salt
+        for attempt in range(3):  # 3 attempts max: HF try, Pollinations fallback, emergency
+
             # Compound seed: run entropy + scene id + attempt → guaranteed globally unique
             seed = _unique_seed(f"{scene_id}:{raw_prompt[:40]}", attempt)
 
@@ -276,7 +277,7 @@ def generate_all_scene_images(scenes: list, assets_dir: Path, progress_callback=
                         scene["image_engine"] = res["engine"]
                         success = True
                         print(f"  ✅ [{scene_id}] Image OK via {res['engine']} (attempt {attempt+1})", flush=True)
-                        time.sleep(0.8)
+                        time.sleep(0.2)
                         break
                     else:
                         logger.warning(

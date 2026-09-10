@@ -78,7 +78,7 @@ jobs:
   render-and-publish:
     name: 🎥 Render 1080x1920 Video & Publish
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
 
     steps:
       - name: 📥 Checkout Repository
