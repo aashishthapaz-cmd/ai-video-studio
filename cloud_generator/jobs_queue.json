@@ -38,7 +38,7 @@
     "scheduled_time_usa": "2026-09-08 01:01 EDT",
     "scheduled_epoch": 1788843710,
     "timezone": "Asia/Kathmandu",
-    "status": "RENDERING",
+    "status": "PENDING",
     "created_at": "2026-09-07 16:59:50",
     "render_time": null,
     "output_file": null,
@@ -46,7 +46,7 @@
     "error": "Auto-recovered from unexpected process restart (was RENDERING)",
     "synced_to_local": false,
     "started_at": "2026-09-10 00:50:29",
-    "recovered_at": "2026-09-10 00:50:24"
+    "recovered_at": "2026-09-10 05:07:27"
   },
   {
     "id": "job_1788800390_162711",
@@ -3265,30 +3265,6 @@
     "synced_to_local": false
   },
   {
-    "id": "job_1788970363_c1fa32",
-    "title": "Truth Or Illusion",
-    "script_text": "Dostoevsky said,\nperhaps it is better to suffer and know the truth than to be happy in a delusion.\nBut Franz Kafka said, I would rather keep my illusions,\nfor they are often kinder than the truth.\nSo the question is, do you want the truth?\nOr do you want the illusion?",
-    "niche_id": "typewriters_voice_nostalgia",
-    "niche_name": "Typewriters Voice Nostalgia",
-    "voice": "assets/reference_voice/whishper_prompt.wav",
-    "theme": "typewriters_voice_nostalgia",
-    "target_page_ids": [
-      "1131453436723290"
-    ],
-    "scheduled_time": "2026-09-24 22:51",
-    "scheduled_time_nepal": "2026-09-24 22:51 NPT",
-    "scheduled_time_usa": "2026-09-24 13:06 EDT",
-    "scheduled_epoch": 1790269560,
-    "timezone": "Asia/Kathmandu",
-    "status": "PENDING",
-    "created_at": "2026-09-09 16:12:43",
-    "render_time": null,
-    "output_file": null,
-    "facebook_results": null,
-    "error": null,
-    "synced_to_local": false
-  },
-  {
     "id": "job_1788970363_1936e4",
     "title": "Lost With You",
     "script_text": "Lost with you in you and without you.\nBefore you, after you, somehow, still around you.\nNot by chance, not by choice, but by a love that never learned to leave.",
@@ -5175,30 +5151,6 @@
     "scheduled_time_nepal": "2026-09-18 20:55 NPT",
     "scheduled_time_usa": "2026-09-18 11:10 EDT",
     "scheduled_epoch": 1789744200,
-    "timezone": "Asia/Kathmandu",
-    "status": "PENDING",
-    "created_at": "2026-09-09 17:18:31",
-    "render_time": null,
-    "output_file": null,
-    "facebook_results": null,
-    "error": null,
-    "synced_to_local": false
-  },
-  {
-    "id": "job_1788974311_dd6339",
-    "title": "What Is Love",
-    "script_text": "What is love?\nAfter all, it's quite simple.\nLove is everything that enhances, widens, and enriches our life.\nIn its heights and in its depths, it makes every moment worth living.",
-    "niche_id": "typewriters_voice_nostalgia",
-    "niche_name": "Typewriters Voice Nostalgia",
-    "voice": "assets/reference_voice/whishper_prompt.wav",
-    "theme": "typewriters_voice_nostalgia",
-    "target_page_ids": [
-      "1084268771446346"
-    ],
-    "scheduled_time": "2026-09-19 20:55",
-    "scheduled_time_nepal": "2026-09-19 20:55 NPT",
-    "scheduled_time_usa": "2026-09-19 11:10 EDT",
-    "scheduled_epoch": 1789830600,
     "timezone": "Asia/Kathmandu",
     "status": "PENDING",
     "created_at": "2026-09-09 17:18:31",
