@@ -96,30 +96,6 @@
     "synced_to_local": false
   },
   {
-    "id": "job_1788974311_3315a4",
-    "title": "Leave What You Love Just To Live",
-    "script_text": "When there are more tears than smiles, leave.\nWhen there are more fights than jokes, leave.\nWhen it hurts more than it feels good,\nleave, even if it means leaving what you love, just to live.",
-    "niche_id": "typewriters_voice_nostalgia",
-    "niche_name": "Typewriters Voice Nostalgia",
-    "voice": "assets/reference_voice/whishper_prompt.wav",
-    "theme": "typewriters_voice_nostalgia",
-    "target_page_ids": [
-      "1084268771446346"
-    ],
-    "scheduled_time": "2026-09-11 20:55",
-    "scheduled_time_nepal": "2026-09-11 20:55 NPT",
-    "scheduled_time_usa": "2026-09-11 11:10 EDT",
-    "scheduled_epoch": 1789139400,
-    "timezone": "Asia/Kathmandu",
-    "status": "PENDING",
-    "created_at": "2026-09-09 17:18:31",
-    "render_time": null,
-    "output_file": null,
-    "facebook_results": null,
-    "error": null,
-    "synced_to_local": false
-  },
-  {
     "id": "job_1788968718_a6ca4f",
     "title": "Sometimes Being Intelligent Is A Curse",
     "script_text": "Sometimes being intelligent is a curse.\nYou understand the game. You see the lies. You recognize the patterns.\nBut despite knowing all of this,\nsometimes, to survive, you still have to play along.",
