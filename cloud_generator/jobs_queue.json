@@ -1,29 +1,5 @@
 [
   {
-    "id": "job_1788800390_e65e00",
-    "title": "Change What Surrounds You",
-    "script_text": "I read once that you can't always change the people around you,\nbut you can change who you choose to be around.\nAnd when I finally understood that,\neverything made sense.",
-    "niche_id": "typewriters_voice_nostalgia",
-    "niche_name": "Typewriters Voice Nostalgia",
-    "voice": "assets/reference_voice/whishper_prompt.wav",
-    "theme": "typewriters_voice_nostalgia",
-    "target_page_ids": [
-      "1256616857537225"
-    ],
-    "scheduled_time": "2026-09-11 10:46",
-    "scheduled_time_nepal": "2026-09-11 10:46 NPT",
-    "scheduled_time_usa": "2026-09-11 01:01 EDT",
-    "scheduled_epoch": 1789102910,
-    "timezone": "Asia/Kathmandu",
-    "status": "PENDING",
-    "created_at": "2026-09-07 16:59:50",
-    "render_time": null,
-    "output_file": null,
-    "facebook_results": null,
-    "error": null,
-    "synced_to_local": false
-  },
-  {
     "id": "job_1788800390_0c4971",
     "title": "You Might Already Be Too Late",
     "script_text": "I was too tired to explain, so I chose silence.\nYou kept asking what was wrong. I kept saying nothing.\nYou heard my words. You never heard my silence.\nYou wanted an explanation. I wanted to be understood.\nBy the time you finally understand me, it might already be too late.",
