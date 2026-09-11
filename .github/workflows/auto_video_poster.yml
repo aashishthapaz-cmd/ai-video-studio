@@ -5,7 +5,8 @@ on:
   #    Wakes up every 30 minutes to check scheduled queue, resolve collisions,
   #    render & publish due videos, and send notifications + playable video to Telegram.
   schedule:
-    - cron: '*/15 * * * *'   # Runs every 15 minutes (:00, :15, :30, :45)
+    # Staggered every 15 mins (:07, :22, :37, :52) to avoid GitHub Actions scheduler delays
+    - cron: '7,22,37,52 * * * *'
 
   # 2. Manual / Mobile Trigger via GitHub Web UI or GitHub App
   workflow_dispatch:

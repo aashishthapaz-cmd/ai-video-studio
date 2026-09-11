@@ -1538,6 +1538,7 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
         });
 
         if (success) {
+          markJobAsDispatched(job.id);
           showToast('✅ Dispatched "' + job.title + '" to ' + pageLabel + '! Removing from pending queue on GitHub...');
           // 3. Commit removal of this job from GitHub Actions queue immediately
           await commitCloudQueueToGithub(CLOUD_QUEUE, 'chore(queue): Dispatched job "' + job.title + '" immediately');
@@ -1553,6 +1554,92 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
         setTimeout(function() { window._DISPATCH_LOCK = false; }, 8000);
       }
     }
+
+    // Persistent anti-duplicate dispatch memory (stores dispatched IDs for 24h)
+    function isJobAlreadyDispatched(jobId) {
+      try {
+        const raw = localStorage.getItem('dispatched_jobs_v1');
+        const map = raw ? JSON.parse(raw) : {};
+        const ts = map[jobId];
+        if (!ts) return false;
+        if (Date.now() - ts > 86400000) { // 24h expiry
+          delete map[jobId];
+          localStorage.setItem('dispatched_jobs_v1', JSON.stringify(map));
+          return false;
+        }
+        return true;
+      } catch(e) {
+        return false;
+      }
+    }
+
+    function markJobAsDispatched(jobId) {
+      try {
+        const raw = localStorage.getItem('dispatched_jobs_v1');
+        const map = raw ? JSON.parse(raw) : {};
+        map[jobId] = Date.now();
+        localStorage.setItem('dispatched_jobs_v1', JSON.stringify(map));
+      } catch(e) {}
+    }
+
+    // Smart Autonomous Queue Dispatcher (with persistent anti-duplicate protection)
+    let IS_AUTO_DISPATCHING = false;
+    async function checkAndAutoDispatchDueJobs() {
+      if (IS_AUTO_DISPATCHING || window._DISPATCH_LOCK) return;
+      const pat = localStorage.getItem('gh_pat');
+      if (!pat || !CLOUD_QUEUE || !CLOUD_QUEUE.length) return;
+
+      const nowEpoch = Math.floor(Date.now() / 1000);
+      const dueJob = CLOUD_QUEUE.find(function(j) {
+        return j.status === 'PENDING' && 
+               j.scheduled_epoch && 
+               (j.scheduled_epoch <= nowEpoch) && 
+               !isJobAlreadyDispatched(j.id);
+      });
+
+      if (!dueJob) return;
+
+      IS_AUTO_DISPATCHING = true;
+      markJobAsDispatched(dueJob.id);
+
+      console.log('⏰ Scheduled time reached for "' + dueJob.title + '". Auto-dispatching render...');
+      showToast('⏰ Time reached for "' + dueJob.title + '"! Auto-dispatching render to GitHub Actions...');
+
+      const previousQueue = [...CLOUD_QUEUE];
+      CLOUD_QUEUE = CLOUD_QUEUE.filter(function(j) { return j.id !== dueJob.id; });
+      renderCloudQueue();
+
+      const targetPage = (dueJob.target_page_ids && dueJob.target_page_ids.length) ? String(dueJob.target_page_ids[0]).trim() : 'ALL Pages';
+
+      try {
+        const success = await dispatchWorkflowAPI({
+          script_text: dueJob.script_text,
+          title: dueJob.title,
+          custom_vibe: dueJob.theme || dueJob.vibe || 'Typewriters Voice Nostalgia',
+          poetry_niche: dueJob.niche_id || 'Auto-Detect from Poem',
+          target_page: targetPage,
+          publish_facebook: true
+        });
+
+        if (success) {
+          showToast('✅ Auto-dispatched "' + dueJob.title + '"! Removing from pending queue on GitHub...');
+          await commitCloudQueueToGithub(CLOUD_QUEUE, 'chore(queue): Auto-dispatched scheduled job "' + dueJob.title + '"');
+          triggerFastQueueSync();
+        } else {
+          // If dispatch completely failed, rollback
+          CLOUD_QUEUE = previousQueue;
+          renderCloudQueue();
+        }
+      } catch(err) {
+        console.error('Auto dispatch error:', err);
+      } finally {
+        setTimeout(function() { IS_AUTO_DISPATCHING = false; }, 60000);
+      }
+    }
+
+    // Auto-check for due scheduled jobs every 30 seconds
+    setInterval(checkAndAutoDispatchDueJobs, 30000);
+    setTimeout(checkAndAutoDispatchDueJobs, 3000);
 
     async function runAllDueCloudJobs() {
       if (window._DISPATCH_LOCK) {

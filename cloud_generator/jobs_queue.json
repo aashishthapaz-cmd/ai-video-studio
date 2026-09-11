@@ -1,29 +1,5 @@
 [
   {
-    "id": "job_1788968718_a6ca4f",
-    "title": "Sometimes Being Intelligent Is A Curse",
-    "script_text": "Sometimes being intelligent is a curse.\nYou understand the game. You see the lies. You recognize the patterns.\nBut despite knowing all of this,\nsometimes, to survive, you still have to play along.",
-    "niche_id": "typewriters_voice_nostalgia",
-    "niche_name": "Typewriters Voice Nostalgia",
-    "voice": "assets/reference_voice/whishper_prompt.wav",
-    "theme": "typewriters_voice_nostalgia",
-    "target_page_ids": [
-      "1111538525383568"
-    ],
-    "scheduled_time": "2026-09-11 21:32",
-    "scheduled_time_nepal": "2026-09-11 21:32 NPT",
-    "scheduled_time_usa": "2026-09-11 11:47 EDT",
-    "scheduled_epoch": 1789141638,
-    "timezone": "Asia/Kathmandu",
-    "status": "PENDING",
-    "created_at": "2026-09-09 15:45:18",
-    "render_time": null,
-    "output_file": null,
-    "facebook_results": null,
-    "error": null,
-    "synced_to_local": false
-  },
-  {
     "id": "job_1788800390_0c4971",
     "title": "You Might Already Be Too Late",
     "script_text": "I was too tired to explain, so I chose silence.\nYou kept asking what was wrong. I kept saying nothing.\nYou heard my words. You never heard my silence.\nYou wanted an explanation. I wanted to be understood.\nBy the time you finally understand me, it might already be too late.",
