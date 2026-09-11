@@ -266,6 +266,20 @@ def run():
                 video_path=out_file
             )
 
+            # Auto-remove matching queued job from jobs_queue.json so it never lingers
+            try:
+                from bulk_scheduler import load_queue, save_queue, _commit_queue_to_git
+                q = load_queue()
+                init_len = len(q)
+                clean_title = title.strip().lower()
+                q = [j for j in q if j.get("title", "").strip().lower() != clean_title]
+                if len(q) < init_len:
+                    save_queue(q)
+                    print(f"[Queue] Removed dispatched job '{title}' from scheduled queue.", flush=True)
+                    _commit_queue_to_git(f"🤖 Queue: auto-removed dispatched job '{title}' [skip ci]")
+            except Exception as e:
+                print(f"[Queue] Note on queue sync: {e}", flush=True)
+
         except Exception as err:
             print(f"\n❌ Error during video generation: {err}", flush=True)
             notify_job_failure(

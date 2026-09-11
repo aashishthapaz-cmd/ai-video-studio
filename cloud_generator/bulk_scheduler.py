@@ -505,10 +505,10 @@ def clear_completed_jobs() -> int:
     return removed
 
 
-def expire_stale_jobs(max_age_hours: int = 72) -> int:
+def expire_stale_jobs(max_age_hours: int = 2) -> int:
     """
     Removes PENDING jobs whose scheduled_epoch is more than max_age_hours in the past.
-    Posts older than 72 hours are too stale to publish — followers would see wrong timing.
+    Posts older than 2 hours are stale — prevents outdated jobs from cluttering the queue.
     Returns the number of jobs removed.
     """
     q = load_queue()

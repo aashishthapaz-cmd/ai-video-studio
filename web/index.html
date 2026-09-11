@@ -356,6 +356,7 @@
     <button class="tab-btn" id="btn-fb" onclick="switchTab('fb', this)">📱 Facebook Pages Hub</button>
     <button class="tab-btn" id="btn-bots" onclick="switchTab('bots', this)">🔔 Telegram & WhatsApp (Bots)</button>
     <button class="tab-btn" id="btn-gallery" onclick="switchTab('gallery', this)">🎬 Cloud Gallery & Runs</button>
+    <a class="tab-btn" href="nanobanana.html" target="_blank" style="border-color: rgba(245, 158, 11, 0.4); color: #fef08a; text-decoration: none;">🍌 Nano Banana (Direct UI)</a>
     <button class="tab-btn" id="btn-settings" onclick="switchTab('settings', this)">⚙️ GitHub Actions & Secrets</button>
   </nav>
 
@@ -524,8 +525,11 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
               Live scheduled posts running on GitHub Actions runner. Edit or delete any post instantly.
             </div>
           </div>
-          <div style="display:flex; gap:8px; flex-wrap: wrap;">
-            <button class="btn btn-secondary btn-sm" onclick="fetchCloudQueueFromGithub()">🔄 Refresh from GitHub</button>
+          <div style="display:flex; gap:8px; flex-wrap: wrap; align-items: center;">
+            <span id="queueSyncIndicator" style="font-size: 0.78rem; color: #34d399; background: rgba(16,185,129,0.12); padding: 4px 10px; border-radius: 999px; border: 1px solid rgba(16,185,129,0.3); font-weight: 600;">🟢 Live Auto-Sync (15s)</span>
+            <button class="btn btn-emerald btn-sm" onclick="autoSpaceCloudQueue()" title="Auto-detect collisions and enforce 30-minute spacing across all scheduled jobs">⚡ Auto-Space (±30m Gaps)</button>
+            <button class="btn btn-warning btn-sm" onclick="cleanOutdatedCloudQueue()" title="Remove all past/outdated scheduled jobs whose time has already passed">🧹 Clean Outdated</button>
+            <button class="btn btn-secondary btn-sm" onclick="fetchCloudQueueFromGithub(false)">🔄 Refresh from GitHub</button>
             <button class="btn btn-danger btn-sm" onclick="clearAllPendingCloudQueue()">🗑️ Clear All Pending</button>
           </div>
         </div>
@@ -537,6 +541,7 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
             <select id="queuePageFilter" onchange="filterCloudQueueByPage(this.value)" style="padding: 6px 12px; border-radius: 6px; font-size: 0.82rem; background: var(--bg-card); color: var(--text-main); border: 1px solid var(--card-border); min-width: 240px;">
               <option value="ALL">📢 All Pages (Show All Posts)</option>
             </select>
+            <button class="btn btn-danger btn-sm" id="btnPageClear" onclick="clearSelectedPageCloudQueue()" style="display: none; background: rgba(239, 68, 68, 0.25); border: 1px solid rgba(239, 68, 68, 0.6); color: #fca5a5; font-weight: 700;">🗑️ Delete Page Queue</button>
           </div>
           <div id="queueFilterStats" style="font-size: 0.82rem; color: #6ee7b7; font-weight: 600;">
             Showing all scheduled posts
@@ -983,24 +988,112 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       });
     }
 
-    async function fetchCloudQueueFromGithub() {
+    let LIVE_QUEUE_POLL_INTERVAL = null;
+
+    function triggerFastQueueSync() {
+      // Re-fetch immediately at 1.5s, 4s, 8s, 15s to capture any new commit from GitHub Actions
+      const delays = [1500, 4000, 8000, 15000];
+      delays.forEach(function(d) {
+        setTimeout(function() { fetchCloudQueueFromGithub(true); }, d);
+      });
+    }
+
+    async function autoSpaceCloudQueue() {
+      if (!CLOUD_QUEUE || !CLOUD_QUEUE.length) {
+        alert('Cloud queue is empty.');
+        return;
+      }
+      const pendingJobs = CLOUD_QUEUE.filter(function(j) { return j.status === 'PENDING'; });
+      if (!pendingJobs.length) {
+        alert('No pending scheduled jobs to space.');
+        return;
+      }
+
+      // Sort pending jobs by scheduled epoch
+      pendingJobs.sort(function(a, b) {
+        const ea = a.scheduled_epoch || 0;
+        const eb = b.scheduled_epoch || 0;
+        return ea - eb;
+      });
+
+      const nowEpoch = Math.floor(Date.now() / 1000);
+      const minGap = 1800; // 30 minutes in seconds
+      let adjusted = 0;
+
+      for (let i = 0; i < pendingJobs.length; i++) {
+        const job = pendingJobs[i];
+        const currEpoch = job.scheduled_epoch || nowEpoch;
+        let targetEpoch = currEpoch;
+
+        if (i === 0) {
+          // Earliest job stays due now if it was in the past
+        } else {
+          const prevEpoch = pendingJobs[i - 1].scheduled_epoch || nowEpoch;
+          let minAllowed = prevEpoch + minGap;
+          if (prevEpoch <= nowEpoch) {
+            minAllowed = Math.max(minAllowed, nowEpoch + minGap);
+          }
+          if (currEpoch < minAllowed) {
+            targetEpoch = minAllowed;
+          }
+        }
+
+        if (targetEpoch !== currEpoch) {
+          adjusted++;
+          job.scheduled_epoch = targetEpoch;
+          const d = new Date(targetEpoch * 1000);
+          const npt = d.toLocaleString('en-US', { timeZone: 'Asia/Kathmandu', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true });
+          const usa = d.toLocaleString('en-US', { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit', hour12: true, timeZoneName: 'short' });
+          job.scheduled_time_nepal = '🇳🇵 ' + npt + ' (Nepal)';
+          job.scheduled_time_usa = '🇺🇸 ' + usa + ' (USA)';
+          job.scheduled_time = d.toISOString().replace('T', ' ').substring(0, 16);
+        }
+      }
+
+      renderCloudQueue();
+
+      if (adjusted > 0) {
+        showToast('⚡ Auto-spaced ' + adjusted + ' colliding job(s)! Saving to GitHub...');
+        const success = await commitCloudQueueToGithub(CLOUD_QUEUE, 'chore(queue): Auto-space ' + adjusted + ' schedule collisions (+30m gap)');
+        if (success) {
+          showToast('✅ All ' + pendingJobs.length + ' scheduled jobs are now cleanly spaced by >=30 minutes!');
+          triggerFastQueueSync();
+        }
+      } else {
+        showToast('✅ Queue is already cleanly spaced! No collisions detected.');
+      }
+    }
+
+    async function fetchCloudQueueFromGithub(silent) {
       const pat = localStorage.getItem('gh_pat');
       const repo = localStorage.getItem('gh_repo') || DEFAULT_REPO;
       const container = document.getElementById('cloudQueueList');
       const countEl = document.getElementById('cloudQueueCount');
+      const indicator = document.getElementById('queueSyncIndicator');
       if (!container) return;
 
-      container.innerHTML = '<p style="color: var(--text-dim); font-size: 0.88rem;">⏳ Loading scheduled posts from GitHub Actions repository...</p>';
+      if (!silent) {
+        container.innerHTML = '<p style="color: var(--text-dim); font-size: 0.88rem;">⏳ Loading scheduled posts from GitHub Actions repository...</p>';
+      }
+      if (indicator) {
+        indicator.innerText = '🔄 Syncing...';
+        indicator.style.color = '#38bdf8';
+      }
 
       try {
         const headers = { 'Accept': 'application/vnd.github+json' };
         if (pat) headers['Authorization'] = 'Bearer ' + pat;
 
         let res = null;
+        let loadedFromRaw = false;
+
+        // 1. Primary: Try GitHub API (provides SHA needed for editing/deleting queue items)
         try {
-          res = await fetch('https://api.github.com/repos/' + repo + '/contents/cloud_generator/jobs_queue.json?ref=main&t=' + Date.now(), { headers: headers });
+          res = await fetch('https://api.github.com/repos/' + repo + '/contents/cloud_generator/jobs_queue.json?ref=main&_cb=' + Date.now(), {
+            headers: headers
+          });
         } catch (apiErr) {
-          console.warn('GitHub API fetch failed, trying raw fallback:', apiErr);
+          console.warn('GitHub API fetch failed or blocked by CORS, trying raw fallback:', apiErr);
         }
 
         if (res && res.ok) {
@@ -1012,9 +1105,11 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
           CLOUD_QUEUE = [];
           CLOUD_QUEUE_SHA = null;
         } else {
+          // 2. Secondary Fallback: raw.githubusercontent.com (CORS-friendly, no rate-limiting)
           const rawRes = await fetch('https://raw.githubusercontent.com/' + repo + '/main/cloud_generator/jobs_queue.json?_cb=' + Date.now());
           if (rawRes.ok) {
             CLOUD_QUEUE = await rawRes.json();
+            loadedFromRaw = true;
           } else if (rawRes.status === 404) {
             CLOUD_QUEUE = [];
             CLOUD_QUEUE_SHA = null;
@@ -1022,12 +1117,23 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
             throw new Error('GitHub API ' + (res ? res.status : 'offline') + ' & Raw CDN ' + rawRes.status);
           }
         }
+
         renderCloudQueue();
+        if (indicator) {
+          indicator.innerText = loadedFromRaw ? '🟢 Live Sync (Direct CDN)' : '🟢 Live Auto-Sync (15s)';
+          indicator.style.color = '#34d399';
+        }
       } catch (err) {
-        container.innerHTML = `<div style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; padding: 0.85rem; color: #fca5a5; font-size: 0.85rem;">
-          ⚠️ Could not load GitHub queue: ${escapeHtml(err.message)}.<br>
-          <span style="font-size: 0.78rem; color: var(--text-muted);">Make sure your GitHub PAT is entered in the Settings tab if the repository is private.</span>
-        </div>`;
+        if (indicator) {
+          indicator.innerText = '⚠️ Offline / Sync Pause';
+          indicator.style.color = '#f87171';
+        }
+        if (!silent) {
+          container.innerHTML = `<div style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; padding: 0.85rem; color: #fca5a5; font-size: 0.85rem;">
+            ⚠️ Could not load GitHub queue: ${escapeHtml(err.message)}.<br>
+            <span style="font-size: 0.78rem; color: var(--text-muted);">Make sure your GitHub PAT is entered in the Settings tab if the repository is private.</span>
+          </div>`;
+        }
       }
     }
 
@@ -1061,16 +1167,43 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
         }
       }
 
+      const pageClearBtn = document.getElementById('btnPageClear');
+      if (pageClearBtn) {
+        if (CURRENT_QUEUE_PAGE_FILTER && CURRENT_QUEUE_PAGE_FILTER !== 'ALL' && CURRENT_QUEUE_PAGE_FILTER !== 'ALL Pages') {
+          let pageName = CURRENT_QUEUE_PAGE_FILTER;
+          if (FB_PAGES && FB_PAGES.length) {
+            const found = FB_PAGES.find(function(p) { return String(p.id || p.page_id) === String(CURRENT_QUEUE_PAGE_FILTER); });
+            if (found) pageName = found.name;
+          }
+          pageClearBtn.style.display = 'inline-block';
+          pageClearBtn.innerText = `🗑️ Delete ${pageName} Queue (${filtered.length})`;
+        } else {
+          pageClearBtn.style.display = 'none';
+        }
+      }
+
       if (!filtered.length) {
         container.innerHTML = `<div style="background: rgba(255,255,255,0.02); padding: 1.25rem; border-radius: 10px; border: 1px dashed var(--card-border); color: var(--text-muted); font-size: 0.88rem; text-align: center;">No scheduled posts found for this page in the GitHub Actions queue.</div>`;
         return;
       }
 
+      const nowEpoch = Math.floor(Date.now() / 1000);
+
       container.innerHTML = filtered.map(function(item, index) {
+        const isPastDue = item.scheduled_epoch && (item.scheduled_epoch < nowEpoch - 60) && item.status === 'PENDING';
         let statusBadgeClass = 'badge-pending';
-        if (item.status === 'COMPLETED' || item.status === 'PUBLISHED') statusBadgeClass = 'badge-completed';
-        else if (item.status === 'RUNNING' || item.status === 'RENDERING') statusBadgeClass = 'badge-rendering';
-        else if (item.status === 'FAILED' || item.status === 'ERROR') statusBadgeClass = 'badge-danger';
+        let statusLabel = item.status || 'PENDING';
+
+        if (isPastDue) {
+          statusBadgeClass = 'badge-danger';
+          statusLabel = 'DUE NOW / OUTDATED';
+        } else if (item.status === 'COMPLETED' || item.status === 'PUBLISHED') {
+          statusBadgeClass = 'badge-completed';
+        } else if (item.status === 'RUNNING' || item.status === 'RENDERING') {
+          statusBadgeClass = 'badge-rendering';
+        } else if (item.status === 'FAILED' || item.status === 'ERROR') {
+          statusBadgeClass = 'badge-danger';
+        }
 
         let pageDisplay = '📢 ALL Enabled Pages';
         if (item.target_page_ids && item.target_page_ids.length) {
@@ -1093,12 +1226,14 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
           schedDisplay = item.scheduled_time_usa;
         }
 
+        const safeId = escapeHtml(item.id || ('job_' + index));
+
         return `
           <div class="item-card" style="border-color: rgba(16,185,129,0.25); background: rgba(8, 20, 24, 0.75);">
             <div class="item-info" style="flex: 1; min-width: 260px;">
               <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 4px;">
                 <h4 style="margin: 0;">${index + 1}. ${escapeHtml(item.title)}</h4>
-                <span class="badge ${statusBadgeClass}">${item.status || 'PENDING'}</span>
+                <span class="badge ${statusBadgeClass}">${statusLabel}</span>
               </div>
               <p style="font-size: 0.82rem; color: #a5b4fc; margin-bottom: 4px;">
                 📅 <strong>Scheduled:</strong> <span style="color: #fde047; font-weight: 600;">${escapeHtml(schedDisplay)}</span> | 🎯 <strong>Target:</strong> <span style="color: #6ee7b7; font-weight: 600;">${escapeHtml(pageDisplay)}</span>
@@ -1111,9 +1246,9 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
               </p>
             </div>
             <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
-              <button class="btn btn-sm btn-secondary" onclick="openEditModal(${index})" title="Edit Title, Schedule Time, Script or Target Page">✏️ Edit</button>
-              <button class="btn btn-sm btn-emerald" onclick="runCloudJobNow(${index})" title="Run this video render and Facebook post immediately">⚡ Run Now</button>
-              <button class="btn btn-sm btn-danger" onclick="deleteCloudJob(${index})" title="Delete permanently from GitHub Actions schedule">🗑️ Delete</button>
+              <button class="btn btn-sm btn-secondary" onclick="openEditModalById('${safeId}')" title="Edit Title, Schedule Time, Script or Target Page">✏️ Edit</button>
+              <button class="btn btn-sm btn-emerald" onclick="runCloudJobNow('${safeId}')" title="Run immediately and remove from pending queue">⚡ Run Now</button>
+              <button class="btn btn-sm btn-danger" onclick="deleteCloudJob('${safeId}')" title="Delete permanently from GitHub Actions schedule">🗑️ Delete</button>
             </div>
           </div>
         `;
@@ -1180,15 +1315,18 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       }
     }
 
-    async function deleteCloudJob(jobIndex) {
-      const job = CLOUD_QUEUE[jobIndex];
+    async function deleteCloudJob(jobId) {
+      const job = CLOUD_QUEUE.find(function(j) { return j.id === jobId; });
       if (!job) return;
-      if (!confirm('Permanently delete "' + job.title + '" from GitHub Actions? It will be removed immediately from cloud processing.')) return;
+      if (!confirm('Permanently delete "' + job.title + '" from GitHub Actions schedule? It will be removed immediately.')) return;
 
-      const newQueue = CLOUD_QUEUE.filter(function(_, idx) { return idx !== jobIndex; });
+      const newQueue = CLOUD_QUEUE.filter(function(j) { return j.id !== jobId; });
+      CLOUD_QUEUE = newQueue;
+      renderCloudQueue();
+
       const success = await commitCloudQueueToGithub(newQueue, 'chore(queue): Delete scheduled job "' + job.title + '"');
       if (success) {
-        showToast('🗑️ "' + job.title + '" instantly deleted from GitHub Actions schedule!');
+        showToast('🗑️ "' + job.title + '" permanently deleted from schedule!');
       }
     }
 
@@ -1198,19 +1336,86 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
         alert('No pending scheduled jobs to clear.');
         return;
       }
-      if (!confirm('Are you sure you want to delete all ' + pendingCount + ' pending scheduled posts from GitHub Actions?')) return;
+      if (!confirm('Are you sure you want to delete ALL ' + pendingCount + ' pending scheduled posts across ALL pages from GitHub Actions?')) return;
 
       const newQueue = CLOUD_QUEUE.filter(function(j) { return j.status !== 'PENDING'; });
+      CLOUD_QUEUE = newQueue;
+      renderCloudQueue();
+
       const success = await commitCloudQueueToGithub(newQueue, 'chore(queue): Clear all pending scheduled jobs');
       if (success) {
         showToast('🗑️ Cleared ' + pendingCount + ' pending jobs from GitHub Actions!');
       }
     }
 
-    function openEditModal(index) {
-      const job = CLOUD_QUEUE[index];
+    async function clearSelectedPageCloudQueue() {
+      if (!CURRENT_QUEUE_PAGE_FILTER || CURRENT_QUEUE_PAGE_FILTER === 'ALL' || CURRENT_QUEUE_PAGE_FILTER === 'ALL Pages') {
+        return clearAllPendingCloudQueue();
+      }
+
+      let pageName = CURRENT_QUEUE_PAGE_FILTER;
+      if (FB_PAGES && FB_PAGES.length) {
+        const found = FB_PAGES.find(function(p) { return String(p.id || p.page_id) === String(CURRENT_QUEUE_PAGE_FILTER); });
+        if (found) pageName = found.name;
+      }
+
+      const pageJobs = CLOUD_QUEUE.filter(function(j) {
+        if (!j.target_page_ids || !j.target_page_ids.length) return false;
+        return j.target_page_ids.some(function(pid) { return String(pid) === String(CURRENT_QUEUE_PAGE_FILTER); });
+      });
+
+      if (!pageJobs.length) {
+        alert('No scheduled jobs found for ' + pageName);
+        return;
+      }
+
+      if (!confirm('Are you sure you want to delete all ' + pageJobs.length + ' scheduled post(s) for "' + pageName + '" from GitHub Actions?')) return;
+
+      const newQueue = CLOUD_QUEUE.filter(function(j) {
+        if (!j.target_page_ids || !j.target_page_ids.length) return true;
+        return !j.target_page_ids.some(function(pid) { return String(pid) === String(CURRENT_QUEUE_PAGE_FILTER); });
+      });
+      CLOUD_QUEUE = newQueue;
+      renderCloudQueue();
+
+      const success = await commitCloudQueueToGithub(newQueue, 'chore(queue): Clear all ' + pageJobs.length + ' jobs for ' + pageName);
+      if (success) {
+        showToast('🗑️ Cleared all ' + pageJobs.length + ' scheduled jobs for ' + pageName + '!');
+      }
+    }
+
+    async function cleanOutdatedCloudQueue() {
+      const nowEpoch = Math.floor(Date.now() / 1000);
+      const outdated = CLOUD_QUEUE.filter(function(j) {
+        return (j.status !== 'PENDING') || (j.scheduled_epoch && j.scheduled_epoch < (nowEpoch - 120));
+      });
+
+      if (!outdated.length) {
+        showToast('✅ No outdated jobs! All scheduled posts are set for the future.');
+        return;
+      }
+
+      if (!confirm('Remove ' + outdated.length + ' past-due / outdated scheduled post(s) from the GitHub Actions queue?')) return;
+
+      const newQueue = CLOUD_QUEUE.filter(function(j) {
+        if (j.status !== 'PENDING') return false;
+        return !j.scheduled_epoch || (j.scheduled_epoch >= nowEpoch - 120);
+      });
+      CLOUD_QUEUE = newQueue;
+      renderCloudQueue();
+
+      const success = await commitCloudQueueToGithub(newQueue, 'chore(queue): Clean ' + outdated.length + ' past-due outdated jobs');
+      if (success) {
+        showToast('🧹 Cleaned ' + outdated.length + ' outdated jobs from the schedule!');
+      }
+    }
+
+    let CURRENT_EDIT_JOB_ID = null;
+
+    function openEditModalById(jobId) {
+      const job = CLOUD_QUEUE.find(function(j) { return j.id === jobId; });
       if (!job) return;
-      CURRENT_EDIT_INDEX = index;
+      CURRENT_EDIT_JOB_ID = jobId;
 
       document.getElementById('editJobTitle').value = job.title || '';
       document.getElementById('editJobScript').value = job.script_text || '';
@@ -1233,12 +1438,12 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
 
     function closeEditModal() {
       document.getElementById('editModal').style.display = 'none';
-      CURRENT_EDIT_INDEX = null;
+      CURRENT_EDIT_JOB_ID = null;
     }
 
     async function saveJobEdit() {
-      if (CURRENT_EDIT_INDEX === null) return;
-      const job = CLOUD_QUEUE[CURRENT_EDIT_INDEX];
+      if (!CURRENT_EDIT_JOB_ID) return;
+      const job = CLOUD_QUEUE.find(function(j) { return j.id === CURRENT_EDIT_JOB_ID; });
       if (!job) return;
 
       const newTitle = document.getElementById('editJobTitle').value.trim();
@@ -1275,13 +1480,21 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       }
     }
 
-    async function runCloudJobNow(index) {
-      const job = CLOUD_QUEUE[index];
+    async function runCloudJobNow(jobId) {
+      const job = CLOUD_QUEUE.find(function(j) { return j.id === jobId; });
       if (!job) return;
-      if (!confirm('Run and auto-post "' + job.title + '" immediately via GitHub Actions?')) return;
+      if (!confirm('Run and auto-post "' + job.title + '" immediately via GitHub Actions? It will be removed from the scheduled pending queue.')) return;
 
       showToast('🚀 Dispatching instant render for "' + job.title + '"...');
+
+      // 1. Instantly remove from local pending queue so it disappears from UI immediately
+      const previousQueue = [...CLOUD_QUEUE];
+      CLOUD_QUEUE = CLOUD_QUEUE.filter(function(j) { return j.id !== jobId; });
+      renderCloudQueue();
+
       const targetPage = job.target_page_ids && job.target_page_ids.length ? job.target_page_ids[0] : 'ALL Pages';
+
+      // 2. Dispatch workflow run to GitHub Actions
       const success = await dispatchWorkflowAPI({
         script_text: job.script_text,
         title: job.title,
@@ -1292,8 +1505,16 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       });
 
       if (success) {
-        showToast('✅ Render run launched for "' + job.title + '"! Check Cloud Gallery & Runs.');
-        setTimeout(function() { switchTab('gallery'); }, 1800);
+        showToast('✅ Dispatched "' + job.title + '"! Removing from pending queue on GitHub...');
+        // 3. Commit removal of this job from GitHub Actions queue immediately
+        await commitCloudQueueToGithub(CLOUD_QUEUE, 'chore(queue): Dispatched job "' + job.title + '" immediately');
+        triggerFastQueueSync();
+        setTimeout(function() { switchTab('gallery'); }, 1500);
+      } else {
+        // Rollback if dispatch failed
+        CLOUD_QUEUE = previousQueue;
+        renderCloudQueue();
+        alert('Failed to dispatch job to GitHub Actions. Please check your GitHub PAT token in Settings.');
       }
     }
 
@@ -1317,8 +1538,16 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       }
 
       if (tabId === 'bulk') {
-        fetchCloudQueueFromGithub();
+        fetchCloudQueueFromGithub(false);
         renderQueue();
+        if (!LIVE_QUEUE_POLL_INTERVAL) {
+          LIVE_QUEUE_POLL_INTERVAL = setInterval(function() {
+            const activePanel = document.querySelector('.panel.active');
+            if (activePanel && activePanel.id === 'tab-bulk') {
+              fetchCloudQueueFromGithub(true);
+            }
+          }, 15000);
+        }
       }
       if (tabId === 'fb') renderFbPages();
       if (tabId === 'gallery') fetchRecentRuns();
@@ -1532,6 +1761,7 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       if (success) {
         const intervalDesc = intervalVal === 'peak_slots' ? 'at USA EST peak slots' : 'every ' + (parseInt(intervalVal, 10) >= 60 ? (parseInt(intervalVal, 10)/60) + 'h' : intervalVal + 'm');
         showToast('✅ ' + count + ' poems dispatched! GitHub Actions will schedule each ' + intervalDesc + ' → ' + targetPage);
+        triggerFastQueueSync();
         setTimeout(function() { switchTab('gallery'); }, 2000);
       }
     }
@@ -1562,6 +1792,7 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
         localStorage.setItem('video_queue', JSON.stringify(QUEUE));
         renderQueue();
         showToast('✅ Queue dispatched to GitHub Actions! ' + pending.length + ' poems scheduled.');
+        triggerFastQueueSync();
       }
     }
 

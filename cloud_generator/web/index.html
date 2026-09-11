@@ -527,7 +527,8 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
           </div>
           <div style="display:flex; gap:8px; flex-wrap: wrap; align-items: center;">
             <span id="queueSyncIndicator" style="font-size: 0.78rem; color: #34d399; background: rgba(16,185,129,0.12); padding: 4px 10px; border-radius: 999px; border: 1px solid rgba(16,185,129,0.3); font-weight: 600;">🟢 Live Auto-Sync (15s)</span>
-            <button class="btn btn-emerald btn-sm" onclick="autoSpaceCloudQueue()" title="Auto-detect collisions and enforce 30-minute spacing across all scheduled jobs">⚡ Auto-Space Queue (±30m Gaps)</button>
+            <button class="btn btn-emerald btn-sm" onclick="autoSpaceCloudQueue()" title="Auto-detect collisions and enforce 30-minute spacing across all scheduled jobs">⚡ Auto-Space (±30m Gaps)</button>
+            <button class="btn btn-warning btn-sm" onclick="cleanOutdatedCloudQueue()" title="Remove all past/outdated scheduled jobs whose time has already passed">🧹 Clean Outdated</button>
             <button class="btn btn-secondary btn-sm" onclick="fetchCloudQueueFromGithub(false)">🔄 Refresh from GitHub</button>
             <button class="btn btn-danger btn-sm" onclick="clearAllPendingCloudQueue()">🗑️ Clear All Pending</button>
           </div>
@@ -540,6 +541,7 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
             <select id="queuePageFilter" onchange="filterCloudQueueByPage(this.value)" style="padding: 6px 12px; border-radius: 6px; font-size: 0.82rem; background: var(--bg-card); color: var(--text-main); border: 1px solid var(--card-border); min-width: 240px;">
               <option value="ALL">📢 All Pages (Show All Posts)</option>
             </select>
+            <button class="btn btn-danger btn-sm" id="btnPageClear" onclick="clearSelectedPageCloudQueue()" style="display: none; background: rgba(239, 68, 68, 0.25); border: 1px solid rgba(239, 68, 68, 0.6); color: #fca5a5; font-weight: 700;">🗑️ Delete Page Queue</button>
           </div>
           <div id="queueFilterStats" style="font-size: 0.82rem; color: #6ee7b7; font-weight: 600;">
             Showing all scheduled posts
@@ -1165,16 +1167,43 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
         }
       }
 
+      const pageClearBtn = document.getElementById('btnPageClear');
+      if (pageClearBtn) {
+        if (CURRENT_QUEUE_PAGE_FILTER && CURRENT_QUEUE_PAGE_FILTER !== 'ALL' && CURRENT_QUEUE_PAGE_FILTER !== 'ALL Pages') {
+          let pageName = CURRENT_QUEUE_PAGE_FILTER;
+          if (FB_PAGES && FB_PAGES.length) {
+            const found = FB_PAGES.find(function(p) { return String(p.id || p.page_id) === String(CURRENT_QUEUE_PAGE_FILTER); });
+            if (found) pageName = found.name;
+          }
+          pageClearBtn.style.display = 'inline-block';
+          pageClearBtn.innerText = `🗑️ Delete ${pageName} Queue (${filtered.length})`;
+        } else {
+          pageClearBtn.style.display = 'none';
+        }
+      }
+
       if (!filtered.length) {
         container.innerHTML = `<div style="background: rgba(255,255,255,0.02); padding: 1.25rem; border-radius: 10px; border: 1px dashed var(--card-border); color: var(--text-muted); font-size: 0.88rem; text-align: center;">No scheduled posts found for this page in the GitHub Actions queue.</div>`;
         return;
       }
 
+      const nowEpoch = Math.floor(Date.now() / 1000);
+
       container.innerHTML = filtered.map(function(item, index) {
+        const isPastDue = item.scheduled_epoch && (item.scheduled_epoch < nowEpoch - 60) && item.status === 'PENDING';
         let statusBadgeClass = 'badge-pending';
-        if (item.status === 'COMPLETED' || item.status === 'PUBLISHED') statusBadgeClass = 'badge-completed';
-        else if (item.status === 'RUNNING' || item.status === 'RENDERING') statusBadgeClass = 'badge-rendering';
-        else if (item.status === 'FAILED' || item.status === 'ERROR') statusBadgeClass = 'badge-danger';
+        let statusLabel = item.status || 'PENDING';
+
+        if (isPastDue) {
+          statusBadgeClass = 'badge-danger';
+          statusLabel = 'DUE NOW / OUTDATED';
+        } else if (item.status === 'COMPLETED' || item.status === 'PUBLISHED') {
+          statusBadgeClass = 'badge-completed';
+        } else if (item.status === 'RUNNING' || item.status === 'RENDERING') {
+          statusBadgeClass = 'badge-rendering';
+        } else if (item.status === 'FAILED' || item.status === 'ERROR') {
+          statusBadgeClass = 'badge-danger';
+        }
 
         let pageDisplay = '📢 ALL Enabled Pages';
         if (item.target_page_ids && item.target_page_ids.length) {
@@ -1197,12 +1226,14 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
           schedDisplay = item.scheduled_time_usa;
         }
 
+        const safeId = escapeHtml(item.id || ('job_' + index));
+
         return `
           <div class="item-card" style="border-color: rgba(16,185,129,0.25); background: rgba(8, 20, 24, 0.75);">
             <div class="item-info" style="flex: 1; min-width: 260px;">
               <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 4px;">
                 <h4 style="margin: 0;">${index + 1}. ${escapeHtml(item.title)}</h4>
-                <span class="badge ${statusBadgeClass}">${item.status || 'PENDING'}</span>
+                <span class="badge ${statusBadgeClass}">${statusLabel}</span>
               </div>
               <p style="font-size: 0.82rem; color: #a5b4fc; margin-bottom: 4px;">
                 📅 <strong>Scheduled:</strong> <span style="color: #fde047; font-weight: 600;">${escapeHtml(schedDisplay)}</span> | 🎯 <strong>Target:</strong> <span style="color: #6ee7b7; font-weight: 600;">${escapeHtml(pageDisplay)}</span>
@@ -1215,9 +1246,9 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
               </p>
             </div>
             <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
-              <button class="btn btn-sm btn-secondary" onclick="openEditModal(${index})" title="Edit Title, Schedule Time, Script or Target Page">✏️ Edit</button>
-              <button class="btn btn-sm btn-emerald" onclick="runCloudJobNow(${index})" title="Run this video render and Facebook post immediately">⚡ Run Now</button>
-              <button class="btn btn-sm btn-danger" onclick="deleteCloudJob(${index})" title="Delete permanently from GitHub Actions schedule">🗑️ Delete</button>
+              <button class="btn btn-sm btn-secondary" onclick="openEditModalById('${safeId}')" title="Edit Title, Schedule Time, Script or Target Page">✏️ Edit</button>
+              <button class="btn btn-sm btn-emerald" onclick="runCloudJobNow('${safeId}')" title="Run immediately and remove from pending queue">⚡ Run Now</button>
+              <button class="btn btn-sm btn-danger" onclick="deleteCloudJob('${safeId}')" title="Delete permanently from GitHub Actions schedule">🗑️ Delete</button>
             </div>
           </div>
         `;
@@ -1284,15 +1315,18 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       }
     }
 
-    async function deleteCloudJob(jobIndex) {
-      const job = CLOUD_QUEUE[jobIndex];
+    async function deleteCloudJob(jobId) {
+      const job = CLOUD_QUEUE.find(function(j) { return j.id === jobId; });
       if (!job) return;
-      if (!confirm('Permanently delete "' + job.title + '" from GitHub Actions? It will be removed immediately from cloud processing.')) return;
+      if (!confirm('Permanently delete "' + job.title + '" from GitHub Actions schedule? It will be removed immediately.')) return;
 
-      const newQueue = CLOUD_QUEUE.filter(function(_, idx) { return idx !== jobIndex; });
+      const newQueue = CLOUD_QUEUE.filter(function(j) { return j.id !== jobId; });
+      CLOUD_QUEUE = newQueue;
+      renderCloudQueue();
+
       const success = await commitCloudQueueToGithub(newQueue, 'chore(queue): Delete scheduled job "' + job.title + '"');
       if (success) {
-        showToast('🗑️ "' + job.title + '" instantly deleted from GitHub Actions schedule!');
+        showToast('🗑️ "' + job.title + '" permanently deleted from schedule!');
       }
     }
 
@@ -1302,19 +1336,86 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
         alert('No pending scheduled jobs to clear.');
         return;
       }
-      if (!confirm('Are you sure you want to delete all ' + pendingCount + ' pending scheduled posts from GitHub Actions?')) return;
+      if (!confirm('Are you sure you want to delete ALL ' + pendingCount + ' pending scheduled posts across ALL pages from GitHub Actions?')) return;
 
       const newQueue = CLOUD_QUEUE.filter(function(j) { return j.status !== 'PENDING'; });
+      CLOUD_QUEUE = newQueue;
+      renderCloudQueue();
+
       const success = await commitCloudQueueToGithub(newQueue, 'chore(queue): Clear all pending scheduled jobs');
       if (success) {
         showToast('🗑️ Cleared ' + pendingCount + ' pending jobs from GitHub Actions!');
       }
     }
 
-    function openEditModal(index) {
-      const job = CLOUD_QUEUE[index];
+    async function clearSelectedPageCloudQueue() {
+      if (!CURRENT_QUEUE_PAGE_FILTER || CURRENT_QUEUE_PAGE_FILTER === 'ALL' || CURRENT_QUEUE_PAGE_FILTER === 'ALL Pages') {
+        return clearAllPendingCloudQueue();
+      }
+
+      let pageName = CURRENT_QUEUE_PAGE_FILTER;
+      if (FB_PAGES && FB_PAGES.length) {
+        const found = FB_PAGES.find(function(p) { return String(p.id || p.page_id) === String(CURRENT_QUEUE_PAGE_FILTER); });
+        if (found) pageName = found.name;
+      }
+
+      const pageJobs = CLOUD_QUEUE.filter(function(j) {
+        if (!j.target_page_ids || !j.target_page_ids.length) return false;
+        return j.target_page_ids.some(function(pid) { return String(pid) === String(CURRENT_QUEUE_PAGE_FILTER); });
+      });
+
+      if (!pageJobs.length) {
+        alert('No scheduled jobs found for ' + pageName);
+        return;
+      }
+
+      if (!confirm('Are you sure you want to delete all ' + pageJobs.length + ' scheduled post(s) for "' + pageName + '" from GitHub Actions?')) return;
+
+      const newQueue = CLOUD_QUEUE.filter(function(j) {
+        if (!j.target_page_ids || !j.target_page_ids.length) return true;
+        return !j.target_page_ids.some(function(pid) { return String(pid) === String(CURRENT_QUEUE_PAGE_FILTER); });
+      });
+      CLOUD_QUEUE = newQueue;
+      renderCloudQueue();
+
+      const success = await commitCloudQueueToGithub(newQueue, 'chore(queue): Clear all ' + pageJobs.length + ' jobs for ' + pageName);
+      if (success) {
+        showToast('🗑️ Cleared all ' + pageJobs.length + ' scheduled jobs for ' + pageName + '!');
+      }
+    }
+
+    async function cleanOutdatedCloudQueue() {
+      const nowEpoch = Math.floor(Date.now() / 1000);
+      const outdated = CLOUD_QUEUE.filter(function(j) {
+        return (j.status !== 'PENDING') || (j.scheduled_epoch && j.scheduled_epoch < (nowEpoch - 120));
+      });
+
+      if (!outdated.length) {
+        showToast('✅ No outdated jobs! All scheduled posts are set for the future.');
+        return;
+      }
+
+      if (!confirm('Remove ' + outdated.length + ' past-due / outdated scheduled post(s) from the GitHub Actions queue?')) return;
+
+      const newQueue = CLOUD_QUEUE.filter(function(j) {
+        if (j.status !== 'PENDING') return false;
+        return !j.scheduled_epoch || (j.scheduled_epoch >= nowEpoch - 120);
+      });
+      CLOUD_QUEUE = newQueue;
+      renderCloudQueue();
+
+      const success = await commitCloudQueueToGithub(newQueue, 'chore(queue): Clean ' + outdated.length + ' past-due outdated jobs');
+      if (success) {
+        showToast('🧹 Cleaned ' + outdated.length + ' outdated jobs from the schedule!');
+      }
+    }
+
+    let CURRENT_EDIT_JOB_ID = null;
+
+    function openEditModalById(jobId) {
+      const job = CLOUD_QUEUE.find(function(j) { return j.id === jobId; });
       if (!job) return;
-      CURRENT_EDIT_INDEX = index;
+      CURRENT_EDIT_JOB_ID = jobId;
 
       document.getElementById('editJobTitle').value = job.title || '';
       document.getElementById('editJobScript').value = job.script_text || '';
@@ -1337,12 +1438,12 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
 
     function closeEditModal() {
       document.getElementById('editModal').style.display = 'none';
-      CURRENT_EDIT_INDEX = null;
+      CURRENT_EDIT_JOB_ID = null;
     }
 
     async function saveJobEdit() {
-      if (CURRENT_EDIT_INDEX === null) return;
-      const job = CLOUD_QUEUE[CURRENT_EDIT_INDEX];
+      if (!CURRENT_EDIT_JOB_ID) return;
+      const job = CLOUD_QUEUE.find(function(j) { return j.id === CURRENT_EDIT_JOB_ID; });
       if (!job) return;
 
       const newTitle = document.getElementById('editJobTitle').value.trim();
@@ -1379,18 +1480,21 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       }
     }
 
-    async function runCloudJobNow(index) {
-      const job = CLOUD_QUEUE[index];
+    async function runCloudJobNow(jobId) {
+      const job = CLOUD_QUEUE.find(function(j) { return j.id === jobId; });
       if (!job) return;
-      if (!confirm('Run and auto-post "' + job.title + '" immediately via GitHub Actions?')) return;
-
-      // Optimistic UI update: instantly mark as RENDERING so the user sees immediate feedback
-      job.status = 'RENDERING';
-      job.started_at = new Date().toISOString();
-      renderCloudQueue();
+      if (!confirm('Run and auto-post "' + job.title + '" immediately via GitHub Actions? It will be removed from the scheduled pending queue.')) return;
 
       showToast('🚀 Dispatching instant render for "' + job.title + '"...');
+
+      // 1. Instantly remove from local pending queue so it disappears from UI immediately
+      const previousQueue = [...CLOUD_QUEUE];
+      CLOUD_QUEUE = CLOUD_QUEUE.filter(function(j) { return j.id !== jobId; });
+      renderCloudQueue();
+
       const targetPage = job.target_page_ids && job.target_page_ids.length ? job.target_page_ids[0] : 'ALL Pages';
+
+      // 2. Dispatch workflow run to GitHub Actions
       const success = await dispatchWorkflowAPI({
         script_text: job.script_text,
         title: job.title,
@@ -1401,12 +1505,16 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       });
 
       if (success) {
-        showToast('✅ Render run launched for "' + job.title + '"! Starting live poll...');
+        showToast('✅ Dispatched "' + job.title + '"! Removing from pending queue on GitHub...');
+        // 3. Commit removal of this job from GitHub Actions queue immediately
+        await commitCloudQueueToGithub(CLOUD_QUEUE, 'chore(queue): Dispatched job "' + job.title + '" immediately');
         triggerFastQueueSync();
-        setTimeout(function() { switchTab('gallery'); }, 2000);
+        setTimeout(function() { switchTab('gallery'); }, 1500);
       } else {
-        job.status = 'PENDING';
+        // Rollback if dispatch failed
+        CLOUD_QUEUE = previousQueue;
         renderCloudQueue();
+        alert('Failed to dispatch job to GitHub Actions. Please check your GitHub PAT token in Settings.');
       }
     }
 
