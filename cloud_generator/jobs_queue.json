@@ -4824,30 +4824,6 @@
     "synced_to_local": false
   },
   {
-    "id": "job_1788970363_013037",
-    "title": "You’re My Favorite Person",
-    "script_text": "I wish you knew.\nhow much our little talks and the time we spend together mean to me.\nI wish you knew.\nThe way I remember you with every breath I take.\nI wish you knew how every small thing somehow reminds me of you.\nHonestly, you're my favorite person.",
-    "niche_id": "typewriters_voice_nostalgia",
-    "niche_name": "Typewriters Voice Nostalgia",
-    "voice": "assets/reference_voice/whishper_prompt.wav",
-    "theme": "typewriters_voice_nostalgia",
-    "target_page_ids": [
-      "1084268771446346"
-    ],
-    "scheduled_time": "2026-10-15 22:51",
-    "scheduled_time_nepal": "2026-10-15 22:51 NPT",
-    "scheduled_time_usa": "2026-10-15 13:06 EDT",
-    "scheduled_epoch": 1792083960,
-    "timezone": "Asia/Kathmandu",
-    "status": "PENDING",
-    "created_at": "2026-09-09 16:12:43",
-    "render_time": null,
-    "output_file": null,
-    "facebook_results": null,
-    "error": null,
-    "synced_to_local": false
-  },
-  {
     "id": "job_1788969355_421079",
     "title": "I'm Still Waiting",
     "script_text": "I'm still waiting for you.\nBecause my heart feels like there's something special between us.\nMaybe not today, maybe not tomorrow.\nBut I feel like it's worth waiting for.\nDeep down, I believe one day we'll find our way back to each other.",
