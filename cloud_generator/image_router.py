@@ -13,7 +13,7 @@ try:
     from .image_engines.huggingface_engine import generate_huggingface_image
     from .image_engines.puter_engine import generate_puter_image
     from .image_engines.google_flow_engine import generate_google_flow_image, is_google_flow_configured
-    from .image_engines.perchance_engine import generate_perchance_image
+    from .image_engines.perchance_engine import generate_perchance_image, is_perchance_available
 except ImportError:
     from config import load_settings
     from image_engines.pollinations_engine import generate_pollinations_image
@@ -21,7 +21,7 @@ except ImportError:
     from image_engines.huggingface_engine import generate_huggingface_image
     from image_engines.puter_engine import generate_puter_image
     from image_engines.google_flow_engine import generate_google_flow_image, is_google_flow_configured
-    from image_engines.perchance_engine import generate_perchance_image
+    from image_engines.perchance_engine import generate_perchance_image, is_perchance_available
 
 logger = logging.getLogger("ImageRouter")
 
@@ -204,6 +204,9 @@ def generate_scene_image(
         engine = engine.lower().strip()
         try:
             if "perchance" in engine:
+                if not is_perchance_available():
+                    errors.append("perchance: engine unavailable in this environment")
+                    continue
                 style = cfg.get("perchance_style", "Anime")
                 img = generate_perchance_image(
                     final_prompt, output_path, width=width, height=height, seed=seed, style=style
@@ -380,7 +383,7 @@ def generate_all_scene_images(scenes: list, assets_dir: Path, progress_callback=
 
         if not success:
             # Try one final emergency attempt with Pollinations directly
-            print(f"  ⚠️ [{scene_id}] All 8 attempts failed. Trying emergency Pollinations...", flush=True)
+            print(f"  ⚠️ [{scene_id}] Primary engine attempts exhausted. Trying emergency Pollinations...", flush=True)
             emergency_seed = _unique_seed(f"emergency:{scene_id}", 99)
             emergency_path = _emergency_fallback_from_pollinations(
                 raw_prompt, out_file, 1080, 1920, emergency_seed
@@ -388,6 +391,14 @@ def generate_all_scene_images(scenes: list, assets_dir: Path, progress_callback=
             scene["image_path"] = emergency_path
             scene["image_engine"] = "Emergency Pollinations"
             print(f"  🆘 [{scene_id}] Used emergency fallback.", flush=True)
+
+        # Ultimate safety check: ensure the image file exists and is valid on disk
+        final_img = Path(scene.get("image_path", ""))
+        if not final_img.exists() or final_img.stat().st_size < 1000:
+            emergency_seed = _unique_seed(f"canvas:{scene_id}", 101)
+            canvas_path = _generate_artistic_fallback_canvas(out_file, 1080, 1920, emergency_seed)
+            scene["image_path"] = str(canvas_path)
+            scene["image_engine"] = "Artistic Mood Canvas"
 
         results.append(scene)
 

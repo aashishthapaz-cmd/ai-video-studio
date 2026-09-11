@@ -85,8 +85,20 @@ def compile_cloud_video(scenes: list, title: str, workspace_dir: Path, captions_
         
     master_audio = master_audio_file(master_raw, workspace_dir / "narration_mastered.wav")
 
-    # 2. Extract Assets & Measured Durations
-    assets = [VisualAsset(path=Path(s["image_path"])) for s in scenes if "image_path" in s and Path(s["image_path"]).exists()]
+    # 2. Extract Assets & Measured Durations (with self-healing guarantee)
+    for i, s in enumerate(scenes):
+        img_p = Path(s.get("image_path", ""))
+        if not img_p.exists() or img_p.stat().st_size < 1000:
+            fallback_canvas = workspace_dir / f"canvas_fallback_{i+1:03d}.png"
+            try:
+                from image_router import _generate_artistic_fallback_canvas
+                _generate_artistic_fallback_canvas(fallback_canvas, 1080, 1920, 9999 + i)
+            except Exception:
+                from PIL import Image
+                Image.new("RGB", (1080, 1920), (16, 18, 28)).save(fallback_canvas, "PNG")
+            s["image_path"] = str(fallback_canvas)
+
+    assets = [VisualAsset(path=Path(s["image_path"])) for s in scenes]
     
     # Measure exact duration from individual audio files to eliminate any drift
     durations = []
