@@ -12,12 +12,14 @@ try:
     from .image_engines.cloudflare_engine import generate_cloudflare_image
     from .image_engines.huggingface_engine import generate_huggingface_image
     from .image_engines.puter_engine import generate_puter_image
+    from .image_engines.google_flow_engine import generate_google_flow_image, is_google_flow_configured
 except ImportError:
     from config import load_settings
     from image_engines.pollinations_engine import generate_pollinations_image
     from image_engines.cloudflare_engine import generate_cloudflare_image
     from image_engines.huggingface_engine import generate_huggingface_image
     from image_engines.puter_engine import generate_puter_image
+    from image_engines.google_flow_engine import generate_google_flow_image, is_google_flow_configured
 
 logger = logging.getLogger("ImageRouter")
 
@@ -136,8 +138,8 @@ def generate_scene_image(
 
     priority = (
         [preferred_engine] if preferred_engine
-        # Puter (Nano Banana) → HuggingFace → Cloudflare → Pollinations (last resort)
-        else cfg.get("image_engine_priority", ["puter", "huggingface", "cloudflare", "pollinations"])
+        # Google Flow (Browser-like) → Puter (Nano Banana) → HuggingFace → Cloudflare → Pollinations (last resort)
+        else cfg.get("image_engine_priority", ["google_flow", "puter", "huggingface", "cloudflare", "pollinations"])
     )
 
     errors = []
@@ -146,7 +148,16 @@ def generate_scene_image(
             continue
         engine = engine.lower().strip()
         try:
-            if "puter" in engine or "banana" in engine:
+            if "flow" in engine or "google_flow" in engine:
+                if not is_google_flow_configured():
+                    errors.append("google_flow: not logged in (run 'python google_flow_login.py' or set GOOGLE_FLOW_SESSION secret)")
+                    continue
+                img = generate_google_flow_image(
+                    final_prompt, output_path, width=width, height=height, seed=seed
+                )
+                return {"ok": True, "engine": "Google Flow (Nano Banana)", "path": img}
+
+            elif "puter" in engine or "banana" in engine:
                 puter_token = cfg.get("puter_auth_token", "")
                 if not puter_token:
                     errors.append("puter: no auth token configured (get free token at puter.com/dashboard)")

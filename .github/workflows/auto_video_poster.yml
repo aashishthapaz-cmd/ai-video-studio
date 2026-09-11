@@ -131,6 +131,10 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r cloud_generator/requirements.txt
+          pip install playwright
+          if [ -n "${{ secrets.GOOGLE_FLOW_SESSION }}" ]; then
+            python -m playwright install chromium --with-deps
+          fi
 
       - name: 🚀 Run Autonomous Video Pipeline
         env:
@@ -143,6 +147,7 @@ jobs:
           POLLINATIONS_API_KEY: ${{ secrets.POLLINATIONS_API_KEY }}
           PUTER_AUTH_TOKEN: ${{ secrets.PUTER_AUTH_TOKEN }}
           PUTER_MODEL: ${{ secrets.PUTER_MODEL }}
+          GOOGLE_FLOW_SESSION: ${{ secrets.GOOGLE_FLOW_SESSION }}
           SCRIPT_INPUT: ${{ inputs.script_text }}
           TITLE_INPUT: ${{ inputs.title }}
           VIBE_INPUT: ${{ inputs.custom_vibe }}

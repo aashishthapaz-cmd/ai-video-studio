@@ -1,5 +1,6 @@
 {
   "image_engine_priority": [
+    "google_flow",
     "puter",
     "huggingface",
     "cloudflare",
