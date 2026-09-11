@@ -96,7 +96,8 @@ jobs:
           sudo apt-get install -y --no-install-recommends \
             ffmpeg \
             xvfb \
-            libgl1-mesa-glx \
+            libgl1 \
+            libglx-mesa0 \
             libegl1 \
             fonts-dejavu-core \
             fonts-noto-core \
