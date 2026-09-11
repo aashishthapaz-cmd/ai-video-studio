@@ -36,7 +36,7 @@ DEFAULT_SETTINGS = {
     "puter_auth_token": os.getenv("PUTER_AUTH_TOKEN", ""),
     "voice_engine": "f5_tts",
     "reference_voice_path": "assets/reference_voice/whishper_prompt.wav",
-    "f5_tts_speed": float(os.getenv("F5_TTS_SPEED", "0.85")),
+    "f5_tts_speed": float(os.getenv("F5_TTS_SPEED", "0.68")),
     "f5_tts_nfe_step": int(os.getenv("F5_TTS_NFE_STEP", "32")),
     "english_voice": "en-US-ChristopherNeural",
     "nepali_voice": "ne-NP-SagarNeural",
@@ -99,12 +99,16 @@ def load_settings():
         try:
             pages = json.loads(os.getenv("FACEBOOK_PAGES_JSON"))
             if isinstance(pages, list):
-                # Filter out placeholder/dummy entries
-                real_pages = [
-                    p for p in pages
-                    if p.get("page_id") and "YOUR_" not in str(p.get("page_id", ""))
-                    and p.get("access_token") and "YOUR_" not in str(p.get("access_token", ""))
-                ]
+                # Filter out placeholder/dummy entries and normalize ID/token
+                real_pages = []
+                for p in pages:
+                    pid = str(p.get("page_id") or p.get("id") or "").strip()
+                    tok = str(p.get("access_token") or p.get("token") or "").strip()
+                    if pid and "YOUR_" not in pid and tok and "YOUR_" not in tok:
+                        p["page_id"] = pid
+                        p["id"] = pid
+                        p["access_token"] = tok
+                        real_pages.append(p)
                 merged["facebook_pages"] = real_pages
                 if real_pages:
                     merged["auto_publish_facebook"] = True

@@ -220,19 +220,50 @@ def publish_video_to_facebook_page(
         "error": last_err or "Upload failed after retries"
     }
 
-def publish_to_all_enabled_pages(video_path: Path, title: str, description: str, hashtags: str = None, target_page_ids: list = None) -> list:
+def publish_to_all_enabled_pages(video_path: Path, title: str, description: str, hashtags: str = None, target_page_ids = None) -> list:
     """
     Publishes to target Facebook Pages (or all enabled pages).
-    Isolated execution: Failure or token error on one page never blocks other pages.
+    Strict Page Isolation:
+    - If target_page_ids is provided, posts ONLY to matching pages.
+    - If specified target page is not found, refuses to post to avoid accidental cross-posting.
+    - Failure or token error on one page never blocks other pages.
     """
     cfg = load_settings()
     pages = cfg.get("facebook_pages", [])
     hashtags = hashtags or cfg.get("default_hashtags", "#poetry #anime #ghibli #reels #art #nepali")
     
-    # Filter target pages
-    if target_page_ids and "all" not in target_page_ids:
-        target_str_ids = {str(x).strip() for x in target_page_ids if str(x).strip()}
-        pages = [p for p in pages if (str(p.get("id") or "").strip() in target_str_ids or str(p.get("page_id") or "").strip() in target_str_ids)]
+    # Normalize target_page_ids (can be list or single string)
+    if isinstance(target_page_ids, str):
+        target_page_ids = [target_page_ids]
+
+    # Filter target pages strictly
+    if target_page_ids and "all" not in [str(x).lower() for x in target_page_ids]:
+        import re
+        def _norm_name(s: str) -> str:
+            return re.sub(r'[^a-z0-9]', '', str(s or "").lower().replace("whishper", "whisper"))
+
+        target_str_ids = {str(x).strip().lower() for x in target_page_ids if str(x).strip()}
+        norm_targets = {_norm_name(x) for x in target_page_ids if str(x).strip()}
+        matched_pages = []
+        for p in pages:
+            pid = str(p.get("id") or p.get("page_id") or "").strip().lower()
+            pname = str(p.get("name") or p.get("page_name") or "")
+            norm_p = _norm_name(pname)
+            if pid and pid in target_str_ids:
+                matched_pages.append(p)
+            elif norm_p and any(t and (t in norm_p or norm_p in t) for t in norm_targets if not t.isdigit()):
+                matched_pages.append(p)
+
+        if not matched_pages:
+            print(f"❌ [Facebook] Target page(s) {target_page_ids} NOT found in configured Facebook pages! Refusing to post to unintended pages.", flush=True)
+            return [{
+                "ok": False,
+                "success": False,
+                "error": f"Target page(s) {target_page_ids} not found in Facebook settings. Refused to post to unintended pages.",
+                "page_id": target_page_ids[0] if target_page_ids else ""
+            }]
+        pages = matched_pages
+        print(f"🎯 [Facebook] Strict target isolation active: publishing exclusively to {len(pages)} page(s): {[p.get('name') or p.get('page_id') for p in pages]}", flush=True)
         
     results = []
     for page in pages:
@@ -240,7 +271,7 @@ def publish_to_all_enabled_pages(video_path: Path, title: str, description: str,
             continue
             
         page_id = str(page.get("id") or page.get("page_id") or "").strip()
-        access_token = str(page.get("access_token", "")).strip()
+        access_token = str(page.get("access_token") or page.get("token") or "").strip()
         page_name = page.get("name") or page.get("page_name") or page_id
         page_hashtags = page.get("default_hashtags") or hashtags
         

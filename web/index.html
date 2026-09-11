@@ -1483,16 +1483,31 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
     async function runCloudJobNow(jobId) {
       const job = CLOUD_QUEUE.find(function(j) { return j.id === jobId; });
       if (!job) return;
-      if (!confirm('Run and auto-post "' + job.title + '" immediately via GitHub Actions? It will be removed from the scheduled pending queue.')) return;
 
-      showToast('🚀 Dispatching instant render for "' + job.title + '"...');
+      let targetPage = '';
+      if (job.target_page_ids && job.target_page_ids.length) {
+        targetPage = String(job.target_page_ids[0]).trim();
+      } else if (CURRENT_QUEUE_PAGE_FILTER && CURRENT_QUEUE_PAGE_FILTER !== 'ALL' && CURRENT_QUEUE_PAGE_FILTER !== 'ALL Pages') {
+        targetPage = String(CURRENT_QUEUE_PAGE_FILTER).trim();
+      }
+      if (!targetPage) {
+        targetPage = 'ALL Pages';
+      }
+
+      let pageLabel = targetPage;
+      if (FB_PAGES && FB_PAGES.length) {
+        const found = FB_PAGES.find(function(p) { return String(p.id || p.page_id) === String(targetPage); });
+        if (found) pageLabel = found.name;
+      }
+
+      if (!confirm('Run and auto-post "' + job.title + '" exclusively to [' + pageLabel + '] immediately via GitHub Actions? It will be removed from the scheduled pending queue.')) return;
+
+      showToast('🚀 Dispatching instant render for "' + job.title + '" to ' + pageLabel + '...');
 
       // 1. Instantly remove from local pending queue so it disappears from UI immediately
       const previousQueue = [...CLOUD_QUEUE];
       CLOUD_QUEUE = CLOUD_QUEUE.filter(function(j) { return j.id !== jobId; });
       renderCloudQueue();
-
-      const targetPage = job.target_page_ids && job.target_page_ids.length ? job.target_page_ids[0] : 'ALL Pages';
 
       // 2. Dispatch workflow run to GitHub Actions
       const success = await dispatchWorkflowAPI({
@@ -1505,7 +1520,7 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       });
 
       if (success) {
-        showToast('✅ Dispatched "' + job.title + '"! Removing from pending queue on GitHub...');
+        showToast('✅ Dispatched "' + job.title + '" to ' + pageLabel + '! Removing from pending queue on GitHub...');
         // 3. Commit removal of this job from GitHub Actions queue immediately
         await commitCloudQueueToGithub(CLOUD_QUEUE, 'chore(queue): Dispatched job "' + job.title + '" immediately');
         triggerFastQueueSync();

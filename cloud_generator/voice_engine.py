@@ -80,27 +80,32 @@ def get_audio_duration(file_path: Path) -> float:
 def prepare_poetic_speech_text(text: str) -> str:
     """
     Transforms raw poetic script into natural, smooth spoken-word text with exact pacing, tone, and breath markers.
-    Preserves commas for gentle micro-breaths, pauses for stanza transitions, and avoids robotic clipping.
+    Preserves commas for gentle micro-breaths, line breaks / ENTER for stanza pauses,
+    and periods / full stops for calm, reflective pauses with natural breath.
     """
     t = str(text or "").strip()
     if not t:
         return ""
     # Normalize em-dashes and long dashes to natural breath pauses
     t = re.sub(r'[—–]|--', ', ', t)
-    # Ensure line breaks become a gentle breath space
+    # Line breaks (ENTER) in poetry represent natural breath spaces
     t = re.sub(r'\n+', ', ', t)
-    # Normalize semicolons and colons to gentle breath pause
+    # Semicolons and colons
     t = re.sub(r'[;:]', ', ', t)
+    # Full stops, exclamation marks, question marks followed by a calm breath pause
+    t = re.sub(r'([.!?]+)\s*', r'\1 ... ', t)
     # Protect ellipses with breath space
-    t = re.sub(r'\.{2,}', ' <ELLIPSIS> ', t)
-    # Ensure commas and periods have clean trailing spacing (required for F5-TTS chunking/pausing)
-    t = re.sub(r'\s*([,\.!?])\s*', r'\1 ', t)
-    # Restore clean ellipsis
-    t = t.replace('<ELLIPSIS>', '... ')
-    # Clean multiple commas
-    t = re.sub(r',\s*,+', ', ', t)
-    # Clean up multiple spaces
+    t = re.sub(r'\.{2,}', ' ... ', t)
+    # Ensure commas have clean single spacing (gives TTS a natural micro-pause)
+    t = re.sub(r'\s*,\s*', ', ', t)
+    # Clean redundant pauses
+    t = re.sub(r'(\.\.\.\s*)+', '... ', t)
+    t = re.sub(r'(,\s*)+', ', ', t)
+    t = re.sub(r',\s*\.\.\.', '... ', t)
+    t = re.sub(r'\.\.\.\s*,', '... ', t)
     t = re.sub(r'\s+', ' ', t).strip()
+    t = re.sub(r'\.\.\.\s*$', '.', t)
+    t = re.sub(r',\s*$', '.', t)
     return t
 
 def synthesize_huggingface_space_clone(scenes: list, audio_dir: Path, reference_audio: Path = None, hf_token: str = None) -> list:
@@ -199,7 +204,7 @@ def synthesize_huggingface_space_clone(scenes: list, audio_dir: Path, reference_
         
     return scenes
 
-def trim_and_pad_scene_audio(audio_path: Path, tail_pad_sec: float = 0.35) -> Path:
+def trim_and_pad_scene_audio(audio_path: Path, tail_pad_sec: float = 0.45) -> Path:
     """
     Gently trims harsh dead lead silence (preserving natural breath intakes at -55dB)
     and adds calm ambient trailing silence padding to avoid rushed scene transitions.
@@ -479,7 +484,7 @@ def synthesize_f5_tts_batch(scenes: list, audio_dir: Path, reference_audio: Path
             print(f"[Voice F5-TTS] Cloud space fallback to local CPU: {e}")
 
     cfg = load_settings()
-    poetic_speed = float(cfg.get("f5_tts_speed", 0.85))
+    poetic_speed = float(cfg.get("f5_tts_speed", 0.68))
     default_nfe = 32 if has_cuda else 16
     nfe = int(cfg.get("f5_tts_nfe_step", default_nfe)) if has_cuda else min(16, int(cfg.get("f5_tts_nfe_step", 16)))
 

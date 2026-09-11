@@ -59,17 +59,21 @@ def _inject_fb_pages_from_env(cfg: dict) -> dict:
             # Skip placeholder entries
             real_pages = []
             for p in pages:
-                pid = str(p.get("page_id") or p.get("id") or "")
-                tok = str(p.get("access_token") or "")
+                pid = str(p.get("page_id") or p.get("id") or "").strip()
+                tok = str(p.get("access_token") or p.get("token") or "").strip()
                 if pid and "YOUR_" not in pid and tok and "YOUR_" not in tok:
+                    p["page_id"] = pid
+                    p["id"] = pid
+                    p["access_token"] = tok
                     real_pages.append(p)
             if real_pages:
                 cfg["facebook_pages"] = real_pages
                 cfg["auto_publish_facebook"] = True
+                save_settings(cfg)
                 print(f"[FB] Loaded {len(real_pages)} Facebook page(s) successfully.", flush=True)
                 for p in real_pages:
                     tok_preview = (p.get('access_token') or '')[:12] + '••••••••'
-                    print(f"     - {p.get('name', 'Unknown')} | Page ID: {p.get('page_id') or p.get('id')} | Token: {tok_preview} | Niche: {p.get('niche_id', 'auto')}", flush=True)
+                    print(f"     - {p.get('name') or p.get('page_name', 'Unknown')} | Page ID: {p.get('page_id')} | Token: {tok_preview} | Niche: {p.get('niche_id', 'auto')}", flush=True)
     except Exception as e:
         print(f"[FB] Warning: Failed to parse FACEBOOK_PAGES_JSON: {e}", flush=True)
     return cfg
@@ -77,21 +81,32 @@ def _inject_fb_pages_from_env(cfg: dict) -> dict:
 
 def _resolve_target_page_ids(target_page_input: str, all_pages: list) -> list:
     """Resolve target page IDs from workflow input string."""
-    if not target_page_input or target_page_input in ("ALL Pages", "ALL", "all", ""):
+    clean_in = str(target_page_input or "").strip()
+    if not clean_in or clean_in in ("ALL Pages", "ALL", "all"):
         return []  # Empty = all enabled pages
     # Extract page_id from format "Page Name (PAGE_ID)"
     import re
-    m = re.search(r'\((\d+)\)', target_page_input)
+    m = re.search(r'\((\d+)\)', clean_in)
     if m:
         return [m.group(1)]
-    if target_page_input.strip().isdigit():
-        return [target_page_input.strip()]
+    if clean_in.isdigit():
+        return [clean_in]
+    def _norm_name(s: str) -> str:
+        s = s.lower().replace("whishper", "whisper")
+        return re.sub(r'[^a-z0-9]', '', s)
+
+    norm_in = _norm_name(clean_in)
     # Try matching by name
     for p in all_pages:
-        p_name = p.get("name", "")
-        if p_name and (p_name.lower() in target_page_input.lower() or target_page_input.lower() in p_name.lower()):
-            return [str(p.get("page_id") or p.get("id"))]
-    return []
+        p_name = str(p.get("name") or p.get("page_name") or "")
+        norm_p = _norm_name(p_name)
+        if norm_p and (norm_p in norm_in or norm_in in norm_p):
+            pid = str(p.get("page_id") or p.get("id") or "").strip()
+            if pid:
+                return [pid]
+    # If a specific target was given but not resolved by name, preserve raw input
+    # so downstream never defaults back to "all pages"
+    return [clean_in]
 
 
 def run():
@@ -310,13 +325,17 @@ def run():
 
         # Filter to target page if specified
         if target_page_ids:
-            page_pending = [
-                j for j in pending_jobs
-                if any(pid in (j.get("target_page_ids") or []) for pid in target_page_ids)
-            ]
+            target_ids_set = {str(x).strip().lower() for x in target_page_ids if str(x).strip()}
+            def _matches_target(j):
+                job_pages = [str(x).strip().lower() for x in (j.get("target_page_ids") or [])]
+                return any(t in job_pages for t in target_ids_set)
+            page_pending = [j for j in pending_jobs if _matches_target(j)]
             if page_pending:
                 pending_jobs = page_pending
                 print(f"[Queue] Filtered to {len(pending_jobs)} jobs for page(s): {target_page_ids}", flush=True)
+            else:
+                print(f"ℹ️ [Queue] No pending jobs found matching target page(s) {target_page_ids}. Halting cleanly to avoid unintended cross-posting.", flush=True)
+                return
 
         # ── STEP 2: Collect only TRULY DUE jobs ─────────────────────────────
         # CRITICAL: Never process expired jobs as fallback — that causes double-posting
