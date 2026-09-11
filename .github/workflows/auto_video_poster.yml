@@ -129,9 +129,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r cloud_generator/requirements.txt
           pip install playwright
-          if [ -n "${{ secrets.GOOGLE_FLOW_SESSION }}" ]; then
-            python -m playwright install chromium --with-deps
-          fi
+          python -m playwright install chromium --with-deps
 
       - name: 🚀 Run Autonomous Video Pipeline
         env:

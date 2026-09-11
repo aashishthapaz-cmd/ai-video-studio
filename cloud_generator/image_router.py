@@ -13,6 +13,7 @@ try:
     from .image_engines.huggingface_engine import generate_huggingface_image
     from .image_engines.puter_engine import generate_puter_image
     from .image_engines.google_flow_engine import generate_google_flow_image, is_google_flow_configured
+    from .image_engines.perchance_engine import generate_perchance_image
 except ImportError:
     from config import load_settings
     from image_engines.pollinations_engine import generate_pollinations_image
@@ -20,6 +21,7 @@ except ImportError:
     from image_engines.huggingface_engine import generate_huggingface_image
     from image_engines.puter_engine import generate_puter_image
     from image_engines.google_flow_engine import generate_google_flow_image, is_google_flow_configured
+    from image_engines.perchance_engine import generate_perchance_image
 
 logger = logging.getLogger("ImageRouter")
 
@@ -191,8 +193,8 @@ def generate_scene_image(
 
     priority = (
         [preferred_engine] if preferred_engine
-        # Puter (Nano Banana) → Cloudflare (FLUX) → Pollinations → HuggingFace → Google Flow
-        else cfg.get("image_engine_priority", ["puter", "cloudflare", "pollinations", "huggingface", "google_flow"])
+        # Perchance (Primary) → Google Flow (Secondary) → Cloudflare (FLUX) → Puter → Pollinations → HuggingFace
+        else cfg.get("image_engine_priority", ["perchance", "google_flow", "cloudflare", "puter", "pollinations", "huggingface"])
     )
 
     errors = []
@@ -201,7 +203,13 @@ def generate_scene_image(
             continue
         engine = engine.lower().strip()
         try:
-            if "flow" in engine or "google_flow" in engine:
+            if "perchance" in engine:
+                img = generate_perchance_image(
+                    final_prompt, output_path, width=width, height=height, seed=seed
+                )
+                return {"ok": True, "engine": "Perchance AI", "path": img}
+
+            elif "flow" in engine or "google_flow" in engine:
                 if not is_google_flow_configured():
                     errors.append("google_flow: not logged in (run 'python google_flow_login.py' or set GOOGLE_FLOW_SESSION secret)")
                     continue

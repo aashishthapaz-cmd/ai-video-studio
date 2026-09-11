@@ -1,10 +1,11 @@
 {
   "image_engine_priority": [
-    "puter",
+    "perchance",
+    "google_flow",
     "cloudflare",
+    "puter",
     "pollinations",
-    "huggingface",
-    "google_flow"
+    "huggingface"
   ],
   "pollinations_model": "flux",
   "puter_model": "gemini-3.1-flash-image-preview",

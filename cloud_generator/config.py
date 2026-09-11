@@ -29,7 +29,7 @@ WORKSPACE_DIR.mkdir(parents=True, exist_ok=True)
 TEMP_CLOUD_DIR.mkdir(parents=True, exist_ok=True)
 
 DEFAULT_SETTINGS = {
-    "image_engine_priority": ["puter", "cloudflare", "pollinations", "huggingface", "google_flow"],
+    "image_engine_priority": ["perchance", "google_flow", "cloudflare", "puter", "pollinations", "huggingface"],
     "pollinations_model": "flux",
     "puter_model": "gemini-3.1-flash-image-preview",
     "puter_auth_token": os.getenv("PUTER_AUTH_TOKEN", ""),
