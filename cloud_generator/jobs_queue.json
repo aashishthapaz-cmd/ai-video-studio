@@ -1,29 +1,5 @@
 [
   {
-    "id": "job_1788974929_b18094",
-    "title": "Truth Or Illusion",
-    "script_text": "Some say it's better to suffer and know the truth than to be happy inside a delusion.\nOthers say they'd rather keep their illusions, because illusions are often kinder than the truth.\nSo which are you?\nDo you want the truth?\nOr do you want the illusion?",
-    "niche_id": "typewriters_voice_nostalgia",
-    "niche_name": "Typewriters Voice Nostalgia",
-    "voice": "assets/reference_voice/whishper_prompt.wav",
-    "theme": "typewriters_voice_nostalgia",
-    "target_page_ids": [
-      "975713682296183"
-    ],
-    "scheduled_time": "2026-09-11 18:36",
-    "scheduled_time_nepal": "2026-09-11 18:36 NPT",
-    "scheduled_time_usa": "2026-09-11 08:51 EDT",
-    "scheduled_epoch": 1789131115,
-    "timezone": "Asia/Kathmandu",
-    "status": "PENDING",
-    "created_at": "2026-09-09 17:28:49",
-    "render_time": null,
-    "output_file": null,
-    "facebook_results": null,
-    "error": null,
-    "synced_to_local": false
-  },
-  {
     "id": "job_1788968718_defc71",
     "title": "Trust The Story Written For You",
     "script_text": "We plan a lot of things, but in the end, life follows its own script.\nSometimes the detours break your heart, only to lead you where you were meant to be.\nOne day you'll understand why it had to happen.\nUntil then, trust the story being written for you.",
