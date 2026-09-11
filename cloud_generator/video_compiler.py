@@ -26,14 +26,24 @@ def sanitize_title(title: str) -> str:
     return safe or 'cloud_video'
 
 def audio_fx_filter():
-    """Warm acoustic broadcast mastering for poetic human voice with exact timeline sync."""
+    """
+    Warm acoustic broadcast mastering for poetic human narration:
+    1. afftdn: Light FFT noise reduction to eliminate background hiss while preserving intimate whisper breath.
+    2. highpass/lowpass: Cleans sub-55Hz rumble and caps ultrasonic frequencies.
+    3. Harmonic Vocal EQ: Proximity chest warmth at 220Hz, intimate breath articulation at 3400Hz, de-essing at 6200Hz.
+    4. mcompand: Professional 4-band broadcast multiband compressor (Low, Body, Articulation, Air).
+    5. loudnorm: ITU-R BS.1770 broadcast loudness normalization (-15 LUFS, -1.5 dBTP).
+    """
     return (
-        "highpass=f=45,"
-        "lowpass=f=16000,"
-        "equalizer=f=200:t=q:w=1.0:g=1.0,"
-        "equalizer=f=5500:t=q:w=1.5:g=-1.8,"
-        "acompressor=threshold=0.25:ratio=1.35:attack=25:release=220:makeup=1.05,"
-        "loudnorm=I=-16:TP=-1.5:LRA=11"
+        "aformat=channel_layouts=mono,"
+        "afftdn=nr=10:nf=-50:tn=1,"
+        "highpass=f=55,"
+        "lowpass=f=16500,"
+        "equalizer=f=220:t=q:w=1.2:g=1.5,"
+        "equalizer=f=3400:t=q:w=1.5:g=1.2,"
+        "equalizer=f=6200:t=q:w=2.0:g=-1.5,"
+        "mcompand=args='0.005,0.1 6 -60/-60,-30/-30,-12/-15,0/-6 160 | 0.003,0.05 6 -60/-60,-30/-30,-12/-14,0/-6 800 | 0.001,0.025 6 -60/-60,-30/-30,-12/-14,0/-5 4000 | 0.0005,0.02 6 -60/-60,-30/-30,-12/-15,0/-6 20000',"
+        "loudnorm=I=-15:TP=-1.5:LRA=10"
     )
 
 def master_audio_file(source_audio: Path, target_audio: Path) -> Path:

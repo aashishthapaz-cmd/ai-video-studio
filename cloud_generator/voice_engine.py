@@ -79,33 +79,35 @@ def get_audio_duration(file_path: Path) -> float:
 
 def prepare_poetic_speech_text(text: str) -> str:
     """
-    Transforms raw poetic script into natural, smooth spoken-word text with exact pacing, tone, and breath markers.
-    Preserves commas for gentle micro-breaths, line breaks / ENTER for stanza pauses,
-    and periods / full stops for calm, reflective pauses with natural breath.
+    Transforms raw poetic script into natural, smooth spoken-word text with exact prosody.
+    Preserves clean natural commas ',' for subtle micro-pauses and periods '.' for reflective full-stop pauses.
+    Eliminates artificial ellipses '...' and dangling punctuation that corrupt TTS duration models.
     """
     t = str(text or "").strip()
     if not t:
         return ""
-    # Normalize em-dashes and long dashes to natural breath pauses
+    # Normalize em-dashes and long dashes to natural comma pause
     t = re.sub(r'[—–]|--', ', ', t)
     # Line breaks (ENTER) in poetry represent natural breath spaces
     t = re.sub(r'\n+', ', ', t)
-    # Semicolons and colons
+    # Semicolons and colons to gentle comma pause
     t = re.sub(r'[;:]', ', ', t)
-    # Full stops, exclamation marks, question marks followed by a calm breath pause
-    t = re.sub(r'([.!?]+)\s*', r'\1 ... ', t)
-    # Protect ellipses with breath space
-    t = re.sub(r'\.{2,}', ' ... ', t)
-    # Ensure commas have clean single spacing (gives TTS a natural micro-pause)
+    # Normalize multiple dots / ellipses to single period
+    t = re.sub(r'\.{2,}', '.', t)
+    # Ensure clean spacing around punctuation
     t = re.sub(r'\s*,\s*', ', ', t)
-    # Clean redundant pauses
-    t = re.sub(r'(\.\.\.\s*)+', '... ', t)
+    t = re.sub(r'\s*\.\s*', '. ', t)
+    t = re.sub(r'\s*\?\s*', '? ', t)
+    t = re.sub(r'\s*!\s*', '! ', t)
+    # Remove duplicate consecutive commas or periods
     t = re.sub(r'(,\s*)+', ', ', t)
-    t = re.sub(r',\s*\.\.\.', '... ', t)
-    t = re.sub(r'\.\.\.\s*,', '... ', t)
+    t = re.sub(r'(\.\s*)+', '. ', t)
+    t = re.sub(r',\s*\.', '.', t)
+    t = re.sub(r'\.\s*,', '.', t)
     t = re.sub(r'\s+', ' ', t).strip()
-    t = re.sub(r'\.\.\.\s*$', '.', t)
-    t = re.sub(r',\s*$', '.', t)
+    # Ensure it ends with clean punctuation
+    if t and not t.endswith(('.', '!', '?')):
+        t += '.'
     return t
 
 def synthesize_huggingface_space_clone(scenes: list, audio_dir: Path, reference_audio: Path = None, hf_token: str = None) -> list:
@@ -192,7 +194,7 @@ def synthesize_huggingface_space_clone(scenes: list, audio_dir: Path, reference_
                 audio_src = res
                 
             shutil.copyfile(audio_src, str(out_file))
-            trim_and_pad_scene_audio(out_file, tail_pad_sec=0.35)
+            trim_and_pad_scene_audio(out_file, tail_pad_sec=0.50)
             dur = get_audio_duration(out_file)
             s["audio_path"] = str(out_file)
             s["duration"] = round(dur, 2)
@@ -204,14 +206,52 @@ def synthesize_huggingface_space_clone(scenes: list, audio_dir: Path, reference_
         
     return scenes
 
-def trim_and_pad_scene_audio(audio_path: Path, tail_pad_sec: float = 0.45) -> Path:
+def stitch_audio_parts_with_pause(part_files: list[Path], output_file: Path, pause_sec: float = 0.48) -> Path:
     """
-    Gently trims harsh dead lead silence (preserving natural breath intakes at -55dB)
+    Concatenates individual sentence audio clips with a calm, natural reflective breath pause (~480ms).
+    Prevents sentences within the same scene from rushing together or drifting in tempo.
+    """
+    valid_parts = [p for p in part_files if p.exists() and p.stat().st_size > 1000]
+    if not valid_parts:
+        raise FileNotFoundError("No valid audio parts to stitch.")
+    if len(valid_parts) == 1:
+        shutil.copy2(str(valid_parts[0]), str(output_file))
+        return output_file
+
+    inputs = []
+    filter_parts = []
+    for i, p in enumerate(valid_parts):
+        inputs.extend(["-i", str(p)])
+        if i < len(valid_parts) - 1:
+            filter_parts.append(f"[{i}:a]apad=pad_dur={pause_sec:.3f}[a{i}];")
+        else:
+            filter_parts.append(f"[{i}:a]asetpts=PTS-STARTPTS[a{i}];")
+
+    concat_inputs = "".join(f"[a{i}]" for i in range(len(valid_parts)))
+    filter_parts.append(f"{concat_inputs}concat=n={len(valid_parts)}:v=0:a=1[aout]")
+
+    cmd = [
+        "ffmpeg", "-y", *inputs,
+        "-filter_complex", "".join(filter_parts),
+        "-map", "[aout]",
+        "-c:a", "pcm_s16le",
+        str(output_file)
+    ]
+    res = subprocess.run(cmd, capture_output=True, text=True)
+    if res.returncode == 0 and output_file.exists() and output_file.stat().st_size > 1000:
+        return output_file
+    else:
+        shutil.copy2(str(valid_parts[0]), str(output_file))
+        return output_file
+
+def trim_and_pad_scene_audio(audio_path: Path, tail_pad_sec: float = 0.50) -> Path:
+    """
+    Gently trims harsh dead lead silence (preserving natural breath intakes at -50dB)
     and adds calm ambient trailing silence padding to avoid rushed scene transitions.
     """
     tmp_path = audio_path.parent / f"proc_{audio_path.name}"
     is_wav = audio_path.suffix.lower() == ".wav"
-    filter_chain = f"silenceremove=start_periods=1:start_duration=0.01:start_threshold=-55dB,apad=pad_dur={tail_pad_sec}"
+    filter_chain = f"silenceremove=start_periods=1:start_duration=0.02:start_threshold=-50dB,apad=pad_dur={tail_pad_sec}"
     cmd = [
         "ffmpeg", "-y", "-i", str(audio_path),
         "-af", filter_chain,
@@ -446,11 +486,12 @@ def get_f5_engine(device=None):
             print(f"[Voice F5-TTS] Initializing F5TTS engine on target device: {device}")
             try:
                 _CACHED_F5 = F5TTS(device=device)
-            except TypeError:
-                try:
-                    _CACHED_F5 = F5TTS(model_type="F5-TTS_Base", device=device)
-                except TypeError:
-                    _CACHED_F5 = F5TTS()
+            except Exception as e:
+                if device != "cpu":
+                    print(f"[Voice F5-TTS] Device '{device}' init notice ({e}). Falling back to CPU...")
+                    _CACHED_F5 = F5TTS(device="cpu")
+                else:
+                    raise e
         except Exception as e:
             print(f"[Voice] Error importing or initializing local F5-TTS: {e}")
             raise e
@@ -459,7 +500,8 @@ def get_f5_engine(device=None):
 def synthesize_f5_tts_batch(scenes: list, audio_dir: Path, reference_audio: Path = None) -> list:
     """
     Synthesizes exact voice cloning using SWivid/F5-TTS (Option 1 Primary).
-    Clones reference audio whishper_prompt.wav with emotional nuances, slow poetic tempo, and whisper breathing.
+    Clones reference audio whishper_prompt.wav with emotional nuances, natural whisper breathing,
+    stable cadence (~2.6-2.8 words/sec), and calibrated pauses (comma ~250ms, full-stop ~480ms).
     Auto-detects GPU acceleration or falls back to cloud HF space / CPU inference.
     """
     ref_path, ref_text = get_effective_reference_voice(reference_audio, work_dir=audio_dir)
@@ -484,27 +526,19 @@ def synthesize_f5_tts_batch(scenes: list, audio_dir: Path, reference_audio: Path
             print(f"[Voice F5-TTS] Cloud space fallback to local CPU: {e}")
 
     cfg = load_settings()
-    poetic_speed = float(cfg.get("f5_tts_speed", 0.68))
+    poetic_speed = float(cfg.get("f5_tts_speed", 0.92))
     default_nfe = 32 if has_cuda else 16
     nfe = int(cfg.get("f5_tts_nfe_step", default_nfe)) if has_cuda else min(16, int(cfg.get("f5_tts_nfe_step", 16)))
 
     f5 = get_f5_engine(device="cuda" if has_cuda else "cpu")
 
-    for i, s in enumerate(scenes):
-        scene_id = s.get("id", f"scene_{i+1:03d}")
-        out_file = audio_dir / f"{scene_id}.wav"
-        raw_text = s.get("narration", "").strip()
-        if not raw_text:
-            continue
-            
-        speech_text = prepare_poetic_speech_text(raw_text)
-        print(f"[Voice F5-TTS] Synthesizing scene {i+1}/{len(scenes)} ({'GPU' if has_cuda else 'CPU'} speed={poetic_speed} nfe={nfe}): '{raw_text[:50]}...'")
+    def _run_f5_infer(text_chunk: str, target_wave: Path):
         try:
             f5.infer(
                 ref_file=str(ref_path.resolve()),
                 ref_text=ref_text,
-                gen_text=speech_text,
-                file_wave=str(out_file),
+                gen_text=text_chunk,
+                file_wave=str(target_wave),
                 speed=poetic_speed,
                 nfe_step=nfe,
                 remove_silence=False,
@@ -516,8 +550,8 @@ def synthesize_f5_tts_batch(scenes: list, audio_dir: Path, reference_audio: Path
                 f5.infer(
                     ref_file=str(ref_path.resolve()),
                     ref_text=ref_text,
-                    gen_text=speech_text,
-                    file_wave=str(out_file),
+                    gen_text=text_chunk,
+                    file_wave=str(target_wave),
                     speed=poetic_speed,
                     nfe_step=nfe,
                     remove_silence=False
@@ -527,18 +561,42 @@ def synthesize_f5_tts_batch(scenes: list, audio_dir: Path, reference_audio: Path
                     f5.infer(
                         ref_file=str(ref_path.resolve()),
                         ref_text=ref_text,
-                        gen_text=speech_text,
-                        file_wave=str(out_file),
+                        gen_text=text_chunk,
+                        file_wave=str(target_wave),
                         speed=poetic_speed
                     )
                 except TypeError:
                     f5.infer(
                         ref_file=str(ref_path.resolve()),
                         ref_text=ref_text,
-                        gen_text=speech_text,
-                        file_wave=str(out_file)
+                        gen_text=text_chunk,
+                        file_wave=str(target_wave)
                     )
-        trim_and_pad_scene_audio(out_file, tail_pad_sec=0.35)
+
+    for i, s in enumerate(scenes):
+        scene_id = s.get("id", f"scene_{i+1:03d}")
+        out_file = audio_dir / f"{scene_id}.wav"
+        raw_text = s.get("narration", "").strip()
+        if not raw_text:
+            continue
+            
+        speech_text = prepare_poetic_speech_text(raw_text)
+        print(f"[Voice F5-TTS] Synthesizing scene {i+1}/{len(scenes)} ({'GPU' if has_cuda else 'CPU'} speed={poetic_speed} nfe={nfe}): '{raw_text[:50]}...'")
+
+        sentences = [sent.strip() for sent in re.split(r'(?<=[.!?])\s+', speech_text) if sent.strip()]
+        if len(sentences) > 1:
+            part_files = []
+            for idx, sent in enumerate(sentences):
+                p_file = audio_dir / f"{scene_id}_part_{idx}.wav"
+                _run_f5_infer(sent, p_file)
+                part_files.append(p_file)
+            stitch_audio_parts_with_pause(part_files, out_file, pause_sec=0.48)
+            for p_file in part_files:
+                p_file.unlink(missing_ok=True)
+        else:
+            _run_f5_infer(speech_text, out_file)
+
+        trim_and_pad_scene_audio(out_file, tail_pad_sec=0.50)
         dur = get_audio_duration(out_file)
         s["audio_path"] = str(out_file)
         s["duration"] = round(dur, 2)
@@ -565,6 +623,8 @@ def synthesize_xtts_v2_batch(scenes: list, audio_dir: Path, reference_audio: Pat
     if not ref_path.exists():
         raise FileNotFoundError(f"Reference voice audio not found at: {ref_path}")
         
+    cfg = load_settings()
+    poetic_speed = float(cfg.get("xtts_speed", 0.92))
     xtts = get_xtts_engine(device="cpu")
     
     for i, s in enumerate(scenes):
@@ -575,15 +635,34 @@ def synthesize_xtts_v2_batch(scenes: list, audio_dir: Path, reference_audio: Pat
             continue
             
         speech_text = prepare_poetic_speech_text(raw_text)
-        print(f"[Voice XTTS-v2] Synthesizing scene {i+1}/{len(scenes)}: '{raw_text[:50]}...'")
-        xtts.tts_to_file(
-            text=speech_text,
-            speaker_wav=str(ref_path.resolve()),
-            language="en",
-            file_path=str(out_file),
-            speed=0.68
-        )
-        trim_and_pad_scene_audio(out_file, tail_pad_sec=0.35)
+        print(f"[Voice XTTS-v2] Synthesizing scene {i+1}/{len(scenes)} (speed={poetic_speed}): '{raw_text[:50]}...'")
+        
+        sentences = [sent.strip() for sent in re.split(r'(?<=[.!?])\s+', speech_text) if sent.strip()]
+        if len(sentences) > 1:
+            part_files = []
+            for idx, sent in enumerate(sentences):
+                p_file = audio_dir / f"{scene_id}_part_{idx}.wav"
+                xtts.tts_to_file(
+                    text=sent,
+                    speaker_wav=str(ref_path.resolve()),
+                    language="en",
+                    file_path=str(p_file),
+                    speed=poetic_speed
+                )
+                part_files.append(p_file)
+            stitch_audio_parts_with_pause(part_files, out_file, pause_sec=0.48)
+            for p_file in part_files:
+                p_file.unlink(missing_ok=True)
+        else:
+            xtts.tts_to_file(
+                text=speech_text,
+                speaker_wav=str(ref_path.resolve()),
+                language="en",
+                file_path=str(out_file),
+                speed=poetic_speed
+            )
+            
+        trim_and_pad_scene_audio(out_file, tail_pad_sec=0.50)
         dur = get_audio_duration(out_file)
         s["audio_path"] = str(out_file)
         s["duration"] = round(dur, 2)

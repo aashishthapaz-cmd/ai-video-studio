@@ -36,7 +36,7 @@ DEFAULT_SETTINGS = {
     "puter_auth_token": os.getenv("PUTER_AUTH_TOKEN", ""),
     "voice_engine": "f5_tts",
     "reference_voice_path": "assets/reference_voice/whishper_prompt.wav",
-    "f5_tts_speed": float(os.getenv("F5_TTS_SPEED", "0.68")),
+    "f5_tts_speed": float(os.getenv("F5_TTS_SPEED", "0.92")),
     "f5_tts_nfe_step": int(os.getenv("F5_TTS_NFE_STEP", "32")),
     "english_voice": "en-US-ChristopherNeural",
     "nepali_voice": "ne-NP-SagarNeural",
