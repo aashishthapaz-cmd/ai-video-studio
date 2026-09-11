@@ -24,30 +24,6 @@
     "synced_to_local": false
   },
   {
-    "id": "job_1788970363_7533c1",
-    "title": "People Will Be Who They Are",
-    "script_text": "I used to believe that if I treated people with kindness, they'd return it.\nBut life taught me otherwise.\nPeople will be who they are, believe what they want, and act however they choose,\nregardless of how it affects you.\nAt the end of the day, actions speak the loudest and words often mean the least.",
-    "niche_id": "typewriters_voice_nostalgia",
-    "niche_name": "Typewriters Voice Nostalgia",
-    "voice": "assets/reference_voice/whishper_prompt.wav",
-    "theme": "typewriters_voice_nostalgia",
-    "target_page_ids": [
-      "1111538525383568"
-    ],
-    "scheduled_time": "2026-09-11 23:16",
-    "scheduled_time_nepal": "2026-09-11 23:16 NPT",
-    "scheduled_time_usa": "2026-09-11 13:31 EDT",
-    "scheduled_epoch": 1789147910,
-    "timezone": "Asia/Kathmandu",
-    "status": "PENDING",
-    "created_at": "2026-09-09 16:12:43",
-    "render_time": null,
-    "output_file": null,
-    "facebook_results": null,
-    "error": null,
-    "synced_to_local": false
-  },
-  {
     "id": "job_1788802799_03e561",
     "title": "I'm Keeping You Forever",
     "script_text": "I love the way you love.\nI love your gentle soul.\nI love the way you make the hardest days feel absolutely effortless.\nEven when we are exhausted.\nEven when we are overwhelmed.\nEven when we are just sitting in complete silence.\nI look at you, and I know.\nI found exactly what my heart was looking for.\nI'm keeping you forever.",
