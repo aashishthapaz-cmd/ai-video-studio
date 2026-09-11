@@ -245,6 +245,42 @@ def run():
         if target_page_ids:
             print(f"Target Page IDs: {target_page_ids}", flush=True)
 
+        # ── Strict Deduplication Guard: Check if already published before generating ──
+        clean_title_check = title.strip().lower()
+        if publish_fb and clean_title_check and clean_title_check not in ("poetic whispers", "untitled", "test"):
+            try:
+                try:
+                    from facebook_publisher import is_already_published_to_page
+                except ImportError:
+                    from cloud_generator.facebook_publisher import is_already_published_to_page
+
+                pages_to_check = target_page_ids if target_page_ids else [str(p.get('id') or p.get('page_id')) for p in enabled_pages]
+                pages_already_done = []
+                for pid in pages_to_check:
+                    p_tok = next((p.get("access_token") for p in enabled_pages if str(p.get("id") or p.get("page_id")) == str(pid)), None)
+                    is_dup, reason = is_already_published_to_page(title, str(pid), access_token=p_tok, max_age_hours=24)
+                    if is_dup:
+                        pages_already_done.append((pid, reason))
+
+                if pages_to_check and len(pages_already_done) == len(pages_to_check):
+                    print(f"\n🛑 [Deduplication Guard] '{title}' was already successfully published to target page(s) recently! Skipping redundant generation & upload.", flush=True)
+                    for pid, reason in pages_already_done:
+                        print(f"   → Target {pid}: {reason}", flush=True)
+                    # Clean up matching pending item from jobs_queue.json if present
+                    try:
+                        from bulk_scheduler import load_queue, save_queue, _commit_queue_to_git
+                        q = load_queue()
+                        init_len = len(q)
+                        q = [j for j in q if j.get("title", "").strip().lower() != clean_title_check]
+                        if len(q) < init_len:
+                            save_queue(q)
+                            _commit_queue_to_git(f"🤖 Queue: auto-removed duplicate job '{title}' [skip ci]")
+                    except Exception:
+                        pass
+                    return
+            except Exception as e:
+                print(f"[Deduplication] Early check notice: {e}", flush=True)
+
         # Notify Telegram & alerts that video production has started
         try:
             notify_job_start({
@@ -360,6 +396,40 @@ def run():
                     due_jobs.append(j)
             elif sched and sched <= now_str:
                 due_jobs.append(j)
+
+        # ── STEP 2.5: Strict Deduplication against Publication History ────
+        filtered_due_jobs = []
+        for j in due_jobs:
+            j_title = j.get("title", "")
+            j_targets = j.get("target_page_ids") or []
+            if not j_targets:
+                j_targets = [str(p.get('id') or p.get('page_id')) for p in enabled_pages]
+
+            try:
+                try:
+                    from facebook_publisher import is_already_published_to_page
+                except ImportError:
+                    from cloud_generator.facebook_publisher import is_already_published_to_page
+
+                all_published = True
+                for pid in j_targets:
+                    p_tok = next((p.get("access_token") for p in enabled_pages if str(p.get("id") or p.get("page_id")) == str(pid)), None)
+                    is_dup, reason = is_already_published_to_page(j_title, str(pid), access_token=p_tok, max_age_hours=24)
+                    if not is_dup:
+                        all_published = False
+                        break
+                if all_published and j_targets:
+                    print(f"🛑 [Queue Deduplication] Job '{j_title}' was already successfully published to target page(s). Auto-removing from queue.", flush=True)
+                    from bulk_scheduler import load_queue, save_queue, _commit_queue_to_git
+                    q = load_queue()
+                    q = [x for x in q if x.get("id") != j.get("id")]
+                    save_queue(q)
+                    _commit_queue_to_git(f"🤖 Queue: auto-removed already published job '{j_title}' [skip ci]")
+                    continue
+            except Exception as e:
+                pass
+            filtered_due_jobs.append(j)
+        due_jobs = filtered_due_jobs
 
         if not due_jobs:
             next_job = pending_jobs[0] if pending_jobs else None

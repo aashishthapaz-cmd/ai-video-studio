@@ -1512,6 +1512,13 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
 
       if (!confirm('Run and auto-post "' + job.title + '" exclusively to [' + pageLabel + '] immediately via GitHub Actions? It will be removed from the scheduled pending queue.')) return;
 
+      // Protect against accidental double-clicks or concurrent dispatches
+      if (window._DISPATCH_LOCK) {
+        showToast('⚠️ Another video generation is currently being dispatched. Please wait...');
+        return;
+      }
+      window._DISPATCH_LOCK = true;
+
       showToast('🚀 Dispatching instant render for "' + job.title + '" to ' + pageLabel + '...');
 
       // 1. Instantly remove from local pending queue so it disappears from UI immediately
@@ -1519,31 +1526,39 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       CLOUD_QUEUE = CLOUD_QUEUE.filter(function(j) { return j.id !== jobId; });
       renderCloudQueue();
 
-      // 2. Dispatch workflow run to GitHub Actions
-      const success = await dispatchWorkflowAPI({
-        script_text: job.script_text,
-        title: job.title,
-        custom_vibe: job.theme || job.vibe || 'Typewriters Voice Nostalgia',
-        poetry_niche: job.niche_id || 'Auto-Detect from Poem',
-        target_page: targetPage,
-        publish_facebook: true
-      });
+      try {
+        // 2. Dispatch workflow run to GitHub Actions
+        const success = await dispatchWorkflowAPI({
+          script_text: job.script_text,
+          title: job.title,
+          custom_vibe: job.theme || job.vibe || 'Typewriters Voice Nostalgia',
+          poetry_niche: job.niche_id || 'Auto-Detect from Poem',
+          target_page: targetPage,
+          publish_facebook: true
+        });
 
-      if (success) {
-        showToast('✅ Dispatched "' + job.title + '" to ' + pageLabel + '! Removing from pending queue on GitHub...');
-        // 3. Commit removal of this job from GitHub Actions queue immediately
-        await commitCloudQueueToGithub(CLOUD_QUEUE, 'chore(queue): Dispatched job "' + job.title + '" immediately');
-        triggerFastQueueSync();
-        setTimeout(function() { switchTab('gallery'); }, 1500);
-      } else {
-        // Rollback if dispatch failed
-        CLOUD_QUEUE = previousQueue;
-        renderCloudQueue();
-        alert('Failed to dispatch job to GitHub Actions. Please check your GitHub PAT token in Settings.');
+        if (success) {
+          showToast('✅ Dispatched "' + job.title + '" to ' + pageLabel + '! Removing from pending queue on GitHub...');
+          // 3. Commit removal of this job from GitHub Actions queue immediately
+          await commitCloudQueueToGithub(CLOUD_QUEUE, 'chore(queue): Dispatched job "' + job.title + '" immediately');
+          triggerFastQueueSync();
+          setTimeout(function() { switchTab('gallery'); }, 1500);
+        } else {
+          // Rollback if dispatch failed
+          CLOUD_QUEUE = previousQueue;
+          renderCloudQueue();
+          alert('Failed to dispatch job to GitHub Actions. Please check your GitHub PAT token in Settings.');
+        }
+      } finally {
+        setTimeout(function() { window._DISPATCH_LOCK = false; }, 8000);
       }
     }
 
     async function runAllDueCloudJobs() {
+      if (window._DISPATCH_LOCK) {
+        showToast('⚠️ A dispatch is already in progress...');
+        return;
+      }
       const nowEpoch = Math.floor(Date.now() / 1000);
       const dueJobs = CLOUD_QUEUE.filter(function(j) {
         return j.status === 'PENDING' && j.scheduled_epoch && (j.scheduled_epoch <= nowEpoch);
@@ -1555,53 +1570,6 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       const nextDue = dueJobs[0];
       await runCloudJobNow(nextDue.id);
     }
-
-    // Autonomous Client-Side Queue Dispatcher
-    let LAST_AUTO_DISPATCH_EPOCH = 0;
-    async function checkAndAutoDispatchDueJobs() {
-      const pat = localStorage.getItem('gh_pat');
-      if (!pat || !CLOUD_QUEUE || !CLOUD_QUEUE.length) return;
-
-      const nowEpoch = Math.floor(Date.now() / 1000);
-      // Throttle automatic dispatches: min 3 minutes between auto-triggers
-      if (nowEpoch - LAST_AUTO_DISPATCH_EPOCH < 180) return;
-
-      const dueJob = CLOUD_QUEUE.find(function(j) {
-        return j.status === 'PENDING' && j.scheduled_epoch && (j.scheduled_epoch <= nowEpoch);
-      });
-
-      if (!dueJob) return;
-
-      LAST_AUTO_DISPATCH_EPOCH = nowEpoch;
-      console.log('⏰ Scheduled time reached for "' + dueJob.title + '". Autonomously dispatching render...');
-      showToast('⏰ Time reached for "' + dueJob.title + '"! Auto-dispatching render to GitHub Actions...');
-
-      const previousQueue = [...CLOUD_QUEUE];
-      CLOUD_QUEUE = CLOUD_QUEUE.filter(function(j) { return j.id !== dueJob.id; });
-      renderCloudQueue();
-
-      const targetPage = (dueJob.target_page_ids && dueJob.target_page_ids.length) ? String(dueJob.target_page_ids[0]).trim() : 'ALL Pages';
-
-      const success = await dispatchWorkflowAPI({
-        script_text: dueJob.script_text,
-        title: dueJob.title,
-        custom_vibe: dueJob.theme || dueJob.vibe || 'Typewriters Voice Nostalgia',
-        poetry_niche: dueJob.niche_id || 'Auto-Detect from Poem',
-        target_page: targetPage,
-        publish_facebook: true
-      });
-
-      if (success) {
-        await commitCloudQueueToGithub(CLOUD_QUEUE, 'chore(queue): Auto-dispatched scheduled job "' + dueJob.title + '"');
-        triggerFastQueueSync();
-      } else {
-        CLOUD_QUEUE = previousQueue;
-        renderCloudQueue();
-      }
-    }
-
-    // Start background watcher
-    setInterval(checkAndAutoDispatchDueJobs, 20000);
 
     function switchTab(tabId, btnElement) {
       const allButtons = document.querySelectorAll('.tab-btn');

@@ -220,6 +220,82 @@ def publish_video_to_facebook_page(
         "error": last_err or "Upload failed after retries"
     }
 
+def normalize_video_title(title: str) -> str:
+    """Normalizes titles for strict deduplication matching."""
+    import re
+    t = str(title or "").strip().lower()
+    t = re.sub(r'^(?:#?\d+[\.\)\-:]\s*|title:\s*)', '', t).strip()
+    return re.sub(r'[^a-z0-9]', '', t)
+
+def is_already_published_to_page(
+    title: str,
+    page_id: str,
+    access_token: str = None,
+    max_age_hours: int = 48
+) -> tuple:
+    """
+    Multi-tier deduplication guard against repeated posting:
+    Tier 1: Checks local facebook_history.json for matching successful upload.
+    Tier 2: Queries live Facebook Graph API recent videos on the page to intercept
+            concurrent GitHub Actions runs before duplicate bytes are published.
+    Returns: (is_duplicate: bool, reason_str: str)
+    """
+    clean_target = normalize_video_title(title)
+    if not clean_target or clean_target in ("untitled", "cloudvideo", "poem", "poeticwhispers", "quickpost"):
+        return False, "Generic/placeholder title"
+
+    target_pid = str(page_id or "").strip().lower()
+
+    # --- Tier 1: Check facebook_history.json ---
+    history = get_publication_history()
+    now_ts = time.time()
+    for entry in history:
+        if not entry.get("success"):
+            continue
+        entry_pid = str(entry.get("page_id") or "").strip().lower()
+        if target_pid and entry_pid and target_pid != entry_pid:
+            continue
+        entry_title = normalize_video_title(entry.get("title"))
+        if entry_title == clean_target:
+            ts_str = entry.get("timestamp")
+            if ts_str:
+                try:
+                    import datetime
+                    if "T" in ts_str:
+                        dt = datetime.datetime.fromisoformat(ts_str.replace("Z", "+00:00"))
+                    else:
+                        dt = datetime.datetime.strptime(ts_str, "%Y-%m-%d %H:%M:%S")
+                    entry_epoch = dt.timestamp()
+                    age_hours = (now_ts - entry_epoch) / 3600.0
+                    if age_hours <= max_age_hours:
+                        return True, f"Already recorded in history {age_hours:.1f}h ago (Video ID: {entry.get('video_id', 'unknown')})"
+                except Exception:
+                    return True, f"Already recorded in history (timestamp: {ts_str})"
+            else:
+                return True, "Already recorded in history"
+
+    # --- Tier 2: Live Facebook Graph API Query ---
+    # Intercepts concurrent runs executing across different CI runner VMs in real-time
+    if access_token and target_pid and not target_pid.startswith("your_") and not access_token.startswith("your_"):
+        try:
+            url = f"https://graph.facebook.com/{GRAPH_API_VERSION}/{target_pid}/videos?fields=id,title,description,created_time&limit=25&access_token={urllib.parse.quote(access_token)}"
+            req = urllib.request.Request(url, headers={"User-Agent": "AI-Video-Publisher/2.0"})
+            with urllib.request.urlopen(req, timeout=12) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+                for v in data.get("data", []):
+                    v_title = normalize_video_title(v.get("title", ""))
+                    v_desc = normalize_video_title(v.get("description", ""))
+                    v_id = v.get("id")
+                    v_time = v.get("created_time", "recently")
+                    if v_title and v_title == clean_target:
+                        return True, f"Live Facebook Graph API: video already exists on page (ID: {v_id}, uploaded: {v_time})"
+                    if clean_target and len(clean_target) >= 10 and clean_target in v_desc:
+                        return True, f"Live Facebook Graph API: video description matched on page (ID: {v_id}, uploaded: {v_time})"
+        except Exception as e:
+            logger.warning(f"[Deduplication] Live Graph API check notice: {e}")
+
+    return False, ""
+
 def publish_to_all_enabled_pages(video_path: Path, title: str, description: str, hashtags: str = None, target_page_ids = None) -> list:
     """
     Publishes to target Facebook Pages (or all enabled pages).
@@ -285,6 +361,28 @@ def publish_to_all_enabled_pages(video_path: Path, title: str, description: str,
             })
             continue
             
+        # Strict Deduplication Guard
+        is_dup, dup_reason = is_already_published_to_page(
+            title=title,
+            page_id=page_id,
+            access_token=access_token,
+            max_age_hours=48
+        )
+        if is_dup:
+            print(f"🛑 [Facebook Deduplication Guard] Video '{title}' already exists on '{page_name}' ({page_id}): {dup_reason}. Skipping duplicate upload!", flush=True)
+            results.append({
+                "page_name": page_name,
+                "page_id": page_id,
+                "ok": True,
+                "success": True,
+                "skipped": True,
+                "already_published": True,
+                "video_id": "ALREADY_PUBLISHED",
+                "post_url": f"https://facebook.com/{page_id}",
+                "message": f"Deduplication guard: '{title}' was already successfully published to this page ({dup_reason})"
+            })
+            continue
+
         res = publish_video_to_facebook_page(
             video_path=video_path,
             title=title,

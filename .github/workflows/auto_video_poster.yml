@@ -66,9 +66,9 @@ permissions:
   contents: write
 
 concurrency:
-  # Each manual dispatch gets its own unique run_id group → never cancelled.
-  # Scheduled cron triggers share one 'scheduled-queue' group → no duplicate queue runs.
-  group: ${{ github.workflow }}-${{ github.run_id }}
+  # Sequential execution queue: only 1 video pipeline executes at a time.
+  # If another job is triggered or scheduled while a video is rendering, it queues cleanly.
+  group: ${{ github.workflow }}
   cancel-in-progress: false
 
 jobs:
@@ -180,9 +180,11 @@ jobs:
           git config --global user.email "bot@autovideostudio.internal"
           git add cloud_generator/jobs_queue.json cloud_generator/facebook_history.json || true
           if git diff --staged --quiet; then
-            echo "No queue changes to commit."
+            echo "No queue or history changes to commit."
           else
             git commit -m "🤖 Auto-update job queue & publication history [skip ci]"
+            # Stash any remaining untracked/unstaged runtime files so pull --rebase never fails
+            git stash --keep-index -u || true
             git pull --rebase origin ${{ github.ref_name }} || true
             git push origin HEAD:${{ github.ref_name }} || true
           fi
