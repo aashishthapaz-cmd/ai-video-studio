@@ -1,28 +1,5 @@
 [
   {
-    "id": "job_1788793546_a38f50",
-    "title": "You Make Me Smile",
-    "script_text": "You make me smile, especially when you don't even know I'm looking.\nWhen you're focused on something, singing badly, talking to yourself.\nDoing whatever weird thing you do when you're comfortable.\nThose are the moments I like most.\nBecause you have no idea how much I love that side of you.",
-    "niche_id": "typewriters_voice_nostalgia",
-    "niche_name": "Typewriters Voice Nostalgia",
-    "voice": "assets/reference_voice/whishper_prompt.wav",
-    "theme": "typewriters_voice_nostalgia",
-    "target_page_ids": [
-      "1084268771446346"
-    ],
-    "scheduled_time": "2026-09-10 20:30",
-    "scheduled_time_usa": "2026-09-10 20:30 EDT",
-    "scheduled_epoch": 1789086600,
-    "timezone": "America/New_York",
-    "status": "PENDING",
-    "created_at": "2026-09-07 15:05:46",
-    "render_time": null,
-    "output_file": null,
-    "facebook_results": null,
-    "error": null,
-    "synced_to_local": false
-  },
-  {
     "id": "job_1788800390_e65e00",
     "title": "Change What Surrounds You",
     "script_text": "I read once that you can't always change the people around you,\nbut you can change who you choose to be around.\nAnd when I finally understood that,\neverything made sense.",
@@ -134,14 +111,15 @@
     "scheduled_time_usa": "2026-09-10 13:41 EDT",
     "scheduled_epoch": 1789062060,
     "timezone": "Asia/Kathmandu",
-    "status": "RENDERING",
+    "status": "PENDING",
     "created_at": "2026-09-07 17:39:59",
     "render_time": null,
     "output_file": null,
     "facebook_results": null,
-    "error": null,
+    "error": "Auto-recovered from unexpected process restart (was RENDERING)",
     "synced_to_local": false,
-    "started_at": "2026-09-10 22:56:52"
+    "started_at": "2026-09-10 22:56:52",
+    "recovered_at": "2026-09-11 00:49:33"
   },
   {
     "id": "job_1788802799_5e135d",
