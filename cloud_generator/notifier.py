@@ -16,6 +16,7 @@ def send_telegram_message(message: str, bot_token: str = None, chat_id: str = No
     token = (bot_token or cfg.get('telegram_bot_token', '')).strip()
     chat = (chat_id or cfg.get('telegram_chat_id', '')).strip()
     if not token or not chat:
+        print("[Telegram] Bot token or chat ID is not configured. Skipping message.", flush=True)
         return {'ok': False, 'error': 'Telegram bot token or chat ID is missing'}
     url = f'https://api.telegram.org/bot{token}/sendMessage'
     
@@ -25,19 +26,20 @@ def send_telegram_message(message: str, bot_token: str = None, chat_id: str = No
         r = requests.post(url, json=payload, timeout=15)
         data = r.json()
         if data.get('ok'):
+            print(f"[Telegram] [OK] Message delivered successfully to chat {chat}", flush=True)
             return {'ok': True, 'result': data}
         
-        # 2. If Markdown parsing fails (e.g. unclosed entities, brackets, or code errors), fallback to plain text
+        # 2. If Markdown parsing fails (e.g. unclosed entities or brackets), fallback to plain text
         err_desc = str(data.get('description', ''))
-        if 'parse entities' in err_desc.lower() or 'bad request' in err_desc.lower():
-            plain_payload = {'chat_id': chat, 'text': message, 'disable_web_page_preview': False}
-            r_plain = requests.post(url, json=plain_payload, timeout=15)
-            data_plain = r_plain.json()
-            if data_plain.get('ok'):
-                return {'ok': True, 'result': data_plain}
-            return {'ok': False, 'error': data_plain.get('description', r_plain.text)}
-
-        return {'ok': False, 'error': err_desc}
+        print(f"[Telegram] [Warn] Markdown delivery rejected ({err_desc}). Retrying as clean plain text...", flush=True)
+        plain_payload = {'chat_id': chat, 'text': message, 'disable_web_page_preview': False}
+        r_plain = requests.post(url, json=plain_payload, timeout=15)
+        data_plain = r_plain.json()
+        if data_plain.get('ok'):
+            print(f"[Telegram] [OK] Plain text message delivered successfully to chat {chat}", flush=True)
+            return {'ok': True, 'result': data_plain}
+        print(f"[Telegram] [Error] Delivery failed: {data_plain.get('description', r_plain.text)}", flush=True)
+        return {'ok': False, 'error': data_plain.get('description', r_plain.text)}
     except Exception as e:
         # Fallback to plain text on any request error
         try:
@@ -45,9 +47,11 @@ def send_telegram_message(message: str, bot_token: str = None, chat_id: str = No
             r_plain = requests.post(url, json=plain_payload, timeout=15)
             data_plain = r_plain.json()
             if data_plain.get('ok'):
+                print(f"[Telegram] [OK] Plain text fallback succeeded after network exception", flush=True)
                 return {'ok': True, 'result': data_plain}
         except Exception:
             pass
+        print(f"[Telegram] [Error] Network exception: {e}", flush=True)
         return {'ok': False, 'error': str(e)}
 
 def send_whatsapp_message(message: str, phone: str = None, apikey: str = None) -> dict:
@@ -79,16 +83,25 @@ def dispatch_alert(message: str) -> dict:
 
 def notify_job_start(job: dict):
     title = job.get('title', 'Untitled Video')
-    sched_time = job.get('scheduled_time', 'Immediate')
+    sched_time = job.get('scheduled_time') or job.get('scheduled_time_nepal') or 'Immediate / Active Run'
+    pages = job.get('target_page_name') or job.get('target_page_ids') or 'Configured Facebook Page'
+    if isinstance(pages, list):
+        pages = ', '.join([str(p) for p in pages])
+    vibe = job.get('theme') or job.get('vibe') or 'Anime / Poetic Parallax'
+    
     msg = (
-        f"[Video Production Started]\n\n"
-        f"Title: {title}\n"
-        f"Scheduled Time: {sched_time}\n"
-        f"Voice: {job.get('voice', 'Default')}\n"
-        f"Visual World: {job.get('theme', 'Auto Dynamic')}\n"
-        f"Status: Generating audio, 2.5D visual scenes and parallax motion..."
+        f"🚀 *Video Production Started!*\n\n"
+        f"📌 *Title:* {title}\n"
+        f"🎯 *Target:* {pages}\n"
+        f"⏰ *Scheduled:* {sched_time}\n"
+        f"🎨 *Style:* {vibe}\n"
+        f"🎙️ *Voice:* F5-TTS Poetic Voice\n\n"
+        f"⏳ *Status:* Generating poem scenes, speech audio & compiling video..."
     )
-    return dispatch_alert(msg)
+    print(f"[Telegram] Sending start alert for '{title}'...", flush=True)
+    res = dispatch_alert(msg)
+    print(f"[Telegram] Start alert result: {res}", flush=True)
+    return res
 
 def send_telegram_video(video_path: str, caption: str = "") -> dict:
     cfg = load_settings()

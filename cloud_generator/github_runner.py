@@ -31,7 +31,7 @@ except ImportError:
         load_queue, save_queue, execute_single_job,
         parse_bulk_scripts, enqueue_bulk_jobs
     )
-    from notifier import dispatch_alert, send_telegram_message, notify_job_success, notify_job_failure
+    from notifier import dispatch_alert, send_telegram_message, notify_job_start, notify_job_success, notify_job_failure
     from self_healing import run_self_repair
 
 
@@ -244,6 +244,17 @@ def run():
         print(f"Auto-Publish Facebook: {publish_fb}", flush=True)
         if target_page_ids:
             print(f"Target Page IDs: {target_page_ids}", flush=True)
+
+        # Notify Telegram & alerts that video production has started
+        try:
+            notify_job_start({
+                "title": title,
+                "scheduled_time": "Now (Immediate Run)",
+                "target_page_ids": target_page_ids,
+                "theme": vibe or "Anime / Poetic Parallax"
+            })
+        except Exception as e:
+            print(f"[Warning] Failed to send start alert: {e}", flush=True)
 
         def on_prog(pct, msg):
             print(f"[{pct}%] {msg}", flush=True)

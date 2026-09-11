@@ -527,6 +527,7 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
           </div>
           <div style="display:flex; gap:8px; flex-wrap: wrap; align-items: center;">
             <span id="queueSyncIndicator" style="font-size: 0.78rem; color: #34d399; background: rgba(16,185,129,0.12); padding: 4px 10px; border-radius: 999px; border: 1px solid rgba(16,185,129,0.3); font-weight: 600;">🟢 Live Auto-Sync (15s)</span>
+            <button class="btn btn-emerald btn-sm" onclick="runAllDueCloudJobs()" id="btnRunDueJobs" style="display: none; background: #059669; font-weight: 700;" title="Instantly render and publish the next scheduled job that has reached its time">⚡ Run Due Job (<span id="dueJobsCount">0</span>)</button>
             <button class="btn btn-emerald btn-sm" onclick="autoSpaceCloudQueue()" title="Auto-detect collisions and enforce 30-minute spacing across all scheduled jobs">⚡ Auto-Space (±30m Gaps)</button>
             <button class="btn btn-warning btn-sm" onclick="cleanOutdatedCloudQueue()" title="Remove all past/outdated scheduled jobs whose time has already passed">🧹 Clean Outdated</button>
             <button class="btn btn-secondary btn-sm" onclick="fetchCloudQueueFromGithub(false)">🔄 Refresh from GitHub</button>
@@ -1182,12 +1183,21 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
         }
       }
 
+      const nowEpoch = Math.floor(Date.now() / 1000);
+      const dueJobs = CLOUD_QUEUE.filter(function(j) {
+        return j.status === 'PENDING' && j.scheduled_epoch && (j.scheduled_epoch <= nowEpoch);
+      });
+      const dueBtn = document.getElementById('btnRunDueJobs');
+      const dueCountEl = document.getElementById('dueJobsCount');
+      if (dueBtn && dueCountEl) {
+        dueCountEl.innerText = dueJobs.length;
+        dueBtn.style.display = dueJobs.length ? 'inline-block' : 'none';
+      }
+
       if (!filtered.length) {
         container.innerHTML = `<div style="background: rgba(255,255,255,0.02); padding: 1.25rem; border-radius: 10px; border: 1px dashed var(--card-border); color: var(--text-muted); font-size: 0.88rem; text-align: center;">No scheduled posts found for this page in the GitHub Actions queue.</div>`;
         return;
       }
-
-      const nowEpoch = Math.floor(Date.now() / 1000);
 
       container.innerHTML = filtered.map(function(item, index) {
         const isPastDue = item.scheduled_epoch && (item.scheduled_epoch < nowEpoch - 60) && item.status === 'PENDING';
@@ -1532,6 +1542,66 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
         alert('Failed to dispatch job to GitHub Actions. Please check your GitHub PAT token in Settings.');
       }
     }
+
+    async function runAllDueCloudJobs() {
+      const nowEpoch = Math.floor(Date.now() / 1000);
+      const dueJobs = CLOUD_QUEUE.filter(function(j) {
+        return j.status === 'PENDING' && j.scheduled_epoch && (j.scheduled_epoch <= nowEpoch);
+      });
+      if (!dueJobs.length) {
+        showToast('ℹ️ No scheduled posts are due yet.');
+        return;
+      }
+      const nextDue = dueJobs[0];
+      await runCloudJobNow(nextDue.id);
+    }
+
+    // Autonomous Client-Side Queue Dispatcher
+    let LAST_AUTO_DISPATCH_EPOCH = 0;
+    async function checkAndAutoDispatchDueJobs() {
+      const pat = localStorage.getItem('gh_pat');
+      if (!pat || !CLOUD_QUEUE || !CLOUD_QUEUE.length) return;
+
+      const nowEpoch = Math.floor(Date.now() / 1000);
+      // Throttle automatic dispatches: min 3 minutes between auto-triggers
+      if (nowEpoch - LAST_AUTO_DISPATCH_EPOCH < 180) return;
+
+      const dueJob = CLOUD_QUEUE.find(function(j) {
+        return j.status === 'PENDING' && j.scheduled_epoch && (j.scheduled_epoch <= nowEpoch);
+      });
+
+      if (!dueJob) return;
+
+      LAST_AUTO_DISPATCH_EPOCH = nowEpoch;
+      console.log('⏰ Scheduled time reached for "' + dueJob.title + '". Autonomously dispatching render...');
+      showToast('⏰ Time reached for "' + dueJob.title + '"! Auto-dispatching render to GitHub Actions...');
+
+      const previousQueue = [...CLOUD_QUEUE];
+      CLOUD_QUEUE = CLOUD_QUEUE.filter(function(j) { return j.id !== dueJob.id; });
+      renderCloudQueue();
+
+      const targetPage = (dueJob.target_page_ids && dueJob.target_page_ids.length) ? String(dueJob.target_page_ids[0]).trim() : 'ALL Pages';
+
+      const success = await dispatchWorkflowAPI({
+        script_text: dueJob.script_text,
+        title: dueJob.title,
+        custom_vibe: dueJob.theme || dueJob.vibe || 'Typewriters Voice Nostalgia',
+        poetry_niche: dueJob.niche_id || 'Auto-Detect from Poem',
+        target_page: targetPage,
+        publish_facebook: true
+      });
+
+      if (success) {
+        await commitCloudQueueToGithub(CLOUD_QUEUE, 'chore(queue): Auto-dispatched scheduled job "' + dueJob.title + '"');
+        triggerFastQueueSync();
+      } else {
+        CLOUD_QUEUE = previousQueue;
+        renderCloudQueue();
+      }
+    }
+
+    // Start background watcher
+    setInterval(checkAndAutoDispatchDueJobs, 20000);
 
     function switchTab(tabId, btnElement) {
       const allButtons = document.querySelectorAll('.tab-btn');
