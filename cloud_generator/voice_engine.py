@@ -17,18 +17,28 @@ except ImportError:
 VOX_ROOT = Path(r'D:\VoxCPM Content Factory')
 VOX_PY = VOX_ROOT / '.venv' / 'Scripts' / 'python.exe'
 VOX_BRIDGE = PROJECT_ROOT / 'voxcpm_bridge.py'
-DEFAULT_REFERENCE_VOICE = PROJECT_ROOT / 'assets' / 'reference_voice' / 'whishper_prompt.wav'
+DEFAULT_REFERENCE_VOICE = PROJECT_ROOT / 'assets' / 'reference_voice' / 'whishper_poetic_music.wav'
 FULL_REFERENCE_VOICE = PROJECT_ROOT / 'assets' / 'reference_voice' / 'whishper.wav'
+LEGACY_REFERENCE_VOICE = PROJECT_ROOT / 'assets' / 'reference_voice' / 'whishper_prompt.wav'
 
-WHISPER_REFERENCE_TRANSCRIPT = "I don't know what you did to me, but I swear my heart reacts to you like a habit."
+WHISPER_POETIC_TRANSCRIPT = "Your voice feels like music. Your smile hits me harder than any high."
+WHISPER_REFERENCE_TRANSCRIPT = WHISPER_POETIC_TRANSCRIPT
 
 def get_effective_reference_voice(reference_audio: Path = None, work_dir: Path = None) -> tuple[Path, str]:
     """
-    Returns a clean 3-6s reference voice clip and its matching transcript.
-    If the source audio is >8.0s, automatically slices a clean 5.2s WAV clip
-    so F5-TTS and XTTS-v2 cross-attention windows never overflow or distort.
+    Returns the true soft, calm poetic whisper voice clip (~2.3-2.4 words/sec)
+    and its matching verified transcript:
+    'Your voice feels like music. Your smile hits me harder than any high.'
+    Auto-slices whishper.wav Section 1 if needed to prevent cross-attention window overflow.
     """
+    req_name = Path(reference_audio).name.lower() if reference_audio else ""
+    if not reference_audio or req_name in ("whishper_prompt.wav", "whishper_poetic_music.wav", "whishper.wav"):
+        if DEFAULT_REFERENCE_VOICE.exists() and DEFAULT_REFERENCE_VOICE.stat().st_size > 1000:
+            return DEFAULT_REFERENCE_VOICE, WHISPER_POETIC_TRANSCRIPT
+
     p = Path(reference_audio) if reference_audio else DEFAULT_REFERENCE_VOICE
+    if not p.exists() and DEFAULT_REFERENCE_VOICE.exists():
+        return DEFAULT_REFERENCE_VOICE, WHISPER_POETIC_TRANSCRIPT
     if not p.exists() and FULL_REFERENCE_VOICE.exists():
         p = FULL_REFERENCE_VOICE
 
@@ -36,24 +46,28 @@ def get_effective_reference_voice(reference_audio: Path = None, work_dir: Path =
         raise FileNotFoundError(f"Reference voice audio not found at: {p}")
 
     dur = get_audio_duration(p)
-    if dur <= 8.0:
+    if dur <= 8.0 and req_name != "whishper_prompt.wav":
         return p, WHISPER_REFERENCE_TRANSCRIPT
 
-    # Auto-slice long reference audio to 5.2s
+    # Auto-slice the calm poetic section (6.6s to 12.2s = 5.6s @ 2.32 wps) from whishper.wav
     target_dir = work_dir or p.parent
-    sliced_path = target_dir / "whishper_prompt_auto.wav"
+    sliced_path = target_dir / "whishper_poetic_auto.wav"
     if sliced_path.exists() and sliced_path.stat().st_size > 1000:
-        return sliced_path, WHISPER_REFERENCE_TRANSCRIPT
+        return sliced_path, WHISPER_POETIC_TRANSCRIPT
 
     try:
         import soundfile as sf
         data, sr = sf.read(str(p))
-        samples = int(5.2 * sr)
-        sliced_data = data[:samples]
+        s_idx = int(6.6 * sr)
+        e_idx = int(12.2 * sr)
+        if len(data) >= e_idx:
+            sliced_data = data[s_idx:e_idx]
+        else:
+            sliced_data = data[:int(5.6 * sr)]
         sf.write(str(sliced_path), sliced_data, sr)
-        return sliced_path, WHISPER_REFERENCE_TRANSCRIPT
+        return sliced_path, WHISPER_POETIC_TRANSCRIPT
     except Exception:
-        return p, WHISPER_REFERENCE_TRANSCRIPT
+        return (DEFAULT_REFERENCE_VOICE if DEFAULT_REFERENCE_VOICE.exists() else p), WHISPER_POETIC_TRANSCRIPT
 
 def detect_language(text: str) -> str:
     """Detect if text is Nepali (Devanagari) or English/Latin."""
@@ -573,9 +587,7 @@ def synthesize_f5_tts_batch(scenes: list, audio_dir: Path, reference_audio: Path
             print(f"[Voice F5-TTS] Cloud space fallback to local CPU: {e}")
 
     cfg = load_settings()
-    poetic_speed = float(cfg.get("f5_tts_speed", 0.85))
-    comma_pause = float(cfg.get("comma_pause_sec", 0.48))
-    period_pause = float(cfg.get("period_pause_sec", 0.52))
+    poetic_speed = float(cfg.get("f5_tts_speed", 1.0))
     default_nfe = 32 if has_cuda else 16
     nfe = int(cfg.get("f5_tts_nfe_step", default_nfe)) if has_cuda else min(16, int(cfg.get("f5_tts_nfe_step", 16)))
 
@@ -632,22 +644,10 @@ def synthesize_f5_tts_batch(scenes: list, audio_dir: Path, reference_audio: Path
         speech_text = prepare_poetic_speech_text(raw_text)
         print(f"[Voice F5-TTS] Synthesizing scene {i+1}/{len(scenes)} ({'GPU' if has_cuda else 'CPU'} speed={poetic_speed} nfe={nfe}): '{raw_text[:50]}...'")
 
-        segments = split_into_poetic_segments(speech_text, comma_pause=comma_pause, period_pause=period_pause)
-        if len(segments) > 1:
-            part_items = []
-            part_files_to_clean = []
-            for idx, (chunk_text, pause_after) in enumerate(segments):
-                p_file = audio_dir / f"{scene_id}_part_{idx}.wav"
-                _run_f5_infer(chunk_text, p_file)
-                part_items.append((p_file, pause_after))
-                part_files_to_clean.append(p_file)
-            stitch_audio_parts_with_pauses(part_items, out_file)
-            for p_file in part_files_to_clean:
-                p_file.unlink(missing_ok=True)
-        else:
-            _run_f5_infer(speech_text, out_file)
+        # Synthesize organic unbroken poetic scene with natural breaths and subtle comma pauses
+        _run_f5_infer(speech_text, out_file)
 
-        trim_and_pad_scene_audio(out_file, tail_pad_sec=period_pause)
+        trim_and_pad_scene_audio(out_file, tail_pad_sec=0.52)
         dur = get_audio_duration(out_file)
         s["audio_path"] = str(out_file)
         s["duration"] = round(dur, 2)
@@ -668,16 +668,14 @@ def get_xtts_engine(device="cpu"):
 def synthesize_xtts_v2_batch(scenes: list, audio_dir: Path, reference_audio: Path = None) -> list:
     """
     Synthesizes exact voice cloning using coqui-ai/TTS XTTS-v2 (Option 2 Secondary Fallback).
-    Clones reference audio whishper_prompt.wav directly into the speech conditioning embedding.
+    Clones reference audio whishper_poetic_music.wav directly into the speech conditioning embedding.
     """
     ref_path, _ref_text = get_effective_reference_voice(reference_audio, work_dir=audio_dir)
     if not ref_path.exists():
         raise FileNotFoundError(f"Reference voice audio not found at: {ref_path}")
         
     cfg = load_settings()
-    poetic_speed = float(cfg.get("xtts_speed", 0.85))
-    comma_pause = float(cfg.get("comma_pause_sec", 0.48))
-    period_pause = float(cfg.get("period_pause_sec", 0.52))
+    poetic_speed = float(cfg.get("xtts_speed", 1.0))
     xtts = get_xtts_engine(device="cpu")
     
     for i, s in enumerate(scenes):
@@ -690,34 +688,15 @@ def synthesize_xtts_v2_batch(scenes: list, audio_dir: Path, reference_audio: Pat
         speech_text = prepare_poetic_speech_text(raw_text)
         print(f"[Voice XTTS-v2] Synthesizing scene {i+1}/{len(scenes)} (speed={poetic_speed}): '{raw_text[:50]}...'")
         
-        segments = split_into_poetic_segments(speech_text, comma_pause=comma_pause, period_pause=period_pause)
-        if len(segments) > 1:
-            part_items = []
-            part_files_to_clean = []
-            for idx, (chunk_text, pause_after) in enumerate(segments):
-                p_file = audio_dir / f"{scene_id}_part_{idx}.wav"
-                xtts.tts_to_file(
-                    text=chunk_text,
-                    speaker_wav=str(ref_path.resolve()),
-                    language="en",
-                    file_path=str(p_file),
-                    speed=poetic_speed
-                )
-                part_items.append((p_file, pause_after))
-                part_files_to_clean.append(p_file)
-            stitch_audio_parts_with_pauses(part_items, out_file)
-            for p_file in part_files_to_clean:
-                p_file.unlink(missing_ok=True)
-        else:
-            xtts.tts_to_file(
-                text=speech_text,
-                speaker_wav=str(ref_path.resolve()),
-                language="en",
-                file_path=str(out_file),
-                speed=poetic_speed
-            )
+        xtts.tts_to_file(
+            text=speech_text,
+            speaker_wav=str(ref_path.resolve()),
+            language="en",
+            file_path=str(out_file),
+            speed=poetic_speed
+        )
             
-        trim_and_pad_scene_audio(out_file, tail_pad_sec=period_pause)
+        trim_and_pad_scene_audio(out_file, tail_pad_sec=0.52)
         dur = get_audio_duration(out_file)
         s["audio_path"] = str(out_file)
         s["duration"] = round(dur, 2)
