@@ -208,7 +208,7 @@ def synthesize_huggingface_space_clone(scenes: list, audio_dir: Path, reference_
                 audio_src = res
                 
             shutil.copyfile(audio_src, str(out_file))
-            trim_and_pad_scene_audio(out_file, tail_pad_sec=0.52)
+            trim_and_pad_scene_audio(out_file, tail_pad_sec=0.85)
             dur = get_audio_duration(out_file)
             s["audio_path"] = str(out_file)
             s["duration"] = round(dur, 2)
@@ -305,14 +305,14 @@ def stitch_audio_parts_with_pause(part_files: list[Path], output_file: Path, pau
     """Backward compatibility wrapper."""
     return stitch_audio_parts_with_pauses([(p, pause_sec) for p in part_files], output_file)
 
-def trim_and_pad_scene_audio(audio_path: Path, tail_pad_sec: float = 0.52) -> Path:
+def trim_and_pad_scene_audio(audio_path: Path, tail_pad_sec: float = 0.85) -> Path:
     """
-    Gently trims harsh dead lead silence (preserving natural breath intakes at -50dB)
-    and adds calm ambient trailing silence padding (520ms) to avoid rushed scene transitions.
+    Gently trims harsh dead lead silence (preserving natural breath intakes at -45dB)
+    and adds calm ambient trailing silence padding (850ms) to match the reference audio's reflective inter-stanza cadence.
     """
     tmp_path = audio_path.parent / f"proc_{audio_path.name}"
     is_wav = audio_path.suffix.lower() == ".wav"
-    filter_chain = f"silenceremove=start_periods=1:start_duration=0.02:start_threshold=-50dB,apad=pad_dur={tail_pad_sec}"
+    filter_chain = f"silenceremove=start_periods=1:start_duration=0.02:start_threshold=-45dB,apad=pad_dur={tail_pad_sec}"
     cmd = [
         "ffmpeg", "-y", "-i", str(audio_path),
         "-af", filter_chain,
@@ -647,7 +647,7 @@ def synthesize_f5_tts_batch(scenes: list, audio_dir: Path, reference_audio: Path
         # Synthesize organic unbroken poetic scene with natural breaths and subtle comma pauses
         _run_f5_infer(speech_text, out_file)
 
-        trim_and_pad_scene_audio(out_file, tail_pad_sec=0.52)
+        trim_and_pad_scene_audio(out_file, tail_pad_sec=0.85)
         dur = get_audio_duration(out_file)
         s["audio_path"] = str(out_file)
         s["duration"] = round(dur, 2)
@@ -696,7 +696,7 @@ def synthesize_xtts_v2_batch(scenes: list, audio_dir: Path, reference_audio: Pat
             speed=poetic_speed
         )
             
-        trim_and_pad_scene_audio(out_file, tail_pad_sec=0.52)
+        trim_and_pad_scene_audio(out_file, tail_pad_sec=0.85)
         dur = get_audio_duration(out_file)
         s["audio_path"] = str(out_file)
         s["duration"] = round(dur, 2)
