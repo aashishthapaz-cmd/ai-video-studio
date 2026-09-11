@@ -1079,33 +1079,46 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       }
 
       try {
-        const headers = {
-          'Accept': 'application/vnd.github+json',
-          'Cache-Control': 'no-cache, no-store, must-revalidate',
-          'Pragma': 'no-cache'
-        };
+        const headers = { 'Accept': 'application/vnd.github+json' };
         if (pat) headers['Authorization'] = 'Bearer ' + pat;
 
-        const res = await fetch('https://api.github.com/repos/' + repo + '/contents/cloud_generator/jobs_queue.json?ref=main&_cb=' + Date.now(), {
-          headers: headers,
-          cache: 'no-store'
-        });
-        if (!res.ok) {
-          if (res.status === 404) {
+        let res = null;
+        let loadedFromRaw = false;
+
+        // 1. Primary: Try GitHub API (provides SHA needed for editing/deleting queue items)
+        try {
+          res = await fetch('https://api.github.com/repos/' + repo + '/contents/cloud_generator/jobs_queue.json?ref=main&_cb=' + Date.now(), {
+            headers: headers
+          });
+        } catch (apiErr) {
+          console.warn('GitHub API fetch failed or blocked by CORS, trying raw fallback:', apiErr);
+        }
+
+        if (res && res.ok) {
+          const data = await res.json();
+          CLOUD_QUEUE_SHA = data.sha;
+          const rawJson = base64ToUtf8(data.content.replace(/\s/g, ''));
+          CLOUD_QUEUE = JSON.parse(rawJson || '[]');
+        } else if (res && res.status === 404) {
+          CLOUD_QUEUE = [];
+          CLOUD_QUEUE_SHA = null;
+        } else {
+          // 2. Secondary Fallback: raw.githubusercontent.com (CORS-friendly, no rate-limiting)
+          const rawRes = await fetch('https://raw.githubusercontent.com/' + repo + '/main/cloud_generator/jobs_queue.json?_cb=' + Date.now());
+          if (rawRes.ok) {
+            CLOUD_QUEUE = await rawRes.json();
+            loadedFromRaw = true;
+          } else if (rawRes.status === 404) {
             CLOUD_QUEUE = [];
             CLOUD_QUEUE_SHA = null;
-            renderCloudQueue();
-            return;
+          } else {
+            throw new Error('GitHub API ' + (res ? res.status : 'offline') + ' & Raw CDN ' + rawRes.status);
           }
-          throw new Error('GitHub API returned ' + res.status + ' (' + res.statusText + ')');
         }
-        const data = await res.json();
-        CLOUD_QUEUE_SHA = data.sha;
-        const rawJson = base64ToUtf8(data.content.replace(/\s/g, ''));
-        CLOUD_QUEUE = JSON.parse(rawJson || '[]');
+
         renderCloudQueue();
         if (indicator) {
-          indicator.innerText = '🟢 Live Auto-Sync (15s)';
+          indicator.innerText = loadedFromRaw ? '🟢 Live Sync (Direct CDN)' : '🟢 Live Auto-Sync (15s)';
           indicator.style.color = '#34d399';
         }
       } catch (err) {
