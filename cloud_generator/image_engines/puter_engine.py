@@ -54,6 +54,9 @@ def _save_image_data(raw_data: bytes, output_path: Path, target_w: int, target_h
     return str(output_path)
 
 
+_PUTER_EXHAUSTED = False
+
+
 def generate_puter_image(
     prompt: str,
     output_path: Path,
@@ -69,6 +72,10 @@ def generate_puter_image(
     Generates an image using Puter.com's Nano Banana API.
     Uses 'api.puter.com/drivers/call' with interface 'puter-image-generation' and driver 'ai-image'.
     """
+    global _PUTER_EXHAUSTED
+    if _PUTER_EXHAUSTED:
+        raise RuntimeError("Puter credits previously exhausted (HTTP 402). Skipping Puter to fail fast.")
+
     if not auth_token:
         raise ValueError("Puter Auth Token is required. Get one free at puter.com/dashboard#account")
 
@@ -183,6 +190,12 @@ def generate_puter_image(
                     pass
 
                 logger.warning(f"[Puter] HTTP {http_err.code} for model {cur_model}: {err_body}")
+
+                # 402 Insufficient Funds / Credits exhausted: fail fast immediately across all models and scenes
+                if http_err.code == 402:
+                    _PUTER_EXHAUSTED = True
+                    logger.warning(f"[Puter] Token credits exhausted (HTTP 402). Disabling Puter engine for remaining scenes.")
+                    raise RuntimeError(f"Puter credits exhausted (HTTP 402): {err_body}")
 
                 # 401 or auth failure: don't retry same model
                 if http_err.code == 401:

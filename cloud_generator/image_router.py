@@ -33,34 +33,87 @@ def _unique_seed(base: str, attempt: int = 0) -> int:
     return int(hashlib.sha256(raw.encode()).hexdigest()[:8], 16)
 
 
+def _generate_artistic_fallback_canvas(output_path: Path, width: int, height: int, seed: int) -> str:
+    """
+    Generates a rich, atmospheric, poetic mood canvas if all remote engines fail.
+    Combines deep indigo-amber cinematic lighting, radial atmospheric haze, and soft golden particles.
+    """
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    rng = random.Random(seed)
+    
+    # Base deep atmospheric gradient (nocturnal indigo to warm vintage charcoal)
+    im = Image.new("RGB", (width, height), (12, 14, 24))
+    draw = ImageDraw.Draw(im)
+    
+    for y in range(height):
+        t = y / height
+        # Smooth ease-in-out curve
+        t_curved = t * t * (3 - 2 * t)
+        r = int(10 + (28 - 10) * t_curved)
+        g = int(13 + (22 - 13) * t_curved)
+        b = int(24 + (32 - 24) * t_curved)
+        draw.line([(0, y), (width, y)], fill=(r, g, b))
+        
+    # Central warm atmospheric glow (poetic golden/amber candlelit aura)
+    center_x = width // 2 + rng.randint(-width // 8, width // 8)
+    center_y = int(height * 0.45) + rng.randint(-height // 10, height // 10)
+    max_radius = int(min(width, height) * 0.65)
+    
+    # Layer soft concentric radial circles
+    for radius in range(max_radius, 0, -8):
+        alpha = (1.0 - (radius / max_radius)) ** 1.8
+        glow_r = min(255, int(18 + 65 * alpha))
+        glow_g = min(255, int(22 + 45 * alpha))
+        glow_b = min(255, int(35 + 20 * alpha))
+        draw.ellipse(
+            [center_x - radius, center_y - radius, center_x + radius, center_y + radius],
+            fill=(glow_r, glow_g, glow_b)
+        )
+    
+    # Subtle drifting golden dust / starlight particles
+    for _ in range(60):
+        px = rng.randint(40, width - 40)
+        py = rng.randint(60, height - 60)
+        p_radius = rng.randint(1, 3)
+        brightness = rng.uniform(0.3, 0.85)
+        pr = int(220 * brightness)
+        pg = int(190 * brightness)
+        pb = int(140 * brightness)
+        draw.ellipse([px - p_radius, py - p_radius, px + p_radius, py + p_radius], fill=(pr, pg, pb))
+        
+    im.save(output_path, "PNG", quality=95)
+    logger.info(f"Artistic fallback mood canvas saved to {output_path}")
+    return str(output_path)
+
+
 def _emergency_fallback_from_pollinations(prompt: str, output_path: Path, width: int, height: int, seed: int) -> str:
     """
-    Last-resort: tries Pollinations (no token needed, always available) with a simplified prompt.
-    This replaces the old gradient canvas fallback — we always try to get a real image.
+    Last-resort: tries Pollinations cascade (flux -> turbo -> midjourney) with a simplified prompt.
+    If network totally fails, generates an evocative artistic mood canvas instead of a blank screen.
     """
+    clean = prompt.split("no white border")[0].split("no borders")[0].strip().rstrip(",. ")
+    short_prompt = clean[:180].rsplit(" ", 1)[0] if len(clean) > 180 else clean
+    
+    # 1. Try Pollinations cascade (flux -> turbo -> midjourney)
     try:
-        # Strip the long negative prompts — Pollinations works better with positive-only prompts
-        clean = prompt.split("no white border")[0].split("no borders")[0].strip().rstrip(",. ")
-        # Keep only the first 200 chars for speed and reliability
-        short_prompt = clean[:200].rsplit(" ", 1)[0]
         return generate_pollinations_image(
             short_prompt, output_path, width=width, height=height,
-            seed=seed, model="flux", retries=4
+            seed=seed, model=None, retries=2
         )
     except Exception as e:
-        logger.warning(f"Emergency Pollinations fallback also failed: {e}. Using minimal solid canvas.")
-        # Absolute last resort: solid dark gradient (NOT the orb — it looked terrible)
-        output_path.parent.mkdir(parents=True, exist_ok=True)
-        im = Image.new("RGB", (width, height), (18, 22, 38))
-        draw = ImageDraw.Draw(im)
-        for y in range(height):
-            ratio = y / height
-            r = int(18 + 20 * ratio)
-            g = int(22 + 18 * ratio)
-            b = int(38 + 12 * ratio)
-            draw.line([(0, y), (width, y)], fill=(r, g, b))
-        im.save(output_path, "PNG")
-        return str(output_path)
+        logger.warning(f"Emergency Pollinations cascade failed: {e}. Trying fast turbo fallback...")
+        
+    # 2. Try Pollinations turbo directly
+    try:
+        return generate_pollinations_image(
+            short_prompt, output_path, width=width, height=height,
+            seed=seed, model="turbo", retries=2
+        )
+    except Exception as e2:
+        logger.warning(f"Pollinations turbo emergency failed: {e2}. Generating artistic mood canvas.")
+        
+    # 3. Absolute offline safety net: rich poetic mood canvas
+    return _generate_artistic_fallback_canvas(output_path, width, height, seed)
 
 
 # ─── UNIVERSAL NEGATIVE TAGS applied to every prompt ─────────────────────────
@@ -138,8 +191,8 @@ def generate_scene_image(
 
     priority = (
         [preferred_engine] if preferred_engine
-        # Google Flow (Browser-like) → Puter (Nano Banana) → HuggingFace → Cloudflare → Pollinations (last resort)
-        else cfg.get("image_engine_priority", ["google_flow", "puter", "huggingface", "cloudflare", "pollinations"])
+        # Puter (Nano Banana) → Cloudflare (FLUX) → Pollinations → HuggingFace → Google Flow
+        else cfg.get("image_engine_priority", ["puter", "cloudflare", "pollinations", "huggingface", "google_flow"])
     )
 
     errors = []
@@ -169,15 +222,16 @@ def generate_scene_image(
                 )
                 return {"ok": True, "engine": f"Puter Nano Banana ({puter_model})", "path": img}
 
-            elif "huggingface" in engine:
-                hf_token = cfg.get("huggingface_token", "")
-                if not hf_token:
-                    errors.append("huggingface: no token")
+            elif "cloudflare" in engine or "cf" in engine:
+                acc_id = cfg.get("cloudflare_account_id", "")
+                token = cfg.get("cloudflare_api_token", "")
+                if not acc_id or not token:
+                    errors.append("cloudflare: no credentials")
                     continue
-                img = generate_huggingface_image(
-                    final_prompt, output_path, hf_token=hf_token, width=width, height=height, seed=seed
+                img = generate_cloudflare_image(
+                    final_prompt, output_path, account_id=acc_id, api_token=token, width=width, height=height, seed=seed
                 )
-                return {"ok": True, "engine": "Hugging Face Serverless", "path": img}
+                return {"ok": True, "engine": "Cloudflare Workers AI", "path": img}
 
             elif "pollinations" in engine:
                 model = "turbo" if "turbo" in engine else cfg.get("pollinations_model", "flux")
@@ -199,16 +253,15 @@ def generate_scene_image(
                             pass
                     raise e
 
-            elif engine == "cloudflare":
-                acc_id = cfg.get("cloudflare_account_id", "")
-                token = cfg.get("cloudflare_api_token", "")
-                if not acc_id or not token:
-                    errors.append("cloudflare: no credentials")
+            elif "huggingface" in engine:
+                hf_token = cfg.get("huggingface_token", "")
+                if not hf_token:
+                    errors.append("huggingface: no token")
                     continue
-                img = generate_cloudflare_image(
-                    final_prompt, output_path, account_id=acc_id, api_token=token, width=width, height=height, seed=seed
+                img = generate_huggingface_image(
+                    final_prompt, output_path, hf_token=hf_token, width=width, height=height, seed=seed
                 )
-                return {"ok": True, "engine": "Cloudflare Workers AI", "path": img}
+                return {"ok": True, "engine": "Hugging Face Serverless", "path": img}
 
         except Exception as exc:
             errors.append(f"{engine}: {exc}")

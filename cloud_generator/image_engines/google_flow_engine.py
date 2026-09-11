@@ -42,6 +42,9 @@ def _ensure_session_restored():
             if env_session.startswith("{"):
                 session_data = json.loads(env_session)
             else:
+                missing_padding = (-len(env_session)) % 4
+                if missing_padding:
+                    env_session += "=" * missing_padding
                 session_data = json.loads(base64.b64decode(env_session).decode("utf-8"))
             SESSION_FILE.parent.mkdir(parents=True, exist_ok=True)
             SESSION_FILE.write_text(json.dumps(session_data, indent=2), encoding="utf-8")
@@ -53,7 +56,7 @@ def _ensure_session_restored():
 def is_google_flow_configured() -> bool:
     """Checks if a valid Google session exists locally or via environment variables."""
     _ensure_session_restored()
-    return SESSION_FILE.exists() or os.environ.get("GOOGLE_FLOW_SESSION", "").strip() != "" or USER_DATA_DIR.exists()
+    return SESSION_FILE.exists() or (USER_DATA_DIR.exists() and any(USER_DATA_DIR.iterdir()))
 
 
 def generate_google_flow_image(
