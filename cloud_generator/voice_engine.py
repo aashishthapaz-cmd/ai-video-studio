@@ -79,27 +79,27 @@ def get_audio_duration(file_path: Path) -> float:
 
 def prepare_poetic_speech_text(text: str) -> str:
     """
-    Transforms raw poetic script into natural, smooth spoken-word text.
-    Preserves natural sentence flow without injecting robotic ellipses or awkward mid-clause pauses.
+    Transforms raw poetic script into natural, smooth spoken-word text with exact pacing, tone, and breath markers.
+    Preserves commas for gentle micro-breaths, pauses for stanza transitions, and avoids robotic clipping.
     """
     t = str(text or "").strip()
     if not t:
         return ""
-    # Normalize em-dashes and long dashes to simple comma pause
+    # Normalize em-dashes and long dashes to natural breath pauses
     t = re.sub(r'[—–]|--', ', ', t)
     # Ensure line breaks become a gentle breath space
-    t = re.sub(r'\n+', ' ', t)
-    # Normalize semicolons and colons
-    t = re.sub(r'[;:]', ',', t)
-    # Clean multiple dots into single period
-    t = re.sub(r'\.{2,}', '.', t)
-    # Ensure commas have clean single spacing
-    t = re.sub(r'\s*,\s*', ', ', t)
-    # Ensure periods have clean single spacing
-    t = re.sub(r'\s*\.\s*', '. ', t)
-    # Clean duplicate punctuation
+    t = re.sub(r'\n+', ', ', t)
+    # Normalize semicolons and colons to gentle breath pause
+    t = re.sub(r'[;:]', ', ', t)
+    # Protect ellipses with breath space
+    t = re.sub(r'\.{2,}', ' <ELLIPSIS> ', t)
+    # Ensure commas and periods have clean trailing spacing (required for F5-TTS chunking/pausing)
+    t = re.sub(r'\s*([,\.!?])\s*', r'\1 ', t)
+    # Restore clean ellipsis
+    t = t.replace('<ELLIPSIS>', '... ')
+    # Clean multiple commas
     t = re.sub(r',\s*,+', ', ', t)
-    t = re.sub(r'\.\s*\.+', '. ', t)
+    # Clean up multiple spaces
     t = re.sub(r'\s+', ' ', t).strip()
     return t
 
@@ -427,11 +427,18 @@ def extract_acoustic_word_durations(audio_path: Path, script_text: str, language
 
 _CACHED_F5 = None
 
-def get_f5_engine(device="cpu"):
+def get_f5_engine(device=None):
     global _CACHED_F5
     if _CACHED_F5 is None:
+        if device is None:
+            try:
+                import torch
+                device = "cuda" if torch.cuda.is_available() else "cpu"
+            except Exception:
+                device = "cpu"
         try:
             from f5_tts.api import F5TTS
+            print(f"[Voice F5-TTS] Initializing F5TTS engine on target device: {device}")
             try:
                 _CACHED_F5 = F5TTS(device=device)
             except TypeError:
@@ -447,14 +454,37 @@ def get_f5_engine(device="cpu"):
 def synthesize_f5_tts_batch(scenes: list, audio_dir: Path, reference_audio: Path = None) -> list:
     """
     Synthesizes exact voice cloning using SWivid/F5-TTS (Option 1 Primary).
-    Clones reference audio whishper_prompt.wav with emotional nuances, slow tempo, and whisper breathing.
+    Clones reference audio whishper_prompt.wav with emotional nuances, slow poetic tempo, and whisper breathing.
+    Auto-detects GPU acceleration or falls back to cloud HF space / CPU inference.
     """
     ref_path, ref_text = get_effective_reference_voice(reference_audio, work_dir=audio_dir)
     if not ref_path.exists():
         raise FileNotFoundError(f"Reference voice audio not found at: {ref_path}")
-        
-    f5 = get_f5_engine(device="cpu")
-    
+
+    # Check if we should use HF Space for zero-CPU in GitHub Actions
+    is_github_actions = os.environ.get("GITHUB_ACTIONS") == "true"
+    has_cuda = False
+    try:
+        import torch
+        has_cuda = torch.cuda.is_available()
+    except Exception:
+        pass
+
+    # If running in GitHub Actions without GPU, prefer cloud HF Space for instant GPU synthesis
+    if is_github_actions and not has_cuda:
+        try:
+            print("[Voice F5-TTS] CI Environment detected without GPU. Attempting zero-CPU Cloud F5-TTS...")
+            return synthesize_huggingface_space_clone(scenes, audio_dir, reference_audio=ref_path)
+        except Exception as e:
+            print(f"[Voice F5-TTS] Cloud space fallback to local CPU: {e}")
+
+    cfg = load_settings()
+    poetic_speed = float(cfg.get("f5_tts_speed", 0.85))
+    default_nfe = 32 if has_cuda else 16
+    nfe = int(cfg.get("f5_tts_nfe_step", default_nfe)) if has_cuda else min(16, int(cfg.get("f5_tts_nfe_step", 16)))
+
+    f5 = get_f5_engine(device="cuda" if has_cuda else "cpu")
+
     for i, s in enumerate(scenes):
         scene_id = s.get("id", f"scene_{i+1:03d}")
         out_file = audio_dir / f"{scene_id}.wav"
@@ -463,15 +493,18 @@ def synthesize_f5_tts_batch(scenes: list, audio_dir: Path, reference_audio: Path
             continue
             
         speech_text = prepare_poetic_speech_text(raw_text)
-        print(f"[Voice F5-TTS] Synthesizing scene {i+1}/{len(scenes)}: '{raw_text[:50]}...'")
+        print(f"[Voice F5-TTS] Synthesizing scene {i+1}/{len(scenes)} ({'GPU' if has_cuda else 'CPU'} speed={poetic_speed} nfe={nfe}): '{raw_text[:50]}...'")
         try:
             f5.infer(
                 ref_file=str(ref_path.resolve()),
                 ref_text=ref_text,
                 gen_text=speech_text,
                 file_wave=str(out_file),
-                speed=0.68,
-                nfe_step=36
+                speed=poetic_speed,
+                nfe_step=nfe,
+                remove_silence=False,
+                target_rms=0.1,
+                cfg_strength=2.0
             )
         except TypeError:
             try:
@@ -480,20 +513,31 @@ def synthesize_f5_tts_batch(scenes: list, audio_dir: Path, reference_audio: Path
                     ref_text=ref_text,
                     gen_text=speech_text,
                     file_wave=str(out_file),
-                    speed=0.68
+                    speed=poetic_speed,
+                    nfe_step=nfe,
+                    remove_silence=False
                 )
             except TypeError:
-                f5.infer(
-                    ref_file=str(ref_path.resolve()),
-                    ref_text=ref_text,
-                    gen_text=speech_text,
-                    file_wave=str(out_file)
-                )
+                try:
+                    f5.infer(
+                        ref_file=str(ref_path.resolve()),
+                        ref_text=ref_text,
+                        gen_text=speech_text,
+                        file_wave=str(out_file),
+                        speed=poetic_speed
+                    )
+                except TypeError:
+                    f5.infer(
+                        ref_file=str(ref_path.resolve()),
+                        ref_text=ref_text,
+                        gen_text=speech_text,
+                        file_wave=str(out_file)
+                    )
         trim_and_pad_scene_audio(out_file, tail_pad_sec=0.35)
         dur = get_audio_duration(out_file)
         s["audio_path"] = str(out_file)
         s["duration"] = round(dur, 2)
-        s["voice"] = "F5-TTS Reference Whisper Clone"
+        s["voice"] = f"F5-TTS Reference Whisper Clone ({'CUDA' if has_cuda else 'CPU'})"
         s["word_durations"] = extract_acoustic_word_durations(out_file, raw_text, language="en")
         
     return scenes

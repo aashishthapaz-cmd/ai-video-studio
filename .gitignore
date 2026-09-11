@@ -17,6 +17,7 @@ temp_test_assets/
 Output/*.mp4
 Output/*.wav
 temp_test/
+assets/temp_f5_test/
 logs/
 assets/models/
 
