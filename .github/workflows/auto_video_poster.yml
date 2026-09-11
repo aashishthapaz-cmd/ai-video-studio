@@ -141,6 +141,8 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           POLLINATIONS_API_KEY: ${{ secrets.POLLINATIONS_API_KEY }}
+          PUTER_AUTH_TOKEN: ${{ secrets.PUTER_AUTH_TOKEN }}
+          PUTER_MODEL: ${{ secrets.PUTER_MODEL }}
           SCRIPT_INPUT: ${{ inputs.script_text }}
           TITLE_INPUT: ${{ inputs.title }}
           VIBE_INPUT: ${{ inputs.custom_vibe }}

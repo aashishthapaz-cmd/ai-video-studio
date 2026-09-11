@@ -11,11 +11,13 @@ try:
     from .image_engines.pollinations_engine import generate_pollinations_image
     from .image_engines.cloudflare_engine import generate_cloudflare_image
     from .image_engines.huggingface_engine import generate_huggingface_image
+    from .image_engines.puter_engine import generate_puter_image
 except ImportError:
     from config import load_settings
     from image_engines.pollinations_engine import generate_pollinations_image
     from image_engines.cloudflare_engine import generate_cloudflare_image
     from image_engines.huggingface_engine import generate_huggingface_image
+    from image_engines.puter_engine import generate_puter_image
 
 logger = logging.getLogger("ImageRouter")
 
@@ -134,8 +136,8 @@ def generate_scene_image(
 
     priority = (
         [preferred_engine] if preferred_engine
-        # HuggingFace → Cloudflare → Pollinations (last resort)
-        else cfg.get("image_engine_priority", ["huggingface", "cloudflare", "pollinations"])
+        # Puter (Nano Banana) → HuggingFace → Cloudflare → Pollinations (last resort)
+        else cfg.get("image_engine_priority", ["puter", "huggingface", "cloudflare", "pollinations"])
     )
 
     errors = []
@@ -144,7 +146,19 @@ def generate_scene_image(
             continue
         engine = engine.lower().strip()
         try:
-            if "huggingface" in engine:
+            if "puter" in engine or "banana" in engine:
+                puter_token = cfg.get("puter_auth_token", "")
+                if not puter_token:
+                    errors.append("puter: no auth token configured (get free token at puter.com/dashboard)")
+                    continue
+                puter_model = cfg.get("puter_model", "gemini-3.1-flash-image-preview")
+                img = generate_puter_image(
+                    final_prompt, output_path, auth_token=puter_token, model=puter_model,
+                    width=width, height=height, seed=seed
+                )
+                return {"ok": True, "engine": f"Puter Nano Banana ({puter_model})", "path": img}
+
+            elif "huggingface" in engine:
                 hf_token = cfg.get("huggingface_token", "")
                 if not hf_token:
                     errors.append("huggingface: no token")

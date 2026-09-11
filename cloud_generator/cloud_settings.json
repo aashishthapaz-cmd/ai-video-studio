@@ -1,10 +1,13 @@
 {
   "image_engine_priority": [
+    "puter",
     "huggingface",
     "cloudflare",
     "pollinations"
   ],
   "pollinations_model": "flux",
+  "puter_model": "gemini-3.1-flash-image-preview",
+  "puter_auth_token": "",
   "voice_engine": "voxcpm_reference",
   "reference_voice_path": "assets/reference_voice/whishper.wav",
   "english_voice": "en-US-ChristopherNeural",

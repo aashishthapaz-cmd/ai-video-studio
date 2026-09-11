@@ -29,8 +29,10 @@ WORKSPACE_DIR.mkdir(parents=True, exist_ok=True)
 TEMP_CLOUD_DIR.mkdir(parents=True, exist_ok=True)
 
 DEFAULT_SETTINGS = {
-    "image_engine_priority": ["huggingface", "cloudflare", "pollinations"],
+    "image_engine_priority": ["puter", "huggingface", "cloudflare", "pollinations"],
     "pollinations_model": "flux",
+    "puter_model": "gemini-3.1-flash-image-preview",
+    "puter_auth_token": os.getenv("PUTER_AUTH_TOKEN", ""),
     "voice_engine": "voxcpm_reference",
     "reference_voice_path": "assets/reference_voice/whishper.wav",
     "english_voice": "en-US-ChristopherNeural",
@@ -86,6 +88,10 @@ def load_settings():
         merged["cloudflare_api_token"] = os.getenv("CLOUDFLARE_API_TOKEN")
     if os.getenv("POLLINATIONS_API_KEY"):
         merged["pollinations_api_key"] = os.getenv("POLLINATIONS_API_KEY")
+    if os.getenv("PUTER_AUTH_TOKEN"):
+        merged["puter_auth_token"] = os.getenv("PUTER_AUTH_TOKEN")
+    if os.getenv("PUTER_MODEL"):
+        merged["puter_model"] = os.getenv("PUTER_MODEL")
     if os.getenv("FACEBOOK_PAGES_JSON"):
         try:
             pages = json.loads(os.getenv("FACEBOOK_PAGES_JSON"))
