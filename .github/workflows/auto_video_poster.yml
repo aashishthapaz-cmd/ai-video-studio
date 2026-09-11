@@ -1,14 +1,11 @@
 name: 🎬 Autonomous AI Video Studio & Auto-Poster
 
 on:
-  # 1. Scheduled Posting via Cron (USA peak engagement times + Hourly Check)
-  #    Hourly check wakes up to process any pending post whose scheduled time has arrived.
-  #    08:30 AM EDT = 12:30 UTC  |  13:00 PM EDT = 17:00 UTC  |  20:30 PM EDT = 00:30 UTC next day
+  # 1. Scheduled Posting via Cron (Every 30 Minutes Queue Check)
+  #    Wakes up every 30 minutes to check scheduled queue, resolve collisions,
+  #    render & publish due videos, and send notifications + playable video to Telegram.
   schedule:
-    - cron: '0 * * * *'     # Hourly check at minute 0
-    - cron: '30 12 * * *'   # 08:30 AM EDT peak slot
-    - cron: '0 17 * * *'    # 13:00 PM EDT peak slot
-    - cron: '30 0 * * *'    # 20:30 PM EDT peak slot
+    - cron: '*/30 * * * *'   # Runs every 30 minutes (:00 and :30)
 
   # 2. Manual / Mobile Trigger via GitHub Web UI or GitHub App
   workflow_dispatch:

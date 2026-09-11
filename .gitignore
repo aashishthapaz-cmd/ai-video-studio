@@ -24,6 +24,8 @@ assets/models/
 .env
 .env.*
 *.secret
+cloud_generator/google_profile/
+cloud_generator/google_session_state.json
 
 # System & OS
 .DS_Store

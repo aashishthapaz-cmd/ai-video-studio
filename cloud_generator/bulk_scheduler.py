@@ -334,11 +334,119 @@ def parse_bulk_scripts(
         
     return jobs
 
+def resolve_schedule_collisions(
+    queue: list = None,
+    min_gap_seconds: int = 1800,
+    auto_align_past: bool = True
+) -> tuple:
+    """
+    Detects and automatically resolves schedule collisions among PENDING jobs.
+    Guarantees that no two jobs are scheduled within min_gap_seconds (default 30 minutes / 1800s) of each other.
+
+    - Sorts all pending jobs by scheduled epoch.
+    - If job[i].epoch < job[i-1].epoch + min_gap_seconds, offsets job[i] to job[i-1].epoch + min_gap_seconds (+30 min).
+    - If multiple jobs are in the past:
+        * The earliest pending job remains due NOW (ready for immediate execution).
+        * Subsequent overdue jobs are automatically aligned into upcoming 30-minute intervals
+          (now + 30m, now + 60m, etc.) so they never pile up or appear stuck/expired in the UI.
+    - Automatically recomputes human-readable timestamps for Nepal (Asia/Kathmandu) and USA (America/New_York).
+    - Saves the updated queue and syncs to Git if changes were made.
+
+    Returns:
+        (adjusted_count, updated_queue)
+    """
+    q = list(queue) if (queue is not None) else load_queue()
+    if not q:
+        return 0, q
+
+    try:
+        tz_npt = ZoneInfo("Asia/Kathmandu")
+    except Exception:
+        tz_npt = ZoneInfo("UTC")
+    try:
+        tz_usa = ZoneInfo("America/New_York")
+    except Exception:
+        tz_usa = ZoneInfo("UTC")
+
+    now_epoch = int(time.time())
+
+    # Separate pending jobs from non-pending
+    pending_jobs = []
+    other_jobs = []
+    for j in q:
+        if j.get("status") == "PENDING":
+            # Ensure scheduled_epoch is valid
+            epoch = j.get("scheduled_epoch")
+            if not epoch or not isinstance(epoch, (int, float)):
+                sched_str = j.get("scheduled_time", "")
+                if sched_str:
+                    try:
+                        clean_str = re.sub(r'\s+[A-Za-z/_-]+$', '', sched_str.strip())
+                        dt = datetime.strptime(clean_str, "%Y-%m-%d %H:%M").replace(tzinfo=tz_npt)
+                        epoch = int(dt.timestamp())
+                    except Exception:
+                        epoch = now_epoch + 120
+                else:
+                    epoch = now_epoch + 120
+                j["scheduled_epoch"] = epoch
+            pending_jobs.append(j)
+        else:
+            other_jobs.append(j)
+
+    if not pending_jobs:
+        return 0, q
+
+    # Sort pending jobs by scheduled_epoch ascending
+    pending_jobs.sort(key=lambda x: x.get("scheduled_epoch", 0))
+
+    adjusted_count = 0
+
+    for i in range(len(pending_jobs)):
+        curr_epoch = pending_jobs[i].get("scheduled_epoch", 0)
+        target_epoch = curr_epoch
+
+        if i == 0:
+            # First job: if in past, keep it due now.
+            pass
+        else:
+            prev_epoch = pending_jobs[i - 1].get("scheduled_epoch", 0)
+            min_allowed = prev_epoch + min_gap_seconds
+
+            # If auto_align_past is True and previous job was in the past / due now,
+            # ensure subsequent job is pushed into the future (now + min_gap_seconds)
+            if auto_align_past and (prev_epoch <= now_epoch):
+                min_allowed = max(min_allowed, now_epoch + min_gap_seconds)
+
+            if curr_epoch < min_allowed:
+                target_epoch = min_allowed
+
+        if target_epoch != curr_epoch:
+            adjusted_count += 1
+            pending_jobs[i]["scheduled_epoch"] = int(target_epoch)
+            npt_dt = datetime.fromtimestamp(target_epoch, tz=tz_npt)
+            usa_dt = datetime.fromtimestamp(target_epoch, tz=tz_usa)
+            pending_jobs[i]["scheduled_time"] = npt_dt.strftime("%Y-%m-%d %H:%M")
+            pending_jobs[i]["scheduled_time_nepal"] = npt_dt.strftime("%Y-%m-%d %H:%M NPT")
+            pending_jobs[i]["scheduled_time_usa"] = usa_dt.strftime("%Y-%m-%d %H:%M %Z")
+
+    # Combine back into a single list
+    new_q = pending_jobs + other_jobs
+
+    if adjusted_count > 0:
+        save_queue(new_q)
+        print(f"[Queue Collision Resolver] Auto-adjusted {adjusted_count} job(s) with >={min_gap_seconds//60}m spacing.", flush=True)
+        _commit_queue_to_git(f"🤖 Queue: auto-spaced {adjusted_count} colliding jobs (+30m difference) [skip ci]")
+
+    return adjusted_count, new_q
+
 def enqueue_bulk_jobs(jobs: list) -> list:
     q = load_queue()
     for job in jobs:
         q.append(job)
     save_queue(q)
+    # Immediately resolve schedule collisions across entire queue (including newly enqueued jobs)
+    resolve_schedule_collisions(min_gap_seconds=1800, auto_align_past=True)
+    _commit_queue_to_git(f"🤖 Queue: enqueued {len(jobs)} bulk jobs & verified 30m spacing [skip ci]")
     return jobs
 
 def delete_job(job_id: str) -> bool:
@@ -397,25 +505,40 @@ def clear_completed_jobs() -> int:
     return removed
 
 
-def expire_stale_jobs(max_age_hours: int = 6) -> int:
+def expire_stale_jobs(max_age_hours: int = 72) -> int:
     """
     Removes PENDING jobs whose scheduled_epoch is more than max_age_hours in the past.
-    Posts older than 6 hours are too stale to publish — followers would see wrong timing.
-    Set max_age_hours higher if you want GitHub to still process missed slots.
+    Posts older than 72 hours are too stale to publish — followers would see wrong timing.
     Returns the number of jobs removed.
     """
     q = load_queue()
     cutoff = time.time() - (max_age_hours * 3600)
     kept = []
     removed_count = 0
+    try:
+        tz_npt = ZoneInfo("Asia/Kathmandu")
+    except Exception:
+        tz_npt = ZoneInfo("UTC")
+
     for j in q:
-        epoch = j.get("scheduled_epoch")
         status = j.get("status", "PENDING")
-        if status == "PENDING" and epoch and isinstance(epoch, (int, float)) and epoch < cutoff:
-            removed_count += 1
-            print(f"[Queue] Expired & removed stale job: '{j.get('title')}' (was scheduled {j.get('scheduled_time')})", flush=True)
-        else:
-            kept.append(j)
+        if status == "PENDING":
+            epoch = j.get("scheduled_epoch")
+            if not epoch or not isinstance(epoch, (int, float)):
+                sched_str = j.get("scheduled_time", "")
+                if sched_str:
+                    try:
+                        clean_str = re.sub(r'\s+[A-Za-z/_-]+$', '', sched_str.strip())
+                        dt = datetime.strptime(clean_str, "%Y-%m-%d %H:%M").replace(tzinfo=tz_npt)
+                        epoch = int(dt.timestamp())
+                        j["scheduled_epoch"] = epoch
+                    except Exception:
+                        epoch = None
+            if epoch and epoch < cutoff:
+                removed_count += 1
+                print(f"[Queue] Expired & removed stale job: '{j.get('title')}' (was scheduled {j.get('scheduled_time')})", flush=True)
+                continue
+        kept.append(j)
     if removed_count > 0:
         save_queue(kept)
         print(f"[Queue] Cleaned {removed_count} expired stale jobs.", flush=True)
@@ -513,14 +636,21 @@ def run_queue_housekeeping() -> dict:
     1. Reset RENDERING jobs stuck > 2hrs (runner timeout recovery)
     2. Remove PENDING jobs expired > 72hrs (avoid posting stale content)
     3. Remove duplicate (title + page) entries
+    4. Auto-resolve schedule collisions (enforce >=30m spacing across queue)
     Returns summary dict of what was cleaned.
     """
     reset = reset_stuck_rendering(max_rendering_hours=2)
     expired = expire_stale_jobs(max_age_hours=72)
     dupes = deduplicate_queue()
-    if reset or expired or dupes:
-        _commit_queue_to_git("🤖 Queue: housekeeping — reset/expire/dedup [skip ci]")
-    return {"reset_rendering": reset, "expired": expired, "duplicates_removed": dupes}
+    collisions_adjusted, _ = resolve_schedule_collisions(min_gap_seconds=1800, auto_align_past=True)
+    if reset or expired or dupes or collisions_adjusted:
+        _commit_queue_to_git("🤖 Queue: housekeeping — reset/expire/dedup/spacing [skip ci]")
+    return {
+        "reset_rendering": reset,
+        "expired": expired,
+        "duplicates_removed": dupes,
+        "collisions_adjusted": collisions_adjusted
+    }
 
 
 def execute_single_job(job_id: str) -> dict:

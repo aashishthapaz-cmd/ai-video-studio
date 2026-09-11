@@ -18,14 +18,36 @@ def send_telegram_message(message: str, bot_token: str = None, chat_id: str = No
     if not token or not chat:
         return {'ok': False, 'error': 'Telegram bot token or chat ID is missing'}
     url = f'https://api.telegram.org/bot{token}/sendMessage'
+    
+    # 1. First attempt with Markdown formatting
     payload = {'chat_id': chat, 'text': message, 'parse_mode': 'Markdown', 'disable_web_page_preview': False}
     try:
-        r = requests.post(url, json=payload, timeout=4)
+        r = requests.post(url, json=payload, timeout=15)
         data = r.json()
         if data.get('ok'):
             return {'ok': True, 'result': data}
-        return {'ok': False, 'error': data.get('description', r.text)}
+        
+        # 2. If Markdown parsing fails (e.g. unclosed entities, brackets, or code errors), fallback to plain text
+        err_desc = str(data.get('description', ''))
+        if 'parse entities' in err_desc.lower() or 'bad request' in err_desc.lower():
+            plain_payload = {'chat_id': chat, 'text': message, 'disable_web_page_preview': False}
+            r_plain = requests.post(url, json=plain_payload, timeout=15)
+            data_plain = r_plain.json()
+            if data_plain.get('ok'):
+                return {'ok': True, 'result': data_plain}
+            return {'ok': False, 'error': data_plain.get('description', r_plain.text)}
+
+        return {'ok': False, 'error': err_desc}
     except Exception as e:
+        # Fallback to plain text on any request error
+        try:
+            plain_payload = {'chat_id': chat, 'text': message, 'disable_web_page_preview': False}
+            r_plain = requests.post(url, json=plain_payload, timeout=15)
+            data_plain = r_plain.json()
+            if data_plain.get('ok'):
+                return {'ok': True, 'result': data_plain}
+        except Exception:
+            pass
         return {'ok': False, 'error': str(e)}
 
 def send_whatsapp_message(message: str, phone: str = None, apikey: str = None) -> dict:
@@ -84,10 +106,28 @@ def send_telegram_video(video_path: str, caption: str = "") -> dict:
                 url,
                 data={'chat_id': chat, 'caption': caption[:1024], 'parse_mode': 'Markdown'},
                 files={'video': f},
-                timeout=60
+                timeout=90
             )
         data = r.json()
-        return {'ok': data.get('ok', False), 'result': data}
+        if data.get('ok'):
+            return {'ok': True, 'result': data}
+            
+        # Retry without Markdown if caption entity parsing failed
+        err_desc = str(data.get('description', ''))
+        if 'parse entities' in err_desc.lower() or 'bad request' in err_desc.lower():
+            with open(p, 'rb') as f:
+                r_plain = requests.post(
+                    url,
+                    data={'chat_id': chat, 'caption': caption[:1024]},
+                    files={'video': f},
+                    timeout=90
+                )
+            data_plain = r_plain.json()
+            if data_plain.get('ok'):
+                return {'ok': True, 'result': data_plain}
+            return {'ok': False, 'error': data_plain.get('description', r_plain.text)}
+
+        return {'ok': False, 'error': err_desc}
     except Exception as e:
         return {'ok': False, 'error': str(e)}
 

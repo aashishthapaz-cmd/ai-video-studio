@@ -525,8 +525,10 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
               Live scheduled posts running on GitHub Actions runner. Edit or delete any post instantly.
             </div>
           </div>
-          <div style="display:flex; gap:8px; flex-wrap: wrap;">
-            <button class="btn btn-secondary btn-sm" onclick="fetchCloudQueueFromGithub()">🔄 Refresh from GitHub</button>
+          <div style="display:flex; gap:8px; flex-wrap: wrap; align-items: center;">
+            <span id="queueSyncIndicator" style="font-size: 0.78rem; color: #34d399; background: rgba(16,185,129,0.12); padding: 4px 10px; border-radius: 999px; border: 1px solid rgba(16,185,129,0.3); font-weight: 600;">🟢 Live Auto-Sync (15s)</span>
+            <button class="btn btn-emerald btn-sm" onclick="autoSpaceCloudQueue()" title="Auto-detect collisions and enforce 30-minute spacing across all scheduled jobs">⚡ Auto-Space Queue (±30m Gaps)</button>
+            <button class="btn btn-secondary btn-sm" onclick="fetchCloudQueueFromGithub(false)">🔄 Refresh from GitHub</button>
             <button class="btn btn-danger btn-sm" onclick="clearAllPendingCloudQueue()">🗑️ Clear All Pending</button>
           </div>
         </div>
@@ -984,20 +986,110 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       });
     }
 
-    async function fetchCloudQueueFromGithub() {
+    let LIVE_QUEUE_POLL_INTERVAL = null;
+
+    function triggerFastQueueSync() {
+      // Re-fetch immediately at 1.5s, 4s, 8s, 15s to capture any new commit from GitHub Actions
+      const delays = [1500, 4000, 8000, 15000];
+      delays.forEach(function(d) {
+        setTimeout(function() { fetchCloudQueueFromGithub(true); }, d);
+      });
+    }
+
+    async function autoSpaceCloudQueue() {
+      if (!CLOUD_QUEUE || !CLOUD_QUEUE.length) {
+        alert('Cloud queue is empty.');
+        return;
+      }
+      const pendingJobs = CLOUD_QUEUE.filter(function(j) { return j.status === 'PENDING'; });
+      if (!pendingJobs.length) {
+        alert('No pending scheduled jobs to space.');
+        return;
+      }
+
+      // Sort pending jobs by scheduled epoch
+      pendingJobs.sort(function(a, b) {
+        const ea = a.scheduled_epoch || 0;
+        const eb = b.scheduled_epoch || 0;
+        return ea - eb;
+      });
+
+      const nowEpoch = Math.floor(Date.now() / 1000);
+      const minGap = 1800; // 30 minutes in seconds
+      let adjusted = 0;
+
+      for (let i = 0; i < pendingJobs.length; i++) {
+        const job = pendingJobs[i];
+        const currEpoch = job.scheduled_epoch || nowEpoch;
+        let targetEpoch = currEpoch;
+
+        if (i === 0) {
+          // Earliest job stays due now if it was in the past
+        } else {
+          const prevEpoch = pendingJobs[i - 1].scheduled_epoch || nowEpoch;
+          let minAllowed = prevEpoch + minGap;
+          if (prevEpoch <= nowEpoch) {
+            minAllowed = Math.max(minAllowed, nowEpoch + minGap);
+          }
+          if (currEpoch < minAllowed) {
+            targetEpoch = minAllowed;
+          }
+        }
+
+        if (targetEpoch !== currEpoch) {
+          adjusted++;
+          job.scheduled_epoch = targetEpoch;
+          const d = new Date(targetEpoch * 1000);
+          const npt = d.toLocaleString('en-US', { timeZone: 'Asia/Kathmandu', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true });
+          const usa = d.toLocaleString('en-US', { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit', hour12: true, timeZoneName: 'short' });
+          job.scheduled_time_nepal = '🇳🇵 ' + npt + ' (Nepal)';
+          job.scheduled_time_usa = '🇺🇸 ' + usa + ' (USA)';
+          job.scheduled_time = d.toISOString().replace('T', ' ').substring(0, 16);
+        }
+      }
+
+      renderCloudQueue();
+
+      if (adjusted > 0) {
+        showToast('⚡ Auto-spaced ' + adjusted + ' colliding job(s)! Saving to GitHub...');
+        const success = await commitCloudQueueToGithub(CLOUD_QUEUE, 'chore(queue): Auto-space ' + adjusted + ' schedule collisions (+30m gap)');
+        if (success) {
+          showToast('✅ All ' + pendingJobs.length + ' scheduled jobs are now cleanly spaced by >=30 minutes!');
+          triggerFastQueueSync();
+        }
+      } else {
+        showToast('✅ Queue is already cleanly spaced! No collisions detected.');
+      }
+    }
+
+    async function fetchCloudQueueFromGithub(silent) {
       const pat = localStorage.getItem('gh_pat');
       const repo = localStorage.getItem('gh_repo') || DEFAULT_REPO;
       const container = document.getElementById('cloudQueueList');
       const countEl = document.getElementById('cloudQueueCount');
+      const indicator = document.getElementById('queueSyncIndicator');
       if (!container) return;
 
-      container.innerHTML = '<p style="color: var(--text-dim); font-size: 0.88rem;">⏳ Loading scheduled posts from GitHub Actions repository...</p>';
+      if (!silent) {
+        container.innerHTML = '<p style="color: var(--text-dim); font-size: 0.88rem;">⏳ Loading scheduled posts from GitHub Actions repository...</p>';
+      }
+      if (indicator) {
+        indicator.innerText = '🔄 Syncing...';
+        indicator.style.color = '#38bdf8';
+      }
 
       try {
-        const headers = { 'Accept': 'application/vnd.github+json' };
+        const headers = {
+          'Accept': 'application/vnd.github+json',
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'Pragma': 'no-cache'
+        };
         if (pat) headers['Authorization'] = 'Bearer ' + pat;
 
-        const res = await fetch('https://api.github.com/repos/' + repo + '/contents/cloud_generator/jobs_queue.json?ref=main&t=' + Date.now(), { headers: headers });
+        const res = await fetch('https://api.github.com/repos/' + repo + '/contents/cloud_generator/jobs_queue.json?ref=main&_cb=' + Date.now(), {
+          headers: headers,
+          cache: 'no-store'
+        });
         if (!res.ok) {
           if (res.status === 404) {
             CLOUD_QUEUE = [];
@@ -1012,11 +1104,21 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
         const rawJson = base64ToUtf8(data.content.replace(/\s/g, ''));
         CLOUD_QUEUE = JSON.parse(rawJson || '[]');
         renderCloudQueue();
+        if (indicator) {
+          indicator.innerText = '🟢 Live Auto-Sync (15s)';
+          indicator.style.color = '#34d399';
+        }
       } catch (err) {
-        container.innerHTML = `<div style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; padding: 0.85rem; color: #fca5a5; font-size: 0.85rem;">
-          ⚠️ Could not load GitHub queue: ${escapeHtml(err.message)}.<br>
-          <span style="font-size: 0.78rem; color: var(--text-muted);">Make sure your GitHub PAT is entered in the Settings tab if the repository is private.</span>
-        </div>`;
+        if (indicator) {
+          indicator.innerText = '⚠️ Offline / Sync Pause';
+          indicator.style.color = '#f87171';
+        }
+        if (!silent) {
+          container.innerHTML = `<div style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; padding: 0.85rem; color: #fca5a5; font-size: 0.85rem;">
+            ⚠️ Could not load GitHub queue: ${escapeHtml(err.message)}.<br>
+            <span style="font-size: 0.78rem; color: var(--text-muted);">Make sure your GitHub PAT is entered in the Settings tab if the repository is private.</span>
+          </div>`;
+        }
       }
     }
 
@@ -1269,6 +1371,11 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       if (!job) return;
       if (!confirm('Run and auto-post "' + job.title + '" immediately via GitHub Actions?')) return;
 
+      // Optimistic UI update: instantly mark as RENDERING so the user sees immediate feedback
+      job.status = 'RENDERING';
+      job.started_at = new Date().toISOString();
+      renderCloudQueue();
+
       showToast('🚀 Dispatching instant render for "' + job.title + '"...');
       const targetPage = job.target_page_ids && job.target_page_ids.length ? job.target_page_ids[0] : 'ALL Pages';
       const success = await dispatchWorkflowAPI({
@@ -1281,8 +1388,12 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       });
 
       if (success) {
-        showToast('✅ Render run launched for "' + job.title + '"! Check Cloud Gallery & Runs.');
-        setTimeout(function() { switchTab('gallery'); }, 1800);
+        showToast('✅ Render run launched for "' + job.title + '"! Starting live poll...');
+        triggerFastQueueSync();
+        setTimeout(function() { switchTab('gallery'); }, 2000);
+      } else {
+        job.status = 'PENDING';
+        renderCloudQueue();
       }
     }
 
@@ -1306,8 +1417,16 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       }
 
       if (tabId === 'bulk') {
-        fetchCloudQueueFromGithub();
+        fetchCloudQueueFromGithub(false);
         renderQueue();
+        if (!LIVE_QUEUE_POLL_INTERVAL) {
+          LIVE_QUEUE_POLL_INTERVAL = setInterval(function() {
+            const activePanel = document.querySelector('.panel.active');
+            if (activePanel && activePanel.id === 'tab-bulk') {
+              fetchCloudQueueFromGithub(true);
+            }
+          }, 15000);
+        }
       }
       if (tabId === 'fb') renderFbPages();
       if (tabId === 'gallery') fetchRecentRuns();
@@ -1521,6 +1640,7 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       if (success) {
         const intervalDesc = intervalVal === 'peak_slots' ? 'at USA EST peak slots' : 'every ' + (parseInt(intervalVal, 10) >= 60 ? (parseInt(intervalVal, 10)/60) + 'h' : intervalVal + 'm');
         showToast('✅ ' + count + ' poems dispatched! GitHub Actions will schedule each ' + intervalDesc + ' → ' + targetPage);
+        triggerFastQueueSync();
         setTimeout(function() { switchTab('gallery'); }, 2000);
       }
     }
@@ -1551,6 +1671,7 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
         localStorage.setItem('video_queue', JSON.stringify(QUEUE));
         renderQueue();
         showToast('✅ Queue dispatched to GitHub Actions! ' + pending.length + ' poems scheduled.');
+        triggerFastQueueSync();
       }
     }
 
