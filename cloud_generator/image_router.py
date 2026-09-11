@@ -204,10 +204,11 @@ def generate_scene_image(
         engine = engine.lower().strip()
         try:
             if "perchance" in engine:
+                style = cfg.get("perchance_style", "Anime")
                 img = generate_perchance_image(
-                    final_prompt, output_path, width=width, height=height, seed=seed
+                    final_prompt, output_path, width=width, height=height, seed=seed, style=style
                 )
-                return {"ok": True, "engine": "Perchance AI", "path": img}
+                return {"ok": True, "engine": f"Perchance AI ({style})", "path": img}
 
             elif "flow" in engine or "google_flow" in engine:
                 if not is_google_flow_configured():

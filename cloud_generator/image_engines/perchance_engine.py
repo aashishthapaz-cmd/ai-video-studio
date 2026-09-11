@@ -65,11 +65,12 @@ def generate_perchance_image(
     width: int = 1080,
     height: int = 1920,
     seed: int = None,
+    style: str = "Anime",
     time_for_image: int = 50,
 ) -> str:
     """
     Generates an image via Perchance AI Text-to-Image Generator.
-    Returns the absolute path of the generated 1080x1920 image file.
+    Defaults to 'Anime' art style. Returns the absolute path of the generated 1080x1920 image file.
     """
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -79,11 +80,11 @@ def generate_perchance_image(
     if len(clean_prompt) > 400:
         clean_prompt = clean_prompt[:400].rsplit(" ", 1)[0]
 
-    # Ensure poetry style cues
-    if "poetry" not in clean_prompt.lower() and "cinematic" not in clean_prompt.lower():
-        clean_prompt = f"{clean_prompt}, cinematic atmosphere, poetry aesthetic, masterpiece"
+    # Ensure Anime aesthetic cues
+    if "anime" not in clean_prompt.lower():
+        clean_prompt = f"anime art of {clean_prompt}, world-class masterpiece, breathtaking painterly anime style, beautiful lighting, high quality"
 
-    logger.info(f"[Perchance] Generating image for prompt: '{clean_prompt[:80]}...'")
+    logger.info(f"[Perchance] Generating image (style={style}) for prompt: '{clean_prompt[:80]}...'")
 
     last_error = None
     for attempt in range(2):
@@ -92,6 +93,7 @@ def generate_perchance_image(
             res = client.images.generate(
                 model="ai-text-to-image-generator",
                 prompt=clean_prompt,
+                extra_params={"style": style} if style else None,
                 time_for_image=time_for_image,
             )
 
