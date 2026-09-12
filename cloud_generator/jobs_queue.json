@@ -1,31 +1,5 @@
 [
   {
-    "id": "job_1789235590_954529",
-    "title": "Life Is Happening For You",
-    "script_text": "Anything that annoys you, teaches patience.\nAnyone who abandons you, teaches strength.\nAnything that angers you, teaches forgiveness.\nAnything you fear, teaches courage.\nAnything you can't control, teaches surrender.\nLife isn't happening to you.\nIt's happening for you.",
-    "niche_id": "typewriters_voice_nostalgia",
-    "niche_name": "Typewriters Voice Nostalgia",
-    "voice": "assets/reference_voice/whishper_prompt.wav",
-    "theme": "typewriters_voice_nostalgia",
-    "target_page_ids": [
-      "1183182341543305"
-    ],
-    "scheduled_time": "2026-09-13 03:10",
-    "scheduled_time_nepal": "2026-09-13 03:10 NPT",
-    "scheduled_time_usa": "2026-09-12 17:25 EDT",
-    "scheduled_epoch": 1789248354,
-    "timezone": "Asia/Kathmandu",
-    "status": "PENDING",
-    "created_at": "2026-09-12 17:53:10",
-    "render_time": null,
-    "output_file": null,
-    "facebook_results": null,
-    "error": "Auto-recovered from unexpected process restart (was RENDERING)",
-    "synced_to_local": false,
-    "started_at": "2026-09-12 21:25:10",
-    "recovered_at": "2026-09-12 22:29:27"
-  },
-  {
     "id": "job_1788969355_01684d",
     "title": "Losing You Is My Biggest Fear",
     "script_text": "I never want to lose you, because I can't imagine a world without you.\nYou came into my life in a way I never expected.\nYou became such a special part of my world.\nI can't explain how much you mean to me.\nNo matter how strong I try to be, the thought of losing you breaks my heart from the inside.",
