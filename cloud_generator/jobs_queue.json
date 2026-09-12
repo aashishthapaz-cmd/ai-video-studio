@@ -1,29 +1,5 @@
 [
   {
-    "id": "job_1788969355_01684d",
-    "title": "Losing You Is My Biggest Fear",
-    "script_text": "I never want to lose you, because I can't imagine a world without you.\nYou came into my life in a way I never expected.\nYou became such a special part of my world.\nI can't explain how much you mean to me.\nNo matter how strong I try to be, the thought of losing you breaks my heart from the inside.",
-    "niche_id": "typewriters_voice_nostalgia",
-    "niche_name": "Typewriters Voice Nostalgia",
-    "voice": "assets/reference_voice/whishper_prompt.wav",
-    "theme": "typewriters_voice_nostalgia",
-    "target_page_ids": [
-      "1131453436723290"
-    ],
-    "scheduled_time": "2026-09-13 04:44",
-    "scheduled_time_nepal": "2026-09-13 04:44 NPT",
-    "scheduled_time_usa": "2026-09-12 18:59 EDT",
-    "scheduled_epoch": 1789253970,
-    "timezone": "Asia/Kathmandu",
-    "status": "PENDING",
-    "created_at": "2026-09-09 15:55:55",
-    "render_time": null,
-    "output_file": null,
-    "facebook_results": null,
-    "error": null,
-    "synced_to_local": false
-  },
-  {
     "id": "job_1788973777_78cefc",
     "title": "You Loved Me Anyway",
     "script_text": "When I thought I didn't deserve love, you loved me anyway.\nWhen all I knew was darkness, you brought me light.\nWhen I said I was broken, you healed things you didn't break.\nWhen I struggled to love myself, you loved me quietly.",
