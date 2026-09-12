@@ -1,29 +1,5 @@
 [
   {
-    "id": "job_1788802799_0ee6dd",
-    "title": "I Am So Proud Of You",
-    "script_text": "I believe in you.\nI believe in your dreams.\nI believe in the incredible things you are going to achieve.\nWhen you doubt yourself, I will remind you of your worth.\nWhen you stumble, I will be the one to catch you.\nAnd when you succeed, I will be the one cheering the loudest.\nDon't ever let the world make you feel small.\nBecause I have seen what you are capable of.\nAnd I am so proud of you.",
-    "niche_id": "typewriters_voice_nostalgia",
-    "niche_name": "Typewriters Voice Nostalgia",
-    "voice": "assets/reference_voice/whishper_prompt.wav",
-    "theme": "typewriters_voice_nostalgia",
-    "target_page_ids": [
-      "1240936549096940"
-    ],
-    "scheduled_time": "2026-09-12 12:23",
-    "scheduled_time_nepal": "2026-09-12 12:23 NPT",
-    "scheduled_time_usa": "2026-09-12 02:38 EDT",
-    "scheduled_epoch": 1789195081,
-    "timezone": "Asia/Kathmandu",
-    "status": "PENDING",
-    "created_at": "2026-09-07 17:39:59",
-    "render_time": null,
-    "output_file": null,
-    "facebook_results": null,
-    "error": null,
-    "synced_to_local": false
-  },
-  {
     "id": "job_1788974311_115c4e",
     "title": "Questions For Your Father",
     "script_text": "Five questions to ask your father before it's too late.\nNumber 1, What did you feel the first time you held me in your arms?\n2, What was the hardest day of your life?\n3, What's something you gave up for us that we never noticed?\nAnd 4, when the day comes that you're no longer with me, what's one thing you want me to always remember?",
