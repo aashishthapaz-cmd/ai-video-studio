@@ -104,7 +104,7 @@ def _emergency_fallback_from_pollinations(prompt: str, output_path: Path, width:
     try:
         return generate_pollinations_image(
             short_prompt, output_path, width=width, height=height,
-            seed=seed, model=None, retries=2
+            seed=seed, model="flux", retries=2
         )
     except Exception as e:
         logger.warning(f"Emergency Pollinations cascade failed: {e}. Trying fast turbo fallback...")

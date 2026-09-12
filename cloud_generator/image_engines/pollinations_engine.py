@@ -59,7 +59,17 @@ def generate_pollinations_image(
     encoded_prompt = urllib.parse.quote(clean_prompt)
 
     # Model cascade: requested model first, then remaining models
-    models_to_try = [model] + [m for m in POLLINATIONS_MODELS if m != model]
+    model_choice = model if model else "flux"
+    models_to_try = [model_choice] + [m for m in POLLINATIONS_MODELS if m != model_choice]
+
+    # Calculate optimal wire resolution (Pollinations backend generates 576x1024 in ~10s vs timing out at 1080x1920)
+    # _save_image_data will automatically scale & crop-fill to full 1080x1920 via high-quality LANCZOS filter
+    wire_w, wire_h = width, height
+    if width == 1080 and height == 1920:
+        wire_w, wire_h = 576, 1024
+    elif width > 768 or height > 1344:
+        scale = min(768 / width, 1344 / height)
+        wire_w, wire_h = int(width * scale), int(height * scale)
 
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
@@ -69,14 +79,15 @@ def generate_pollinations_image(
 
     last_err = None
     for cur_model in models_to_try:
-        url = f"https://image.pollinations.ai/prompt/{encoded_prompt}?width={width}&height={height}&model={cur_model}&nologo=true&enhance=false&seed={seed}"
+        model_param = f"&model={cur_model}" if cur_model else ""
+        url = f"https://image.pollinations.ai/prompt/{encoded_prompt}?width={wire_w}&height={wire_h}{model_param}&nologo=true&enhance=false&seed={seed}"
         if api_key:
             url += f"&token={api_key}"
 
         for attempt in range(retries):
             try:
                 req = urllib.request.Request(url, headers=headers)
-                with urllib.request.urlopen(req, timeout=40) as resp:
+                with urllib.request.urlopen(req, timeout=60) as resp:
                     if resp.status == 200:
                         data = resp.read()
                         if len(data) > 5000:  # Valid image check
@@ -95,4 +106,5 @@ def generate_pollinations_image(
                 last_err = e
                 time.sleep(1.5 * (attempt + 1))
 
-    raise RuntimeError(f"Pollinations generation failed across all models ({', '.join(models_to_try)}): {last_err}")
+    valid_models = [str(m) for m in models_to_try if m]
+    raise RuntimeError(f"Pollinations generation failed across all models ({', '.join(valid_models)}): {last_err}")

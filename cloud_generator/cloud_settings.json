@@ -1,7 +1,7 @@
 {
   "image_engine_priority": [
-    "perchance",
     "pollinations",
+    "perchance",
     "cloudflare",
     "puter",
     "huggingface"

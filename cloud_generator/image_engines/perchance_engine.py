@@ -98,25 +98,26 @@ def _apply_perchancy_patches():
                 options.set_browser_path(detected_chrome)
                 logger.info(f"[Perchance] Using browser executable: {detected_chrome}")
 
-            if self.headless:
+            has_display = bool(os.environ.get("DISPLAY"))
+            if self.headless and not has_display:
                 options.headless(True)
                 options.set_argument("--headless=new")
-                # On Linux without GPU (CI), --disable-gpu prevents swiftshader/angle crashes
-                options.set_argument("--disable-gpu")
-                options.set_argument("--use-gl=angle")
-                options.set_argument("--use-angle=swiftshader")
-                options.set_argument("--enable-webgl")
-                options.set_argument(
-                    "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
-                )
+            else:
+                # With virtual X11 display (xvfb in CI), run headful on virtual display to avoid headless bot detection
+                options.headless(False)
 
             options.set_argument("--disable-blink-features=AutomationControlled")
-            options.set_argument("--window-size=1920,1080")
+            options.set_argument("--window-size=1280,720")
             options.set_pref("profile.default_content_setting_values.popups", 2)
             options.set_argument("--no-sandbox")
             options.set_argument("--disable-dev-shm-usage")
-            options.set_argument("--disable-software-rasterizer")
             options.set_argument("--mute-audio")
+            ua = (
+                "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+                if sys.platform != "win32"
+                else "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+            )
+            options.set_argument(f"--user-agent={ua}")
 
             if proxy:
                 options.set_proxy(proxy)
@@ -125,6 +126,37 @@ def _apply_perchancy_patches():
             self.page.get("about:blank")
 
         BrowserCore.init_driver = _patched_init_driver
+
+        # Also patch _click_button_js to trigger Perchance's native generate button event properly
+        orig_click = getattr(BrowserCore, "_click_button_js", None)
+        def _patched_click(self_core, frame, btn_sels):
+            try:
+                # First attempt direct trigger of Perchance's generate handler if available
+                res = frame.run_js("""
+                    try {
+                        let btn = document.getElementById('generateButtonEl') || document.querySelector('button[id*="generate" i]');
+                        if (btn) {
+                            let fnKey = Object.keys(window).find(k => k.startsWith('___generateButtonClickEvent'));
+                            if (fnKey && typeof window[fnKey] === 'function') {
+                                window[fnKey](new Event('click'));
+                                return '#generateButtonEl';
+                            }
+                            btn.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
+                            btn.click();
+                            return '#generateButtonEl';
+                        }
+                    } catch(e) {}
+                    return null;
+                """)
+                if res:
+                    return res
+            except Exception:
+                pass
+            if orig_click:
+                return orig_click(self_core, frame, btn_sels)
+            return None
+
+        BrowserCore._click_button_js = _patched_click
         _PATCH_APPLIED = True
     except Exception as e:
         logger.warning(f"[Perchance] Could not patch perchancy BrowserCore: {e}")
