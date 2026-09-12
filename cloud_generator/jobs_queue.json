@@ -34,10 +34,10 @@
     "target_page_ids": [
       "1240936549096940"
     ],
-    "scheduled_time": "2026-09-12 12:04",
-    "scheduled_time_nepal": "2026-09-12 12:04 NPT",
-    "scheduled_time_usa": "2026-09-12 02:19 EDT",
-    "scheduled_epoch": 1789193997,
+    "scheduled_time": "2026-09-12 12:23",
+    "scheduled_time_nepal": "2026-09-12 12:23 NPT",
+    "scheduled_time_usa": "2026-09-12 02:38 EDT",
+    "scheduled_epoch": 1789195081,
     "timezone": "Asia/Kathmandu",
     "status": "PENDING",
     "created_at": "2026-09-07 17:39:59",
