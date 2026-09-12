@@ -13,7 +13,7 @@ try:
     from .image_engines.huggingface_engine import generate_huggingface_image
     from .image_engines.puter_engine import generate_puter_image
     from .image_engines.google_flow_engine import generate_google_flow_image, is_google_flow_configured
-    from .image_engines.perchance_engine import generate_perchance_image, is_perchance_available
+    from .image_engines.perchance_engine import generate_perchance_image, is_perchance_available, enable_perchance, auto_heal_perchance_client
 except ImportError:
     from config import load_settings
     from image_engines.pollinations_engine import generate_pollinations_image
@@ -21,9 +21,13 @@ except ImportError:
     from image_engines.huggingface_engine import generate_huggingface_image
     from image_engines.puter_engine import generate_puter_image
     from image_engines.google_flow_engine import generate_google_flow_image, is_google_flow_configured
-    from image_engines.perchance_engine import generate_perchance_image, is_perchance_available
+    from image_engines.perchance_engine import generate_perchance_image, is_perchance_available, enable_perchance, auto_heal_perchance_client
 
 logger = logging.getLogger("ImageRouter")
+
+# Quota circuit breakers for fast failover
+_CLOUDFLARE_EXHAUSTED = False
+_PUTER_EXHAUSTED = False
 
 # ── Per-process entropy salt ensures no two runs (poems) share the same seed space ──
 _RUN_ENTROPY = uuid.uuid4().hex  # unique per GitHub Actions runner invocation
@@ -119,16 +123,14 @@ def _emergency_fallback_from_pollinations(prompt: str, output_path: Path, width:
 
 
 # ─── UNIVERSAL NEGATIVE TAGS applied to every prompt ─────────────────────────
-# These prevent: white borders, pillarbox bars, AI portrait defaults, wrong gender
+# These prevent: white borders, pillarbox bars, distorted anatomy, text/watermarks
 _UNIVERSAL_NEGATIVE = (
     "no white border, no white frame, no black bar, no letterbox, no pillarbox, "
     "no vignette frame, no oval frame, no polaroid frame, no film border, "
     "no picture frame, no canvas edge, no margin, no padding, "
     "no watermark, no text, no letters, no typography, no logo, "
-    "no photorealistic portrait, no stock photo, no glamour shot, "
-    "no beauty shot, no selfie, no close-up face, no AI face default, "
-    "no realistic young woman unless poem is about a woman, "
-    "no anime girl, no deformed anatomy, edge-to-edge full bleed"
+    "no distorted anatomy, no deformed hands, no extra fingers, no blur, "
+    "no low quality, edge-to-edge full bleed"
 )
 
 # Subject-specific gender negatives added ON TOP of universal
@@ -177,11 +179,12 @@ def generate_scene_image(
 ) -> dict:
     """
     Unified multi-cloud image router with automatic failover.
-    HuggingFace → Cloudflare → Pollinations → Emergency Pollinations (never gradient).
+    Perchance (Anime/Artistic) → Pollinations → Cloudflare → Puter → HuggingFace.
     
     subject_type: 'father', 'mother', 'child', 'lover', 'self_reflection', etc.
                   Used to add gender-specific negative prompts.
     """
+    global _CLOUDFLARE_EXHAUSTED, _PUTER_EXHAUSTED
     cfg = load_settings()
     width = width or cfg.get("output_width", 1080)
     height = height or cfg.get("output_height", 1920)
@@ -193,8 +196,8 @@ def generate_scene_image(
 
     priority = (
         [preferred_engine] if preferred_engine
-        # Perchance (Primary) → Google Flow (Secondary) → Cloudflare (FLUX) → Puter → Pollinations → HuggingFace
-        else cfg.get("image_engine_priority", ["perchance", "google_flow", "cloudflare", "puter", "pollinations", "huggingface"])
+        # Perchance (Primary) → Pollinations → Cloudflare (FLUX) → Puter → HuggingFace
+        else cfg.get("image_engine_priority", ["perchance", "pollinations", "cloudflare", "puter", "huggingface"])
     )
 
     errors = []
@@ -205,11 +208,13 @@ def generate_scene_image(
         try:
             if "perchance" in engine:
                 if not is_perchance_available():
-                    errors.append("perchance: engine unavailable in this environment")
-                    continue
+                    enable_perchance()
+                    if not is_perchance_available():
+                        errors.append("perchance: engine unavailable in this environment")
+                        continue
                 style = cfg.get("perchance_style", "Anime")
                 img = generate_perchance_image(
-                    final_prompt, output_path, width=width, height=height, seed=seed, style=style
+                    final_prompt, output_path, width=width, height=height, seed=seed, style=style, time_for_image=75
                 )
                 return {"ok": True, "engine": f"Perchance AI ({style})", "path": img}
 
@@ -223,27 +228,44 @@ def generate_scene_image(
                 return {"ok": True, "engine": "Google Flow (Nano Banana)", "path": img}
 
             elif "puter" in engine or "banana" in engine:
+                if _PUTER_EXHAUSTED:
+                    errors.append("puter: credits exhausted (HTTP 402) - fast-skipped")
+                    continue
                 puter_token = cfg.get("puter_auth_token", "")
                 if not puter_token:
                     errors.append("puter: no auth token configured (get free token at puter.com/dashboard)")
                     continue
                 puter_model = cfg.get("puter_model", "gemini-3.1-flash-image-preview")
-                img = generate_puter_image(
-                    final_prompt, output_path, auth_token=puter_token, model=puter_model,
-                    width=width, height=height, seed=seed
-                )
-                return {"ok": True, "engine": f"Puter Nano Banana ({puter_model})", "path": img}
+                try:
+                    img = generate_puter_image(
+                        final_prompt, output_path, auth_token=puter_token, model=puter_model,
+                        width=width, height=height, seed=seed
+                    )
+                    return {"ok": True, "engine": f"Puter Nano Banana ({puter_model})", "path": img}
+                except Exception as p_err:
+                    if "402" in str(p_err) or "insufficient" in str(p_err).lower():
+                        _PUTER_EXHAUSTED = True
+                    raise p_err
 
             elif "cloudflare" in engine or "cf" in engine:
+                if _CLOUDFLARE_EXHAUSTED:
+                    errors.append("cloudflare: daily neuron quota exhausted (HTTP 429) - fast-skipped")
+                    continue
                 acc_id = cfg.get("cloudflare_account_id", "")
                 token = cfg.get("cloudflare_api_token", "")
                 if not acc_id or not token:
                     errors.append("cloudflare: no credentials")
                     continue
-                img = generate_cloudflare_image(
-                    final_prompt, output_path, account_id=acc_id, api_token=token, width=width, height=height, seed=seed
-                )
-                return {"ok": True, "engine": "Cloudflare Workers AI", "path": img}
+                try:
+                    img = generate_cloudflare_image(
+                        final_prompt, output_path, account_id=acc_id, api_token=token, width=width, height=height, seed=seed
+                    )
+                    return {"ok": True, "engine": "Cloudflare Workers AI", "path": img}
+                except Exception as cf_err:
+                    if "429" in str(cf_err) or "quota" in str(cf_err).lower() or "neurons" in str(cf_err).lower():
+                        _CLOUDFLARE_EXHAUSTED = True
+                        logger.warning("[ImageRouter] Cloudflare daily neuron quota exhausted (429). Fast-skipping for remainder of run.")
+                    raise cf_err
 
             elif "pollinations" in engine:
                 model = "turbo" if "turbo" in engine else cfg.get("pollinations_model", "flux")

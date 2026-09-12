@@ -29,7 +29,7 @@ WORKSPACE_DIR.mkdir(parents=True, exist_ok=True)
 TEMP_CLOUD_DIR.mkdir(parents=True, exist_ok=True)
 
 DEFAULT_SETTINGS = {
-    "image_engine_priority": ["perchance", "google_flow", "cloudflare", "puter", "pollinations", "huggingface"],
+    "image_engine_priority": ["perchance", "pollinations", "cloudflare", "puter", "huggingface"],
     "perchance_style": os.getenv("PERCHANCE_STYLE", "Anime"),
     "pollinations_model": "flux",
     "puter_model": "gemini-3.1-flash-image-preview",

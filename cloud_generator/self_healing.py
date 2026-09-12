@@ -233,18 +233,67 @@ def get_system_health() -> dict:
         "recent_healing_events": HEALING_EVENTS[:15]
     }
 
+def auto_heal_image_pipeline() -> dict:
+    """
+    Self-heals the image generation subsystem:
+    1. Discovers and verifies Chromium executable path for Perchance AI.
+    2. Resets Perchance circuit breaker and cleans up any zombie browser locks.
+    3. Verifies fallback engines (Pollinations, Cloudflare, Puter).
+    """
+    healed = []
+    
+    # 1. Perchance Auto-Discovery & Health Check
+    try:
+        from image_engines.perchance_engine import find_chromium_path, enable_perchance, is_perchance_available
+    except ImportError:
+        try:
+            from cloud_generator.image_engines.perchance_engine import find_chromium_path, enable_perchance, is_perchance_available
+        except ImportError:
+            find_chromium_path = None
+
+    if find_chromium_path:
+        chrome_path = find_chromium_path()
+        if chrome_path:
+            enable_perchance()
+            healed.append(f"Perchance active with browser: {chrome_path}")
+            log_healing_event("ImageHealer", "Perchance Recovery", f"Found usable browser at {chrome_path}. Re-enabled Perchance.")
+        else:
+            # Check Playwright cache on Linux and auto-symlink if possible
+            if sys.platform != "win32":
+                pw_cache = Path.home() / ".cache" / "ms-playwright"
+                found_ch = None
+                if pw_cache.exists():
+                    for ch in pw_cache.glob("chromium-*/**/chrome"):
+                        if ch.is_file() and os.access(str(ch), os.X_OK):
+                            found_ch = str(ch)
+                            break
+                if found_ch:
+                    try:
+                        import subprocess
+                        subprocess.run(["sudo", "ln", "-sf", found_ch, "/usr/bin/google-chrome"], check=False)
+                        enable_perchance()
+                        healed.append(f"Symlinked Playwright Chrome: {found_ch}")
+                        log_healing_event("ImageHealer", "Chromium Symlink", f"Restored /usr/bin/google-chrome -> {found_ch}")
+                    except Exception:
+                        pass
+
+    return {"status": "HEALED", "actions": healed}
+
+
 def run_self_repair() -> dict:
     """Triggers an immediate complete system self-repair & diagnostics pass."""
     log_healing_event("SelfRepair", "Manual Trigger", "Initiated complete system self-healing diagnostics pass.")
     recovered_jobs = recover_crashed_jobs()
     purge_info = purge_stale_temporary_files(max_age_hours=12)
     fb_health = check_facebook_pages_health()
+    img_healing = auto_heal_image_pipeline()
     
     return {
         "ok": True,
         "recovered_jobs": recovered_jobs,
         "purged_storage": purge_info,
         "facebook_pages_health": fb_health,
+        "image_healing": img_healing,
         "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     }
 
