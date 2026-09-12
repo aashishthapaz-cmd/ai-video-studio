@@ -34,10 +34,10 @@
     "target_page_ids": [
       "1131453436723290"
     ],
-    "scheduled_time": "2026-09-13 03:49",
-    "scheduled_time_nepal": "2026-09-13 03:49 NPT",
-    "scheduled_time_usa": "2026-09-12 18:04 EDT",
-    "scheduled_epoch": 1789250677,
+    "scheduled_time": "2026-09-13 03:54",
+    "scheduled_time_nepal": "2026-09-13 03:54 NPT",
+    "scheduled_time_usa": "2026-09-12 18:09 EDT",
+    "scheduled_epoch": 1789250943,
     "timezone": "Asia/Kathmandu",
     "status": "PENDING",
     "created_at": "2026-09-09 15:55:55",
@@ -58,10 +58,10 @@
     "target_page_ids": [
       "1084268771446346"
     ],
-    "scheduled_time": "2026-09-13 04:19",
-    "scheduled_time_nepal": "2026-09-13 04:19 NPT",
-    "scheduled_time_usa": "2026-09-12 18:34 EDT",
-    "scheduled_epoch": 1789252477,
+    "scheduled_time": "2026-09-13 04:24",
+    "scheduled_time_nepal": "2026-09-13 04:24 NPT",
+    "scheduled_time_usa": "2026-09-12 18:39 EDT",
+    "scheduled_epoch": 1789252743,
     "timezone": "Asia/Kathmandu",
     "status": "PENDING",
     "created_at": "2026-09-09 17:09:37",
