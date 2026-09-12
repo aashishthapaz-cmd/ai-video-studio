@@ -1,29 +1,5 @@
 [
   {
-    "id": "job_1788968718_0b454d",
-    "title": "Choose Your Peace",
-    "script_text": "At some point, you will have to disappoint others to live a life that's honest to you.\nPeople-pleasing will drain you, not save you.\nYou have every right to set boundaries and choose your peace.\nYou can disappoint people and still be a good person.",
-    "niche_id": "typewriters_voice_nostalgia",
-    "niche_name": "Typewriters Voice Nostalgia",
-    "voice": "assets/reference_voice/whishper_prompt.wav",
-    "theme": "typewriters_voice_nostalgia",
-    "target_page_ids": [
-      "1111538525383568"
-    ],
-    "scheduled_time": "2026-09-12 09:53",
-    "scheduled_time_nepal": "2026-09-12 09:53 NPT",
-    "scheduled_time_usa": "2026-09-12 00:08 EDT",
-    "scheduled_epoch": 1789186130,
-    "timezone": "Asia/Kathmandu",
-    "status": "PENDING",
-    "created_at": "2026-09-09 15:45:18",
-    "render_time": null,
-    "output_file": null,
-    "facebook_results": null,
-    "error": null,
-    "synced_to_local": false
-  },
-  {
     "id": "job_1788800390_e94876",
     "title": "I'm Not Born To Impress Others",
     "script_text": "I don't care what others think about me.\nI'm not born to impress others.\nEvery mask eventually wears you down.\nEvery honest soul faces criticism.\nI'd rather be misunderstood for being real, than admired for being someone I'm not.",
