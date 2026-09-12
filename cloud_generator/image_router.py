@@ -123,14 +123,16 @@ def _emergency_fallback_from_pollinations(prompt: str, output_path: Path, width:
 
 
 # ─── UNIVERSAL NEGATIVE TAGS applied to every prompt ─────────────────────────
-# These prevent: white borders, pillarbox bars, distorted anatomy, text/watermarks
+# These prevent: white borders, pillarbox bars, distorted anatomy, text/watermarks, and big character portraits
 _UNIVERSAL_NEGATIVE = (
     "no white border, no white frame, no black bar, no letterbox, no pillarbox, "
     "no vignette frame, no oval frame, no polaroid frame, no film border, "
     "no picture frame, no canvas edge, no margin, no padding, "
     "no watermark, no text, no letters, no typography, no logo, "
+    "no close-up face, no giant character portrait, no character zoom, no cropped face, "
+    "no selfie, no big anime girl, no big anime boy, no anime face focus, "
     "no distorted anatomy, no deformed hands, no extra fingers, no blur, "
-    "no low quality, edge-to-edge full bleed"
+    "no low quality, wide shot landscape, edge-to-edge full bleed"
 )
 
 # Subject-specific gender negatives added ON TOP of universal
