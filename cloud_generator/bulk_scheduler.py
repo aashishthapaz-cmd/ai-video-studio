@@ -715,15 +715,20 @@ def _scheduler_loop():
                 if job.get("status") == "PENDING":
                     epoch = job.get("scheduled_epoch")
                     triggered = False
+                    EARLY_TRIGGER_WINDOW_SEC = 300  # 5 minutes
                     if epoch and isinstance(epoch, (int, float)):
-                        if now_epoch >= epoch:
+                        diff_sec = epoch - now_epoch
+                        if diff_sec <= EARLY_TRIGGER_WINDOW_SEC:
                             triggered = True
+                            if diff_sec > 0:
+                                print(f"[TRIGGER] ⏰ Early trigger (due in {diff_sec/60:.1f}m <= 5m): {job.get('title')} ({job.get('id')})")
                     else:
                         sched_str = job.get("scheduled_time")
                         if sched_str:
                             try:
-                                sched_dt = datetime.strptime(sched_str.strip(), "%Y-%m-%d %H:%M")
-                                if datetime.now() >= sched_dt:
+                                clean_s = re.sub(r'\s+[A-Za-z/_-]+$', '', sched_str.strip())
+                                sched_dt = datetime.strptime(clean_s, "%Y-%m-%d %H:%M")
+                                if (sched_dt - datetime.now()).total_seconds() <= EARLY_TRIGGER_WINDOW_SEC:
                                     triggered = True
                             except Exception:
                                 pass

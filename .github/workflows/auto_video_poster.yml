@@ -5,8 +5,8 @@ on:
   #    Wakes up every 30 minutes to check scheduled queue, resolve collisions,
   #    render & publish due videos, and send notifications + playable video to Telegram.
   schedule:
-    # Staggered every 15 mins (:07, :22, :37, :52) to avoid GitHub Actions scheduler delays
-    - cron: '7,22,37,52 * * * *'
+    # Scan regularly every 5 minutes so near/upcoming +-5m post windows are checked promptly
+    - cron: '*/5 * * * *'
 
   # 2. Manual / Mobile Trigger via GitHub Web UI or GitHub App
   workflow_dispatch:
@@ -65,6 +65,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   # Sequential execution queue: only 1 video pipeline executes at a time.
@@ -171,6 +172,9 @@ jobs:
           BULK_START_TIME_INPUT: ${{ inputs.bulk_start_time }}
           BULK_INTERVAL_INPUT: ${{ inputs.bulk_interval }}
           DISPATCH_PAYLOAD: ${{ toJson(github.event.client_payload) }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_REF_NAME: ${{ github.ref_name }}
         run: |
           xvfb-run -a python cloud_generator/github_runner.py
 

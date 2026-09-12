@@ -20,19 +20,29 @@ try:
     from cloud_generator.pipeline import run_cloud_pipeline
     from cloud_generator.bulk_scheduler import (
         load_queue, save_queue, execute_single_job,
-        parse_bulk_scripts, enqueue_bulk_jobs
+        parse_bulk_scripts, enqueue_bulk_jobs,
+        run_queue_housekeeping, _commit_queue_to_git
     )
-    from cloud_generator.notifier import dispatch_alert, send_telegram_message, notify_job_success, notify_job_failure
+    from cloud_generator.notifier import (
+        dispatch_alert, send_telegram_message,
+        notify_job_start, notify_job_success, notify_job_failure
+    )
     from cloud_generator.self_healing import run_self_repair
+    from cloud_generator.facebook_publisher import is_already_published_to_page
 except ImportError:
     from config import load_settings, save_settings, OUTPUT_DIR
     from pipeline import run_cloud_pipeline
     from bulk_scheduler import (
         load_queue, save_queue, execute_single_job,
-        parse_bulk_scripts, enqueue_bulk_jobs
+        parse_bulk_scripts, enqueue_bulk_jobs,
+        run_queue_housekeeping, _commit_queue_to_git
     )
-    from notifier import dispatch_alert, send_telegram_message, notify_job_start, notify_job_success, notify_job_failure
+    from notifier import (
+        dispatch_alert, send_telegram_message,
+        notify_job_start, notify_job_success, notify_job_failure
+    )
     from self_healing import run_self_repair
+    from facebook_publisher import is_already_published_to_page
 
 
 def _inject_fb_pages_from_env(cfg: dict) -> dict:
@@ -249,11 +259,6 @@ def run():
         clean_title_check = title.strip().lower()
         if publish_fb and clean_title_check and clean_title_check not in ("poetic whispers", "untitled", "test"):
             try:
-                try:
-                    from facebook_publisher import is_already_published_to_page
-                except ImportError:
-                    from cloud_generator.facebook_publisher import is_already_published_to_page
-
                 pages_to_check = target_page_ids if target_page_ids else [str(p.get('id') or p.get('page_id')) for p in enabled_pages]
                 pages_already_done = []
                 for pid in pages_to_check:
@@ -268,7 +273,6 @@ def run():
                         print(f"   → Target {pid}: {reason}", flush=True)
                     # Clean up matching pending item from jobs_queue.json if present
                     try:
-                        from bulk_scheduler import load_queue, save_queue, _commit_queue_to_git
                         q = load_queue()
                         init_len = len(q)
                         q = [j for j in q if j.get("title", "").strip().lower() != clean_title_check]
@@ -330,7 +334,6 @@ def run():
 
             # Auto-remove matching queued job from jobs_queue.json so it never lingers
             try:
-                from bulk_scheduler import load_queue, save_queue, _commit_queue_to_git
                 q = load_queue()
                 init_len = len(q)
                 clean_title = title.strip().lower()
@@ -356,7 +359,6 @@ def run():
 
         # ── STEP 1: Housekeeping — run at start of EVERY queue run ──────────
         # Fixes stuck RENDERING jobs, removes expired stale posts, deduplicates
-        from bulk_scheduler import run_queue_housekeeping
         hk = run_queue_housekeeping()
         if any(hk.values()):
             print(f"[Queue] Housekeeping: reset={hk['reset_rendering']}, expired={hk['expired']}, dupes={hk['duplicates_removed']}", flush=True)
@@ -384,17 +386,41 @@ def run():
                 print(f"ℹ️ [Queue] No pending jobs found matching target page(s) {target_page_ids}. Halting cleanly to avoid unintended cross-posting.", flush=True)
                 return
 
-        # ── STEP 2: Collect only TRULY DUE jobs ─────────────────────────────
-        # CRITICAL: Never process expired jobs as fallback — that causes double-posting
-        # A job is only due if scheduled_epoch <= now. Period.
+        # ── STEP 2: Collect DUE or NEAR-DUE jobs (Early Trigger Window: +-5 minutes) ──
+        # If post time is coming up in next 5 minutes (300s) OR already due in past,
+        # trigger generation early so 3-5min video rendering finishes right on target!
+        EARLY_TRIGGER_WINDOW_SEC = 300  # 5 minutes buffer
         due_jobs = []
         for j in pending_jobs:
             epoch = j.get("scheduled_epoch")
             sched = j.get("scheduled_time", "")
+            is_due = False
+
             if epoch and isinstance(epoch, (int, float)):
-                if now_epoch >= epoch:
-                    due_jobs.append(j)
-            elif sched and sched <= now_str:
+                diff_sec = epoch - now_epoch
+                # Due if overdue (diff_sec <= 0) OR coming up within next 5 mins (0 < diff_sec <= 300)
+                if diff_sec <= EARLY_TRIGGER_WINDOW_SEC:
+                    is_due = True
+                    if diff_sec > 0:
+                        print(f"[Queue] ⏰ Early Trigger: '{j.get('title')}' is due in {diff_sec/60:.1f}m (<={EARLY_TRIGGER_WINDOW_SEC/60:.0f}m) -> Starting early generation!", flush=True)
+                    elif diff_sec >= -300:
+                        print(f"[Queue] 🎯 Target Post Window: '{j.get('title')}' is scheduled now ({abs(diff_sec)/60:.1f}m past target) -> Generating!", flush=True)
+                    else:
+                        print(f"[Queue] ⚡ Catch-Up: '{j.get('title')}' is overdue by {abs(diff_sec)/60:.1f}m -> Generating immediately!", flush=True)
+            elif sched:
+                try:
+                    clean_sched = re.sub(r'\s+[A-Za-z/_-]+$', '', sched.strip())
+                    sched_dt = datetime.strptime(clean_sched, "%Y-%m-%d %H:%M")
+                    from zoneinfo import ZoneInfo
+                    sched_epoch_val = sched_dt.replace(tzinfo=ZoneInfo("Asia/Kathmandu")).timestamp()
+                    diff_sec = sched_epoch_val - now_epoch
+                    if diff_sec <= EARLY_TRIGGER_WINDOW_SEC:
+                        is_due = True
+                except Exception:
+                    if sched <= now_str:
+                        is_due = True
+
+            if is_due:
                 due_jobs.append(j)
 
         # ── STEP 2.5: Strict Deduplication against Publication History ────
@@ -406,11 +432,6 @@ def run():
                 j_targets = [str(p.get('id') or p.get('page_id')) for p in enabled_pages]
 
             try:
-                try:
-                    from facebook_publisher import is_already_published_to_page
-                except ImportError:
-                    from cloud_generator.facebook_publisher import is_already_published_to_page
-
                 all_published = True
                 for pid in j_targets:
                     p_tok = next((p.get("access_token") for p in enabled_pages if str(p.get("id") or p.get("page_id")) == str(pid)), None)
@@ -420,7 +441,6 @@ def run():
                         break
                 if all_published and j_targets:
                     print(f"🛑 [Queue Deduplication] Job '{j_title}' was already successfully published to target page(s). Auto-removing from queue.", flush=True)
-                    from bulk_scheduler import load_queue, save_queue, _commit_queue_to_git
                     q = load_queue()
                     q = [x for x in q if x.get("id") != j.get("id")]
                     save_queue(q)
@@ -435,7 +455,9 @@ def run():
             next_job = pending_jobs[0] if pending_jobs else None
             if next_job:
                 next_time = next_job.get("scheduled_time", "unknown")
-                print(f"ℹ️ No jobs due yet. Next scheduled: '{next_job.get('title')}' at {next_time}", flush=True)
+                next_ep = next_job.get("scheduled_epoch", 0)
+                diff_m = (next_ep - now_epoch) / 60.0 if next_ep else 0
+                print(f"ℹ️ No jobs due yet. Next scheduled: '{next_job.get('title')}' at {next_time} (in {diff_m:.1f}m)", flush=True)
             else:
                 print("ℹ️ No jobs due yet.", flush=True)
             return
@@ -470,6 +492,8 @@ def run():
                             status_icon = "✅" if (r.get("ok") or r.get("success")) else "❌"
                             post_id = r.get("video_id") or r.get("post_id") or r.get("error", "unknown")
                             print(f"   {status_icon} {r.get('page_name', r.get('page_id', '?'))}: {post_id}", flush=True)
+                    # Check if more due/near-due jobs remain and dispatch next runner sequentially
+                    _trigger_next_workflow_run_if_due()
                 else:
                     print(f"\n⚠️ Job '{job_title}' finished with status: {res.get('status')} - Error: {res.get('error')}", flush=True)
                     overall_ok = False
@@ -481,11 +505,50 @@ def run():
             sys.exit(1)
 
 
-
-
     print("\n" + "=" * 70, flush=True)
     print("  AUTONOMOUS GITHUB RUNNER FINISHED SUCCESSFULLY", flush=True)
     print("=" * 70, flush=True)
+
+
+def _trigger_next_workflow_run_if_due():
+    """
+    If there are more due or near-due jobs waiting in the queue,
+    trigger the next GitHub Actions workflow run immediately via repository dispatch
+    so subsequent jobs don't have to wait for the next cron cycle.
+    """
+    try:
+        token = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
+        repo = os.environ.get("GITHUB_REPOSITORY")
+        if not token or not repo:
+            return
+        q = load_queue()
+        now_ep = time.time()
+        EARLY_TRIGGER_WINDOW_SEC = 300
+        remaining_due = [
+            j for j in q
+            if j.get("status") == "PENDING" and (j.get("scheduled_epoch", 0) - now_ep) <= EARLY_TRIGGER_WINDOW_SEC
+        ]
+        if remaining_due:
+            next_j = remaining_due[0]
+            diff_m = (next_j.get("scheduled_epoch", 0) - now_ep) / 60.0
+            print(f"\n[Queue Chaining] 🚀 Found {len(remaining_due)} more due/near-due job(s) in queue! Next: '{next_j.get('title')}' (in {diff_m:.1f}m).", flush=True)
+            print(f"[Queue Chaining] Dispatching next GitHub Actions runner immediately...", flush=True)
+            import requests
+            headers = {
+                "Authorization": f"Bearer {token}",
+                "Accept": "application/vnd.github+json"
+            }
+            res = requests.post(
+                f"https://api.github.com/repos/{repo}/actions/workflows/auto_video_poster.yml/dispatches",
+                headers=headers,
+                json={"ref": os.environ.get("GITHUB_REF_NAME", "main")}
+            )
+            if res.status_code in (200, 204):
+                print(f"[Queue Chaining] ✅ Successfully triggered next runner run for '{next_j.get('title')}'!", flush=True)
+            else:
+                print(f"[Queue Chaining] Note: Dispatch response {res.status_code}: {res.text}", flush=True)
+    except Exception as e:
+        print(f"[Queue Chaining] Note: Chaining dispatch notice: {e}", flush=True)
 
 
 if __name__ == "__main__":
