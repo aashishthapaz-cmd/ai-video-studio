@@ -470,10 +470,10 @@ def run():
                     break
 
             if not due_jobs:
-                # If manual trigger was launched (workflow_dispatch), advance queue with next pending job
-                event_name = os.environ.get("GITHUB_EVENT_NAME", "").lower()
-                if event_name == "workflow_dispatch" and remaining_pending:
-                    print(f"[Queue Manual Dispatch] Manual run detected: advancing queue with next post '{remaining_pending[0].get('title')}'", flush=True)
+                # Only advance queue on manual run if explicitly requested via FORCE_IMMEDIATE
+                force_immediate = os.environ.get("FORCE_IMMEDIATE_INPUT", "").strip().lower() in ("true", "1", "yes")
+                if force_immediate and remaining_pending:
+                    print(f"[Queue Manual Dispatch] Force-immediate requested: advancing queue with next post '{remaining_pending[0].get('title')}'", flush=True)
                     due_jobs.append(remaining_pending[0])
 
             if not due_jobs:
@@ -503,6 +503,14 @@ def run():
             job_id = target_job.get("id")
             job_title = target_job.get("title", "Scheduled Post")
             print(f"\n[{idx+1}/{len(due_jobs)}] 🎯 Processing: '{job_title}' (ID: {job_id}) | Niche: {target_job.get('niche_id')} | Page(s): {target_job.get('target_page_ids', 'ALL')}", flush=True)
+
+            # Lock job immediately in queue so any other concurrent runner skips it
+            try:
+                from bulk_scheduler import update_job
+                update_job(job_id, {"status": "RENDERING", "started_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S")})
+                _commit_queue_to_git(f"🤖 Queue: started rendering '{job_title}' [skip ci]")
+            except Exception as _lock_err:
+                print(f"[Queue Lock] Notice: {_lock_err}", flush=True)
 
             try:
                 res = execute_single_job(job_id)

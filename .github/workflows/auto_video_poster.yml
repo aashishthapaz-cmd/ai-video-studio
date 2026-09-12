@@ -58,6 +58,11 @@ on:
         required: false
         type: string
         default: 'peak_slots'
+      force_immediate:
+        description: 'Force generate next queued post immediately (ignore post schedule time)'
+        required: false
+        type: boolean
+        default: false
 
   # 3. Webhook / Repository Dispatch Trigger (e.g. from Telegram Bot / External API)
   repository_dispatch:
@@ -67,11 +72,6 @@ permissions:
   contents: write
   actions: write
 
-concurrency:
-  # Sequential execution queue: only 1 video pipeline executes at a time.
-  # If another job is triggered or scheduled while a video is rendering, it queues cleanly.
-  group: ${{ github.workflow }}
-  cancel-in-progress: false
 
 jobs:
   render-and-publish:
@@ -171,6 +171,7 @@ jobs:
           BULK_POEMS_INPUT: ${{ inputs.bulk_poems }}
           BULK_START_TIME_INPUT: ${{ inputs.bulk_start_time }}
           BULK_INTERVAL_INPUT: ${{ inputs.bulk_interval }}
+          FORCE_IMMEDIATE_INPUT: ${{ inputs.force_immediate }}
           DISPATCH_PAYLOAD: ${{ toJson(github.event.client_payload) }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
