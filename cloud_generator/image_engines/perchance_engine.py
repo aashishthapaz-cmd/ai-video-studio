@@ -257,18 +257,17 @@ def generate_perchance_image(
     width: int = 1080,
     height: int = 1920,
     seed: int = None,
-    style: str = "Anime",
-    time_for_image: int = 75,
+    style: str = "Painted Anime",
+    time_for_image: int = 60,
 ) -> str:
     """
-    Generates an artistic anime tuned portrait image via Perchance AI Text-to-Image Generator.
-    Defaults to 'Anime' art style. Returns the absolute path of the generated 1080x1920 image file.
-    Includes auto-healing retry and per-scene failover without permanently killing the engine.
+    Generates an artistic anime portrait image via Perchance AI Text-to-Image Generator.
+    Directly interacts with generator frame and embedded output frames for 100% reliable image extraction.
+    Returns the absolute path of the generated 1080x1920 image file.
     """
     global _FAIL_COUNT
 
     if not is_perchance_available():
-        # Attempt auto-heal unpause before giving up
         enable_perchance()
         if not is_perchance_available():
             raise RuntimeError(f"Perchance is unavailable: {_PERCHANCE_DISABLE_REASON or 'Engine offline'}")
@@ -276,13 +275,12 @@ def generate_perchance_image(
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
-    # Clean prompt: strip border negatives since Perchance interprets positive cues best
+    # Clean prompt: strip border negatives since positive cues work best in Perchance
     clean_prompt = prompt
     for m in ["no white border", "no borders", "no frame", "edge-to-edge full bleed", "no watermark"]:
         if m.lower() in clean_prompt.lower():
             idx = clean_prompt.lower().find(m.lower())
             clean_prompt = clean_prompt[:idx].strip().rstrip(",. ")
-    import re
     clean_prompt = re.sub(r'[\r\n]+', ' ', clean_prompt).strip()
     if len(clean_prompt) > 320:
         clean_prompt = clean_prompt[:320].rsplit(" ", 1)[0]
@@ -299,58 +297,115 @@ def generate_perchance_image(
 
     logger.info(f"[Perchance] Generating artistic anime portrait (style={style}) for prompt: '{clean_prompt[:75]}...'")
 
-    # 2 attempts with auto-heal recovery in between
     last_error = None
     for attempt in range(2):
+        client = None
+        tab = None
         try:
             client = _get_client()
-            res = client.images.generate(
-                model="ai-text-to-image-generator",
-                prompt=clean_prompt,
-                extra_params={"style": style} if style else None,
-                time_for_image=time_for_image,
-                disable_safety_settings=True,
-            )
+            page = client.core.page
+            tab = page.new_tab("https://perchance.org/ai-text-to-image-generator")
+            time.sleep(3.5)
 
-            if isinstance(res, dict) and res.get("data"):
-                data_item = res["data"][0]
-                raw_url = data_item.get("url", "")
+            frames = client.core._get_all_frames(tab)
+            generator_frame = None
+            for f in frames:
+                href = f.run_js("return window.location.href;") or ""
+                if "perchance.org/ai-text-to-image-generator" in href and f != tab:
+                    generator_frame = f
+                    break
 
-                img_bytes = None
-                if raw_url.startswith("data:image/"):
-                    b64_data = raw_url.split(",", 1)[1]
-                    img_bytes = base64.b64decode(b64_data)
-                elif raw_url.startswith("http"):
-                    import urllib.request
-                    req = urllib.request.Request(raw_url, headers={"User-Agent": "Mozilla/5.0"})
-                    with urllib.request.urlopen(req, timeout=30) as r:
-                        img_bytes = r.read()
-                elif len(raw_url) > 1000:
-                    img_bytes = base64.b64decode(raw_url)
+            if not generator_frame:
+                raise RuntimeError("Could not locate generator frame in Perchance")
 
-                if img_bytes:
-                    img = Image.open(io.BytesIO(img_bytes))
-                    if img.size != (width, height):
-                        img = _crop_fill(img, width, height)
-                    img.save(output_path, "PNG", optimize=False)
-                    _FAIL_COUNT = 0  # Reset fail count on success
-                    logger.info(f"[Perchance] Successfully generated artistic portrait: {output_path} ({width}x{height})")
-                    return str(output_path)
+            # Configure Art Style (Painted Anime) & Shape (Portrait 512x768) and Prompt
+            style_val = "ref:optionKeyName:Painted Anime" if "anime" in str(style).lower() else "ref:optionKeyName:Cinematic"
+            generator_frame.run_js(f"""
+                let selects = document.querySelectorAll('select');
+                if (selects.length >= 2) {{
+                    selects[0].value = '{style_val}';
+                    selects[0].dispatchEvent(new Event('change', {{ bubbles: true }}));
 
-            error_msg = res.get("error") if isinstance(res, dict) else str(res)
-            raise RuntimeError(f"Perchance returned no image data: {error_msg}")
+                    selects[1].value = '512x768';
+                    selects[1].dispatchEvent(new Event('change', {{ bubbles: true }}));
+                }}
 
-        except Exception as e:
-            last_error = e
-            logger.warning(f"[Perchance] Attempt {attempt+1} failed: {e}")
-            if attempt == 0:
-                logger.info("[Perchance] Auto-healing client: restarting browser and retrying...")
-                auto_heal_perchance_client()
-                time.sleep(2.0)
-            else:
-                _FAIL_COUNT += 1
-                _close_client()
-                if _FAIL_COUNT >= MAX_CONSECUTIVE_FAILS:
-                    disable_perchance(f"Repeated failures ({_FAIL_COUNT}): {e}")
+                let tas = document.querySelectorAll('textarea.paragraph-input');
+                if (tas.length > 0) {{
+                    let ta = tas[tas.length - 1];
+                    ta.value = {json.dumps(clean_prompt)};
+                    ta.dispatchEvent(new Event('input', {{ bubbles: true }}));
+                    ta.dispatchEvent(new Event('change', {{ bubbles: true }}));
+                }}
+            """)
 
+            # Trigger generation via native event handler
+            generator_frame.run_js("""
+                let fn = window.___generateButtonClickEvent746291937;
+                if (typeof fn === 'function') {
+                    fn(new Event('click'));
+                } else {
+                    let btn = document.getElementById('generateButtonEl');
+                    if (btn) btn.click();
+                }
+            """)
+
+            # Poll embed frames for result image
+            t0 = time.time()
+            result_img_bytes = None
+            while time.time() - t0 < time_for_image:
+                time.sleep(1.0)
+                all_frames = client.core._get_all_frames(tab)
+                for f in all_frames:
+                    try:
+                        href = f.run_js("return window.location.href;") or ""
+                        if "image-generation" in href:
+                            src = f.run_js("""
+                                let img = document.getElementById('resultImgEl');
+                                return img ? img.src : null;
+                            """)
+                            if src and src.startswith("data:image/"):
+                                b64 = src.split(",", 1)[1]
+                                result_img_bytes = base64.b64decode(b64)
+                                break
+                            elif src and src.startswith("http"):
+                                import urllib.request
+                                req = urllib.request.Request(src, headers={"User-Agent": "Mozilla/5.0"})
+                                with urllib.request.urlopen(req, timeout=15) as resp:
+                                    result_img_bytes = resp.read()
+                                break
+                    except Exception:
+                        pass
+                if result_img_bytes:
+                    break
+
+            try:
+                tab.close()
+                tab = None
+            except Exception:
+                pass
+
+            if result_img_bytes and len(result_img_bytes) > 5000:
+                img = Image.open(io.BytesIO(result_img_bytes))
+                cropped = _crop_fill(img, width, height)
+                cropped.save(str(output_path), "PNG")
+                _FAIL_COUNT = 0
+                logger.info(f"[Perchance] Successfully generated image: {output_path} ({width}x{height})")
+                return str(output_path.resolve())
+
+            raise RuntimeError(f"Perchance generation timed out after {time_for_image}s (no image in embed frame)")
+
+        except Exception as err:
+            last_error = err
+            logger.warning(f"[Perchance] Attempt {attempt+1} failed: {err}")
+            if tab:
+                try:
+                    tab.close()
+                except Exception:
+                    pass
+            auto_heal_perchance_client()
+
+    _FAIL_COUNT += 1
+    if _FAIL_COUNT >= MAX_CONSECUTIVE_FAILS:
+        disable_perchance(f"Repeated failures ({_FAIL_COUNT}): {last_error}")
     raise RuntimeError(f"Perchance image generation failed: {last_error}")
