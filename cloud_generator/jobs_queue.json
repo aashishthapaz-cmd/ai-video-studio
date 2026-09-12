@@ -1,29 +1,5 @@
 [
   {
-    "id": "job_1788800390_e94876",
-    "title": "I'm Not Born To Impress Others",
-    "script_text": "I don't care what others think about me.\nI'm not born to impress others.\nEvery mask eventually wears you down.\nEvery honest soul faces criticism.\nI'd rather be misunderstood for being real, than admired for being someone I'm not.",
-    "niche_id": "typewriters_voice_nostalgia",
-    "niche_name": "Typewriters Voice Nostalgia",
-    "voice": "assets/reference_voice/whishper_prompt.wav",
-    "theme": "typewriters_voice_nostalgia",
-    "target_page_ids": [
-      "1256616857537225"
-    ],
-    "scheduled_time": "2026-09-12 11:34",
-    "scheduled_time_nepal": "2026-09-12 11:34 NPT",
-    "scheduled_time_usa": "2026-09-12 01:49 EDT",
-    "scheduled_epoch": 1789192197,
-    "timezone": "Asia/Kathmandu",
-    "status": "PENDING",
-    "created_at": "2026-09-07 16:59:50",
-    "render_time": null,
-    "output_file": null,
-    "facebook_results": null,
-    "error": null,
-    "synced_to_local": false
-  },
-  {
     "id": "job_1788802799_0ee6dd",
     "title": "I Am So Proud Of You",
     "script_text": "I believe in you.\nI believe in your dreams.\nI believe in the incredible things you are going to achieve.\nWhen you doubt yourself, I will remind you of your worth.\nWhen you stumble, I will be the one to catch you.\nAnd when you succeed, I will be the one cheering the loudest.\nDon't ever let the world make you feel small.\nBecause I have seen what you are capable of.\nAnd I am so proud of you.",
