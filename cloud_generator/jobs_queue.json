@@ -1,29 +1,5 @@
 [
   {
-    "id": "job_1788974311_115c4e",
-    "title": "Questions For Your Father",
-    "script_text": "Five questions to ask your father before it's too late.\nNumber 1, What did you feel the first time you held me in your arms?\n2, What was the hardest day of your life?\n3, What's something you gave up for us that we never noticed?\nAnd 4, when the day comes that you're no longer with me, what's one thing you want me to always remember?",
-    "niche_id": "typewriters_voice_nostalgia",
-    "niche_name": "Typewriters Voice Nostalgia",
-    "voice": "assets/reference_voice/whishper_prompt.wav",
-    "theme": "typewriters_voice_nostalgia",
-    "target_page_ids": [
-      "1084268771446346"
-    ],
-    "scheduled_time": "2026-09-12 20:55",
-    "scheduled_time_nepal": "2026-09-12 20:55 NPT",
-    "scheduled_time_usa": "2026-09-12 11:10 EDT",
-    "scheduled_epoch": 1789225800,
-    "timezone": "Asia/Kathmandu",
-    "status": "PENDING",
-    "created_at": "2026-09-09 17:18:31",
-    "render_time": null,
-    "output_file": null,
-    "facebook_results": null,
-    "error": null,
-    "synced_to_local": false
-  },
-  {
     "id": "job_1788968718_ad1adc",
     "title": "Accept People As They Are",
     "script_text": "Accept people as they are. Place them where they belong.\nYou are responsible for your own life.\nAcceptance frees you from trying to change anyone.\nBoundaries protect your peace.\nNot everyone earns the same access, the same closeness, or the same seat at your table.\nAnd that's not cruelty. That's self-respect.",
