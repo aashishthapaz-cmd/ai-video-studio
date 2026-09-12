@@ -1,31 +1,5 @@
 [
   {
-    "id": "job_1789231263_a57bea",
-    "title": "Happy Father's Day",
-    "script_text": "Dad, I don't think I say this enough, but thank you.\nThank you for all the things that became so normal I stopped noticing them:\nthe rides, the advice, the phone calls,\nthe way you always seemed to show up when something needed to be handled.\nA lot of what you gave me felt ordinary at the time,\nbecause you made it look easy.\nBut the older I get, the more I understand how much of it was effort.\nThank you for your patience, your time,\nand all the ways you showed up for our family,\neven on the days nobody stopped to say it out loud.\nI hope you know how much you matter in my life.\nHappy Father's Day.",
-    "niche_id": "typewriters_voice_nostalgia",
-    "niche_name": "Typewriters Voice Nostalgia",
-    "voice": "assets/reference_voice/whishper_prompt.wav",
-    "theme": "typewriters_voice_nostalgia",
-    "target_page_ids": [
-      "105077258283692"
-    ],
-    "scheduled_time": "2026-09-13 01:25",
-    "scheduled_time_nepal": "2026-09-13 01:25 NPT",
-    "scheduled_time_usa": "2026-09-12 15:40 EDT",
-    "scheduled_epoch": 1789242000,
-    "timezone": "Asia/Kathmandu",
-    "status": "PENDING",
-    "created_at": "2026-09-12 16:41:03",
-    "render_time": null,
-    "output_file": null,
-    "facebook_results": null,
-    "error": "Auto-recovered from unexpected process restart (was RENDERING)",
-    "synced_to_local": false,
-    "started_at": "2026-09-12 19:35:27",
-    "recovered_at": "2026-09-12 20:39:38"
-  },
-  {
     "id": "job_1789235590_954529",
     "title": "Life Is Happening For You",
     "script_text": "Anything that annoys you, teaches patience.\nAnyone who abandons you, teaches strength.\nAnything that angers you, teaches forgiveness.\nAnything you fear, teaches courage.\nAnything you can't control, teaches surrender.\nLife isn't happening to you.\nIt's happening for you.",
