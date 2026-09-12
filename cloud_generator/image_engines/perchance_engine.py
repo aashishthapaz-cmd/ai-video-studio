@@ -11,6 +11,8 @@ Includes:
 
 import os
 import io
+import re
+import json
 import sys
 import time
 import base64
@@ -220,10 +222,16 @@ def _get_client():
         try:
             from perchancy import Client
             _CLIENT = Client(headless=True, debug=False)
-            logger.info("[Perchance] Initialized headless perchancy client.")
+            _CLIENT.core.init_driver()
+            logger.info("[Perchance] Initialized headless perchancy client with active driver.")
         except Exception as e:
             logger.warning(f"[Perchance] Client init failed: {e}")
             raise
+    elif _CLIENT.core.page is None:
+        try:
+            _CLIENT.core.init_driver()
+        except Exception:
+            pass
     return _CLIENT
 
 
@@ -285,17 +293,16 @@ def generate_perchance_image(
     if len(clean_prompt) > 320:
         clean_prompt = clean_prompt[:320].rsplit(" ", 1)[0]
 
-    # Artistic Tuned Portrait & Anime prompt crafting
-    if "portrait" not in clean_prompt.lower() and "anime" not in clean_prompt.lower():
+    # Scenic artwork & poem-related subject prompt tuning
+    # Preserve environmental landscape prompts while ensuring Studio Ghibli/Shinkai aesthetic
+    if "ghibli" not in clean_prompt.lower() and "anime" not in clean_prompt.lower() and "scenic" not in clean_prompt.lower():
         clean_prompt = (
-            f"artistic anime portrait masterpiece of {clean_prompt}, "
-            f"stunning expressive character portrait, Makoto Shinkai and Studio Ghibli inspired, "
-            f"dramatic soft volumetric lighting, painterly fine art aesthetic, exquisite details, 8k resolution"
+            f"Breathtaking wide scenic landscape illustration, Studio Ghibli background art aesthetic, "
+            f"{clean_prompt}, Makoto Shinkai atmospheric lighting, pure scenery, wide angle vista, "
+            f"no close-up face, no giant character portrait, no big anime character"
         )
-    elif "anime" not in clean_prompt.lower():
-        clean_prompt = f"artistic anime masterpiece of {clean_prompt}, painterly anime aesthetic, breathtaking lighting, 8k resolution"
 
-    logger.info(f"[Perchance] Generating artistic anime portrait (style={style}) for prompt: '{clean_prompt[:75]}...'")
+    logger.info(f"[Perchance] Generating scenic visual with poem-related subjects (style={style}) for prompt: '{clean_prompt[:75]}...'")
 
     last_error = None
     for attempt in range(2):
@@ -303,6 +310,8 @@ def generate_perchance_image(
         tab = None
         try:
             client = _get_client()
+            if client.core.page is None:
+                client.core.init_driver()
             page = client.core.page
             tab = page.new_tab("https://perchance.org/ai-text-to-image-generator")
             time.sleep(3.5)

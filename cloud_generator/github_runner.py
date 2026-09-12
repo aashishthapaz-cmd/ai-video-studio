@@ -452,15 +452,40 @@ def run():
         due_jobs = filtered_due_jobs
 
         if not due_jobs:
-            next_job = pending_jobs[0] if pending_jobs else None
-            if next_job:
-                next_time = next_job.get("scheduled_time", "unknown")
-                next_ep = next_job.get("scheduled_epoch", 0)
-                diff_m = (next_ep - now_epoch) / 60.0 if next_ep else 0
-                print(f"ℹ️ No jobs due yet. Next scheduled: '{next_job.get('title')}' at {next_time} (in {diff_m:.1f}m)", flush=True)
-            else:
-                print("ℹ️ No jobs due yet.", flush=True)
-            return
+            # Reload queue to get accurate remaining pending jobs after any deduplication removals
+            fresh_q = load_queue()
+            remaining_pending = [x for x in fresh_q if x.get("status") == "PENDING"]
+            if target_page_ids:
+                target_ids_set = {str(x).strip().lower() for x in target_page_ids if str(x).strip()}
+                def _matches_tgt(job):
+                    jp = [str(x).strip().lower() for x in (job.get("target_page_ids") or [])]
+                    return any(t in jp for t in target_ids_set)
+                remaining_pending = [x for x in remaining_pending if _matches_tgt(x)]
+
+            # Check if any remaining pending job is overdue or near-due
+            for j in remaining_pending:
+                ep = j.get("scheduled_epoch", 0)
+                if ep and (ep - now_epoch) <= EARLY_TRIGGER_WINDOW_SEC:
+                    due_jobs.append(j)
+                    break
+
+            if not due_jobs:
+                # If manual trigger was launched (workflow_dispatch), advance queue with next pending job
+                event_name = os.environ.get("GITHUB_EVENT_NAME", "").lower()
+                if event_name == "workflow_dispatch" and remaining_pending:
+                    print(f"[Queue Manual Dispatch] Manual run detected: advancing queue with next post '{remaining_pending[0].get('title')}'", flush=True)
+                    due_jobs.append(remaining_pending[0])
+
+            if not due_jobs:
+                next_job = remaining_pending[0] if remaining_pending else None
+                if next_job:
+                    next_time = next_job.get("scheduled_time", "unknown")
+                    next_ep = next_job.get("scheduled_epoch", 0)
+                    diff_m = (next_ep - now_epoch) / 60.0 if next_ep else 0
+                    print(f"ℹ️ No jobs due yet. Next scheduled: '{next_job.get('title')}' at {next_time} (in {diff_m:.1f}m)", flush=True)
+                else:
+                    print("ℹ️ No pending jobs remaining in queue.", flush=True)
+                return
 
         # ── STEP 3: Process max 1 job per run (GitHub Actions = 45min limit) ─
         # Each video generation takes 5-30min. Processing more than 1 per run

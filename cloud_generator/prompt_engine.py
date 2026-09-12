@@ -107,10 +107,10 @@ def build_scene_artistic_prompt(stanza: str, scene_idx: int, total_scenes: int, 
     # 1. Living honestly, self-respect, not impressing others, boundaries, choosing peace, integrity
     if any(k in words_lower for k in ["disappoint", "honest", "boundaries", "choose your peace", "peace", "impress", "criticism", "misunderstood", "real", "mask", "myself", "truth"]):
         scenic_envs = [
-            "a serene diverging mountain trail at dawn, golden morning god rays piercing through misty pine trees and wild flowers, calm tranquil atmosphere, vast alpine horizon",
-            "a majestic ancient cedar tree standing proudly on a tranquil coastal cliff overlooking a calm glass-like ocean at golden hour, warm god rays filtering through lush branches, safe sanctuary",
-            "an expansive rolling wildflower meadow bathed in warm golden sunlight, soft distant mountains under pastel clouds, radiant warmth and peaceful solitude",
-            "a solitary ancient stone lighthouse standing firm on a rugged misty cliff above a calm vast ocean at dawn, gentle sea fog illuminated by morning light, tranquil strength"
+            "a solitary traveler in the distance seen from behind walking along a peaceful diverging mountain path at sunrise, golden god rays piercing through misty pines and wildflowers, vast alpine horizon, choosing one's honest path",
+            "a serene reflective figure resting peacefully beneath a majestic ancient cedar tree on a quiet coastal cliff, gazing at a calm glass-like ocean at golden hour, safe unshakeable sanctuary",
+            "a gentle wanderer standing in an expansive rolling wildflower meadow at golden hour, looking up at soft pastel clouds with a deep sense of relief and inner peace",
+            "a solitary lighthouse keeper standing on the open balcony of an ancient stone cliffside lighthouse at dawn, watching the calm endless sea in tranquil self-reliance"
         ]
         chosen_env = scenic_envs[(scene_idx - 1) % len(scenic_envs)]
         feeling_theme = "quiet self-reclamation, honest integrity, and choosing one's peaceful path"
@@ -118,10 +118,10 @@ def build_scene_artistic_prompt(stanza: str, scene_idx: int, total_scenes: int, 
     # 2. People-pleasing, draining, burdens, letting go, release, healing, silence
     elif any(k in words_lower for k in ["people-pleasing", "drain", "save you", "burden", "heavy", "tired", "let go", "heal", "healing", "silence", "free", "release", "surrender", "alone"]):
         scenic_envs = [
-            "a serene autumn lakeside at twilight, gentle evening breeze carrying glowing amber and crimson leaves across calm reflective water, soft dusky lavender and indigo horizon",
-            "a peaceful river winding through a quiet misty valley after a gentle rain, soft pastel sunset glow behind rolling distant hills, profound calm and stillness",
-            "a tranquil grassy hilltop where delicate white dandelion seeds drift softly into the twilight breeze across an expansive pastel evening sky, boundless openness",
-            "a secluded mossy forest clearing with a crystal-clear natural spring pool, gentle sunbeams dancing on still water, deep quiet restoration"
+            "a solitary reflective figure sitting quietly by a twilight lakeside, watching glowing amber and crimson leaves drift gently across calm reflective water, releasing heavy burdens into the wind",
+            "a lone wanderer walking beside a tranquil winding river in a misty valley after soft rain, mist rising from cool waters, profound calm and gentle emotional release",
+            "a peaceful figure standing on a breezy grassy hilltop at dusk, watching hundreds of glowing dandelion seeds drift away into an expansive pastel twilight sky",
+            "a weary traveler resting beside a secluded mossy forest pool, dipping hands into the crystal-clear healing water under soft dappled sunbeams"
         ]
         chosen_env = scenic_envs[(scene_idx - 1) % len(scenic_envs)]
         feeling_theme = "releasing heavy burdens into the wind, emotional catharsis, and gentle healing"
@@ -129,10 +129,10 @@ def build_scene_artistic_prompt(stanza: str, scene_idx: int, total_scenes: int, 
     # 3. Pride, belief, encouragement, dreams, worth, rising, soaring
     elif any(k in words_lower for k in ["proud", "believe", "dreams", "achieve", "worth", "stumble", "succeed", "capable", "small", "rise", "shine", "fly", "courage"]):
         scenic_envs = [
-            "a breathtaking sunrise breaking over majestic mountain peaks with golden alpenglow, light cascading into a vast green valley below, soaring rays of dawn, boundless openness",
-            "a sun-drenched hillside path bordered by blooming jacaranda trees and wildflowers overlooking a sparkling panoramic valley at sunrise, fresh morning breeze, radiant optimism",
-            "a peaceful alpine meadow surrounded by towering sunlit peaks, crystal-clear mountain stream reflecting warm morning light, vast inspiring beauty",
-            "an awe-inspiring panoramic cliffside lookout bathed in the first triumphant rays of morning sun over an endless sea of rolling clouds"
+            "a distant wanderer standing atop a sunlit mountain summit with open arms, gazing at the golden sunrise breaking over rolling cloud waves, soaring belief and boundless potential",
+            "a traveler walking along a sun-drenched coastal path lined with blooming jacaranda trees, overlooking a sparkling azure sea at dawn, radiant optimism and quiet pride",
+            "a gentle figure looking across a crystal-clear alpine lake reflecting towering sunlit snow peaks, fresh mountain breeze, deep inspiring courage",
+            "a lone climber pausing on an awe-inspiring panoramic cliff overlook to watch the first golden dawn rays illuminate the world below"
         ]
         chosen_env = scenic_envs[(scene_idx - 1) % len(scenic_envs)]
         feeling_theme = "unwavering belief, quiet pride, and radiant uplifting hope"
@@ -140,10 +140,10 @@ def build_scene_artistic_prompt(stanza: str, scene_idx: int, total_scenes: int, 
     # 4. Father, mother, family, sacrifice, roots, heritage, generations
     elif any(k in words_lower for k in ["father", "mother", "child", "family", "held me", "arms", "gave up", "remember", "home", "growing", "hands", "parent"]):
         scenic_envs = [
-            "a majestic deeply-rooted ancient oak tree standing proudly in a golden harvest field at late afternoon, warm amber sunlight filtering through sprawling canopy, timeless enduring strength",
-            "a warm rustic wooden porch of a countryside home at sunset, soft warm lantern light glowing beside weathered rocking chairs overlooking quiet golden hills",
-            "an ancient weathered stone bridge spanning a quiet flowing stream in an autumn forest, golden leaves resting on weathered stone, soft sunbeams, timeless presence",
-            "a tranquil country garden bathed in warm late-afternoon golden glow, blooming hydrangeas along a white picket fence, peaceful nostalgic sanctuary"
+            "a loving father and young child holding hands, seen from behind walking together down a sunlit autumn country lane beneath towering golden oak trees, deep quiet gratitude",
+            "a warm rustic wooden porch of a countryside farmhouse at sunset, a glowing amber lantern hanging beside empty weathered rocking chairs looking over quiet golden hills",
+            "an ancient weathered stone bridge over a quiet flowing forest stream, two generations walking side by side across fallen autumn leaves in soft warm sunbeams",
+            "a peaceful cottage garden bathed in warm late-afternoon golden glow, blooming hydrangeas along a white picket fence, timeless nostalgic warmth and roots"
         ]
         chosen_env = scenic_envs[(scene_idx - 1) % len(scenic_envs)]
         feeling_theme = "deep quiet gratitude, enduring protective strength, and timeless nostalgic warmth"
@@ -151,10 +151,10 @@ def build_scene_artistic_prompt(stanza: str, scene_idx: int, total_scenes: int, 
     # 5. Rain, tears, grief, heartache, sadness, pain
     elif any(k in words_lower for k in ["rain", "crying", "tears", "pain", "hurt", "broken", "loss", "mourn", "storm", "drown", "water"]):
         scenic_envs = [
-            "a quiet rain-washed historic cobblestone street at blue hour dusk, glowing streetlamps casting liquid amber reflections across wet stone, soft rainfall ripples in puddles",
-            "a solitary wooden jetty reaching into a calm misty lake during a quiet gentle rain, soft blue and slate grey tones, tranquil stillness and deep reflection",
-            "a moody coastal cliff with distant sea spray under dramatic storm clouds breaking into soft slivers of pale silver sunlight, peaceful quiet sorrow",
-            "a peaceful garden terrace after a summer shower, dewdrops clinging to dark green leaves, soft cool mist rising in the evening air"
+            "a solitary figure holding an umbrella walking down a quiet rain-washed historic cobblestone street at blue hour dusk, glowing streetlamps casting amber reflections on wet stone",
+            "a lone reflective figure standing at the end of a wooden dock over a calm misty lake during gentle rainfall, ripples expanding in cool blue and slate grey tones",
+            "a moody windswept coastal bluff with sea spray under dramatic storm clouds parting to reveal soft slivers of pale silver sunlight, peaceful quiet sorrow",
+            "a quiet figure sitting under a sheltered wooden garden arbor watching gentle rain drops fall onto lush green leaves and water lilies in a pond"
         ]
         chosen_env = scenic_envs[(scene_idx - 1) % len(scenic_envs)]
         feeling_theme = "cleansing melancholic sorrow, quiet reflection, and poignant beauty"
@@ -162,10 +162,10 @@ def build_scene_artistic_prompt(stanza: str, scene_idx: int, total_scenes: int, 
     # 6. Night, stars, moon, galaxy, celestial wonder
     elif any(k in words_lower for k in ["night", "star", "stars", "moon", "sky", "dark", "midnight", "galaxy", "universe", "cosmos"]):
         scenic_envs = [
-            "a breathtaking celestial night sky brimming with the luminous Milky Way and glowing constellations over a calm mirror-like alpine lake, silhouettes of distant pine ridges",
-            "a radiant crescent moon hanging low over a misty valley, soft silver moonlight illuminating rolling hills and a quiet winding river, deep peaceful wonder",
-            "a tranquil field of blooming night flowers under a vast indigo sky filled with shooting stars and ethereal aurora borealis glow",
-            "a peaceful hilltop observatory overlook beneath a dazzling canopy of starlight, vast cosmic expanse"
+            "a solitary stargazer sitting on a grassy knoll beneath a magnificent celestial night sky brimming with the luminous Milky Way, looking up at shooting stars",
+            "a lone traveler camping beside a calm alpine mirror lake reflecting a glowing crescent moon and twinkling constellations, serene pine silhouettes",
+            "a peaceful wanderer in a field of night-blooming flowers under an ethereal violet aurora borealis and dazzling starlight",
+            "an open wooden observatory deck on a mountain peak under an infinite expanse of glowing stars and purple nebulae"
         ]
         chosen_env = scenic_envs[(scene_idx - 1) % len(scenic_envs)]
         feeling_theme = "infinite cosmic wonder, comforting solitude, and quiet starlight solace"
@@ -173,10 +173,10 @@ def build_scene_artistic_prompt(stanza: str, scene_idx: int, total_scenes: int, 
     # 7. Time, memories, typewriter, vintage nostalgia, letters
     elif any(k in words_lower for k in ["time", "memory", "remember", "past", "years", "old", "book", "typewriter", "write", "letter", "story"]):
         scenic_envs = [
-            "an atmospheric sun-drenched vintage library room with tall arched windows, soft sunbeams illuminating floating dust motes, wooden shelves of antique books overlooking a quiet autumn garden",
-            "a quiet vintage train platform at dusk, warm station lamps glowing softly in the evening mist, empty railway tracks curving into distant twilight countryside",
-            "an antique wooden desk beside an open bay window overlooking rolling green meadows at sunset, scattered handwritten papers and warm golden amber glow",
-            "a weathered stone garden bench under an ancient weeping willow, golden late-afternoon sunbeams piercing through foliage"
+            "an atmospheric sun-drenched vintage writer's study with tall arched windows, an antique typewriter, scattered handwritten letters, a warm steaming ceramic mug overlooking an autumn garden",
+            "a quiet vintage railway platform at dusk, warm station lamps glowing in evening mist, empty tracks curving toward distant twilight countryside",
+            "an antique wooden desk beside an open bay window overlooking rolling green hills at golden hour, a solitary writer looking out in gentle contemplation",
+            "a weathered stone bench under an ancient weeping willow in an old botanical garden, sunbeams illuminating floating golden dust motes"
         ]
         chosen_env = scenic_envs[(scene_idx - 1) % len(scenic_envs)]
         feeling_theme = "bittersweet nostalgia, passage of time, and enduring quiet memories"
@@ -184,10 +184,10 @@ def build_scene_artistic_prompt(stanza: str, scene_idx: int, total_scenes: int, 
     # 8. Love, romance, soul connection, devotion, warmth
     elif any(k in words_lower for k in ["heart", "love", "kiss", "hug", "hold", "forever", "together", "soul", "smile", "eyes", "cherish"]):
         scenic_envs = [
-            "a romantic twilight riverbank with glowing paper lanterns floating gently across calm reflective water under weeping willow trees, warm candle glow against indigo ripples",
-            "a peaceful garden path lined with warm fairy lights and blooming night-jasmine under a canopy of starlight, soft warm bokeh, enchanting atmosphere",
-            "a breathtaking sunset terrace overlooking a tranquil coastal bay, warm golden glow washing over blooming bougainvillea, peaceful romantic evening",
-            "a secluded blooming meadow at golden hour with wildflowers swaying in a gentle breeze, soft amber sunlight illuminating drifting dandelion fluff"
+            "two gentle silhouettes sitting side-by-side on a wooden riverbank dock beneath weeping willows, watching glowing paper lanterns drift over calm water at twilight",
+            "a couple seen from behind walking hand-in-hand along a quiet garden path illuminated by soft fairy lights and blooming night jasmine under stars",
+            "two figures standing on a scenic sunset terrace overlooking a tranquil coastal bay, warm golden light washing over blooming bougainvillea",
+            "a peaceful pair resting in a sunlit meadow at golden hour surrounded by swaying wildflowers and floating dandelion seeds"
         ]
         chosen_env = scenic_envs[(scene_idx - 1) % len(scenic_envs)]
         feeling_theme = "intimate warmth, tender devotion, and heartwarming harmony"
@@ -195,17 +195,17 @@ def build_scene_artistic_prompt(stanza: str, scene_idx: int, total_scenes: int, 
     # 9. General contemplative / philosophical poetry
     else:
         scenic_envs = [
-            f"an expansive scenic mountain vista overlooking rolling valleys under dramatic atmospheric clouds, soft golden god rays illuminating lush slopes, calm and serene",
-            f"a tranquil secluded forest glade with sunlight filtering through emerald leaves, gentle winding brook, pristine nature scenery",
-            f"a quiet coastal path winding along rolling green bluffs above a peaceful sparkling sea at late afternoon, fresh coastal breeze",
-            f"a panoramic view from a tranquil hilltop looking out toward endless misty horizons at sunrise, majestic stillness"
+            f"a solitary wanderer in the distance standing on a scenic mountain ridge overlooking rolling valleys under dramatic clouds, golden god rays illuminating the landscape",
+            f"a peaceful traveler walking along a secluded forest glade path beside a gentle winding brook, sunlight filtering through emerald leaves",
+            f"a lone figure walking along rolling green coastal bluffs above a peaceful sparkling sea at late afternoon, fresh coastal breeze",
+            f"a reflective wanderer sitting on a tranquil hilltop looking out toward endless misty horizons at golden sunrise"
         ]
         chosen_env = scenic_envs[(scene_idx - 1) % len(scenic_envs)]
         feeling_theme = f"contemplative poetic stillness reflecting '{clean[:45]}'"
 
     prompt = (
         f"Breathtaking wide scenic landscape illustration capturing the feeling: '{feeling_theme}'. "
-        f"Scenic environment: {chosen_env}. "
+        f"Scenic environment with poem-related subject: {chosen_env}. "
         f"Atmosphere & Lighting: {lighting_prog}, rich atmospheric depth, cinematic volumetric illumination. "
         f"Artistic Style: Masterpiece Studio Ghibli background scenic art and Makoto Shinkai environmental aesthetic, "
         f"rich painterly fine art, expansive 9:16 vertical environmental composition, "

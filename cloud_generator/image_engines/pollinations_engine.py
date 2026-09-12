@@ -53,9 +53,9 @@ def generate_pollinations_image(
 
     clean_prompt = prompt.replace("|", " ").strip()
     clean_prompt = " ".join(clean_prompt.split())
-    # Keep prompt concise for URL encoding
-    if len(clean_prompt) > 800:
-        clean_prompt = clean_prompt[:800].rsplit(" ", 1)[0]
+    # Keep prompt under 240 chars so Pollinations URL path does not trigger HTTP 500 / 414 / timeout
+    if len(clean_prompt) > 240:
+        clean_prompt = clean_prompt[:240].rsplit(" ", 1)[0]
     encoded_prompt = urllib.parse.quote(clean_prompt)
 
     # Model cascade: requested model first, then remaining models
