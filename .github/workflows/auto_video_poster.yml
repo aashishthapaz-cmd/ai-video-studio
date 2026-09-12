@@ -86,6 +86,10 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: 🛡️ Setup Cloudflare WARP (Bypass Cloudflare Datacenter Blocks)
+        uses: fscarmen/warp-on-actions@v1.3
+        continue-on-error: true
+
       - name: 🐍 Set up Python 3.10
         uses: actions/setup-python@v5
         with:

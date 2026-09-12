@@ -114,6 +114,9 @@ def _apply_perchancy_patches():
             options.set_argument("--no-sandbox")
             options.set_argument("--disable-dev-shm-usage")
             options.set_argument("--mute-audio")
+            options.set_argument("--enable-webgl")
+            options.set_argument("--ignore-gpu-blocklist")
+            options.set_argument("--disable-infobars")
             ua = (
                 "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
                 if sys.platform != "win32"
@@ -125,6 +128,17 @@ def _apply_perchancy_patches():
                 options.set_proxy(proxy)
 
             self.page = ChromiumPage(options)
+            try:
+                self.page.run_cdp("Page.addScriptToEvaluateOnNewDocument", {
+                    "source": """
+                        Object.defineProperty(navigator, 'webdriver', {get: () => undefined});
+                        window.chrome = { runtime: {} };
+                        Object.defineProperty(navigator, 'plugins', {get: () => [1, 2, 3, 4, 5]});
+                        Object.defineProperty(navigator, 'languages', {get: () => ['en-US', 'en']});
+                    """
+                })
+            except Exception as _cdp_err:
+                logger.debug(f"[Perchance] CDP stealth patch notice: {_cdp_err}")
             self.page.get("about:blank")
 
         BrowserCore.init_driver = _patched_init_driver
@@ -367,6 +381,17 @@ def generate_perchance_image(
                 all_frames = client.core._get_all_frames(tab)
                 for f in all_frames:
                     try:
+                        # Auto-click Cloudflare Turnstile challenge checkbox if present
+                        f.run_js("""
+                            try {
+                                let cb = document.querySelector('input[type="checkbox"], .ctp-checkbox-label, [name="cf-turnstile-response"]');
+                                if (cb && !cb.checked) {
+                                    cb.click();
+                                    cb.dispatchEvent(new MouseEvent('click', {bubbles: true}));
+                                }
+                            } catch(e) {}
+                        """)
+
                         href = f.run_js("return window.location.href;") or ""
                         if "image-generation" in href:
                             src = f.run_js("""
