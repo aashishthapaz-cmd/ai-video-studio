@@ -1,12 +1,14 @@
 """
 Perchance AI Image Generation Engine.
-Automates Perchance's free, unlimited AI image generator via headless browser automation (CDP).
+Automates Perchance's free, unlimited AI image generator via direct DrissionPage automation.
 Requires no API token or account sign-up.
 Outputs borderless edge-to-edge 1080x1920 vertical portraits.
 Includes:
 - Dynamic Chrome/Chromium auto-discovery (Playwright cache, Linux system bins, Windows registry).
-- Robust headless flags (--disable-gpu, --no-sandbox, --disable-dev-shm-usage).
-- Circuit breaker pattern to immediately fail over on any runner incompatibility without blocking CI.
+- Virtual Display (xvfb) headful execution to defeat bot detection and Cloudflare Turnstile blocks.
+- Direct DOM control of the generator iframe and nested result iframes for instant extraction.
+- Automatic image scaling and cropping to fill 1080x1920 without letterboxing.
+- Circuit breaker pattern to immediately fail over without blocking pipeline.
 """
 
 import os
@@ -23,10 +25,11 @@ from PIL import Image
 
 logger = logging.getLogger("PerchanceEngine")
 
-_CLIENT = None
+_PAGE = None
 _PERCHANCE_DISABLED = False
 _PERCHANCE_DISABLE_REASON = ""
-_PATCH_APPLIED = False
+_FAIL_COUNT = 0
+MAX_CONSECUTIVE_FAILS = 4
 
 
 def find_chromium_path() -> str | None:
@@ -75,112 +78,6 @@ def find_chromium_path() -> str | None:
     return None
 
 
-def _apply_perchancy_patches():
-    """Patches perchancy.core.BrowserCore to auto-inject the discovered Chromium binary & Linux flags."""
-    global _PATCH_APPLIED
-    if _PATCH_APPLIED:
-        return
-    try:
-        from perchancy.core import BrowserCore
-        from DrissionPage import ChromiumPage, ChromiumOptions
-
-        orig_init_driver = BrowserCore.init_driver
-
-        def _patched_init_driver(self, proxy=None):
-            if self.page is not None:
-                try:
-                    self.page.quit()
-                except Exception:
-                    pass
-                self.page = None
-
-            detected_chrome = find_chromium_path()
-            options = ChromiumOptions()
-            if detected_chrome:
-                options.set_browser_path(detected_chrome)
-                logger.info(f"[Perchance] Using browser executable: {detected_chrome}")
-
-            has_display = bool(os.environ.get("DISPLAY"))
-            if self.headless and not has_display:
-                options.headless(True)
-                options.set_argument("--headless=new")
-            else:
-                # With virtual X11 display (xvfb in CI), run headful on virtual display to avoid headless bot detection
-                options.headless(False)
-
-            options.set_argument("--disable-blink-features=AutomationControlled")
-            options.set_argument("--window-size=1280,720")
-            options.set_pref("profile.default_content_setting_values.popups", 2)
-            options.set_argument("--no-sandbox")
-            options.set_argument("--disable-dev-shm-usage")
-            options.set_argument("--mute-audio")
-            options.set_argument("--enable-webgl")
-            options.set_argument("--ignore-gpu-blocklist")
-            options.set_argument("--disable-infobars")
-            ua = (
-                "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
-                if sys.platform != "win32"
-                else "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
-            )
-            options.set_argument(f"--user-agent={ua}")
-
-            if proxy:
-                options.set_proxy(proxy)
-
-            self.page = ChromiumPage(options)
-            try:
-                self.page.run_cdp("Page.addScriptToEvaluateOnNewDocument", {
-                    "source": """
-                        Object.defineProperty(navigator, 'webdriver', {get: () => undefined});
-                        window.chrome = { runtime: {} };
-                        Object.defineProperty(navigator, 'plugins', {get: () => [1, 2, 3, 4, 5]});
-                        Object.defineProperty(navigator, 'languages', {get: () => ['en-US', 'en']});
-                    """
-                })
-            except Exception as _cdp_err:
-                logger.debug(f"[Perchance] CDP stealth patch notice: {_cdp_err}")
-            self.page.get("about:blank")
-
-        BrowserCore.init_driver = _patched_init_driver
-
-        # Also patch _click_button_js to trigger Perchance's native generate button event properly
-        orig_click = getattr(BrowserCore, "_click_button_js", None)
-        def _patched_click(self_core, frame, btn_sels):
-            try:
-                # First attempt direct trigger of Perchance's generate handler if available
-                res = frame.run_js("""
-                    try {
-                        let btn = document.getElementById('generateButtonEl') || document.querySelector('button[id*="generate" i]');
-                        if (btn) {
-                            let fnKey = Object.keys(window).find(k => k.startsWith('___generateButtonClickEvent'));
-                            if (fnKey && typeof window[fnKey] === 'function') {
-                                window[fnKey](new Event('click'));
-                                return '#generateButtonEl';
-                            }
-                            btn.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
-                            btn.click();
-                            return '#generateButtonEl';
-                        }
-                    } catch(e) {}
-                    return null;
-                """)
-                if res:
-                    return res
-            except Exception:
-                pass
-            if orig_click:
-                return orig_click(self_core, frame, btn_sels)
-            return None
-
-        BrowserCore._click_button_js = _patched_click
-        _PATCH_APPLIED = True
-    except Exception as e:
-        logger.warning(f"[Perchance] Could not patch perchancy BrowserCore: {e}")
-
-
-_FAIL_COUNT = 0
-MAX_CONSECUTIVE_FAILS = 4
-
 def is_perchance_available() -> bool:
     """Returns True if Perchance is enabled and a browser is available."""
     global _PERCHANCE_DISABLED, _FAIL_COUNT
@@ -209,55 +106,74 @@ def disable_perchance(reason: str = ""):
     _close_client()
 
 
-def auto_heal_perchance_client() -> bool:
-    """Restarts headless browser and clears state to recover from timeouts or dead processes."""
-    global _CLIENT
-    logger.info("[Perchance] Auto-healing: resetting headless browser client...")
-    _close_client()
-    time.sleep(1.0)
-    try:
-        _CLIENT = _get_client()
-        logger.info("[Perchance] Auto-heal succeeded: fresh client ready.")
-        return True
-    except Exception as e:
-        logger.warning(f"[Perchance] Auto-heal client reset warning: {e}")
-        return False
-
-
-def _get_client():
-    """Lazily initializes and reuses a headless perchancy client."""
-    global _CLIENT
-    if not is_perchance_available():
-        raise RuntimeError(f"Perchance is disabled: {_PERCHANCE_DISABLE_REASON or 'Engine offline'}")
-
-    _apply_perchancy_patches()
-
-    if _CLIENT is None:
+def _get_browser_page():
+    """Lazily initializes and reuses a ChromiumPage browser instance."""
+    global _PAGE
+    if _PAGE is not None:
         try:
-            from perchancy import Client
-            _CLIENT = Client(headless=True, debug=False)
-            _CLIENT.core.init_driver()
-            logger.info("[Perchance] Initialized headless perchancy client with active driver.")
-        except Exception as e:
-            logger.warning(f"[Perchance] Client init failed: {e}")
-            raise
-    elif _CLIENT.core.page is None:
-        try:
-            _CLIENT.core.init_driver()
+            _ = _PAGE.tabs_count
+            return _PAGE
         except Exception:
-            pass
-    return _CLIENT
+            _close_client()
+
+    from DrissionPage import ChromiumPage, ChromiumOptions
+
+    options = ChromiumOptions()
+    detected_chrome = find_chromium_path()
+    if detected_chrome:
+        options.set_browser_path(detected_chrome)
+        logger.info(f"[Perchance] Using browser binary: {detected_chrome}")
+
+    has_display = bool(os.environ.get("DISPLAY"))
+    # In Linux CI with xvfb-run, DISPLAY is set. On Windows desktop, platform is win32.
+    # Running headful on xvfb or Windows desktop bypasses Cloudflare bot flags completely!
+    if has_display or sys.platform == "win32":
+        options.headless(False)
+    else:
+        options.headless(True)
+        options.set_argument("--headless=new")
+
+    options.set_argument("--disable-blink-features=AutomationControlled")
+    options.set_argument("--no-sandbox")
+    options.set_argument("--disable-dev-shm-usage")
+    options.set_argument("--mute-audio")
+    options.set_argument("--window-size=1280,720")
+    ua = (
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+        if sys.platform != "win32"
+        else "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+    )
+    options.set_argument(f"--user-agent={ua}")
+
+    _PAGE = ChromiumPage(options)
+    logger.info("[Perchance] Initialized persistent ChromiumPage instance.")
+    return _PAGE
 
 
 def _close_client():
-    """Safely closes the active browser client."""
-    global _CLIENT
-    if _CLIENT is not None:
+    """Safely closes the active browser page instance."""
+    global _PAGE
+    if _PAGE is not None:
         try:
-            _CLIENT.close()
+            _PAGE.quit()
         except Exception:
             pass
-        _CLIENT = None
+        _PAGE = None
+
+
+def auto_heal_perchance_client() -> bool:
+    """Restarts browser session and clears state to recover from timeouts or dead processes."""
+    global _PAGE
+    logger.info("[Perchance] Auto-healing: resetting Chromium browser session...")
+    _close_client()
+    time.sleep(1.0)
+    try:
+        _PAGE = _get_browser_page()
+        logger.info("[Perchance] Auto-heal succeeded: fresh browser session ready.")
+        return True
+    except Exception as e:
+        logger.warning(f"[Perchance] Auto-heal browser reset warning: {e}")
+        return False
 
 
 def _crop_fill(img: Image.Image, target_w: int, target_h: int) -> Image.Image:
@@ -280,11 +196,11 @@ def generate_perchance_image(
     height: int = 1920,
     seed: int = None,
     style: str = "Painted Anime",
-    time_for_image: int = 60,
+    time_for_image: int = 45,
 ) -> str:
     """
     Generates an artistic anime portrait image via Perchance AI Text-to-Image Generator.
-    Directly interacts with generator frame and embedded output frames for 100% reliable image extraction.
+    Uses direct DOM control of generator iframe and nested result iframes for instant extraction.
     Returns the absolute path of the generated 1080x1920 image file.
     """
     global _FAIL_COUNT
@@ -303,7 +219,7 @@ def generate_perchance_image(
         if m.lower() in clean_prompt.lower():
             idx = clean_prompt.lower().find(m.lower())
             clean_prompt = clean_prompt[:idx].strip().rstrip(",. ")
-    clean_prompt = re.sub(r'[\r\n]+', ' ', clean_prompt).strip()
+    clean_prompt = " ".join(clean_prompt.split()).strip()
     if len(clean_prompt) > 320:
         clean_prompt = clean_prompt[:320].rsplit(" ", 1)[0]
 
@@ -316,98 +232,84 @@ def generate_perchance_image(
             f"no close-up face, no giant character portrait, no big anime character"
         )
 
-    logger.info(f"[Perchance] Generating scenic visual with poem-related subjects (style={style}) for prompt: '{clean_prompt[:75]}...'")
+    logger.info(f"[Perchance] Generating scenic visual (style={style}) for prompt: '{clean_prompt[:75]}...'")
+
+    ua = (
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+        if sys.platform != "win32"
+        else "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+    )
 
     last_error = None
     for attempt in range(2):
-        client = None
         tab = None
         try:
-            client = _get_client()
-            if client.core.page is None:
-                client.core.init_driver()
-            page = client.core.page
+            page = _get_browser_page()
             tab = page.new_tab("https://perchance.org/ai-text-to-image-generator")
-            time.sleep(3.5)
 
-            frames = client.core._get_all_frames(tab)
-            generator_frame = None
-            for f in frames:
-                href = f.run_js("return window.location.href;") or ""
-                if "perchance.org/ai-text-to-image-generator" in href and f != tab:
-                    generator_frame = f
+            # Wait up to 10 seconds for generator iframe to load
+            gen_frame = None
+            t_start = time.time()
+            while time.time() - t_start < 10:
+                gen_frame = tab.get_frame("@src:ai-text-to-image-generator")
+                if gen_frame:
                     break
+                time.sleep(0.5)
 
-            if not generator_frame:
-                raise RuntimeError("Could not locate generator frame in Perchance")
+            if not gen_frame:
+                raise RuntimeError("Could not locate generator frame '@src:ai-text-to-image-generator'")
 
-            # Configure Art Style (Painted Anime) & Shape (Portrait 512x768) and Prompt
+            # Configure Art Style (Painted Anime) & Shape (Portrait 512x768)
             style_val = "ref:optionKeyName:Painted Anime" if "anime" in str(style).lower() else "ref:optionKeyName:Cinematic"
-            generator_frame.run_js(f"""
+            gen_frame.run_js(f"""
                 let selects = document.querySelectorAll('select');
                 if (selects.length >= 2) {{
                     selects[0].value = '{style_val}';
                     selects[0].dispatchEvent(new Event('change', {{ bubbles: true }}));
-
                     selects[1].value = '512x768';
                     selects[1].dispatchEvent(new Event('change', {{ bubbles: true }}));
                 }}
-
-                let tas = document.querySelectorAll('textarea.paragraph-input');
-                if (tas.length > 0) {{
-                    let ta = tas[tas.length - 1];
-                    ta.value = {json.dumps(clean_prompt)};
-                    ta.dispatchEvent(new Event('input', {{ bubbles: true }}));
-                    ta.dispatchEvent(new Event('change', {{ bubbles: true }}));
-                }}
             """)
 
-            # Trigger generation via native event handler
-            generator_frame.run_js("""
-                let fn = window.___generateButtonClickEvent746291937;
-                if (typeof fn === 'function') {
-                    fn(new Event('click'));
-                } else {
-                    let btn = document.getElementById('generateButtonEl');
-                    if (btn) btn.click();
-                }
-            """)
+            # Target prompt textarea (the prompt input is the last textarea on the page)
+            tas = gen_frame.eles("tag:textarea")
+            if not tas:
+                raise RuntimeError("Prompt textarea not found in generator frame")
+            prompt_ta = tas[-1]
+            prompt_ta.input(clean_prompt, clear=True)
 
-            # Poll embed frames for result image
-            t0 = time.time()
+            # Click Generate Button
+            btn = gen_frame.ele("#generateButtonEl") or gen_frame.ele("text=✨ generate")
+            if not btn:
+                raise RuntimeError("Generate button not found in generator frame")
+            btn.click()
+
+            # Poll for generated image in nested iframes
+            t_poll = time.time()
             result_img_bytes = None
-            while time.time() - t0 < time_for_image:
+            while time.time() - t_poll < time_for_image:
                 time.sleep(1.0)
-                all_frames = client.core._get_all_frames(tab)
-                for f in all_frames:
+                nested_frames = gen_frame.eles("tag:iframe")
+                for nf in nested_frames:
                     try:
-                        # Auto-click Cloudflare Turnstile challenge checkbox if present
-                        f.run_js("""
-                            try {
-                                let cb = document.querySelector('input[type="checkbox"], .ctp-checkbox-label, [name="cf-turnstile-response"]');
-                                if (cb && !cb.checked) {
-                                    cb.click();
-                                    cb.dispatchEvent(new MouseEvent('click', {bubbles: true}));
-                                }
-                            } catch(e) {}
-                        """)
-
-                        href = f.run_js("return window.location.href;") or ""
-                        if "image-generation" in href:
-                            src = f.run_js("""
-                                let img = document.getElementById('resultImgEl');
-                                return img ? img.src : null;
-                            """)
-                            if src and src.startswith("data:image/"):
+                        n_fr = gen_frame.get_frame(nf)
+                        img = n_fr.ele("#resultImgEl")
+                        if img:
+                            src = img.attr("src") or ""
+                            if src.startswith("data:image/"):
                                 b64 = src.split(",", 1)[1]
-                                result_img_bytes = base64.b64decode(b64)
-                                break
-                            elif src and src.startswith("http"):
+                                raw = base64.b64decode(b64)
+                                if len(raw) > 5000:
+                                    result_img_bytes = raw
+                                    break
+                            elif src.startswith("http"):
                                 import urllib.request
-                                req = urllib.request.Request(src, headers={"User-Agent": "Mozilla/5.0"})
+                                req = urllib.request.Request(src, headers={"User-Agent": ua})
                                 with urllib.request.urlopen(req, timeout=15) as resp:
-                                    result_img_bytes = resp.read()
-                                break
+                                    raw = resp.read()
+                                    if len(raw) > 5000:
+                                        result_img_bytes = raw
+                                        break
                     except Exception:
                         pass
                 if result_img_bytes:
