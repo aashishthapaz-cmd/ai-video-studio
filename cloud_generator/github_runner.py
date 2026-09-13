@@ -137,6 +137,27 @@ def run():
     print("  🚀 GITHUB ACTIONS AUTONOMOUS VIDEO FACTORY & AUTO-POSTER", flush=True)
     print("=" * 70, flush=True)
 
+    # ── MUTEX: Prevent duplicate concurrent runner execution ────────────────
+    token = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
+    repo = os.environ.get("GITHUB_REPOSITORY")
+    current_run_id = os.environ.get("GITHUB_RUN_ID")
+    if token and repo and current_run_id:
+        try:
+            import requests
+            headers = {"Authorization": f"Bearer {token}", "Accept": "application/vnd.github+json"}
+            url = f"https://api.github.com/repos/{repo}/actions/workflows/auto_video_poster.yml/runs?status=in_progress&per_page=15"
+            r = requests.get(url, headers=headers, timeout=10)
+            if r.status_code == 200:
+                in_prog = r.json().get("workflow_runs", [])
+                other_active = [x for x in in_prog if str(x.get("id")) != str(current_run_id)]
+                if other_active:
+                    earliest = sorted(other_active, key=lambda x: int(x.get("id", 0)))[0]
+                    if int(current_run_id) > int(earliest.get("id", 0)):
+                        print(f"🛑 [Active Runner Mutex] Run #{earliest.get('run_number')} (ID: {earliest.get('id')}) is already actively processing a video.\n   Exiting this heartbeat run cleanly to prevent duplicate video rendering & duplicate Telegram notifications.", flush=True)
+                        return
+        except Exception as _mutex_err:
+            print(f"[Active Runner Mutex] Notice: {_mutex_err}", flush=True)
+
     try:
         run_self_repair()
     except Exception as e:

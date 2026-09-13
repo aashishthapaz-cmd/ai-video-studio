@@ -196,10 +196,18 @@ def generate_scene_image(
     # Build the final prompt with universal negatives and subject gender lock
     final_prompt = _build_prompt(prompt, subject_type=subject_type)
 
+    is_ci = bool(os.environ.get("GITHUB_ACTIONS"))
+    # In GitHub Actions (Azure Datacenter IP), Cloudflare Turnstile blocks Perchance's iframe.
+    # Therefore, in CI we make Pollinations (FLUX) Primary (instant 5s generation, no CAPTCHA).
+    # Locally on PC (Residential IP), Perchance remains Primary!
+    default_priority = (
+        ["pollinations", "perchance", "cloudflare", "puter", "huggingface"]
+        if is_ci
+        else ["perchance", "pollinations", "cloudflare", "puter", "huggingface"]
+    )
     priority = (
         [preferred_engine] if preferred_engine
-        # Perchance (Primary) → Pollinations → Cloudflare (FLUX) → Puter → HuggingFace
-        else cfg.get("image_engine_priority", ["perchance", "pollinations", "cloudflare", "puter", "huggingface"])
+        else cfg.get("image_engine_priority", default_priority)
     )
 
     errors = []
@@ -215,8 +223,9 @@ def generate_scene_image(
                         errors.append("perchance: engine unavailable in this environment")
                         continue
                 style = cfg.get("perchance_style", "Anime")
+                timeout_val = 25 if is_ci else 75
                 img = generate_perchance_image(
-                    final_prompt, output_path, width=width, height=height, seed=seed, style=style, time_for_image=75
+                    final_prompt, output_path, width=width, height=height, seed=seed, style=style, time_for_image=timeout_val
                 )
                 return {"ok": True, "engine": f"Perchance AI ({style})", "path": img}
 
