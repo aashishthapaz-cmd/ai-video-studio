@@ -1,29 +1,5 @@
 [
   {
-    "id": "job_1788968718_9708db",
-    "title": "Some People Were Only Sent To Teach You",
-    "script_text": "When someone isn't right for you, life will keep using them to hurt you, until you're strong enough to let go.\nAnd one day you'll realize,\nthey were only sent to teach you that losing someone is how you find yourself.",
-    "niche_id": "typewriters_voice_nostalgia",
-    "niche_name": "Typewriters Voice Nostalgia",
-    "voice": "assets/reference_voice/whishper_prompt.wav",
-    "theme": "typewriters_voice_nostalgia",
-    "target_page_ids": [
-      "1111538525383568"
-    ],
-    "scheduled_time": "2026-09-13 09:32",
-    "scheduled_time_nepal": "2026-09-13 09:32 NPT",
-    "scheduled_time_usa": "2026-09-12 23:47 EDT",
-    "scheduled_epoch": 1789271238,
-    "timezone": "Asia/Kathmandu",
-    "status": "PENDING",
-    "created_at": "2026-09-09 15:45:18",
-    "render_time": null,
-    "output_file": null,
-    "facebook_results": null,
-    "error": null,
-    "synced_to_local": false
-  },
-  {
     "id": "job_1789214322_9c71f7",
     "title": "The People Meant For Us Feel Exactly Like You",
     "script_text": "The people meant for us feel exactly like you,\nsomeone I've always known,\nsomeone who never expects me to be anything more than myself.\nYou're the person I hoped would arrive,\nbut never knew how to find.",
