@@ -1,0 +1,62 @@
+name: 🧪 Test Perchance AI in CI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-perchance:
+    name: 🎨 Test Perchance Headful in xvfb
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: 🎬 Install FFmpeg, Virtual Display & Fonts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg xvfb x11-utils fonts-noto-cjk fonts-noto-color-emoji fonts-dejavu-core
+
+      - name: 📦 Cache Pip Dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('cloud_generator/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: 📦 Install Dependencies & Chromium
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r cloud_generator/requirements.txt
+          pip install playwright
+          python -m playwright install chromium --with-deps
+          PLAYWRIGHT_CHROME=$(find ~/.cache/ms-playwright/chromium-* -name chrome 2>/dev/null | head -n 1)
+          if [ -n "$PLAYWRIGHT_CHROME" ] && [ -x "$PLAYWRIGHT_CHROME" ]; then
+            echo "Found Playwright Chromium at: $PLAYWRIGHT_CHROME"
+            sudo ln -sf "$PLAYWRIGHT_CHROME" /usr/bin/google-chrome
+            sudo ln -sf "$PLAYWRIGHT_CHROME" /usr/bin/chromium
+            sudo ln -sf "$PLAYWRIGHT_CHROME" /usr/bin/chromium-browser
+            sudo chmod +x "$PLAYWRIGHT_CHROME"
+          fi
+          google-chrome --version || chromium --version || true
+
+      - name: 🚀 Run CI Perchance Test
+        run: |
+          xvfb-run -a python cloud_generator/test_ci_perchance.py
+
+      - name: 📤 Upload Debug Screenshots & Generated Images
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: perchance-ci-diagnostics
+          path: debug_output/
+          retention-days: 7
+          if-no-files-found: ignore
