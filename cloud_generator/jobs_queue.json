@@ -15,14 +15,15 @@
     "scheduled_time_usa": "2026-09-12 20:46 EDT",
     "scheduled_epoch": 1789260378,
     "timezone": "Asia/Kathmandu",
-    "status": "RENDERING",
+    "status": "PENDING",
     "created_at": "2026-09-12 11:58:42",
     "render_time": null,
     "output_file": null,
     "facebook_results": null,
-    "error": null,
+    "error": "Auto-recovered from unexpected process restart (was RENDERING)",
     "synced_to_local": false,
-    "started_at": "2026-09-13 00:45:15"
+    "started_at": "2026-09-13 00:45:15",
+    "recovered_at": "2026-09-13 01:49:06"
   },
   {
     "id": "job_1788974929_1b6009",
@@ -35,10 +36,10 @@
     "target_page_ids": [
       "975713682296183"
     ],
-    "scheduled_time": "2026-09-13 07:54",
-    "scheduled_time_nepal": "2026-09-13 07:54 NPT",
-    "scheduled_time_usa": "2026-09-12 22:09 EDT",
-    "scheduled_epoch": 1789265352,
+    "scheduled_time": "2026-09-13 08:04",
+    "scheduled_time_nepal": "2026-09-13 08:04 NPT",
+    "scheduled_time_usa": "2026-09-12 22:19 EDT",
+    "scheduled_epoch": 1789265948,
     "timezone": "Asia/Kathmandu",
     "status": "PENDING",
     "created_at": "2026-09-09 17:28:49",
