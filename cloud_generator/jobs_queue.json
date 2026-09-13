@@ -1,31 +1,5 @@
 [
   {
-    "id": "job_1789214322_251c6b",
-    "title": "If I Could Give You The World",
-    "script_text": "If I could give you the world,\nit still wouldn't match what you've given me.\nYou're the one decision I'd make a thousand times over, without a second thought.\nEven time itself can't take this love from us,\neven if it speeds up, slows down, or reverses itself.\nYou're always there with me.\nYou are the kind of beauty that artists dream of capturing.\nIf fate exists, it showed up in my life as you.\nKnowing you're here is enough to make this complicated life feel beautifully simple again.\nTough days become something I don't dwell on.\nAnd every moment I love is something that stays with me forever.",
-    "niche_id": "typewriters_voice_nostalgia",
-    "niche_name": "Typewriters Voice Nostalgia",
-    "voice": "assets/reference_voice/whishper_prompt.wav",
-    "theme": "typewriters_voice_nostalgia",
-    "target_page_ids": [
-      "1262528790282693"
-    ],
-    "scheduled_time": "2026-09-13 06:31",
-    "scheduled_time_nepal": "2026-09-13 06:31 NPT",
-    "scheduled_time_usa": "2026-09-12 20:46 EDT",
-    "scheduled_epoch": 1789260378,
-    "timezone": "Asia/Kathmandu",
-    "status": "PENDING",
-    "created_at": "2026-09-12 11:58:42",
-    "render_time": null,
-    "output_file": null,
-    "facebook_results": null,
-    "error": "Auto-recovered from unexpected process restart (was RENDERING)",
-    "synced_to_local": false,
-    "started_at": "2026-09-13 00:45:15",
-    "recovered_at": "2026-09-13 01:49:06"
-  },
-  {
     "id": "job_1788974929_1b6009",
     "title": "Born Again",
     "script_text": "After you walked away from me, I didn't break.\nI learned to forget you.\nI learned how to live without you.\nAnd I began to love myself.\nIn the end, I was able to start over and begin a new life.",
