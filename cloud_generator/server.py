@@ -29,12 +29,16 @@ try:
         parse_bulk_scripts, 
         enqueue_bulk_jobs, 
         load_queue, 
+        save_queue,
         delete_job, 
+        update_job,
         execute_single_job, 
         start_scheduler,
         reorder_queue,
         retry_job,
-        clear_completed_jobs
+        clear_completed_jobs,
+        stop_scheduler,
+        get_scheduler_status,
     )
     from cloud_generator.self_healing import start_watchdog, get_system_health, run_self_repair
     from cloud_generator.cloud_storage import get_pending_sync_list, get_video_file_for_job, confirm_sync_and_delete, get_storage_stats
@@ -56,12 +60,16 @@ except ImportError:
         parse_bulk_scripts, 
         enqueue_bulk_jobs, 
         load_queue, 
+        save_queue,
         delete_job, 
+        update_job,
         execute_single_job, 
         start_scheduler,
         reorder_queue,
         retry_job,
-        clear_completed_jobs
+        clear_completed_jobs,
+        stop_scheduler,
+        get_scheduler_status,
     )
     from self_healing import start_watchdog, get_system_health, run_self_repair
     from cloud_storage import get_pending_sync_list, get_video_file_for_job, confirm_sync_and_delete, get_storage_stats
@@ -150,7 +158,13 @@ class CloudStudioHandler(SimpleHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-Type", "application/json")
             self.end_headers()
-            self.wfile.write(json.dumps(load_settings()).encode("utf-8"))
+            # The browser needs page names and statuses, never access tokens.
+            public_settings = load_settings().copy()
+            public_settings["facebook_pages"] = [
+                {key: value for key, value in page.items() if key not in {"access_token", "token"}}
+                for page in public_settings.get("facebook_pages", [])
+            ]
+            self.wfile.write(json.dumps(public_settings).encode("utf-8"))
             return
 
         elif path == "/api/bulk/queue":
@@ -158,6 +172,13 @@ class CloudStudioHandler(SimpleHTTPRequestHandler):
             self.send_header("Content-Type", "application/json")
             self.end_headers()
             self.wfile.write(json.dumps({"queue": load_queue()}).encode("utf-8"))
+            return
+
+        elif path == "/api/autopilot":
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.end_headers()
+            self.wfile.write(json.dumps(get_scheduler_status()).encode("utf-8"))
             return
 
         elif path == "/api/niches":
@@ -322,6 +343,22 @@ class CloudStudioHandler(SimpleHTTPRequestHandler):
             self.wfile.write(json.dumps({"ok": True, "added_jobs": len(enqueued), "jobs": enqueued}).encode("utf-8"))
             return
 
+        elif path == "/api/autopilot/start":
+            start_scheduler()
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.end_headers()
+            self.wfile.write(json.dumps(get_scheduler_status()).encode("utf-8"))
+            return
+
+        elif path == "/api/autopilot/stop":
+            stop_scheduler()
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.end_headers()
+            self.wfile.write(json.dumps(get_scheduler_status()).encode("utf-8"))
+            return
+
         elif path == "/api/bulk/delete":
             payload = json.loads(post_body)
             job_id = payload.get("job_id", "")
@@ -361,6 +398,45 @@ class CloudStudioHandler(SimpleHTTPRequestHandler):
             self.send_header("Content-Type", "application/json")
             self.end_headers()
             self.wfile.write(json.dumps({"ok": True, "queue": new_q}).encode("utf-8"))
+            return
+
+        elif path == "/api/bulk/update":
+            payload = json.loads(post_body)
+            job_id = payload.get("job_id", "")
+            updates = payload.get("updates", {})
+            update_job(job_id, updates)
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.end_headers()
+            self.wfile.write(json.dumps({"ok": True, "job_id": job_id}).encode("utf-8"))
+            return
+
+        elif path == "/api/bulk/clear":
+            payload = json.loads(post_body) if post_body else {}
+            target_page_id = payload.get("target_page_id")
+            only_pending = payload.get("only_pending", True)
+            q = load_queue()
+            if target_page_id:
+                new_q = [j for j in q if not (target_page_id in (j.get("target_page_ids") or []))]
+            elif only_pending:
+                new_q = [j for j in q if j.get("status") != "PENDING"]
+            else:
+                new_q = []
+            save_queue(new_q)
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.end_headers()
+            self.wfile.write(json.dumps({"ok": True, "remaining": len(new_q)}).encode("utf-8"))
+            return
+
+        elif path == "/api/bulk/save_queue":
+            payload = json.loads(post_body)
+            new_q = payload.get("queue", [])
+            save_queue(new_q)
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.end_headers()
+            self.wfile.write(json.dumps({"ok": True, "count": len(new_q)}).encode("utf-8"))
             return
 
         elif path == "/api/bulk/clear_completed":
@@ -453,8 +529,8 @@ class CloudStudioHandler(SimpleHTTPRequestHandler):
 
 def start_server():
     start_watchdog()
-    start_scheduler()
-    server = HTTPServer(("0.0.0.0", PORT), CloudStudioHandler)
+    # This studio handles local Page tokens. Do not expose it on the LAN.
+    server = HTTPServer(("127.0.0.1", PORT), CloudStudioHandler)
     print(f"\n=======================================================")
     print(f"  AI Autonomous Video Factory & Multi-Page Studio is LIVE!")
     print(f"  URL: http://127.0.0.1:{PORT}")

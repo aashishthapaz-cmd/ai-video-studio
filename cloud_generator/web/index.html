@@ -435,7 +435,22 @@ And I'll always admire you for that.</textarea>
         </div>
 
         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.5rem;">
-          <button class="btn btn-emerald" onclick="triggerSingleCloudRender()">🚀 Render & Post Now via GitHub Actions</button>
+          <button class="btn btn-emerald" id="btnSingleRender" onclick="triggerSingleCloudRender()">🚀 Render & Post Now via GitHub Actions</button>
+        </div>
+
+        <!-- Real-Time Local Studio Progress Tracker -->
+        <div id="localProgressBox" style="display: none; margin-top: 1.25rem; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 1.25rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem; flex-wrap: wrap; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="status-dot"></span>
+              <strong id="localProgressStatus" style="color: #6ee7b7; font-size: 0.92rem;">Starting generation...</strong>
+            </div>
+            <span id="localProgressPercent" style="color: #fde047; font-weight: 700; font-family: monospace; font-size: 0.95rem;">0%</span>
+          </div>
+          <div style="background: rgba(255,255,255,0.08); border-radius: 999px; height: 10px; overflow: hidden;">
+            <div id="localProgressBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #10b981, #06b6d4); transition: width 0.35s ease;"></div>
+          </div>
+          <p id="localProgressLog" style="font-size: 0.78rem; color: var(--text-dim); margin-top: 0.6rem; font-family: 'JetBrains Mono', monospace;"></p>
         </div>
       </div>
     </section>
@@ -510,7 +525,7 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
         </div>
 
         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-          <button class="btn" onclick="dispatchBulkToGithub()">⚡ Dispatch All Poems to GitHub Actions Now</button>
+          <button class="btn" id="btnDispatchBulk" onclick="dispatchBulkToGithub()">⚡ Dispatch All Poems to GitHub Actions Now</button>
         </div>
       </div>
 
@@ -518,7 +533,7 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       <div class="card" style="border-color: rgba(16, 185, 129, 0.35); background: rgba(10, 24, 28, 0.85);">
         <div class="card-header">
           <div>
-            <h3 class="card-title" style="color: #a7f3d0;">
+            <h3 class="card-title" id="cloudQueueTitle" style="color: #a7f3d0;">
               📅 Live GitHub Actions Cloud Queue (<span id="cloudQueueCount">0</span> Scheduled)
             </h3>
             <div style="font-size: 0.8rem; color: var(--text-dim); margin-top: 3px;">
@@ -530,7 +545,7 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
             <button class="btn btn-emerald btn-sm" onclick="runAllDueCloudJobs()" id="btnRunDueJobs" style="display: none; background: #059669; font-weight: 700;" title="Instantly render and publish the next scheduled job that has reached its time">⚡ Run Due Job (<span id="dueJobsCount">0</span>)</button>
             <button class="btn btn-emerald btn-sm" onclick="autoSpaceCloudQueue()" title="Auto-detect collisions and enforce 30-minute spacing across all scheduled jobs">⚡ Auto-Space (±30m Gaps)</button>
             <button class="btn btn-warning btn-sm" onclick="cleanOutdatedCloudQueue()" title="Remove all past/outdated scheduled jobs whose time has already passed">🧹 Clean Outdated</button>
-            <button class="btn btn-secondary btn-sm" onclick="fetchCloudQueueFromGithub(false)">🔄 Refresh from GitHub</button>
+            <button class="btn btn-secondary btn-sm" id="btnRefreshQueue" onclick="fetchCloudQueueFromGithub(false)">🔄 Refresh from GitHub</button>
             <button class="btn btn-danger btn-sm" onclick="clearAllPendingCloudQueue()">🗑️ Clear All Pending</button>
           </div>
         </div>
@@ -860,6 +875,7 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
 
   <script>
     const DEFAULT_REPO = 'aashishthapaz-cmd/ai-video-studio';
+    const IS_LOCAL = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost';
     let QUEUE = [];
     let FB_PAGES = [];
 
@@ -887,6 +903,50 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       localStorage.setItem('gh_repo', savedRepo);
       localStorage.setItem('tg_token', savedTgToken);
       localStorage.setItem('tg_chat', savedTgChat);
+
+      if (IS_LOCAL) {
+        const connText = document.getElementById('connStatusText');
+        if (connText) connText.innerHTML = '● LOCAL STUDIO MODE (Port 8190)';
+        const connStatus = document.getElementById('connStatus');
+        if (connStatus) {
+          connStatus.style.background = 'rgba(16, 185, 129, 0.18)';
+          connStatus.style.borderColor = 'rgba(16, 185, 129, 0.45)';
+          connStatus.style.color = '#34d399';
+        }
+        const btnHeader = document.querySelector('.header-actions button');
+        if (btnHeader) {
+          btnHeader.innerHTML = '⚡ Run Local Worker';
+          btnHeader.title = 'Run next scheduled queue job on local PC worker';
+        }
+        const btnSingle = document.getElementById('btnSingleRender');
+        if (btnSingle) {
+          btnSingle.innerHTML = '🚀 Render & Post Now (Local Studio Worker)';
+        }
+        const btnBulk = document.getElementById('btnDispatchBulk');
+        if (btnBulk) {
+          btnBulk.innerHTML = '⚡ Schedule All to Local Queue';
+        }
+        const qTitle = document.getElementById('cloudQueueTitle');
+        if (qTitle) {
+          qTitle.innerHTML = '📅 Live Local Studio Queue (<span id="cloudQueueCount">0</span> Scheduled)';
+        }
+        const btnRef = document.getElementById('btnRefreshQueue');
+        if (btnRef) {
+          btnRef.innerHTML = '🔄 Refresh Local Queue';
+        }
+
+        // Fetch settings and Facebook pages from local server
+        fetch('/api/settings?_cb=' + Date.now())
+          .then(r => r.json())
+          .then(data => {
+            if (data && data.facebook_pages && data.facebook_pages.length) {
+              FB_PAGES = data.facebook_pages;
+              try { localStorage.setItem('fb_pages', JSON.stringify(FB_PAGES)); } catch(e){}
+              populateAllTargetPageDropdowns();
+              renderFbPages();
+            }
+          }).catch(err => console.warn('Could not load local settings:', err));
+      }
 
       // Set default start time picker to current local time if empty
       const startPicker = document.getElementById('bulkCloudStartTime');
@@ -1072,6 +1132,24 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       const countEl = document.getElementById('cloudQueueCount');
       const indicator = document.getElementById('queueSyncIndicator');
       if (!container) return;
+
+      if (IS_LOCAL) {
+        try {
+          const localRes = await fetch('/api/bulk/queue?_cb=' + Date.now());
+          if (localRes.ok) {
+            const localData = await localRes.json();
+            CLOUD_QUEUE = localData.queue || [];
+            renderCloudQueue();
+            if (indicator) {
+              indicator.innerText = '🟢 Local Queue Active (Real-Time)';
+              indicator.style.color = '#34d399';
+            }
+            return;
+          }
+        } catch (localErr) {
+          console.warn('Local queue fetch failed, falling back to GitHub:', localErr);
+        }
+      }
 
       if (!silent) {
         container.innerHTML = '<p style="color: var(--text-dim); font-size: 0.88rem;">⏳ Loading scheduled posts from GitHub Actions repository...</p>';
@@ -1266,6 +1344,28 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
     }
 
     async function commitCloudQueueToGithub(updatedQueue, commitMessage) {
+      if (IS_LOCAL) {
+        showToast('💾 Saving queue changes to local studio...');
+        try {
+          const res = await fetch('/api/bulk/save_queue', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ queue: updatedQueue })
+          });
+          if (res.ok) {
+            CLOUD_QUEUE = updatedQueue;
+            renderCloudQueue();
+            return true;
+          } else {
+            const errData = await res.json().catch(function() { return {}; });
+            throw new Error(errData.error || ('Server error ' + res.status));
+          }
+        } catch (err) {
+          alert('Local queue save error: ' + err.message);
+          return false;
+        }
+      }
+
       const pat = localStorage.getItem('gh_pat');
       const repo = localStorage.getItem('gh_repo') || DEFAULT_REPO;
 
@@ -1494,6 +1594,30 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       const job = CLOUD_QUEUE.find(function(j) { return j.id === jobId; });
       if (!job) return;
 
+      if (IS_LOCAL) {
+        if (!confirm('Run "' + job.title + '" immediately on Local PC Worker? It will start rendering now.')) return;
+        showToast('⚡ Starting local render for "' + job.title + '"...');
+        try {
+          const res = await fetch('/api/bulk/run_now', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ job_id: jobId })
+          });
+          const data = await res.json();
+          if (data.ok) {
+            showToast('🚀 Local render started! Check Single Studio progress or Outputs.');
+            fetchCloudQueueFromGithub(true);
+            return;
+          } else {
+            alert('Failed to run job: ' + (data.error || 'Unknown error'));
+            return;
+          }
+        } catch (err) {
+          alert('Local run error: ' + err.message);
+          return;
+        }
+      }
+
       let targetPage = '';
       if (job.target_page_ids && job.target_page_ids.length) {
         targetPage = String(job.target_page_ids[0]).trim();
@@ -1585,7 +1709,7 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
     // Smart Autonomous Queue Dispatcher (with persistent anti-duplicate protection)
     let IS_AUTO_DISPATCHING = false;
     async function checkAndAutoDispatchDueJobs() {
-      if (IS_AUTO_DISPATCHING || window._DISPATCH_LOCK) return;
+      if (IS_LOCAL || IS_AUTO_DISPATCHING || window._DISPATCH_LOCK) return;
       const pat = localStorage.getItem('gh_pat');
       if (!pat || !CLOUD_QUEUE || !CLOUD_QUEUE.length) return;
 
@@ -1701,8 +1825,45 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       setTimeout(function() { t.style.display = 'none'; }, 4500);
     }
 
+    let LOCAL_PROGRESS_POLLER = null;
+    function startLocalProgressTracking() {
+      const box = document.getElementById('localProgressBox');
+      const statusEl = document.getElementById('localProgressStatus');
+      const barEl = document.getElementById('localProgressBar');
+      const pctEl = document.getElementById('localProgressPercent');
+      const logEl = document.getElementById('localProgressLog');
+      if (box) box.style.display = 'block';
+
+      if (LOCAL_PROGRESS_POLLER) clearInterval(LOCAL_PROGRESS_POLLER);
+
+      LOCAL_PROGRESS_POLLER = setInterval(async function() {
+        try {
+          const res = await fetch('/api/status?_cb=' + Date.now());
+          if (!res.ok) return;
+          const data = await res.json();
+          if (statusEl) statusEl.innerText = data.status || 'Processing...';
+          if (pctEl) pctEl.innerText = (data.progress || 0) + '%';
+          if (barEl) barEl.style.width = (data.progress || 0) + '%';
+          if (logEl && data.logs && data.logs.length) {
+            logEl.innerText = data.logs[data.logs.length - 1];
+          }
+
+          if (!data.running && data.progress >= 100) {
+            clearInterval(LOCAL_PROGRESS_POLLER);
+            showToast('🎉 Video render completed successfully!');
+            setTimeout(function() { switchTab('gallery'); }, 1500);
+          } else if (!data.running && data.status && data.status.startsWith('Error')) {
+            clearInterval(LOCAL_PROGRESS_POLLER);
+            showToast('⚠️ Video render error: ' + data.status);
+          }
+        } catch(e) {
+          console.warn('Status poll error:', e);
+        }
+      }, 2000);
+    }
+
     // Single Cloud Render Dispatch
-    async function triggerSingleCloudRender() {
+    async function triggerSingleCloudRender(forceCloud) {
       const title = document.getElementById('singleTitle').value.trim();
       const script = document.getElementById('singleScript').value.trim();
       const vibe = document.getElementById('singleVibe').value;
@@ -1713,6 +1874,35 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       if (!script) {
         alert('Please enter poem or script text.');
         return;
+      }
+
+      if (IS_LOCAL && !forceCloud) {
+        showToast('🚀 Starting local rendering on PC...');
+        try {
+          const res = await fetch('/api/generate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              title: title || 'Single Masterpiece',
+              script: script,
+              theme: vibe,
+              auto_publish_fb: autoPub === 'true',
+              target_page_ids: (targetPage && targetPage !== 'ALL Pages') ? [targetPage] : []
+            })
+          });
+          const data = await res.json();
+          if (data.ok) {
+            showToast('✨ Local rendering in progress! Tracking status below...');
+            startLocalProgressTracking();
+            return;
+          } else {
+            alert('Error starting local generation: ' + (data.error || 'Unknown error'));
+            return;
+          }
+        } catch (err) {
+          alert('Local generation error: ' + err.message);
+          return;
+        }
       }
 
       showToast('🚀 Dispatching single render job to GitHub Actions...');
@@ -1888,6 +2078,37 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
         count = raw.split(new RegExp('\\n\\s*\\n+', 'g')).filter(function(s) { return s.trim(); }).length;
       }
 
+      if (IS_LOCAL) {
+        showToast('⚡ Adding ' + count + ' poem(s) directly to Local Queue...');
+        try {
+          const localInterval = intervalVal === 'peak_slots' ? 120 : parseInt(intervalVal, 10);
+          const res = await fetch('/api/bulk/create', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              raw_text: raw,
+              target_page_ids: (targetPage && targetPage !== 'ALL Pages') ? [targetPage] : [],
+              start_time: formattedStartTime || undefined,
+              interval_minutes: isNaN(localInterval) ? 120 : localInterval,
+              auto_distribute: targetPage === 'ALL Pages'
+            })
+          });
+          const data = await res.json();
+          if (data.ok) {
+            showToast('✅ ' + (data.added_jobs || count) + ' poem(s) added to Local Queue successfully!');
+            document.getElementById('bulkCloudText').value = '';
+            fetchCloudQueueFromGithub(false);
+            return;
+          } else {
+            alert('Error adding bulk jobs: ' + (data.error || 'Unknown error'));
+            return;
+          }
+        } catch (err) {
+          alert('Local bulk schedule error: ' + err.message);
+          return;
+        }
+      }
+
       showToast('⚡ Dispatching ' + count + ' poem(s) to GitHub Actions bulk scheduler...');
 
       const success = await dispatchWorkflowAPI({
@@ -1993,8 +2214,16 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       populateAllTargetPageDropdowns();
       renderFbPages();
 
+      if (IS_LOCAL) {
+        fetch('/api/facebook/page/save', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: name, id: id, access_token: token, token: token, niche: niche, enabled: true })
+        }).catch(err => console.warn('Could not save page locally:', err));
+      }
+
       document.getElementById('fbPageToken').value = '';
-      showToast('📱 Saved Page "' + name + '". Click "🔐 Sync to GitHub Secrets" to push to GitHub Actions!');
+      showToast('📱 Saved Page "' + name + '"' + (IS_LOCAL ? ' to local studio!' : '. Click "🔐 Sync to GitHub Secrets" to push to GitHub Actions!'));
     }
 
     async function testFbToken() {
@@ -2188,12 +2417,20 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
     }
 
     function removeFbPage(idx) {
-      if (!confirm('Remove page "' + (FB_PAGES[idx] ? FB_PAGES[idx].name : '') + '"?')) return;
+      const p = FB_PAGES[idx];
+      if (!confirm('Remove page "' + (p ? p.name : '') + '"?')) return;
+      if (IS_LOCAL && p) {
+        fetch('/api/facebook/page/delete', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ page_id: p.id || p.page_id })
+        }).catch(function(e) { console.warn('Local page delete error:', e); });
+      }
       FB_PAGES.splice(idx, 1);
       localStorage.setItem('fb_pages', JSON.stringify(FB_PAGES));
       populateAllTargetPageDropdowns();
       renderFbPages();
-      showToast('🗑️ Page removed. Click "🔐 Sync to GitHub Secrets" to update GitHub.');
+      showToast('🗑️ Page removed.');
     }
 
     // Post now to a specific page by dispatching a quick test poem
@@ -2262,6 +2499,36 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
     }
 
     async function dispatchCloudWorkflow() {
+      if (IS_LOCAL) {
+        showToast('⚡ Triggering local queue execution...');
+        try {
+          const qRes = await fetch('/api/bulk/queue?_cb=' + Date.now());
+          const qData = await qRes.json();
+          const q = qData.queue || [];
+          const nowEpoch = Math.floor(Date.now() / 1000);
+          const dueJob = q.find(function(j) {
+            return j.status === 'PENDING' && (!j.scheduled_epoch || j.scheduled_epoch <= nowEpoch);
+          }) || q.find(function(j) { return j.status === 'PENDING'; });
+
+          if (dueJob) {
+            showToast('🚀 Running next pending job: "' + dueJob.title + '" on PC...');
+            await fetch('/api/bulk/run_now', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ job_id: dueJob.id })
+            });
+            fetchCloudQueueFromGithub(true);
+            return;
+          } else {
+            showToast('ℹ️ No pending jobs in local queue to run.');
+            return;
+          }
+        } catch(e) {
+          alert('Local execution error: ' + e.message);
+          return;
+        }
+      }
+
       showToast('⚡ Dispatching scheduled batch runner on GitHub Actions...');
       const success = await dispatchWorkflowAPI({});
       if (success) {
@@ -2312,6 +2579,50 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       const repo = localStorage.getItem('gh_repo') || DEFAULT_REPO;
       const list = document.getElementById('runsList');
       if (!list) return;
+
+      if (IS_LOCAL) {
+        list.innerHTML = '<p style="color: var(--text-dim); font-size: 0.85rem;">⏳ Fetching rendered videos from local output directory...</p>';
+        try {
+          const outRes = await fetch('/api/outputs?_cb=' + Date.now());
+          if (outRes.ok) {
+            const outData = await outRes.json();
+            if (outData && outData.length) {
+              list.innerHTML = `
+                <div style="margin-bottom: 1.25rem;">
+                  <h4 style="color: #6ee7b7; margin-bottom: 0.85rem; font-size: 0.95rem;">🎬 Rendered Masterpiece Videos (Local Output Folder)</h4>
+                  <div style="display: flex; flex-direction: column; gap: 14px;">
+                    ${outData.map(function(vid) {
+                      return `
+                        <div class="item-card" style="border-color: rgba(16,185,129,0.35); background: rgba(10,24,28,0.85); display: flex; flex-direction: column; gap: 10px;">
+                          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                            <div class="item-info">
+                              <h4 style="margin: 0; color: #fff;">🎥 ${escapeHtml(vid.name)}</h4>
+                              <p style="font-size: 0.82rem; color: #a7f3d0; margin-top: 3px;">Size: ${vid.size_mb} MB • Rendered: ${vid.created_at}</p>
+                            </div>
+                            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                              <a href="${vid.url}" download class="btn btn-sm btn-emerald">📥 Download MP4</a>
+                              <a href="${vid.url}" target="_blank" class="btn btn-sm btn-secondary">▶️ Fullscreen</a>
+                            </div>
+                          </div>
+                          <video controls preload="metadata" style="max-height: 280px; width: 100%; border-radius: 8px; background: #000;">
+                            <source src="${vid.url}" type="video/mp4">
+                          </video>
+                        </div>
+                      `;
+                    }).join('')}
+                  </div>
+                </div>
+              `;
+              return;
+            } else {
+              list.innerHTML = '<p style="color: var(--text-muted); font-size: 0.88rem;">No rendered videos found in local Output directory yet. Generate a video from Single Studio or run a queue job!</p>';
+              return;
+            }
+          }
+        } catch (err) {
+          console.warn('Local outputs fetch failed, trying GitHub runs:', err);
+        }
+      }
 
       list.innerHTML = '<p style="color: var(--text-dim); font-size: 0.85rem;">⏳ Fetching recent workflow runs from GitHub API...</p>';
 

@@ -466,6 +466,25 @@ def update_job(job_id: str, updates: dict):
             break
     save_queue(q)
 
+
+def _valid_target_pages(cfg: dict, target_page_ids) -> list:
+    """Return enabled pages with real credentials, honoring a job's target list."""
+    pages = []
+    wanted = {str(page_id).strip() for page_id in (target_page_ids or []) if str(page_id).strip()}
+    for page in cfg.get("facebook_pages", []):
+        page_id = str(page.get("id") or page.get("page_id") or "").strip()
+        token = str(page.get("access_token") or page.get("token") or "").strip()
+        is_placeholder = (
+            not page_id or not token or page_id.startswith("YOUR_")
+            or token.startswith("YOUR_")
+        )
+        if not page.get("enabled", True) or is_placeholder:
+            continue
+        if wanted and page_id not in wanted:
+            continue
+        pages.append(page)
+    return pages
+
 def reorder_queue(job_ids_order: list) -> list:
     q = load_queue()
     id_map = {j["id"]: j for j in q if "id" in j}
@@ -658,13 +677,12 @@ def execute_single_job(job_id: str) -> dict:
     job = next((j for j in q if j.get("id") == job_id), None)
     if not job:
         return {"ok": False, "error": f"Job {job_id} not found in queue"}
-        
+
     update_job(job_id, {"status": "RENDERING", "started_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S")})
     notify_job_start(job)
     
     t0 = time.time()
     try:
-        cfg = load_settings()
         res = run_cloud_pipeline(
             title=job["title"],
             script_text=job["script_text"],
@@ -746,4 +764,22 @@ def start_scheduler():
     _RUNNING = True
     _SCHEDULER_THREAD = threading.Thread(target=_scheduler_loop, daemon=True, name="BulkSchedulerDaemon")
     _SCHEDULER_THREAD.start()
-    print("[OK] Autonomous Bulk Video Scheduler daemon with USA Timezones started successfully.")
+    print("[OK] Local Auto Pilot started. It checks the local queue every 15 seconds.")
+
+
+def stop_scheduler() -> bool:
+    """Stops Auto Pilot from taking new queue jobs; an active render is allowed to finish."""
+    global _RUNNING
+    was_running = _RUNNING
+    _RUNNING = False
+    if was_running:
+        print("[OK] Local Auto Pilot stopped. Any active render will finish safely.")
+    return was_running
+
+
+def get_scheduler_status() -> dict:
+    return {
+        "running": bool(_RUNNING and _SCHEDULER_THREAD and _SCHEDULER_THREAD.is_alive()),
+        "check_interval_seconds": 15,
+        "mode": "local_pc",
+    }
