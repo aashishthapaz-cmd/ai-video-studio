@@ -1,4 +1,13 @@
+import sys
+if hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
 import time
+import os
 import uuid
 import random
 import hashlib
@@ -377,9 +386,10 @@ def generate_all_scene_images(scenes: list, assets_dir: Path, progress_callback=
             subject_type = "child"
 
         out_file = assets_dir / f"{scene_id}.png"
+        engine_tag = (preferred_engine or "AI Router").upper()
 
         if progress_callback:
-            progress_callback(i + 1, total, f"Generating image for {scene_id}")
+            progress_callback(i + 1, total, f"Rendering Scene {i+1}/{total} visual via {engine_tag}...")
 
         success = False
         for attempt in range(3):  # 3 attempts max: HF try, Pollinations fallback, emergency
@@ -411,7 +421,12 @@ def generate_all_scene_images(scenes: list, assets_dir: Path, progress_callback=
                         scene["image_path"] = str(img_path)
                         scene["image_engine"] = res["engine"]
                         success = True
-                        print(f"  ✅ [{scene_id}] Image OK via {res['engine']} (attempt {attempt+1})", flush=True)
+                        if progress_callback:
+                            progress_callback(i + 1, total, f"Scene {i+1}/{total} rendered via {res['engine']}!")
+                        try:
+                            print(f"  [OK] [{scene_id}] Image OK via {res['engine']} (attempt {attempt+1})", flush=True)
+                        except Exception:
+                            pass
                         time.sleep(0.2)
                         break
                     else:

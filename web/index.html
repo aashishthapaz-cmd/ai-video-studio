@@ -471,18 +471,18 @@ And I'll always admire you for that.</textarea>
         </div>
 
         <!-- Real-Time Local Studio Progress Tracker -->
-        <div id="localProgressBox" style="display: none; margin-top: 1.25rem; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 1.25rem;">
+        <div id="localProgressBox" class="localProgressBoxClass" style="display: none; margin-top: 1.25rem; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 1.25rem;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem; flex-wrap: wrap; gap: 8px;">
             <div style="display: flex; align-items: center; gap: 8px;">
               <span class="status-dot"></span>
-              <strong id="localProgressStatus" style="color: #6ee7b7; font-size: 0.92rem;">Starting generation...</strong>
+              <strong id="localProgressStatus" class="localProgressStatusClass" style="color: #6ee7b7; font-size: 0.92rem;">Starting generation...</strong>
             </div>
-            <span id="localProgressPercent" style="color: #fde047; font-weight: 700; font-family: monospace; font-size: 0.95rem;">0%</span>
+            <span id="localProgressPercent" class="localProgressPercentClass" style="color: #fde047; font-weight: 700; font-family: monospace; font-size: 0.95rem;">0%</span>
           </div>
           <div style="background: rgba(255,255,255,0.08); border-radius: 999px; height: 10px; overflow: hidden;">
-            <div id="localProgressBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #10b981, #06b6d4); transition: width 0.35s ease;"></div>
+            <div id="localProgressBar" class="localProgressBarClass" style="width: 0%; height: 100%; background: linear-gradient(90deg, #10b981, #06b6d4); transition: width 0.35s ease;"></div>
           </div>
-          <p id="localProgressLog" style="font-size: 0.78rem; color: var(--text-dim); margin-top: 0.6rem; font-family: 'JetBrains Mono', monospace;"></p>
+          <p id="localProgressLog" class="localProgressLogClass" style="font-size: 0.78rem; color: var(--text-dim); margin-top: 0.6rem; font-family: 'JetBrains Mono', monospace;"></p>
         </div>
       </div>
     </section>
@@ -630,6 +630,21 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
           <div id="queueFilterStats" style="font-size: 0.82rem; color: #6ee7b7; font-weight: 600;">
             Showing all scheduled posts
           </div>
+        </div>
+
+        <!-- Real-Time Local Queue Progress Tracker -->
+        <div class="localProgressBoxClass" style="display: none; margin-bottom: 1.25rem; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 1.25rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem; flex-wrap: wrap; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="status-dot"></span>
+              <strong class="localProgressStatusClass" style="color: #6ee7b7; font-size: 0.92rem;">Starting generation...</strong>
+            </div>
+            <span class="localProgressPercentClass" style="color: #fde047; font-weight: 700; font-family: monospace; font-size: 0.95rem;">0%</span>
+          </div>
+          <div style="background: rgba(255,255,255,0.08); border-radius: 999px; height: 10px; overflow: hidden;">
+            <div class="localProgressBarClass" style="width: 0%; height: 100%; background: linear-gradient(90deg, #10b981, #06b6d4); transition: width 0.35s ease;"></div>
+          </div>
+          <p class="localProgressLogClass" style="font-size: 0.78rem; color: var(--text-dim); margin-top: 0.6rem; font-family: 'JetBrains Mono', monospace;"></p>
         </div>
 
         <div class="item-list" id="cloudQueueList">
@@ -1028,6 +1043,15 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
               renderFbPages();
             }
           }).catch(err => console.warn('Could not load local settings:', err));
+
+        // Check if a local generation job is currently running on the server
+        fetch('/api/status?_cb=' + Date.now())
+          .then(r => r.json())
+          .then(st => {
+            if (st && st.running) {
+              startLocalProgressTracking();
+            }
+          }).catch(() => {});
       } else {
         if (document.getElementById('singleRunTarget')) document.getElementById('singleRunTarget').value = 'cloud';
         if (document.getElementById('bulkRunTarget')) document.getElementById('bulkRunTarget').value = 'cloud';
@@ -1711,7 +1735,8 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
           });
           const data = await res.json();
           if (data.ok) {
-            showToast('🚀 Local render started! Check Single Studio progress or Outputs.');
+            showToast('🚀 Local render started! Tracking live progress...');
+            startLocalProgressTracking();
             fetchCloudQueueFromGithub(true);
             return;
           } else {
@@ -1933,12 +1958,12 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
 
     let LOCAL_PROGRESS_POLLER = null;
     function startLocalProgressTracking() {
-      const box = document.getElementById('localProgressBox');
-      const statusEl = document.getElementById('localProgressStatus');
-      const barEl = document.getElementById('localProgressBar');
-      const pctEl = document.getElementById('localProgressPercent');
-      const logEl = document.getElementById('localProgressLog');
-      if (box) box.style.display = 'block';
+      const boxes = document.querySelectorAll('.localProgressBoxClass, #localProgressBox');
+      const statusEls = document.querySelectorAll('.localProgressStatusClass, #localProgressStatus');
+      const barEls = document.querySelectorAll('.localProgressBarClass, #localProgressBar');
+      const pctEls = document.querySelectorAll('.localProgressPercentClass, #localProgressPercent');
+      const logEls = document.querySelectorAll('.localProgressLogClass, #localProgressLog');
+      boxes.forEach(function(b) { b.style.display = 'block'; });
 
       if (LOCAL_PROGRESS_POLLER) clearInterval(LOCAL_PROGRESS_POLLER);
 
@@ -1947,12 +1972,14 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
           const res = await fetch('/api/status?_cb=' + Date.now());
           if (!res.ok) return;
           const data = await res.json();
-          if (statusEl) statusEl.innerText = data.status || 'Processing...';
-          if (pctEl) pctEl.innerText = (data.progress || 0) + '%';
-          if (barEl) barEl.style.width = (data.progress || 0) + '%';
-          if (logEl && data.logs && data.logs.length) {
-            logEl.innerText = data.logs[data.logs.length - 1];
-          }
+          const st = data.status || 'Processing...';
+          const pct = (data.progress || 0) + '%';
+          const logTxt = (data.logs && data.logs.length) ? data.logs[data.logs.length - 1] : '';
+
+          statusEls.forEach(function(el) { el.innerText = st; });
+          pctEls.forEach(function(el) { el.innerText = pct; });
+          barEls.forEach(function(el) { el.style.width = pct; });
+          logEls.forEach(function(el) { el.innerText = logTxt; });
 
           if (!data.running && data.progress >= 100) {
             clearInterval(LOCAL_PROGRESS_POLLER);
@@ -1965,7 +1992,7 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
         } catch(e) {
           console.warn('Status poll error:', e);
         }
-      }, 2000);
+      }, 1500);
     }
 
     function updateSingleUI() {

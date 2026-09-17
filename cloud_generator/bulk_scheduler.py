@@ -10,6 +10,13 @@ from zoneinfo import ZoneInfo
 from pathlib import Path
 import sys
 
+if hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
 CURR_DIR = Path(__file__).resolve().parent
 if str(CURR_DIR) not in sys.path:
     sys.path.insert(0, str(CURR_DIR))
@@ -676,7 +683,7 @@ def run_queue_housekeeping() -> dict:
     }
 
 
-def execute_single_job(job_id: str) -> dict:
+def execute_single_job(job_id: str, progress_callback = None) -> dict:
     q = load_queue()
     job = next((j for j in q if j.get("id") == job_id), None)
     if not job:
@@ -698,7 +705,8 @@ def execute_single_job(job_id: str) -> dict:
             auto_publish_fb=bool(auto_pub),
             target_page_ids=job.get("target_page_ids"),
             niche_id=job.get("niche_id"),
-            preferred_image_engine=pref_eng
+            preferred_image_engine=pref_eng,
+            progress_callback=progress_callback
         )
         total_time = time.time() - t0
         output_file = res.get("output_file")

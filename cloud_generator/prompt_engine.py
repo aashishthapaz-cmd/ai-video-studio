@@ -1,5 +1,12 @@
-import re
 import sys
+if hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
+import re
 from pathlib import Path
 
 # Add project root to sys.path so we can import artwork_prompts
@@ -8,6 +15,96 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 import artwork_prompts
+
+# =========================================================================
+# ARTISTIC WORLD STYLES REGISTRY (POETRY NICHE ALIGNED)
+# =========================================================================
+ARTISTIC_STYLES_MAP = {
+    "typewriters_voice_nostalgia": (
+        "Masterpiece vertical 9:16 editorial graphic novel illustration in the signature style of Typewriters Voice and Guy Billout. Clean black ink line art with delicate cross-hatch shading and fine horizontal ripple textures, flat gouache color blocking, deep nocturnal indigo navy and slate blue sky with fine ink line hatching, high-contrast radiant warm golden amber and cadmium yellow lantern glow, saturated accents of mustard yellow and crimson red, rich matte serigraph print.",
+        "flat gouache color blocking, fine ink hatching, midnight navy and warm golden amber"
+    ),
+    "makoto_shinkai_twilight": (
+        "Masterpiece vertical 9:16 anime background scenic art in the breathtaking aesthetic of Makoto Shinkai. Expansive cosmic twilight sky, radiant volumetric god rays piercing towering painterly cumulonimbus clouds, sparkling evening starlight and glowing horizon, deep ultramarine blue, violet dusk and apricot golden hour reflections.",
+        "Makoto Shinkai anime scenic art, vibrant twilight sky, volumetric god rays, hyper-detailed clouds"
+    ),
+    "studio_ghibli_meadow": (
+        "Masterpiece vertical 9:16 hand-painted background scenic art in the lush naturalism style of Studio Ghibli and Hayao Miyazaki. Painterly gouache and watercolor textures, vibrant summer meadow of swaying wildflowers and dandelion seeds, ancient gnarled mossy trees, soft gentle breeze, warm radiant afternoon sunlight, peaceful pastoral wonder.",
+        "Studio Ghibli painterly gouache, lush green meadow, watercolor foliage, warm natural sunlight"
+    ),
+    "himalayan_mist_serenity": (
+        "Masterpiece vertical 9:16 spiritual alpine landscape of the majestic Himalayas. Sacred snow-capped peaks towering above rolling seas of morning mist, vibrant colorful Buddhist prayer flags fluttering in mountain wind, ancient stone chorten shrine, serene quiet atmosphere, soft golden dawn rays touching sacred glaciers.",
+        "majestic Himalayan peaks, sea of mist, Buddhist prayer flags, serene high-altitude sunrise"
+    ),
+    "dark_romantic_academia": (
+        "Masterpiece vertical 9:16 classical oil painting with dramatic Baroque chiaroscuro lighting in the style of Caravaggio and Rembrandt. Heavy dark espresso and charcoal shadows, rich burgundy undertones, warm flickering candlelight casting amber glow across antique mahogany and aged parchment, stormy twilight through arched stone windows, poignant melancholy.",
+        "Baroque chiaroscuro oil painting, deep mahogany shadows, flickering candlelight, moody romantic atmosphere"
+    ),
+    "claude_monet_impressionism": (
+        "Masterpiece vertical 9:16 French Impressionist oil painting in the plein-air style of Claude Monet. Soft textured impasto brushstrokes, shimmering light dappling on water and weeping willows, pastel palette of lavender, pale rose, sage green, and golden yellow, ethereal luminous atmospheric haze.",
+        "Claude Monet impressionism, textured oil brushwork, pastel palette, shimmering light on water"
+    ),
+    "cyberpunk_rain_reflections": (
+        "Masterpiece vertical 9:16 atmospheric 90s lo-fi cyberpunk aesthetic. Quiet rain-washed city street under gentle drizzle, vibrant cyan and amber neon signs reflecting on wet asphalt and puddles, moody nocturnal mist, lone figure with umbrella in the distance, nostalgic cinematic retro-futurism.",
+        "90s lo-fi cyberpunk, wet asphalt reflections, glowing neon mist, rain-drenched cinematic mood"
+    ),
+    "van_gogh_starry_canvas": (
+        "Masterpiece vertical 9:16 post-impressionist oil painting in the expressive style of Vincent van Gogh. Dynamic swirling impasto brushstrokes, glowing golden stars and crescent moon swirling in a deep Prussian blue night sky, dark cypress silhouette reaching upward, rich tactile paint texture and luminous emotional energy.",
+        "Van Gogh swirling impasto brushstrokes, starry night sky, rich Prussian blue and vibrant gold"
+    ),
+    "ink_wash_zen_landscape": (
+        "Masterpiece vertical 9:16 traditional East Asian Sumi-e ink wash landscape painting (Shan Shui). Delicate black ink gradients on aged rice paper, majestic misty mountain peaks fading into vast quiet negative space, gnarled pine tree clinging to ancient cliff, serene tranquil Zen stillness.",
+        "traditional Sumi-e ink wash painting, delicate black ink gradients, misty mountain peaks, zen stillness"
+    ),
+    "romantic_devotion": (
+        "Masterpiece vertical 9:16 romantic watercolor and dreamy 35mm film photography aesthetic. Warm radiant golden hour rim lighting, soft honey and blush tones, glowing rim light, gentle atmospheric bokeh, tender emotional warmth and serene harmonious intimacy.",
+        "soft ethereal watercolor and 35mm film grain, radiant golden hour rim lighting, warm honey blush tones"
+    ),
+    "healing_self_worth": (
+        "Masterpiece vertical 9:16 serene nature sanctuary. Deep emerald mossy forest glade, gentle crystal-clear stream with morning mist rising, golden sunbeams piercing the forest canopy, peaceful solitary haven of unshakeable self-worth and quiet stoic resilience.",
+        "serene forest glade, crystal stream, golden sunbeams, peaceful natural sanctuary"
+    ),
+    "cosmic_philosophical": (
+        "Masterpiece vertical 9:16 cosmic philosophical vista. Vast deep space panorama with glowing violet and sapphire nebulae, millions of distant stars and swirling galaxies, a solitary silhouette standing on an ancient cliff gazing at the infinite universe, awe-inspiring perspective and eternal wonder.",
+        "deep space nebula, glowing cosmic dust, starry infinity, contemplative stargazer silhouette"
+    )
+}
+
+def resolve_vibe_style(vibe_name: str) -> tuple:
+    if not vibe_name:
+        return ARTISTIC_STYLES_MAP["typewriters_voice_nostalgia"]
+    norm = vibe_name.lower().strip()
+    norm = re.sub(r'[^a-z0-9]', '_', norm)
+    norm = re.sub(r'_+', '_', norm).strip('_')
+
+    for k in ARTISTIC_STYLES_MAP:
+        if k in norm or norm in k:
+            return ARTISTIC_STYLES_MAP[k]
+
+    if "shinkai" in norm or "twilight" in norm:
+        return ARTISTIC_STYLES_MAP["makoto_shinkai_twilight"]
+    if "ghibli" in norm or "meadow" in norm:
+        return ARTISTIC_STYLES_MAP["studio_ghibli_meadow"]
+    if "himalaya" in norm or "mist" in norm or "zen" in norm:
+        return ARTISTIC_STYLES_MAP["himalayan_mist_serenity"]
+    if "academia" in norm or "dark" in norm or "baroque" in norm:
+        return ARTISTIC_STYLES_MAP["dark_romantic_academia"]
+    if "monet" in norm or "impression" in norm:
+        return ARTISTIC_STYLES_MAP["claude_monet_impressionism"]
+    if "cyber" in norm or "rain" in norm:
+        return ARTISTIC_STYLES_MAP["cyberpunk_rain_reflections"]
+    if "gogh" in norm or "starry" in norm:
+        return ARTISTIC_STYLES_MAP["van_gogh_starry_canvas"]
+    if "ink" in norm or "wash" in norm:
+        return ARTISTIC_STYLES_MAP["ink_wash_zen_landscape"]
+    if "romance" in norm or "devotion" in norm or "soulmate" in norm:
+        return ARTISTIC_STYLES_MAP["romantic_devotion"]
+    if "heal" in norm or "stoic" in norm or "solace" in norm:
+        return ARTISTIC_STYLES_MAP["healing_self_worth"]
+    if "cosmic" in norm or "philosophy" in norm:
+        return ARTISTIC_STYLES_MAP["cosmic_philosophical"]
+
+    return ARTISTIC_STYLES_MAP["typewriters_voice_nostalgia"]
 
 def split_into_poetic_stanzas(text: str) -> list:
     """
@@ -203,13 +300,16 @@ def build_scene_artistic_prompt(stanza: str, scene_idx: int, total_scenes: int, 
         chosen_env = scenic_envs[(scene_idx - 1) % len(scenic_envs)]
         feeling_theme = f"contemplative poetic stillness reflecting '{clean[:45]}'"
 
+    style_desc, medium_tags = resolve_vibe_style(vibe_id)
+
     prompt = (
-        f"Breathtaking wide scenic landscape illustration capturing the feeling: '{feeling_theme}'. "
-        f"Scenic environment with poem-related subject: {chosen_env}. "
+        f"{style_desc} "
+        f"Poetic essence: '{feeling_theme}'. "
+        f"Scenic environment: {chosen_env}. "
         f"Atmosphere & Lighting: {lighting_prog}, rich atmospheric depth, cinematic volumetric illumination. "
-        f"Artistic Style: Masterpiece Studio Ghibli background scenic art and Makoto Shinkai environmental aesthetic, "
-        f"rich painterly fine art, expansive 9:16 vertical environmental composition, "
-        f"pure scenery, wide shot landscape, vast nature vista, no close-up face, no giant character portrait, no big anime character"
+        f"Medium details: {medium_tags}. "
+        f"Composition: Expansive 9:16 vertical full bleed, wide shot landscape scenery, vast nature vista, "
+        f"no close-up face, no giant character portrait, no character zoom, no cropped face"
     )
     return prompt
 

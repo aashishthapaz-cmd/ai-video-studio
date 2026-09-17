@@ -3,6 +3,14 @@ import sys
 import json
 import time
 import threading
+
+if hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
 from pathlib import Path
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
@@ -380,7 +388,38 @@ class CloudStudioHandler(SimpleHTTPRequestHandler):
         elif path == "/api/bulk/run_now":
             payload = json.loads(post_body)
             job_id = payload.get("job_id", "")
-            t = threading.Thread(target=execute_single_job, args=(job_id,), daemon=True)
+
+            def _run_bulk_job_bg(jid):
+                ACTIVE_JOB["running"] = True
+                ACTIVE_JOB["progress"] = 5
+                ACTIVE_JOB["status"] = f"Initializing queue job {jid}..."
+                ACTIVE_JOB["output_file"] = ""
+                ACTIVE_JOB["facebook_results"] = []
+                ACTIVE_JOB["logs"] = []
+
+                def on_prog(pct, msg):
+                    ACTIVE_JOB["progress"] = pct
+                    ACTIVE_JOB["status"] = msg
+                    log_event(msg)
+
+                try:
+                    res = execute_single_job(jid, progress_callback=on_prog)
+                    if res.get("ok"):
+                        ACTIVE_JOB["output_file"] = res.get("output_file", "")
+                        ACTIVE_JOB["facebook_results"] = res.get("facebook_results", [])
+                        ACTIVE_JOB["status"] = "Completed successfully!"
+                        ACTIVE_JOB["progress"] = 100
+                        log_event(f"Finished rendering: {res.get('output_file')}")
+                    else:
+                        ACTIVE_JOB["status"] = f"Error: {res.get('error')}"
+                        log_event(f"ERROR: {res.get('error')}")
+                except Exception as ex:
+                    ACTIVE_JOB["status"] = f"Error: {str(ex)}"
+                    log_event(f"ERROR: {str(ex)}")
+                finally:
+                    ACTIVE_JOB["running"] = False
+
+            t = threading.Thread(target=_run_bulk_job_bg, args=(job_id,), daemon=True)
             t.start()
             self.send_response(200)
             self.send_header("Content-Type", "application/json")
