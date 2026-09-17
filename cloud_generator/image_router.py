@@ -196,11 +196,21 @@ def generate_scene_image(
     # Build the final prompt with universal negatives and subject gender lock
     final_prompt = _build_prompt(prompt, subject_type=subject_type)
 
+    is_github_actions = bool(os.getenv("GITHUB_ACTIONS"))
+
     default_priority = ["perchance", "pollinations", "cloudflare", "puter", "huggingface"]
     priority = (
         [preferred_engine] if preferred_engine
-        else cfg.get("image_engine_priority", default_priority)
+        else list(cfg.get("image_engine_priority", default_priority))
     )
+
+    # Local generation prioritizes local ComfyUI unless running on GitHub Actions
+    if not is_github_actions:
+        local_gen = str(cfg.get("image_generator", "comfyui")).lower().strip()
+        if preferred_engine == "comfyui" or local_gen == "comfyui":
+            if "comfyui" in priority:
+                priority.remove("comfyui")
+            priority.insert(0, "comfyui")
 
     errors = []
     for engine in priority:
@@ -208,7 +218,17 @@ def generate_scene_image(
             continue
         engine = engine.lower().strip()
         try:
-            if "perchance" in engine:
+            if "comfyui" in engine or "comfy" in engine:
+                try:
+                    from cloud_generator.image_engines.comfyui_engine import generate_comfyui_image
+                except ImportError:
+                    from image_engines.comfyui_engine import generate_comfyui_image
+                img = generate_comfyui_image(
+                    final_prompt, output_path, width=width, height=height, seed=seed, cfg=cfg
+                )
+                return {"ok": True, "engine": "Local ComfyUI", "path": img}
+
+            elif "perchance" in engine:
                 if not is_perchance_available():
                     enable_perchance()
                     if not is_perchance_available():
@@ -312,7 +332,7 @@ def generate_scene_image(
     return {"ok": True, "engine": "Emergency Pollinations Fallback", "path": emergency_path}
 
 
-def generate_all_scene_images(scenes: list, assets_dir: Path, progress_callback=None) -> list:
+def generate_all_scene_images(scenes: list, assets_dir: Path, progress_callback=None, preferred_engine: str = None) -> list:
     """
     Generates strictly unique, borderless, poem-subject-accurate images for all scenes.
 
@@ -378,7 +398,7 @@ def generate_all_scene_images(scenes: list, assets_dir: Path, progress_callback=
 
             try:
                 res = generate_scene_image(
-                    salted_prompt, out_file, seed=seed, subject_type=subject_type
+                    salted_prompt, out_file, seed=seed, subject_type=subject_type, preferred_engine=preferred_engine
                 )
                 img_path = Path(res["path"])
 

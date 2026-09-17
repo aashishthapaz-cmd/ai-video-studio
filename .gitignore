@@ -32,3 +32,6 @@ cloud_generator/google_session_state.json
 .DS_Store
 Thumbs.db
 
+# Scratch
+scratch/
+

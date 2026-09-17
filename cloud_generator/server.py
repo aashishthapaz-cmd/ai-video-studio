@@ -94,7 +94,7 @@ def log_event(msg: str):
     if len(ACTIVE_JOB["logs"]) > 100:
         ACTIVE_JOB["logs"].pop(0)
 
-def bg_generate(title: str, script: str, custom_vibe: str = "", auto_publish_fb: bool = False, target_page_ids: list = None):
+def bg_generate(title: str, script: str, custom_vibe: str = "", auto_publish_fb: bool = False, target_page_ids: list = None, preferred_engine: str = None):
     ACTIVE_JOB["running"] = True
     ACTIVE_JOB["progress"] = 5
     ACTIVE_JOB["status"] = "Starting generation..."
@@ -115,7 +115,8 @@ def bg_generate(title: str, script: str, custom_vibe: str = "", auto_publish_fb:
             custom_vibe=custom_vibe,
             progress_callback=on_prog, 
             auto_publish_fb=auto_publish_fb,
-            target_page_ids=target_page_ids
+            target_page_ids=target_page_ids,
+            preferred_image_engine=preferred_engine
         )
         ACTIVE_JOB["output_file"] = res.get("output_file", "")
         ACTIVE_JOB["facebook_results"] = res.get("facebook_published", [])
@@ -280,6 +281,7 @@ class CloudStudioHandler(SimpleHTTPRequestHandler):
             theme = payload.get("theme", "auto")
             auto_fb = payload.get("auto_publish_fb", False)
             target_pages = payload.get("target_page_ids", [])
+            pref_engine = payload.get("preferred_engine") or payload.get("image_generator") or "comfyui"
             
             if not script:
                 self.send_response(400)
@@ -288,7 +290,7 @@ class CloudStudioHandler(SimpleHTTPRequestHandler):
                 self.wfile.write(json.dumps({"error": "Script text cannot be empty."}).encode("utf-8"))
                 return
                 
-            t = threading.Thread(target=bg_generate, args=(title, script, theme, auto_fb, target_pages), daemon=True)
+            t = threading.Thread(target=bg_generate, args=(title, script, theme, auto_fb, target_pages, pref_engine), daemon=True)
             t.start()
             
             self.send_response(200)
@@ -316,6 +318,10 @@ class CloudStudioHandler(SimpleHTTPRequestHandler):
             tz = payload.get("timezone", "America/New_York")
             auto_dist = bool(payload.get("auto_distribute", False))
             target_pages = payload.get("target_page_ids", [])
+            auto_fb = payload.get("auto_publish_facebook")
+            if auto_fb is None:
+                auto_fb = payload.get("auto_publish_fb", True)
+            pref_engine = payload.get("preferred_engine") or payload.get("image_generator") or "comfyui"
             
             if not raw_text:
                 self.send_response(400)
@@ -333,7 +339,9 @@ class CloudStudioHandler(SimpleHTTPRequestHandler):
                 default_page_ids=target_pages,
                 default_niche=niche,
                 timezone_str=tz,
-                auto_distribute_pages=auto_dist
+                auto_distribute_pages=auto_dist,
+                auto_publish_facebook=bool(auto_fb),
+                preferred_engine=pref_engine
             )
             enqueued = enqueue_bulk_jobs(jobs)
             

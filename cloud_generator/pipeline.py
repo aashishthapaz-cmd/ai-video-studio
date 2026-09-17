@@ -22,7 +22,7 @@ except ImportError:
 
 logger = logging.getLogger("CloudPipeline")
 
-def run_cloud_pipeline(title: str, script_text: str, custom_vibe: str = "", progress_callback = None, auto_publish_fb: bool = None, target_page_ids: list = None, niche_id: str = None) -> dict:
+def run_cloud_pipeline(title: str, script_text: str, custom_vibe: str = "", progress_callback = None, auto_publish_fb: bool = None, target_page_ids: list = None, niche_id: str = None, preferred_image_engine: str = None, **kwargs) -> dict:
     """
     Executes end-to-end zero-cost cloud video generation tuned to the assigned poetry niche:
     1. Poetry Niche Resolution & Aesthetic Stanza Planning
@@ -106,7 +106,7 @@ def run_cloud_pipeline(title: str, script_text: str, custom_vibe: str = "", prog
         step_pct = 55 + int((curr / max(1, total)) * 25)
         report(step_pct, f"Images [{curr}/{total}]: {text}")
         
-    scenes = generate_all_scene_images(scenes, assets_dir, progress_callback=img_prog)
+    scenes = generate_all_scene_images(scenes, assets_dir, progress_callback=img_prog, preferred_engine=preferred_image_engine)
     
     # 4. Final Video Compilation
     caption_style_map = {

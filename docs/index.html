@@ -419,23 +419,55 @@ And I'll always admire you for that.</textarea>
 
         <div class="grid-2">
           <div class="form-group">
-            <label>🎯 Target Facebook Page</label>
-            <select id="singleTargetPage">
-              <option value="ALL Pages">📢 ALL Enabled Pages</option>
-              <option value="Typewriters Voice (1054247421115636)" selected>✍️ Typewriters Voice (1054247421115636)</option>
+            <label>⚡ Execution Target (Where to Run)</label>
+            <select id="singleRunTarget" onchange="updateSingleUI()">
+              <option value="local" selected>💻 Local PC Worker (ComfyUI / Local Hardware)</option>
+              <option value="cloud">☁️ Cloud Runner (GitHub Actions 24/7)</option>
             </select>
           </div>
           <div class="form-group">
-            <label>Auto-Publish Option</label>
-            <select id="singleAutoPublish">
-              <option value="true" selected>✅ Yes — Auto-Post to Facebook</option>
-              <option value="false">❌ No — Render Only (Save to Artifacts)</option>
+            <label>⏱️ Execution Mode</label>
+            <select id="singleActionMode" onchange="updateSingleUI()">
+              <option value="now" selected>⚡ Render Immediately</option>
+              <option value="schedule">📅 Send to Scheduling Queue</option>
             </select>
           </div>
         </div>
 
+        <div id="singleScheduleGroup" style="display: none;" class="form-group">
+          <label>📅 Scheduled Date & Time (Nepal / Local Time)</label>
+          <input type="datetime-local" id="singleScheduleTime">
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label>🎨 Image Generator Engine</label>
+            <select id="singleImageEngine">
+              <option value="comfyui" selected>🎨 Local ComfyUI (Realistic Photo / Local GPU)</option>
+              <option value="perchance">🎭 Perchance (Warm Nostalgic Atmosphere)</option>
+              <option value="pollinations">🌸 Pollinations AI (High-Speed Cloud)</option>
+              <option value="auto">✨ Auto / Intelligent Router</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>📢 Publishing Action</label>
+            <select id="singleAutoPublish" onchange="updateSingleUI()">
+              <option value="false" selected>🎬 Render Only (Save Video Locally / Artifacts)</option>
+              <option value="true">✅ Render & Auto-Publish to Facebook</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>🎯 Target Facebook Page</label>
+          <select id="singleTargetPage">
+            <option value="ALL Pages">📢 ALL Enabled Pages</option>
+            <option value="Typewriters Voice (1054247421115636)" selected>✍️ Typewriters Voice (1054247421115636)</option>
+          </select>
+        </div>
+
         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.5rem;">
-          <button class="btn btn-emerald" id="btnSingleRender" onclick="triggerSingleCloudRender()">🚀 Render & Post Now via GitHub Actions</button>
+          <button class="btn btn-emerald" id="btnSingleRender" onclick="executeSingleStudioAction()">🎬 Render Video Only (Local PC + ComfyUI)</button>
         </div>
 
         <!-- Real-Time Local Studio Progress Tracker -->
@@ -488,6 +520,42 @@ But even then, one bad day won't change what you mean to me.
 Through every hard day we go through, you'll have me and I'll have you."></textarea>
         </div>
 
+        <div class="grid-2">
+          <div class="form-group">
+            <label>⚡ Execution Target (Where to Run)</label>
+            <select id="bulkRunTarget" onchange="updateBulkUI()">
+              <option value="local" selected>💻 Local PC Worker (ComfyUI / Local Hardware)</option>
+              <option value="cloud">☁️ Cloud Runner (GitHub Actions 24/7)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>⏱️ Execution Mode</label>
+            <select id="bulkActionMode" onchange="updateBulkUI()">
+              <option value="schedule" selected>📅 Send to Scheduling Queue (Interval)</option>
+              <option value="now">⚡ Run First Job Immediately</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label>🎨 Image Generator Engine</label>
+            <select id="bulkImageEngine">
+              <option value="comfyui" selected>🎨 Local ComfyUI (Realistic Photo / Local GPU)</option>
+              <option value="perchance">🎭 Perchance (Warm Nostalgic Atmosphere)</option>
+              <option value="pollinations">🌸 Pollinations AI (High-Speed Cloud)</option>
+              <option value="auto">✨ Auto / Intelligent Router</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>📢 Publishing Action</label>
+            <select id="bulkAutoPublish" onchange="updateBulkUI()">
+              <option value="false">🎬 Render Only (Save Videos Locally / Artifacts)</option>
+              <option value="true" selected>✅ Render & Auto-Publish to Facebook</option>
+            </select>
+          </div>
+        </div>
+
         <div class="grid-3">
           <div class="form-group">
             <label>🎯 Target Facebook Page</label>
@@ -525,7 +593,7 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
         </div>
 
         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-          <button class="btn" id="btnDispatchBulk" onclick="dispatchBulkToGithub()">⚡ Dispatch All Poems to GitHub Actions Now</button>
+          <button class="btn" id="btnDispatchBulk" onclick="executeBulkStudioAction()">⚡ Schedule All Poems to Local Queue (Auto-Post)</button>
         </div>
       </div>
 
@@ -859,6 +927,25 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
         </select>
       </div>
 
+      <div class="grid-2">
+        <div class="form-group">
+          <label>🎨 Image Generator Engine</label>
+          <select id="editJobEngine">
+            <option value="comfyui">🎨 Local ComfyUI (Realistic Photo / Local GPU)</option>
+            <option value="perchance">🎭 Perchance (Warm Nostalgia Atmosphere)</option>
+            <option value="pollinations">🌸 Pollinations AI (High-Speed Cloud)</option>
+            <option value="auto">✨ Auto / Intelligent Router</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>📢 Publishing Action</label>
+          <select id="editJobAutoPublish">
+            <option value="true">✅ Auto-Post to Facebook</option>
+            <option value="false">🎬 Render Only (Save Locally / Artifacts)</option>
+          </select>
+        </div>
+      </div>
+
       <div class="form-group">
         <label>Poem / Script Text</label>
         <textarea id="editJobScript" style="min-height: 150px;"></textarea>
@@ -918,14 +1005,9 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
           btnHeader.innerHTML = '⚡ Run Local Worker';
           btnHeader.title = 'Run next scheduled queue job on local PC worker';
         }
-        const btnSingle = document.getElementById('btnSingleRender');
-        if (btnSingle) {
-          btnSingle.innerHTML = '🚀 Render & Post Now (Local Studio Worker)';
-        }
-        const btnBulk = document.getElementById('btnDispatchBulk');
-        if (btnBulk) {
-          btnBulk.innerHTML = '⚡ Schedule All to Local Queue';
-        }
+        if (document.getElementById('singleRunTarget')) document.getElementById('singleRunTarget').value = 'local';
+        if (document.getElementById('bulkRunTarget')) document.getElementById('bulkRunTarget').value = 'local';
+
         const qTitle = document.getElementById('cloudQueueTitle');
         if (qTitle) {
           qTitle.innerHTML = '📅 Live Local Studio Queue (<span id="cloudQueueCount">0</span> Scheduled)';
@@ -946,7 +1028,13 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
               renderFbPages();
             }
           }).catch(err => console.warn('Could not load local settings:', err));
+      } else {
+        if (document.getElementById('singleRunTarget')) document.getElementById('singleRunTarget').value = 'cloud';
+        if (document.getElementById('bulkRunTarget')) document.getElementById('bulkRunTarget').value = 'cloud';
       }
+
+      updateSingleUI();
+      updateBulkUI();
 
       // Set default start time picker to current local time if empty
       const startPicker = document.getElementById('bulkCloudStartTime');
@@ -1315,6 +1403,12 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
         }
 
         const safeId = escapeHtml(item.id || ('job_' + index));
+        const autoPubBadge = (item.auto_publish_facebook === false)
+          ? '<span class="badge" style="background: rgba(245,158,11,0.2); color: #fde047; border: 1px solid rgba(245,158,11,0.4);">🎬 Render Only</span>'
+          : '<span class="badge" style="background: rgba(24,119,242,0.2); color: #93c5fd; border: 1px solid rgba(24,119,242,0.4);">📢 Auto-Post</span>';
+        const engineBadge = item.preferred_engine
+          ? `<span class="badge" style="background: rgba(16,185,129,0.15); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.35);">🎨 ${escapeHtml(item.preferred_engine.toUpperCase())}</span>`
+          : '<span class="badge" style="background: rgba(99,102,241,0.15); color: #c7d2fe; border: 1px solid rgba(99,102,241,0.35);">🎨 COMFYUI</span>';
 
         return `
           <div class="item-card" style="border-color: rgba(16,185,129,0.25); background: rgba(8, 20, 24, 0.75);">
@@ -1322,6 +1416,8 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
               <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 4px;">
                 <h4 style="margin: 0;">${index + 1}. ${escapeHtml(item.title)}</h4>
                 <span class="badge ${statusBadgeClass}">${statusLabel}</span>
+                ${autoPubBadge}
+                ${engineBadge}
               </div>
               <p style="font-size: 0.82rem; color: #a5b4fc; margin-bottom: 4px;">
                 📅 <strong>Scheduled:</strong> <span style="color: #fde047; font-weight: 600;">${escapeHtml(schedDisplay)}</span> | 🎯 <strong>Target:</strong> <span style="color: #6ee7b7; font-weight: 600;">${escapeHtml(pageDisplay)}</span>
@@ -1543,6 +1639,12 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
         pageSel.value = pages.length ? pages[0] : 'ALL Pages';
       }
 
+      const engineSel = document.getElementById('editJobEngine');
+      if (engineSel) engineSel.value = job.preferred_engine || 'comfyui';
+
+      const autoPubSel = document.getElementById('editJobAutoPublish');
+      if (autoPubSel) autoPubSel.value = (job.auto_publish_facebook === false) ? 'false' : 'true';
+
       document.getElementById('editModal').style.display = 'flex';
     }
 
@@ -1561,6 +1663,8 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       const newTimeInput = document.getElementById('editJobTime').value.trim();
       const newVibe = document.getElementById('editJobVibe').value;
       const newPage = document.getElementById('editJobTargetPage').value;
+      const newEngine = document.getElementById('editJobEngine') ? document.getElementById('editJobEngine').value : 'comfyui';
+      const newAutoPub = document.getElementById('editJobAutoPublish') ? (document.getElementById('editJobAutoPublish').value === 'true') : true;
 
       if (!newTitle || !newScript) {
         alert('Title and Poem script are required.');
@@ -1569,6 +1673,8 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
 
       job.title = newTitle;
       job.script_text = newScript;
+      job.preferred_engine = newEngine;
+      job.auto_publish_facebook = newAutoPub;
       if (newTimeInput) {
         const formattedTime = newTimeInput.replace('T', ' ');
         job.scheduled_time = formattedTime;
@@ -1862,64 +1968,192 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       }, 2000);
     }
 
-    // Single Cloud Render Dispatch
-    async function triggerSingleCloudRender(forceCloud) {
+    function updateSingleUI() {
+      const runTarget = document.getElementById('singleRunTarget') ? document.getElementById('singleRunTarget').value : (IS_LOCAL ? 'local' : 'cloud');
+      const actionMode = document.getElementById('singleActionMode') ? document.getElementById('singleActionMode').value : 'now';
+      const autoPub = document.getElementById('singleAutoPublish') ? document.getElementById('singleAutoPublish').value : 'false';
+      const schedGroup = document.getElementById('singleScheduleGroup');
+      const btn = document.getElementById('btnSingleRender');
+
+      if (schedGroup) {
+        schedGroup.style.display = (actionMode === 'schedule') ? 'block' : 'none';
+        if (actionMode === 'schedule') {
+          const timeInput = document.getElementById('singleScheduleTime');
+          if (timeInput && !timeInput.value) {
+            const now = new Date();
+            now.setMinutes(now.getMinutes() - now.getTimezoneOffset() + 15);
+            timeInput.value = now.toISOString().slice(0, 16);
+          }
+        }
+      }
+
+      if (!btn) return;
+      if (runTarget === 'local') {
+        if (actionMode === 'now') {
+          btn.innerHTML = (autoPub === 'true') 
+            ? '🚀 Render & Auto-Post Now (Local PC + ComfyUI)' 
+            : '🎬 Render Video Only (Local PC + ComfyUI)';
+        } else {
+          btn.innerHTML = (autoPub === 'true') 
+            ? '📅 Add to Local Schedule (Auto-Post)' 
+            : '📅 Add to Local Schedule (Render Only)';
+        }
+      } else {
+        if (actionMode === 'now') {
+          btn.innerHTML = (autoPub === 'true') 
+            ? '🚀 Render & Post via GitHub Actions' 
+            : '🎬 Render Only via GitHub Actions';
+        } else {
+          btn.innerHTML = (autoPub === 'true') 
+            ? '📅 Add to GitHub Cloud Schedule (Auto-Post)' 
+            : '📅 Add to GitHub Cloud Schedule (Render Only)';
+        }
+      }
+    }
+
+    async function executeSingleStudioAction() {
       const title = document.getElementById('singleTitle').value.trim();
       const script = document.getElementById('singleScript').value.trim();
       const vibe = document.getElementById('singleVibe').value;
       const niche = document.getElementById('singleNiche') ? document.getElementById('singleNiche').value : 'Auto-Detect from Poem';
       const targetPage = document.getElementById('singleTargetPage') ? document.getElementById('singleTargetPage').value : 'ALL Pages';
-      const autoPub = document.getElementById('singleAutoPublish').value;
+      const autoPub = document.getElementById('singleAutoPublish') ? document.getElementById('singleAutoPublish').value : 'false';
+      const runTarget = document.getElementById('singleRunTarget') ? document.getElementById('singleRunTarget').value : (IS_LOCAL ? 'local' : 'cloud');
+      const actionMode = document.getElementById('singleActionMode') ? document.getElementById('singleActionMode').value : 'now';
+      const engine = document.getElementById('singleImageEngine') ? document.getElementById('singleImageEngine').value : 'comfyui';
+      const schedTimeInput = document.getElementById('singleScheduleTime') ? document.getElementById('singleScheduleTime').value.trim() : '';
 
       if (!script) {
         alert('Please enter poem or script text.');
         return;
       }
 
-      if (IS_LOCAL && !forceCloud) {
-        showToast('🚀 Starting local rendering on PC...');
-        try {
-          const res = await fetch('/api/generate', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              title: title || 'Single Masterpiece',
-              script: script,
-              theme: vibe,
-              auto_publish_fb: autoPub === 'true',
-              target_page_ids: (targetPage && targetPage !== 'ALL Pages') ? [targetPage] : []
-            })
-          });
-          const data = await res.json();
-          if (data.ok) {
-            showToast('✨ Local rendering in progress! Tracking status below...');
-            startLocalProgressTracking();
-            return;
-          } else {
-            alert('Error starting local generation: ' + (data.error || 'Unknown error'));
+      const shouldPublish = (autoPub === 'true');
+
+      if (runTarget === 'local') {
+        if (actionMode === 'now') {
+          showToast('🚀 Starting local rendering on PC (' + engine.toUpperCase() + ')...');
+          try {
+            const res = await fetch('/api/generate', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                title: title || 'Single Masterpiece',
+                script: script,
+                theme: vibe,
+                auto_publish_fb: shouldPublish,
+                preferred_engine: engine,
+                target_page_ids: (targetPage && targetPage !== 'ALL Pages') ? [targetPage] : []
+              })
+            });
+            const data = await res.json();
+            if (data.ok) {
+              showToast('✨ Local generation started using ' + engine.toUpperCase() + '! Tracking progress below...');
+              startLocalProgressTracking();
+              return;
+            } else {
+              alert('Error starting local generation: ' + (data.error || 'Unknown error'));
+              return;
+            }
+          } catch (err) {
+            alert('Local generation error: ' + err.message);
             return;
           }
-        } catch (err) {
-          alert('Local generation error: ' + err.message);
-          return;
+        } else {
+          // Schedule locally
+          showToast('📅 Adding single video to Local Scheduling Queue (' + engine.toUpperCase() + ')...');
+          const formattedStartTime = schedTimeInput ? schedTimeInput.replace('T', ' ') : undefined;
+          try {
+            const res = await fetch('/api/bulk/create', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                raw_text: 'Title: ' + (title || 'Single Masterpiece') + '\n' + script,
+                target_page_ids: (targetPage && targetPage !== 'ALL Pages') ? [targetPage] : [],
+                start_time: formattedStartTime,
+                interval_minutes: 120,
+                auto_publish_facebook: shouldPublish,
+                preferred_engine: engine,
+                theme: vibe
+              })
+            });
+            const data = await res.json();
+            if (data.ok) {
+              showToast('✅ Added "' + (title || 'Single Masterpiece') + '" to Local Schedule (' + (shouldPublish ? 'Auto-Post' : 'Render Only') + ')!');
+              fetchCloudQueueFromGithub(true);
+              switchTab('bulk');
+              return;
+            } else {
+              alert('Failed to schedule job: ' + (data.error || 'Unknown error'));
+              return;
+            }
+          } catch(err) {
+            alert('Local scheduling error: ' + err.message);
+            return;
+          }
+        }
+      } else {
+        // Cloud Runner (GitHub Actions)
+        if (actionMode === 'now') {
+          showToast('🚀 Dispatching single render job to GitHub Actions...');
+          const success = await dispatchWorkflowAPI({
+            script_text: script,
+            title: title || 'Single Masterpiece',
+            custom_vibe: vibe,
+            poetry_niche: niche,
+            target_page: targetPage,
+            publish_facebook: shouldPublish
+          });
+          if (success) {
+            showToast('✅ Job launched on GitHub Actions! ' + (shouldPublish ? 'Will post to ' + targetPage + ' when done.' : 'Render only — check Cloud Gallery.'));
+            setTimeout(function() { switchTab('gallery'); }, 1800);
+          }
+        } else {
+          // Schedule in GitHub Cloud Queue
+          showToast('📅 Adding job to GitHub Actions cloud queue...');
+          let schedEpoch = Math.floor(Date.now() / 1000) + 1800;
+          if (schedTimeInput) {
+            try { schedEpoch = Math.floor(new Date(schedTimeInput).getTime() / 1000); } catch(e){}
+          }
+          const d = new Date(schedEpoch * 1000);
+          const npt = d.toLocaleString('en-US', { timeZone: 'Asia/Kathmandu', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true });
+          const usa = d.toLocaleString('en-US', { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit', hour12: true, timeZoneName: 'short' });
+
+          const newJob = {
+            id: 'job_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+            title: title || 'Single Masterpiece',
+            script_text: script,
+            niche_id: niche,
+            theme: vibe,
+            vibe: vibe,
+            target_page_ids: (targetPage && targetPage !== 'ALL Pages') ? [targetPage] : [],
+            scheduled_time: d.toISOString().replace('T', ' ').substring(0, 16),
+            scheduled_time_nepal: '🇳🇵 ' + npt + ' (Nepal)',
+            scheduled_time_usa: '🇺🇸 ' + usa + ' (USA)',
+            scheduled_epoch: schedEpoch,
+            auto_publish_facebook: shouldPublish,
+            preferred_engine: engine,
+            status: 'PENDING',
+            created_at: new Date().toISOString()
+          };
+
+          CLOUD_QUEUE.push(newJob);
+          renderCloudQueue();
+          const success = await commitCloudQueueToGithub(CLOUD_QUEUE, 'chore(queue): Schedule single job "' + (title || 'Masterpiece') + '"');
+          if (success) {
+            showToast('✅ Scheduled "' + (title || 'Single Masterpiece') + '" on GitHub Actions (' + (shouldPublish ? 'Auto-Post' : 'Render Only') + ')!');
+            switchTab('bulk');
+          }
         }
       }
+    }
 
-      showToast('🚀 Dispatching single render job to GitHub Actions...');
-
-      const success = await dispatchWorkflowAPI({
-        script_text: script,
-        title: title || 'Single Masterpiece',
-        custom_vibe: vibe,
-        poetry_niche: niche,
-        target_page: targetPage,
-        publish_facebook: autoPub === 'true'
-      });
-
-      if (success) {
-        showToast('✅ Job launched! ' + (autoPub === 'true' ? 'Will post to ' + targetPage + ' when done.' : 'Render only — check Cloud Gallery.'));
-        setTimeout(function() { switchTab('gallery'); }, 1800);
+    // Legacy Single Cloud Render Dispatch alias
+    async function triggerSingleCloudRender(forceCloud) {
+      if (forceCloud && document.getElementById('singleRunTarget')) {
+        document.getElementById('singleRunTarget').value = 'cloud';
       }
+      return executeSingleStudioAction();
     }
 
     // Safe Parse Numbered Bulk Poems
@@ -2050,25 +2284,57 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
       showToast('🗑️ Queue cleared.');
     }
 
-    // Direct Bulk Dispatch to GitHub Actions
-    async function dispatchBulkToGithub() {
+    function updateBulkUI() {
+      const runTarget = document.getElementById('bulkRunTarget') ? document.getElementById('bulkRunTarget').value : (IS_LOCAL ? 'local' : 'cloud');
+      const actionMode = document.getElementById('bulkActionMode') ? document.getElementById('bulkActionMode').value : 'schedule';
+      const autoPub = document.getElementById('bulkAutoPublish') ? document.getElementById('bulkAutoPublish').value : 'true';
+      const btn = document.getElementById('btnDispatchBulk');
+
+      if (!btn) return;
+      if (runTarget === 'local') {
+        if (actionMode === 'schedule') {
+          btn.innerHTML = (autoPub === 'true')
+            ? '⚡ Schedule All Poems to Local Queue (Auto-Post)'
+            : '🎬 Schedule All Poems to Local Queue (Render Only)';
+        } else {
+          btn.innerHTML = (autoPub === 'true')
+            ? '🚀 Schedule & Render 1st Poem Now on Local PC'
+            : '🎬 Schedule & Render 1st Poem Only on Local PC';
+        }
+      } else {
+        if (actionMode === 'schedule') {
+          btn.innerHTML = (autoPub === 'true')
+            ? '⚡ Dispatch Bulk to GitHub Actions (Auto-Post)'
+            : '🎬 Dispatch Bulk to GitHub Actions (Render Only)';
+        } else {
+          btn.innerHTML = (autoPub === 'true')
+            ? '🚀 Dispatch & Run First Job on GitHub Actions'
+            : '🎬 Dispatch & Run First Job on GitHub Actions';
+        }
+      }
+    }
+
+    async function executeBulkStudioAction() {
       const raw = document.getElementById('bulkCloudText').value.trim();
       const targetPage = document.getElementById('bulkCloudPage').value;
       const intervalVal = document.getElementById('bulkCloudInterval') ? document.getElementById('bulkCloudInterval').value : 'peak_slots';
       const startTimeInput = document.getElementById('bulkCloudStartTime').value.trim();
+      const runTarget = document.getElementById('bulkRunTarget') ? document.getElementById('bulkRunTarget').value : (IS_LOCAL ? 'local' : 'cloud');
+      const actionMode = document.getElementById('bulkActionMode') ? document.getElementById('bulkActionMode').value : 'schedule';
+      const engine = document.getElementById('bulkImageEngine') ? document.getElementById('bulkImageEngine').value : 'comfyui';
+      const autoPub = document.getElementById('bulkAutoPublish') ? document.getElementById('bulkAutoPublish').value : 'true';
+      const shouldPublish = (autoPub === 'true');
 
       if (!raw) {
         alert('Please paste at least one poem in the input box.');
         return;
       }
 
-      // Format start time if datetime-local used (YYYY-MM-DDTHH:MM -> YYYY-MM-DD HH:MM)
       let formattedStartTime = '';
       if (startTimeInput) {
         formattedStartTime = startTimeInput.replace('T', ' ');
       }
 
-      // Count poems accurately for toast (supports numbered, ---, or paragraphs)
       let count = 0;
       if (new RegExp('(?:^|\\n)\\s*\\d+[\\.\\)]\\s+', 'i').test(raw)) {
         count = raw.split(new RegExp('(?=(?:^|\\n)\\s*\\d+[\\.\\)]\\s+)', 'gi')).filter(function(s) { return s.trim(); }).length;
@@ -2078,8 +2344,8 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
         count = raw.split(new RegExp('\\n\\s*\\n+', 'g')).filter(function(s) { return s.trim(); }).length;
       }
 
-      if (IS_LOCAL) {
-        showToast('⚡ Adding ' + count + ' poem(s) directly to Local Queue...');
+      if (runTarget === 'local') {
+        showToast('⚡ Adding ' + count + ' poem(s) to Local Queue (' + engine.toUpperCase() + ' / ' + (shouldPublish ? 'Auto-Post' : 'Render Only') + ')...');
         try {
           const localInterval = intervalVal === 'peak_slots' ? 120 : parseInt(intervalVal, 10);
           const res = await fetch('/api/bulk/create', {
@@ -2090,14 +2356,22 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
               target_page_ids: (targetPage && targetPage !== 'ALL Pages') ? [targetPage] : [],
               start_time: formattedStartTime || undefined,
               interval_minutes: isNaN(localInterval) ? 120 : localInterval,
-              auto_distribute: targetPage === 'ALL Pages'
+              auto_distribute: targetPage === 'ALL Pages',
+              auto_publish_facebook: shouldPublish,
+              preferred_engine: engine
             })
           });
           const data = await res.json();
           if (data.ok) {
             showToast('✅ ' + (data.added_jobs || count) + ' poem(s) added to Local Queue successfully!');
             document.getElementById('bulkCloudText').value = '';
-            fetchCloudQueueFromGithub(false);
+            await fetchCloudQueueFromGithub(true);
+
+            if (actionMode === 'now' && data.jobs && data.jobs.length) {
+              const firstJob = data.jobs[0];
+              showToast('⚡ Immediately triggering first job "' + firstJob.title + '" on Local PC...');
+              runCloudJobNow(firstJob.id);
+            }
             return;
           } else {
             alert('Error adding bulk jobs: ' + (data.error || 'Unknown error'));
@@ -2107,24 +2381,29 @@ Through every hard day we go through, you'll have me and I'll have you."></texta
           alert('Local bulk schedule error: ' + err.message);
           return;
         }
+      } else {
+        // Cloud Runner
+        showToast('⚡ Dispatching ' + count + ' poem(s) to GitHub Actions bulk scheduler...');
+        const success = await dispatchWorkflowAPI({
+          bulk_poems: raw,
+          target_page: targetPage,
+          bulk_start_time: formattedStartTime,
+          bulk_interval: intervalVal,
+          publish_facebook: shouldPublish
+        });
+
+        if (success) {
+          const intervalDesc = intervalVal === 'peak_slots' ? 'at USA EST peak slots' : 'every ' + (parseInt(intervalVal, 10) >= 60 ? (parseInt(intervalVal, 10)/60) + 'h' : intervalVal + 'm');
+          showToast('✅ ' + count + ' poems dispatched! GitHub Actions will schedule each ' + intervalDesc + ' (' + (shouldPublish ? 'Auto-Post' : 'Render Only') + ')');
+          triggerFastQueueSync();
+          setTimeout(function() { switchTab('gallery'); }, 2000);
+        }
       }
+    }
 
-      showToast('⚡ Dispatching ' + count + ' poem(s) to GitHub Actions bulk scheduler...');
-
-      const success = await dispatchWorkflowAPI({
-        bulk_poems: raw,
-        target_page: targetPage,
-        bulk_start_time: formattedStartTime,
-        bulk_interval: intervalVal,
-        publish_facebook: true
-      });
-
-      if (success) {
-        const intervalDesc = intervalVal === 'peak_slots' ? 'at USA EST peak slots' : 'every ' + (parseInt(intervalVal, 10) >= 60 ? (parseInt(intervalVal, 10)/60) + 'h' : intervalVal + 'm');
-        showToast('✅ ' + count + ' poems dispatched! GitHub Actions will schedule each ' + intervalDesc + ' → ' + targetPage);
-        triggerFastQueueSync();
-        setTimeout(function() { switchTab('gallery'); }, 2000);
-      }
+    // Legacy dispatch alias
+    async function dispatchBulkToGithub() {
+      return executeBulkStudioAction();
     }
 
     // Push Local Queue to GitHub Actions (send first pending item)

@@ -161,7 +161,9 @@ def parse_bulk_scripts(
     default_niche: str = None,
     timezone_str: str = "Asia/Kathmandu",
     auto_distribute_pages: bool = False,
-    available_pages: list = None
+    available_pages: list = None,
+    auto_publish_facebook: bool = True,
+    preferred_engine: str = None
 ) -> list:
     """
     Parses bulk poetry submissions and maps each poem to:
@@ -328,6 +330,8 @@ def parse_bulk_scripts(
             "output_file": None,
             "facebook_results": None,
             "error": None,
+            "auto_publish_facebook": bool(auto_publish_facebook),
+            "preferred_engine": preferred_engine or "comfyui",
             "synced_to_local": False
         }
         jobs.append(job)
@@ -683,13 +687,18 @@ def execute_single_job(job_id: str) -> dict:
     
     t0 = time.time()
     try:
+        auto_pub = job.get("auto_publish_facebook")
+        if auto_pub is None:
+            auto_pub = job.get("publish_facebook", True)
+        pref_eng = job.get("preferred_engine") or job.get("image_generator")
         res = run_cloud_pipeline(
             title=job["title"],
             script_text=job["script_text"],
             custom_vibe=job.get("theme", "auto"),
-            auto_publish_fb=True,
+            auto_publish_fb=bool(auto_pub),
             target_page_ids=job.get("target_page_ids"),
-            niche_id=job.get("niche_id")
+            niche_id=job.get("niche_id"),
+            preferred_image_engine=pref_eng
         )
         total_time = time.time() - t0
         output_file = res.get("output_file")

@@ -29,7 +29,14 @@ WORKSPACE_DIR.mkdir(parents=True, exist_ok=True)
 TEMP_CLOUD_DIR.mkdir(parents=True, exist_ok=True)
 
 DEFAULT_SETTINGS = {
+    "image_generator": os.getenv("IMAGE_GENERATOR", "comfyui"),
     "image_engine_priority": ["perchance", "pollinations", "cloudflare", "puter", "huggingface"],
+    "comfyui_url": os.getenv("COMFYUI_URL", "http://127.0.0.1:8188"),
+    "comfyui_workflow": os.getenv("COMFYUI_WORKFLOW", "workflows/txt2img_api.json"),
+    "comfyui_launch_path": os.getenv("COMFYUI_LAUNCH_PATH", ""),
+    "comfyui_launch_args": os.getenv("COMFYUI_LAUNCH_ARGS", ""),
+    "comfyui_workdir": os.getenv("COMFYUI_WORKDIR", ""),
+    "comfyui_python": os.getenv("COMFYUI_PYTHON", ""),
     "perchance_style": os.getenv("PERCHANCE_STYLE", "Anime"),
     "pollinations_model": "flux",
     "puter_model": "gemini-3.1-flash-image-preview",
@@ -71,6 +78,16 @@ DEFAULT_SETTINGS = {
 
 def load_settings():
     merged = DEFAULT_SETTINGS.copy()
+    root_settings = PROJECT_ROOT / "settings.json"
+    if root_settings.exists():
+        try:
+            rdata = json.loads(root_settings.read_text(encoding="utf-8"))
+            for k in ("image_generator", "comfyui_url", "comfyui_workflow", "comfyui_launch_path", "comfyui_launch_args", "comfyui_workdir", "comfyui_python"):
+                if k in rdata and rdata[k]:
+                    merged[k] = rdata[k]
+        except Exception:
+            pass
+
     if SETTINGS_FILE.exists():
         try:
             data = json.loads(SETTINGS_FILE.read_text(encoding="utf-8"))
