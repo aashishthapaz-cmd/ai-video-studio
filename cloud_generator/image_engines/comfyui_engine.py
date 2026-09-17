@@ -33,6 +33,8 @@ def _replace_workflow(value, prompt: str, seed: int, width: int, height: int):
     if isinstance(value, list):
         return [_replace_workflow(item, prompt, seed, width, height) for item in value]
     if isinstance(value, str):
+        if value == "__SEED__":
+            return int(seed)
         return value.replace("__PROMPT__", prompt).replace("__SEED__", str(seed))
     return value
 
@@ -60,18 +62,21 @@ def _start_comfyui(cfg: dict) -> bool:
     return True
 
 
-def ensure_comfyui_ready(cfg: dict, wait_seconds: int = 120) -> str:
+def ensure_comfyui_ready(cfg: dict, wait_seconds: int = 180) -> str:
     base_url = str(cfg.get("comfyui_url") or "http://127.0.0.1:8188").rstrip("/")
     try:
         _request_json(f"{base_url}/system_stats", timeout=3)
         return base_url
     except Exception:
+        print(f"[ComfyUI] ComfyUI not detected at {base_url}. Attempting to launch...", flush=True)
         if not _start_comfyui(cfg):
             raise RuntimeError("ComfyUI is offline and no valid local launcher is configured.")
+        print(f"[ComfyUI] Launched ComfyUI background process. Waiting for {base_url} to be ready...", flush=True)
     deadline = time.monotonic() + wait_seconds
     while time.monotonic() < deadline:
         try:
             _request_json(f"{base_url}/system_stats", timeout=3)
+            print(f"[ComfyUI] Connected successfully to {base_url}!", flush=True)
             return base_url
         except Exception:
             time.sleep(2)
@@ -89,7 +94,11 @@ def generate_comfyui_image(prompt: str, output_path: Path, width: int, height: i
         raise FileNotFoundError(f"ComfyUI workflow not found: {workflow_path}")
 
     workflow = json.loads(workflow_path.read_text(encoding="utf-8-sig"))
-    payload = _replace_workflow(workflow, prompt, seed, width, height)
+    # For FLUX on local 8GB desktop GPU, generating latents at 720x1280 (9:16) runs ~3x faster
+    # with zero VRAM offload, and is cleanly upscaled to 1080x1920 in video compilation
+    latent_w = 720 if width >= 1080 else (width or 720)
+    latent_h = 1280 if height >= 1920 else (height or 1280)
+    payload = _replace_workflow(workflow, prompt, seed, latent_w, latent_h)
     queued = _request_json(
         f"{base_url}/prompt",
         method="POST",

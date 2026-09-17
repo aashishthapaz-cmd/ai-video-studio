@@ -207,11 +207,11 @@ def generate_scene_image(
 
     is_github_actions = bool(os.getenv("GITHUB_ACTIONS"))
 
-    default_priority = ["perchance", "pollinations", "cloudflare", "puter", "huggingface"]
-    priority = (
-        [preferred_engine] if preferred_engine
-        else list(cfg.get("image_engine_priority", default_priority))
-    )
+    default_priority = ["comfyui", "perchance", "pollinations", "cloudflare", "puter", "huggingface"]
+    if preferred_engine:
+        priority = [preferred_engine] + [e for e in default_priority if e.lower() != preferred_engine.lower()]
+    else:
+        priority = list(cfg.get("image_engine_priority", default_priority))
 
     # Local generation prioritizes local ComfyUI unless running on GitHub Actions
     if not is_github_actions:
@@ -220,6 +220,10 @@ def generate_scene_image(
             if "comfyui" in priority:
                 priority.remove("comfyui")
             priority.insert(0, "comfyui")
+    else:
+        # On GitHub Actions, remove comfyui as it is a local engine
+        if "comfyui" in priority:
+            priority.remove("comfyui")
 
     errors = []
     for engine in priority:
