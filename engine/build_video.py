@@ -318,7 +318,12 @@ def main(project):
         durations=[max(1.0,d*scale) for d in durations]
     clips=[]
     for i,(image,dur) in enumerate(zip(assets,durations),1):
-        clip=frames/f'{i:03d}.mp4'; vf='scale=1080:1920:force_original_aspect_ratio=decrease,pad=1080:1920:(ow-iw)/2:(oh-ih)/2,format=yuv420p'
+        try:
+            from cloud_generator.image_router import detect_and_clean_image_borders
+            detect_and_clean_image_borders(image)
+        except Exception:
+            pass
+        clip=frames/f'{i:03d}.mp4'; vf='scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,format=yuv420p'
         r=run(['ffmpeg','-y','-loop','1','-i',str(image),'-t',str(dur),'-vf',vf,'-an','-c:v','libx264','-preset','veryfast','-crf','22',str(clip)])
         if r.returncode: raise RuntimeError(r.stderr[-1200:])
         clips.append(clip)

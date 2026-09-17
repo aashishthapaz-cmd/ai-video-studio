@@ -131,13 +131,139 @@ def _emergency_fallback_from_pollinations(prompt: str, output_path: Path, width:
     return _generate_artistic_fallback_canvas(output_path, width, height, seed)
 
 
+def detect_and_clean_image_borders(image_path: str | Path, max_crop_px: int = 70) -> Path:
+    """
+    Inspects an image for:
+    1. White / off-white paper margins and frames (RGB > 195)
+    2. Solid black or uniform border bars (std < 4.0, mean < 50 or dark_ratio > 0.35)
+    3. Thin black or drawn framing lines / matting around illustrations
+    4. Artist signatures / edge watermarks in margins
+
+    If detected, crops the border inward past any framing line with safety padding,
+    and resamples back to the original resolution using high-quality Lanczos interpolation.
+    """
+    path = Path(image_path)
+    if not path.is_file():
+        return path
+    try:
+        import numpy as np
+        with Image.open(path) as im:
+            orig_w, orig_h = im.size
+            rgb_im = im.convert("RGB")
+            arr = np.array(rgb_im, dtype=np.float32)
+        
+        h, w, _ = arr.shape
+        gray = 0.299 * arr[:, :, 0] + 0.587 * arr[:, :, 1] + 0.114 * arr[:, :, 2]
+        
+        crop_top = 0
+        crop_bottom = 0
+        crop_left = 0
+        crop_right = 0
+        
+        # 1. Top Edge
+        if gray[0, :].mean() > 200 or (gray[0, :] > 195).mean() > 0.45 or gray[0, :].std() < 3.0:
+            for y in range(min(max_crop_px, h // 10)):
+                row = gray[y, :]
+                mean_v = row.mean()
+                white_ratio = (row > 195).mean()
+                dark_ratio = (row < 50).mean()
+                if white_ratio > 0.25 or mean_v > 200 or (crop_top > 0 and dark_ratio > 0.35) or row.std() < 4.0:
+                    crop_top = y + 1
+                elif crop_top > 0 and y < crop_top + 6:
+                    if dark_ratio > 0.15 or white_ratio > 0.15:
+                        crop_top = y + 1
+                else:
+                    break
+
+        # 2. Bottom Edge
+        if gray[-1, :].mean() > 200 or (gray[-1, :] > 195).mean() > 0.45 or gray[-1, :].std() < 3.0:
+            for y in range(min(max_crop_px, h // 10)):
+                row = gray[h - 1 - y, :]
+                mean_v = row.mean()
+                white_ratio = (row > 195).mean()
+                dark_ratio = (row < 50).mean()
+                if white_ratio > 0.25 or mean_v > 200 or (crop_bottom > 0 and dark_ratio > 0.35) or row.std() < 4.0:
+                    crop_bottom = y + 1
+                elif crop_bottom > 0 and y < crop_bottom + 6:
+                    if dark_ratio > 0.15 or white_ratio > 0.15:
+                        crop_bottom = y + 1
+                else:
+                    break
+
+        # 3. Left Edge
+        if gray[:, 0].mean() > 200 or (gray[:, 0] > 195).mean() > 0.45 or gray[:, 0].std() < 3.0:
+            for x in range(min(max_crop_px, w // 10)):
+                col = gray[:, x]
+                mean_v = col.mean()
+                white_ratio = (col > 195).mean()
+                dark_ratio = (col < 50).mean()
+                if white_ratio > 0.25 or mean_v > 200 or (crop_left > 0 and dark_ratio > 0.35) or col.std() < 4.0:
+                    crop_left = x + 1
+                elif crop_left > 0 and x < crop_left + 6:
+                    if dark_ratio > 0.15 or white_ratio > 0.15:
+                        crop_left = x + 1
+                else:
+                    break
+
+        # 4. Right Edge
+        if gray[:, -1].mean() > 200 or (gray[:, -1] > 195).mean() > 0.45 or gray[:, -1].std() < 3.0:
+            for x in range(min(max_crop_px, w // 10)):
+                col = gray[:, w - 1 - x]
+                mean_v = col.mean()
+                white_ratio = (col > 195).mean()
+                dark_ratio = (col < 50).mean()
+                if white_ratio > 0.25 or mean_v > 200 or (crop_right > 0 and dark_ratio > 0.35) or col.std() < 4.0:
+                    crop_right = x + 1
+                elif crop_right > 0 and x < crop_right + 6:
+                    if dark_ratio > 0.15 or white_ratio > 0.15:
+                        crop_right = x + 1
+                else:
+                    break
+
+        # Drawn black comic frame line without white margin
+        if crop_top == 0 and (gray[0:25, :].mean(axis=1) < 45).any():
+            for y in range(25):
+                if (gray[y, :] < 45).mean() > 0.40:
+                    crop_top = max(crop_top, y + 4)
+        if crop_left == 0 and (gray[:, 0:25].mean(axis=0) < 45).any():
+            for x in range(25):
+                if (gray[:, x] < 45).mean() > 0.40:
+                    crop_left = max(crop_left, x + 4)
+        if crop_right == 0 and (gray[:, w-25:w].mean(axis=0) < 45).any():
+            for x in range(25):
+                if (gray[:, w - 1 - x] < 45).mean() > 0.40:
+                    crop_right = max(crop_right, x + 4)
+
+        if crop_top > 0 or crop_bottom > 0 or crop_left > 0 or crop_right > 0:
+            l = crop_left + (6 if crop_left > 0 else 0)
+            r = w - crop_right - (6 if crop_right > 0 else 0)
+            t = crop_top + (6 if crop_top > 0 else 0)
+            b = h - crop_bottom - (6 if crop_bottom > 0 else 0)
+            if r > l + 50 and b > t + 50:
+                logger.info(f"[BorderCleaner] Cropping borders from {path.name}: L={l}px, R={w-r}px, T={t}px, B={h-b}px")
+                cropped = rgb_im.crop((l, t, r, b))
+                cleaned = cropped.resize((orig_w, orig_h), Image.Resampling.LANCZOS)
+                cleaned.save(path, "PNG", quality=98)
+    except Exception as e:
+        logger.warning(f"[BorderCleaner] Error checking/cropping borders on {path}: {e}")
+    
+    return path
+
+
+def _finish_image(output_path: Path, engine_name: str) -> dict:
+    """Helper to ensure all generated images have borders stripped before returning."""
+    cleaned_path = detect_and_clean_image_borders(output_path)
+    return {"ok": True, "engine": engine_name, "path": str(cleaned_path)}
+
+
 # ─── UNIVERSAL NEGATIVE TAGS applied to every prompt ─────────────────────────
-# These prevent: white borders, pillarbox bars, distorted anatomy, text/watermarks, and big character portraits
+# These prevent: white borders, comic margins, frame lines, pillarbox bars, distorted anatomy, text/watermarks
 _UNIVERSAL_NEGATIVE = (
-    "no white border, no white frame, no black bar, no letterbox, no pillarbox, "
-    "no vignette frame, no oval frame, no polaroid frame, no film border, "
-    "no picture frame, no canvas edge, no margin, no padding, "
-    "no watermark, no text, no letters, no typography, no logo, "
+    "no white border, no white frame, no black frame, no comic panel border, no outer border, "
+    "no inner frame, no white margin, no matting, no framed, no border padding, "
+    "no black bar, no letterbox, no pillarbox, no vignette frame, no oval frame, "
+    "no polaroid frame, no film border, no picture frame, no canvas edge, no margin, no padding, "
+    "no artist signature, no signature, no username, no watermark, no text, no letters, no typography, no logo, "
     "no close-up face, no giant character portrait, no character zoom, no cropped face, "
     "no selfie, no big anime girl, no big anime boy, no anime face focus, "
     "no distorted anatomy, no deformed hands, no extra fingers, no blur, "
@@ -239,7 +365,7 @@ def generate_scene_image(
                 img = generate_comfyui_image(
                     final_prompt, output_path, width=width, height=height, seed=seed, cfg=cfg
                 )
-                return {"ok": True, "engine": "Local ComfyUI", "path": img}
+                return _finish_image(output_path, "Local ComfyUI")
 
             elif "perchance" in engine:
                 if not is_perchance_available():
@@ -252,7 +378,7 @@ def generate_scene_image(
                 img = generate_perchance_image(
                     final_prompt, output_path, width=width, height=height, seed=seed, style=style, time_for_image=timeout_val
                 )
-                return {"ok": True, "engine": f"Perchance AI ({style})", "path": img}
+                return _finish_image(output_path, f"Perchance AI ({style})")
 
             elif "flow" in engine or "google_flow" in engine:
                 if not is_google_flow_configured():
@@ -261,7 +387,7 @@ def generate_scene_image(
                 img = generate_google_flow_image(
                     final_prompt, output_path, width=width, height=height, seed=seed
                 )
-                return {"ok": True, "engine": "Google Flow (Nano Banana)", "path": img}
+                return _finish_image(output_path, "Google Flow (Nano Banana)")
 
             elif "puter" in engine or "banana" in engine:
                 if _PUTER_EXHAUSTED:
@@ -277,7 +403,7 @@ def generate_scene_image(
                         final_prompt, output_path, auth_token=puter_token, model=puter_model,
                         width=width, height=height, seed=seed
                     )
-                    return {"ok": True, "engine": f"Puter Nano Banana ({puter_model})", "path": img}
+                    return _finish_image(output_path, f"Puter Nano Banana ({puter_model})")
                 except Exception as p_err:
                     if "402" in str(p_err) or "insufficient" in str(p_err).lower():
                         _PUTER_EXHAUSTED = True
@@ -296,7 +422,7 @@ def generate_scene_image(
                     img = generate_cloudflare_image(
                         final_prompt, output_path, account_id=acc_id, api_token=token, width=width, height=height, seed=seed
                     )
-                    return {"ok": True, "engine": "Cloudflare Workers AI", "path": img}
+                    return _finish_image(output_path, "Cloudflare Workers AI")
                 except Exception as cf_err:
                     if "429" in str(cf_err) or "quota" in str(cf_err).lower() or "neurons" in str(cf_err).lower():
                         _CLOUDFLARE_EXHAUSTED = True
@@ -310,7 +436,7 @@ def generate_scene_image(
                     img = generate_pollinations_image(
                         final_prompt, output_path, width=width, height=height, seed=seed, model=model, api_key=api_key
                     )
-                    return {"ok": True, "engine": f"Pollinations ({model})", "path": img}
+                    return _finish_image(output_path, f"Pollinations ({model})")
                 except Exception as e:
                     if model != "turbo":
                         try:
@@ -318,7 +444,7 @@ def generate_scene_image(
                             img = generate_pollinations_image(
                                 final_prompt, output_path, width=width, height=height, seed=seed, model="turbo", api_key=api_key
                             )
-                            return {"ok": True, "engine": "Pollinations (turbo fallback)", "path": img}
+                            return _finish_image(output_path, "Pollinations (turbo fallback)")
                         except Exception:
                             pass
                     raise e
@@ -331,7 +457,7 @@ def generate_scene_image(
                 img = generate_huggingface_image(
                     final_prompt, output_path, hf_token=hf_token, width=width, height=height, seed=seed
                 )
-                return {"ok": True, "engine": "Hugging Face Serverless", "path": img}
+                return _finish_image(output_path, "Hugging Face Serverless")
 
         except Exception as exc:
             errors.append(f"{engine}: {exc}")
@@ -342,7 +468,7 @@ def generate_scene_image(
     # NEVER use the gradient canvas — always try to get a real image
     logger.warning(f"All primary engines failed ({'; '.join(errors)}). Attempting emergency Pollinations...")
     emergency_path = _emergency_fallback_from_pollinations(final_prompt, output_path, width, height, seed)
-    return {"ok": True, "engine": "Emergency Pollinations Fallback", "path": emergency_path}
+    return _finish_image(output_path, "Emergency Pollinations Fallback")
 
 
 def generate_all_scene_images(scenes: list, assets_dir: Path, progress_callback=None, preferred_engine: str = None) -> list:
@@ -452,7 +578,8 @@ def generate_all_scene_images(scenes: list, assets_dir: Path, progress_callback=
             emergency_path = _emergency_fallback_from_pollinations(
                 raw_prompt, out_file, 1080, 1920, emergency_seed
             )
-            scene["image_path"] = emergency_path
+            detect_and_clean_image_borders(emergency_path)
+            scene["image_path"] = str(emergency_path)
             scene["image_engine"] = "Emergency Pollinations"
             print(f"  🆘 [{scene_id}] Used emergency fallback.", flush=True)
 

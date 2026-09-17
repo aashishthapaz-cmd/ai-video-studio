@@ -21,8 +21,8 @@ import artwork_prompts
 # =========================================================================
 ARTISTIC_STYLES_MAP = {
     "typewriters_voice_nostalgia": (
-        "Masterpiece vertical 9:16 editorial graphic novel illustration in the signature style of Typewriters Voice and Guy Billout. Clean black ink line art with delicate cross-hatch shading and fine horizontal ripple textures, flat gouache color blocking, deep nocturnal indigo navy and slate blue sky with fine ink line hatching, high-contrast radiant warm golden amber and cadmium yellow lantern glow, saturated accents of mustard yellow and crimson red, rich matte serigraph print.",
-        "flat gouache color blocking, fine ink hatching, midnight navy and warm golden amber"
+        "Masterpiece vertical 9:16 borderless edge-to-edge full bleed fine art painting in the atmospheric visual style of Typewriters Voice nostalgia. Clean black ink line art with delicate cross-hatch shading and fine horizontal ripple textures, flat gouache color blocking, deep nocturnal indigo navy and slate blue sky with fine ink line hatching, high-contrast radiant warm golden amber and cadmium yellow lantern glow, saturated accents of mustard yellow and crimson red, full canvas bleed, no borders, no frames.",
+        "flat gouache color blocking, fine ink hatching, midnight navy and warm golden amber, borderless"
     ),
     "makoto_shinkai_twilight": (
         "Masterpiece vertical 9:16 anime background scenic art in the breathtaking aesthetic of Makoto Shinkai. Expansive cosmic twilight sky, radiant volumetric god rays piercing towering painterly cumulonimbus clouds, sparkling evening starlight and glowing horizon, deep ultramarine blue, violet dusk and apricot golden hour reflections.",

@@ -493,8 +493,19 @@ def _parallax_layers(image: Path, work_dir: Path, width: int, height: int, varia
     work_dir.mkdir(parents=True, exist_ok=True)
     bg_path = work_dir / f"parallax_{variant:03d}_bg.jpg"
     fg_path = work_dir / f"parallax_{variant:03d}_fg.png"
-    resampling = getattr(Image, "Resampling", Image).LANCZOS
-    base = Image.open(image).convert("RGB")
+    try:
+        from cloud_generator.image_router import detect_and_clean_image_borders
+        detect_and_clean_image_borders(image)
+    except Exception:
+        pass
+
+    raw = Image.open(image)
+    if raw.mode in ("RGBA", "LA") or (raw.mode == "P" and "transparency" in raw.info):
+        canvas = Image.new("RGB", raw.size, (0, 0, 0))
+        canvas.paste(raw, mask=raw.split()[-1] if raw.mode in ("RGBA", "LA") else None)
+        base = canvas
+    else:
+        base = raw.convert("RGB")
     fitted = ImageOps.fit(base, (width, height), method=resampling, centering=(0.5, 0.5))
 
     background = fitted.filter(ImageFilter.GaussianBlur(radius=8))

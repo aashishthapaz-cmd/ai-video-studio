@@ -13,6 +13,14 @@ except ImportError:
 sys.path.insert(0, str(PROJECT_ROOT / "reference_system"))
 sys.path.insert(0, str(Path(__file__).resolve().parent / "reference_system"))
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "reference_system"))
+try:
+    from .image_router import detect_and_clean_image_borders
+except ImportError:
+    try:
+        from image_router import detect_and_clean_image_borders
+    except ImportError:
+        detect_and_clean_image_borders = None
+
 from vox_content.models import VisualAsset
 from vox_content.render import render as reference_render
 from vox_content.captions import TimedCaption, write_timed_ass
@@ -107,6 +115,12 @@ def compile_cloud_video(scenes: list, title: str, workspace_dir: Path, captions_
                 from PIL import Image
                 Image.new("RGB", (1080, 1920), (16, 18, 28)).save(fallback_canvas, "PNG")
             s["image_path"] = str(fallback_canvas)
+        else:
+            if detect_and_clean_image_borders:
+                try:
+                    detect_and_clean_image_borders(img_p)
+                except Exception:
+                    pass
 
     assets = [VisualAsset(path=Path(s["image_path"])) for s in scenes]
     
